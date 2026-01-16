@@ -1039,7 +1039,7 @@
       "NaturalAttacks": "No natural attacks.",
       "SpecialAbilities": "No special abilities.",
       "LifeEventEffects": "No benefits or complications defined.",
-      "Traits": "No traits assigned. Use the NPC Creation Wizard to add traits."
+      "Traits": "No traits assigned. Use the NPC Designer to add traits."
     },
     "NPC": {
       "Type": "NPC Type",
@@ -1812,7 +1812,7 @@
       }
     },
     "NPCCreation": {
-      "Title": "NPC Creation Wizard",
+      "Title": "NPC Designer",
       "GMOnly": "Only the GM can create NPCs.",
       "StepLabel": "Step",
       "NextStep": "Next Step",
@@ -1904,7 +1904,7 @@
       },
       "Finalize": {
         "Title": "Finalize NPC",
-        "Description": "Review and complete NPC creation.",
+        "Description": "Review and complete NPC design.",
         "NPCName": "NPC Name",
         "NamePlaceholder": "Enter NPC name...",
         "Summary": "NPC Summary",
@@ -1916,7 +1916,7 @@
         "Traits": "Traits",
         "DerivedStats": "Derived Stats",
         "CreateButton": "Create NPC",
-        "CreationComplete": "NPC creation complete!"
+        "CreationComplete": "NPC design complete!"
       },
       "Errors": {
         "NoClass": "Please select a class.",

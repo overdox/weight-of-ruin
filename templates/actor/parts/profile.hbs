@@ -762,12 +762,24 @@
   {{!-- ============================================ --}}
   <div class="tab profile-tab-content {{#if (eq profileTab 'notes')}}active{{/if}}" data-tab="notes" data-group="profile">
 
-    <div class="notes-content-section">
-      <h3>{{localize "AOA.Section.Notes"}}</h3>
-      <div class="notes-editor-container">
-        {{editor system.notes target="system.notes" button=true engine="prosemirror" rollData=rollData editable=isEditable owner=owner}}
+    <section class="notes-section">
+      <h3><i class="fas fa-scroll"></i> {{localize "AOA.Section.Notes"}}</h3>
+      {{#if isEditable}}
+      <a class="toggle-editor-btn" data-action="toggleNotesEditor" title="{{localize 'AOA.Common.Edit'}}">
+        <i class="fas fa-edit"></i>
+      </a>
+      {{/if}}
+      <div class="notes-editor-container" data-field="system.notes">
+        {{!-- View mode --}}
+        <div class="notes-view">{{{enrichedNotes}}}</div>
+        {{!-- Edit mode (hidden by default) --}}
+        {{#if isEditable}}
+        <div class="notes-edit hidden">
+          <prose-mirror name="system.notes" value="{{source.system.notes}}" document-uuid="{{actor.uuid}}"></prose-mirror>
+        </div>
+        {{/if}}
       </div>
-    </div>
+    </section>
   </div>
 
 </section>

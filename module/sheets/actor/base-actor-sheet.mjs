@@ -59,7 +59,9 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
       configurePrototypeToken: WoRBaseActorSheet.#onConfigurePrototypeToken,
       viewCharacterArt: WoRBaseActorSheet.#onViewCharacterArt,
       viewTokenArt: WoRBaseActorSheet.#onViewTokenArt,
-      configureActorSettings: WoRBaseActorSheet.#onConfigureActorSettings
+      configureActorSettings: WoRBaseActorSheet.#onConfigureActorSettings,
+      // Notes editor toggle
+      toggleNotesEditor: WoRBaseActorSheet.#onToggleNotesEditor
     },
     form: {
       submitOnChange: true
@@ -442,6 +444,51 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     // Setup editor button handlers for ProseMirror
     this._setupEditorButtons();
+
+    // Setup notes editor with Save and Close behavior
+    this._setupNotesEditor();
+  }
+
+  /**
+   * Setup the notes editor with Save and Close functionality.
+   * Resets editor state on render and handles save button behavior.
+   */
+  _setupNotesEditor() {
+    const section = this.element.querySelector('.notes-section');
+    if (!section) return;
+
+    const viewDiv = section.querySelector('.notes-view');
+    const editDiv = section.querySelector('.notes-edit');
+    const editBtn = section.querySelector('.toggle-editor-btn');
+
+    // Reset editor to view mode on render
+    if (viewDiv) viewDiv.classList.remove('hidden');
+    if (editDiv) editDiv.classList.add('hidden');
+    if (editBtn) editBtn.style.display = '';
+
+    // Use event delegation to catch save button clicks
+    section.addEventListener('click', (event) => {
+      const saveBtn = event.target.closest('button[data-action="save"]');
+      if (saveBtn) {
+        // Small delay to let ProseMirror save first, then close editor
+        setTimeout(() => {
+          if (viewDiv) viewDiv.classList.remove('hidden');
+          if (editDiv) editDiv.classList.add('hidden');
+          if (editBtn) editBtn.style.display = '';
+        }, 100);
+      }
+    });
+
+    // Update save button tooltip to "Save and Close" when ProseMirror initializes
+    const updateSaveButton = () => {
+      const saveBtn = section.querySelector('button[data-action="save"]');
+      if (saveBtn) {
+        saveBtn.setAttribute('data-tooltip', game.i18n.localize('AOA.Common.SaveAndClose'));
+      }
+    };
+    // Try immediately and also after a short delay for async initialization
+    updateSaveButton();
+    setTimeout(updateSaveButton, 100);
   }
 
   /**
@@ -1964,6 +2011,28 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     // Open the document ownership configuration (v13 API)
     new foundry.applications.apps.DocumentOwnershipConfig({ document: actor }).render(true);
+  }
+
+  /**
+   * Toggle the notes editor between view and edit modes
+   * @param {PointerEvent} event - The triggering event
+   * @param {HTMLElement} target - The element that triggered the action
+   */
+  static async #onToggleNotesEditor(event, target) {
+    event.preventDefault();
+    const section = target.closest('.notes-section');
+    if (!section) return;
+
+    const viewDiv = section.querySelector('.notes-view');
+    const editDiv = section.querySelector('.notes-edit');
+    if (!viewDiv || !editDiv) return;
+
+    // Toggle visibility
+    viewDiv.classList.add('hidden');
+    editDiv.classList.remove('hidden');
+
+    // Hide the edit button while editing
+    target.style.display = 'none';
   }
 
   /* -------------------------------------------- */

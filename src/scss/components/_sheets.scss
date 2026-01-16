@@ -2964,13 +2964,130 @@ h3.section-header-with-button {
   .life-events-section,
   .contacts-section,
   .passions-content-section,
-  .advancement-content-section,
-  .notes-content-section {
+  .advancement-content-section {
     @include section-container;
 
     > h3 {
       @include section-header;
       margin-bottom: 0;
+    }
+  }
+
+  // Notes Section (NPC-style with toggle editor)
+  .notes-section {
+    @include section-container;
+    position: relative;
+
+    > h3 {
+      @include section-header;
+      margin-bottom: $spacing-md;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+    }
+
+    .toggle-editor-btn {
+      position: absolute;
+      top: 45px;
+      right: 15px;
+      left: auto;
+      cursor: pointer;
+      font-size: 18px;
+      color: $c-medium;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $border-radius-md;
+      transition: all $transition-fast;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        color: $c-gold;
+        background: rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    .notes-editor-container {
+      min-height: 200px;
+      background: rgba(0, 0, 0, 0.3);
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-sm;
+      padding: $spacing-sm;
+      position: relative;
+
+      .notes-view {
+        font-size: $font-size-base;
+        line-height: $line-height-base;
+        padding: $spacing-md;
+        min-height: 150px;
+
+        &:empty::before {
+          content: "No notes yet...";
+          color: $c-faint;
+          font-style: italic;
+        }
+
+        &.hidden {
+          display: none !important;
+          visibility: hidden !important;
+          position: absolute !important;
+          pointer-events: none !important;
+          z-index: -1 !important;
+        }
+      }
+
+      .notes-edit {
+        min-height: 200px;
+
+        &.hidden {
+          display: none !important;
+        }
+
+        prose-mirror {
+          min-height: 200px;
+          display: block;
+
+          // ProseMirror wrapper
+          .editor.prosemirror {
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+          }
+
+          // Editor container
+          .editor-container {
+            min-height: 150px;
+          }
+
+          // Editable content area - target both classes
+          .editor-content,
+          .editor-content.ProseMirror,
+          .ProseMirror {
+            flex: 1;
+            min-height: 150px !important;
+            padding: $spacing-md !important;
+            background: #3a3530 !important;
+            color: #e8e0d5 !important;
+            font-size: $font-size-base;
+            line-height: $line-height-base;
+            overflow-y: auto;
+
+            &:focus {
+              outline: none;
+            }
+
+            // Ensure ALL text elements are visible
+            p, span, div, li, h1, h2, h3, h4, h5, h6 {
+              color: #e8e0d5 !important;
+              margin: 0 0 $spacing-sm 0;
+            }
+          }
+        }
+      }
     }
   }
 

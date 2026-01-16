@@ -372,50 +372,6 @@ export class WoRNPCSheet extends WoRBaseActorSheet {
     target.style.display = 'none';
   }
 
-  /** @override */
-  _onRender(context, options) {
-    super._onRender(context, options);
-
-    // Reset editor state on render (editor closes when sheet re-renders after save)
-    this._notesEditorOpen = false;
-
-    // Ensure the notes editor UI is reset to view mode
-    const section = this.element.querySelector('.notes-section');
-    if (section) {
-      const viewDiv = section.querySelector('.notes-view');
-      const editDiv = section.querySelector('.notes-edit');
-      const editBtn = section.querySelector('.toggle-editor-btn');
-
-      if (viewDiv) viewDiv.classList.remove('hidden');
-      if (editDiv) editDiv.classList.add('hidden');
-      if (editBtn) editBtn.style.display = '';
-
-      // Use event delegation to catch save button clicks (button may not exist yet)
-      section.addEventListener('click', (event) => {
-        const saveBtn = event.target.closest('button[data-action="save"]');
-        if (saveBtn) {
-          // Small delay to let ProseMirror save first, then close editor
-          setTimeout(() => {
-            if (viewDiv) viewDiv.classList.remove('hidden');
-            if (editDiv) editDiv.classList.add('hidden');
-            if (editBtn) editBtn.style.display = '';
-          }, 100);
-        }
-      });
-
-      // Update save button tooltip to "Save and Close" when ProseMirror initializes
-      const updateSaveButton = () => {
-        const saveBtn = section.querySelector('button[data-action="save"]');
-        if (saveBtn) {
-          saveBtn.setAttribute('data-tooltip', game.i18n.localize('AOA.Common.SaveAndClose'));
-        }
-      };
-      // Try immediately and also after a short delay for async initialization
-      updateSaveButton();
-      setTimeout(updateSaveButton, 100);
-    }
-  }
-
   /* -------------------------------------------- */
   /*  NPC Creation Wizard                         */
   /* -------------------------------------------- */

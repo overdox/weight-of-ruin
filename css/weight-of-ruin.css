@@ -8078,8 +8078,7 @@ body {
 .weight-of-ruin .profile-section .life-events-section,
 .weight-of-ruin .profile-section .contacts-section,
 .weight-of-ruin .profile-section .passions-content-section,
-.weight-of-ruin .profile-section .advancement-content-section,
-.weight-of-ruin .profile-section .notes-content-section {
+.weight-of-ruin .profile-section .advancement-content-section {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
@@ -8092,8 +8091,7 @@ body {
 .weight-of-ruin .profile-section .life-events-section > h3,
 .weight-of-ruin .profile-section .contacts-section > h3,
 .weight-of-ruin .profile-section .passions-content-section > h3,
-.weight-of-ruin .profile-section .advancement-content-section > h3,
-.weight-of-ruin .profile-section .notes-content-section > h3 {
+.weight-of-ruin .profile-section .advancement-content-section > h3 {
   display: flex;
   align-items: center;
   min-height: 32px;
@@ -8117,9 +8115,149 @@ body {
 .weight-of-ruin .profile-section .life-events-section > h3 *,
 .weight-of-ruin .profile-section .contacts-section > h3 *,
 .weight-of-ruin .profile-section .passions-content-section > h3 *,
-.weight-of-ruin .profile-section .advancement-content-section > h3 *,
-.weight-of-ruin .profile-section .notes-content-section > h3 * {
+.weight-of-ruin .profile-section .advancement-content-section > h3 * {
   color: var(--wor-gold) !important;
+}
+.weight-of-ruin .profile-section .notes-section {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  box-shadow: var(--wor-shadow-md);
+  margin-bottom: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.weight-of-ruin .profile-section .notes-section > h3 {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  height: 32px;
+  padding: 0 12px;
+  background: linear-gradient(90deg, #4d3535 0%, #755550 100%);
+  color: var(--wor-gold) !important;
+  font-family: "IM Fell English", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+  border: none;
+  border-radius: 4px 4px 0 0;
+  font-variant: small-caps;
+  margin-bottom: 8px;
+}
+.weight-of-ruin .profile-section .notes-section > h3 * {
+  color: var(--wor-gold) !important;
+}
+.weight-of-ruin .profile-section .notes-section > h3 i {
+  margin-right: 4px;
+}
+.weight-of-ruin .profile-section .notes-section .toggle-editor-btn {
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  left: auto;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--wor-text-secondary);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.1);
+}
+.weight-of-ruin .profile-section .notes-section .toggle-editor-btn:hover {
+  color: var(--wor-gold);
+  background: rgba(0, 0, 0, 0.25);
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container {
+  min-height: 200px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--wor-border-light);
+  border-radius: 2px;
+  padding: 4px;
+  position: relative;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-view {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  padding: 8px;
+  min-height: 150px;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-view:empty::before {
+  content: "No notes yet...";
+  color: var(--wor-border-light);
+  font-style: italic;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-view.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit {
+  min-height: 200px;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit.hidden {
+  display: none !important;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror {
+  min-height: 200px;
+  display: block;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor.prosemirror {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-container {
+  min-height: 150px;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror {
+  flex: 1;
+  min-height: 150px !important;
+  padding: 8px !important;
+  background: #3a3530 !important;
+  color: #e8e0d5 !important;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  overflow-y: auto;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content:focus,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror:focus,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror:focus {
+  outline: none;
+}
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content p, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content span, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content div, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content li, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content h1, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content h2, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content h3, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content h4, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content h5, .weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content h6,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror p,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror span,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror div,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror li,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror h1,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror h2,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror h3,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror h4,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror h5,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .editor-content.ProseMirror h6,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror p,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror span,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror div,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror li,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror h1,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror h2,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror h3,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror h4,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror h5,
+.weight-of-ruin .profile-section .notes-section .notes-editor-container .notes-edit prose-mirror .ProseMirror h6 {
+  color: #e8e0d5 !important;
+  margin: 0 0 4px 0;
 }
 .weight-of-ruin .profile-section .identity-details-content {
   padding: 12px;
@@ -9998,10 +10136,10 @@ body {
   right: 15px;
   left: auto;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 18px;
   color: var(--wor-text-secondary);
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
