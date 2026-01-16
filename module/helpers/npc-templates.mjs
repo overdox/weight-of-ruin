@@ -20,138 +20,138 @@ import { NPC_TIERS, getTierData } from './npc-config.mjs';
 export const ATTRIBUTE_ARCHETYPES = {
   humanoid: {
     balanced: {
-      label: 'AOA.NPCCreation.Template.Balanced',
-      description: 'AOA.NPCCreation.TemplateDesc.Balanced',
+      label: 'WOR.NPCCreation.Template.Balanced',
+      description: 'WOR.NPCCreation.TemplateDesc.Balanced',
       weights: { str: 1, for: 1, agi: 1, awa: 1, res: 1, per: 1, ing: 1, exp: 1 }
     },
     brute: {
-      label: 'AOA.NPCCreation.Template.Brute',
-      description: 'AOA.NPCCreation.TemplateDesc.Brute',
+      label: 'WOR.NPCCreation.Template.Brute',
+      description: 'WOR.NPCCreation.TemplateDesc.Brute',
       weights: { str: 3, for: 3, agi: 1, awa: 1, res: 1, per: 0.5, ing: 0.5, exp: 0 }
     },
     agile: {
-      label: 'AOA.NPCCreation.Template.Agile',
-      description: 'AOA.NPCCreation.TemplateDesc.Agile',
+      label: 'WOR.NPCCreation.Template.Agile',
+      description: 'WOR.NPCCreation.TemplateDesc.Agile',
       weights: { str: 0.5, for: 1, agi: 3, awa: 3, res: 1, per: 0.5, ing: 0.5, exp: 0.5 }
     },
     cunning: {
-      label: 'AOA.NPCCreation.Template.Cunning',
-      description: 'AOA.NPCCreation.TemplateDesc.Cunning',
+      label: 'WOR.NPCCreation.Template.Cunning',
+      description: 'WOR.NPCCreation.TemplateDesc.Cunning',
       weights: { str: 0.5, for: 0.5, agi: 1.5, awa: 2, res: 1, per: 2, ing: 2, exp: 0.5 }
     },
     leader: {
-      label: 'AOA.NPCCreation.Template.Leader',
-      description: 'AOA.NPCCreation.TemplateDesc.Leader',
+      label: 'WOR.NPCCreation.Template.Leader',
+      description: 'WOR.NPCCreation.TemplateDesc.Leader',
       weights: { str: 1, for: 1, agi: 1, awa: 1.5, res: 2, per: 2, ing: 1, exp: 0.5 }
     },
     caster: {
-      label: 'AOA.NPCCreation.Template.Caster',
-      description: 'AOA.NPCCreation.TemplateDesc.Caster',
+      label: 'WOR.NPCCreation.Template.Caster',
+      description: 'WOR.NPCCreation.TemplateDesc.Caster',
       weights: { str: 0, for: 0.5, agi: 1, awa: 2, res: 2, per: 1, ing: 2.5, exp: 1 }
     }
   },
   beast: {
     predator: {
-      label: 'AOA.NPCCreation.Template.Predator',
-      description: 'AOA.NPCCreation.TemplateDesc.Predator',
+      label: 'WOR.NPCCreation.Template.Predator',
+      description: 'WOR.NPCCreation.TemplateDesc.Predator',
       weights: { str: 3, for: 2, agi: 2, awa: 3, res: 0.5, per: 0, ing: 0, exp: 0.5 }
     },
     prey: {
-      label: 'AOA.NPCCreation.Template.Prey',
-      description: 'AOA.NPCCreation.TemplateDesc.Prey',
+      label: 'WOR.NPCCreation.Template.Prey',
+      description: 'WOR.NPCCreation.TemplateDesc.Prey',
       weights: { str: 0.5, for: 2, agi: 3, awa: 3, res: 1, per: 0.5, ing: 0, exp: 0 }
     },
     tank: {
-      label: 'AOA.NPCCreation.Template.Tank',
-      description: 'AOA.NPCCreation.TemplateDesc.Tank',
+      label: 'WOR.NPCCreation.Template.Tank',
+      description: 'WOR.NPCCreation.TemplateDesc.Tank',
       weights: { str: 3, for: 4, agi: 0.5, awa: 1.5, res: 1.5, per: 0, ing: 0, exp: 0.5 }
     },
     ambusher: {
-      label: 'AOA.NPCCreation.Template.Ambusher',
-      description: 'AOA.NPCCreation.TemplateDesc.Ambusher',
+      label: 'WOR.NPCCreation.Template.Ambusher',
+      description: 'WOR.NPCCreation.TemplateDesc.Ambusher',
       weights: { str: 2, for: 1, agi: 3, awa: 3, res: 0.5, per: 0, ing: 0.5, exp: 0 }
     }
   },
   vermin: {
     swarm: {
-      label: 'AOA.NPCCreation.Template.Swarm',
-      description: 'AOA.NPCCreation.TemplateDesc.Swarm',
+      label: 'WOR.NPCCreation.Template.Swarm',
+      description: 'WOR.NPCCreation.TemplateDesc.Swarm',
       weights: { str: 0, for: 1, agi: 3, awa: 2, res: 0.5, per: 0, ing: 0, exp: 0 }
     },
     ambusher: {
-      label: 'AOA.NPCCreation.Template.Ambusher',
-      description: 'AOA.NPCCreation.TemplateDesc.Ambusher',
+      label: 'WOR.NPCCreation.Template.Ambusher',
+      description: 'WOR.NPCCreation.TemplateDesc.Ambusher',
       weights: { str: 1.5, for: 1, agi: 3, awa: 3, res: 0.5, per: 0, ing: 0, exp: 0 }
     },
     venomous: {
-      label: 'AOA.NPCCreation.Template.Venomous',
-      description: 'AOA.NPCCreation.TemplateDesc.Venomous',
+      label: 'WOR.NPCCreation.Template.Venomous',
+      description: 'WOR.NPCCreation.TemplateDesc.Venomous',
       weights: { str: 0.5, for: 1.5, agi: 2, awa: 2, res: 1, per: 0, ing: 1, exp: 0 }
     },
     burrower: {
-      label: 'AOA.NPCCreation.Template.Burrower',
-      description: 'AOA.NPCCreation.TemplateDesc.Burrower',
+      label: 'WOR.NPCCreation.Template.Burrower',
+      description: 'WOR.NPCCreation.TemplateDesc.Burrower',
       weights: { str: 2, for: 2, agi: 1.5, awa: 2, res: 0.5, per: 0, ing: 0, exp: 0 }
     }
   },
   afflicted: {
     undead: {
-      label: 'AOA.NPCCreation.Template.Undead',
-      description: 'AOA.NPCCreation.TemplateDesc.Undead',
+      label: 'WOR.NPCCreation.Template.Undead',
+      description: 'WOR.NPCCreation.TemplateDesc.Undead',
       weights: { str: 2, for: 3, agi: 0.5, awa: 1.5, res: 2, per: 0.5, ing: 0.5, exp: 0.5 }
     },
     cursed: {
-      label: 'AOA.NPCCreation.Template.Cursed',
-      description: 'AOA.NPCCreation.TemplateDesc.Cursed',
+      label: 'WOR.NPCCreation.Template.Cursed',
+      description: 'WOR.NPCCreation.TemplateDesc.Cursed',
       weights: { str: 2, for: 2, agi: 2, awa: 2, res: 1.5, per: 0.5, ing: 0.5, exp: 0 }
     },
     vampiric: {
-      label: 'AOA.NPCCreation.Template.Vampiric',
-      description: 'AOA.NPCCreation.TemplateDesc.Vampiric',
+      label: 'WOR.NPCCreation.Template.Vampiric',
+      description: 'WOR.NPCCreation.TemplateDesc.Vampiric',
       weights: { str: 2, for: 1.5, agi: 2, awa: 2, res: 1.5, per: 2, ing: 1.5, exp: 0 }
     },
     feral: {
-      label: 'AOA.NPCCreation.Template.Feral',
-      description: 'AOA.NPCCreation.TemplateDesc.Feral',
+      label: 'WOR.NPCCreation.Template.Feral',
+      description: 'WOR.NPCCreation.TemplateDesc.Feral',
       weights: { str: 3, for: 2, agi: 2.5, awa: 2.5, res: 1, per: 0, ing: 0, exp: 0 }
     }
   },
   apparition: {
     ethereal: {
-      label: 'AOA.NPCCreation.Template.Ethereal',
-      description: 'AOA.NPCCreation.TemplateDesc.Ethereal',
+      label: 'WOR.NPCCreation.Template.Ethereal',
+      description: 'WOR.NPCCreation.TemplateDesc.Ethereal',
       weights: { str: 0, for: 0, agi: 2, awa: 3, res: 3, per: 1.5, ing: 1.5, exp: 0.5 }
     },
     vengeful: {
-      label: 'AOA.NPCCreation.Template.Vengeful',
-      description: 'AOA.NPCCreation.TemplateDesc.Vengeful',
+      label: 'WOR.NPCCreation.Template.Vengeful',
+      description: 'WOR.NPCCreation.TemplateDesc.Vengeful',
       weights: { str: 1.5, for: 0.5, agi: 2, awa: 3, res: 2, per: 1.5, ing: 0.5, exp: 0 }
     },
     possessor: {
-      label: 'AOA.NPCCreation.Template.Possessor',
-      description: 'AOA.NPCCreation.TemplateDesc.Possessor',
+      label: 'WOR.NPCCreation.Template.Possessor',
+      description: 'WOR.NPCCreation.TemplateDesc.Possessor',
       weights: { str: 0, for: 0, agi: 1.5, awa: 2.5, res: 2.5, per: 2, ing: 2.5, exp: 0 }
     }
   },
   fiend: {
     demonic: {
-      label: 'AOA.NPCCreation.Template.Demonic',
-      description: 'AOA.NPCCreation.TemplateDesc.Demonic',
+      label: 'WOR.NPCCreation.Template.Demonic',
+      description: 'WOR.NPCCreation.TemplateDesc.Demonic',
       weights: { str: 3, for: 3, agi: 1.5, awa: 2, res: 2, per: 1, ing: 1.5, exp: 0 }
     },
     tempter: {
-      label: 'AOA.NPCCreation.Template.Tempter',
-      description: 'AOA.NPCCreation.TemplateDesc.Tempter',
+      label: 'WOR.NPCCreation.Template.Tempter',
+      description: 'WOR.NPCCreation.TemplateDesc.Tempter',
       weights: { str: 0.5, for: 1, agi: 2, awa: 2.5, res: 2, per: 3.5, ing: 2, exp: 0.5 }
     },
     minion: {
-      label: 'AOA.NPCCreation.Template.Minion',
-      description: 'AOA.NPCCreation.TemplateDesc.Minion',
+      label: 'WOR.NPCCreation.Template.Minion',
+      description: 'WOR.NPCCreation.TemplateDesc.Minion',
       weights: { str: 0.5, for: 1, agi: 3, awa: 2, res: 1, per: 0.5, ing: 1.5, exp: 0.5 }
     },
     corruptor: {
-      label: 'AOA.NPCCreation.Template.Corruptor',
-      description: 'AOA.NPCCreation.TemplateDesc.Corruptor',
+      label: 'WOR.NPCCreation.Template.Corruptor',
+      description: 'WOR.NPCCreation.TemplateDesc.Corruptor',
       weights: { str: 1, for: 1, agi: 1.5, awa: 2, res: 2.5, per: 2, ing: 2.5, exp: 0.5 }
     }
   }
@@ -168,8 +168,8 @@ export const ATTRIBUTE_ARCHETYPES = {
 export const SKILL_ARCHETYPES = {
   humanoid: {
     warrior: {
-      label: 'AOA.NPCCreation.SkillTemplate.Warrior',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Warrior',
+      label: 'WOR.NPCCreation.SkillTemplate.Warrior',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Warrior',
       skills: [
         { skill: 'Arms', priority: 3 },
         { skill: 'Athletics', priority: 2 },
@@ -178,8 +178,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     assassin: {
-      label: 'AOA.NPCCreation.SkillTemplate.Assassin',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Assassin',
+      label: 'WOR.NPCCreation.SkillTemplate.Assassin',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Assassin',
       skills: [
         { skill: 'Arms', priority: 2 },
         { skill: 'Stealth', priority: 3 },
@@ -188,8 +188,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     guard: {
-      label: 'AOA.NPCCreation.SkillTemplate.Guard',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Guard',
+      label: 'WOR.NPCCreation.SkillTemplate.Guard',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Guard',
       skills: [
         { skill: 'Arms', priority: 2 },
         { skill: 'Awareness', priority: 3 },
@@ -198,8 +198,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     mage: {
-      label: 'AOA.NPCCreation.SkillTemplate.Mage',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Mage',
+      label: 'WOR.NPCCreation.SkillTemplate.Mage',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Mage',
       skills: [
         { skill: 'Spellcraft', priority: 3 },
         { skill: 'Awareness', priority: 2 },
@@ -208,8 +208,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     scout: {
-      label: 'AOA.NPCCreation.SkillTemplate.Scout',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Scout',
+      label: 'WOR.NPCCreation.SkillTemplate.Scout',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Scout',
       skills: [
         { skill: 'Awareness', priority: 3 },
         { skill: 'Stealth', priority: 2 },
@@ -218,8 +218,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     diplomat: {
-      label: 'AOA.NPCCreation.SkillTemplate.Diplomat',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Diplomat',
+      label: 'WOR.NPCCreation.SkillTemplate.Diplomat',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Diplomat',
       skills: [
         { skill: 'Persuasion', priority: 3 },
         { skill: 'Insight', priority: 2 },
@@ -230,8 +230,8 @@ export const SKILL_ARCHETYPES = {
   },
   beast: {
     hunter: {
-      label: 'AOA.NPCCreation.SkillTemplate.Hunter',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Hunter',
+      label: 'WOR.NPCCreation.SkillTemplate.Hunter',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Hunter',
       skills: [
         { skill: 'Brawling', priority: 3 },
         { skill: 'Athletics', priority: 2 },
@@ -239,8 +239,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     stalker: {
-      label: 'AOA.NPCCreation.SkillTemplate.Stalker',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Stalker',
+      label: 'WOR.NPCCreation.SkillTemplate.Stalker',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Stalker',
       skills: [
         { skill: 'Stealth', priority: 3 },
         { skill: 'Awareness', priority: 3 },
@@ -248,8 +248,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     charger: {
-      label: 'AOA.NPCCreation.SkillTemplate.Charger',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Charger',
+      label: 'WOR.NPCCreation.SkillTemplate.Charger',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Charger',
       skills: [
         { skill: 'Brawling', priority: 3 },
         { skill: 'Athletics', priority: 3 },
@@ -259,8 +259,8 @@ export const SKILL_ARCHETYPES = {
   },
   vermin: {
     swarmer: {
-      label: 'AOA.NPCCreation.SkillTemplate.Swarmer',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Swarmer',
+      label: 'WOR.NPCCreation.SkillTemplate.Swarmer',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Swarmer',
       skills: [
         { skill: 'Brawling', priority: 2 },
         { skill: 'Stealth', priority: 3 },
@@ -268,8 +268,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     ambusher: {
-      label: 'AOA.NPCCreation.SkillTemplate.Ambusher',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Ambusher',
+      label: 'WOR.NPCCreation.SkillTemplate.Ambusher',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Ambusher',
       skills: [
         { skill: 'Stealth', priority: 3 },
         { skill: 'Brawling', priority: 2 },
@@ -277,8 +277,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     parasite: {
-      label: 'AOA.NPCCreation.SkillTemplate.Parasite',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Parasite',
+      label: 'WOR.NPCCreation.SkillTemplate.Parasite',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Parasite',
       skills: [
         { skill: 'Stealth', priority: 3 },
         { skill: 'Brawling', priority: 2 },
@@ -288,8 +288,8 @@ export const SKILL_ARCHETYPES = {
   },
   afflicted: {
     relentless: {
-      label: 'AOA.NPCCreation.SkillTemplate.Relentless',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Relentless',
+      label: 'WOR.NPCCreation.SkillTemplate.Relentless',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Relentless',
       skills: [
         { skill: 'Brawling', priority: 3 },
         { skill: 'Athletics', priority: 2 },
@@ -298,8 +298,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     predator: {
-      label: 'AOA.NPCCreation.SkillTemplate.Predator',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Predator',
+      label: 'WOR.NPCCreation.SkillTemplate.Predator',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Predator',
       skills: [
         { skill: 'Stealth', priority: 2 },
         { skill: 'Brawling', priority: 3 },
@@ -308,8 +308,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     mastermind: {
-      label: 'AOA.NPCCreation.SkillTemplate.Mastermind',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Mastermind',
+      label: 'WOR.NPCCreation.SkillTemplate.Mastermind',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Mastermind',
       skills: [
         { skill: 'Deception', priority: 3 },
         { skill: 'Persuasion', priority: 2 },
@@ -320,8 +320,8 @@ export const SKILL_ARCHETYPES = {
   },
   apparition: {
     haunter: {
-      label: 'AOA.NPCCreation.SkillTemplate.Haunter',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Haunter',
+      label: 'WOR.NPCCreation.SkillTemplate.Haunter',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Haunter',
       skills: [
         { skill: 'Stealth', priority: 3 },
         { skill: 'Intimidation', priority: 3 },
@@ -329,8 +329,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     possessor: {
-      label: 'AOA.NPCCreation.SkillTemplate.Possessor',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Possessor',
+      label: 'WOR.NPCCreation.SkillTemplate.Possessor',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Possessor',
       skills: [
         { skill: 'Spellcraft', priority: 3 },
         { skill: 'Awareness', priority: 2 },
@@ -339,8 +339,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     wailing: {
-      label: 'AOA.NPCCreation.SkillTemplate.Wailing',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Wailing',
+      label: 'WOR.NPCCreation.SkillTemplate.Wailing',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Wailing',
       skills: [
         { skill: 'Intimidation', priority: 3 },
         { skill: 'Awareness', priority: 2 },
@@ -350,8 +350,8 @@ export const SKILL_ARCHETYPES = {
   },
   fiend: {
     destroyer: {
-      label: 'AOA.NPCCreation.SkillTemplate.Destroyer',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Destroyer',
+      label: 'WOR.NPCCreation.SkillTemplate.Destroyer',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Destroyer',
       skills: [
         { skill: 'Brawling', priority: 3 },
         { skill: 'Athletics', priority: 2 },
@@ -360,8 +360,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     corrupter: {
-      label: 'AOA.NPCCreation.SkillTemplate.Corrupter',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Corrupter',
+      label: 'WOR.NPCCreation.SkillTemplate.Corrupter',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Corrupter',
       skills: [
         { skill: 'Deception', priority: 3 },
         { skill: 'Persuasion', priority: 2 },
@@ -370,8 +370,8 @@ export const SKILL_ARCHETYPES = {
       ]
     },
     trickster: {
-      label: 'AOA.NPCCreation.SkillTemplate.Trickster',
-      description: 'AOA.NPCCreation.SkillTemplateDesc.Trickster',
+      label: 'WOR.NPCCreation.SkillTemplate.Trickster',
+      description: 'WOR.NPCCreation.SkillTemplateDesc.Trickster',
       skills: [
         { skill: 'Deception', priority: 3 },
         { skill: 'Stealth', priority: 2 },

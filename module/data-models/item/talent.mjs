@@ -21,7 +21,7 @@ export default class TalentData extends ItemBaseData {
       initial: 1,
       min: 1,
       max: 5,
-      label: "AOA.Talent.Rank"
+      label: "WOR.Talent.Rank"
     });
 
     schema.maxRank = new fields.NumberField({
@@ -29,7 +29,7 @@ export default class TalentData extends ItemBaseData {
       initial: 5,
       min: 1,
       max: 5,
-      label: "AOA.Talent.MaxRank"
+      label: "WOR.Talent.MaxRank"
     });
 
     // ========================================
@@ -38,7 +38,7 @@ export default class TalentData extends ItemBaseData {
     schema.effect = new fields.HTMLField({
       required: false,
       blank: true,
-      label: "AOA.Talent.Effect"
+      label: "WOR.Talent.Effect"
     });
 
     // ========================================
@@ -49,7 +49,7 @@ export default class TalentData extends ItemBaseData {
       blank: false,
       initial: "universal",
       choices: ["universal", "archetype", "signature"],
-      label: "AOA.Talent.Type"
+      label: "WOR.Talent.Type"
     });
 
     // ========================================
@@ -61,14 +61,14 @@ export default class TalentData extends ItemBaseData {
       required: false,
       blank: true,
       initial: "",
-      label: "AOA.Talent.Archetype"
+      label: "WOR.Talent.Archetype"
     });
 
     schema.subtype = new fields.StringField({
       required: false,
       blank: true,
       initial: "",
-      label: "AOA.Talent.Subtype"
+      label: "WOR.Talent.Subtype"
     });
 
     // ========================================
@@ -152,7 +152,7 @@ export default class TalentData extends ItemBaseData {
       ...requiredInteger,
       initial: 10,
       min: 0,
-      label: "AOA.Talent.LPCost"
+      label: "WOR.Talent.LPCost"
     });
 
     // ========================================
@@ -162,7 +162,7 @@ export default class TalentData extends ItemBaseData {
       ...requiredInteger,
       initial: 10,
       min: 0,
-      label: "AOA.Talent.XPCost"
+      label: "WOR.Talent.XPCost"
     });
 
     return schema;

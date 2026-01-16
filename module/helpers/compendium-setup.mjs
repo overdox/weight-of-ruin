@@ -159,9 +159,9 @@ export function registerCompendiumSettings() {
 
   // Register the Rebuild Compendiums menu button
   game.settings.registerMenu('weight-of-ruin', 'rebuildCompendiumsMenu', {
-    name: 'AOA.Settings.RebuildCompendiums.Name',
-    label: 'AOA.Settings.RebuildCompendiums.Label',
-    hint: 'AOA.Settings.RebuildCompendiums.Hint',
+    name: 'WOR.Settings.RebuildCompendiums.Name',
+    label: 'WOR.Settings.RebuildCompendiums.Label',
+    hint: 'WOR.Settings.RebuildCompendiums.Hint',
     icon: 'fas fa-database',
     type: RebuildCompendiumsDialog,
     restricted: true
@@ -177,7 +177,7 @@ class RebuildCompendiumsDialog extends HandlebarsApplicationMixin(ApplicationV2)
   static DEFAULT_OPTIONS = {
     id: 'rebuild-compendiums-dialog',
     window: {
-      title: 'AOA.Settings.RebuildCompendiums.Title',
+      title: 'WOR.Settings.RebuildCompendiums.Title',
       icon: 'fas fa-database'
     },
     position: {
@@ -198,15 +198,15 @@ class RebuildCompendiumsDialog extends HandlebarsApplicationMixin(ApplicationV2)
 
   async _prepareContext() {
     return {
-      warning: game.i18n.localize('AOA.Settings.RebuildCompendiums.Warning')
+      warning: game.i18n.localize('WOR.Settings.RebuildCompendiums.Warning')
     };
   }
 
   static async _onRebuild(event, target) {
     // Confirm action
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: { title: game.i18n.localize('AOA.Settings.RebuildCompendiums.ConfirmTitle') },
-      content: `<p>${game.i18n.localize('AOA.Settings.RebuildCompendiums.ConfirmMessage')}</p>`,
+      window: { title: game.i18n.localize('WOR.Settings.RebuildCompendiums.ConfirmTitle') },
+      content: `<p>${game.i18n.localize('WOR.Settings.RebuildCompendiums.ConfirmMessage')}</p>`,
       yes: { default: false },
       no: { default: true }
     });

@@ -1,5 +1,5 @@
 {
-  "AOA": {
+  "WOR": {
     "Attributes": {
       "Strength": "Strength",
       "Fortitude": "Fortitude",
@@ -11,6 +11,12 @@
       "Expertise": "Expertise",
       "Witchsight": "Witchsight",
       "Any": "Any"
+    },
+    "LP": {
+      "label": "Legacy Points",
+      "Earned": "Earned",
+      "Spent": "Spent",
+      "Remaining": "Remaining"
     },
     "Attribute": {
       "Strength": { "long": "Strength", "abbr": "STR" },

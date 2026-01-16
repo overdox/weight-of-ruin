@@ -20,7 +20,7 @@ export default class SpellData extends ItemBaseData {
       blank: false,
       initial: "create",
       choices: ["create", "perceive", "transform", "destroy", "control"],
-      label: "AOA.Spell.Technique"
+      label: "WOR.Spell.Technique"
     });
 
     schema.form = new fields.StringField({
@@ -28,7 +28,7 @@ export default class SpellData extends ItemBaseData {
       blank: false,
       initial: "elements",
       choices: ["elements", "living", "mind", "matter", "spirit", "space", "time"],
-      label: "AOA.Spell.Form"
+      label: "WOR.Spell.Form"
     });
 
     // Minimum ranks required in Technique and Form
@@ -46,7 +46,7 @@ export default class SpellData extends ItemBaseData {
       initial: 1,
       min: 1,
       max: 10,
-      label: "AOA.Spell.Rank"
+      label: "WOR.Spell.Rank"
     });
 
     // ========================================
@@ -57,13 +57,13 @@ export default class SpellData extends ItemBaseData {
         ...requiredInteger,
         initial: 1,
         min: 0,
-        label: "AOA.Spell.Cost.Trauma"
+        label: "WOR.Spell.Cost.Trauma"
       }),
       essence: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Spell.Cost.Essence"
+        label: "WOR.Spell.Cost.Essence"
       }),
       // Additional material costs
       components: new fields.ArrayField(
@@ -85,7 +85,7 @@ export default class SpellData extends ItemBaseData {
         ...requiredInteger,
         initial: 1,
         min: 0,
-        label: "AOA.Spell.ActionCost"
+        label: "WOR.Spell.ActionCost"
       }),
       // Difficulty tier for casting
       difficulty: new fields.StringField({
@@ -93,19 +93,19 @@ export default class SpellData extends ItemBaseData {
         blank: true,
         initial: "standard",
         choices: ["trivial", "standard", "hard"],
-        label: "AOA.Spell.Difficulty"
+        label: "WOR.Spell.Difficulty"
       }),
       // Target threshold for casting
       targetThreshold: new fields.NumberField({
         ...requiredInteger,
         initial: 2,
         min: 1,
-        label: "AOA.Spell.TargetThreshold"
+        label: "WOR.Spell.TargetThreshold"
       }),
       // Is this a formulaic (learned) spell or improvised
       formulaic: new fields.BooleanField({
         initial: true,
-        label: "AOA.Spell.Formulaic"
+        label: "WOR.Spell.Formulaic"
       })
     });
 
@@ -116,14 +116,14 @@ export default class SpellData extends ItemBaseData {
       description: new fields.HTMLField({
         required: false,
         blank: true,
-        label: "AOA.Spell.Effect.Description"
+        label: "WOR.Spell.Effect.Description"
       }),
       magnitude: new fields.StringField({
         required: false,
         blank: true,
         initial: "minor",
         choices: ["trivial", "minor", "moderate", "major", "extreme"],
-        label: "AOA.Spell.Effect.Magnitude"
+        label: "WOR.Spell.Effect.Magnitude"
       }),
       // Damage if applicable
       damage: new fields.NumberField({ required: false, nullable: true, integer: true, min: 0 }),
@@ -141,7 +141,7 @@ export default class SpellData extends ItemBaseData {
         blank: true,
         initial: "touch",
         choices: ["self", "touch", "short", "medium", "long", "sight", "unlimited"],
-        label: "AOA.Spell.Range.Type"
+        label: "WOR.Spell.Range.Type"
       }),
       distance: new fields.NumberField({ required: false, nullable: true, integer: true, min: 0 })
     });
@@ -155,7 +155,7 @@ export default class SpellData extends ItemBaseData {
         blank: true,
         initial: "instant",
         choices: ["instant", "concentration", "rounds", "minutes", "hours", "days", "permanent"],
-        label: "AOA.Spell.Duration.Type"
+        label: "WOR.Spell.Duration.Type"
       }),
       value: new fields.NumberField({ required: false, nullable: true, integer: true, min: 0 }),
       // Can be dismissed early
@@ -171,7 +171,7 @@ export default class SpellData extends ItemBaseData {
         blank: true,
         initial: "single",
         choices: ["self", "single", "multiple", "area", "all"],
-        label: "AOA.Spell.Targets.Type"
+        label: "WOR.Spell.Targets.Type"
       }),
       count: new fields.NumberField({ required: false, nullable: true, integer: true, min: 1 }),
       areaSize: new fields.NumberField({ required: false, nullable: true, integer: true, min: 0 }),
@@ -193,7 +193,7 @@ export default class SpellData extends ItemBaseData {
         blank: true,
         initial: "minor",
         choices: ["trivial", "minor", "moderate", "severe", "catastrophic"],
-        label: "AOA.Spell.Backlash.Severity"
+        label: "WOR.Spell.Backlash.Severity"
       }),
       // Specific backlash effects for this spell
       effects: new fields.ArrayField(

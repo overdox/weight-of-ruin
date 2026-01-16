@@ -15,9 +15,9 @@ export class AdvancementWizard extends HandlebarsApplicationMixin(ApplicationV2)
    * The steps in the advancement wizard.
    */
   static STEPS = [
-    { id: 'attribute', label: 'AOA.Advancement.Wizard.Attribute', number: 1 },
-    { id: 'skills', label: 'AOA.Advancement.Wizard.Skills', number: 2 },
-    { id: 'talent', label: 'AOA.Advancement.Wizard.Talent', number: 3 }
+    { id: 'attribute', label: 'WOR.Advancement.Wizard.Attribute', number: 1 },
+    { id: 'skills', label: 'WOR.Advancement.Wizard.Skills', number: 2 },
+    { id: 'talent', label: 'WOR.Advancement.Wizard.Talent', number: 3 }
   ];
 
   /** @override */
@@ -29,7 +29,7 @@ export class AdvancementWizard extends HandlebarsApplicationMixin(ApplicationV2)
       height: 700
     },
     window: {
-      title: 'AOA.Advancement.Wizard.Title',
+      title: 'WOR.Advancement.Wizard.Title',
       resizable: true
     },
     actions: {
@@ -70,7 +70,7 @@ export class AdvancementWizard extends HandlebarsApplicationMixin(ApplicationV2)
 
   /** @override */
   get title() {
-    return game.i18n.localize('AOA.Advancement.Wizard.Title');
+    return game.i18n.localize('WOR.Advancement.Wizard.Title');
   }
 
   /* -------------------------------------------- */
@@ -158,8 +158,8 @@ export class AdvancementWizard extends HandlebarsApplicationMixin(ApplicationV2)
       const total = (attr.base || 0) + (attr.advances || 0) + (attr.modifier || 0);
       return {
         key,
-        label: game.i18n.localize(`AOA.Attribute.${key.charAt(0).toUpperCase() + key.slice(1)}.long`),
-        abbr: game.i18n.localize(`AOA.Attribute.${key.charAt(0).toUpperCase() + key.slice(1)}.abbr`),
+        label: game.i18n.localize(`WOR.Attribute.${key.charAt(0).toUpperCase() + key.slice(1)}.long`),
+        abbr: game.i18n.localize(`WOR.Attribute.${key.charAt(0).toUpperCase() + key.slice(1)}.abbr`),
         current: total,
         advances: attr.advances || 0,
         selected: this._selectedAttribute === key,
@@ -376,7 +376,7 @@ export class AdvancementWizard extends HandlebarsApplicationMixin(ApplicationV2)
     // Deduct 1000 XP
     const currentXP = actor.system.advancement?.xp?.current ?? 0;
     if (currentXP < 1000) {
-      ui.notifications.error(game.i18n.localize('AOA.Advancement.PurchaseDisabled'));
+      ui.notifications.error(game.i18n.localize('WOR.Advancement.PurchaseDisabled'));
       return;
     }
 
@@ -442,10 +442,10 @@ export class AdvancementWizard extends HandlebarsApplicationMixin(ApplicationV2)
     }
 
     // Show success message
-    ui.notifications.info(game.i18n.format('AOA.Advancement.Wizard.Success', { name: actor.name }));
+    ui.notifications.info(game.i18n.format('WOR.Advancement.Wizard.Success', { name: actor.name }));
 
     // Create chat message summarizing the advancement
-    const attrLabel = game.i18n.localize(`AOA.Attribute.${this._selectedAttribute.charAt(0).toUpperCase() + this._selectedAttribute.slice(1)}.long`);
+    const attrLabel = game.i18n.localize(`WOR.Attribute.${this._selectedAttribute.charAt(0).toUpperCase() + this._selectedAttribute.slice(1)}.long`);
     const skillsList = this._selectedSkills.join(', ');
     let talentText;
     if (this._talentMode === 'advance') {
@@ -460,7 +460,7 @@ export class AdvancementWizard extends HandlebarsApplicationMixin(ApplicationV2)
     ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
       content: `<div class="wor advancement-complete">
-        <h3><i class="fas fa-level-up-alt"></i> ${game.i18n.localize('AOA.Advancement.PurchaseTitle')}</h3>
+        <h3><i class="fas fa-level-up-alt"></i> ${game.i18n.localize('WOR.Advancement.PurchaseTitle')}</h3>
         <p><strong>${actor.name}</strong> has advanced!</p>
         <ul>
           <li><strong>Attribute:</strong> ${attrLabel} +1</li>

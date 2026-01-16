@@ -539,7 +539,7 @@ export class WoRActor extends Actor {
 
     // Check if skill is gated
     if (skill?.gated) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.SkillRequiresWitchsight'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.SkillRequiresWitchsight'));
       return null;
     }
 
@@ -608,7 +608,7 @@ export class WoRActor extends Actor {
   async rollAttack(weaponId, options = {}) {
     const weapon = this.items.get(weaponId);
     if (!weapon || weapon.type !== 'weapon') {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.InvalidWeapon'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.InvalidWeapon'));
       return null;
     }
 
@@ -748,7 +748,7 @@ export class WoRActor extends Actor {
       if (!this.canUseThaumaturgy()) {
         return {
           valid: false,
-          message: game.i18n.format('AOA.Warnings.SkillRequiresWitchsightAdd', { skill: item.name })
+          message: game.i18n.format('WOR.Warnings.SkillRequiresWitchsightAdd', { skill: item.name })
         };
       }
     }
@@ -758,7 +758,7 @@ export class WoRActor extends Actor {
       if (!this.canUseThaumaturgy()) {
         return {
           valid: false,
-          message: game.i18n.localize('AOA.Warnings.MagicRequiresWitchsight')
+          message: game.i18n.localize('WOR.Warnings.MagicRequiresWitchsight')
         };
       }
     }
@@ -768,7 +768,7 @@ export class WoRActor extends Actor {
       if (this.type === 'character' && this.system.creation?.complete) {
         return {
           valid: false,
-          message: game.i18n.localize('AOA.Warnings.CreationItemAfterComplete')
+          message: game.i18n.localize('WOR.Warnings.CreationItemAfterComplete')
         };
       }
     }
@@ -779,7 +779,7 @@ export class WoRActor extends Actor {
       if (existing) {
         return {
           valid: false,
-          message: game.i18n.format('AOA.Warnings.DuplicateCreationItem', { type: item.type })
+          message: game.i18n.format('WOR.Warnings.DuplicateCreationItem', { type: item.type })
         };
       }
     }
@@ -822,7 +822,7 @@ export class WoRActor extends Actor {
 
     // Notify if just entered Breaking Point
     if (nowAtBreakingPoint && !wasAtBreakingPoint) {
-      ui.notifications.warn(game.i18n.format('AOA.Warnings.EnteredBreakingPoint', { name: this.name }));
+      ui.notifications.warn(game.i18n.format('WOR.Warnings.EnteredBreakingPoint', { name: this.name }));
     }
 
     return this;
@@ -843,12 +843,12 @@ export class WoRActor extends Actor {
 
     // Warn on critical Essence
     if (newEssence <= 2 && newEssence > 0) {
-      ui.notifications.warn(game.i18n.format('AOA.Warnings.EssenceCritical', { name: this.name, essence: newEssence }));
+      ui.notifications.warn(game.i18n.format('WOR.Warnings.EssenceCritical', { name: this.name, essence: newEssence }));
     }
 
     // Warn on Leng transformation
     if (newEssence === 0) {
-      ui.notifications.error(game.i18n.format('AOA.Warnings.LengTransformation', { name: this.name }));
+      ui.notifications.error(game.i18n.format('WOR.Warnings.LengTransformation', { name: this.name }));
     }
 
     return this;
@@ -887,10 +887,10 @@ export class WoRActor extends Actor {
 
     // Show notifications for state changes
     if (stateChanges.becameUnconscious) {
-      ui.notifications.error(game.i18n.format('AOA.Warnings.Unconscious', { name: this.name }));
+      ui.notifications.error(game.i18n.format('WOR.Warnings.Unconscious', { name: this.name }));
     }
     if (stateChanges.died) {
-      ui.notifications.error(game.i18n.format('AOA.Warnings.Death', { name: this.name }));
+      ui.notifications.error(game.i18n.format('WOR.Warnings.Death', { name: this.name }));
     }
 
     return this;
@@ -979,14 +979,14 @@ export class WoRActor extends Actor {
 
     // Send chat notification
     const restTypeLabel = hours >= 8
-      ? game.i18n.localize('AOA.Recovery.FullNight')
-      : game.i18n.format('AOA.Recovery.SleepHours', { hours });
+      ? game.i18n.localize('WOR.Recovery.FullNight')
+      : game.i18n.format('WOR.Recovery.SleepHours', { hours });
 
-    const content = game.i18n.format('AOA.Recovery.RestResult', {
+    const content = game.i18n.format('WOR.Recovery.RestResult', {
       name: this.name,
       traumaRecovered,
       restType: restTypeLabel,
-      comfortable: comfortable ? ` (${game.i18n.localize('AOA.Recovery.Comfortable')})` : ''
+      comfortable: comfortable ? ` (${game.i18n.localize('WOR.Recovery.Comfortable')})` : ''
     });
 
     await ChatMessage.create({
@@ -1047,32 +1047,32 @@ export class WoRActor extends Actor {
       case 'criticalFailure':
         // Patient loses 1 Wound
         woundsChange = -1;
-        outcome = 'AOA.Recovery.Treatment.CriticalFailure';
+        outcome = 'WOR.Recovery.Treatment.CriticalFailure';
         outcomeIcon = 'fa-skull-crossbones';
         break;
       case 'failure':
         // Patient gains 1 Trauma
         traumaChange = 1;
-        outcome = 'AOA.Recovery.Treatment.Failure';
+        outcome = 'WOR.Recovery.Treatment.Failure';
         outcomeIcon = 'fa-times-circle';
         break;
       case 'success':
         // Patient removes 2 Trauma
         traumaChange = -Math.min(2, currentTrauma);
-        outcome = 'AOA.Recovery.Treatment.Success';
+        outcome = 'WOR.Recovery.Treatment.Success';
         outcomeIcon = 'fa-check-circle';
         break;
       case 'criticalSuccess':
         // Restore 1 Wound + remove all Trauma
         woundsChange = 1;
         traumaChange = -currentTrauma;
-        outcome = 'AOA.Recovery.Treatment.CriticalSuccess';
+        outcome = 'WOR.Recovery.Treatment.CriticalSuccess';
         outcomeIcon = 'fa-star';
         break;
       default:
         // Treat unknown as failure
         traumaChange = 1;
-        outcome = 'AOA.Recovery.Treatment.Failure';
+        outcome = 'WOR.Recovery.Treatment.Failure';
         outcomeIcon = 'fa-times-circle';
     }
 
@@ -1092,7 +1092,7 @@ export class WoRActor extends Actor {
     await updateHealthConditions(this);
 
     // Send chat notification
-    const content = game.i18n.format('AOA.Recovery.TreatmentResult', {
+    const content = game.i18n.format('WOR.Recovery.TreatmentResult', {
       name: this.name,
       outcome: game.i18n.localize(outcome),
       traumaChange: traumaChange > 0 ? `+${traumaChange}` : traumaChange,
@@ -1143,7 +1143,7 @@ export class WoRActor extends Actor {
     await updateHealthConditions(this);
 
     // Send chat notification
-    const content = game.i18n.format('AOA.Recovery.LongTermResult', {
+    const content = game.i18n.format('WOR.Recovery.LongTermResult', {
       name: this.name,
       woundsRestored,
       maxTraumaRestored
@@ -1184,7 +1184,7 @@ export class WoRActor extends Actor {
     await updateHealthConditions(this);
 
     // Send chat notification
-    const content = game.i18n.format('AOA.Recovery.TreatmentReceived', {
+    const content = game.i18n.format('WOR.Recovery.TreatmentReceived', {
       name: this.name,
       traumaHealed: actualHealed
     });
@@ -1210,7 +1210,7 @@ export class WoRActor extends Actor {
   async stabilize() {
     // Can only stabilize if unconscious
     if (!this.system.isUnconscious) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.NotUnconscious'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.NotUnconscious'));
       return false;
     }
 
@@ -1222,7 +1222,7 @@ export class WoRActor extends Actor {
       await applyCondition(this, 'unconscious');
     }
 
-    const content = game.i18n.format('AOA.Recovery.Stabilized', { name: this.name });
+    const content = game.i18n.format('WOR.Recovery.Stabilized', { name: this.name });
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: `<div class="wor recovery-message stabilized"><i class="fas fa-heartbeat"></i> ${content}</div>`,
@@ -1243,12 +1243,12 @@ export class WoRActor extends Actor {
     const atBreakingPoint = this.system.atBreakingPoint ?? false;
 
     if (wounds <= 1) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.InsufficientWounds'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.InsufficientWounds'));
       return false;
     }
 
     if (atBreakingPoint) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.StillAtBreakingPoint'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.StillAtBreakingPoint'));
       return false;
     }
 
@@ -1258,7 +1258,7 @@ export class WoRActor extends Actor {
       // Clear stabilized flag
       await this.setStabilized(false);
 
-      const content = game.i18n.format('AOA.Recovery.Revived', { name: this.name });
+      const content = game.i18n.format('WOR.Recovery.Revived', { name: this.name });
       await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this }),
         content: `<div class="wor recovery-message revived"><i class="fas fa-heart"></i> ${content}</div>`,

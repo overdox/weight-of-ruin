@@ -72,13 +72,13 @@ async function _onApplyDamage(event) {
   // Get the target actor
   const actor = game.actors.get(targetId);
   if (!actor) {
-    ui.notifications.warn(game.i18n.localize('AOA.Combat.TargetNotFound'));
+    ui.notifications.warn(game.i18n.localize('WOR.Combat.TargetNotFound'));
     return;
   }
 
   // Check permissions
   if (!actor.isOwner) {
-    ui.notifications.warn(game.i18n.localize('AOA.Combat.NoPermission'));
+    ui.notifications.warn(game.i18n.localize('WOR.Combat.NoPermission'));
     return;
   }
 
@@ -92,11 +92,11 @@ async function _onApplyDamage(event) {
 
   // Disable the button after use
   button.disabled = true;
-  button.innerHTML = `<i class="fas fa-check"></i> ${game.i18n.localize('AOA.Combat.DamageApplied')}`;
+  button.innerHTML = `<i class="fas fa-check"></i> ${game.i18n.localize('WOR.Combat.DamageApplied')}`;
 
   // Notify
   ui.notifications.info(
-    game.i18n.format('AOA.Combat.DamageAppliedTo', {
+    game.i18n.format('WOR.Combat.DamageAppliedTo', {
       damage: damage,
       name: actor.name
     })
@@ -115,13 +115,13 @@ async function _onAddInjury(event) {
   // Get the actor
   const actor = game.actors.get(actorId);
   if (!actor) {
-    ui.notifications.warn(game.i18n.localize('AOA.Health.ActorNotFound'));
+    ui.notifications.warn(game.i18n.localize('WOR.Health.ActorNotFound'));
     return;
   }
 
   // Check permissions
   if (!actor.isOwner) {
-    ui.notifications.warn(game.i18n.localize('AOA.Combat.NoPermission'));
+    ui.notifications.warn(game.i18n.localize('WOR.Combat.NoPermission'));
     return;
   }
 
@@ -139,11 +139,11 @@ async function _onAddInjury(event) {
 
   // Disable the button after use
   button.disabled = true;
-  button.innerHTML = `<i class="fas fa-check"></i> ${game.i18n.localize('AOA.Health.InjuryAdded')}`;
+  button.innerHTML = `<i class="fas fa-check"></i> ${game.i18n.localize('WOR.Health.InjuryAdded')}`;
 
   // Notify
   ui.notifications.info(
-    game.i18n.format('AOA.Health.InjuryAddedTo', {
+    game.i18n.format('WOR.Health.InjuryAddedTo', {
       name: actor.name
     })
   );
@@ -161,7 +161,7 @@ async function _onApplySpellDamage(event) {
   // Get selected tokens
   const targets = game.user.targets;
   if (targets.size === 0) {
-    ui.notifications.warn(game.i18n.localize('AOA.Spell.NoTargetsSelected'));
+    ui.notifications.warn(game.i18n.localize('WOR.Spell.NoTargetsSelected'));
     return;
   }
 
@@ -180,11 +180,11 @@ async function _onApplySpellDamage(event) {
 
   // Disable the button after use
   button.disabled = true;
-  button.innerHTML = `<i class="fas fa-check"></i> ${game.i18n.localize('AOA.Spell.EffectApplied')}`;
+  button.innerHTML = `<i class="fas fa-check"></i> ${game.i18n.localize('WOR.Spell.EffectApplied')}`;
 
   // Notify
   ui.notifications.info(
-    game.i18n.format('AOA.Spell.DamageAppliedToTargets', {
+    game.i18n.format('WOR.Spell.DamageAppliedToTargets', {
       damage: damage,
       count: targets.size
     })

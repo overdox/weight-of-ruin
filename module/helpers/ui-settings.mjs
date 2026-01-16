@@ -10,14 +10,14 @@
 export function registerUISettings() {
   // Theme setting - dark is default for grimdark aesthetic
   game.settings.register('weight-of-ruin', 'uiTheme', {
-    name: 'AOA.Settings.UITheme.Name',
-    hint: 'AOA.Settings.UITheme.Hint',
+    name: 'WOR.Settings.UITheme.Name',
+    hint: 'WOR.Settings.UITheme.Hint',
     scope: 'client',
     config: true,
     type: String,
     choices: {
-      'dark': 'AOA.Settings.UITheme.Dark',
-      'light': 'AOA.Settings.UITheme.Light'
+      'dark': 'WOR.Settings.UITheme.Dark',
+      'light': 'WOR.Settings.UITheme.Light'
     },
     default: 'dark',
     onChange: applyTheme

@@ -39,14 +39,14 @@ export default class ActorBaseData extends foundry.abstract.TypeDataModel {
     });
 
     schema.attributes = new fields.SchemaField({
-      strength: attributeSchema("AOA.Attributes.Strength"),
-      fortitude: attributeSchema("AOA.Attributes.Fortitude"),
-      agility: attributeSchema("AOA.Attributes.Agility"),
-      awareness: attributeSchema("AOA.Attributes.Awareness"),
-      resolve: attributeSchema("AOA.Attributes.Resolve"),
-      persona: attributeSchema("AOA.Attributes.Persona"),
-      ingenuity: attributeSchema("AOA.Attributes.Ingenuity"),
-      expertise: attributeSchema("AOA.Attributes.Expertise")
+      strength: attributeSchema("WOR.Attributes.Strength"),
+      fortitude: attributeSchema("WOR.Attributes.Fortitude"),
+      agility: attributeSchema("WOR.Attributes.Agility"),
+      awareness: attributeSchema("WOR.Attributes.Awareness"),
+      resolve: attributeSchema("WOR.Attributes.Resolve"),
+      persona: attributeSchema("WOR.Attributes.Persona"),
+      ingenuity: attributeSchema("WOR.Attributes.Ingenuity"),
+      expertise: attributeSchema("WOR.Attributes.Expertise")
     });
 
     // ========================================
@@ -58,7 +58,7 @@ export default class ActorBaseData extends foundry.abstract.TypeDataModel {
       initial: 0,
       min: 0,
       max: 10,
-      label: "AOA.Attributes.Witchsight"
+      label: "WOR.Attributes.Witchsight"
     });
 
     // ========================================
@@ -71,7 +71,7 @@ export default class ActorBaseData extends foundry.abstract.TypeDataModel {
       initial: 2,
       min: 0,
       max: 5,
-      label: "AOA.Derived.BaseSpeed"
+      label: "WOR.Derived.BaseSpeed"
     });
 
     // ========================================
@@ -84,7 +84,7 @@ export default class ActorBaseData extends foundry.abstract.TypeDataModel {
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Health.Trauma"
+        label: "WOR.Health.Trauma"
       }),
       // Wounds: Survival resource pool (remaining health)
       wounds: new fields.SchemaField({
@@ -93,14 +93,14 @@ export default class ActorBaseData extends foundry.abstract.TypeDataModel {
           ...requiredInteger,
           initial: 0, // Set during prepareData based on formula
           min: 0,
-          label: "AOA.Health.Wounds.Value"
+          label: "WOR.Health.Wounds.Value"
         }),
         // Max wounds (base value from formula, can be modified by traits)
         max: new fields.NumberField({
           ...requiredInteger,
           initial: 0, // Set during prepareData based on formula
           min: 0,
-          label: "AOA.Health.Wounds.Max"
+          label: "WOR.Health.Wounds.Max"
         })
       }),
       // Max Trauma reduction (accumulated from failing Wounds Rolls)
@@ -109,12 +109,12 @@ export default class ActorBaseData extends foundry.abstract.TypeDataModel {
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Health.MaxTraumaReduction"
+        label: "WOR.Health.MaxTraumaReduction"
       }),
       // Stabilized flag (set by Medicine check when unconscious)
       stabilized: new fields.BooleanField({
         initial: false,
-        label: "AOA.Health.Stabilized"
+        label: "WOR.Health.Stabilized"
       })
     });
 

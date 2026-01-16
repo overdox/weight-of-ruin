@@ -2,7 +2,7 @@
 <footer class="creation-footer npc-creation-footer">
   <div class="footer-info">
     <span class="step-info">
-      {{localize "AOA.NPCCreation.StepLabel"}} {{add currentStep 1}} {{localize "AOA.Common.Of"}} 6
+      {{localize "WOR.NPCCreation.StepLabel"}} {{add currentStep 1}} {{localize "WOR.Common.Of"}} 6
     </span>
   </div>
 
@@ -10,7 +10,7 @@
     {{!-- Start Over Button --}}
     <button type="button" class="start-over-btn" data-action="startOver">
       <i class="fas fa-redo"></i>
-      {{localize "AOA.NPCCreation.StartOver"}}
+      {{localize "WOR.NPCCreation.StartOver"}}
     </button>
 
     {{!-- Navigation Buttons --}}
@@ -18,18 +18,18 @@
       {{#if (gt currentStep 0)}}
       <button type="button" class="back-btn" data-action="previousStep">
         <i class="fas fa-arrow-left"></i>
-        {{localize "AOA.NPCCreation.PreviousStep"}}
+        {{localize "WOR.NPCCreation.PreviousStep"}}
       </button>
       {{/if}}
 
       {{#if isFinalStep}}
       <button type="button" class="finalize-btn" data-action="finalize" {{#unless canProceed}}disabled{{/unless}}>
         <i class="fas fa-check-circle"></i>
-        {{localize "AOA.NPCCreation.CreateNPC"}}
+        {{localize "WOR.NPCCreation.CreateNPC"}}
       </button>
       {{else}}
       <button type="button" class="next-btn" data-action="nextStep" {{#unless canProceed}}disabled{{/unless}}>
-        {{localize "AOA.NPCCreation.NextStep"}}
+        {{localize "WOR.NPCCreation.NextStep"}}
         <i class="fas fa-arrow-right"></i>
       </button>
       {{/if}}

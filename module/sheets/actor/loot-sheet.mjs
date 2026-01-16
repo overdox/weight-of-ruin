@@ -61,7 +61,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     if (game.user.isGM) {
       controls.push({
         icon: 'fa-solid fa-user-circle',
-        label: 'AOA.HeaderControls.PrototypeToken',
+        label: 'WOR.HeaderControls.PrototypeToken',
         action: 'configurePrototypeToken',
         visible: true
       });
@@ -70,7 +70,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     // View Character Artwork
     controls.push({
       icon: 'fa-solid fa-image',
-      label: 'AOA.HeaderControls.ViewCharacterArt',
+      label: 'WOR.HeaderControls.ViewCharacterArt',
       action: 'viewCharacterArt',
       visible: true
     });
@@ -78,7 +78,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     // View Token Artwork
     controls.push({
       icon: 'fa-solid fa-user-circle',
-      label: 'AOA.HeaderControls.ViewTokenArt',
+      label: 'WOR.HeaderControls.ViewTokenArt',
       action: 'viewTokenArt',
       visible: !!actor.prototypeToken?.texture?.src
     });
@@ -87,7 +87,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     if (game.user.isGM) {
       controls.push({
         icon: 'fa-solid fa-cogs',
-        label: 'AOA.HeaderControls.ActorSettings',
+        label: 'WOR.HeaderControls.ActorSettings',
         action: 'configureActorSettings',
         visible: true
       });
@@ -103,8 +103,8 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
   /** @override */
   get title() {
     const mode = this.document.system.isMerchantMode
-      ? game.i18n.localize('AOA.Loot.SheetType.merchant')
-      : game.i18n.localize('AOA.Loot.SheetType.loot');
+      ? game.i18n.localize('WOR.Loot.SheetType.merchant')
+      : game.i18n.localize('WOR.Loot.SheetType.loot');
     return `${this.document.name} (${mode})`;
   }
 
@@ -336,7 +336,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     // Only accept equipment items
     const validTypes = ['weapon', 'armor', 'gear'];
     if (!validTypes.includes(item.type)) {
-      ui.notifications.warn(game.i18n.localize('AOA.Loot.InvalidItemType'));
+      ui.notifications.warn(game.i18n.localize('WOR.Loot.InvalidItemType'));
       return;
     }
 
@@ -371,7 +371,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     await Item.create(itemData, { parent: this.document });
     await item.delete();
 
-    ui.notifications.info(game.i18n.format('AOA.Loot.ItemTransferred', { name: item.name }));
+    ui.notifications.info(game.i18n.format('WOR.Loot.ItemTransferred', { name: item.name }));
   }
 
   /* -------------------------------------------- */
@@ -396,10 +396,10 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     if (!item) return;
 
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: { title: game.i18n.localize('AOA.Dialog.DeleteItem') },
-      content: `<p>${game.i18n.format('AOA.Dialog.DeleteItemConfirm', { name: item.name })}</p>`,
-      yes: { label: game.i18n.localize('AOA.Common.Delete'), icon: 'fas fa-trash' },
-      no: { label: game.i18n.localize('AOA.Common.Cancel') }
+      window: { title: game.i18n.localize('WOR.Dialog.DeleteItem') },
+      content: `<p>${game.i18n.format('WOR.Dialog.DeleteItemConfirm', { name: item.name })}</p>`,
+      yes: { label: game.i18n.localize('WOR.Common.Delete'), icon: 'fas fa-trash' },
+      no: { label: game.i18n.localize('WOR.Common.Cancel') }
     });
 
     if (confirmed) {
@@ -443,7 +443,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
 
     const wealth = this.document.system.wealth;
     if (this.document.system.totalWealthInOrin === 0) {
-      ui.notifications.warn(game.i18n.localize('AOA.Loot.NoCoinsToSplit'));
+      ui.notifications.warn(game.i18n.localize('WOR.Loot.NoCoinsToSplit'));
       return;
     }
 
@@ -453,7 +453,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     );
 
     if (playerCharacters.length === 0) {
-      ui.notifications.warn(game.i18n.localize('AOA.Loot.NoPlayersAvailable'));
+      ui.notifications.warn(game.i18n.localize('WOR.Loot.NoPlayersAvailable'));
       return;
     }
 
@@ -468,13 +468,13 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     );
 
     const result = await foundry.applications.api.DialogV2.wait({
-      window: { title: game.i18n.localize('AOA.Loot.SplitCoins') },
+      window: { title: game.i18n.localize('WOR.Loot.SplitCoins') },
       classes: ['weight-of-ruin', 'split-coins-dialog'],
       content,
       buttons: [
         {
           action: 'split',
-          label: game.i18n.localize('AOA.Loot.SplitCoins'),
+          label: game.i18n.localize('WOR.Loot.SplitCoins'),
           icon: 'fas fa-coins',
           default: true,
           callback: (event, button, dialog) => {
@@ -486,14 +486,14 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
         },
         {
           action: 'cancel',
-          label: game.i18n.localize('AOA.Common.Cancel')
+          label: game.i18n.localize('WOR.Common.Cancel')
         }
       ]
     });
 
     if (result === 'cancel' || !result || result.length === 0) {
       if (result && result.length === 0) {
-        ui.notifications.warn(game.i18n.localize('AOA.Loot.NoPlayersSelected'));
+        ui.notifications.warn(game.i18n.localize('WOR.Loot.NoPlayersSelected'));
       }
       return;
     }
@@ -538,13 +538,13 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
 
     // Notify
     const names = targetActors.map(a => a.name).join(', ');
-    ui.notifications.info(game.i18n.format('AOA.Loot.SplitComplete', { count: numTargets }));
+    ui.notifications.info(game.i18n.format('WOR.Loot.SplitComplete', { count: numTargets }));
 
     // Chat message
     const chatContent = `
       <div class="wor loot-split">
-        <h4>${game.i18n.localize('AOA.Loot.CoinsSplit')}</h4>
-        <p>${game.i18n.format('AOA.Loot.SplitDetails', {
+        <h4>${game.i18n.localize('WOR.Loot.CoinsSplit')}</h4>
+        <p>${game.i18n.format('WOR.Loot.SplitDetails', {
           sovereigns: splitSovereigns,
           crowns: splitCrowns,
           orin: splitOrin,
@@ -574,7 +574,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     );
 
     if (selectedTokens.length === 0) {
-      ui.notifications.warn(game.i18n.localize('AOA.Loot.NoTokensSelected'));
+      ui.notifications.warn(game.i18n.localize('WOR.Loot.NoTokensSelected'));
       return;
     }
 
@@ -593,13 +593,13 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     );
 
     const result = await foundry.applications.api.DialogV2.wait({
-      window: { title: game.i18n.localize('AOA.Loot.LootTokens') },
+      window: { title: game.i18n.localize('WOR.Loot.LootTokens') },
       classes: ['weight-of-ruin', 'loot-tokens-dialog'],
       content,
       buttons: [
         {
           action: 'loot',
-          label: game.i18n.localize('AOA.Loot.LootTokens'),
+          label: game.i18n.localize('WOR.Loot.LootTokens'),
           icon: 'fas fa-hand-holding',
           default: true,
           callback: (event, button, dialog) => {
@@ -611,7 +611,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
         },
         {
           action: 'cancel',
-          label: game.i18n.localize('AOA.Common.Cancel')
+          label: game.i18n.localize('WOR.Common.Cancel')
         }
       ]
     });
@@ -656,7 +656,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     }
 
     if (totalItems > 0) {
-      ui.notifications.info(game.i18n.format('AOA.Loot.LootComplete', { count: totalItems }));
+      ui.notifications.info(game.i18n.format('WOR.Loot.LootComplete', { count: totalItems }));
     }
   }
 
@@ -671,7 +671,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     // Determine the buyer
     const buyer = game.user.character;
     if (!buyer) {
-      ui.notifications.warn(game.i18n.localize('AOA.Loot.NoBuyerSelected'));
+      ui.notifications.warn(game.i18n.localize('WOR.Loot.NoBuyerSelected'));
       return;
     }
 
@@ -682,20 +682,20 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     // Check if buyer can afford it
     const buyerWealth = buyer.system.totalWealthInOrin;
     if (buyerWealth < modifiedPrice) {
-      ui.notifications.warn(game.i18n.localize('AOA.Loot.CannotAfford'));
+      ui.notifications.warn(game.i18n.localize('WOR.Loot.CannotAfford'));
       return;
     }
 
     // Confirm purchase
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: { title: game.i18n.localize('AOA.Loot.ConfirmPurchase') },
-      content: `<p>${game.i18n.format('AOA.Loot.PurchaseConfirm', {
+      window: { title: game.i18n.localize('WOR.Loot.ConfirmPurchase') },
+      content: `<p>${game.i18n.format('WOR.Loot.PurchaseConfirm', {
         item: item.name,
         price: modifiedPrice,
         buyer: buyer.name
       })}</p>`,
-      yes: { label: game.i18n.localize('AOA.Loot.Purchase'), icon: 'fas fa-coins' },
-      no: { label: game.i18n.localize('AOA.Common.Cancel') }
+      yes: { label: game.i18n.localize('WOR.Loot.Purchase'), icon: 'fas fa-coins' },
+      no: { label: game.i18n.localize('WOR.Common.Cancel') }
     });
 
     if (!confirmed) return;
@@ -722,7 +722,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
 
       await Item.create(itemData, { parent: buyer });
 
-      ui.notifications.info(game.i18n.format('AOA.Loot.PurchaseComplete', {
+      ui.notifications.info(game.i18n.format('WOR.Loot.PurchaseComplete', {
         item: item.name,
         buyer: buyer.name
       }));
@@ -730,7 +730,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
       // Request purchase via query (GM will handle it)
       const activeGM = game.users.activeGM;
       if (!activeGM) {
-        ui.notifications.warn(game.i18n.localize('AOA.Loot.NoGMOnline'));
+        ui.notifications.warn(game.i18n.localize('WOR.Loot.NoGMOnline'));
         return;
       }
 
@@ -745,18 +745,18 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
         const result = await activeGM.query('weight-of-ruin.purchaseItem', queryData);
 
         if (result.success) {
-          ui.notifications.info(game.i18n.format('AOA.Loot.PurchaseComplete', {
+          ui.notifications.info(game.i18n.format('WOR.Loot.PurchaseComplete', {
             item: result.itemName,
             buyer: result.targetName
           }));
         } else if (result.error === 'cannot_afford') {
-          ui.notifications.warn(game.i18n.localize('AOA.Loot.CannotAfford'));
+          ui.notifications.warn(game.i18n.localize('WOR.Loot.CannotAfford'));
         } else {
-          ui.notifications.warn(game.i18n.localize('AOA.Loot.PurchaseFailed'));
+          ui.notifications.warn(game.i18n.localize('WOR.Loot.PurchaseFailed'));
         }
       } catch (error) {
         console.error('The Weight of Ruin | Purchase query error:', error);
-        ui.notifications.error(game.i18n.localize('AOA.Loot.PurchaseFailed'));
+        ui.notifications.error(game.i18n.localize('WOR.Loot.PurchaseFailed'));
       }
     }
   }
@@ -772,7 +772,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     // Determine the taker
     const taker = game.user.character;
     if (!taker) {
-      ui.notifications.warn(game.i18n.localize('AOA.Loot.NoCharacterSelected'));
+      ui.notifications.warn(game.i18n.localize('WOR.Loot.NoCharacterSelected'));
       return;
     }
 
@@ -811,7 +811,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
       // Check if any GM is online
       const activeGM = game.users.activeGM;
       if (!activeGM) {
-        ui.notifications.warn(game.i18n.localize('AOA.Loot.NoGMOnline'));
+        ui.notifications.warn(game.i18n.localize('WOR.Loot.NoGMOnline'));
         return;
       }
 
@@ -828,12 +828,12 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
         console.log('The Weight of Ruin | Query result:', result);
 
         if (!result.success) {
-          ui.notifications.warn(game.i18n.localize('AOA.Loot.TransferFailed'));
+          ui.notifications.warn(game.i18n.localize('WOR.Loot.TransferFailed'));
         }
         // Success case: chat message is posted by GM's handler
       } catch (error) {
         console.error('The Weight of Ruin | Query error:', error);
-        ui.notifications.error(game.i18n.localize('AOA.Loot.TransferFailed'));
+        ui.notifications.error(game.i18n.localize('WOR.Loot.TransferFailed'));
       }
     }
   }
@@ -946,7 +946,7 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     const img = actor.img;
 
     if (!img || img === CONST.DEFAULT_TOKEN) {
-      ui.notifications.warn(game.i18n.localize('AOA.HeaderControls.NoCharacterArt'));
+      ui.notifications.warn(game.i18n.localize('WOR.HeaderControls.NoCharacterArt'));
       return;
     }
 
@@ -968,14 +968,14 @@ export class WoRLootSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
     const tokenImg = actor.prototypeToken?.texture?.src;
 
     if (!tokenImg || tokenImg === CONST.DEFAULT_TOKEN) {
-      ui.notifications.warn(game.i18n.localize('AOA.HeaderControls.NoTokenArt'));
+      ui.notifications.warn(game.i18n.localize('WOR.HeaderControls.NoTokenArt'));
       return;
     }
 
     // Create an image popout (v13 API)
     new foundry.applications.apps.ImagePopout({
       src: tokenImg,
-      window: { title: `${actor.name} - ${game.i18n.localize('AOA.HeaderControls.Token')}` },
+      window: { title: `${actor.name} - ${game.i18n.localize('WOR.HeaderControls.Token')}` },
       uuid: actor.uuid
     }).render(true);
   }

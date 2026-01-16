@@ -46,13 +46,13 @@ export default class WeaponData extends ItemBaseData {
       ...requiredInteger,
       initial: 4,
       min: 0,
-      label: "AOA.Weapon.BaseDamage"
+      label: "WOR.Weapon.BaseDamage"
     });
 
     // Whether to add Strength Bonus to damage (true for melee, some ranged like Composite Bow)
     schema.useStrengthBonus = new fields.BooleanField({
       initial: true,
-      label: "AOA.Weapon.UseStrengthBonus"
+      label: "WOR.Weapon.UseStrengthBonus"
     });
 
     schema.damageType = new fields.StringField({
@@ -60,7 +60,7 @@ export default class WeaponData extends ItemBaseData {
       blank: true,
       initial: "slashing",
       choices: ["slashing", "piercing", "bludgeoning"],
-      label: "AOA.Weapon.DamageType"
+      label: "WOR.Weapon.DamageType"
     });
 
     // ========================================
@@ -74,7 +74,7 @@ export default class WeaponData extends ItemBaseData {
       initial: 6,
       min: 1,
       max: 10,
-      label: "AOA.Weapon.Reliability"
+      label: "WOR.Weapon.Reliability"
     });
 
     // ========================================
@@ -85,7 +85,7 @@ export default class WeaponData extends ItemBaseData {
       ...requiredInteger,
       initial: 0,
       min: 0,
-      label: "AOA.Weapon.ArmorPiercing"
+      label: "WOR.Weapon.ArmorPiercing"
     });
 
     // ========================================
@@ -96,7 +96,7 @@ export default class WeaponData extends ItemBaseData {
       blank: false,
       initial: "strength",
       choices: ["strength", "agility"],
-      label: "AOA.Weapon.Attribute"
+      label: "WOR.Weapon.Attribute"
     });
 
     // Prowess used for attack rolls (replaces former skill field)
@@ -105,7 +105,7 @@ export default class WeaponData extends ItemBaseData {
       blank: false,
       initial: "weaponProwess",
       choices: ["weaponProwess", "ballisticProwess", "unarmedProwess"],
-      label: "AOA.Weapon.ProwessLabel"
+      label: "WOR.Weapon.ProwessLabel"
     });
 
     // ========================================
@@ -117,7 +117,7 @@ export default class WeaponData extends ItemBaseData {
       blank: false,
       initial: "simple",
       choices: ["simple", "martial", "exotic"],
-      label: "AOA.Weapon.Category"
+      label: "WOR.Weapon.Category"
     });
 
     // ========================================
@@ -129,7 +129,7 @@ export default class WeaponData extends ItemBaseData {
         blank: false,
         initial: "melee",
         choices: ["melee", "ranged", "thrown", "reach"],
-        label: "AOA.Weapon.Range.Type"
+        label: "WOR.Weapon.Range.Type"
       }),
       // For ranged weapons: base range (may include SB+X format stored as base value)
       value: new fields.NumberField({ required: false, nullable: true, integer: true, min: 0 }),
@@ -156,7 +156,7 @@ export default class WeaponData extends ItemBaseData {
       blank: false,
       initial: "sword",
       choices: ["dagger", "sword", "axe", "blunt", "polearm", "bow", "crossbow", "thrown", "unarmed"],
-      label: "AOA.Weapon.Group"
+      label: "WOR.Weapon.Group"
     });
 
     // ========================================
@@ -167,7 +167,7 @@ export default class WeaponData extends ItemBaseData {
       blank: false,
       initial: "common",
       choices: ["common", "uncommon", "rare", "exotic"],
-      label: "AOA.Weapon.Rarity"
+      label: "WOR.Weapon.Rarity"
     });
 
     // ========================================
@@ -180,14 +180,14 @@ export default class WeaponData extends ItemBaseData {
         blank: false,
         initial: "standard",
         choices: ["poor", "standard", "fine", "superior", "masterwork"],
-        label: "AOA.Weapon.Quality"
+        label: "WOR.Weapon.Quality"
       }),
       // Attack dice modifier based on quality level
       // Poor: -1, Standard: 0, Fine: +1, Superior: +2, Masterwork: +3
       attackModifier: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
-        label: "AOA.Weapon.Quality.AttackModifier"
+        label: "WOR.Weapon.Quality.AttackModifier"
       })
     });
 
@@ -196,7 +196,7 @@ export default class WeaponData extends ItemBaseData {
     // ========================================
     schema.equipped = new fields.BooleanField({
       initial: false,
-      label: "AOA.Weapon.Equipped"
+      label: "WOR.Weapon.Equipped"
     });
 
     // ========================================
@@ -207,7 +207,7 @@ export default class WeaponData extends ItemBaseData {
       initial: 1,
       min: 1,
       max: 2,
-      label: "AOA.Weapon.Hands"
+      label: "WOR.Weapon.Hands"
     });
 
     // ========================================
@@ -218,7 +218,7 @@ export default class WeaponData extends ItemBaseData {
       nullable: false,
       initial: 1,
       min: 0,
-      label: "AOA.Weapon.Weight"
+      label: "WOR.Weapon.Weight"
     });
 
     // ========================================
@@ -229,19 +229,19 @@ export default class WeaponData extends ItemBaseData {
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Sovereigns"
+        label: "WOR.Wealth.Sovereigns"
       }),
       crowns: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Crowns"
+        label: "WOR.Wealth.Crowns"
       }),
       orin: new fields.NumberField({
         ...requiredInteger,
         initial: 10,
         min: 0,
-        label: "AOA.Wealth.Orin"
+        label: "WOR.Wealth.Orin"
       })
     });
 
@@ -252,7 +252,7 @@ export default class WeaponData extends ItemBaseData {
       ...requiredInteger,
       initial: 1,
       min: 1,
-      label: "AOA.Gear.Quantity"
+      label: "WOR.Gear.Quantity"
     });
 
     return schema;

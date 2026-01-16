@@ -10,7 +10,7 @@
         {{!-- Sidebar (Quantity, Hands, Weight, Value) --}}
         <div class="item-sidebar">
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Gear.Quantity"}}</span>
+            <span class="stat-label">{{localize "WOR.Gear.Quantity"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.quantity" value="{{system.quantity}}" min="1" />
             {{else}}
@@ -18,7 +18,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Weapon.Hands"}}</span>
+            <span class="stat-label">{{localize "WOR.Weapon.Hands"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.hands" value="{{system.hands}}" min="1" max="2" />
             {{else}}
@@ -26,7 +26,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Common.Weight"}}</span>
+            <span class="stat-label">{{localize "WOR.Common.Weight"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.weight" value="{{system.weight}}" min="0" step="0.1" />
             {{else}}
@@ -34,7 +34,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat price-stat">
-            <span class="stat-label">{{localize "AOA.Common.Price"}}</span>
+            <span class="stat-label">{{localize "WOR.Common.Price"}}</span>
             {{#if isEditMode}}
             <div class="price-inputs">
               <div class="currency-input sovereigns">
@@ -65,9 +65,9 @@
           {{!-- Description --}}
           <div class="description-section">
             <div class="description-header">
-              <h3>{{localize "AOA.Common.Description"}}</h3>
+              <h3>{{localize "WOR.Common.Description"}}</h3>
               {{#if editable}}
-              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'WOR.Common.Edit'}}">
                 <i class="fas fa-edit"></i>
               </a>
               {{/if}}
@@ -85,11 +85,11 @@
       <div class="item-main-content" style="padding: 16px;">
         {{!-- Weapon Details Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Weapon.Details"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Weapon.Details"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Weapon.Category"}}</label>
+                <label>{{localize "WOR.Weapon.Category"}}</label>
                 {{#if isEditMode}}
                 <select name="system.category">
                   {{#each categoryOptions as |label key|}}
@@ -97,11 +97,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Weapon.CategoryType." (capitalize system.category))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Weapon.CategoryType." (capitalize system.category))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Weapon.ProwessLabel"}}</label>
+                <label>{{localize "WOR.Weapon.ProwessLabel"}}</label>
                 {{#if isEditMode}}
                 <select name="system.prowess">
                   {{#each prowessOptions as |label key|}}
@@ -109,11 +109,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Derived." (capitalize system.prowess) ".label")}}</span>
+                <span class="field-value">{{localize (concat "WOR.Derived." (capitalize system.prowess) ".label")}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Weapon.Range"}}</label>
+                <label>{{localize "WOR.Weapon.Range"}}</label>
                 {{#if isEditMode}}
                 <select name="system.range.type">
                   {{#each rangeTypeOptions as |label key|}}
@@ -121,12 +121,12 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Weapon.RangeType." (capitalize system.range.type))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Weapon.RangeType." (capitalize system.range.type))}}</span>
                 {{/if}}
               </div>
               {{#if (or (eq system.range.type "ranged") (eq system.range.type "thrown"))}}
               <div class="form-group">
-                <label>{{localize "AOA.Weapon.RangeShort"}}</label>
+                <label>{{localize "WOR.Weapon.RangeShort"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.range.short" value="{{system.range.short}}" min="0" />
                 {{else}}
@@ -134,7 +134,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Weapon.RangeLong"}}</label>
+                <label>{{localize "WOR.Weapon.RangeLong"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.range.long" value="{{system.range.long}}" min="0" />
                 {{else}}
@@ -143,7 +143,7 @@
               </div>
               {{/if}}
               <div class="form-group">
-                <label>{{localize "AOA.Weapon.Reliability"}}</label>
+                <label>{{localize "WOR.Weapon.Reliability"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.reliability" value="{{system.reliability}}" min="1" max="6" />
                 {{else}}
@@ -151,7 +151,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Quality.Label"}}</label>
+                <label>{{localize "WOR.Quality.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.quality.level">
                   {{#each qualityOptions as |label key|}}
@@ -159,11 +159,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Quality." (capitalize system.quality.level))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Quality." (capitalize system.quality.level))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Weapon.Group"}}</label>
+                <label>{{localize "WOR.Weapon.Group"}}</label>
                 {{#if isEditMode}}
                 <select name="system.group">
                   {{#each groupOptions as |label key|}}
@@ -171,7 +171,7 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.WeaponGroup." (capitalize system.group))}}</span>
+                <span class="field-value">{{localize (concat "WOR.WeaponGroup." (capitalize system.group))}}</span>
                 {{/if}}
               </div>
             </div>
@@ -180,11 +180,11 @@
 
         {{!-- Damage & Rarity Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Weapon.Damage"}} & {{localize "AOA.Item.Rarity"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Weapon.Damage"}} & {{localize "WOR.Item.Rarity"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Weapon.BaseDamage"}}</label>
+                <label>{{localize "WOR.Weapon.BaseDamage"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.baseDamage" value="{{system.baseDamage}}" min="0" />
                 {{else}}
@@ -198,11 +198,11 @@
                   {{else}}
                   <i class="fas {{#if system.useStrengthBonus}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Weapon.UseStrengthBonus"}}
+                  {{localize "WOR.Weapon.UseStrengthBonus"}}
                 </label>
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Item.Rarity"}}</label>
+                <label>{{localize "WOR.Item.Rarity"}}</label>
                 {{#if isEditMode}}
                 <select name="system.rarity">
                   {{#each rarityOptions as |label key|}}
@@ -210,7 +210,7 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Rarity." (capitalize system.rarity))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Rarity." (capitalize system.rarity))}}</span>
                 {{/if}}
               </div>
             </div>
@@ -219,7 +219,7 @@
 
         {{!-- Weapon Properties Fieldset (Checkboxes) --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Weapon.Properties"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Weapon.Properties"}}</div>
           <div class="fieldset-content">
             <div class="form-grid three-col">
               {{#each weaponProperties}}
@@ -249,7 +249,7 @@
         {{!-- Sidebar --}}
         <div class="item-sidebar">
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Gear.Quantity"}}</span>
+            <span class="stat-label">{{localize "WOR.Gear.Quantity"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.quantity" value="{{system.quantity}}" min="1" />
             {{else}}
@@ -257,7 +257,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Common.Weight"}}</span>
+            <span class="stat-label">{{localize "WOR.Common.Weight"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.weight" value="{{system.weight}}" min="0" step="0.1" />
             {{else}}
@@ -265,7 +265,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat price-stat">
-            <span class="stat-label">{{localize "AOA.Common.Price"}}</span>
+            <span class="stat-label">{{localize "WOR.Common.Price"}}</span>
             {{#if isEditMode}}
             <div class="price-inputs">
               <div class="currency-input sovereigns">
@@ -296,9 +296,9 @@
           {{!-- Description --}}
           <div class="description-section">
             <div class="description-header">
-              <h3>{{localize "AOA.Common.Description"}}</h3>
+              <h3>{{localize "WOR.Common.Description"}}</h3>
               {{#if editable}}
-              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'WOR.Common.Edit'}}">
                 <i class="fas fa-edit"></i>
               </a>
               {{/if}}
@@ -316,11 +316,11 @@
       <div class="item-main-content" style="padding: 16px;">
         {{!-- Armor Details Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Armor.Details"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Armor.Details"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Armor.Category.Label"}}</label>
+                <label>{{localize "WOR.Armor.Category.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.armorCategory">
                   {{#each armorCategoryOptions as |label key|}}
@@ -328,11 +328,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Armor.Category." (capitalize system.armorCategory))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Armor.Category." (capitalize system.armorCategory))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Armor.Group.Label"}}</label>
+                <label>{{localize "WOR.Armor.Group.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.armorGroup">
                   {{#each currentGroupOptions as |label key|}}
@@ -340,11 +340,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Armor.Group." (capitalize system.armorGroup))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Armor.Group." (capitalize system.armorGroup))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Quality.Label"}}</label>
+                <label>{{localize "WOR.Quality.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.quality.level">
                   {{#each qualityOptions as |label key|}}
@@ -352,11 +352,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Quality." (capitalize system.quality.level))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Quality." (capitalize system.quality.level))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Item.Rarity"}}</label>
+                <label>{{localize "WOR.Item.Rarity"}}</label>
                 {{#if isEditMode}}
                 <select name="system.rarity">
                   {{#each rarityOptions as |label key|}}
@@ -364,11 +364,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Rarity." (capitalize system.rarity))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Rarity." (capitalize system.rarity))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Armor.Encumbering"}}</label>
+                <label>{{localize "WOR.Armor.Encumbering"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.encumbering" value="{{system.encumbering}}" min="0" max="3" />
                 {{else}}
@@ -376,7 +376,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Armor.Heat"}}</label>
+                <label>{{localize "WOR.Armor.Heat"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.heat" value="{{system.heat}}" min="0" max="5" />
                 {{else}}
@@ -386,7 +386,7 @@
               {{!-- Shield-specific fields --}}
               {{#if isShieldCategory}}
               <div class="form-group">
-                <label>{{localize "AOA.Armor.DefenseBonus"}}</label>
+                <label>{{localize "WOR.Armor.DefenseBonus"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.shield.defenseBonus" value="{{system.shield.defenseBonus}}" min="0" />
                 {{else}}
@@ -394,7 +394,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Armor.BlockDR"}}</label>
+                <label>{{localize "WOR.Armor.BlockDR"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.shield.blockDR" value="{{system.shield.blockDR}}" min="0" />
                 {{else}}
@@ -408,11 +408,11 @@
 
         {{!-- Damage Reduction Fieldset (S/P/B) --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Armor.DR.Label"}} ({{localize "AOA.Armor.DR.Slash"}}/{{localize "AOA.Armor.DR.Pierce"}}/{{localize "AOA.Armor.DR.Blunt"}})</div>
+          <div class="fieldset-header">{{localize "WOR.Armor.DR.Label"}} ({{localize "WOR.Armor.DR.Slash"}}/{{localize "WOR.Armor.DR.Pierce"}}/{{localize "WOR.Armor.DR.Blunt"}})</div>
           <div class="fieldset-content">
             <div class="form-grid three-col">
               <div class="form-group">
-                <label>{{localize "AOA.Armor.DR.Slash"}}</label>
+                <label>{{localize "WOR.Armor.DR.Slash"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.dr.slash" value="{{system.dr.slash}}" min="0" max="10" />
                 {{else}}
@@ -420,7 +420,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Armor.DR.Pierce"}}</label>
+                <label>{{localize "WOR.Armor.DR.Pierce"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.dr.pierce" value="{{system.dr.pierce}}" min="0" max="10" />
                 {{else}}
@@ -428,7 +428,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Armor.DR.Blunt"}}</label>
+                <label>{{localize "WOR.Armor.DR.Blunt"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.dr.blunt" value="{{system.dr.blunt}}" min="0" max="10" />
                 {{else}}
@@ -447,7 +447,7 @@
 
         {{!-- Armor Properties Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Armor.Properties"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Armor.Properties"}}</div>
           <div class="fieldset-content">
             <div class="form-grid three-col">
               <div class="form-group checkbox">
@@ -457,7 +457,7 @@
                   {{else}}
                   <i class="fas {{#if system.flexible}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Armor.Flexible"}}
+                  {{localize "WOR.Armor.Flexible"}}
                 </label>
               </div>
               <div class="form-group checkbox">
@@ -467,7 +467,7 @@
                   {{else}}
                   <i class="fas {{#if system.noisy}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Armor.Noisy"}}
+                  {{localize "WOR.Armor.Noisy"}}
                 </label>
               </div>
               <div class="form-group checkbox">
@@ -477,7 +477,7 @@
                   {{else}}
                   <i class="fas {{#if system.bulky}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Armor.Bulky"}}
+                  {{localize "WOR.Armor.Bulky"}}
                 </label>
               </div>
               <div class="form-group checkbox">
@@ -487,7 +487,7 @@
                   {{else}}
                   <i class="fas {{#if system.cumbersome}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Armor.Cumbersome"}}
+                  {{localize "WOR.Armor.Cumbersome"}}
                 </label>
               </div>
               <div class="form-group checkbox">
@@ -497,7 +497,7 @@
                   {{else}}
                   <i class="fas {{#if system.insulating}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Armor.Insulating"}}
+                  {{localize "WOR.Armor.Insulating"}}
                 </label>
               </div>
               <div class="form-group checkbox">
@@ -507,7 +507,7 @@
                   {{else}}
                   <i class="fas {{#if system.chafing}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Armor.Chafing"}}
+                  {{localize "WOR.Armor.Chafing"}}
                 </label>
               </div>
               <div class="form-group checkbox">
@@ -517,7 +517,7 @@
                   {{else}}
                   <i class="fas {{#if system.requiresUnderlayer}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Armor.RequiresUnderlayer"}}
+                  {{localize "WOR.Armor.RequiresUnderlayer"}}
                 </label>
               </div>
             </div>
@@ -535,7 +535,7 @@
         {{!-- Sidebar (Quantity, Weight, Value) --}}
         <div class="item-sidebar">
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Gear.Quantity"}}</span>
+            <span class="stat-label">{{localize "WOR.Gear.Quantity"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.quantity" value="{{system.quantity}}" min="0" />
             {{else}}
@@ -543,7 +543,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Common.Weight"}}</span>
+            <span class="stat-label">{{localize "WOR.Common.Weight"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.weight" value="{{system.weight}}" min="0" step="0.1" />
             {{else}}
@@ -551,7 +551,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat price-stat">
-            <span class="stat-label">{{localize "AOA.Common.Price"}}</span>
+            <span class="stat-label">{{localize "WOR.Common.Price"}}</span>
             {{#if isEditMode}}
             <div class="price-inputs">
               <div class="currency-input sovereigns">
@@ -582,9 +582,9 @@
           {{!-- Description --}}
           <div class="description-section">
             <div class="description-header">
-              <h3>{{localize "AOA.Common.Description"}}</h3>
+              <h3>{{localize "WOR.Common.Description"}}</h3>
               {{#if editable}}
-              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'WOR.Common.Edit'}}">
                 <i class="fas fa-edit"></i>
               </a>
               {{/if}}
@@ -602,11 +602,11 @@
       <div class="item-main-content" style="padding: 16px;">
         {{!-- Gear Details Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Gear.Details"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Gear.Details"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Gear.Group.Label"}}</label>
+                <label>{{localize "WOR.Gear.Group.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.gearGroup">
                   {{#each gearGroupOptions as |label key|}}
@@ -614,11 +614,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Gear.Group." (capitalize system.gearGroup))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Gear.Group." (capitalize system.gearGroup))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Item.Rarity"}}</label>
+                <label>{{localize "WOR.Item.Rarity"}}</label>
                 {{#if isEditMode}}
                 <select name="system.rarity">
                   {{#each rarityOptions as |label key|}}
@@ -626,7 +626,7 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Rarity." (capitalize system.rarity))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Rarity." (capitalize system.rarity))}}</span>
                 {{/if}}
               </div>
               <div class="form-group checkbox">
@@ -636,7 +636,7 @@
                   {{else}}
                   <i class="fas {{#if system.carried}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Gear.Carried"}}
+                  {{localize "WOR.Gear.Carried"}}
                 </label>
               </div>
               <div class="form-group checkbox">
@@ -646,7 +646,7 @@
                   {{else}}
                   <i class="fas {{#if system.equipped}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Gear.Equipped"}}
+                  {{localize "WOR.Gear.Equipped"}}
                 </label>
               </div>
             </div>
@@ -655,7 +655,7 @@
 
         {{!-- Consumable Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Gear.Consumable.Label"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Gear.Consumable.Label"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group checkbox">
@@ -665,12 +665,12 @@
                   {{else}}
                   <i class="fas {{#if system.consumable.isConsumable}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Gear.Consumable.IsConsumable"}}
+                  {{localize "WOR.Gear.Consumable.IsConsumable"}}
                 </label>
               </div>
               {{#if system.consumable.isConsumable}}
               <div class="form-group">
-                <label>{{localize "AOA.Gear.Consumable.Uses"}}</label>
+                <label>{{localize "WOR.Gear.Consumable.Uses"}}</label>
                 {{#if isEditMode}}
                 <div style="display: flex; gap: 4px; align-items: center;">
                   <input type="number" name="system.consumable.uses.current" value="{{system.consumable.uses.current}}" min="0" style="width: 60px;" />
@@ -688,7 +688,7 @@
 
         {{!-- Container Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Gear.Container.Label"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Gear.Container.Label"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group checkbox">
@@ -698,12 +698,12 @@
                   {{else}}
                   <i class="fas {{#if system.container.isContainer}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Gear.Container.IsContainer"}}
+                  {{localize "WOR.Gear.Container.IsContainer"}}
                 </label>
               </div>
               {{#if system.container.isContainer}}
               <div class="form-group">
-                <label>{{localize "AOA.Gear.Container.Capacity"}}</label>
+                <label>{{localize "WOR.Gear.Container.Capacity"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.container.capacity" value="{{system.container.capacity}}" min="0" />
                 {{else}}
@@ -717,21 +717,21 @@
 
         {{!-- Associated Skill Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Gear.AssociatedSkill"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Gear.AssociatedSkill"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group full-width">
-                <label>{{localize "AOA.Gear.AssociatedSkill"}}</label>
+                <label>{{localize "WOR.Gear.AssociatedSkill"}}</label>
                 {{#if isEditMode}}
-                <input type="text" name="system.associatedSkill" value="{{system.associatedSkill}}" placeholder="{{localize 'AOA.Gear.AssociatedSkillHint'}}" />
+                <input type="text" name="system.associatedSkill" value="{{system.associatedSkill}}" placeholder="{{localize 'WOR.Gear.AssociatedSkillHint'}}" />
                 {{else}}
                 <span class="field-value">{{#if system.associatedSkill}}{{system.associatedSkill}}{{else}}—{{/if}}</span>
                 {{/if}}
               </div>
               <div class="form-group full-width">
-                <label>{{localize "AOA.Gear.Formula"}}</label>
+                <label>{{localize "WOR.Gear.Formula"}}</label>
                 {{#if isEditMode}}
-                <input type="text" name="system.formula" value="{{system.formula}}" placeholder="{{localize 'AOA.Gear.FormulaHint'}}" />
+                <input type="text" name="system.formula" value="{{system.formula}}" placeholder="{{localize 'WOR.Gear.FormulaHint'}}" />
                 {{else}}
                 <span class="field-value">{{#if system.formula}}{{system.formula}}{{else}}—{{/if}}</span>
                 {{/if}}
@@ -748,18 +748,18 @@
     <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
       <div class="item-main-content" style="padding: 16px;">
         <div class="description-section">
-          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <h3>{{localize "WOR.Common.Description"}}</h3>
           <div class="editor-container">
             {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
         </div>
 
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Skill.Details"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Skill.Details"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Skill.Attribute"}}</label>
+                <label>{{localize "WOR.Skill.Attribute"}}</label>
                 {{#if isEditMode}}
                 <select name="system.attribute">
                   {{#each attributeOptions as |label key|}}
@@ -767,11 +767,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Attribute." (capitalize system.attribute) ".long")}}</span>
+                <span class="field-value">{{localize (concat "WOR.Attribute." (capitalize system.attribute) ".long")}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Skill.Category"}}</label>
+                <label>{{localize "WOR.Skill.Category"}}</label>
                 {{#if isEditMode}}
                 <select name="system.category">
                   {{#each categoryOptions as |label key|}}
@@ -779,7 +779,7 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.SkillCategory." (capitalize system.category))}}</span>
+                <span class="field-value">{{localize (concat "WOR.SkillCategory." (capitalize system.category))}}</span>
                 {{/if}}
               </div>
               <div class="form-group checkbox">
@@ -789,7 +789,7 @@
                   {{else}}
                   <i class="fas {{#if system.requiresWitchsight}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.Skill.RequiresWitchsight"}}
+                  {{localize "WOR.Skill.RequiresWitchsight"}}
                 </label>
               </div>
             </div>
@@ -804,18 +804,18 @@
     <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
       <div class="item-main-content" style="padding: 16px;">
         <div class="description-section">
-          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <h3>{{localize "WOR.Common.Description"}}</h3>
           <div class="editor-container">
             {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
         </div>
 
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Talent.Details"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Talent.Details"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Talent.Type"}}</label>
+                <label>{{localize "WOR.Talent.Type"}}</label>
                 {{#if isEditMode}}
                 <select name="system.talentType">
                   {{#each talentTypeOptions as |label key|}}
@@ -823,33 +823,33 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.TalentType." system.talentType)}}</span>
+                <span class="field-value">{{localize (concat "WOR.TalentType." system.talentType)}}</span>
                 {{/if}}
               </div>
               {{!-- Archetype field (for archetype and signature talents) --}}
               {{#if (or (eq system.talentType "archetype") (eq system.talentType "signature"))}}
               <div class="form-group">
-                <label>{{localize "AOA.Talent.AssociatedArchetype"}}</label>
+                <label>{{localize "WOR.Talent.AssociatedArchetype"}}</label>
                 {{#if isEditMode}}
                 <select name="system.archetype">
-                  <option value="">{{localize "AOA.Common.None"}}</option>
-                  <option value="zealot" {{#if (eq system.archetype "zealot")}}selected{{/if}}>{{localize "AOA.Archetype.Zealot"}}</option>
-                  <option value="thaumaturge" {{#if (eq system.archetype "thaumaturge")}}selected{{/if}}>{{localize "AOA.Archetype.Thaumaturge"}}</option>
-                  <option value="warrior" {{#if (eq system.archetype "warrior")}}selected{{/if}}>{{localize "AOA.Archetype.Warrior"}}</option>
-                  <option value="rogue" {{#if (eq system.archetype "rogue")}}selected{{/if}}>{{localize "AOA.Archetype.Rogue"}}</option>
-                  <option value="sage" {{#if (eq system.archetype "sage")}}selected{{/if}}>{{localize "AOA.Archetype.Sage"}}</option>
+                  <option value="">{{localize "WOR.Common.None"}}</option>
+                  <option value="zealot" {{#if (eq system.archetype "zealot")}}selected{{/if}}>{{localize "WOR.Archetype.Zealot"}}</option>
+                  <option value="thaumaturge" {{#if (eq system.archetype "thaumaturge")}}selected{{/if}}>{{localize "WOR.Archetype.Thaumaturge"}}</option>
+                  <option value="warrior" {{#if (eq system.archetype "warrior")}}selected{{/if}}>{{localize "WOR.Archetype.Warrior"}}</option>
+                  <option value="rogue" {{#if (eq system.archetype "rogue")}}selected{{/if}}>{{localize "WOR.Archetype.Rogue"}}</option>
+                  <option value="sage" {{#if (eq system.archetype "sage")}}selected{{/if}}>{{localize "WOR.Archetype.Sage"}}</option>
                 </select>
                 {{else}}
-                <span class="field-value">{{#if system.archetype}}{{localize (concat "AOA.Archetype." (capitalize system.archetype))}}{{else}}—{{/if}}</span>
+                <span class="field-value">{{#if system.archetype}}{{localize (concat "WOR.Archetype." (capitalize system.archetype))}}{{else}}—{{/if}}</span>
                 {{/if}}
               </div>
               {{/if}}
               {{!-- Subtype/Calling field (for signature talents) --}}
               {{#if (eq system.talentType "signature")}}
               <div class="form-group">
-                <label>{{localize "AOA.Talent.AssociatedCalling"}}</label>
+                <label>{{localize "WOR.Talent.AssociatedCalling"}}</label>
                 {{#if isEditMode}}
-                <input type="text" name="system.subtype" value="{{system.subtype}}" placeholder="{{localize 'AOA.Talent.SubtypeHint'}}" />
+                <input type="text" name="system.subtype" value="{{system.subtype}}" placeholder="{{localize 'WOR.Talent.SubtypeHint'}}" />
                 {{else}}
                 <span class="field-value">{{#if system.subtype}}{{system.subtype}}{{else}}—{{/if}}</span>
                 {{/if}}
@@ -860,7 +860,7 @@
         </div>
 
         <div class="effect-section">
-          <h4>{{localize "AOA.Talent.Effect"}} ({{localize "AOA.Common.Rank"}} {{system.rank}})</h4>
+          <h4>{{localize "WOR.Talent.Effect"}} ({{localize "WOR.Common.Rank"}} {{system.rank}})</h4>
           <div class="editor-container">
             {{editor enrichedEffect target="system.effect" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
@@ -875,7 +875,7 @@
       <div class="item-content-columns">
         <div class="item-sidebar">
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Spell.Rank"}}</span>
+            <span class="stat-label">{{localize "WOR.Spell.Rank"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.rank" value="{{system.rank}}" min="1" />
             {{else}}
@@ -883,7 +883,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Spell.Cost.Trauma"}}</span>
+            <span class="stat-label">{{localize "WOR.Spell.Cost.Trauma"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.costs.trauma" value="{{system.costs.trauma}}" min="0" />
             {{else}}
@@ -891,7 +891,7 @@
             {{/if}}
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Spell.Cost.Essence"}}</span>
+            <span class="stat-label">{{localize "WOR.Spell.Cost.Essence"}}</span>
             {{#if isEditMode}}
             <input type="number" name="system.costs.essence" value="{{system.costs.essence}}" min="0" />
             {{else}}
@@ -903,9 +903,9 @@
         <div class="item-main-content">
           <div class="description-section">
             <div class="description-header">
-              <h3>{{localize "AOA.Common.Description"}}</h3>
+              <h3>{{localize "WOR.Common.Description"}}</h3>
               {{#if editable}}
-              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'WOR.Common.Edit'}}">
                 <i class="fas fa-edit"></i>
               </a>
               {{/if}}
@@ -916,11 +916,11 @@
           </div>
 
           <div class="item-fieldset">
-            <div class="fieldset-header">{{localize "AOA.Spell.Details"}}</div>
+            <div class="fieldset-header">{{localize "WOR.Spell.Details"}}</div>
             <div class="fieldset-content">
               <div class="form-grid">
                 <div class="form-group">
-                  <label>{{localize "AOA.Spell.Technique"}}</label>
+                  <label>{{localize "WOR.Spell.Technique"}}</label>
                   {{#if isEditMode}}
                   <select name="system.technique">
                     {{#each techniqueOptions as |label key|}}
@@ -928,11 +928,11 @@
                     {{/each}}
                   </select>
                   {{else}}
-                  <span class="field-value">{{localize (concat "AOA.Sorcery.Technique." (capitalize system.technique))}}</span>
+                  <span class="field-value">{{localize (concat "WOR.Sorcery.Technique." (capitalize system.technique))}}</span>
                   {{/if}}
                 </div>
                 <div class="form-group">
-                  <label>{{localize "AOA.Spell.Form"}}</label>
+                  <label>{{localize "WOR.Spell.Form"}}</label>
                   {{#if isEditMode}}
                   <select name="system.form">
                     {{#each formOptions as |label key|}}
@@ -940,11 +940,11 @@
                     {{/each}}
                   </select>
                   {{else}}
-                  <span class="field-value">{{localize (concat "AOA.Sorcery.Form." (capitalize system.form))}}</span>
+                  <span class="field-value">{{localize (concat "WOR.Sorcery.Form." (capitalize system.form))}}</span>
                   {{/if}}
                 </div>
                 <div class="form-group">
-                  <label>{{localize "AOA.Spell.Range"}}</label>
+                  <label>{{localize "WOR.Spell.Range"}}</label>
                   {{#if isEditMode}}
                   <input type="text" name="system.range" value="{{system.range}}" />
                   {{else}}
@@ -952,7 +952,7 @@
                   {{/if}}
                 </div>
                 <div class="form-group">
-                  <label>{{localize "AOA.Spell.Duration"}}</label>
+                  <label>{{localize "WOR.Spell.Duration"}}</label>
                   {{#if isEditMode}}
                   <input type="text" name="system.duration" value="{{system.duration}}" />
                   {{else}}
@@ -972,18 +972,18 @@
     <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
       <div class="item-main-content" style="padding: 16px;">
         <div class="description-section">
-          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <h3>{{localize "WOR.Common.Description"}}</h3>
           <div class="editor-container">
             {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
         </div>
 
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Ritual.Details"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Ritual.Details"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Ritual.Path"}}</label>
+                <label>{{localize "WOR.Ritual.Path"}}</label>
                 {{#if isEditMode}}
                 <select name="system.path">
                   {{#each pathOptions as |label key|}}
@@ -991,11 +991,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Ritual.Path." (capitalize system.path))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Ritual.Path." (capitalize system.path))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Ritual.Complexity"}}</label>
+                <label>{{localize "WOR.Ritual.Complexity"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.complexity" value="{{system.complexity}}" min="1" />
                 {{else}}
@@ -1003,7 +1003,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Ritual.Time"}}</label>
+                <label>{{localize "WOR.Ritual.Time"}}</label>
                 {{#if isEditMode}}
                 <div class="time-input">
                   <input type="number" name="system.time.value" value="{{system.time.value}}" min="1" />
@@ -1014,7 +1014,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Ritual.Participants"}}</label>
+                <label>{{localize "WOR.Ritual.Participants"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.participants.minimum" value="{{system.participants.minimum}}" min="1" />
                 {{else}}
@@ -1022,7 +1022,7 @@
                 {{/if}}
               </div>
               <div class="form-group full-width">
-                <label>{{localize "AOA.Ritual.Components"}}</label>
+                <label>{{localize "WOR.Ritual.Components"}}</label>
                 {{#if isEditMode}}
                 <textarea name="system.components">{{system.components}}</textarea>
                 {{else}}
@@ -1041,31 +1041,31 @@
     <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
       <div class="item-main-content" style="padding: 16px;">
         <div class="description-section">
-          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <h3>{{localize "WOR.Common.Description"}}</h3>
           <div class="editor-container">
             {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
         </div>
 
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Lineage.AttributeModifiers"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Lineage.AttributeModifiers"}}</div>
           <div class="fieldset-content">
             <div class="attribute-modifiers">
               {{#each system.attributeModifiers as |value attr|}}
               {{#if value}}
-              <span class="modifier">{{localize (concat "AOA.Attribute." (capitalize attr) ".abbr")}}: {{signedNumber value}}</span>
+              <span class="modifier">{{localize (concat "WOR.Attribute." (capitalize attr) ".abbr")}}: {{signedNumber value}}</span>
               {{/if}}
               {{/each}}
             </div>
             {{#if system.startingWitchsight}}
             <div class="form-group">
-              <label>{{localize "AOA.Lineage.StartingWitchsight"}}</label>
+              <label>{{localize "WOR.Lineage.StartingWitchsight"}}</label>
               <span class="field-value">{{system.startingWitchsight}}</span>
             </div>
             {{/if}}
             {{#if system.bonusSkillRanks}}
             <div class="form-group">
-              <label>{{localize "AOA.Lineage.BonusSkillRanks"}}</label>
+              <label>{{localize "WOR.Lineage.BonusSkillRanks"}}</label>
               <span class="field-value">+{{system.bonusSkillRanks}}</span>
             </div>
             {{/if}}
@@ -1083,21 +1083,21 @@
         {{!-- Sidebar --}}
         <div class="item-sidebar">
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Background.EconomicTier"}}</span>
-            <span class="stat-value">{{localize (concat "AOA.EconomicTier." (capitalize system.economicTier))}}</span>
+            <span class="stat-label">{{localize "WOR.Background.EconomicTier"}}</span>
+            <span class="stat-value">{{localize (concat "WOR.EconomicTier." (capitalize system.economicTier))}}</span>
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Background.StartingWealth.Label"}}</span>
+            <span class="stat-label">{{localize "WOR.Background.StartingWealth.Label"}}</span>
             <span class="stat-value">{{system.startingWealth.min}}-{{system.startingWealth.max}}</span>
-            <span class="stat-unit">{{localize (concat "AOA.Wealth." (capitalize system.startingWealth.currency))}}</span>
+            <span class="stat-unit">{{localize (concat "WOR.Wealth." (capitalize system.startingWealth.currency))}}</span>
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Background.FreeSkillRanks"}}</span>
+            <span class="stat-label">{{localize "WOR.Background.FreeSkillRanks"}}</span>
             <span class="stat-value highlight">{{system.freeSkillRanks}}</span>
           </div>
           {{#if system.lpAward}}
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.Background.LPAward"}}</span>
+            <span class="stat-label">{{localize "WOR.Background.LPAward"}}</span>
             <span class="stat-value bonus">+{{system.lpAward}}</span>
           </div>
           {{/if}}
@@ -1108,9 +1108,9 @@
           {{!-- Description --}}
           <div class="description-section">
             <div class="description-header">
-              <h3>{{localize "AOA.Common.Description"}}</h3>
+              <h3>{{localize "WOR.Common.Description"}}</h3>
               {{#if editable}}
-              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'WOR.Common.Edit'}}">
                 <i class="fas fa-edit"></i>
               </a>
               {{/if}}
@@ -1128,11 +1128,11 @@
       <div class="item-main-content" style="padding: 16px;">
         {{!-- Background Details Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Background.Details"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Background.Details"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Background.EconomicTier"}}</label>
+                <label>{{localize "WOR.Background.EconomicTier"}}</label>
                 {{#if isEditMode}}
                 <select name="system.economicTier">
                   {{#each tierOptions as |label key|}}
@@ -1140,11 +1140,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.EconomicTier." (capitalize system.economicTier))}}</span>
+                <span class="field-value">{{localize (concat "WOR.EconomicTier." (capitalize system.economicTier))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Background.FreeSkillRanks"}}</label>
+                <label>{{localize "WOR.Background.FreeSkillRanks"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.freeSkillRanks" value="{{system.freeSkillRanks}}" min="0" />
                 {{else}}
@@ -1152,7 +1152,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Background.LPAward"}}</label>
+                <label>{{localize "WOR.Background.LPAward"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.lpAward" value="{{system.lpAward}}" min="0" />
                 {{else}}
@@ -1165,11 +1165,11 @@
 
         {{!-- Starting Wealth Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Background.StartingWealth.Label"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Background.StartingWealth.Label"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Background.StartingWealth.Min"}}</label>
+                <label>{{localize "WOR.Background.StartingWealth.Min"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.startingWealth.min" value="{{system.startingWealth.min}}" min="0" />
                 {{else}}
@@ -1177,7 +1177,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Background.StartingWealth.Max"}}</label>
+                <label>{{localize "WOR.Background.StartingWealth.Max"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.startingWealth.max" value="{{system.startingWealth.max}}" min="0" />
                 {{else}}
@@ -1185,7 +1185,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Background.StartingWealth.Currency"}}</label>
+                <label>{{localize "WOR.Background.StartingWealth.Currency"}}</label>
                 {{#if isEditMode}}
                 <select name="system.startingWealth.currency">
                   {{#each currencyOptions as |label key|}}
@@ -1193,7 +1193,7 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.Wealth." (capitalize system.startingWealth.currency))}}</span>
+                <span class="field-value">{{localize (concat "WOR.Wealth." (capitalize system.startingWealth.currency))}}</span>
                 {{/if}}
               </div>
             </div>
@@ -1202,11 +1202,11 @@
 
         {{!-- Social Standing Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Background.SocialStanding"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Background.SocialStanding"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Background.SocialStanding"}}</label>
+                <label>{{localize "WOR.Background.SocialStanding"}}</label>
                 {{#if isEditMode}}
                 <select name="system.socialStanding">
                   {{#each socialStandingOptions as |label key|}}
@@ -1214,7 +1214,7 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.SocialStanding." (capitalize system.socialStanding))}}</span>
+                <span class="field-value">{{localize (concat "WOR.SocialStanding." (capitalize system.socialStanding))}}</span>
                 {{/if}}
               </div>
             </div>
@@ -1223,13 +1223,13 @@
 
         {{!-- Contact Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Background.Contact"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Background.Contact"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group full-width">
-                <label>{{localize "AOA.Background.Contact"}}</label>
+                <label>{{localize "WOR.Background.Contact"}}</label>
                 {{#if isEditMode}}
-                <input type="text" name="system.contact" value="{{system.contact}}" placeholder="{{localize 'AOA.Background.ContactPlaceholder'}}" />
+                <input type="text" name="system.contact" value="{{system.contact}}" placeholder="{{localize 'WOR.Background.ContactPlaceholder'}}" />
                 {{else}}
                 <span class="field-value">{{#if system.contact}}{{system.contact}}{{else}}—{{/if}}</span>
                 {{/if}}
@@ -1246,19 +1246,19 @@
     <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
       <div class="item-main-content" style="padding: 16px;">
         <div class="description-section">
-          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <h3>{{localize "WOR.Common.Description"}}</h3>
           <div class="editor-container">
             {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
         </div>
 
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Archetype.AttributeBonuses"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Archetype.AttributeBonuses"}}</div>
           <div class="fieldset-content">
             <div class="attribute-bonuses">
               {{#each system.attributeBonuses as |value attr|}}
               {{#if value}}
-              <span class="bonus">{{localize (concat "AOA.Attribute." (capitalize attr) ".abbr")}}: {{signedNumber value}}</span>
+              <span class="bonus">{{localize (concat "WOR.Attribute." (capitalize attr) ".abbr")}}: {{signedNumber value}}</span>
               {{/if}}
               {{/each}}
             </div>
@@ -1267,7 +1267,7 @@
 
         {{#if system.subtypes.length}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Archetype.Subtypes"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Archetype.Subtypes"}}</div>
           <div class="fieldset-content">
             <div class="subtypes">
               <ul>
@@ -1291,7 +1291,7 @@
     <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
       <div class="item-main-content" style="padding: 16px;">
         <div class="description-section">
-          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <h3>{{localize "WOR.Common.Description"}}</h3>
           <div class="editor-container">
             {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
@@ -1299,23 +1299,23 @@
 
         {{!-- Parent Archetype --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Calling.Archetype"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Calling.Archetype"}}</div>
           <div class="fieldset-content">
             {{#if isEditMode}}
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Calling.ParentArchetype"}}</label>
+                <label>{{localize "WOR.Calling.ParentArchetype"}}</label>
                 <select name="system.archetype">
-                  <option value="cleric" {{#if (eq system.archetype "cleric")}}selected{{/if}}>{{localize "AOA.Archetype.Cleric"}}</option>
-                  <option value="enchanter" {{#if (eq system.archetype "enchanter")}}selected{{/if}}>{{localize "AOA.Archetype.Enchanter"}}</option>
-                  <option value="fighter" {{#if (eq system.archetype "fighter")}}selected{{/if}}>{{localize "AOA.Archetype.Fighter"}}</option>
-                  <option value="rogue" {{#if (eq system.archetype "rogue")}}selected{{/if}}>{{localize "AOA.Archetype.Rogue"}}</option>
-                  <option value="sage" {{#if (eq system.archetype "sage")}}selected{{/if}}>{{localize "AOA.Archetype.Sage"}}</option>
+                  <option value="cleric" {{#if (eq system.archetype "cleric")}}selected{{/if}}>{{localize "WOR.Archetype.Cleric"}}</option>
+                  <option value="enchanter" {{#if (eq system.archetype "enchanter")}}selected{{/if}}>{{localize "WOR.Archetype.Enchanter"}}</option>
+                  <option value="fighter" {{#if (eq system.archetype "fighter")}}selected{{/if}}>{{localize "WOR.Archetype.Fighter"}}</option>
+                  <option value="rogue" {{#if (eq system.archetype "rogue")}}selected{{/if}}>{{localize "WOR.Archetype.Rogue"}}</option>
+                  <option value="sage" {{#if (eq system.archetype "sage")}}selected{{/if}}>{{localize "WOR.Archetype.Sage"}}</option>
                 </select>
               </div>
             </div>
             {{else}}
-            <p class="archetype-display">{{localize (concat "AOA.Archetype." (capitalize system.archetype))}}</p>
+            <p class="archetype-display">{{localize (concat "WOR.Archetype." (capitalize system.archetype))}}</p>
             {{/if}}
           </div>
         </div>
@@ -1323,10 +1323,10 @@
         {{!-- Focus --}}
         {{#if (or system.focus isEditMode)}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Calling.Focus"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Calling.Focus"}}</div>
           <div class="fieldset-content">
             {{#if isEditMode}}
-            <input type="text" name="system.focus" value="{{system.focus}}" placeholder="{{localize 'AOA.Calling.FocusPlaceholder'}}" />
+            <input type="text" name="system.focus" value="{{system.focus}}" placeholder="{{localize 'WOR.Calling.FocusPlaceholder'}}" />
             {{else}}
             <p>{{system.focus}}</p>
             {{/if}}
@@ -1337,7 +1337,7 @@
         {{!-- Signature Talents --}}
         {{#if system.signatureTalents.length}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Calling.SignatureTalents"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Calling.SignatureTalents"}}</div>
           <div class="fieldset-content">
             <ul class="signature-talents-list">
               {{#each system.signatureTalents}}
@@ -1354,7 +1354,7 @@
         {{!-- Features --}}
         {{#if system.features.length}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Calling.Features"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Calling.Features"}}</div>
           <div class="fieldset-content">
             <ul class="features-list">
               {{#each system.features}}
@@ -1371,7 +1371,7 @@
         {{!-- Suggested Skills --}}
         {{#if system.suggestedSkills.length}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Calling.SuggestedSkills"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Calling.SuggestedSkills"}}</div>
           <div class="fieldset-content">
             <div class="skill-tags">
               {{#each system.suggestedSkills}}
@@ -1385,7 +1385,7 @@
         {{!-- Starting Equipment --}}
         {{#if system.startingEquipment.length}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Calling.StartingEquipment"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Calling.StartingEquipment"}}</div>
           <div class="fieldset-content">
             <ul class="equipment-list">
               {{#each system.startingEquipment}}
@@ -1399,7 +1399,7 @@
         {{!-- Flavor Text --}}
         {{#if (or system.flavorText isEditMode)}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Calling.FlavorText"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Calling.FlavorText"}}</div>
           <div class="fieldset-content">
             {{#if isEditMode}}
             <div class="editor-container">
@@ -1420,7 +1420,7 @@
     <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
       <div class="item-main-content" style="padding: 16px;">
         <div class="description-section">
-          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <h3>{{localize "WOR.Common.Description"}}</h3>
           <div class="editor-container">
             {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
@@ -1429,21 +1429,21 @@
         {{!-- Duration --}}
         {{#if (or system.duration.years system.duration.description)}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Pathway.Duration"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Pathway.Duration"}}</div>
           <div class="fieldset-content">
             {{#if isEditMode}}
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Common.Years"}}</label>
+                <label>{{localize "WOR.Common.Years"}}</label>
                 <input type="number" name="system.duration.years" value="{{system.duration.years}}" min="0" />
               </div>
               <div class="form-group full-width">
-                <label>{{localize "AOA.Common.Description"}}</label>
+                <label>{{localize "WOR.Common.Description"}}</label>
                 <input type="text" name="system.duration.description" value="{{system.duration.description}}" />
               </div>
             </div>
             {{else}}
-            <p>{{system.duration.years}} {{localize "AOA.Common.Years"}}{{#if system.duration.description}} - {{system.duration.description}}{{/if}}</p>
+            <p>{{system.duration.years}} {{localize "WOR.Common.Years"}}{{#if system.duration.description}} - {{system.duration.description}}{{/if}}</p>
             {{/if}}
           </div>
         </div>
@@ -1452,7 +1452,7 @@
         {{!-- Skill Grants --}}
         {{#if system.skillGrants.length}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Pathway.SkillGrants"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Pathway.SkillGrants"}}</div>
           <div class="fieldset-content">
             <ul class="pathway-skill-grants">
               {{#each system.skillGrants}}
@@ -1469,16 +1469,16 @@
         {{!-- Contact --}}
         {{#if (or system.contact.type system.contact.description)}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Pathway.Contact"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Pathway.Contact"}}</div>
           <div class="fieldset-content">
             {{#if isEditMode}}
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Pathway.Contact.Type"}}</label>
+                <label>{{localize "WOR.Pathway.Contact.Type"}}</label>
                 <input type="text" name="system.contact.type" value="{{system.contact.type}}" />
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Pathway.Contact.Relationship"}}</label>
+                <label>{{localize "WOR.Pathway.Contact.Relationship"}}</label>
                 <select name="system.contact.relationship">
                   <option value="professional" {{#if (eq system.contact.relationship "professional")}}selected{{/if}}>Professional</option>
                   <option value="mentor" {{#if (eq system.contact.relationship "mentor")}}selected{{/if}}>Mentor</option>
@@ -1489,7 +1489,7 @@
                 </select>
               </div>
               <div class="form-group full-width">
-                <label>{{localize "AOA.Common.Description"}}</label>
+                <label>{{localize "WOR.Common.Description"}}</label>
                 <textarea name="system.contact.description">{{system.contact.description}}</textarea>
               </div>
             </div>
@@ -1507,7 +1507,7 @@
         {{!-- Narrative Hooks --}}
         {{#if system.narrativeHooks.length}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Pathway.NarrativeHooks"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Pathway.NarrativeHooks"}}</div>
           <div class="fieldset-content">
             <ul class="narrative-hooks-list">
               {{#each system.narrativeHooks}}
@@ -1524,14 +1524,14 @@
         {{!-- Resources --}}
         {{#if (or system.resources.wealthModifier system.resources.equipment.length system.resources.privileges.length)}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Pathway.Resources"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Pathway.Resources"}}</div>
           <div class="fieldset-content">
             {{#if system.resources.wealthModifier}}
-            <p><strong>{{localize "AOA.Pathway.WealthModifier"}}:</strong> {{signedNumber system.resources.wealthModifier}}</p>
+            <p><strong>{{localize "WOR.Pathway.WealthModifier"}}:</strong> {{signedNumber system.resources.wealthModifier}}</p>
             {{/if}}
             {{#if system.resources.equipment.length}}
             <div class="resource-subsection">
-              <strong>{{localize "AOA.Pathway.Equipment"}}:</strong>
+              <strong>{{localize "WOR.Pathway.Equipment"}}:</strong>
               <ul>
                 {{#each system.resources.equipment}}
                 <li>{{this}}</li>
@@ -1541,7 +1541,7 @@
             {{/if}}
             {{#if system.resources.privileges.length}}
             <div class="resource-subsection">
-              <strong>{{localize "AOA.Pathway.Privileges"}}:</strong>
+              <strong>{{localize "WOR.Pathway.Privileges"}}:</strong>
               <ul>
                 {{#each system.resources.privileges}}
                 <li>{{this}}</li>
@@ -1556,7 +1556,7 @@
         {{!-- Associated Archetypes --}}
         {{#if system.associatedArchetypes.length}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.Pathway.AssociatedArchetypes"}}</div>
+          <div class="fieldset-header">{{localize "WOR.Pathway.AssociatedArchetypes"}}</div>
           <div class="fieldset-content">
             <div class="archetype-tags">
               {{#each system.associatedArchetypes}}
@@ -1570,15 +1570,15 @@
         {{!-- LP Award (for edit mode) --}}
         {{#if isEditMode}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.LP.label"}}</div>
+          <div class="fieldset-header">{{localize "WOR.LP.label"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.Pathway.LPAward"}}</label>
+                <label>{{localize "WOR.Pathway.LPAward"}}</label>
                 <input type="number" name="system.lpAward" value="{{system.lpAward}}" min="0" />
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.Pathway.RollValue"}}</label>
+                <label>{{localize "WOR.Pathway.RollValue"}}</label>
                 <input type="number" name="system.rollValue" value="{{system.rollValue}}" min="1" max="6" />
               </div>
             </div>
@@ -1594,18 +1594,18 @@
     <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
       <div class="item-main-content" style="padding: 16px;">
         <div class="description-section">
-          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <h3>{{localize "WOR.Common.Description"}}</h3>
           <div class="editor-container">
             {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
           </div>
         </div>
 
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.LifeEvent.Details"}}</div>
+          <div class="fieldset-header">{{localize "WOR.LifeEvent.Details"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.LifeEvent.Suit.Label"}}</label>
+                <label>{{localize "WOR.LifeEvent.Suit.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.suit">
                   {{#each suitOptions as |label key|}}
@@ -1613,11 +1613,11 @@
                   {{/each}}
                 </select>
                 {{else}}
-                <span class="field-value">{{localize (concat "AOA.LifeEvent.Suit." (capitalize system.suit))}}</span>
+                <span class="field-value">{{localize (concat "WOR.LifeEvent.Suit." (capitalize system.suit))}}</span>
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.LifeEvent.Number"}}</label>
+                <label>{{localize "WOR.LifeEvent.Number"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.number" value="{{system.number}}" min="1" max="40" />
                 {{else}}
@@ -1625,7 +1625,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.LifeEvent.LPValue"}}</label>
+                <label>{{localize "WOR.LifeEvent.LPValue"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.lpValue" value="{{system.lpValue}}" min="0" />
                 {{else}}
@@ -1639,12 +1639,12 @@
         {{!-- Benefits Section --}}
         {{#if system.benefits.length}}
         <div class="item-fieldset benefits-section">
-          <div class="fieldset-header"><i class="fas fa-plus-circle"></i> {{localize "AOA.LifeEvent.Benefits"}}</div>
+          <div class="fieldset-header"><i class="fas fa-plus-circle"></i> {{localize "WOR.LifeEvent.Benefits"}}</div>
           <div class="fieldset-content">
             <ul class="benefits-list">
               {{#each system.benefits}}
               <li class="benefit-item benefit-{{type}}">
-                <span class="benefit-type">{{localize (concat "AOA.LifeEvent.BenefitType." (capitalize type))}}</span>
+                <span class="benefit-type">{{localize (concat "WOR.LifeEvent.BenefitType." (capitalize type))}}</span>
                 {{#if target}}<span class="benefit-target">{{target}}</span>{{/if}}
                 {{#if value}}<span class="benefit-value">+{{value}}</span>{{/if}}
                 {{#if description}}<p class="benefit-description">{{description}}</p>{{/if}}
@@ -1658,14 +1658,14 @@
         {{!-- Complications Section --}}
         {{#if system.complications.length}}
         <div class="item-fieldset complications-section">
-          <div class="fieldset-header"><i class="fas fa-exclamation-triangle"></i> {{localize "AOA.LifeEvent.Complications"}}</div>
+          <div class="fieldset-header"><i class="fas fa-exclamation-triangle"></i> {{localize "WOR.LifeEvent.Complications"}}</div>
           <div class="fieldset-content">
             <ul class="complications-list">
               {{#each system.complications}}
               <li class="complication-item complication-{{type}}">
-                <span class="complication-type">{{localize (concat "AOA.LifeEvent.ComplicationType." (capitalize type))}}</span>
+                <span class="complication-type">{{localize (concat "WOR.LifeEvent.ComplicationType." (capitalize type))}}</span>
                 {{#if target}}<span class="complication-target">{{target}}</span>{{/if}}
-                {{#if severity}}<span class="complication-severity severity-{{severity}}">{{localize (concat "AOA.Severity." (capitalize severity))}}</span>{{/if}}
+                {{#if severity}}<span class="complication-severity severity-{{severity}}">{{localize (concat "WOR.Severity." (capitalize severity))}}</span>{{/if}}
                 {{#if description}}<p class="complication-description">{{description}}</p>{{/if}}
               </li>
               {{/each}}
@@ -1678,7 +1678,7 @@
         {{#unless (or system.benefits.length system.complications.length)}}
         <div class="item-fieldset empty-section">
           <div class="fieldset-content">
-            <p class="empty-notice">{{localize "AOA.Empty.LifeEventEffects"}}</p>
+            <p class="empty-notice">{{localize "WOR.Empty.LifeEventEffects"}}</p>
           </div>
         </div>
         {{/unless}}
@@ -1694,11 +1694,11 @@
         {{!-- Sidebar --}}
         <div class="item-sidebar">
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.NPCTrait.Cost"}}</span>
+            <span class="stat-label">{{localize "WOR.NPCTrait.Cost"}}</span>
             <span class="stat-value highlight">{{system.cost}}</span>
           </div>
           <div class="sidebar-stat">
-            <span class="stat-label">{{localize "AOA.NPCTrait.TierRange"}}</span>
+            <span class="stat-label">{{localize "WOR.NPCTrait.TierRange"}}</span>
             <span class="stat-value">{{system.tierRequirement.min}}-{{system.tierRequirement.max}}</span>
           </div>
         </div>
@@ -1708,9 +1708,9 @@
           {{!-- Description --}}
           <div class="description-section">
             <div class="description-header">
-              <h3>{{localize "AOA.Common.Description"}}</h3>
+              <h3>{{localize "WOR.Common.Description"}}</h3>
               {{#if editable}}
-              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'WOR.Common.Edit'}}">
                 <i class="fas fa-edit"></i>
               </a>
               {{/if}}
@@ -1728,11 +1728,11 @@
       <div class="item-main-content" style="padding: 16px;">
         {{!-- Classification Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.NPCTrait.Classification"}}</div>
+          <div class="fieldset-header">{{localize "WOR.NPCTrait.Classification"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.NPCTrait.Category.Label"}}</label>
+                <label>{{localize "WOR.NPCTrait.Category.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.category">
                   {{#each categoryOptions as |label key|}}
@@ -1744,7 +1744,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.NPCTrait.Cost"}}</label>
+                <label>{{localize "WOR.NPCTrait.Cost"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.cost" value="{{system.cost}}" min="0" max="10" />
                 {{else}}
@@ -1757,11 +1757,11 @@
 
         {{!-- Tier Requirement Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.NPCTrait.TierRequirement"}}</div>
+          <div class="fieldset-header">{{localize "WOR.NPCTrait.TierRequirement"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.NPCTrait.TierMin"}}</label>
+                <label>{{localize "WOR.NPCTrait.TierMin"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.tierRequirement.min" value="{{system.tierRequirement.min}}" min="0" max="6" />
                 {{else}}
@@ -1769,7 +1769,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.NPCTrait.TierMax"}}</label>
+                <label>{{localize "WOR.NPCTrait.TierMax"}}</label>
                 {{#if isEditMode}}
                 <input type="number" name="system.tierRequirement.max" value="{{system.tierRequirement.max}}" min="0" max="6" />
                 {{else}}
@@ -1782,11 +1782,11 @@
 
         {{!-- Restrictions Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.NPCTrait.Restrictions"}}</div>
+          <div class="fieldset-header">{{localize "WOR.NPCTrait.Restrictions"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group full-width">
-                <label>{{localize "AOA.NPCTrait.AllowedClasses"}}</label>
+                <label>{{localize "WOR.NPCTrait.AllowedClasses"}}</label>
                 {{#if isEditMode}}
                 <div class="checkbox-group">
                   {{#each classOptions as |label key|}}
@@ -1801,15 +1801,15 @@
                   {{#if system.allowedClasses.length}}
                     {{#each system.allowedClasses}}{{localize (lookup ../classOptions this)}}{{#unless @last}}, {{/unless}}{{/each}}
                   {{else}}
-                    {{localize "AOA.Common.All"}}
+                    {{localize "WOR.Common.All"}}
                   {{/if}}
                 </span>
                 {{/if}}
               </div>
               <div class="form-group full-width">
-                <label>{{localize "AOA.NPCTrait.TypeSpecific"}}</label>
+                <label>{{localize "WOR.NPCTrait.TypeSpecific"}}</label>
                 {{#if isEditMode}}
-                <input type="text" name="system.typeSpecific" value="{{join system.typeSpecific ', '}}" placeholder="{{localize 'AOA.NPCTrait.TypeSpecificHint'}}" />
+                <input type="text" name="system.typeSpecific" value="{{join system.typeSpecific ', '}}" placeholder="{{localize 'WOR.NPCTrait.TypeSpecificHint'}}" />
                 {{else}}
                 <span class="field-value">
                   {{#if system.typeSpecific.length}}
@@ -1826,11 +1826,11 @@
 
         {{!-- Mechanics Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.NPCTrait.Mechanics"}}</div>
+          <div class="fieldset-header">{{localize "WOR.NPCTrait.Mechanics"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group">
-                <label>{{localize "AOA.NPCTrait.Trigger.Label"}}</label>
+                <label>{{localize "WOR.NPCTrait.Trigger.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.mechanics.trigger">
                   {{#each triggerOptions as |label key|}}
@@ -1842,7 +1842,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.NPCTrait.Cooldown.Label"}}</label>
+                <label>{{localize "WOR.NPCTrait.Cooldown.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.mechanics.cooldown">
                   {{#each cooldownOptions as |label key|}}
@@ -1860,7 +1860,7 @@
                   {{else}}
                   <i class="fas {{#if system.mechanics.passive}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.NPCTrait.Passive"}}
+                  {{localize "WOR.NPCTrait.Passive"}}
                 </label>
               </div>
             </div>
@@ -1868,9 +1868,9 @@
             {{!-- Special Abilities (text list) --}}
             {{#if (or system.mechanics.special.length isEditMode)}}
             <div class="form-group full-width">
-              <label>{{localize "AOA.NPCTrait.Special"}}</label>
+              <label>{{localize "WOR.NPCTrait.Special"}}</label>
               {{#if isEditMode}}
-              <textarea name="system.mechanics.special" placeholder="{{localize 'AOA.NPCTrait.SpecialHint'}}">{{join system.mechanics.special "
+              <textarea name="system.mechanics.special" placeholder="{{localize 'WOR.NPCTrait.SpecialHint'}}">{{join system.mechanics.special "
 "}}</textarea>
               {{else}}
               <ul class="special-list">
@@ -1885,9 +1885,9 @@
             {{!-- Bonuses Array Editor --}}
             <div class="form-group full-width array-editor">
               <div class="array-header">
-                <label>{{localize "AOA.NPCTrait.Bonuses.Label"}}</label>
+                <label>{{localize "WOR.NPCTrait.Bonuses.Label"}}</label>
                 {{#if isEditMode}}
-                <a class="array-add-btn" data-action="addBonus" title="{{localize 'AOA.Common.Add'}}">
+                <a class="array-add-btn" data-action="addBonus" title="{{localize 'WOR.Common.Add'}}">
                   <i class="fas fa-plus"></i>
                 </a>
                 {{/if}}
@@ -1898,20 +1898,20 @@
                 <div class="array-item bonus-item" data-index="{{@index}}">
                   {{#if ../isEditMode}}
                   <select name="system.mechanics.bonuses.{{@index}}.type" class="bonus-type">
-                    <option value="attack" {{#if (eq type "attack")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Attack"}}</option>
-                    <option value="damage" {{#if (eq type "damage")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Damage"}}</option>
-                    <option value="defense" {{#if (eq type "defense")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Defense"}}</option>
-                    <option value="pool" {{#if (eq type "pool")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Pool"}}</option>
-                    <option value="other" {{#if (eq type "other")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Other"}}</option>
+                    <option value="attack" {{#if (eq type "attack")}}selected{{/if}}>{{localize "WOR.NPCTrait.Bonuses.Type.Attack"}}</option>
+                    <option value="damage" {{#if (eq type "damage")}}selected{{/if}}>{{localize "WOR.NPCTrait.Bonuses.Type.Damage"}}</option>
+                    <option value="defense" {{#if (eq type "defense")}}selected{{/if}}>{{localize "WOR.NPCTrait.Bonuses.Type.Defense"}}</option>
+                    <option value="pool" {{#if (eq type "pool")}}selected{{/if}}>{{localize "WOR.NPCTrait.Bonuses.Type.Pool"}}</option>
+                    <option value="other" {{#if (eq type "other")}}selected{{/if}}>{{localize "WOR.NPCTrait.Bonuses.Type.Other"}}</option>
                   </select>
                   <input type="number" name="system.mechanics.bonuses.{{@index}}.value" value="{{value}}" class="bonus-value" placeholder="±" />
-                  <input type="text" name="system.mechanics.bonuses.{{@index}}.condition" value="{{condition}}" class="bonus-condition" placeholder="{{localize 'AOA.NPCTrait.Bonuses.ConditionHint'}}" />
-                  <a class="array-remove-btn" data-action="removeBonus" data-index="{{@index}}" title="{{localize 'AOA.Common.Delete'}}">
+                  <input type="text" name="system.mechanics.bonuses.{{@index}}.condition" value="{{condition}}" class="bonus-condition" placeholder="{{localize 'WOR.NPCTrait.Bonuses.ConditionHint'}}" />
+                  <a class="array-remove-btn" data-action="removeBonus" data-index="{{@index}}" title="{{localize 'WOR.Common.Delete'}}">
                     <i class="fas fa-trash"></i>
                   </a>
                   {{else}}
                   <span class="bonus-display">
-                    {{#if (gt value 0)}}+{{/if}}{{value}} {{localize (concat "AOA.NPCTrait.Bonuses.Type." (capitalize type))}}{{#if condition}} ({{condition}}){{/if}}
+                    {{#if (gt value 0)}}+{{/if}}{{value}} {{localize (concat "WOR.NPCTrait.Bonuses.Type." (capitalize type))}}{{#if condition}} ({{condition}}){{/if}}
                   </span>
                   {{/if}}
                 </div>
@@ -1927,9 +1927,9 @@
             {{!-- Applied Conditions Array Editor --}}
             <div class="form-group full-width array-editor">
               <div class="array-header">
-                <label>{{localize "AOA.NPCTrait.AppliedConditions.Label"}}</label>
+                <label>{{localize "WOR.NPCTrait.AppliedConditions.Label"}}</label>
                 {{#if isEditMode}}
-                <a class="array-add-btn" data-action="addAppliedCondition" title="{{localize 'AOA.Common.Add'}}">
+                <a class="array-add-btn" data-action="addAppliedCondition" title="{{localize 'WOR.Common.Add'}}">
                   <i class="fas fa-plus"></i>
                 </a>
                 {{/if}}
@@ -1944,9 +1944,9 @@
                     <option value="{{key}}" {{#if (eq key ../condition)}}selected{{/if}}>{{localize label}}</option>
                     {{/each}}
                   </select>
-                  <input type="text" name="system.mechanics.appliedConditions.{{@index}}.duration" value="{{duration}}" class="condition-duration" placeholder="{{localize 'AOA.NPCTrait.AppliedConditions.DurationHint'}}" />
-                  <input type="number" name="system.mechanics.appliedConditions.{{@index}}.hitThreshold" value="{{hitThreshold}}" class="condition-threshold" placeholder="{{localize 'AOA.NPCTrait.AppliedConditions.ThresholdHint'}}" min="0" />
-                  <a class="array-remove-btn" data-action="removeAppliedCondition" data-index="{{@index}}" title="{{localize 'AOA.Common.Delete'}}">
+                  <input type="text" name="system.mechanics.appliedConditions.{{@index}}.duration" value="{{duration}}" class="condition-duration" placeholder="{{localize 'WOR.NPCTrait.AppliedConditions.DurationHint'}}" />
+                  <input type="number" name="system.mechanics.appliedConditions.{{@index}}.hitThreshold" value="{{hitThreshold}}" class="condition-threshold" placeholder="{{localize 'WOR.NPCTrait.AppliedConditions.ThresholdHint'}}" min="0" />
+                  <a class="array-remove-btn" data-action="removeAppliedCondition" data-index="{{@index}}" title="{{localize 'WOR.Common.Delete'}}">
                     <i class="fas fa-trash"></i>
                   </a>
                   {{else}}
@@ -1968,7 +1968,7 @@
 
         {{!-- Roll Fieldset --}}
         <div class="item-fieldset">
-          <div class="fieldset-header">{{localize "AOA.NPCTrait.Roll.Label"}}</div>
+          <div class="fieldset-header">{{localize "WOR.NPCTrait.Roll.Label"}}</div>
           <div class="fieldset-content">
             <div class="form-grid">
               <div class="form-group checkbox">
@@ -1978,12 +1978,12 @@
                   {{else}}
                   <i class="fas {{#if system.roll.hasRoll}}fa-check-square{{else}}fa-square{{/if}}"></i>
                   {{/if}}
-                  {{localize "AOA.NPCTrait.Roll.HasRoll"}}
+                  {{localize "WOR.NPCTrait.Roll.HasRoll"}}
                 </label>
               </div>
               {{#if system.roll.hasRoll}}
               <div class="form-group">
-                <label>{{localize "AOA.NPCTrait.Roll.Pool"}}</label>
+                <label>{{localize "WOR.NPCTrait.Roll.Pool"}}</label>
                 {{#if isEditMode}}
                 <input type="text" name="system.roll.pool" value="{{system.roll.pool}}" placeholder="e.g., 5" />
                 {{else}}
@@ -1991,7 +1991,7 @@
                 {{/if}}
               </div>
               <div class="form-group">
-                <label>{{localize "AOA.NPCTrait.Roll.Difficulty"}}</label>
+                <label>{{localize "WOR.NPCTrait.Roll.Difficulty"}}</label>
                 {{#if isEditMode}}
                 <select name="system.roll.difficulty">
                   {{#each difficultyOptions as |label key|}}
@@ -2014,10 +2014,10 @@
     <div class="tab effects {{#if (eq currentTab 'effects')}}active{{/if}}" data-group="primary" data-tab="effects">
       <div class="effects-section">
         <div class="effects-header">
-          <h3>{{localize "AOA.Effect.ActiveEffects"}}</h3>
+          <h3>{{localize "WOR.Effect.ActiveEffects"}}</h3>
           {{#if isEditMode}}
           <a class="effect-control" data-action="createEffect">
-            <i class="fas fa-plus"></i> {{localize "AOA.Common.Add"}}
+            <i class="fas fa-plus"></i> {{localize "WOR.Common.Add"}}
           </a>
           {{/if}}
         </div>
@@ -2025,21 +2025,21 @@
         {{!-- Passive Effects --}}
         {{#if effects.passive.length}}
         <div class="effect-category passive">
-          <h4>{{localize "AOA.Effect.Passive"}}</h4>
+          <h4>{{localize "WOR.Effect.Passive"}}</h4>
           <ul class="effect-list">
             {{#each effects.passive}}
             <li class="effect-item" data-effect-id="{{id}}">
               <img src="{{img}}" alt="{{name}}" />
               <span class="effect-name">{{name}}</span>
               <div class="effect-controls">
-                <a class="effect-control" data-action="toggleEffect" title="{{localize 'AOA.Effect.Toggle'}}">
+                <a class="effect-control" data-action="toggleEffect" title="{{localize 'WOR.Effect.Toggle'}}">
                   <i class="fas fa-power-off"></i>
                 </a>
-                <a class="effect-control" data-action="editEffect" title="{{localize 'AOA.Common.Edit'}}">
+                <a class="effect-control" data-action="editEffect" title="{{localize 'WOR.Common.Edit'}}">
                   <i class="fas fa-edit"></i>
                 </a>
                 {{#if @root.isEditMode}}
-                <a class="effect-control" data-action="deleteEffect" title="{{localize 'AOA.Common.Delete'}}">
+                <a class="effect-control" data-action="deleteEffect" title="{{localize 'WOR.Common.Delete'}}">
                   <i class="fas fa-trash"></i>
                 </a>
                 {{/if}}
@@ -2053,21 +2053,21 @@
         {{!-- Temporary Effects --}}
         {{#if effects.temporary.length}}
         <div class="effect-category temporary">
-          <h4>{{localize "AOA.Effect.Temporary"}}</h4>
+          <h4>{{localize "WOR.Effect.Temporary"}}</h4>
           <ul class="effect-list">
             {{#each effects.temporary}}
             <li class="effect-item" data-effect-id="{{id}}">
               <img src="{{img}}" alt="{{name}}" />
               <span class="effect-name">{{name}}</span>
               <div class="effect-controls">
-                <a class="effect-control" data-action="toggleEffect" title="{{localize 'AOA.Effect.Toggle'}}">
+                <a class="effect-control" data-action="toggleEffect" title="{{localize 'WOR.Effect.Toggle'}}">
                   <i class="fas fa-power-off"></i>
                 </a>
-                <a class="effect-control" data-action="editEffect" title="{{localize 'AOA.Common.Edit'}}">
+                <a class="effect-control" data-action="editEffect" title="{{localize 'WOR.Common.Edit'}}">
                   <i class="fas fa-edit"></i>
                 </a>
                 {{#if @root.isEditMode}}
-                <a class="effect-control" data-action="deleteEffect" title="{{localize 'AOA.Common.Delete'}}">
+                <a class="effect-control" data-action="deleteEffect" title="{{localize 'WOR.Common.Delete'}}">
                   <i class="fas fa-trash"></i>
                 </a>
                 {{/if}}
@@ -2081,21 +2081,21 @@
         {{!-- Inactive Effects --}}
         {{#if effects.inactive.length}}
         <div class="effect-category inactive">
-          <h4>{{localize "AOA.Effect.Inactive"}}</h4>
+          <h4>{{localize "WOR.Effect.Inactive"}}</h4>
           <ul class="effect-list">
             {{#each effects.inactive}}
             <li class="effect-item disabled" data-effect-id="{{id}}">
               <img src="{{img}}" alt="{{name}}" />
               <span class="effect-name">{{name}}</span>
               <div class="effect-controls">
-                <a class="effect-control" data-action="toggleEffect" title="{{localize 'AOA.Effect.Toggle'}}">
+                <a class="effect-control" data-action="toggleEffect" title="{{localize 'WOR.Effect.Toggle'}}">
                   <i class="fas fa-power-off"></i>
                 </a>
-                <a class="effect-control" data-action="editEffect" title="{{localize 'AOA.Common.Edit'}}">
+                <a class="effect-control" data-action="editEffect" title="{{localize 'WOR.Common.Edit'}}">
                   <i class="fas fa-edit"></i>
                 </a>
                 {{#if @root.isEditMode}}
-                <a class="effect-control" data-action="deleteEffect" title="{{localize 'AOA.Common.Delete'}}">
+                <a class="effect-control" data-action="deleteEffect" title="{{localize 'WOR.Common.Delete'}}">
                   <i class="fas fa-trash"></i>
                 </a>
                 {{/if}}
@@ -2108,7 +2108,7 @@
 
         {{!-- No Effects --}}
         {{#unless (or effects.passive.length effects.temporary.length effects.inactive.length)}}
-        <p class="empty-notice">{{localize "AOA.Empty.Effects"}}</p>
+        <p class="empty-notice">{{localize "WOR.Empty.Effects"}}</p>
         {{/unless}}
       </div>
     </div>

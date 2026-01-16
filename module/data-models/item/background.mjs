@@ -57,7 +57,7 @@ export default class BackgroundData extends ItemBaseData {
       blank: false,
       initial: "middle",
       choices: ["upper", "middle", "lower", "struggling"],
-      label: "AOA.Background.EconomicTier"
+      label: "WOR.Background.EconomicTier"
     });
 
     // ========================================
@@ -69,13 +69,13 @@ export default class BackgroundData extends ItemBaseData {
         ...requiredInteger,
         initial: 50,
         min: 0,
-        label: "AOA.Background.StartingWealth.Min"
+        label: "WOR.Background.StartingWealth.Min"
       }),
       max: new fields.NumberField({
         ...requiredInteger,
         initial: 100,
         min: 0,
-        label: "AOA.Background.StartingWealth.Max"
+        label: "WOR.Background.StartingWealth.Max"
       }),
       // Currency type: orin (copper), crowns (silver), sovereigns (gold)
       currency: new fields.StringField({
@@ -83,7 +83,7 @@ export default class BackgroundData extends ItemBaseData {
         blank: false,
         initial: "crowns",
         choices: ["orin", "crowns", "sovereigns"],
-        label: "AOA.Background.StartingWealth.Currency"
+        label: "WOR.Background.StartingWealth.Currency"
       }),
       // Roll formula for wealth (optional)
       formula: new fields.StringField({ required: false, blank: true })
@@ -138,7 +138,7 @@ export default class BackgroundData extends ItemBaseData {
       blank: false,
       initial: "penitent",
       choices: ["exalted", "ordained", "anointed", "penitent", "heretics", "outcast"],
-      label: "AOA.Background.SocialStanding"
+      label: "WOR.Background.SocialStanding"
     });
 
     // ========================================
@@ -148,7 +148,7 @@ export default class BackgroundData extends ItemBaseData {
     schema.contact = new fields.StringField({
       required: false,
       blank: true,
-      label: "AOA.Background.Contact"
+      label: "WOR.Background.Contact"
     });
 
     // ========================================
@@ -186,7 +186,7 @@ export default class BackgroundData extends ItemBaseData {
       ...requiredInteger,
       initial: 0,
       min: 0,
-      label: "AOA.Background.LPAward"
+      label: "WOR.Background.LPAward"
     });
 
     return schema;

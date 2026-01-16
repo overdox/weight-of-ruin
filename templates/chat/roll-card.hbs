@@ -31,7 +31,7 @@
   {{#if isAutoFailure}}
   <div class="result-indicator auto-failure">
     <div class="result-text">
-      <span>{{localize "AOA.Roll.AutoFailure"}}</span>
+      <span>{{localize "WOR.Roll.AutoFailure"}}</span>
     </div>
   </div>
   {{else}}
@@ -44,7 +44,7 @@
     </div>
     {{#if margin}}
     <div class="result-margin">
-      {{localize "AOA.Roll.Margin"}}: <span class="margin-value {{#if (gt margin 0)}}positive{{else}}negative{{/if}}">{{#if (gt margin 0)}}+{{/if}}{{margin}}</span>
+      {{localize "WOR.Roll.Margin"}}: <span class="margin-value {{#if (gt margin 0)}}positive{{else}}negative{{/if}}">{{#if (gt margin 0)}}+{{/if}}{{margin}}</span>
     </div>
     {{/if}}
   </div>
@@ -54,12 +54,12 @@
   <div class="collapsible-section" data-section="roll-details">
     <div class="collapsible-header collapsed" data-action="toggle-collapse">
       <i class="fas fa-chevron-down collapse-icon"></i>
-      <span class="section-title">{{localize "AOA.Roll.Details"}}</span>
+      <span class="section-title">{{localize "WOR.Roll.Details"}}</span>
     </div>
     <div class="collapsible-content collapsed">
       {{!-- Pool Breakdown --}}
       <div class="roll-pool-breakdown">
-        <span class="pool-label">{{localize "AOA.Roll.Pool"}}:</span>
+        <span class="pool-label">{{localize "WOR.Roll.Pool"}}:</span>
         <span class="pool-components">
           {{#if poolData.attribute.value}}
             <span class="component attribute" title="{{poolData.attribute.label}}">{{poolData.attribute.value}}</span>
@@ -103,7 +103,7 @@
 
       {{!-- Hits Count --}}
       <div class="roll-hits">
-        <span class="hits-label">{{localize "AOA.Roll.Hits"}}:</span>
+        <span class="hits-label">{{localize "WOR.Roll.Hits"}}:</span>
         <span class="hits-value">{{result.hits}}</span>
         {{#if targetThreshold}}
         <span class="hits-vs">/ {{targetThreshold}}</span>
@@ -116,9 +116,9 @@
   {{#if isReroll}}
   <div class="roll-reroll-info">
     {{#if keptOriginal}}
-    <span class="reroll-kept">{{localize "AOA.Roll.KeptOriginal"}} ({{localize "AOA.Roll.RerollHits"}}: {{rerollHits}})</span>
+    <span class="reroll-kept">{{localize "WOR.Roll.KeptOriginal"}} ({{localize "WOR.Roll.RerollHits"}}: {{rerollHits}})</span>
     {{else}}
-    <span class="reroll-improved">{{localize "AOA.Roll.ImprovedRoll"}} ({{localize "AOA.Roll.PreviousHits"}}: {{previousHits}})</span>
+    <span class="reroll-improved">{{localize "WOR.Roll.ImprovedRoll"}} ({{localize "WOR.Roll.PreviousHits"}}: {{previousHits}})</span>
     {{/if}}
   </div>
   {{/if}}
@@ -127,7 +127,7 @@
   {{#if isZeroPoolAttempt}}
   <div class="roll-zero-pool">
     <i class="fas fa-fire"></i>
-    {{localize "AOA.Roll.ZeroPoolAttempt"}}
+    {{localize "WOR.Roll.ZeroPoolAttempt"}}
   </div>
   {{/if}}
 
@@ -137,19 +137,19 @@
   {{#if zealSpend}}
   <div class="roll-zeal-spent">
     {{#if zealSpend.difficultyShift}}
-    <span class="zeal-option"><i class="fas fa-arrow-down"></i> {{localize "AOA.Zeal.DifficultyShift"}}</span>
+    <span class="zeal-option"><i class="fas fa-arrow-down"></i> {{localize "WOR.Zeal.DifficultyShift"}}</span>
     {{/if}}
     {{#if zealSpend.bonusDice}}
-    <span class="zeal-option"><i class="fas fa-dice"></i> {{localize "AOA.Zeal.BonusDice"}}</span>
+    <span class="zeal-option"><i class="fas fa-dice"></i> {{localize "WOR.Zeal.BonusDice"}}</span>
     {{/if}}
     {{#if zealSpend.autoSuccess}}
-    <span class="zeal-option"><i class="fas fa-star"></i> {{localize "AOA.Zeal.AutoSuccess"}}</span>
+    <span class="zeal-option"><i class="fas fa-star"></i> {{localize "WOR.Zeal.AutoSuccess"}}</span>
     {{/if}}
     {{#if zealSpend.reroll}}
-    <span class="zeal-option"><i class="fas fa-redo"></i> {{localize "AOA.Zeal.Reroll"}}</span>
+    <span class="zeal-option"><i class="fas fa-redo"></i> {{localize "WOR.Zeal.Reroll"}}</span>
     {{/if}}
     {{#if zealSpend.zeroPool}}
-    <span class="zeal-option"><i class="fas fa-fire"></i> {{localize "AOA.Zeal.ZeroPool"}}</span>
+    <span class="zeal-option"><i class="fas fa-fire"></i> {{localize "WOR.Zeal.ZeroPool"}}</span>
     {{/if}}
   </div>
   {{/if}}
@@ -158,7 +158,7 @@
   {{#if result.isAutoSuccess}}
   <div class="roll-auto-success">
     <i class="fas fa-star"></i>
-    {{localize "AOA.Roll.AutoSuccess"}}
+    {{localize "WOR.Roll.AutoSuccess"}}
   </div>
   {{/if}}
 </div>

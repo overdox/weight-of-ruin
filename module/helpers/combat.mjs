@@ -35,11 +35,11 @@ export function buildAttackPool({ attacker, weapon, modifier = 0 }) {
 
   // Get prowess label
   const prowessLabels = {
-    weaponProwess: 'AOA.Derived.WeaponProwess.label',
-    ballisticProwess: 'AOA.Derived.BallisticProwess.label',
-    unarmedProwess: 'AOA.Derived.UnarmedProwess.label'
+    weaponProwess: 'WOR.Derived.WeaponProwess.label',
+    ballisticProwess: 'WOR.Derived.BallisticProwess.label',
+    unarmedProwess: 'WOR.Derived.UnarmedProwess.label'
   };
-  const prowessLabel = game.i18n.localize(prowessLabels[prowessKey] || 'AOA.Derived.WeaponProwess.label');
+  const prowessLabel = game.i18n.localize(prowessLabels[prowessKey] || 'WOR.Derived.WeaponProwess.label');
 
   // Map prowess to martial skill name
   const prowessToSkill = {
@@ -273,7 +273,7 @@ async function showAttackDialog({ attacker, weapon, target, poolData, targetThre
   return new Promise((resolve) => {
     new foundry.applications.api.DialogV2({
       window: {
-        title: game.i18n.format('AOA.Combat.AttackWith', { weapon: weapon.name }),
+        title: game.i18n.format('WOR.Combat.AttackWith', { weapon: weapon.name }),
         icon: 'fas fa-sword'
       },
       position: {
@@ -284,7 +284,7 @@ async function showAttackDialog({ attacker, weapon, target, poolData, targetThre
       buttons: [
         {
           action: 'attack',
-          label: game.i18n.localize('AOA.Combat.Attack'),
+          label: game.i18n.localize('WOR.Combat.Attack'),
           icon: 'fas fa-crosshairs',
           default: true,
           callback: (event, button, dialog) => {
@@ -298,7 +298,7 @@ async function showAttackDialog({ attacker, weapon, target, poolData, targetThre
         },
         {
           action: 'cancel',
-          label: game.i18n.localize('AOA.Common.Cancel'),
+          label: game.i18n.localize('WOR.Common.Cancel'),
           icon: 'fas fa-times',
           callback: () => resolve(null)
         }
@@ -359,13 +359,13 @@ async function sendAttackToChat(attackResult) {
  */
 export function getCombatModifiers() {
   return [
-    { key: 'flanking', label: 'AOA.Combat.Modifier.Flanking', value: 2, type: 'attack' },
-    { key: 'highGround', label: 'AOA.Combat.Modifier.HighGround', value: 1, type: 'attack' },
-    { key: 'prone', label: 'AOA.Combat.Modifier.Prone', value: -2, type: 'attack' },
-    { key: 'cover', label: 'AOA.Combat.Modifier.Cover', value: -2, type: 'attack' },
-    { key: 'obscured', label: 'AOA.Combat.Modifier.Obscured', value: -2, type: 'attack' },
-    { key: 'pointBlank', label: 'AOA.Combat.Modifier.PointBlank', value: 2, type: 'ranged' },
-    { key: 'longRange', label: 'AOA.Combat.Modifier.LongRange', value: -2, type: 'ranged' }
+    { key: 'flanking', label: 'WOR.Combat.Modifier.Flanking', value: 2, type: 'attack' },
+    { key: 'highGround', label: 'WOR.Combat.Modifier.HighGround', value: 1, type: 'attack' },
+    { key: 'prone', label: 'WOR.Combat.Modifier.Prone', value: -2, type: 'attack' },
+    { key: 'cover', label: 'WOR.Combat.Modifier.Cover', value: -2, type: 'attack' },
+    { key: 'obscured', label: 'WOR.Combat.Modifier.Obscured', value: -2, type: 'attack' },
+    { key: 'pointBlank', label: 'WOR.Combat.Modifier.PointBlank', value: 2, type: 'ranged' },
+    { key: 'longRange', label: 'WOR.Combat.Modifier.LongRange', value: -2, type: 'ranged' }
   ];
 }
 

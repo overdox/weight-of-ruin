@@ -5,16 +5,16 @@
     <div class="banner-overlay">
       <div class="banner-name-section">
         <h1 class="actor-name">
-          <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'AOA.Common.Name'}}" />
+          <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'WOR.Common.Name'}}" />
         </h1>
         <div class="header-identity npc-identity">
           {{#if isEditMode}}
-          <input type="text" name="system.npcType" value="{{npcType}}" placeholder="{{localize 'AOA.NPC.Type'}}" class="npc-type-input" />
+          <input type="text" name="system.npcType" value="{{npcType}}" placeholder="{{localize 'WOR.NPC.Type'}}" class="npc-type-input" />
           {{#if role}}<span class="identity-separator">•</span>{{/if}}
-          <input type="text" name="system.role" value="{{role}}" placeholder="{{localize 'AOA.NPC.Role'}}" class="npc-role-input" />
+          <input type="text" name="system.role" value="{{role}}" placeholder="{{localize 'WOR.NPC.Role'}}" class="npc-role-input" />
           {{else}}
           <span class="archetype-lineage">
-            {{#if npcType}}{{npcType}}{{else}}{{localize "AOA.NPC.Generic"}}{{/if}}{{#if role}} • {{role}}{{/if}}
+            {{#if npcType}}{{npcType}}{{else}}{{localize "WOR.NPC.Generic"}}{{/if}}{{#if role}} • {{role}}{{/if}}
           </span>
           {{/if}}
         </div>
@@ -31,7 +31,7 @@
           {{else}}
           <span class="threat-badge">{{tierLabel}}</span>
           {{/if}}
-          <span class="threat-rating" title="{{localize 'AOA.NPC.Tier'}}">
+          <span class="threat-rating" title="{{localize 'WOR.NPC.Tier'}}">
             {{system.tier}}
           </span>
         </div>

@@ -48,13 +48,13 @@ export class WoRNPCSheet extends WoRBaseActorSheet {
    * NPC sheets use the same tabs as player characters, with Traits instead of Talents
    */
   static TABS = {
-    core: { id: 'core', group: 'primary', label: 'AOA.Tabs.Core' },
-    skills: { id: 'skills', group: 'primary', label: 'AOA.Tabs.Skills' },
-    traits: { id: 'traits', group: 'primary', label: 'AOA.Tabs.Traits' },
-    combat: { id: 'combat', group: 'primary', label: 'AOA.Tabs.Combat' },
-    inventory: { id: 'inventory', group: 'primary', label: 'AOA.Tabs.Inventory' },
-    thaumaturgy: { id: 'thaumaturgy', group: 'primary', label: 'AOA.Tabs.Thaumaturgy' },
-    profile: { id: 'profile', group: 'primary', label: 'AOA.Tabs.Profile' }
+    core: { id: 'core', group: 'primary', label: 'WOR.Tabs.Core' },
+    skills: { id: 'skills', group: 'primary', label: 'WOR.Tabs.Skills' },
+    traits: { id: 'traits', group: 'primary', label: 'WOR.Tabs.Traits' },
+    combat: { id: 'combat', group: 'primary', label: 'WOR.Tabs.Combat' },
+    inventory: { id: 'inventory', group: 'primary', label: 'WOR.Tabs.Inventory' },
+    thaumaturgy: { id: 'thaumaturgy', group: 'primary', label: 'WOR.Tabs.Thaumaturgy' },
+    profile: { id: 'profile', group: 'primary', label: 'WOR.Tabs.Profile' }
   };
 
   tabGroups = {
@@ -176,7 +176,7 @@ export class WoRNPCSheet extends WoRBaseActorSheet {
     const result = await rollPool({
       actor: this.document,
       pool: attack.pool,
-      title: `${attack.name} (${game.i18n.localize('AOA.Common.Attack')})`,
+      title: `${attack.name} (${game.i18n.localize('WOR.Common.Attack')})`,
       difficulty: 'standard',
       skipDialog: event.shiftKey
     });
@@ -246,7 +246,7 @@ export class WoRNPCSheet extends WoRBaseActorSheet {
     const attacks = foundry.utils.deepClone(this.document.system.attacks || []);
     attacks.push({
       id: foundry.utils.randomID(),
-      name: game.i18n.localize('AOA.NPC.NewAttack'),
+      name: game.i18n.localize('WOR.NPC.NewAttack'),
       pool: 5,
       damage: 2,
       properties: ''
@@ -299,7 +299,7 @@ export class WoRNPCSheet extends WoRBaseActorSheet {
     const abilities = foundry.utils.deepClone(this.document.system.abilities || []);
     abilities.push({
       id: foundry.utils.randomID(),
-      name: game.i18n.localize('AOA.NPC.NewAbility'),
+      name: game.i18n.localize('WOR.NPC.NewAbility'),
       description: '',
       pool: null,
       difficulty: 'standard'
@@ -412,7 +412,7 @@ export class WoRNPCSheet extends WoRBaseActorSheet {
     }
 
     if (pool <= 0) {
-      ui.notifications.warn(game.i18n.localize('AOA.Roll.InvalidPool'));
+      ui.notifications.warn(game.i18n.localize('WOR.Roll.InvalidPool'));
       return;
     }
 

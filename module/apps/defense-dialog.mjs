@@ -64,7 +64,7 @@ export class WoRDefenseDialog extends HandlebarsApplicationMixin(ApplicationV2) 
       height: 'auto'
     },
     window: {
-      title: 'AOA.Defense.Title',
+      title: 'WOR.Defense.Title',
       icon: 'fas fa-shield-alt',
       resizable: false
     },
@@ -141,14 +141,14 @@ export class WoRDefenseDialog extends HandlebarsApplicationMixin(ApplicationV2) 
           type: 'button',
           action: 'roll',
           icon: 'fas fa-shield-alt',
-          label: 'AOA.Combat.RollDefense',
+          label: 'WOR.Combat.RollDefense',
           cssClass: 'default'
         },
         {
           type: 'button',
           action: 'cancel',
           icon: 'fas fa-times',
-          label: 'AOA.Common.Cancel'
+          label: 'WOR.Common.Cancel'
         }
       ]
     };

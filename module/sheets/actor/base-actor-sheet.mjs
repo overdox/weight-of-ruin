@@ -98,7 +98,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     if (game.user.isGM) {
       controls.push({
         icon: 'fa-solid fa-user-circle',
-        label: 'AOA.HeaderControls.PrototypeToken',
+        label: 'WOR.HeaderControls.PrototypeToken',
         action: 'configurePrototypeToken',
         visible: true
       });
@@ -107,7 +107,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     // View Character Artwork
     controls.push({
       icon: 'fa-solid fa-image',
-      label: 'AOA.HeaderControls.ViewCharacterArt',
+      label: 'WOR.HeaderControls.ViewCharacterArt',
       action: 'viewCharacterArt',
       visible: true
     });
@@ -115,7 +115,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     // View Token Artwork
     controls.push({
       icon: 'fa-solid fa-user-circle',
-      label: 'AOA.HeaderControls.ViewTokenArt',
+      label: 'WOR.HeaderControls.ViewTokenArt',
       action: 'viewTokenArt',
       visible: !!actor.prototypeToken?.texture?.src
     });
@@ -124,7 +124,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     if (game.user.isGM) {
       controls.push({
         icon: 'fa-solid fa-cogs',
-        label: 'AOA.HeaderControls.ActorSettings',
+        label: 'WOR.HeaderControls.ActorSettings',
         action: 'configureActorSettings',
         visible: true
       });
@@ -138,13 +138,13 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
    * Override in subclasses to customize.
    */
   static TABS = {
-    core: { id: 'core', group: 'primary', label: 'AOA.Tabs.Core' },
-    skills: { id: 'skills', group: 'primary', label: 'AOA.Tabs.Skills' },
-    talents: { id: 'talents', group: 'primary', label: 'AOA.Tabs.Talents' },
-    combat: { id: 'combat', group: 'primary', label: 'AOA.Tabs.Combat' },
-    inventory: { id: 'inventory', group: 'primary', label: 'AOA.Tabs.Inventory' },
-    thaumaturgy: { id: 'thaumaturgy', group: 'primary', label: 'AOA.Tabs.Thaumaturgy' },
-    profile: { id: 'profile', group: 'primary', label: 'AOA.Tabs.Profile' }
+    core: { id: 'core', group: 'primary', label: 'WOR.Tabs.Core' },
+    skills: { id: 'skills', group: 'primary', label: 'WOR.Tabs.Skills' },
+    talents: { id: 'talents', group: 'primary', label: 'WOR.Tabs.Talents' },
+    combat: { id: 'combat', group: 'primary', label: 'WOR.Tabs.Combat' },
+    inventory: { id: 'inventory', group: 'primary', label: 'WOR.Tabs.Inventory' },
+    thaumaturgy: { id: 'thaumaturgy', group: 'primary', label: 'WOR.Tabs.Thaumaturgy' },
+    profile: { id: 'profile', group: 'primary', label: 'WOR.Tabs.Profile' }
   };
 
   /**
@@ -182,7 +182,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     context.source = source;
     context.system = actor.system;
     context.flags = actor.flags;
-    context.config = CONFIG.AOA;
+    context.config = CONFIG.WOR;
     context.isEditable = this.isEditable;
     context.isEditMode = this.isEditMode;
     context.isPlayMode = this.isPlayMode;
@@ -483,7 +483,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     const updateSaveButton = () => {
       const saveBtn = section.querySelector('button[data-action="save"]');
       if (saveBtn) {
-        const saveAndCloseText = game.i18n.localize('AOA.Common.SaveAndClose');
+        const saveAndCloseText = game.i18n.localize('WOR.Common.SaveAndClose');
         saveBtn.setAttribute('data-tooltip', saveAndCloseText);
         saveBtn.textContent = saveAndCloseText;
       }
@@ -801,10 +801,10 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     // Confirm deletion
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: { title: game.i18n.localize('AOA.Common.Delete') },
-      content: `<p>${game.i18n.format('AOA.Confirm.DeleteItem', { name: item.name })}</p>`,
-      yes: { label: game.i18n.localize('AOA.Common.Delete'), icon: 'fas fa-trash' },
-      no: { label: game.i18n.localize('AOA.Common.Cancel'), icon: 'fas fa-times' }
+      window: { title: game.i18n.localize('WOR.Common.Delete') },
+      content: `<p>${game.i18n.format('WOR.Confirm.DeleteItem', { name: item.name })}</p>`,
+      yes: { label: game.i18n.localize('WOR.Common.Delete'), icon: 'fas fa-trash' },
+      no: { label: game.i18n.localize('WOR.Common.Cancel'), icon: 'fas fa-times' }
     });
 
     if (confirmed) {
@@ -820,7 +820,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
   static async #onCreateItem(event, target) {
     const type = target.dataset.type || 'gear';
     const itemData = {
-      name: game.i18n.format('AOA.Item.New', { type: game.i18n.localize(`AOA.ItemTypes.${type}`) }),
+      name: game.i18n.format('WOR.Item.New', { type: game.i18n.localize(`WOR.ItemTypes.${type}`) }),
       type
     };
 
@@ -930,8 +930,8 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     // Build form content - card style matching Character Advancement dialog
     const attributeCards = Object.entries(attributes).map(([key, attr]) => {
       const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
-      const label = game.i18n.localize(`AOA.Attribute.${capitalizedKey}.long`);
-      const abbr = game.i18n.localize(`AOA.Attribute.${capitalizedKey}.abbr`);
+      const label = game.i18n.localize(`WOR.Attribute.${capitalizedKey}.long`);
+      const abbr = game.i18n.localize(`WOR.Attribute.${capitalizedKey}.abbr`);
       const base = attr.base || 0;
       const advances = attr.advances || 0;
       const modifier = attr.modifier || 0;
@@ -948,7 +948,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
             <span class="breakdown-item">Adv: ${advances >= 0 ? '+' : ''}${advances}</span>
           </div>
           <div class="card-modifier">
-            <label>${game.i18n.localize('AOA.Attribute.Modifier')}</label>
+            <label>${game.i18n.localize('WOR.Attribute.Modifier')}</label>
             <input type="number" name="${key}.modifier" value="${modifier}" />
           </div>
         </div>
@@ -958,25 +958,25 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     const content = `
       <div class="attribute-editor-wrapper">
         <div class="editor-header">
-          <h2 class="editor-title">${game.i18n.localize('AOA.Attribute.EditModifiers')}</h2>
+          <h2 class="editor-title">${game.i18n.localize('WOR.Attribute.EditModifiers')}</h2>
           <p class="editor-subtitle">${actor.name}</p>
         </div>
         <form class="attribute-editor-form">
           <div class="section-header">
             <i class="fas fa-chart-bar"></i>
-            <span>${game.i18n.localize('AOA.Section.Attributes')}</span>
+            <span>${game.i18n.localize('WOR.Section.Attributes')}</span>
           </div>
           <div class="attributes-grid">
             ${attributeCards}
           </div>
           <div class="section-header witchsight">
             <i class="fas fa-eye"></i>
-            <span>${game.i18n.localize('AOA.Attribute.Witchsight.long')}</span>
+            <span>${game.i18n.localize('WOR.Attribute.Witchsight.long')}</span>
           </div>
           <div class="witchsight-display">
-            <span class="witchsight-abbr">${game.i18n.localize('AOA.Attribute.Witchsight.abbr')}</span>
+            <span class="witchsight-abbr">${game.i18n.localize('WOR.Attribute.Witchsight.abbr')}</span>
             <span class="witchsight-value">${witchsight}</span>
-            <span class="witchsight-note">(${game.i18n.localize('AOA.Attribute.Witchsight.ReadOnly')})</span>
+            <span class="witchsight-note">(${game.i18n.localize('WOR.Attribute.Witchsight.ReadOnly')})</span>
           </div>
         </form>
       </div>
@@ -984,7 +984,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     const result = await foundry.applications.api.DialogV2.wait({
       window: {
-        title: game.i18n.localize('AOA.Attribute.EditModifiers'),
+        title: game.i18n.localize('WOR.Attribute.EditModifiers'),
         icon: 'fas fa-edit'
       },
       classes: ['wor', 'attribute-editor-dialog'],
@@ -992,7 +992,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
       buttons: [
         {
           action: 'save',
-          label: game.i18n.localize('AOA.Common.Save'),
+          label: game.i18n.localize('WOR.Common.Save'),
           icon: 'fas fa-save',
           default: true,
           callback: (event, button, dialog) => {
@@ -1007,7 +1007,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
         },
         {
           action: 'cancel',
-          label: game.i18n.localize('AOA.Common.Cancel'),
+          label: game.i18n.localize('WOR.Common.Cancel'),
           icon: 'fas fa-times'
         }
       ]
@@ -1171,37 +1171,37 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     let content;
     if (itemType === 'armor') {
       // Get localized category name
-      const categoryKey = armorCategory ? `AOA.Armor.Category.${armorCategory.charAt(0).toUpperCase() + armorCategory.slice(1)}` : 'AOA.Armor.Category.Outerlayer';
+      const categoryKey = armorCategory ? `WOR.Armor.Category.${armorCategory.charAt(0).toUpperCase() + armorCategory.slice(1)}` : 'WOR.Armor.Category.Outerlayer';
       const categoryName = game.i18n.localize(categoryKey);
 
       content = `
-        <p>${game.i18n.format('AOA.Equipment.ArmorCategoryAlreadyEquipped', { category: categoryName })}</p>
-        <p><strong>${game.i18n.localize('AOA.Equipment.CurrentlyEquipped')}:</strong> ${currentNames}</p>
-        <p><strong>${game.i18n.localize('AOA.Equipment.WantToEquip')}:</strong> ${newItem.name}</p>
-        <p>${game.i18n.localize('AOA.Equipment.SwitchQuestion')}</p>
+        <p>${game.i18n.format('WOR.Equipment.ArmorCategoryAlreadyEquipped', { category: categoryName })}</p>
+        <p><strong>${game.i18n.localize('WOR.Equipment.CurrentlyEquipped')}:</strong> ${currentNames}</p>
+        <p><strong>${game.i18n.localize('WOR.Equipment.WantToEquip')}:</strong> ${newItem.name}</p>
+        <p>${game.i18n.localize('WOR.Equipment.SwitchQuestion')}</p>
       `;
     } else {
       const handsNeeded = newItem.system.hands || 1;
       content = `
-        <p>${game.i18n.format('AOA.Equipment.NotEnoughHands', { hands: handsNeeded })}</p>
-        <p><strong>${game.i18n.localize('AOA.Equipment.CurrentlyEquipped')}:</strong> ${currentNames}</p>
-        <p><strong>${game.i18n.localize('AOA.Equipment.WantToEquip')}:</strong> ${newItem.name}</p>
-        <p>${game.i18n.localize('AOA.Equipment.SwitchQuestion')}</p>
+        <p>${game.i18n.format('WOR.Equipment.NotEnoughHands', { hands: handsNeeded })}</p>
+        <p><strong>${game.i18n.localize('WOR.Equipment.CurrentlyEquipped')}:</strong> ${currentNames}</p>
+        <p><strong>${game.i18n.localize('WOR.Equipment.WantToEquip')}:</strong> ${newItem.name}</p>
+        <p>${game.i18n.localize('WOR.Equipment.SwitchQuestion')}</p>
       `;
     }
 
     return foundry.applications.api.DialogV2.confirm({
       window: {
-        title: game.i18n.localize('AOA.Equipment.SwitchTitle'),
+        title: game.i18n.localize('WOR.Equipment.SwitchTitle'),
         icon: 'fas fa-exchange-alt'
       },
       content,
       yes: {
-        label: game.i18n.localize('AOA.Equipment.Switch'),
+        label: game.i18n.localize('WOR.Equipment.Switch'),
         icon: 'fas fa-check'
       },
       no: {
-        label: game.i18n.localize('AOA.Common.Cancel'),
+        label: game.i18n.localize('WOR.Common.Cancel'),
         icon: 'fas fa-times'
       }
     });
@@ -1243,13 +1243,13 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     // Create chat message
     const messageContent = `
       <div class="wor damage-roll">
-        <h3><i class="fas fa-tint"></i> ${game.i18n.localize('AOA.Combat.Damage')}: ${item.name}</h3>
+        <h3><i class="fas fa-tint"></i> ${game.i18n.localize('WOR.Combat.Damage')}: ${item.name}</h3>
         <div class="damage-breakdown">
-          <span class="base-damage">${game.i18n.localize('AOA.Weapon.BaseDamage')}: ${baseDamage}</span>
-          ${useStrengthBonus ? `<span class="strength-bonus">+ ${game.i18n.localize('AOA.Attribute.Strength.abbr')}: ${strength}</span>` : ''}
+          <span class="base-damage">${game.i18n.localize('WOR.Weapon.BaseDamage')}: ${baseDamage}</span>
+          ${useStrengthBonus ? `<span class="strength-bonus">+ ${game.i18n.localize('WOR.Attribute.Strength.abbr')}: ${strength}</span>` : ''}
         </div>
         <div class="damage-total">
-          <strong>${game.i18n.localize('AOA.Combat.TotalDamage')}:</strong>
+          <strong>${game.i18n.localize('WOR.Combat.TotalDamage')}:</strong>
           <span class="total-value">${totalDamage}</span>
         </div>
       </div>
@@ -1281,7 +1281,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     // Check if already active
     if (isFullDefenseActive(this.document)) {
-      ui.notifications.warn(game.i18n.localize('AOA.Defense.FullDefense.AlreadyActive'));
+      ui.notifications.warn(game.i18n.localize('WOR.Defense.FullDefense.AlreadyActive'));
       return;
     }
 
@@ -1399,13 +1399,13 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     // If reducing Essence, confirm
     if (essenceValue < currentEssence) {
       const confirmed = await foundry.applications.api.DialogV2.confirm({
-        window: { title: game.i18n.localize('AOA.Essence.ConfirmDecrease') },
-        content: `<p>${game.i18n.format('AOA.Essence.DecreaseWarning', {
+        window: { title: game.i18n.localize('WOR.Essence.ConfirmDecrease') },
+        content: `<p>${game.i18n.format('WOR.Essence.DecreaseWarning', {
           current: currentEssence,
           new: essenceValue
         })}</p>`,
-        yes: { label: game.i18n.localize('AOA.Common.Confirm'), icon: 'fas fa-check' },
-        no: { label: game.i18n.localize('AOA.Common.Cancel'), icon: 'fas fa-times' }
+        yes: { label: game.i18n.localize('WOR.Common.Confirm'), icon: 'fas fa-check' },
+        no: { label: game.i18n.localize('WOR.Common.Cancel'), icon: 'fas fa-times' }
       });
 
       if (!confirmed) return;
@@ -1415,9 +1415,9 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     // Check for warnings
     if (essenceValue === 0) {
-      ui.notifications.error(game.i18n.format('AOA.Warnings.LengTransformation', { name: this.document.name }));
+      ui.notifications.error(game.i18n.format('WOR.Warnings.LengTransformation', { name: this.document.name }));
     } else if (essenceValue <= 2) {
-      ui.notifications.warn(game.i18n.format('AOA.Warnings.EssenceCritical', {
+      ui.notifications.warn(game.i18n.format('WOR.Warnings.EssenceCritical', {
         name: this.document.name,
         essence: essenceValue
       }));
@@ -1438,13 +1438,13 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
       const newEssence = currentEssence + adjustment;
 
       const confirmed = await foundry.applications.api.DialogV2.confirm({
-        window: { title: game.i18n.localize('AOA.Essence.ConfirmDecrease') },
-        content: `<p>${game.i18n.format('AOA.Essence.DecreaseWarning', {
+        window: { title: game.i18n.localize('WOR.Essence.ConfirmDecrease') },
+        content: `<p>${game.i18n.format('WOR.Essence.DecreaseWarning', {
           current: currentEssence,
           new: Math.max(0, newEssence)
         })}</p>`,
-        yes: { label: game.i18n.localize('AOA.Common.Confirm'), icon: 'fas fa-check' },
-        no: { label: game.i18n.localize('AOA.Common.Cancel'), icon: 'fas fa-times' }
+        yes: { label: game.i18n.localize('WOR.Common.Confirm'), icon: 'fas fa-check' },
+        no: { label: game.i18n.localize('WOR.Common.Cancel'), icon: 'fas fa-times' }
       });
 
       if (!confirmed) return;
@@ -1473,42 +1473,42 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     const content = `
       <form class="rest-dialog-form">
-        <p class="rest-info">${game.i18n.localize('AOA.Rest.RecoveryRate')}</p>
-        <p class="rest-info">${game.i18n.localize('AOA.Rest.MaxRecovery')}</p>
+        <p class="rest-info">${game.i18n.localize('WOR.Rest.RecoveryRate')}</p>
+        <p class="rest-info">${game.i18n.localize('WOR.Rest.MaxRecovery')}</p>
 
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Rest.Duration')}</label>
+          <label>${game.i18n.localize('WOR.Rest.Duration')}</label>
           <select name="duration">
-            <option value="2">${game.i18n.localize('AOA.Rest.TwoHours')}</option>
-            <option value="4">${game.i18n.localize('AOA.Rest.FourHours')}</option>
-            <option value="8" selected>${game.i18n.localize('AOA.Rest.EightHours')}</option>
-            <option value="custom">${game.i18n.localize('AOA.Rest.Custom')}</option>
+            <option value="2">${game.i18n.localize('WOR.Rest.TwoHours')}</option>
+            <option value="4">${game.i18n.localize('WOR.Rest.FourHours')}</option>
+            <option value="8" selected>${game.i18n.localize('WOR.Rest.EightHours')}</option>
+            <option value="custom">${game.i18n.localize('WOR.Rest.Custom')}</option>
           </select>
         </div>
 
         <div class="form-group custom-duration hidden">
-          <label>${game.i18n.localize('AOA.Rest.Hours')}</label>
+          <label>${game.i18n.localize('WOR.Rest.Hours')}</label>
           <input type="number" name="customHours" value="8" min="1" max="24" />
         </div>
 
         <div class="form-group">
           <label class="checkbox-label">
             <input type="checkbox" name="comfortable" />
-            ${game.i18n.localize('AOA.Rest.Comfortable')}
+            ${game.i18n.localize('WOR.Rest.Comfortable')}
           </label>
-          <p class="hint">${game.i18n.localize('AOA.Rest.ComfortableHint')}</p>
+          <p class="hint">${game.i18n.localize('WOR.Rest.ComfortableHint')}</p>
         </div>
 
         <div class="rest-preview">
-          <p><strong>${game.i18n.localize('AOA.Health.Trauma')}:</strong> ${currentTrauma}</p>
-          <p class="trauma-preview"><strong>${game.i18n.localize('AOA.Rest.TraumaRecovered')}:</strong> <span class="preview-value">4</span></p>
+          <p><strong>${game.i18n.localize('WOR.Health.Trauma')}:</strong> ${currentTrauma}</p>
+          <p class="trauma-preview"><strong>${game.i18n.localize('WOR.Rest.TraumaRecovered')}:</strong> <span class="preview-value">4</span></p>
         </div>
       </form>
     `;
 
     const result = await foundry.applications.api.DialogV2.wait({
       window: {
-        title: game.i18n.localize('AOA.Rest.DialogTitle'),
+        title: game.i18n.localize('WOR.Rest.DialogTitle'),
         icon: 'fas fa-bed'
       },
       content,
@@ -1561,7 +1561,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
       buttons: [
         {
           action: 'rest',
-          label: game.i18n.localize('AOA.Rest.Confirm'),
+          label: game.i18n.localize('WOR.Rest.Confirm'),
           icon: 'fas fa-bed',
           default: true,
           callback: (event, button, dialog) => {
@@ -1580,7 +1580,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
         },
         {
           action: 'cancel',
-          label: game.i18n.localize('AOA.Rest.Cancel'),
+          label: game.i18n.localize('WOR.Rest.Cancel'),
           icon: 'fas fa-times'
         }
       ]
@@ -1608,12 +1608,12 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
         // Show chat message
         const messageContent = comfortable && hours >= 8
-          ? game.i18n.format('AOA.Rest.RestResultComfortable', {
+          ? game.i18n.format('WOR.Rest.RestResultComfortable', {
               name: actor.name,
               hours: hours,
               trauma: traumaRecovery
             })
-          : game.i18n.format('AOA.Rest.RestResult', {
+          : game.i18n.format('WOR.Rest.RestResult', {
               name: actor.name,
               hours: hours,
               trauma: traumaRecovery
@@ -1622,12 +1622,12 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
         ChatMessage.create({
           speaker: ChatMessage.getSpeaker({ actor }),
           content: `<div class="wor rest-result">
-            <h3><i class="fas fa-bed"></i> ${game.i18n.localize('AOA.Rest.RestComplete')}</h3>
+            <h3><i class="fas fa-bed"></i> ${game.i18n.localize('WOR.Rest.RestComplete')}</h3>
             <p>${messageContent}</p>
           </div>`
         });
       } else {
-        ui.notifications.info(game.i18n.format('AOA.Rest.NoTraumaToRecover', { name: actor.name }));
+        ui.notifications.info(game.i18n.format('WOR.Rest.NoTraumaToRecover', { name: actor.name }));
       }
     }
   }
@@ -1686,33 +1686,33 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     const content = `
       <form class="wealth-edit-form">
-        <p>${game.i18n.localize('AOA.Wealth.EditDescription')}</p>
+        <p>${game.i18n.localize('WOR.Wealth.EditDescription')}</p>
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Wealth.Operation')}</label>
+          <label>${game.i18n.localize('WOR.Wealth.Operation')}</label>
           <select name="operation">
-            <option value="add">${game.i18n.localize('AOA.Wealth.Add')}</option>
-            <option value="subtract">${game.i18n.localize('AOA.Wealth.Subtract')}</option>
-            <option value="set">${game.i18n.localize('AOA.Wealth.Set')}</option>
+            <option value="add">${game.i18n.localize('WOR.Wealth.Add')}</option>
+            <option value="subtract">${game.i18n.localize('WOR.Wealth.Subtract')}</option>
+            <option value="set">${game.i18n.localize('WOR.Wealth.Set')}</option>
           </select>
         </div>
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Wealth.Sovereigns')}</label>
+          <label>${game.i18n.localize('WOR.Wealth.Sovereigns')}</label>
           <div class="currency-row">
-            <span class="current-value">${game.i18n.localize('AOA.Wealth.Current')}: ${wealth.sovereigns}</span>
+            <span class="current-value">${game.i18n.localize('WOR.Wealth.Current')}: ${wealth.sovereigns}</span>
             <input type="number" name="sovereigns" value="0" min="0" />
           </div>
         </div>
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Wealth.Crowns')}</label>
+          <label>${game.i18n.localize('WOR.Wealth.Crowns')}</label>
           <div class="currency-row">
-            <span class="current-value">${game.i18n.localize('AOA.Wealth.Current')}: ${wealth.crowns}</span>
+            <span class="current-value">${game.i18n.localize('WOR.Wealth.Current')}: ${wealth.crowns}</span>
             <input type="number" name="crowns" value="0" min="0" />
           </div>
         </div>
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Wealth.Orin')}</label>
+          <label>${game.i18n.localize('WOR.Wealth.Orin')}</label>
           <div class="currency-row">
-            <span class="current-value">${game.i18n.localize('AOA.Wealth.Current')}: ${wealth.orin}</span>
+            <span class="current-value">${game.i18n.localize('WOR.Wealth.Current')}: ${wealth.orin}</span>
             <input type="number" name="orin" value="0" min="0" />
           </div>
         </div>
@@ -1720,10 +1720,10 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     `;
 
     const result = await foundry.applications.api.DialogV2.prompt({
-      window: { title: game.i18n.localize('AOA.Wealth.Edit') },
+      window: { title: game.i18n.localize('WOR.Wealth.Edit') },
       content,
       ok: {
-        label: game.i18n.localize('AOA.Common.Apply'),
+        label: game.i18n.localize('WOR.Common.Apply'),
         icon: 'fas fa-check',
         callback: (event, button, dialog) => {
           const form = button.form;
@@ -1834,38 +1834,38 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     const content = `
       <form class="xp-adjust-form">
-        <p class="xp-current"><strong>${game.i18n.localize('AOA.Advancement.XP.Current')}:</strong> ${currentXP}</p>
+        <p class="xp-current"><strong>${game.i18n.localize('WOR.Advancement.XP.Current')}:</strong> ${currentXP}</p>
 
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Wealth.Operation')}</label>
+          <label>${game.i18n.localize('WOR.Wealth.Operation')}</label>
           <select name="operation">
-            <option value="add">${game.i18n.localize('AOA.Advancement.XP.Add')}</option>
-            <option value="subtract">${game.i18n.localize('AOA.Advancement.XP.Subtract')}</option>
+            <option value="add">${game.i18n.localize('WOR.Advancement.XP.Add')}</option>
+            <option value="subtract">${game.i18n.localize('WOR.Advancement.XP.Subtract')}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Advancement.XP.Amount')}</label>
+          <label>${game.i18n.localize('WOR.Advancement.XP.Amount')}</label>
           <input type="number" name="amount" value="0" min="0" max="10000" />
         </div>
 
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Advancement.XP.Reason')}</label>
-          <input type="text" name="reason" placeholder="${game.i18n.localize('AOA.Advancement.XP.ReasonPlaceholder')}" />
+          <label>${game.i18n.localize('WOR.Advancement.XP.Reason')}</label>
+          <input type="text" name="reason" placeholder="${game.i18n.localize('WOR.Advancement.XP.ReasonPlaceholder')}" />
         </div>
       </form>
     `;
 
     const result = await foundry.applications.api.DialogV2.wait({
       window: {
-        title: game.i18n.localize('AOA.Advancement.XP.AdjustTitle'),
+        title: game.i18n.localize('WOR.Advancement.XP.AdjustTitle'),
         icon: 'fas fa-star'
       },
       content,
       buttons: [
         {
           action: 'apply',
-          label: game.i18n.localize('AOA.Common.Apply'),
+          label: game.i18n.localize('WOR.Common.Apply'),
           icon: 'fas fa-check',
           default: true,
           callback: (event, button, dialog) => {
@@ -1879,7 +1879,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
         },
         {
           action: 'cancel',
-          label: game.i18n.localize('AOA.Common.Cancel'),
+          label: game.i18n.localize('WOR.Common.Cancel'),
           icon: 'fas fa-times'
         }
       ]
@@ -1911,7 +1911,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
         ChatMessage.create({
           speaker: ChatMessage.getSpeaker({ actor }),
           content: `<div class="wor xp-adjustment">
-            <h3><i class="fas fa-star"></i> ${game.i18n.localize('AOA.Advancement.XP.AdjustTitle')}</h3>
+            <h3><i class="fas fa-star"></i> ${game.i18n.localize('WOR.Advancement.XP.AdjustTitle')}</h3>
             <p><strong>${actor.name}:</strong> ${changeText}</p>
             <p class="reason"><em>${reason}</em></p>
           </div>`
@@ -1931,7 +1931,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
 
     // Double-check XP requirement
     if (currentXP < 1000) {
-      ui.notifications.warn(game.i18n.localize('AOA.Advancement.PurchaseDisabled'));
+      ui.notifications.warn(game.i18n.localize('WOR.Advancement.PurchaseDisabled'));
       return;
     }
 
@@ -1968,7 +1968,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     const img = actor.img;
 
     if (!img || img === CONST.DEFAULT_TOKEN) {
-      ui.notifications.warn(game.i18n.localize('AOA.HeaderControls.NoCharacterArt'));
+      ui.notifications.warn(game.i18n.localize('WOR.HeaderControls.NoCharacterArt'));
       return;
     }
 
@@ -1990,14 +1990,14 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     const tokenImg = actor.prototypeToken?.texture?.src;
 
     if (!tokenImg || tokenImg === CONST.DEFAULT_TOKEN) {
-      ui.notifications.warn(game.i18n.localize('AOA.HeaderControls.NoTokenArt'));
+      ui.notifications.warn(game.i18n.localize('WOR.HeaderControls.NoTokenArt'));
       return;
     }
 
     // Create an image popout (v13 API)
     new foundry.applications.apps.ImagePopout({
       src: tokenImg,
-      window: { title: `${actor.name} - ${game.i18n.localize('AOA.HeaderControls.Token')}` },
+      window: { title: `${actor.name} - ${game.i18n.localize('WOR.HeaderControls.Token')}` },
       uuid: actor.uuid
     }).render(true);
   }

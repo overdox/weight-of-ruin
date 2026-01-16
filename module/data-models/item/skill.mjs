@@ -31,7 +31,7 @@ export default class SkillData extends ItemBaseData {
       initial: 0,
       min: 0,
       max: 10,
-      label: "AOA.Skill.Rank"
+      label: "WOR.Skill.Rank"
     });
 
     // ========================================
@@ -42,31 +42,31 @@ export default class SkillData extends ItemBaseData {
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Skill.Source.Background"
+        label: "WOR.Skill.Source.Background"
       }),
       pathway: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Skill.Source.Pathway"
+        label: "WOR.Skill.Source.Pathway"
       }),
       free: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Skill.Source.Free"
+        label: "WOR.Skill.Source.Free"
       }),
       advancement: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Skill.Source.Advancement"
+        label: "WOR.Skill.Source.Advancement"
       }),
       other: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Skill.Source.Other"
+        label: "WOR.Skill.Source.Other"
       })
     });
 
@@ -79,7 +79,7 @@ export default class SkillData extends ItemBaseData {
       blank: false,
       initial: "agility",
       choices: ["strength", "fortitude", "agility", "awareness", "resolve", "persona", "ingenuity", "expertise"],
-      label: "AOA.Skill.Attribute"
+      label: "WOR.Skill.Attribute"
     });
 
     // ========================================
@@ -91,7 +91,7 @@ export default class SkillData extends ItemBaseData {
       blank: false,
       initial: "physical",
       choices: ["martial", "physical", "social", "knowledge", "craft", "thaumaturgy"],
-      label: "AOA.Skill.Category"
+      label: "WOR.Skill.Category"
     });
 
     // ========================================
@@ -103,7 +103,7 @@ export default class SkillData extends ItemBaseData {
       blank: true,
       initial: "",
       choices: ["", "weaponProwess", "ballisticProwess", "unarmedProwess"],
-      label: "AOA.Skill.Prowess"
+      label: "WOR.Skill.Prowess"
     });
 
     // ========================================
@@ -112,7 +112,7 @@ export default class SkillData extends ItemBaseData {
     // ========================================
     schema.requiresWitchsight = new fields.BooleanField({
       initial: false,
-      label: "AOA.Skill.RequiresWitchsight"
+      label: "WOR.Skill.RequiresWitchsight"
     });
 
     // ========================================

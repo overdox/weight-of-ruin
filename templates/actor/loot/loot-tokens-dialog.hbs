@@ -1,7 +1,7 @@
 <form class="loot-tokens-dialog">
   <section class="token-selection">
-    <h4>{{localize "AOA.Loot.SelectTokensToLoot"}}</h4>
-    <p class="hint">{{localize "AOA.Loot.SelectTokensHint"}}</p>
+    <h4>{{localize "WOR.Loot.SelectTokensToLoot"}}</h4>
+    <p class="hint">{{localize "WOR.Loot.SelectTokensHint"}}</p>
     <ul class="token-list">
       {{#each tokens}}
       <li class="token-row">
@@ -9,7 +9,7 @@
           <input type="checkbox" name="token" value="{{id}}" checked />
           <img src="{{img}}" alt="{{name}}" class="token-img" />
           <span class="token-name">{{name}}</span>
-          <span class="item-count">({{itemCount}} {{localize "AOA.Loot.Items"}})</span>
+          <span class="item-count">({{itemCount}} {{localize "WOR.Loot.Items"}})</span>
         </label>
       </li>
       {{/each}}

@@ -4,12 +4,12 @@
     {{!-- Step 1: Class & Type --}}
     {{#if (eq stepId "classType")}}
     <div class="step-classtype">
-      <h2>{{localize "AOA.NPCCreation.Step.ClassType"}}</h2>
-      <p class="step-description">{{localize "AOA.NPCCreation.ClassTypeDesc"}}</p>
+      <h2>{{localize "WOR.NPCCreation.Step.ClassType"}}</h2>
+      <p class="step-description">{{localize "WOR.NPCCreation.ClassTypeDesc"}}</p>
 
       {{!-- Class Selection --}}
       <div class="selection-section">
-        <h3>{{localize "AOA.NPCCreation.SelectClass"}}</h3>
+        <h3>{{localize "WOR.NPCCreation.SelectClass"}}</h3>
         <div class="class-grid">
           {{#each classes}}
           <div class="class-card {{#if selected}}selected{{/if}}" data-action="selectClass" data-class-id="{{id}}">
@@ -23,7 +23,7 @@
       {{!-- Type Selection (shown when Class is selected) --}}
       {{#if selectedClass}}
       <div class="selection-section">
-        <h3>{{localize "AOA.NPCCreation.SelectType"}}</h3>
+        <h3>{{localize "WOR.NPCCreation.SelectType"}}</h3>
         <div class="type-grid">
           {{#each types}}
           <div class="type-card {{#if selected}}selected{{/if}}" data-action="selectType" data-type-id="{{id}}">
@@ -39,8 +39,8 @@
     {{!-- Step 2: Tier Selection --}}
     {{#if (eq stepId "tier")}}
     <div class="step-tier">
-      <h2>{{localize "AOA.NPCCreation.Step.Tier"}}</h2>
-      <p class="step-description">{{localize "AOA.NPCCreation.TierDesc"}}</p>
+      <h2>{{localize "WOR.NPCCreation.Step.Tier"}}</h2>
+      <p class="step-description">{{localize "WOR.NPCCreation.TierDesc"}}</p>
 
       <div class="tier-grid">
         {{#each tiers}}
@@ -51,11 +51,11 @@
           </div>
           <div class="tier-stats">
             <div class="tier-stat">
-              <span class="stat-label">{{localize "AOA.NPCCreation.BaseDicePool"}}</span>
+              <span class="stat-label">{{localize "WOR.NPCCreation.BaseDicePool"}}</span>
               <span class="stat-value">{{baseDicePool}}d6</span>
             </div>
             <div class="tier-stat">
-              <span class="stat-label">{{localize "AOA.NPCCreation.TraitPoints"}}</span>
+              <span class="stat-label">{{localize "WOR.NPCCreation.TraitPoints"}}</span>
               <span class="stat-value">{{traitPoints}}</span>
             </div>
           </div>
@@ -69,21 +69,21 @@
     {{!-- Step 3: Attributes --}}
     {{#if (eq stepId "attributes")}}
     <div class="step-attributes">
-      <h2>{{localize "AOA.NPCCreation.Step.Attributes"}}</h2>
-      <p class="step-description">{{localize "AOA.NPCCreation.AttributesDesc"}}</p>
+      <h2>{{localize "WOR.NPCCreation.Step.Attributes"}}</h2>
+      <p class="step-description">{{localize "WOR.NPCCreation.AttributesDesc"}}</p>
 
       {{!-- Points Counter --}}
       <div class="points-counter">
-        <span class="points-label">{{localize "AOA.NPCCreation.PointsRemaining"}}:</span>
+        <span class="points-label">{{localize "WOR.NPCCreation.PointsRemaining"}}:</span>
         <span class="points-value {{#if (lt attributePointsRemaining 0)}}over-budget{{/if}}">
           {{attributePointsRemaining}} / {{attributePointsTotal}}
         </span>
-        <span class="points-hint">({{localize "AOA.NPCCreation.MaxPerAttribute"}}: {{attributeMax}})</span>
+        <span class="points-hint">({{localize "WOR.NPCCreation.MaxPerAttribute"}}: {{attributeMax}})</span>
       </div>
 
       {{!-- Attribute Templates --}}
       <div class="templates-section">
-        <h3>{{localize "AOA.NPCCreation.AttributeTemplates"}}</h3>
+        <h3>{{localize "WOR.NPCCreation.AttributeTemplates"}}</h3>
         <div class="template-buttons">
           {{#each attributeTemplates}}
           <button type="button" class="template-btn {{#if (eq ../selectedAttributeTemplate @key)}}selected{{/if}}"
@@ -117,12 +117,12 @@
     {{!-- Step 4: Skills --}}
     {{#if (eq stepId "skills")}}
     <div class="step-skills">
-      <h2>{{localize "AOA.NPCCreation.Step.Skills"}}</h2>
-      <p class="step-description">{{localize "AOA.NPCCreation.SkillsDesc"}}</p>
+      <h2>{{localize "WOR.NPCCreation.Step.Skills"}}</h2>
+      <p class="step-description">{{localize "WOR.NPCCreation.SkillsDesc"}}</p>
 
       {{!-- Ranks Counter --}}
       <div class="points-counter">
-        <span class="points-label">{{localize "AOA.NPCCreation.RanksRemaining"}}:</span>
+        <span class="points-label">{{localize "WOR.NPCCreation.RanksRemaining"}}:</span>
         <span class="points-value {{#if (lt skillRanksRemaining 0)}}over-budget{{/if}}">
           {{skillRanksRemaining}} / {{skillRanksTotal}}
         </span>
@@ -130,7 +130,7 @@
 
       {{!-- Skill Templates --}}
       <div class="templates-section">
-        <h3>{{localize "AOA.NPCCreation.SkillTemplates"}}</h3>
+        <h3>{{localize "WOR.NPCCreation.SkillTemplates"}}</h3>
         <div class="template-buttons">
           {{#each skillTemplates}}
           <button type="button" class="template-btn {{#if (eq ../selectedSkillTemplate @key)}}selected{{/if}}"
@@ -146,7 +146,7 @@
         {{#each skillsByCategory}}
         {{#if this.length}}
         <div class="skill-category">
-          <h4>{{localize (concat "AOA.SkillCategory." (capitalize @key))}}</h4>
+          <h4>{{localize (concat "WOR.SkillCategory." (capitalize @key))}}</h4>
           <div class="skills-list">
             {{#each this}}
             <div class="skill-row">
@@ -173,12 +173,12 @@
     {{!-- Step 5: Traits --}}
     {{#if (eq stepId "traits")}}
     <div class="step-traits">
-      <h2>{{localize "AOA.NPCCreation.Step.Traits"}}</h2>
-      <p class="step-description">{{localize "AOA.NPCCreation.TraitsDesc"}}</p>
+      <h2>{{localize "WOR.NPCCreation.Step.Traits"}}</h2>
+      <p class="step-description">{{localize "WOR.NPCCreation.TraitsDesc"}}</p>
 
       {{!-- Points Counter --}}
       <div class="points-counter">
-        <span class="points-label">{{localize "AOA.NPCCreation.TraitPointsRemaining"}}:</span>
+        <span class="points-label">{{localize "WOR.NPCCreation.TraitPointsRemaining"}}:</span>
         <span class="points-value {{#if (lt traitPointsRemaining 0)}}over-budget{{/if}}">
           {{traitPointsRemaining}} / {{traitPointsTotal}}
         </span>
@@ -187,7 +187,7 @@
       <div class="traits-layout">
         {{!-- Selected Traits Panel --}}
         <div class="selected-traits-panel">
-          <h3>{{localize "AOA.NPCCreation.SelectedTraits"}}</h3>
+          <h3>{{localize "WOR.NPCCreation.SelectedTraits"}}</h3>
           {{#if selectedTraits.length}}
           <div class="selected-traits-list">
             {{#each selectedTraits}}
@@ -202,19 +202,19 @@
             {{/each}}
           </div>
           {{else}}
-          <p class="no-traits">{{localize "AOA.NPCCreation.NoTraitsSelected"}}</p>
+          <p class="no-traits">{{localize "WOR.NPCCreation.NoTraitsSelected"}}</p>
           {{/if}}
         </div>
 
         {{!-- Available Traits Browser --}}
         <div class="traits-browser">
-          <h3>{{localize "AOA.NPCCreation.AvailableTraits"}}</h3>
+          <h3>{{localize "WOR.NPCCreation.AvailableTraits"}}</h3>
 
           {{!-- Category Filter --}}
           <div class="trait-category-filters">
             <button type="button" class="trait-category-btn {{#if (eq traitCategoryFilter 'all')}}active{{/if}}"
                     data-category="all">
-              {{localize "AOA.Common.All"}}
+              {{localize "WOR.Common.All"}}
             </button>
             {{#each traitCategories}}
             <button type="button" class="trait-category-btn {{#if (eq ../traitCategoryFilter id)}}active{{/if}}"
@@ -228,7 +228,7 @@
           {{!-- Type-Specific Traits (if any) --}}
           {{#if typeSpecificTraits.length}}
           <div class="type-specific-section">
-            <h4>{{localize "AOA.NPCCreation.TypeSpecificTraits"}}</h4>
+            <h4>{{localize "WOR.NPCCreation.TypeSpecificTraits"}}</h4>
             <div class="traits-grid">
               {{#each typeSpecificTraits}}
               <div class="trait-card {{#if selected}}selected{{/if}} type-specific" data-category="{{system.category}}">
@@ -240,7 +240,7 @@
                 <p class="trait-description">{{system.description}}</p>
                 {{#unless selected}}
                 <button type="button" class="add-trait-btn" data-action="addTrait" data-trait-id="{{id}}">
-                  <i class="fas fa-plus"></i> {{localize "AOA.Common.Add"}}
+                  <i class="fas fa-plus"></i> {{localize "WOR.Common.Add"}}
                 </button>
                 {{/unless}}
               </div>
@@ -252,7 +252,7 @@
           {{!-- General Traits --}}
           <div class="general-traits-section">
             {{#if typeSpecificTraits.length}}
-            <h4>{{localize "AOA.NPCCreation.GeneralTraits"}}</h4>
+            <h4>{{localize "WOR.NPCCreation.GeneralTraits"}}</h4>
             {{/if}}
             <div class="traits-grid">
               {{#each generalTraits}}
@@ -265,7 +265,7 @@
                 <p class="trait-description">{{system.description}}</p>
                 {{#unless selected}}
                 <button type="button" class="add-trait-btn" data-action="addTrait" data-trait-id="{{id}}">
-                  <i class="fas fa-plus"></i> {{localize "AOA.Common.Add"}}
+                  <i class="fas fa-plus"></i> {{localize "WOR.Common.Add"}}
                 </button>
                 {{/unless}}
               </div>
@@ -280,39 +280,39 @@
     {{!-- Step 6: Finalization --}}
     {{#if (eq stepId "finalize")}}
     <div class="step-finalize">
-      <h2>{{localize "AOA.NPCCreation.Step.Finalize"}}</h2>
+      <h2>{{localize "WOR.NPCCreation.Step.Finalize"}}</h2>
 
       <div class="finalize-layout">
         {{!-- Left Panel: Name & Equipment --}}
         <div class="finalize-inputs">
           {{!-- Name Input --}}
           <div class="name-section">
-            <label for="npc-name">{{localize "AOA.NPCCreation.NPCName"}}</label>
+            <label for="npc-name">{{localize "WOR.NPCCreation.NPCName"}}</label>
             <input type="text" id="npc-name" name="name" value="{{npcData.name}}"
-                   placeholder="{{localize 'AOA.NPCCreation.EnterName'}}">
+                   placeholder="{{localize 'WOR.NPCCreation.EnterName'}}">
           </div>
 
           {{!-- Notes --}}
           <div class="notes-section">
-            <label for="npc-notes">{{localize "AOA.NPCCreation.Notes"}}</label>
+            <label for="npc-notes">{{localize "WOR.NPCCreation.Notes"}}</label>
             <textarea id="npc-notes" name="notes" rows="3"
-                      placeholder="{{localize 'AOA.NPCCreation.NotesPlaceholder'}}">{{npcData.notes}}</textarea>
+                      placeholder="{{localize 'WOR.NPCCreation.NotesPlaceholder'}}">{{npcData.notes}}</textarea>
           </div>
 
           {{!-- Equipment Section --}}
           <div class="equipment-section">
-            <h3>{{localize "AOA.NPCCreation.Equipment"}}</h3>
+            <h3>{{localize "WOR.NPCCreation.Equipment"}}</h3>
 
             {{!-- Gear Tabs --}}
             <div class="gear-tabs">
               <button type="button" class="gear-tab-btn {{#if (eq gearTab 'weapons')}}active{{/if}}" data-gear-tab="weapons">
-                {{localize "AOA.ItemType.Weapon"}}
+                {{localize "WOR.ItemType.Weapon"}}
               </button>
               <button type="button" class="gear-tab-btn {{#if (eq gearTab 'armor')}}active{{/if}}" data-gear-tab="armor">
-                {{localize "AOA.ItemType.Armor"}}
+                {{localize "WOR.ItemType.Armor"}}
               </button>
               <button type="button" class="gear-tab-btn {{#if (eq gearTab 'gear')}}active{{/if}}" data-gear-tab="gear">
-                {{localize "AOA.ItemType.Gear"}}
+                {{localize "WOR.ItemType.Gear"}}
               </button>
             </div>
 
@@ -362,7 +362,7 @@
             {{!-- Selected Equipment --}}
             {{#if selectedEquipment.length}}
             <div class="selected-equipment">
-              <h4>{{localize "AOA.NPCCreation.SelectedEquipment"}}</h4>
+              <h4>{{localize "WOR.NPCCreation.SelectedEquipment"}}</h4>
               <div class="selected-equipment-list">
                 {{#each selectedEquipment}}
                 <div class="selected-equipment-item">
@@ -381,33 +381,33 @@
 
         {{!-- Right Panel: Summary --}}
         <div class="npc-summary">
-          <h3>{{localize "AOA.NPCCreation.Summary"}}</h3>
+          <h3>{{localize "WOR.NPCCreation.Summary"}}</h3>
 
           <div class="summary-section">
             <div class="summary-row">
-              <span class="summary-label">{{localize "AOA.NPC.Class.Label"}}:</span>
+              <span class="summary-label">{{localize "WOR.NPC.Class.Label"}}:</span>
               <span class="summary-value">{{npcSummary.npcClass}}</span>
             </div>
             <div class="summary-row">
-              <span class="summary-label">{{localize "AOA.NPC.Type.Label"}}:</span>
+              <span class="summary-label">{{localize "WOR.NPC.Type.Label"}}:</span>
               <span class="summary-value">{{npcSummary.npcType}}</span>
             </div>
             <div class="summary-row">
-              <span class="summary-label">{{localize "AOA.NPC.Tier.Label"}}:</span>
+              <span class="summary-label">{{localize "WOR.NPC.Tier.Label"}}:</span>
               <span class="summary-value">{{npcSummary.tier}} ({{npcSummary.tierName}})</span>
             </div>
             <div class="summary-row">
-              <span class="summary-label">{{localize "AOA.NPCCreation.BaseDicePool"}}:</span>
+              <span class="summary-label">{{localize "WOR.NPCCreation.BaseDicePool"}}:</span>
               <span class="summary-value">{{npcSummary.baseDicePool}}d6</span>
             </div>
           </div>
 
           <div class="summary-section">
-            <h4>{{localize "AOA.CharacterCreation.Step.Attributes"}}</h4>
+            <h4>{{localize "WOR.CharacterCreation.Step.Attributes"}}</h4>
             <div class="summary-attributes">
               {{#each npcSummary.attributes}}
               <div class="summary-attr">
-                <span class="attr-abbr">{{localize (concat "AOA.Attribute." (capitalize @key) ".abbr")}}</span>
+                <span class="attr-abbr">{{localize (concat "WOR.Attribute." (capitalize @key) ".abbr")}}</span>
                 <span class="attr-value">{{this}}</span>
               </div>
               {{/each}}
@@ -415,22 +415,22 @@
           </div>
 
           <div class="summary-section">
-            <h4>{{localize "AOA.Derived.Title"}}</h4>
+            <h4>{{localize "WOR.Derived.Title"}}</h4>
             <div class="summary-derived">
               <div class="derived-row">
-                <span>{{localize "AOA.Derived.Defense.label"}}:</span>
+                <span>{{localize "WOR.Derived.Defense.label"}}:</span>
                 <span>{{npcSummary.derived.defense}}</span>
               </div>
               <div class="derived-row">
-                <span>{{localize "AOA.Derived.Movement.label"}}:</span>
+                <span>{{localize "WOR.Derived.Movement.label"}}:</span>
                 <span>{{npcSummary.derived.movement}}</span>
               </div>
               <div class="derived-row">
-                <span>{{localize "AOA.Derived.MaxTrauma.label"}}:</span>
+                <span>{{localize "WOR.Derived.MaxTrauma.label"}}:</span>
                 <span>{{npcSummary.derived.maxTrauma}}</span>
               </div>
               <div class="derived-row">
-                <span>{{localize "AOA.Derived.Wounds.label"}}:</span>
+                <span>{{localize "WOR.Derived.Wounds.label"}}:</span>
                 <span>{{npcSummary.derived.wounds}}</span>
               </div>
             </div>
@@ -438,15 +438,15 @@
 
           <div class="summary-section">
             <div class="summary-row">
-              <span class="summary-label">{{localize "AOA.NPCCreation.Skills"}}:</span>
+              <span class="summary-label">{{localize "WOR.NPCCreation.Skills"}}:</span>
               <span class="summary-value">{{npcSummary.skillCount}}</span>
             </div>
             <div class="summary-row">
-              <span class="summary-label">{{localize "AOA.NPCCreation.Traits"}}:</span>
+              <span class="summary-label">{{localize "WOR.NPCCreation.Traits"}}:</span>
               <span class="summary-value">{{npcSummary.traitCount}} ({{npcSummary.traitPointsSpent}}/{{npcSummary.traitPointsTotal}} pts)</span>
             </div>
             <div class="summary-row">
-              <span class="summary-label">{{localize "AOA.NPCCreation.Equipment"}}:</span>
+              <span class="summary-label">{{localize "WOR.NPCCreation.Equipment"}}:</span>
               <span class="summary-value">{{npcSummary.equipmentCount}}</span>
             </div>
           </div>

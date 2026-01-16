@@ -35,7 +35,7 @@ export default class NPCTraitData extends ItemBaseData {
         "signature",    // Signature Grimdark Nastiness
         "typeTrait"     // Type-Specific Traits
       ],
-      label: "AOA.NPCTrait.Category"
+      label: "WOR.NPCTrait.Category"
     });
 
     // ========================================
@@ -50,7 +50,7 @@ export default class NPCTraitData extends ItemBaseData {
       }),
       {
         initial: [],
-        label: "AOA.NPCTrait.AllowedClasses"
+        label: "WOR.NPCTrait.AllowedClasses"
       }
     );
 
@@ -62,7 +62,7 @@ export default class NPCTraitData extends ItemBaseData {
       new fields.StringField({ required: true, blank: false }),
       {
         initial: [],
-        label: "AOA.NPCTrait.TypeSpecific"
+        label: "WOR.NPCTrait.TypeSpecific"
       }
     );
 
@@ -75,7 +75,7 @@ export default class NPCTraitData extends ItemBaseData {
       initial: 1,
       min: 0,
       max: 5,
-      label: "AOA.NPCTrait.Cost"
+      label: "WOR.NPCTrait.Cost"
     });
 
     // ========================================
@@ -88,14 +88,14 @@ export default class NPCTraitData extends ItemBaseData {
         initial: 0,
         min: 0,
         max: 6,
-        label: "AOA.NPCTrait.TierMin"
+        label: "WOR.NPCTrait.TierMin"
       }),
       max: new fields.NumberField({
         ...requiredInteger,
         initial: 6,
         min: 0,
         max: 6,
-        label: "AOA.NPCTrait.TierMax"
+        label: "WOR.NPCTrait.TierMax"
       })
     });
 
@@ -151,7 +151,7 @@ export default class NPCTraitData extends ItemBaseData {
           "oncePerFight",  // Once per combat
           "oncePerRound"   // Once per round
         ],
-        label: "AOA.NPCTrait.Trigger"
+        label: "WOR.NPCTrait.Trigger"
       }),
 
       // Applied conditions (debuffs applied to targets)
@@ -207,7 +207,7 @@ export default class NPCTraitData extends ItemBaseData {
       cooldown: new fields.StringField({
         required: false,
         blank: true,
-        label: "AOA.NPCTrait.Cooldown"
+        label: "WOR.NPCTrait.Cooldown"
       })
     });
 

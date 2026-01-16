@@ -1,66 +1,66 @@
 /**
  * The Weight of Ruin system configuration constants.
  */
-export const AOA = {};
+export const WOR = {};
 
 /**
  * The set of core Attributes used within the system.
  * @type {Object}
  */
-AOA.attributes = {
-  str: 'AOA.Attribute.Strength.long',
-  for: 'AOA.Attribute.Fortitude.long',
-  agi: 'AOA.Attribute.Agility.long',
-  awa: 'AOA.Attribute.Awareness.long',
-  res: 'AOA.Attribute.Resolve.long',
-  per: 'AOA.Attribute.Persona.long',
-  ing: 'AOA.Attribute.Ingenuity.long',
-  exp: 'AOA.Attribute.Expertise.long',
+WOR.attributes = {
+  str: 'WOR.Attribute.Strength.long',
+  for: 'WOR.Attribute.Fortitude.long',
+  agi: 'WOR.Attribute.Agility.long',
+  awa: 'WOR.Attribute.Awareness.long',
+  res: 'WOR.Attribute.Resolve.long',
+  per: 'WOR.Attribute.Persona.long',
+  ing: 'WOR.Attribute.Ingenuity.long',
+  exp: 'WOR.Attribute.Expertise.long',
 };
 
-AOA.attributeAbbreviations = {
-  str: 'AOA.Attribute.Strength.abbr',
-  for: 'AOA.Attribute.Fortitude.abbr',
-  agi: 'AOA.Attribute.Agility.abbr',
-  awa: 'AOA.Attribute.Awareness.abbr',
-  res: 'AOA.Attribute.Resolve.abbr',
-  per: 'AOA.Attribute.Persona.abbr',
-  ing: 'AOA.Attribute.Ingenuity.abbr',
-  exp: 'AOA.Attribute.Expertise.abbr',
+WOR.attributeAbbreviations = {
+  str: 'WOR.Attribute.Strength.abbr',
+  for: 'WOR.Attribute.Fortitude.abbr',
+  agi: 'WOR.Attribute.Agility.abbr',
+  awa: 'WOR.Attribute.Awareness.abbr',
+  res: 'WOR.Attribute.Resolve.abbr',
+  per: 'WOR.Attribute.Persona.abbr',
+  ing: 'WOR.Attribute.Ingenuity.abbr',
+  exp: 'WOR.Attribute.Expertise.abbr',
 };
 
 /**
  * Derived attributes calculated from core attributes.
  * @type {Object}
  */
-AOA.derivedAttributes = {
-  toughness: 'AOA.Derived.Toughness',
-  reflex: 'AOA.Derived.Reflex',
-  defense: 'AOA.Derived.Defense',
-  movement: 'AOA.Derived.Movement',
-  maxTrauma: 'AOA.Derived.MaxTrauma',
-  wounds: 'AOA.Derived.Wounds',
+WOR.derivedAttributes = {
+  toughness: 'WOR.Derived.Toughness',
+  reflex: 'WOR.Derived.Reflex',
+  defense: 'WOR.Derived.Defense',
+  movement: 'WOR.Derived.Movement',
+  maxTrauma: 'WOR.Derived.MaxTrauma',
+  wounds: 'WOR.Derived.Wounds',
   // Prowess (combat derived attributes)
-  weaponProwess: 'AOA.Derived.WeaponProwess',
-  ballisticProwess: 'AOA.Derived.BallisticProwess',
-  unarmedProwess: 'AOA.Derived.UnarmedProwess',
+  weaponProwess: 'WOR.Derived.WeaponProwess',
+  ballisticProwess: 'WOR.Derived.BallisticProwess',
+  unarmedProwess: 'WOR.Derived.UnarmedProwess',
 };
 
 /**
  * Difficulty tiers for Threshold Compression dice system.
  * @type {Object}
  */
-AOA.difficultyTiers = {
+WOR.difficultyTiers = {
   trivial: {
-    label: 'AOA.Difficulty.Trivial',
+    label: 'WOR.Difficulty.Trivial',
     threshold: 4, // Hits on 4, 5, 6
   },
   standard: {
-    label: 'AOA.Difficulty.Standard',
+    label: 'WOR.Difficulty.Standard',
     threshold: 5, // Hits on 5, 6
   },
   hard: {
-    label: 'AOA.Difficulty.Hard',
+    label: 'WOR.Difficulty.Hard',
     threshold: 6, // Hits on 6 only
   },
 };
@@ -69,62 +69,62 @@ AOA.difficultyTiers = {
  * Target Threshold challenge levels.
  * @type {Object}
  */
-AOA.targetThresholds = {
-  1: 'AOA.TT.Simple',
-  2: 'AOA.TT.Moderate',
-  3: 'AOA.TT.Challenging',
-  4: 'AOA.TT.Difficult',
-  5: 'AOA.TT.Exceptional',
-  6: 'AOA.TT.Legendary',
+WOR.targetThresholds = {
+  1: 'WOR.TT.Simple',
+  2: 'WOR.TT.Moderate',
+  3: 'WOR.TT.Challenging',
+  4: 'WOR.TT.Difficult',
+  5: 'WOR.TT.Exceptional',
+  6: 'WOR.TT.Legendary',
 };
 
 /**
  * Skill categories.
  * @type {Object}
  */
-AOA.skillCategories = {
-  martial: 'AOA.SkillCategory.Martial',
-  physical: 'AOA.SkillCategory.Physical',
-  social: 'AOA.SkillCategory.Social',
-  knowledge: 'AOA.SkillCategory.Knowledge',
-  craft: 'AOA.SkillCategory.Craft',
-  thaumaturgy: 'AOA.SkillCategory.Thaumaturgy',
+WOR.skillCategories = {
+  martial: 'WOR.SkillCategory.Martial',
+  physical: 'WOR.SkillCategory.Physical',
+  social: 'WOR.SkillCategory.Social',
+  knowledge: 'WOR.SkillCategory.Knowledge',
+  craft: 'WOR.SkillCategory.Craft',
+  thaumaturgy: 'WOR.SkillCategory.Thaumaturgy',
 };
 
 /**
  * Actor types.
  * @type {Object}
  */
-AOA.actorTypes = {
-  character: 'AOA.ActorType.Character',
-  npc: 'AOA.ActorType.NPC',
-  creature: 'AOA.ActorType.Creature',
+WOR.actorTypes = {
+  character: 'WOR.ActorType.Character',
+  npc: 'WOR.ActorType.NPC',
+  creature: 'WOR.ActorType.Creature',
 };
 
 /**
  * Item types.
  * @type {Object}
  */
-AOA.itemTypes = {
-  skill: 'AOA.ItemType.Skill',
-  talent: 'AOA.ItemType.Talent',
-  weapon: 'AOA.ItemType.Weapon',
-  armor: 'AOA.ItemType.Armor',
-  gear: 'AOA.ItemType.Gear',
-  spell: 'AOA.ItemType.Spell',
-  ritual: 'AOA.ItemType.Ritual',
-  lineage: 'AOA.ItemType.Lineage',
-  background: 'AOA.ItemType.Background',
-  archetype: 'AOA.ItemType.Archetype',
-  pathway: 'AOA.ItemType.Pathway',
-  lifeEvent: 'AOA.ItemType.LifeEvent',
+WOR.itemTypes = {
+  skill: 'WOR.ItemType.Skill',
+  talent: 'WOR.ItemType.Talent',
+  weapon: 'WOR.ItemType.Weapon',
+  armor: 'WOR.ItemType.Armor',
+  gear: 'WOR.ItemType.Gear',
+  spell: 'WOR.ItemType.Spell',
+  ritual: 'WOR.ItemType.Ritual',
+  lineage: 'WOR.ItemType.Lineage',
+  background: 'WOR.ItemType.Background',
+  archetype: 'WOR.ItemType.Archetype',
+  pathway: 'WOR.ItemType.Pathway',
+  lifeEvent: 'WOR.ItemType.LifeEvent',
 };
 
 /**
  * Zeal spending costs.
  * @type {Object}
  */
-AOA.zealCosts = {
+WOR.zealCosts = {
   difficultyShift: 1,
   reroll: 2,
   bonusDice: 3,
@@ -135,26 +135,26 @@ AOA.zealCosts = {
  * Lineages available in the system.
  * @type {Object}
  */
-AOA.lineages = {
-  human: 'AOA.Lineage.Human',
-  dwarf: 'AOA.Lineage.Dwarf',
-  elf: 'AOA.Lineage.Elf',
-  changeling: 'AOA.Lineage.Changeling',
-  undine: 'AOA.Lineage.Undine',
-  helskari: 'AOA.Lineage.Helskari',
-  jadwiga: 'AOA.Lineage.Jadwiga',
+WOR.lineages = {
+  human: 'WOR.Lineage.Human',
+  dwarf: 'WOR.Lineage.Dwarf',
+  elf: 'WOR.Lineage.Elf',
+  changeling: 'WOR.Lineage.Changeling',
+  undine: 'WOR.Lineage.Undine',
+  helskari: 'WOR.Lineage.Helskari',
+  jadwiga: 'WOR.Lineage.Jadwiga',
 };
 
 /**
  * Archetypes available in the system.
  * @type {Object}
  */
-AOA.archetypes = {
-  zealot: 'AOA.Archetype.Zealot',
-  thaumaturge: 'AOA.Archetype.Thaumaturge',
-  warrior: 'AOA.Archetype.Warrior',
-  rogue: 'AOA.Archetype.Rogue',
-  sage: 'AOA.Archetype.Sage',
+WOR.archetypes = {
+  zealot: 'WOR.Archetype.Zealot',
+  thaumaturge: 'WOR.Archetype.Thaumaturge',
+  warrior: 'WOR.Archetype.Warrior',
+  rogue: 'WOR.Archetype.Rogue',
+  sage: 'WOR.Archetype.Sage',
 };
 
 /**
@@ -162,7 +162,7 @@ AOA.archetypes = {
  * Each lineage has primary and secondary colors for frames and accents.
  * @type {Object}
  */
-AOA.lineageColors = {
+WOR.lineageColors = {
   human: {
     primary: '#c4a35a',      // Gamboge (Tarnished Gold)
     secondary: '#8b7355',    // Dusty bronze
@@ -205,7 +205,7 @@ AOA.lineageColors = {
  * Each archetype has primary and secondary colors for frames and accents.
  * @type {Object}
  */
-AOA.archetypeColors = {
+WOR.archetypeColors = {
   zealot: {
     primary: '#e8e4d9',     // Bone White
     secondary: '#c9b896',   // Pale Gold
@@ -237,37 +237,37 @@ AOA.archetypeColors = {
  * Pathways available in the system.
  * @type {Object}
  */
-AOA.pathways = {
-  apprenticeship: 'AOA.Pathway.Apprenticeship',
-  militaryService: 'AOA.Pathway.MilitaryService',
-  academicStudy: 'AOA.Pathway.AcademicStudy',
-  streetSurvival: 'AOA.Pathway.StreetSurvival',
-  spiritualCalling: 'AOA.Pathway.SpiritualCalling',
-  wandering: 'AOA.Pathway.Wandering',
+WOR.pathways = {
+  apprenticeship: 'WOR.Pathway.Apprenticeship',
+  militaryService: 'WOR.Pathway.MilitaryService',
+  academicStudy: 'WOR.Pathway.AcademicStudy',
+  streetSurvival: 'WOR.Pathway.StreetSurvival',
+  spiritualCalling: 'WOR.Pathway.SpiritualCalling',
+  wandering: 'WOR.Pathway.Wandering',
 };
 
 /**
  * Economic tiers for backgrounds.
  * @type {Object}
  */
-AOA.economicTiers = {
-  upper: 'AOA.EconomicTier.Upper',
-  middle: 'AOA.EconomicTier.Middle',
-  lower: 'AOA.EconomicTier.Lower',
-  struggling: 'AOA.EconomicTier.Struggling',
+WOR.economicTiers = {
+  upper: 'WOR.EconomicTier.Upper',
+  middle: 'WOR.EconomicTier.Middle',
+  lower: 'WOR.EconomicTier.Lower',
+  struggling: 'WOR.EconomicTier.Struggling',
 };
 
 /**
  * Social standings - determines skill ranks and societal perception.
  * @type {Object}
  */
-AOA.socialStandings = {
-  exalted: 'AOA.SocialStanding.Exalted',
-  ordained: 'AOA.SocialStanding.Ordained',
-  anointed: 'AOA.SocialStanding.Anointed',
-  penitent: 'AOA.SocialStanding.Penitent',
-  heretics: 'AOA.SocialStanding.Heretics',
-  outcast: 'AOA.SocialStanding.Outcast',
+WOR.socialStandings = {
+  exalted: 'WOR.SocialStanding.Exalted',
+  ordained: 'WOR.SocialStanding.Ordained',
+  anointed: 'WOR.SocialStanding.Anointed',
+  penitent: 'WOR.SocialStanding.Penitent',
+  heretics: 'WOR.SocialStanding.Heretics',
+  outcast: 'WOR.SocialStanding.Outcast',
 };
 
 /**
@@ -275,7 +275,7 @@ AOA.socialStandings = {
  * Those outside society's grace have learned more through necessity.
  * @type {Object}
  */
-AOA.socialStandingSkillRanks = {
+WOR.socialStandingSkillRanks = {
   exalted: 18,    // Specialized education; servants handle menial tasks
   ordained: 24,   // Religious training; focused devotion limits breadth
   anointed: 30,   // Professional competence; guild training with practical scope
@@ -288,22 +288,22 @@ AOA.socialStandingSkillRanks = {
  * Magic traditions.
  * @type {Object}
  */
-AOA.magicTraditions = {
-  sorcery: 'AOA.Magic.Sorcery',
-  ritefocus: 'AOA.Magic.Ritefocus',
-  necromancy: 'AOA.Magic.Necromancy',
+WOR.magicTraditions = {
+  sorcery: 'WOR.Magic.Sorcery',
+  ritefocus: 'WOR.Magic.Ritefocus',
+  necromancy: 'WOR.Magic.Necromancy',
 };
 
 /**
  * Sorcery techniques.
  * @type {Object}
  */
-AOA.sorceryTechniques = {
-  create: 'AOA.Sorcery.Technique.Create',
-  perceive: 'AOA.Sorcery.Technique.Perceive',
-  transform: 'AOA.Sorcery.Technique.Transform',
-  destroy: 'AOA.Sorcery.Technique.Destroy',
-  control: 'AOA.Sorcery.Technique.Control',
+WOR.sorceryTechniques = {
+  create: 'WOR.Sorcery.Technique.Create',
+  perceive: 'WOR.Sorcery.Technique.Perceive',
+  transform: 'WOR.Sorcery.Technique.Transform',
+  destroy: 'WOR.Sorcery.Technique.Destroy',
+  control: 'WOR.Sorcery.Technique.Control',
 };
 
 /**
@@ -318,11 +318,11 @@ AOA.sorceryTechniques = {
  * - flags: Special handling flags
  * @type {Object}
  */
-AOA.conditions = {
+WOR.conditions = {
   bleeding: {
     id: 'bleeding',
-    label: 'AOA.Condition.Bleeding.label',
-    description: 'AOA.Condition.Bleeding.Desc',
+    label: 'WOR.Condition.Bleeding.label',
+    description: 'WOR.Condition.Bleeding.Desc',
     icon: 'icons/svg/blood.svg',
     effects: [],
     modifiers: {},
@@ -332,8 +332,8 @@ AOA.conditions = {
   },
   blinded: {
     id: 'blinded',
-    label: 'AOA.Condition.Blinded.label',
-    description: 'AOA.Condition.Blinded.Desc',
+    label: 'WOR.Condition.Blinded.label',
+    description: 'WOR.Condition.Blinded.Desc',
     icon: 'icons/svg/blind.svg',
     effects: [],
     modifiers: {
@@ -346,8 +346,8 @@ AOA.conditions = {
   },
   charmed: {
     id: 'charmed',
-    label: 'AOA.Condition.Charmed.label',
-    description: 'AOA.Condition.Charmed.Desc',
+    label: 'WOR.Condition.Charmed.label',
+    description: 'WOR.Condition.Charmed.Desc',
     icon: 'icons/svg/aura.svg',
     effects: [],
     modifiers: {},
@@ -358,8 +358,8 @@ AOA.conditions = {
   },
   deafened: {
     id: 'deafened',
-    label: 'AOA.Condition.Deafened.label',
-    description: 'AOA.Condition.Deafened.Desc',
+    label: 'WOR.Condition.Deafened.label',
+    description: 'WOR.Condition.Deafened.Desc',
     icon: 'icons/svg/deaf.svg',
     effects: [],
     modifiers: {
@@ -371,8 +371,8 @@ AOA.conditions = {
   },
   defenseless: {
     id: 'defenseless',
-    label: 'AOA.Condition.Defenseless.label',
-    description: 'AOA.Condition.Defenseless.Desc',
+    label: 'WOR.Condition.Defenseless.label',
+    description: 'WOR.Condition.Defenseless.Desc',
     icon: 'icons/svg/paralysis.svg',
     effects: [],
     modifiers: {},
@@ -382,8 +382,8 @@ AOA.conditions = {
   },
   exhausted: {
     id: 'exhausted',
-    label: 'AOA.Condition.Exhausted.label',
-    description: 'AOA.Condition.Exhausted.Desc',
+    label: 'WOR.Condition.Exhausted.label',
+    description: 'WOR.Condition.Exhausted.Desc',
     icon: 'icons/svg/sleep.svg',
     effects: [
       { key: 'system.movementMod', mode: 1, value: 0.5 } // Half movement (multiply by 0.5)
@@ -395,8 +395,8 @@ AOA.conditions = {
   },
   flanked: {
     id: 'flanked',
-    label: 'AOA.Condition.Flanked.label',
-    description: 'AOA.Condition.Flanked.Desc',
+    label: 'WOR.Condition.Flanked.label',
+    description: 'WOR.Condition.Flanked.Desc',
     icon: 'icons/svg/target.svg',
     effects: [],
     modifiers: {},
@@ -406,8 +406,8 @@ AOA.conditions = {
   },
   frightened: {
     id: 'frightened',
-    label: 'AOA.Condition.Frightened.label',
-    description: 'AOA.Condition.Frightened.Desc',
+    label: 'WOR.Condition.Frightened.label',
+    description: 'WOR.Condition.Frightened.Desc',
     icon: 'icons/svg/terror.svg',
     effects: [],
     modifiers: {
@@ -419,8 +419,8 @@ AOA.conditions = {
   },
   grappled: {
     id: 'grappled',
-    label: 'AOA.Condition.Grappled.label',
-    description: 'AOA.Condition.Grappled.Desc',
+    label: 'WOR.Condition.Grappled.label',
+    description: 'WOR.Condition.Grappled.Desc',
     icon: 'icons/svg/net.svg',
     effects: [
       { key: 'system.movementMod', mode: 5, value: 0 } // Movement becomes 0 (override)
@@ -434,8 +434,8 @@ AOA.conditions = {
   },
   hidden: {
     id: 'hidden',
-    label: 'AOA.Condition.Hidden.label',
-    description: 'AOA.Condition.Hidden.Desc',
+    label: 'WOR.Condition.Hidden.label',
+    description: 'WOR.Condition.Hidden.Desc',
     icon: 'icons/svg/invisible.svg',
     effects: [],
     modifiers: {
@@ -448,8 +448,8 @@ AOA.conditions = {
   },
   poisoned: {
     id: 'poisoned',
-    label: 'AOA.Condition.Poisoned.label',
-    description: 'AOA.Condition.Poisoned.Desc',
+    label: 'WOR.Condition.Poisoned.label',
+    description: 'WOR.Condition.Poisoned.Desc',
     icon: 'icons/svg/poison.svg',
     effects: [],
     modifiers: {
@@ -461,8 +461,8 @@ AOA.conditions = {
   },
   prone: {
     id: 'prone',
-    label: 'AOA.Condition.Prone.label',
-    description: 'AOA.Condition.Prone.Desc',
+    label: 'WOR.Condition.Prone.label',
+    description: 'WOR.Condition.Prone.Desc',
     icon: 'icons/svg/falling.svg',
     effects: [],
     modifiers: {
@@ -475,8 +475,8 @@ AOA.conditions = {
   },
   restrained: {
     id: 'restrained',
-    label: 'AOA.Condition.Restrained.label',
-    description: 'AOA.Condition.Restrained.Desc',
+    label: 'WOR.Condition.Restrained.label',
+    description: 'WOR.Condition.Restrained.Desc',
     icon: 'icons/svg/padlock.svg',
     effects: [
       { key: 'system.movementMod', mode: 5, value: 0 } // Movement becomes 0
@@ -491,8 +491,8 @@ AOA.conditions = {
   },
   stunned: {
     id: 'stunned',
-    label: 'AOA.Condition.Stunned.label',
-    description: 'AOA.Condition.Stunned.Desc',
+    label: 'WOR.Condition.Stunned.label',
+    description: 'WOR.Condition.Stunned.Desc',
     icon: 'icons/svg/daze.svg',
     effects: [],
     modifiers: {
@@ -504,8 +504,8 @@ AOA.conditions = {
   },
   unconscious: {
     id: 'unconscious',
-    label: 'AOA.Condition.Unconscious.label',
-    description: 'AOA.Condition.Unconscious.Desc',
+    label: 'WOR.Condition.Unconscious.label',
+    description: 'WOR.Condition.Unconscious.Desc',
     icon: 'icons/svg/unconscious.svg',
     effects: [
       { key: 'system.movementMod', mode: 5, value: 0 }
@@ -519,8 +519,8 @@ AOA.conditions = {
   },
   dying: {
     id: 'dying',
-    label: 'AOA.Condition.Dying.label',
-    description: 'AOA.Condition.Dying.Desc',
+    label: 'WOR.Condition.Dying.label',
+    description: 'WOR.Condition.Dying.Desc',
     icon: 'systems/weight-of-ruin/assets/icons/dying.svg',
     effects: [],
     modifiers: {},
@@ -532,8 +532,8 @@ AOA.conditions = {
   },
   dead: {
     id: 'dead',
-    label: 'AOA.Condition.Dead.label',
-    description: 'AOA.Condition.Dead.Desc',
+    label: 'WOR.Condition.Dead.label',
+    description: 'WOR.Condition.Dead.Desc',
     icon: 'icons/svg/skull.svg',
     effects: [],
     modifiers: {},
@@ -550,8 +550,8 @@ AOA.conditions = {
 
   staggered: {
     id: 'staggered',
-    label: 'AOA.Condition.Staggered.label',
-    description: 'AOA.Condition.Staggered.Desc',
+    label: 'WOR.Condition.Staggered.label',
+    description: 'WOR.Condition.Staggered.Desc',
     icon: 'systems/weight-of-ruin/assets/icons/staggered.svg',
     effects: [],
     modifiers: {},
@@ -561,8 +561,8 @@ AOA.conditions = {
   },
   slowed: {
     id: 'slowed',
-    label: 'AOA.Condition.Slowed.label',
-    description: 'AOA.Condition.Slowed.Desc',
+    label: 'WOR.Condition.Slowed.label',
+    description: 'WOR.Condition.Slowed.Desc',
     icon: 'icons/svg/anchor.svg',
     effects: [
       { key: 'system.movementMod', mode: 1, value: 0.5 } // Half movement (multiply by 0.5)
@@ -574,8 +574,8 @@ AOA.conditions = {
   },
   weakened: {
     id: 'weakened',
-    label: 'AOA.Condition.Weakened.label',
-    description: 'AOA.Condition.Weakened.Desc',
+    label: 'WOR.Condition.Weakened.label',
+    description: 'WOR.Condition.Weakened.Desc',
     icon: 'icons/svg/downgrade.svg',
     effects: [],
     modifiers: {
@@ -585,8 +585,8 @@ AOA.conditions = {
   },
   shaken: {
     id: 'shaken',
-    label: 'AOA.Condition.Shaken.label',
-    description: 'AOA.Condition.Shaken.Desc',
+    label: 'WOR.Condition.Shaken.label',
+    description: 'WOR.Condition.Shaken.Desc',
     icon: 'systems/weight-of-ruin/assets/icons/shaken.svg',
     effects: [],
     modifiers: {
@@ -596,8 +596,8 @@ AOA.conditions = {
   },
   numb: {
     id: 'numb',
-    label: 'AOA.Condition.Numb.label',
-    description: 'AOA.Condition.Numb.Desc',
+    label: 'WOR.Condition.Numb.label',
+    description: 'WOR.Condition.Numb.Desc',
     icon: 'icons/svg/ice-aura.svg',
     effects: [],
     modifiers: {},
@@ -608,8 +608,8 @@ AOA.conditions = {
   },
   marked: {
     id: 'marked',
-    label: 'AOA.Condition.Marked.label',
-    description: 'AOA.Condition.Marked.Desc',
+    label: 'WOR.Condition.Marked.label',
+    description: 'WOR.Condition.Marked.Desc',
     icon: 'icons/svg/target.svg',
     effects: [],
     modifiers: {},
@@ -619,8 +619,8 @@ AOA.conditions = {
   },
   tethered: {
     id: 'tethered',
-    label: 'AOA.Condition.Tethered.label',
-    description: 'AOA.Condition.Tethered.Desc',
+    label: 'WOR.Condition.Tethered.label',
+    description: 'WOR.Condition.Tethered.Desc',
     icon: 'icons/svg/circle.svg',
     effects: [],
     modifiers: {},
@@ -636,72 +636,72 @@ AOA.conditions = {
  * Each property defines mechanical effects for combat.
  * @type {Object}
  */
-AOA.weaponProperties = {
+WOR.weaponProperties = {
   concealable: {
-    label: 'AOA.WeaponProperty.Concealable.label',
-    description: 'AOA.WeaponProperty.Concealable.Desc',
+    label: 'WOR.WeaponProperty.Concealable.label',
+    description: 'WOR.WeaponProperty.Concealable.Desc',
     modifier: { skill: 'stealth', bonus: 2 }
   },
   finesse: {
-    label: 'AOA.WeaponProperty.Finesse.label',
-    description: 'AOA.WeaponProperty.Finesse.Desc',
+    label: 'WOR.WeaponProperty.Finesse.label',
+    description: 'WOR.WeaponProperty.Finesse.Desc',
     allowAgility: true,
     agilityBonus: 1
   },
   heavy: {
-    label: 'AOA.WeaponProperty.Heavy.label',
-    description: 'AOA.WeaponProperty.Heavy.Desc',
+    label: 'WOR.WeaponProperty.Heavy.label',
+    description: 'WOR.WeaponProperty.Heavy.Desc',
     strengthDamageBonus: 1
   },
   light: {
-    label: 'AOA.WeaponProperty.Light.label',
-    description: 'AOA.WeaponProperty.Light.Desc',
+    label: 'WOR.WeaponProperty.Light.label',
+    description: 'WOR.WeaponProperty.Light.Desc',
     allowDualWield: true,
     allowAgility: true
   },
   loading: {
-    label: 'AOA.WeaponProperty.Loading.label',
-    description: 'AOA.WeaponProperty.Loading.Desc',
+    label: 'WOR.WeaponProperty.Loading.label',
+    description: 'WOR.WeaponProperty.Loading.Desc',
     requiresReload: true
   },
   reach: {
-    label: 'AOA.WeaponProperty.Reach.label',
-    description: 'AOA.WeaponProperty.Reach.Desc',
+    label: 'WOR.WeaponProperty.Reach.label',
+    description: 'WOR.WeaponProperty.Reach.Desc',
     reachSpaces: 2,
     noAdjacent: true
   },
   thrown: {
-    label: 'AOA.WeaponProperty.Thrown.label',
-    description: 'AOA.WeaponProperty.Thrown.Desc',
+    label: 'WOR.WeaponProperty.Thrown.label',
+    description: 'WOR.WeaponProperty.Thrown.Desc',
     canThrow: true
   },
   trip: {
-    label: 'AOA.WeaponProperty.Trip.label',
-    description: 'AOA.WeaponProperty.Trip.Desc',
+    label: 'WOR.WeaponProperty.Trip.label',
+    description: 'WOR.WeaponProperty.Trip.Desc',
     tripOnHit: true
   },
   twoHanded: {
-    label: 'AOA.WeaponProperty.TwoHanded.label',
-    description: 'AOA.WeaponProperty.TwoHanded.Desc',
+    label: 'WOR.WeaponProperty.TwoHanded.label',
+    description: 'WOR.WeaponProperty.TwoHanded.Desc',
     hands: 2
   },
   versatile: {
-    label: 'AOA.WeaponProperty.Versatile.label',
-    description: 'AOA.WeaponProperty.Versatile.Desc',
+    label: 'WOR.WeaponProperty.Versatile.label',
+    description: 'WOR.WeaponProperty.Versatile.Desc',
     twoHandedDamageBonus: 1
   },
   wounding: {
-    label: 'AOA.WeaponProperty.Wounding.label',
-    description: 'AOA.WeaponProperty.Wounding.Desc',
+    label: 'WOR.WeaponProperty.Wounding.label',
+    description: 'WOR.WeaponProperty.Wounding.Desc',
     bleedOnCrit: true
   },
   balanced: {
-    label: 'AOA.WeaponProperty.Balanced.label',
-    description: 'AOA.WeaponProperty.Balanced.Desc'
+    label: 'WOR.WeaponProperty.Balanced.label',
+    description: 'WOR.WeaponProperty.Balanced.Desc'
   },
   precise: {
-    label: 'AOA.WeaponProperty.Precise.label',
-    description: 'AOA.WeaponProperty.Precise.Desc'
+    label: 'WOR.WeaponProperty.Precise.label',
+    description: 'WOR.WeaponProperty.Precise.Desc'
   }
 };
 
@@ -709,46 +709,46 @@ AOA.weaponProperties = {
  * Weapon groups/categories for proficiency and classification.
  * @type {Object}
  */
-AOA.weaponGroups = {
-  dagger: 'AOA.WeaponGroup.Dagger',
-  sword: 'AOA.WeaponGroup.Sword',
-  axe: 'AOA.WeaponGroup.Axe',
-  blunt: 'AOA.WeaponGroup.Blunt',
-  polearm: 'AOA.WeaponGroup.Polearm',
-  bow: 'AOA.WeaponGroup.Bow',
-  crossbow: 'AOA.WeaponGroup.Crossbow',
-  thrown: 'AOA.WeaponGroup.Thrown',
-  unarmed: 'AOA.WeaponGroup.Unarmed'
+WOR.weaponGroups = {
+  dagger: 'WOR.WeaponGroup.Dagger',
+  sword: 'WOR.WeaponGroup.Sword',
+  axe: 'WOR.WeaponGroup.Axe',
+  blunt: 'WOR.WeaponGroup.Blunt',
+  polearm: 'WOR.WeaponGroup.Polearm',
+  bow: 'WOR.WeaponGroup.Bow',
+  crossbow: 'WOR.WeaponGroup.Crossbow',
+  thrown: 'WOR.WeaponGroup.Thrown',
+  unarmed: 'WOR.WeaponGroup.Unarmed'
 };
 
 /**
  * Weapon quality levels affecting attack dice and cost.
  * @type {Object}
  */
-AOA.weaponQuality = {
+WOR.weaponQuality = {
   poor: {
-    label: 'AOA.Quality.Poor',
+    label: 'WOR.Quality.Poor',
     attackModifier: -1,
     costMultiplier: 0.5,
     breaksOnCritFail: true
   },
   standard: {
-    label: 'AOA.Quality.Standard',
+    label: 'WOR.Quality.Standard',
     attackModifier: 0,
     costMultiplier: 1
   },
   fine: {
-    label: 'AOA.Quality.Fine',
+    label: 'WOR.Quality.Fine',
     attackModifier: 1,
     costMultiplier: 3
   },
   superior: {
-    label: 'AOA.Quality.Superior',
+    label: 'WOR.Quality.Superior',
     attackModifier: 2,
     costMultiplier: 5
   },
   masterwork: {
-    label: 'AOA.Quality.Masterwork',
+    label: 'WOR.Quality.Masterwork',
     attackModifier: 3,
     costMultiplier: 10
   }
@@ -758,36 +758,36 @@ AOA.weaponQuality = {
  * Armor properties from wor_core Section 8.3.
  * @type {Object}
  */
-AOA.armorProperties = {
+WOR.armorProperties = {
   encumbering: {
-    label: 'AOA.ArmorProperty.Encumbering.label',
-    description: 'AOA.ArmorProperty.Encumbering.Desc',
+    label: 'WOR.ArmorProperty.Encumbering.label',
+    description: 'WOR.ArmorProperty.Encumbering.Desc',
     agilityPenalty: -1, // Per level (0-3)
     affectsSkills: ['acrobatics', 'stealth', 'swim']
   },
   noisy: {
-    label: 'AOA.ArmorProperty.Noisy.label',
-    description: 'AOA.ArmorProperty.Noisy.Desc',
+    label: 'WOR.ArmorProperty.Noisy.label',
+    description: 'WOR.ArmorProperty.Noisy.Desc',
     stealthPenalty: -2
   },
   insulating: {
-    label: 'AOA.ArmorProperty.Insulating.label',
-    description: 'AOA.ArmorProperty.Insulating.Desc',
+    label: 'WOR.ArmorProperty.Insulating.label',
+    description: 'WOR.ArmorProperty.Insulating.Desc',
     coldResistanceBonus: 2
   },
   flexible: {
-    label: 'AOA.ArmorProperty.Flexible.label',
-    description: 'AOA.ArmorProperty.Flexible.Desc',
+    label: 'WOR.ArmorProperty.Flexible.label',
+    description: 'WOR.ArmorProperty.Flexible.Desc',
     encumberingReduction: 1
   },
   cumbersome: {
-    label: 'AOA.ArmorProperty.Cumbersome.label',
-    description: 'AOA.ArmorProperty.Cumbersome.Desc',
+    label: 'WOR.ArmorProperty.Cumbersome.label',
+    description: 'WOR.ArmorProperty.Cumbersome.Desc',
     movementPenalty: -1
   },
   bulky: {
-    label: 'AOA.ArmorProperty.Bulky.label',
-    description: 'AOA.ArmorProperty.Bulky.Desc',
+    label: 'WOR.ArmorProperty.Bulky.label',
+    description: 'WOR.ArmorProperty.Bulky.Desc',
     cannotConceal: true
   }
 };
@@ -796,47 +796,47 @@ AOA.armorProperties = {
  * Armor categories for classification and layering rules.
  * @type {Object}
  */
-AOA.armorCategories = {
-  none: 'AOA.ArmorCategory.None',
-  quilted: 'AOA.ArmorCategory.Quilted',
-  mail: 'AOA.ArmorCategory.Mail',
-  composite: 'AOA.ArmorCategory.Composite',
-  scale: 'AOA.ArmorCategory.Scale',
-  plate: 'AOA.ArmorCategory.Plate',
-  shield: 'AOA.ArmorCategory.Shield'
+WOR.armorCategories = {
+  none: 'WOR.ArmorCategory.None',
+  quilted: 'WOR.ArmorCategory.Quilted',
+  mail: 'WOR.ArmorCategory.Mail',
+  composite: 'WOR.ArmorCategory.Composite',
+  scale: 'WOR.ArmorCategory.Scale',
+  plate: 'WOR.ArmorCategory.Plate',
+  shield: 'WOR.ArmorCategory.Shield'
 };
 
 /**
  * Armor quality levels affecting DR and encumbering.
  * @type {Object}
  */
-AOA.armorQuality = {
+WOR.armorQuality = {
   poor: {
-    label: 'AOA.Quality.Poor',
+    label: 'WOR.Quality.Poor',
     drModifier: -1,
     encumberingReduction: 0,
     costMultiplier: 0.5
   },
   standard: {
-    label: 'AOA.Quality.Standard',
+    label: 'WOR.Quality.Standard',
     drModifier: 0,
     encumberingReduction: 0,
     costMultiplier: 1
   },
   fine: {
-    label: 'AOA.Quality.Fine',
+    label: 'WOR.Quality.Fine',
     drModifier: 0,
     encumberingReduction: 1,
     costMultiplier: 3
   },
   superior: {
-    label: 'AOA.Quality.Superior',
+    label: 'WOR.Quality.Superior',
     drModifier: 1,
     encumberingReduction: 1,
     costMultiplier: 5
   },
   masterwork: {
-    label: 'AOA.Quality.Masterwork',
+    label: 'WOR.Quality.Masterwork',
     drModifier: 2,
     encumberingReduction: 2,
     costMultiplier: 10
@@ -847,11 +847,11 @@ AOA.armorQuality = {
  * Item rarity levels.
  * @type {Object}
  */
-AOA.itemRarity = {
-  common: 'AOA.Rarity.Common',
-  uncommon: 'AOA.Rarity.Uncommon',
-  rare: 'AOA.Rarity.Rare',
-  exotic: 'AOA.Rarity.Exotic'
+WOR.itemRarity = {
+  common: 'WOR.Rarity.Common',
+  uncommon: 'WOR.Rarity.Uncommon',
+  rare: 'WOR.Rarity.Rare',
+  exotic: 'WOR.Rarity.Exotic'
 };
 
 // ========================================
@@ -863,13 +863,13 @@ AOA.itemRarity = {
  * Defines creature types and their specific forms.
  * @type {Object}
  */
-AOA.npcKinds = {
+WOR.npcKinds = {
   humanoid: {
-    label: 'AOA.NPC.Kind.Humanoid',
+    label: 'WOR.NPC.Kind.Humanoid',
     forms: ['human', 'dwarf', 'elf', 'undine', 'changeling', 'helskari', 'jadwiga', 'goblin', 'ogre', 'troll']
   },
   beast: {
-    label: 'AOA.NPC.Kind.Beast',
+    label: 'WOR.NPC.Kind.Beast',
     forms: [
       'ape', 'badger', 'bat', 'bear', 'beaver', 'bull', 'camel', 'cat', 'cobra', 'crocodile',
       'doe', 'dog', 'dolphin', 'elephant', 'elk', 'falcon', 'fox', 'hawk', 'horse', 'leopard',
@@ -877,19 +877,19 @@ AOA.npcKinds = {
     ]
   },
   vermin: {
-    label: 'AOA.NPC.Kind.Vermin',
+    label: 'WOR.NPC.Kind.Vermin',
     forms: ['ant', 'beetle', 'cockroach', 'grub', 'leech', 'locust', 'maggot', 'mite', 'scorpion', 'spider', 'termite', 'tick', 'worm']
   },
   afflicted: {
-    label: 'AOA.NPC.Kind.Afflicted',
+    label: 'WOR.NPC.Kind.Afflicted',
     forms: ['blighted', 'ghul', 'revenant', 'vampire', 'vargin', 'wight', 'werewolf', 'wendigo']
   },
   apparition: {
-    label: 'AOA.NPC.Kind.Apparition',
+    label: 'WOR.NPC.Kind.Apparition',
     forms: ['banshee', 'phantom', 'sprite', 'wraith']
   },
   fiend: {
-    label: 'AOA.NPC.Kind.Fiend',
+    label: 'WOR.NPC.Kind.Fiend',
     forms: ['demon', 'hellhound', 'imp', 'incubus', 'jinn', 'succubus']
   }
 };
@@ -898,83 +898,83 @@ AOA.npcKinds = {
  * NPC Form labels for localization.
  * @type {Object}
  */
-AOA.npcForms = {
+WOR.npcForms = {
   // Humanoid
-  human: 'AOA.NPC.Form.Human',
-  dwarf: 'AOA.NPC.Form.Dwarf',
-  elf: 'AOA.NPC.Form.Elf',
-  undine: 'AOA.NPC.Form.Undine',
-  changeling: 'AOA.NPC.Form.Changeling',
-  helskari: 'AOA.NPC.Form.Helskari',
-  jadwiga: 'AOA.NPC.Form.Jadwiga',
-  goblin: 'AOA.NPC.Form.Goblin',
-  ogre: 'AOA.NPC.Form.Ogre',
-  troll: 'AOA.NPC.Form.Troll',
+  human: 'WOR.NPC.Form.Human',
+  dwarf: 'WOR.NPC.Form.Dwarf',
+  elf: 'WOR.NPC.Form.Elf',
+  undine: 'WOR.NPC.Form.Undine',
+  changeling: 'WOR.NPC.Form.Changeling',
+  helskari: 'WOR.NPC.Form.Helskari',
+  jadwiga: 'WOR.NPC.Form.Jadwiga',
+  goblin: 'WOR.NPC.Form.Goblin',
+  ogre: 'WOR.NPC.Form.Ogre',
+  troll: 'WOR.NPC.Form.Troll',
   // Beast
-  ape: 'AOA.NPC.Form.Ape',
-  badger: 'AOA.NPC.Form.Badger',
-  bat: 'AOA.NPC.Form.Bat',
-  bear: 'AOA.NPC.Form.Bear',
-  beaver: 'AOA.NPC.Form.Beaver',
-  bull: 'AOA.NPC.Form.Bull',
-  camel: 'AOA.NPC.Form.Camel',
-  cat: 'AOA.NPC.Form.Cat',
-  cobra: 'AOA.NPC.Form.Cobra',
-  crocodile: 'AOA.NPC.Form.Crocodile',
-  doe: 'AOA.NPC.Form.Doe',
-  dog: 'AOA.NPC.Form.Dog',
-  dolphin: 'AOA.NPC.Form.Dolphin',
-  elephant: 'AOA.NPC.Form.Elephant',
-  elk: 'AOA.NPC.Form.Elk',
-  falcon: 'AOA.NPC.Form.Falcon',
-  fox: 'AOA.NPC.Form.Fox',
-  hawk: 'AOA.NPC.Form.Hawk',
-  horse: 'AOA.NPC.Form.Horse',
-  leopard: 'AOA.NPC.Form.Leopard',
-  lion: 'AOA.NPC.Form.Lion',
-  lynx: 'AOA.NPC.Form.Lynx',
-  octopus: 'AOA.NPC.Form.Octopus',
-  orca: 'AOA.NPC.Form.Orca',
-  owl: 'AOA.NPC.Form.Owl',
-  raven: 'AOA.NPC.Form.Raven',
-  stag: 'AOA.NPC.Form.Stag',
-  tiger: 'AOA.NPC.Form.Tiger',
-  wolf: 'AOA.NPC.Form.Wolf',
+  ape: 'WOR.NPC.Form.Ape',
+  badger: 'WOR.NPC.Form.Badger',
+  bat: 'WOR.NPC.Form.Bat',
+  bear: 'WOR.NPC.Form.Bear',
+  beaver: 'WOR.NPC.Form.Beaver',
+  bull: 'WOR.NPC.Form.Bull',
+  camel: 'WOR.NPC.Form.Camel',
+  cat: 'WOR.NPC.Form.Cat',
+  cobra: 'WOR.NPC.Form.Cobra',
+  crocodile: 'WOR.NPC.Form.Crocodile',
+  doe: 'WOR.NPC.Form.Doe',
+  dog: 'WOR.NPC.Form.Dog',
+  dolphin: 'WOR.NPC.Form.Dolphin',
+  elephant: 'WOR.NPC.Form.Elephant',
+  elk: 'WOR.NPC.Form.Elk',
+  falcon: 'WOR.NPC.Form.Falcon',
+  fox: 'WOR.NPC.Form.Fox',
+  hawk: 'WOR.NPC.Form.Hawk',
+  horse: 'WOR.NPC.Form.Horse',
+  leopard: 'WOR.NPC.Form.Leopard',
+  lion: 'WOR.NPC.Form.Lion',
+  lynx: 'WOR.NPC.Form.Lynx',
+  octopus: 'WOR.NPC.Form.Octopus',
+  orca: 'WOR.NPC.Form.Orca',
+  owl: 'WOR.NPC.Form.Owl',
+  raven: 'WOR.NPC.Form.Raven',
+  stag: 'WOR.NPC.Form.Stag',
+  tiger: 'WOR.NPC.Form.Tiger',
+  wolf: 'WOR.NPC.Form.Wolf',
   // Vermin
-  ant: 'AOA.NPC.Form.Ant',
-  beetle: 'AOA.NPC.Form.Beetle',
-  cockroach: 'AOA.NPC.Form.Cockroach',
-  grub: 'AOA.NPC.Form.Grub',
-  leech: 'AOA.NPC.Form.Leech',
-  locust: 'AOA.NPC.Form.Locust',
-  maggot: 'AOA.NPC.Form.Maggot',
-  mite: 'AOA.NPC.Form.Mite',
-  scorpion: 'AOA.NPC.Form.Scorpion',
-  spider: 'AOA.NPC.Form.Spider',
-  termite: 'AOA.NPC.Form.Termite',
-  tick: 'AOA.NPC.Form.Tick',
-  worm: 'AOA.NPC.Form.Worm',
+  ant: 'WOR.NPC.Form.Ant',
+  beetle: 'WOR.NPC.Form.Beetle',
+  cockroach: 'WOR.NPC.Form.Cockroach',
+  grub: 'WOR.NPC.Form.Grub',
+  leech: 'WOR.NPC.Form.Leech',
+  locust: 'WOR.NPC.Form.Locust',
+  maggot: 'WOR.NPC.Form.Maggot',
+  mite: 'WOR.NPC.Form.Mite',
+  scorpion: 'WOR.NPC.Form.Scorpion',
+  spider: 'WOR.NPC.Form.Spider',
+  termite: 'WOR.NPC.Form.Termite',
+  tick: 'WOR.NPC.Form.Tick',
+  worm: 'WOR.NPC.Form.Worm',
   // Afflicted
-  blighted: 'AOA.NPC.Form.Blighted',
-  ghul: 'AOA.NPC.Form.Ghul',
-  revenant: 'AOA.NPC.Form.Revenant',
-  vampire: 'AOA.NPC.Form.Vampire',
-  vargin: 'AOA.NPC.Form.Vargin',
-  wight: 'AOA.NPC.Form.Wight',
-  werewolf: 'AOA.NPC.Form.Werewolf',
-  wendigo: 'AOA.NPC.Form.Wendigo',
+  blighted: 'WOR.NPC.Form.Blighted',
+  ghul: 'WOR.NPC.Form.Ghul',
+  revenant: 'WOR.NPC.Form.Revenant',
+  vampire: 'WOR.NPC.Form.Vampire',
+  vargin: 'WOR.NPC.Form.Vargin',
+  wight: 'WOR.NPC.Form.Wight',
+  werewolf: 'WOR.NPC.Form.Werewolf',
+  wendigo: 'WOR.NPC.Form.Wendigo',
   // Apparition
-  banshee: 'AOA.NPC.Form.Banshee',
-  phantom: 'AOA.NPC.Form.Phantom',
-  sprite: 'AOA.NPC.Form.Sprite',
-  wraith: 'AOA.NPC.Form.Wraith',
+  banshee: 'WOR.NPC.Form.Banshee',
+  phantom: 'WOR.NPC.Form.Phantom',
+  sprite: 'WOR.NPC.Form.Sprite',
+  wraith: 'WOR.NPC.Form.Wraith',
   // Fiend
-  demon: 'AOA.NPC.Form.Demon',
-  hellhound: 'AOA.NPC.Form.Hellhound',
-  imp: 'AOA.NPC.Form.Imp',
-  incubus: 'AOA.NPC.Form.Incubus',
-  jinn: 'AOA.NPC.Form.Jinn',
-  succubus: 'AOA.NPC.Form.Succubus'
+  demon: 'WOR.NPC.Form.Demon',
+  hellhound: 'WOR.NPC.Form.Hellhound',
+  imp: 'WOR.NPC.Form.Imp',
+  incubus: 'WOR.NPC.Form.Incubus',
+  jinn: 'WOR.NPC.Form.Jinn',
+  succubus: 'WOR.NPC.Form.Succubus'
 };
 
 /**
@@ -982,55 +982,55 @@ AOA.npcForms = {
  * Determines base dice pool budget and trait points.
  * @type {Object}
  */
-AOA.npcTiers = {
+WOR.npcTiers = {
   0: {
-    label: 'AOA.NPC.Tier.Dreg',
+    label: 'WOR.NPC.Tier.Dreg',
     name: 'Dreg',
     baseDicePool: 5,
     traitPoints: 1,
-    description: 'AOA.NPC.Tier.Dreg.Desc'
+    description: 'WOR.NPC.Tier.Dreg.Desc'
   },
   1: {
-    label: 'AOA.NPC.Tier.Skirmisher',
+    label: 'WOR.NPC.Tier.Skirmisher',
     name: 'Skirmisher',
     baseDicePool: 6,
     traitPoints: 3,
-    description: 'AOA.NPC.Tier.Skirmisher.Desc'
+    description: 'WOR.NPC.Tier.Skirmisher.Desc'
   },
   2: {
-    label: 'AOA.NPC.Tier.Enforcer',
+    label: 'WOR.NPC.Tier.Enforcer',
     name: 'Enforcer',
     baseDicePool: 8,
     traitPoints: 5,
-    description: 'AOA.NPC.Tier.Enforcer.Desc'
+    description: 'WOR.NPC.Tier.Enforcer.Desc'
   },
   3: {
-    label: 'AOA.NPC.Tier.Veteran',
+    label: 'WOR.NPC.Tier.Veteran',
     name: 'Veteran',
     baseDicePool: 10,
     traitPoints: 7,
-    description: 'AOA.NPC.Tier.Veteran.Desc'
+    description: 'WOR.NPC.Tier.Veteran.Desc'
   },
   4: {
-    label: 'AOA.NPC.Tier.Elite',
+    label: 'WOR.NPC.Tier.Elite',
     name: 'Elite',
     baseDicePool: 13,
     traitPoints: 9,
-    description: 'AOA.NPC.Tier.Elite.Desc'
+    description: 'WOR.NPC.Tier.Elite.Desc'
   },
   5: {
-    label: 'AOA.NPC.Tier.Champion',
+    label: 'WOR.NPC.Tier.Champion',
     name: 'Champion',
     baseDicePool: 17,
     traitPoints: 11,
-    description: 'AOA.NPC.Tier.Champion.Desc'
+    description: 'WOR.NPC.Tier.Champion.Desc'
   },
   6: {
-    label: 'AOA.NPC.Tier.Exemplar',
+    label: 'WOR.NPC.Tier.Exemplar',
     name: 'Exemplar',
     baseDicePool: 20,
     traitPoints: 13,
-    description: 'AOA.NPC.Tier.Exemplar.Desc'
+    description: 'WOR.NPC.Tier.Exemplar.Desc'
   }
 };
 
@@ -1038,16 +1038,16 @@ AOA.npcTiers = {
  * NPC Trait categories for filtering and organization.
  * @type {Object}
  */
-AOA.npcTraitCategories = {
-  offense: 'AOA.NPCTrait.Category.Offense',
-  defense: 'AOA.NPCTrait.Category.Defense',
-  mobility: 'AOA.NPCTrait.Category.Mobility',
-  control: 'AOA.NPCTrait.Category.Control',
-  teamplay: 'AOA.NPCTrait.Category.Teamplay',
-  leadership: 'AOA.NPCTrait.Category.Leadership',
-  supernatural: 'AOA.NPCTrait.Category.Supernatural',
-  ranged: 'AOA.NPCTrait.Category.Ranged',
-  signature: 'AOA.NPCTrait.Category.Signature',
-  formTrait: 'AOA.NPCTrait.Category.FormTrait'
+WOR.npcTraitCategories = {
+  offense: 'WOR.NPCTrait.Category.Offense',
+  defense: 'WOR.NPCTrait.Category.Defense',
+  mobility: 'WOR.NPCTrait.Category.Mobility',
+  control: 'WOR.NPCTrait.Category.Control',
+  teamplay: 'WOR.NPCTrait.Category.Teamplay',
+  leadership: 'WOR.NPCTrait.Category.Leadership',
+  supernatural: 'WOR.NPCTrait.Category.Supernatural',
+  ranged: 'WOR.NPCTrait.Category.Ranged',
+  signature: 'WOR.NPCTrait.Category.Signature',
+  formTrait: 'WOR.NPCTrait.Category.FormTrait'
 };
 

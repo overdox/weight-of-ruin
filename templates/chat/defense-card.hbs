@@ -5,7 +5,7 @@
     <div class="card-header">
       <img src="{{actor.img}}" class="actor-portrait" alt="{{actor.name}}" />
       <div class="header-info">
-        <h3 class="defense-roll-title">{{localize "AOA.Defense.Title"}}</h3>
+        <h3 class="defense-roll-title">{{localize "WOR.Defense.Title"}}</h3>
         <span class="actor-name">{{actor.name}}</span>
       </div>
     </div>
@@ -13,7 +13,7 @@
     {{!-- Pool Breakdown --}}
     <div class="pool-breakdown">
       <div class="pool-component base">
-        <span class="component-label">{{localize "AOA.Derived.Reflex.label"}}:</span>
+        <span class="component-label">{{localize "WOR.Derived.Reflex.label"}}:</span>
         <span class="component-value">{{poolData.reflex}}</span>
       </div>
       {{#if buyLabel}}
@@ -24,7 +24,7 @@
       {{/if}}
       {{#if (ne poolData.modifier 0)}}
       <div class="pool-component modifier">
-        <span class="component-label">+ {{localize "AOA.Roll.Modifier"}}:</span>
+        <span class="component-label">+ {{localize "WOR.Roll.Modifier"}}:</span>
         <span class="component-value">{{poolData.modifier}}</span>
       </div>
       {{/if}}
@@ -37,10 +37,10 @@
       {{#if isAutoSuccess}}
       <span class="hits-count auto-success">
         <i class="fas fa-star"></i>
-        {{localize "AOA.Fervor.AutoSuccess"}}
+        {{localize "WOR.Fervor.AutoSuccess"}}
       </span>
       {{else}}
-      <span class="hits-count">{{hits}} {{localize "AOA.Roll.Hits"}}</span>
+      <span class="hits-count">{{hits}} {{localize "WOR.Roll.Hits"}}</span>
       {{/if}}
     </div>
 
@@ -58,11 +58,11 @@
     {{#if (or fervorSpend.difficultyShift fervorSpend.bonusDice fervorSpend.autoSuccess fervorSpend.zeroPool)}}
     <div class="fervor-spent">
       <i class="fas fa-fire"></i>
-      <span>{{localize "AOA.Fervor.Spent"}}:</span>
-      {{#if fervorSpend.difficultyShift}}<span class="fervor-tag">{{localize "AOA.Fervor.DifficultyShift"}}</span>{{/if}}
-      {{#if fervorSpend.bonusDice}}<span class="fervor-tag">{{localize "AOA.Fervor.BonusDice"}}</span>{{/if}}
-      {{#if fervorSpend.autoSuccess}}<span class="fervor-tag">{{localize "AOA.Fervor.AutoSuccess"}}</span>{{/if}}
-      {{#if fervorSpend.zeroPool}}<span class="fervor-tag">{{localize "AOA.Fervor.ZeroPool"}}</span>{{/if}}
+      <span>{{localize "WOR.Fervor.Spent"}}:</span>
+      {{#if fervorSpend.difficultyShift}}<span class="fervor-tag">{{localize "WOR.Fervor.DifficultyShift"}}</span>{{/if}}
+      {{#if fervorSpend.bonusDice}}<span class="fervor-tag">{{localize "WOR.Fervor.BonusDice"}}</span>{{/if}}
+      {{#if fervorSpend.autoSuccess}}<span class="fervor-tag">{{localize "WOR.Fervor.AutoSuccess"}}</span>{{/if}}
+      {{#if fervorSpend.zeroPool}}<span class="fervor-tag">{{localize "WOR.Fervor.ZeroPool"}}</span>{{/if}}
     </div>
     {{/if}}
     {{/if}}

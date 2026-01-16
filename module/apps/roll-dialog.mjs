@@ -46,7 +46,7 @@ export class WoRRollDialog extends foundry.applications.api.DialogV2 {
   constructor({ actor, poolData, title, rollType, defaultDifficulty, defaultTT, resolve }) {
     super({
       window: {
-        title: `${game.i18n.localize('AOA.Roll.Title')}: ${title}`,
+        title: `${game.i18n.localize('WOR.Roll.Title')}: ${title}`,
         resizable: false
       },
       position: {
@@ -56,14 +56,14 @@ export class WoRRollDialog extends foundry.applications.api.DialogV2 {
       buttons: [
         {
           action: 'roll',
-          label: game.i18n.localize('AOA.Common.Roll'),
+          label: game.i18n.localize('WOR.Common.Roll'),
           icon: 'fas fa-dice-d20',
           default: true,
           callback: (event, button, dialog) => dialog.#executeRoll()
         },
         {
           action: 'cancel',
-          label: game.i18n.localize('AOA.Common.Cancel'),
+          label: game.i18n.localize('WOR.Common.Cancel'),
           icon: 'fas fa-times'
         }
       ]
@@ -257,7 +257,7 @@ export class WoRRollDialog extends foundry.applications.api.DialogV2 {
         targetThreshold: this.targetThreshold,
         degree: {
           key: 'criticalSuccess',
-          label: 'AOA.Roll.CriticalSuccess',
+          label: 'WOR.Roll.CriticalSuccess',
           cssClass: 'critical-success',
           margin: 3
         },
@@ -344,18 +344,18 @@ export async function showRerollDialog(actor, result) {
   }
 
   const rerollChoice = await foundry.applications.api.DialogV2.confirm({
-    window: { title: game.i18n.localize('AOA.Zeal.Reroll') },
+    window: { title: game.i18n.localize('WOR.Zeal.Reroll') },
     content: `
-      <p>${game.i18n.localize('AOA.Zeal.RerollPrompt')}</p>
-      <p><strong>${game.i18n.localize('AOA.Roll.Hits')}:</strong> ${result.hits}</p>
-      <p><strong>${game.i18n.localize('AOA.Zeal.Cost')}:</strong> 2</p>
+      <p>${game.i18n.localize('WOR.Zeal.RerollPrompt')}</p>
+      <p><strong>${game.i18n.localize('WOR.Roll.Hits')}:</strong> ${result.hits}</p>
+      <p><strong>${game.i18n.localize('WOR.Zeal.Cost')}:</strong> 2</p>
     `,
     yes: {
-      label: game.i18n.localize('AOA.Zeal.Reroll'),
+      label: game.i18n.localize('WOR.Zeal.Reroll'),
       icon: 'fas fa-dice'
     },
     no: {
-      label: game.i18n.localize('AOA.Common.Cancel'),
+      label: game.i18n.localize('WOR.Common.Cancel'),
       icon: 'fas fa-times'
     }
   });

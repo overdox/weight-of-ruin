@@ -33,7 +33,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
       height: 900
     },
     window: {
-      title: 'AOA.CharacterCreation.Title',
+      title: 'WOR.CharacterCreation.Title',
       icon: 'fas fa-user-plus',
       resizable: true
     },
@@ -85,16 +85,16 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
    * @type {Object[]}
    */
   static STEPS = [
-    { id: 'lineage', label: 'AOA.CharacterCreation.Step.Lineage', number: 1 },
-    { id: 'background', label: 'AOA.CharacterCreation.Step.Background', number: 2 },
-    { id: 'archetype', label: 'AOA.CharacterCreation.Step.Archetype', number: 3 },
-    { id: 'pathway', label: 'AOA.CharacterCreation.Step.Pathway', number: 4 },
-    { id: 'lifeEvents', label: 'AOA.CharacterCreation.Step.LifeEvents', number: 5 },
-    { id: 'attributes', label: 'AOA.CharacterCreation.Step.Attributes', number: 6 },
-    { id: 'skills', label: 'AOA.CharacterCreation.Step.Skills', number: 7 },
-    { id: 'talents', label: 'AOA.CharacterCreation.Step.Talents', number: 8 },
-    { id: 'passions', label: 'AOA.CharacterCreation.Step.Passions', number: 9 },
-    { id: 'finalize', label: 'AOA.CharacterCreation.Step.Finalize', number: 10 }
+    { id: 'lineage', label: 'WOR.CharacterCreation.Step.Lineage', number: 1 },
+    { id: 'background', label: 'WOR.CharacterCreation.Step.Background', number: 2 },
+    { id: 'archetype', label: 'WOR.CharacterCreation.Step.Archetype', number: 3 },
+    { id: 'pathway', label: 'WOR.CharacterCreation.Step.Pathway', number: 4 },
+    { id: 'lifeEvents', label: 'WOR.CharacterCreation.Step.LifeEvents', number: 5 },
+    { id: 'attributes', label: 'WOR.CharacterCreation.Step.Attributes', number: 6 },
+    { id: 'skills', label: 'WOR.CharacterCreation.Step.Skills', number: 7 },
+    { id: 'talents', label: 'WOR.CharacterCreation.Step.Talents', number: 8 },
+    { id: 'passions', label: 'WOR.CharacterCreation.Step.Passions', number: 9 },
+    { id: 'finalize', label: 'WOR.CharacterCreation.Step.Finalize', number: 10 }
   ];
 
   /**
@@ -758,8 +758,8 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
         };
         context.allBackgrounds = backgrounds;
         // Provide social standings config for display
-        context.socialStandings = CONFIG.AOA.socialStandings;
-        context.socialStandingSkillRanks = CONFIG.AOA.socialStandingSkillRanks;
+        context.socialStandings = CONFIG.WOR.socialStandings;
+        context.socialStandingSkillRanks = CONFIG.WOR.socialStandingSkillRanks;
         context.hasRolled = this._rollResults.background !== null;
         context.rolledBackground = this._rollResults.background;
         break;
@@ -801,14 +801,14 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
         // Add lineage base speed for movement calculation
         context.baseSpeed = this.characterData.lineageItem?.system?.baseSpeed ?? 2;
         context.attributeList = [
-          { key: 'strength', label: 'AOA.Attributes.Strength' },
-          { key: 'fortitude', label: 'AOA.Attributes.Fortitude' },
-          { key: 'agility', label: 'AOA.Attributes.Agility' },
-          { key: 'awareness', label: 'AOA.Attributes.Awareness' },
-          { key: 'resolve', label: 'AOA.Attributes.Resolve' },
-          { key: 'persona', label: 'AOA.Attributes.Persona' },
-          { key: 'ingenuity', label: 'AOA.Attributes.Ingenuity' },
-          { key: 'expertise', label: 'AOA.Attributes.Expertise' }
+          { key: 'strength', label: 'WOR.Attributes.Strength' },
+          { key: 'fortitude', label: 'WOR.Attributes.Fortitude' },
+          { key: 'agility', label: 'WOR.Attributes.Agility' },
+          { key: 'awareness', label: 'WOR.Attributes.Awareness' },
+          { key: 'resolve', label: 'WOR.Attributes.Resolve' },
+          { key: 'persona', label: 'WOR.Attributes.Persona' },
+          { key: 'ingenuity', label: 'WOR.Attributes.Ingenuity' },
+          { key: 'expertise', label: 'WOR.Attributes.Expertise' }
         ];
         break;
 
@@ -1169,7 +1169,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     }
 
     return {
-      name: this.characterData.name || game.i18n.localize('AOA.CharacterCreation.UnnamedCharacter'),
+      name: this.characterData.name || game.i18n.localize('WOR.CharacterCreation.UnnamedCharacter'),
       lineage: this.characterData.lineageItem?.name || '-',
       background: this.characterData.backgroundItem?.name || '-',
       archetype: this.characterData.archetypeItem?.name || '-',
@@ -1287,7 +1287,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
 
     return ChatMessage.create({
       content,
-      speaker: { alias: game.i18n.localize('AOA.CharacterCreation.Title') },
+      speaker: { alias: game.i18n.localize('WOR.CharacterCreation.Title') },
       style: CONST.CHAT_MESSAGE_STYLES.OTHER
     });
   }
@@ -1302,7 +1302,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
   static async #onRollLineage(event, target) {
     // Prevent rolling if already rolled (committed)
     if (this._rollResults.lineage !== null) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.RollAlreadyCommitted'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.RollAlreadyCommitted'));
       return;
     }
 
@@ -1316,7 +1316,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     // Display enhanced roll in chat
     await CharacterCreationWizard.#createCreationRollMessage({
       roll,
-      title: game.i18n.localize('AOA.CharacterCreation.LineageRoll'),
+      title: game.i18n.localize('WOR.CharacterCreation.LineageRoll'),
       resultType: 'lineage',
       result: matchedLineage ? {
         name: matchedLineage.name,
@@ -1396,7 +1396,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
    */
   static async #onRollBackground(event, target) {
     if (this._rollResults.background !== null) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.RollAlreadyCommitted'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.RollAlreadyCommitted'));
       return;
     }
 
@@ -1428,7 +1428,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     }
 
     // Prepare dice data for display
-    const standingLabel = game.i18n.localize(`AOA.SocialStanding.${standing.charAt(0).toUpperCase() + standing.slice(1)}`);
+    const standingLabel = game.i18n.localize(`WOR.SocialStanding.${standing.charAt(0).toUpperCase() + standing.slice(1)}`);
     const standingDice = standingRoll.dice[0]?.results.map(r => ({
       result: r.result,
       faces: standingRoll.dice[0].faces,
@@ -1464,7 +1464,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
 
     await ChatMessage.create({
       content,
-      speaker: { alias: game.i18n.localize('AOA.CharacterCreation.Title') },
+      speaker: { alias: game.i18n.localize('WOR.CharacterCreation.Title') },
       style: CONST.CHAT_MESSAGE_STYLES.OTHER
     });
 
@@ -1533,7 +1533,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
    */
   static async #onRollArchetype(event, target) {
     if (this._rollResults.archetype !== null) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.RollAlreadyCommitted'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.RollAlreadyCommitted'));
       return;
     }
 
@@ -1552,13 +1552,13 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     // Display enhanced roll in chat
     await CharacterCreationWizard.#createCreationRollMessage({
       roll,
-      title: game.i18n.localize('AOA.CharacterCreation.ArchetypeRoll'),
+      title: game.i18n.localize('WOR.CharacterCreation.ArchetypeRoll'),
       resultType: 'archetype',
       result: matchedArchetype ? {
         name: matchedArchetype.name,
         img: matchedArchetype.img
       } : null,
-      specialMessage: isChoice ? game.i18n.localize('AOA.CharacterCreation.PlayerChoice') : null,
+      specialMessage: isChoice ? game.i18n.localize('WOR.CharacterCreation.PlayerChoice') : null,
       lpAward: CharacterCreationWizard.LP_AWARDS.rolledArchetype
     });
 
@@ -1625,7 +1625,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
    */
   static async #onRollPathway(event, target) {
     if (this._rollResults.pathway !== null) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.RollAlreadyCommitted'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.RollAlreadyCommitted'));
       return;
     }
 
@@ -1638,7 +1638,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     // Display enhanced roll in chat
     await CharacterCreationWizard.#createCreationRollMessage({
       roll,
-      title: game.i18n.localize('AOA.CharacterCreation.PathwayRoll'),
+      title: game.i18n.localize('WOR.CharacterCreation.PathwayRoll'),
       resultType: 'pathway',
       result: matchedPathway ? {
         name: matchedPathway.name,
@@ -1692,12 +1692,12 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
    */
   static async #onDrawLifeEvent(event, target) {
     if (this.characterData.lifeEvents.length >= 3) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.MaxLifeEvents'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.MaxLifeEvents'));
       return;
     }
 
     if (this._pendingLifeEvent !== null) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.PendingEventExists'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.PendingEventExists'));
       return;
     }
 
@@ -1708,7 +1708,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     const availableEvents = lifeEvents.filter(e => !acceptedIds.includes(e.id));
 
     if (availableEvents.length === 0) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.NoEventsAvailable'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.NoEventsAvailable'));
       return;
     }
 
@@ -1720,13 +1720,13 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     const content = `
       <div class="wor life-event-draw">
         <h4>${drawnEvent.name}</h4>
-        <p><strong>${game.i18n.localize('AOA.LifeEvent.Suit')}:</strong> ${game.i18n.localize(`AOA.LifeEvent.Suit.${drawnEvent.system.suit.charAt(0).toUpperCase() + drawnEvent.system.suit.slice(1)}`)}</p>
+        <p><strong>${game.i18n.localize('WOR.LifeEvent.Suit')}:</strong> ${game.i18n.localize(`WOR.LifeEvent.Suit.${drawnEvent.system.suit.charAt(0).toUpperCase() + drawnEvent.system.suit.slice(1)}`)}</p>
         <p>${drawnEvent.system.description || ''}</p>
       </div>
     `;
 
     await ChatMessage.create({
-      speaker: { alias: game.i18n.localize('AOA.CharacterCreation.Title') },
+      speaker: { alias: game.i18n.localize('WOR.CharacterCreation.Title') },
       content,
       style: CONST.CHAT_MESSAGE_STYLES.OTHER
     });
@@ -1826,7 +1826,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
 
     const currentRank = this.characterData.skills[skillKey] || 0;
     if (currentRank >= STARTING_SKILL_CAP) {
-      ui.notifications.info(game.i18n.localize('AOA.CharacterCreation.SkillCapReached'));
+      ui.notifications.info(game.i18n.localize('WOR.CharacterCreation.SkillCapReached'));
       return;
     }
 
@@ -1870,14 +1870,14 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
 
     // Check if already has this talent
     if (this.characterData.talents.find(t => t.id === talentId)) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.TalentAlreadyAdded'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.TalentAlreadyAdded'));
       return;
     }
 
     // Check LP cost (10 LP per talent)
     const lpRemaining = this.lp.earned - this.lp.spent;
     if (lpRemaining < 10) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.InsufficientLP'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.InsufficientLP'));
       return;
     }
 
@@ -1934,7 +1934,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
                               this.characterData.wealth.orin;
 
     if (totalCostInOrin > totalWealthInOrin) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.InsufficientWealth'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.InsufficientWealth'));
       return;
     }
 
@@ -2021,7 +2021,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
   static async #onRollStartingWealth(event, target) {
     const background = this.characterData.backgroundItem;
     if (!background) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.SelectBackgroundFirst'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.SelectBackgroundFirst'));
       return;
     }
 
@@ -2051,9 +2051,9 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
 
     // Show notification with rolled amount
     ui.notifications.info(
-      game.i18n.format('AOA.CharacterCreation.WealthRolled', {
+      game.i18n.format('WOR.CharacterCreation.WealthRolled', {
         amount: rolledAmount,
-        currency: game.i18n.localize(`AOA.Wealth.${currency.charAt(0).toUpperCase() + currency.slice(1)}`)
+        currency: game.i18n.localize(`WOR.Wealth.${currency.charAt(0).toUpperCase() + currency.slice(1)}`)
       })
     );
 
@@ -2089,7 +2089,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
    */
   static async #onNextStep(event, target) {
     if (!this._canProceedToNextStep()) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.StepIncomplete'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.StepIncomplete'));
       return;
     }
 
@@ -2136,7 +2136,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
    */
   static async #onFinalize(event, target) {
     if (!this._canProceedToNextStep()) {
-      ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.StepIncomplete'));
+      ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.StepIncomplete'));
       return;
     }
 
@@ -2240,7 +2240,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     } else {
       // GM creating new actor - include items directly in create call
       if (!game.user.isGM) {
-        ui.notifications.error(game.i18n.localize('AOA.CharacterCreation.NoIncompleteCharacter'));
+        ui.notifications.error(game.i18n.localize('WOR.CharacterCreation.NoIncompleteCharacter'));
         return;
       }
 
@@ -2257,7 +2257,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     this.close();
     actor.sheet.render(true);
 
-    ui.notifications.info(game.i18n.format('AOA.CharacterCreation.Complete', { name: actor.name }));
+    ui.notifications.info(game.i18n.format('WOR.CharacterCreation.Complete', { name: actor.name }));
   }
 
   /**
@@ -2425,5 +2425,5 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
 }
 
 // Register for global access
-globalThis.AOA = globalThis.AOA || {};
-globalThis.AOA.CharacterCreationWizard = CharacterCreationWizard;
+globalThis.WOR = globalThis.WOR || {};
+globalThis.WOR.CharacterCreationWizard = CharacterCreationWizard;

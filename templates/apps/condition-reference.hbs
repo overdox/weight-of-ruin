@@ -1,14 +1,14 @@
 <div class="condition-reference-wrapper">
   {{!-- Dialog Header --}}
   <div class="editor-header">
-    <h2 class="editor-title">{{localize "AOA.Condition.Reference"}}</h2>
+    <h2 class="editor-title">{{localize "WOR.Condition.Reference"}}</h2>
     {{#if hasTarget}}
     <p class="editor-subtitle">
       <i class="fas fa-crosshairs"></i>
-      {{localize "AOA.Condition.TargetActor"}}: <strong>{{targetName}}</strong>
+      {{localize "WOR.Condition.TargetActor"}}: <strong>{{targetName}}</strong>
     </p>
     {{else}}
-    <p class="editor-subtitle">{{localize "AOA.Condition.ReferenceSubtitle"}}</p>
+    <p class="editor-subtitle">{{localize "WOR.Condition.ReferenceSubtitle"}}</p>
     {{/if}}
   </div>
 
@@ -28,7 +28,7 @@
             <i class="fas fa-chevron-down toggle-icon"></i>
             {{/if}}
             {{#if ../hasTarget}}
-            <button type="button" class="apply-btn" data-action="applyCondition" data-condition-id="{{id}}" title="{{localize 'AOA.Condition.ApplyToTarget'}}">
+            <button type="button" class="apply-btn" data-action="applyCondition" data-condition-id="{{id}}" title="{{localize 'WOR.Condition.ApplyToTarget'}}">
               <i class="fas fa-plus"></i>
             </button>
             {{/if}}
@@ -41,7 +41,7 @@
         <div class="condition-details collapsed">
           {{#if modifiers.length}}
           <div class="detail-section modifiers">
-            <h5>{{localize "AOA.Condition.Modifiers"}}</h5>
+            <h5>{{localize "WOR.Condition.Modifiers"}}</h5>
             <ul class="modifier-list">
               {{#each modifiers}}
               <li class="modifier {{#if isPositive}}positive{{/if}}{{#if isNegative}}negative{{/if}}">
@@ -55,7 +55,7 @@
 
           {{#if flags.length}}
           <div class="detail-section flags">
-            <h5>{{localize "AOA.Condition.SpecialEffects"}}</h5>
+            <h5>{{localize "WOR.Condition.SpecialEffects"}}</h5>
             <ul class="flag-list">
               {{#each flags}}
               <li class="flag">
@@ -69,7 +69,7 @@
 
           {{#if effects.length}}
           <div class="detail-section effects">
-            <h5>{{localize "AOA.Condition.SystemEffects"}}</h5>
+            <h5>{{localize "WOR.Condition.SystemEffects"}}</h5>
             <ul class="effect-list">
               {{#each effects}}
               <li class="effect">

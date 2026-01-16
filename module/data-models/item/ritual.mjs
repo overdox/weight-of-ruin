@@ -19,7 +19,7 @@ export default class RitualData extends ItemBaseData {
       blank: false,
       initial: "circlecasting",
       choices: ["circlecasting", "binding", "hexing"],
-      label: "AOA.Ritual.Path"
+      label: "WOR.Ritual.Path"
     });
 
     // ========================================
@@ -30,7 +30,7 @@ export default class RitualData extends ItemBaseData {
       initial: 1,
       min: 1,
       max: 10,
-      label: "AOA.Ritual.Complexity"
+      label: "WOR.Ritual.Complexity"
     });
 
     // ========================================
@@ -41,14 +41,14 @@ export default class RitualData extends ItemBaseData {
         ...requiredInteger,
         initial: 1,
         min: 1,
-        label: "AOA.Ritual.Time.Value"
+        label: "WOR.Ritual.Time.Value"
       }),
       unit: new fields.StringField({
         required: true,
         blank: false,
         initial: "hours",
         choices: ["rounds", "minutes", "hours", "days", "weeks"],
-        label: "AOA.Ritual.Time.Unit"
+        label: "WOR.Ritual.Time.Unit"
       }),
       // Can be reduced with more participants
       reducible: new fields.BooleanField({ initial: false })
@@ -97,14 +97,14 @@ export default class RitualData extends ItemBaseData {
         ...requiredInteger,
         initial: 1,
         min: 1,
-        label: "AOA.Ritual.Participants.Minimum"
+        label: "WOR.Ritual.Participants.Minimum"
       }),
       maximum: new fields.NumberField({
         required: false,
         nullable: true,
         integer: true,
         min: 1,
-        label: "AOA.Ritual.Participants.Maximum"
+        label: "WOR.Ritual.Participants.Maximum"
       }),
       // Bonus per additional participant
       bonusPerParticipant: new fields.NumberField({
@@ -126,14 +126,14 @@ export default class RitualData extends ItemBaseData {
         blank: true,
         initial: "standard",
         choices: ["trivial", "standard", "hard"],
-        label: "AOA.Ritual.Difficulty"
+        label: "WOR.Ritual.Difficulty"
       }),
       // Target threshold
       targetThreshold: new fields.NumberField({
         ...requiredInteger,
         initial: 3,
         min: 1,
-        label: "AOA.Ritual.TargetThreshold"
+        label: "WOR.Ritual.TargetThreshold"
       }),
       // Extended test (multiple rolls needed)
       extended: new fields.SchemaField({
@@ -151,20 +151,20 @@ export default class RitualData extends ItemBaseData {
         ...requiredInteger,
         initial: 2,
         min: 0,
-        label: "AOA.Ritual.Cost.Trauma"
+        label: "WOR.Ritual.Cost.Trauma"
       }),
       essence: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Ritual.Cost.Essence"
+        label: "WOR.Ritual.Cost.Essence"
       }),
       // Blood cost (for blood magic rituals)
       blood: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Ritual.Cost.Blood"
+        label: "WOR.Ritual.Cost.Blood"
       }),
       // Sacrifice requirement
       sacrifice: new fields.StringField({ required: false, blank: true })
@@ -177,14 +177,14 @@ export default class RitualData extends ItemBaseData {
       description: new fields.HTMLField({
         required: false,
         blank: true,
-        label: "AOA.Ritual.Effect.Description"
+        label: "WOR.Ritual.Effect.Description"
       }),
       magnitude: new fields.StringField({
         required: false,
         blank: true,
         initial: "moderate",
         choices: ["trivial", "minor", "moderate", "major", "extreme"],
-        label: "AOA.Ritual.Effect.Magnitude"
+        label: "WOR.Ritual.Effect.Magnitude"
       }),
       // Duration of effect
       duration: new fields.SchemaField({

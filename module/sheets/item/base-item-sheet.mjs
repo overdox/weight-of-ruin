@@ -60,19 +60,19 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
     description: {
       id: 'description',
       group: 'primary',
-      label: 'AOA.Tabs.Description',
+      label: 'WOR.Tabs.Description',
       icon: 'fa-solid fa-book-open'
     },
     details: {
       id: 'details',
       group: 'primary',
-      label: 'AOA.Tabs.Details',
+      label: 'WOR.Tabs.Details',
       icon: 'fa-solid fa-list'
     },
     effects: {
       id: 'effects',
       group: 'primary',
-      label: 'AOA.Tabs.Effects',
+      label: 'WOR.Tabs.Effects',
       icon: 'fa-solid fa-bolt'
     }
   };
@@ -100,7 +100,7 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
     context.source = source;
     context.system = item.system;
     context.flags = item.flags;
-    context.config = CONFIG.AOA;
+    context.config = CONFIG.WOR;
 
     // Edit mode and ownership
     context.isEditable = this.isEditable;
@@ -296,33 +296,33 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
   async _prepareSkillContext(context) {
     // Attribute options
     context.attributeOptions = {
-      strength: 'AOA.Attribute.Strength.long',
-      fortitude: 'AOA.Attribute.Fortitude.long',
-      agility: 'AOA.Attribute.Agility.long',
-      awareness: 'AOA.Attribute.Awareness.long',
-      resolve: 'AOA.Attribute.Resolve.long',
-      persona: 'AOA.Attribute.Persona.long',
-      ingenuity: 'AOA.Attribute.Ingenuity.long',
-      expertise: 'AOA.Attribute.Expertise.long',
-      witchsight: 'AOA.Attribute.Witchsight.long'
+      strength: 'WOR.Attribute.Strength.long',
+      fortitude: 'WOR.Attribute.Fortitude.long',
+      agility: 'WOR.Attribute.Agility.long',
+      awareness: 'WOR.Attribute.Awareness.long',
+      resolve: 'WOR.Attribute.Resolve.long',
+      persona: 'WOR.Attribute.Persona.long',
+      ingenuity: 'WOR.Attribute.Ingenuity.long',
+      expertise: 'WOR.Attribute.Expertise.long',
+      witchsight: 'WOR.Attribute.Witchsight.long'
     };
 
     // Category options
     context.categoryOptions = {
-      physical: 'AOA.SkillCategory.Physical',
-      social: 'AOA.SkillCategory.Social',
-      knowledge: 'AOA.SkillCategory.Knowledge',
-      craft: 'AOA.SkillCategory.Craft',
-      thaumaturgy: 'AOA.SkillCategory.Thaumaturgy'
+      physical: 'WOR.SkillCategory.Physical',
+      social: 'WOR.SkillCategory.Social',
+      knowledge: 'WOR.SkillCategory.Knowledge',
+      craft: 'WOR.SkillCategory.Craft',
+      thaumaturgy: 'WOR.SkillCategory.Thaumaturgy'
     };
   }
 
   async _prepareTalentContext(context) {
     // Talent type options
     context.talentTypeOptions = {
-      universal: 'AOA.TalentType.universal',
-      archetype: 'AOA.TalentType.archetype',
-      signature: 'AOA.TalentType.signature'
+      universal: 'WOR.TalentType.universal',
+      archetype: 'WOR.TalentType.archetype',
+      signature: 'WOR.TalentType.signature'
     };
 
     // Can advance/reduce
@@ -343,76 +343,76 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
   async _prepareWeaponContext(context) {
     // Attribute options
     context.attributeOptions = {
-      strength: 'AOA.Attribute.Strength.long',
-      agility: 'AOA.Attribute.Agility.long'
+      strength: 'WOR.Attribute.Strength.long',
+      agility: 'WOR.Attribute.Agility.long'
     };
 
     // Prowess options (used for attack rolls instead of skills)
     context.prowessOptions = {
-      weaponProwess: 'AOA.Derived.WeaponProwess.label',
-      ballisticProwess: 'AOA.Derived.BallisticProwess.label',
-      unarmedProwess: 'AOA.Derived.UnarmedProwess.label'
+      weaponProwess: 'WOR.Derived.WeaponProwess.label',
+      ballisticProwess: 'WOR.Derived.BallisticProwess.label',
+      unarmedProwess: 'WOR.Derived.UnarmedProwess.label'
     };
 
     // Range type options
     context.rangeTypeOptions = {
-      melee: 'AOA.Weapon.RangeType.Melee',
-      ranged: 'AOA.Weapon.RangeType.Ranged',
-      thrown: 'AOA.Weapon.RangeType.Thrown',
-      reach: 'AOA.Weapon.RangeType.Reach'
+      melee: 'WOR.Weapon.RangeType.Melee',
+      ranged: 'WOR.Weapon.RangeType.Ranged',
+      thrown: 'WOR.Weapon.RangeType.Thrown',
+      reach: 'WOR.Weapon.RangeType.Reach'
     };
 
     // Category options
     context.categoryOptions = {
-      simple: 'AOA.Weapon.CategoryType.Simple',
-      martial: 'AOA.Weapon.CategoryType.Martial',
-      exotic: 'AOA.Weapon.CategoryType.Exotic'
+      simple: 'WOR.Weapon.CategoryType.Simple',
+      martial: 'WOR.Weapon.CategoryType.Martial',
+      exotic: 'WOR.Weapon.CategoryType.Exotic'
     };
 
     // Quality options - must match schema choices: poor, standard, fine, superior, masterwork
     context.qualityOptions = {
-      poor: 'AOA.Quality.Poor',
-      standard: 'AOA.Quality.Standard',
-      fine: 'AOA.Quality.Fine',
-      superior: 'AOA.Quality.Superior',
-      masterwork: 'AOA.Quality.Masterwork'
+      poor: 'WOR.Quality.Poor',
+      standard: 'WOR.Quality.Standard',
+      fine: 'WOR.Quality.Fine',
+      superior: 'WOR.Quality.Superior',
+      masterwork: 'WOR.Quality.Masterwork'
     };
 
     // Rarity options
     context.rarityOptions = {
-      common: 'AOA.Rarity.Common',
-      uncommon: 'AOA.Rarity.Uncommon',
-      rare: 'AOA.Rarity.Rare'
+      common: 'WOR.Rarity.Common',
+      uncommon: 'WOR.Rarity.Uncommon',
+      rare: 'WOR.Rarity.Rare'
     };
 
     // Weapon group options
     context.groupOptions = {
-      dagger: 'AOA.WeaponGroup.Dagger',
-      sword: 'AOA.WeaponGroup.Sword',
-      axe: 'AOA.WeaponGroup.Axe',
-      blunt: 'AOA.WeaponGroup.Blunt',
-      polearm: 'AOA.WeaponGroup.Polearm',
-      bow: 'AOA.WeaponGroup.Bow',
-      crossbow: 'AOA.WeaponGroup.Crossbow',
-      thrown: 'AOA.WeaponGroup.Thrown',
-      unarmed: 'AOA.WeaponGroup.Unarmed'
+      dagger: 'WOR.WeaponGroup.Dagger',
+      sword: 'WOR.WeaponGroup.Sword',
+      axe: 'WOR.WeaponGroup.Axe',
+      blunt: 'WOR.WeaponGroup.Blunt',
+      polearm: 'WOR.WeaponGroup.Polearm',
+      bow: 'WOR.WeaponGroup.Bow',
+      crossbow: 'WOR.WeaponGroup.Crossbow',
+      thrown: 'WOR.WeaponGroup.Thrown',
+      unarmed: 'WOR.WeaponGroup.Unarmed'
     };
 
     // Weapon property definitions (for checkboxes)
     context.weaponProperties = [
-      { key: 'versatile', label: 'AOA.WeaponProperty.Versatile.label' },
-      { key: 'twoHanded', label: 'AOA.WeaponProperty.TwoHanded.label' },
-      { key: 'light', label: 'AOA.WeaponProperty.Light.label' },
-      { key: 'heavy', label: 'AOA.WeaponProperty.Heavy.label' },
-      { key: 'finesse', label: 'AOA.WeaponProperty.Finesse.label' },
-      { key: 'reach', label: 'AOA.WeaponProperty.Reach.label' },
-      { key: 'thrown', label: 'AOA.WeaponProperty.Thrown.label' },
-      { key: 'loading', label: 'AOA.WeaponProperty.Loading.label' },
-      { key: 'concealable', label: 'AOA.WeaponProperty.Concealable.label' },
-      { key: 'trip', label: 'AOA.WeaponProperty.Trip.label' },
-      { key: 'wounding', label: 'AOA.WeaponProperty.Wounding.label' },
-      { key: 'balanced', label: 'AOA.WeaponProperty.Balanced.label' },
-      { key: 'precise', label: 'AOA.WeaponProperty.Precise.label' }
+      { key: 'versatile', label: 'WOR.WeaponProperty.Versatile.label' },
+      { key: 'twoHanded', label: 'WOR.WeaponProperty.TwoHanded.label' },
+      { key: 'light', label: 'WOR.WeaponProperty.Light.label' },
+      { key: 'heavy', label: 'WOR.WeaponProperty.Heavy.label' },
+      { key: 'finesse', label: 'WOR.WeaponProperty.Finesse.label' },
+      { key: 'reach', label: 'WOR.WeaponProperty.Reach.label' },
+      { key: 'thrown', label: 'WOR.WeaponProperty.Thrown.label' },
+      { key: 'loading', label: 'WOR.WeaponProperty.Loading.label' },
+      { key: 'concealable', label: 'WOR.WeaponProperty.Concealable.label' },
+      { key: 'trip', label: 'WOR.WeaponProperty.Trip.label' },
+      { key: 'wounding', label: 'WOR.WeaponProperty.Wounding.label' },
+      { key: 'balanced', label: 'WOR.WeaponProperty.Balanced.label' },
+      { key: 'precise', label: 'WOR.WeaponProperty.Precise.label' }
     ];
 
     // Check which properties are active
@@ -425,27 +425,27 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
   async _prepareArmorContext(context) {
     // Armor category options (layer classification) - like weapon category
     context.armorCategoryOptions = {
-      underlayer: 'AOA.Armor.Category.Underlayer',
-      outerlayer: 'AOA.Armor.Category.Outerlayer',
-      reinforcement: 'AOA.Armor.Category.Reinforcement',
-      shield: 'AOA.Armor.Category.Shield'
+      underlayer: 'WOR.Armor.Category.Underlayer',
+      outerlayer: 'WOR.Armor.Category.Outerlayer',
+      reinforcement: 'WOR.Armor.Category.Reinforcement',
+      shield: 'WOR.Armor.Category.Shield'
     };
 
     // Armor group options for non-shields (material/construction) - like weapon group
     context.armorGroupOptions = {
-      quilted: 'AOA.Armor.Group.Quilted',
-      mail: 'AOA.Armor.Group.Mail',
-      composite: 'AOA.Armor.Group.Composite',
-      scale: 'AOA.Armor.Group.Scale',
-      plate: 'AOA.Armor.Group.Plate'
+      quilted: 'WOR.Armor.Group.Quilted',
+      mail: 'WOR.Armor.Group.Mail',
+      composite: 'WOR.Armor.Group.Composite',
+      scale: 'WOR.Armor.Group.Scale',
+      plate: 'WOR.Armor.Group.Plate'
     };
 
     // Shield group options (material/construction)
     context.shieldGroupOptions = {
-      hide: 'AOA.Armor.Group.Hide',
-      wood: 'AOA.Armor.Group.Wood',
-      composite: 'AOA.Armor.Group.Composite',
-      metal: 'AOA.Armor.Group.Metal'
+      hide: 'WOR.Armor.Group.Hide',
+      wood: 'WOR.Armor.Group.Wood',
+      composite: 'WOR.Armor.Group.Composite',
+      metal: 'WOR.Armor.Group.Metal'
     };
 
     // Determine which group options to show based on category
@@ -455,71 +455,71 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
 
     // Quality options - must match schema choices: poor, standard, fine, superior, masterwork
     context.qualityOptions = {
-      poor: 'AOA.Quality.Poor',
-      standard: 'AOA.Quality.Standard',
-      fine: 'AOA.Quality.Fine',
-      superior: 'AOA.Quality.Superior',
-      masterwork: 'AOA.Quality.Masterwork'
+      poor: 'WOR.Quality.Poor',
+      standard: 'WOR.Quality.Standard',
+      fine: 'WOR.Quality.Fine',
+      superior: 'WOR.Quality.Superior',
+      masterwork: 'WOR.Quality.Masterwork'
     };
 
     // Rarity options
     context.rarityOptions = {
-      common: 'AOA.Rarity.Common',
-      uncommon: 'AOA.Rarity.Uncommon',
-      rare: 'AOA.Rarity.Rare',
-      exotic: 'AOA.Rarity.Exotic'
+      common: 'WOR.Rarity.Common',
+      uncommon: 'WOR.Rarity.Uncommon',
+      rare: 'WOR.Rarity.Rare',
+      exotic: 'WOR.Rarity.Exotic'
     };
   }
 
   async _prepareGearContext(context) {
     // Gear group options
     context.gearGroupOptions = {
-      clothing: 'AOA.Gear.Group.Clothing',
-      consumable: 'AOA.Gear.Group.Consumable',
-      container: 'AOA.Gear.Group.Container',
-      curio: 'AOA.Gear.Group.Curio',
-      kit: 'AOA.Gear.Group.Kit',
-      remedy: 'AOA.Gear.Group.Remedy',
-      tool: 'AOA.Gear.Group.Tool'
+      clothing: 'WOR.Gear.Group.Clothing',
+      consumable: 'WOR.Gear.Group.Consumable',
+      container: 'WOR.Gear.Group.Container',
+      curio: 'WOR.Gear.Group.Curio',
+      kit: 'WOR.Gear.Group.Kit',
+      remedy: 'WOR.Gear.Group.Remedy',
+      tool: 'WOR.Gear.Group.Tool'
     };
 
     // Rarity options
     context.rarityOptions = {
-      common: 'AOA.Rarity.Common',
-      uncommon: 'AOA.Rarity.Uncommon',
-      rare: 'AOA.Rarity.Rare',
-      exotic: 'AOA.Rarity.Exotic'
+      common: 'WOR.Rarity.Common',
+      uncommon: 'WOR.Rarity.Uncommon',
+      rare: 'WOR.Rarity.Rare',
+      exotic: 'WOR.Rarity.Exotic'
     };
   }
 
   async _prepareSpellContext(context) {
     // Technique options
     context.techniqueOptions = {
-      create: 'AOA.Sorcery.Technique.Create',
-      perceive: 'AOA.Sorcery.Technique.Perceive',
-      transform: 'AOA.Sorcery.Technique.Transform',
-      destroy: 'AOA.Sorcery.Technique.Destroy',
-      control: 'AOA.Sorcery.Technique.Control'
+      create: 'WOR.Sorcery.Technique.Create',
+      perceive: 'WOR.Sorcery.Technique.Perceive',
+      transform: 'WOR.Sorcery.Technique.Transform',
+      destroy: 'WOR.Sorcery.Technique.Destroy',
+      control: 'WOR.Sorcery.Technique.Control'
     };
 
     // Form options
     context.formOptions = {
-      elements: 'AOA.Sorcery.Form.Elements',
-      living: 'AOA.Sorcery.Form.Living',
-      mind: 'AOA.Sorcery.Form.Mind',
-      matter: 'AOA.Sorcery.Form.Matter',
-      spirit: 'AOA.Sorcery.Form.Spirit',
-      space: 'AOA.Sorcery.Form.Space',
-      time: 'AOA.Sorcery.Form.Time'
+      elements: 'WOR.Sorcery.Form.Elements',
+      living: 'WOR.Sorcery.Form.Living',
+      mind: 'WOR.Sorcery.Form.Mind',
+      matter: 'WOR.Sorcery.Form.Matter',
+      spirit: 'WOR.Sorcery.Form.Spirit',
+      space: 'WOR.Sorcery.Form.Space',
+      time: 'WOR.Sorcery.Form.Time'
     };
   }
 
   async _prepareRitualContext(context) {
     // Path options
     context.pathOptions = {
-      circlecasting: 'AOA.Ritual.Path.Circlecasting',
-      binding: 'AOA.Ritual.Path.Binding',
-      hexing: 'AOA.Ritual.Path.Hexing'
+      circlecasting: 'WOR.Ritual.Path.Circlecasting',
+      binding: 'WOR.Ritual.Path.Binding',
+      hexing: 'WOR.Ritual.Path.Hexing'
     };
   }
 
@@ -530,27 +530,27 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
   async _prepareBackgroundContext(context) {
     // Economic tier options
     context.tierOptions = {
-      upper: 'AOA.EconomicTier.Upper',
-      middle: 'AOA.EconomicTier.Middle',
-      lower: 'AOA.EconomicTier.Lower',
-      struggling: 'AOA.EconomicTier.Struggling'
+      upper: 'WOR.EconomicTier.Upper',
+      middle: 'WOR.EconomicTier.Middle',
+      lower: 'WOR.EconomicTier.Lower',
+      struggling: 'WOR.EconomicTier.Struggling'
     };
 
     // Currency options
     context.currencyOptions = {
-      orin: 'AOA.Wealth.Orin',
-      crowns: 'AOA.Wealth.Crowns',
-      sovereigns: 'AOA.Wealth.Sovereigns'
+      orin: 'WOR.Wealth.Orin',
+      crowns: 'WOR.Wealth.Crowns',
+      sovereigns: 'WOR.Wealth.Sovereigns'
     };
 
     // Social standing options (ordered from highest to lowest standing)
     context.socialStandingOptions = {
-      exalted: 'AOA.SocialStanding.Exalted',
-      ordained: 'AOA.SocialStanding.Ordained',
-      anointed: 'AOA.SocialStanding.Anointed',
-      penitent: 'AOA.SocialStanding.Penitent',
-      heretics: 'AOA.SocialStanding.Heretics',
-      outcast: 'AOA.SocialStanding.Outcast'
+      exalted: 'WOR.SocialStanding.Exalted',
+      ordained: 'WOR.SocialStanding.Ordained',
+      anointed: 'WOR.SocialStanding.Anointed',
+      penitent: 'WOR.SocialStanding.Penitent',
+      heretics: 'WOR.SocialStanding.Heretics',
+      outcast: 'WOR.SocialStanding.Outcast'
     };
   }
 
@@ -565,26 +565,26 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
   async _prepareLifeEventContext(context) {
     // Suit options
     context.suitOptions = {
-      love: 'AOA.LifeEvent.Suit.Love',
-      fortune: 'AOA.LifeEvent.Suit.Fortune',
-      conflict: 'AOA.LifeEvent.Suit.Conflict',
-      knowledge: 'AOA.LifeEvent.Suit.Knowledge'
+      love: 'WOR.LifeEvent.Suit.Love',
+      fortune: 'WOR.LifeEvent.Suit.Fortune',
+      conflict: 'WOR.LifeEvent.Suit.Conflict',
+      knowledge: 'WOR.LifeEvent.Suit.Knowledge'
     };
   }
 
   async _prepareNPCTraitContext(context) {
     // Category options with icon paths
     context.categoryOptions = {
-      offense: 'AOA.NPCTrait.Category.Offense',
-      defense: 'AOA.NPCTrait.Category.Defense',
-      mobility: 'AOA.NPCTrait.Category.Mobility',
-      control: 'AOA.NPCTrait.Category.Control',
-      teamplay: 'AOA.NPCTrait.Category.Teamplay',
-      leadership: 'AOA.NPCTrait.Category.Leadership',
-      supernatural: 'AOA.NPCTrait.Category.Supernatural',
-      ranged: 'AOA.NPCTrait.Category.Ranged',
-      signature: 'AOA.NPCTrait.Category.Signature',
-      typeTrait: 'AOA.NPCTrait.Category.TypeTrait'
+      offense: 'WOR.NPCTrait.Category.Offense',
+      defense: 'WOR.NPCTrait.Category.Defense',
+      mobility: 'WOR.NPCTrait.Category.Mobility',
+      control: 'WOR.NPCTrait.Category.Control',
+      teamplay: 'WOR.NPCTrait.Category.Teamplay',
+      leadership: 'WOR.NPCTrait.Category.Leadership',
+      supernatural: 'WOR.NPCTrait.Category.Supernatural',
+      ranged: 'WOR.NPCTrait.Category.Ranged',
+      signature: 'WOR.NPCTrait.Category.Signature',
+      typeTrait: 'WOR.NPCTrait.Category.TypeTrait'
     };
 
     // Category icons
@@ -603,64 +603,64 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
 
     // NPC Class options (for allowedClasses)
     context.classOptions = {
-      humanoid: 'AOA.NPC.Class.Humanoid',
-      beast: 'AOA.NPC.Class.Beast',
-      vermin: 'AOA.NPC.Class.Vermin',
-      afflicted: 'AOA.NPC.Class.Afflicted',
-      apparition: 'AOA.NPC.Class.Apparition',
-      fiend: 'AOA.NPC.Class.Fiend'
+      humanoid: 'WOR.NPC.Class.Humanoid',
+      beast: 'WOR.NPC.Class.Beast',
+      vermin: 'WOR.NPC.Class.Vermin',
+      afflicted: 'WOR.NPC.Class.Afflicted',
+      apparition: 'WOR.NPC.Class.Apparition',
+      fiend: 'WOR.NPC.Class.Fiend'
     };
 
     // Trigger options
     context.triggerOptions = {
-      '': 'AOA.NPCTrait.Trigger.None',
-      onHit: 'AOA.NPCTrait.Trigger.OnHit',
-      onCrit: 'AOA.NPCTrait.Trigger.OnCrit',
-      onDamaged: 'AOA.NPCTrait.Trigger.OnDamaged',
-      onDefend: 'AOA.NPCTrait.Trigger.OnDefend',
-      onKill: 'AOA.NPCTrait.Trigger.OnKill',
-      onTurnStart: 'AOA.NPCTrait.Trigger.OnTurnStart',
-      onTurnEnd: 'AOA.NPCTrait.Trigger.OnTurnEnd',
-      onMove: 'AOA.NPCTrait.Trigger.OnMove',
-      onAllyDeath: 'AOA.NPCTrait.Trigger.OnAllyDeath',
-      reaction: 'AOA.NPCTrait.Trigger.Reaction'
+      '': 'WOR.NPCTrait.Trigger.None',
+      onHit: 'WOR.NPCTrait.Trigger.OnHit',
+      onCrit: 'WOR.NPCTrait.Trigger.OnCrit',
+      onDamaged: 'WOR.NPCTrait.Trigger.OnDamaged',
+      onDefend: 'WOR.NPCTrait.Trigger.OnDefend',
+      onKill: 'WOR.NPCTrait.Trigger.OnKill',
+      onTurnStart: 'WOR.NPCTrait.Trigger.OnTurnStart',
+      onTurnEnd: 'WOR.NPCTrait.Trigger.OnTurnEnd',
+      onMove: 'WOR.NPCTrait.Trigger.OnMove',
+      onAllyDeath: 'WOR.NPCTrait.Trigger.OnAllyDeath',
+      reaction: 'WOR.NPCTrait.Trigger.Reaction'
     };
 
     // Condition options (for appliedConditions)
     context.conditionOptions = {
-      wounded: 'AOA.Condition.Wounded.label',
-      staggered: 'AOA.Condition.Staggered.label',
-      stunned: 'AOA.Condition.Stunned.label',
-      slowed: 'AOA.Condition.Slowed.label',
-      weakened: 'AOA.Condition.Weakened.label',
-      restrained: 'AOA.Condition.Restrained.label',
-      grappled: 'AOA.Condition.Grappled.label',
-      prone: 'AOA.Condition.Prone.label',
-      blinded: 'AOA.Condition.Blinded.label',
-      frightened: 'AOA.Condition.Frightened.label',
-      charmed: 'AOA.Condition.Charmed.label',
-      bleeding: 'AOA.Condition.Bleeding.label',
-      poisoned: 'AOA.Condition.Poisoned.label',
-      burning: 'AOA.Condition.Burning.label',
-      numb: 'AOA.Condition.Numb.label',
-      shaken: 'AOA.Condition.Shaken.label'
+      wounded: 'WOR.Condition.Wounded.label',
+      staggered: 'WOR.Condition.Staggered.label',
+      stunned: 'WOR.Condition.Stunned.label',
+      slowed: 'WOR.Condition.Slowed.label',
+      weakened: 'WOR.Condition.Weakened.label',
+      restrained: 'WOR.Condition.Restrained.label',
+      grappled: 'WOR.Condition.Grappled.label',
+      prone: 'WOR.Condition.Prone.label',
+      blinded: 'WOR.Condition.Blinded.label',
+      frightened: 'WOR.Condition.Frightened.label',
+      charmed: 'WOR.Condition.Charmed.label',
+      bleeding: 'WOR.Condition.Bleeding.label',
+      poisoned: 'WOR.Condition.Poisoned.label',
+      burning: 'WOR.Condition.Burning.label',
+      numb: 'WOR.Condition.Numb.label',
+      shaken: 'WOR.Condition.Shaken.label'
     };
 
     // Cooldown options
     context.cooldownOptions = {
-      '': 'AOA.NPCTrait.Cooldown.None',
-      'once/round': 'AOA.NPCTrait.Cooldown.OncePerRound',
-      'once/scene': 'AOA.NPCTrait.Cooldown.OncePerScene',
-      'once/day': 'AOA.NPCTrait.Cooldown.OncePerDay',
-      'recharge': 'AOA.NPCTrait.Cooldown.Recharge'
+      '': 'WOR.NPCTrait.Cooldown.None',
+      'once/round': 'WOR.NPCTrait.Cooldown.OncePerRound',
+      'once/scene': 'WOR.NPCTrait.Cooldown.OncePerScene',
+      'once/day': 'WOR.NPCTrait.Cooldown.OncePerDay',
+      'recharge': 'WOR.NPCTrait.Cooldown.Recharge'
     };
 
     // Difficulty options for rolls
     context.difficultyOptions = {
-      '': 'AOA.Difficulty.None',
-      trivial: 'AOA.Difficulty.Trivial',
-      standard: 'AOA.Difficulty.Standard',
-      hard: 'AOA.Difficulty.Hard'
+      '': 'WOR.Difficulty.None',
+      trivial: 'WOR.Difficulty.Trivial',
+      standard: 'WOR.Difficulty.Standard',
+      hard: 'WOR.Difficulty.Hard'
     };
 
     // Tier range options (0-6)
@@ -915,7 +915,7 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
     const document = this.document;
     const fieldPath = target.dataset.field || 'system.description';
     const currentContent = foundry.utils.getProperty(document, fieldPath) || '';
-    const fieldLabel = game.i18n.localize('AOA.Common.Description');
+    const fieldLabel = game.i18n.localize('WOR.Common.Description');
 
     // Create a unique ID for this editor instance
     const editorId = `editor-${document.id}-${Date.now()}`;
@@ -933,7 +933,7 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
 
     const dialog = new foundry.applications.api.DialogV2({
       window: {
-        title: `${game.i18n.localize('AOA.Common.Edit')}: ${document.name}`,
+        title: `${game.i18n.localize('WOR.Common.Edit')}: ${document.name}`,
         resizable: true
       },
       content: content,
