@@ -1,7 +1,7 @@
 # The Weight of Ruin
 
 ![Foundry v13](https://img.shields.io/badge/foundry-v13-green)
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-alpha0.1.2-blue)
 
 A grimdark medieval fantasy RPG system for [Foundry VTT](https://foundryvtt.com) where magic corrupts and choices have lasting consequences.
 
