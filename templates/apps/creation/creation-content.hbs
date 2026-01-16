@@ -1,0 +1,1048 @@
+{{!-- Character Creation Wizard Content --}}
+<div class="creation-body">
+  <div class="step-header">
+    <h2>{{localize "AOA.CharacterCreation.StepLabel"}} {{add currentStep 1}}: {{localize stepLabel}}</h2>
+  </div>
+
+  <div class="creation-step-content">
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 1: LINEAGE --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "lineage")}}
+    <div class="step-lineage">
+      <p class="step-description">{{localize "AOA.CharacterCreation.LineageDescription"}}</p>
+
+      {{!-- Roll Option --}}
+      <div class="roll-section">
+        <button type="button" class="roll-btn" data-action="rollLineage" {{#if hasRolled}}disabled{{/if}}>
+          <i class="fas fa-dice"></i> {{localize "AOA.CharacterCreation.RollLineage"}}
+        </button>
+        <span class="lp-award">+{{localize "AOA.CharacterCreation.LPForRoll" amount=25}}</span>
+
+        {{#if rolledLineage}}
+        <div class="roll-result">
+          <span class="roll-value">{{localize "AOA.CharacterCreation.Rolled"}}: {{rolledLineage.roll}}</span>
+          {{#if rolledLineage.lineage}}
+          <span class="roll-match">→ {{rolledLineage.lineage.name}}</span>
+          {{/if}}
+        </div>
+        {{/if}}
+      </div>
+
+      <div class="divider-or">{{localize "AOA.Common.Or"}}</div>
+
+      {{!-- Manual Selection --}}
+      <div class="selection-grid lineage-grid">
+        {{#each lineages}}
+        <div class="selection-card lineage-card lineage-{{toLowerCase name}} {{#if (eq ../characterData.lineageItem.id id)}}selected{{/if}}"
+             data-action="selectLineage" data-lineage-id="{{id}}" data-lineage="{{toLowerCase name}}">
+          <div class="lineage-icon">
+            <img src="{{img}}" alt="{{name}}" />
+          </div>
+          <h3 class="card-title">{{name}}</h3>
+          <div class="card-modifiers">
+            {{#each system.attributeModifiers}}
+            {{#if this}}
+            <span class="modifier {{#if (lt this 0)}}negative{{else}}positive{{/if}} {{#if (eq @key 'any')}}flexible{{/if}}">
+              {{#if (eq @key 'any')}}
+              {{localize "AOA.Attributes.Any"}}: +{{this}}
+              {{else}}
+              {{@key}}: {{#if (gt this 0)}}+{{/if}}{{this}}
+              {{/if}}
+            </span>
+            {{/if}}
+            {{/each}}
+            {{#if system.bonusSkillRanks}}
+            <span class="modifier flexible">+{{system.bonusSkillRanks}} {{localize "AOA.CharacterCreation.SkillRank"}}</span>
+            {{/if}}
+          </div>
+          {{#if system.startingWitchsight}}
+          <span class="witchsight-badge">
+            <i class="fas fa-eye"></i> {{localize "AOA.Attributes.Witchsight"}}: {{system.startingWitchsight}}
+          </span>
+          {{/if}}
+          <div class="card-description">{{{system.description}}}</div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 2: BACKGROUND --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "background")}}
+    <div class="step-background">
+      <p class="step-description">{{localize "AOA.CharacterCreation.BackgroundDescription"}}</p>
+
+      {{!-- Roll Section --}}
+      <div class="roll-section">
+        <button type="button" class="roll-btn" data-action="rollBackground" {{#if hasRolled}}disabled{{/if}}>
+          <i class="fas fa-dice"></i>
+          {{localize "AOA.CharacterCreation.Background.RollButton"}}
+        </button>
+        <span class="lp-award">+{{localize "AOA.CharacterCreation.LPForRoll" amount=50}}</span>
+        {{#if hasRolled}}
+        <div class="roll-result">
+          <i class="fas fa-check"></i>
+          <span class="roll-details">
+            <span class="standing-result">d100: {{rolledBackground.standingRoll}} → {{localize (concat "AOA.SocialStanding." (capitalize rolledBackground.standing))}}</span>
+            <span class="background-result">→ {{rolledBackground.background.name}}</span>
+          </span>
+        </div>
+        {{/if}}
+      </div>
+
+      {{!-- Backgrounds by Social Standing --}}
+      {{#each backgrounds}}
+      {{#if this.length}}
+      <div class="standing-section standing-{{@key}}">
+        <h3 class="standing-header">
+          {{localize (concat "AOA.SocialStanding." (capitalize @key))}}
+          <span class="standing-info">{{lookup @root.socialStandingSkillRanks @key}} {{localize "AOA.SocialStanding.SkillRanks"}}</span>
+        </h3>
+        <div class="selection-grid background-grid">
+          {{#each this}}
+          <div class="selection-card background-card {{#if (eq ../../characterData.backgroundItem.id id)}}selected{{/if}} {{#if (eq ../../rolledBackground.background.id id)}}rolled{{/if}}"
+               data-action="selectBackground" data-background-id="{{id}}">
+            <h4 class="card-title">{{name}}</h4>
+            {{#if system.description}}
+            <p class="card-description">{{{system.description}}}</p>
+            {{/if}}
+            <div class="card-details">
+              <div class="detail-row">
+                <span class="wealth-range">
+                  <i class="fas fa-coins"></i>
+                  <span class="detail-value">{{system.startingWealth.min}}-{{system.startingWealth.max}}</span>
+                  <span class="detail-label">{{localize (concat "AOA.Wealth." (capitalize system.startingWealth.currency))}}</span>
+                </span>
+              </div>
+              <div class="detail-row">
+                <span class="skill-ranks-info">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span class="detail-value">{{system.freeSkillRanks}}</span>
+                  <span class="detail-label">{{localize "AOA.SocialStanding.SkillRanks"}}</span>
+                </span>
+              </div>
+              <div class="detail-row">
+                <span class="social-standing-info">
+                  <i class="fas fa-users"></i>
+                  <span class="detail-label">{{localize (concat "AOA.SocialStanding." (capitalize system.socialStanding))}}</span>
+                </span>
+              </div>
+              {{#if system.contact}}
+              <div class="detail-row">
+                <span class="contact-info">
+                  <i class="fas fa-user"></i>
+                  <span class="detail-label">{{system.contact}}</span>
+                </span>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 3: ARCHETYPE --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "archetype")}}
+    <div class="step-archetype">
+      <p class="step-description">{{localize "AOA.CharacterCreation.ArchetypeDescription"}}</p>
+
+      {{!-- Roll Option --}}
+      <div class="roll-section">
+        <button type="button" class="roll-btn" data-action="rollArchetype" {{#if hasRolled}}disabled{{/if}}>
+          <i class="fas fa-dice-d6"></i> {{localize "AOA.CharacterCreation.RollArchetype"}}
+        </button>
+        <span class="lp-award">+{{localize "AOA.CharacterCreation.LPForRoll" amount=25}}</span>
+
+        {{#if rolledArchetype}}
+        <div class="roll-result">
+          <span class="roll-value">{{localize "AOA.CharacterCreation.Rolled"}}: {{rolledArchetype.roll}}</span>
+          {{#if rolledArchetype.isChoice}}
+          <span class="roll-match">→ {{localize "AOA.CharacterCreation.PlayerChoice"}}</span>
+          {{else if rolledArchetype.archetype}}
+          <span class="roll-match">→ {{rolledArchetype.archetype.name}}</span>
+          {{/if}}
+        </div>
+        {{/if}}
+      </div>
+
+      <div class="divider-or">{{localize "AOA.Common.Or"}}</div>
+
+      {{!-- Archetype Selection --}}
+      <div class="selection-grid archetype-grid">
+        {{#each archetypes}}
+        <div class="selection-card archetype-card archetype-{{toLowerCase name}} {{#if (eq ../characterData.archetypeItem.id id)}}selected{{/if}}"
+             data-action="selectArchetype" data-archetype-id="{{id}}" data-archetype="{{toLowerCase name}}">
+          <div class="archetype-icon">
+            <img src="{{img}}" alt="{{name}}" />
+          </div>
+          <h3 class="card-title">{{name}}</h3>
+          <div class="card-modifiers">
+            {{#each system.attributeBonuses}}
+            {{#if this}}
+            <span class="modifier positive">{{@key}}: +{{this}}</span>
+            {{/if}}
+            {{/each}}
+          </div>
+          {{#if system.startingWitchsight}}
+          <span class="witchsight-badge">
+            <i class="fas fa-eye"></i> +{{system.startingWitchsight}}
+          </span>
+          {{/if}}
+          <div class="card-description">{{{system.description}}}</div>
+        </div>
+        {{/each}}
+      </div>
+
+      {{!-- Calling Selection (if archetype selected) --}}
+      {{#if selectedArchetype}}
+      {{#if selectedArchetype.system.subtypes.length}}
+      <div class="calling-section">
+        <h3>{{localize "AOA.CharacterCreation.SelectCalling"}}</h3>
+        <div class="selection-grid calling-grid">
+          {{#each selectedArchetype.system.subtypes}}
+          <div class="selection-card calling-card {{#if (eq ../characterData.calling name)}}selected{{/if}}"
+               data-action="selectCalling" data-calling="{{name}}">
+            <h4 class="card-title">{{name}}</h4>
+            <div class="card-description">{{{description}}}</div>
+            {{#if signatureTalents.length}}
+            <div class="calling-talents-preview">
+              <h5 class="talents-preview-header">
+                <i class="fas fa-star"></i>
+                {{localize "AOA.CharacterCreation.SignatureTalents"}}
+              </h5>
+              <ul class="signature-talents-list">
+                {{#each signatureTalents}}
+                <li class="signature-talent">
+                  {{#if this.name}}
+                  <span class="talent-name">{{this.name}}</span>
+                  {{else}}
+                  <span class="talent-name">{{this}}</span>
+                  {{/if}}
+                </li>
+                {{/each}}
+              </ul>
+            </div>
+            {{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 4: PATHWAY --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "pathway")}}
+    <div class="step-pathway">
+      <p class="step-description">{{localize "AOA.CharacterCreation.PathwayDescription"}}</p>
+
+      {{!-- Roll Option --}}
+      <div class="roll-section">
+        <button type="button" class="roll-btn" data-action="rollPathway" {{#if hasRolled}}disabled{{/if}}>
+          <i class="fas fa-dice-d6"></i> {{localize "AOA.CharacterCreation.RollPathway"}}
+        </button>
+        <span class="lp-award">+{{localize "AOA.CharacterCreation.LPForRoll" amount=25}}</span>
+
+        {{#if rolledPathway}}
+        <div class="roll-result">
+          <span class="roll-value">{{localize "AOA.CharacterCreation.Rolled"}}: {{rolledPathway.roll}}</span>
+          {{#if rolledPathway.pathway}}
+          <span class="roll-match">→ {{rolledPathway.pathway.name}}</span>
+          {{/if}}
+        </div>
+        {{/if}}
+      </div>
+
+      <div class="divider-or">{{localize "AOA.Common.Or"}}</div>
+
+      {{!-- Pathway Selection --}}
+      <div class="selection-grid pathway-grid">
+        {{#each pathways}}
+        <div class="selection-card {{#if (eq ../characterData.pathwayItem.id id)}}selected{{/if}}"
+             data-action="selectPathway" data-pathway-id="{{id}}">
+          <h3 class="card-title">{{name}}</h3>
+          {{#if system.skillGrants.length}}
+          <div class="skill-grants">
+            {{#each system.skillGrants}}
+            <span class="skill-grant">{{skill}} +{{rank}}</span>
+            {{/each}}
+          </div>
+          {{/if}}
+          <div class="card-description">{{{system.description}}}</div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 5: LIFE EVENTS --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "lifeEvents")}}
+    <div class="step-life-events">
+      <p class="step-description">{{localize "AOA.CharacterCreation.LifeEventsDescription"}}</p>
+
+      <div class="life-events-controls">
+        <button type="button" class="draw-btn" data-action="drawLifeEvent" {{#unless canDrawMore}}disabled{{/unless}}>
+          <i class="fas fa-cards"></i> {{localize "AOA.CharacterCreation.DrawEvent"}}
+        </button>
+        <span class="events-count">{{acceptedEvents.length}} / 3 {{localize "AOA.CharacterCreation.EventsAccepted"}}</span>
+        <span class="lp-award">+10 LP {{localize "AOA.CharacterCreation.PerEvent"}}</span>
+      </div>
+
+      {{!-- Pending Event --}}
+      {{#if hasPending}}
+      <div class="pending-event">
+        <h3>{{pendingLifeEvent.name}}</h3>
+        <div class="event-content">
+          {{#if pendingLifeEvent.benefits.length}}
+          <div class="event-benefits">
+            <h4><i class="fas fa-plus-circle"></i> {{localize "AOA.LifeEvent.Benefits"}}</h4>
+            <ul>
+              {{#each pendingLifeEvent.benefits}}
+              <li>{{description}}</li>
+              {{/each}}
+            </ul>
+          </div>
+          {{/if}}
+          {{#if pendingLifeEvent.complications.length}}
+          <div class="event-complications">
+            <h4><i class="fas fa-minus-circle"></i> {{localize "AOA.LifeEvent.Complications"}}</h4>
+            <ul>
+              {{#each pendingLifeEvent.complications}}
+              <li>{{description}} <span class="severity">({{severity}})</span></li>
+              {{/each}}
+            </ul>
+          </div>
+          {{/if}}
+        </div>
+        <div class="event-actions">
+          <button type="button" class="accept-btn" data-action="acceptLifeEvent">
+            <i class="fas fa-check"></i> {{localize "AOA.CharacterCreation.AcceptEvent"}}
+          </button>
+          <button type="button" class="reject-btn" data-action="rejectLifeEvent">
+            <i class="fas fa-times"></i> {{localize "AOA.CharacterCreation.RejectEvent"}}
+          </button>
+        </div>
+      </div>
+      {{/if}}
+
+      {{!-- Accepted Events --}}
+      {{#if acceptedEvents.length}}
+      <div class="accepted-events">
+        <h3>{{localize "AOA.CharacterCreation.AcceptedEvents"}}</h3>
+        <ul class="events-list">
+          {{#each acceptedEvents}}
+          <li class="event-item">
+            <span class="event-name">{{name}}</span>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 6: ATTRIBUTES --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "attributes")}}
+    <div class="step-attributes">
+      <p class="step-description">{{localize "AOA.CharacterCreation.AttributesDescription"}}</p>
+
+      <div class="points-tracker">
+        <span class="points-label">{{localize "AOA.CharacterCreation.PointsRemaining"}}:</span>
+        <span class="points-value {{#if (eq attributePointsRemaining 0)}}complete{{/if}}">
+          {{attributePointsRemaining}} / {{attributePointsTotal}}
+        </span>
+      </div>
+
+      {{!-- Flexible Attribute Choice (Human) --}}
+      {{#if hasFlexibleBonus}}
+      <div class="flexible-bonus-section">
+        <h4>{{localize "AOA.CharacterCreation.FlexibleBonus"}}</h4>
+        <p>{{localize "AOA.CharacterCreation.FlexibleBonusDescription"}}</p>
+        <div class="flexible-options">
+          {{#each attributeList}}
+          <button type="button" class="flex-option {{#if (eq ../flexibleAttributeChoice key)}}selected{{/if}}"
+                  data-action="selectFlexibleAttribute" data-attribute="{{key}}">
+            {{localize label}}
+          </button>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      <div class="attributes-allocation">
+        {{#each attributeList}}
+        <div class="attribute-row">
+          <span class="attr-label">{{localize label}}</span>
+
+          <div class="attr-breakdown">
+            {{!-- Base allocation --}}
+            <div class="attr-base">
+              <button type="button" class="adjust-btn" data-action="adjustAttribute" data-attribute="{{key}}" data-adjust="-1">-</button>
+              <span class="base-value">{{lookup ../characterData.attributes key}}</span>
+              <button type="button" class="adjust-btn" data-action="adjustAttribute" data-attribute="{{key}}" data-adjust="1">+</button>
+            </div>
+
+            {{!-- Modifiers --}}
+            <span class="attr-mods">
+              {{#with (lookup ../lineageModifiers key)}}
+              {{#if this}}<span class="mod lineage" title="{{localize 'AOA.CharacterCreation.FromLineage'}}">{{#if (gt this 0)}}+{{/if}}{{this}}</span>{{/if}}
+              {{/with}}
+              {{#with (lookup ../archetypeModifiers key)}}
+              {{#if this}}<span class="mod archetype" title="{{localize 'AOA.CharacterCreation.FromArchetype'}}">{{#if (gt this 0)}}+{{/if}}{{this}}</span>{{/if}}
+              {{/with}}
+              {{#if (and ../hasFlexibleBonus (eq ../flexibleAttributeChoice key))}}
+              <span class="mod flexible" title="{{localize 'AOA.CharacterCreation.FlexibleBonus'}}">+1</span>
+              {{/if}}
+            </span>
+
+            {{!-- Total --}}
+            <span class="attr-total">=</span>
+            <span class="attr-final">{{lookup ../attributeTotals key}}</span>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+
+      {{!-- Derived Preview --}}
+      <div class="derived-preview">
+        <h4>{{localize "AOA.CharacterCreation.DerivedPreview"}}</h4>
+        <div class="derived-stats">
+          <span class="derived-stat">
+            <span class="stat-label">{{localize "AOA.Derived.Toughness.label"}}</span>
+            <span class="stat-value">{{lookup (computeDerivedFromAttrs attributeTotals baseSpeed) "toughness"}}</span>
+          </span>
+          <span class="derived-stat">
+            <span class="stat-label">{{localize "AOA.Derived.Defense.label"}}</span>
+            <span class="stat-value">{{lookup (computeDerivedFromAttrs attributeTotals baseSpeed) "defense"}}</span>
+          </span>
+          <span class="derived-stat">
+            <span class="stat-label">{{localize "AOA.Derived.Movement.label"}}</span>
+            <span class="stat-value">{{lookup (computeDerivedFromAttrs attributeTotals baseSpeed) "movement"}}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 7: SKILLS --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "skills")}}
+    <div class="step-skills">
+      <p class="step-description">{{localize "AOA.CharacterCreation.SkillsDescription"}}</p>
+
+      <div class="points-tracker">
+        <span class="points-label">{{localize "AOA.CharacterCreation.FreeSkillRanks"}}:</span>
+        <span class="points-value {{#if (eq freeSkillRanksRemaining 0)}}complete{{/if}}">
+          {{freeSkillRanksRemaining}} / {{freeSkillRanks}}
+        </span>
+      </div>
+
+      {{!-- Skills by Category --}}
+      <div class="skills-section">
+        {{#each skillsByCategory}}
+        {{#if this.length}}
+        <div class="skill-category">
+          <h4 class="category-header">{{localize (concat "AOA.SkillCategory." (capitalize @key))}}</h4>
+          <div class="skills-list">
+            {{#each this}}
+            {{!-- Hide Thaumaturgy skills if no Witchsight --}}
+            {{#unless (and (eq system.category "thaumaturgy") (not ../../hasWitchsight))}}
+            <div class="skill-row" data-skill="{{name}}">
+              <span class="skill-name">{{name}}</span>
+              <span class="skill-attr">({{system.attribute}})</span>
+              {{#with (lookup ../../grantedSkills name)}}
+              {{#if this}}
+              <span class="granted-rank" title="{{localize 'AOA.CharacterCreation.GrantedRank'}}">+{{this}}</span>
+              {{/if}}
+              {{/with}}
+              <div class="skill-controls">
+                <button type="button" class="skill-btn" data-action="removeSkillRank" data-skill="{{name}}">-</button>
+                <span class="skill-rank">{{#with (lookup ../../characterSkills name)}}{{this}}{{else}}0{{/with}}</span>
+                <button type="button" class="skill-btn" data-action="addSkillRank" data-skill="{{name}}">+</button>
+              </div>
+            </div>
+            {{/unless}}
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 8: TALENTS --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "talents")}}
+    <div class="step-talents">
+      <p class="step-description">{{localize "AOA.CharacterCreation.TalentsDescription"}}</p>
+
+      <div class="talents-section">
+        {{!-- Purchased Talents Section --}}
+        {{#if characterTalents.length}}
+        <div class="purchased-talents-section">
+          <h4 class="purchased-header">
+            <i class="fas fa-check-circle"></i>
+            {{localize "AOA.CharacterCreation.PurchasedTalents"}}
+            <span class="talent-count">{{characterTalents.length}}</span>
+          </h4>
+          <div class="purchased-talents-list">
+            {{#each characterTalents}}
+            <div class="purchased-talent-item" data-talent-id="{{id}}">
+              <div class="talent-info">
+                <span class="talent-name">{{name}}</span>
+                <span class="talent-rank">{{localize "AOA.Common.Rank"}} {{rank}}</span>
+              </div>
+              <button type="button" class="refund-talent" data-action="removeTalent" data-talent-id="{{id}}" title="{{localize 'AOA.CharacterCreation.RefundTalent'}}">
+                <i class="fas fa-undo"></i>
+                <span>{{localize "AOA.CharacterCreation.Refund"}}</span>
+              </button>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+
+        <div class="talents-info">
+          <p class="talent-cost"><i class="fas fa-coins"></i> {{localize "AOA.CharacterCreation.TalentCost"}}: <strong>10 LP</strong></p>
+        </div>
+
+        {{!-- Talent Type Filter Tabs --}}
+        <div class="talent-filter-tabs">
+          <button type="button" class="talent-filter-btn {{#if (eq talentFilter 'all')}}active{{/if}}" data-filter="all">
+            {{localize "AOA.CharacterCreation.AllTalents"}}
+          </button>
+          <button type="button" class="talent-filter-btn {{#if (eq talentFilter 'universal')}}active{{/if}}" data-filter="universal">
+            {{localize "AOA.CharacterCreation.UniversalTalents"}}
+          </button>
+          <button type="button" class="talent-filter-btn {{#if (eq talentFilter 'archetype')}}active{{/if}}" data-filter="archetype">
+            {{localize "AOA.CharacterCreation.ArchetypeTalents"}}
+          </button>
+          {{#if characterData.calling}}
+          <button type="button" class="talent-filter-btn {{#if (eq talentFilter 'signature')}}active{{/if}}" data-filter="signature">
+            {{localize "AOA.CharacterCreation.SignatureTalents"}}
+          </button>
+          {{/if}}
+        </div>
+
+        {{!-- Available Talents --}}
+        <div class="available-talents">
+          <div class="talents-grid redesigned">
+            {{#each availableTalents}}
+            <div class="talent-card redesigned {{system.talentType}} {{#if system.isFreeCalling}}free-talent{{/if}}"
+                 data-action="addTalent"
+                 data-talent-id="{{id}}"
+                 data-talent-type="{{system.talentType}}"
+                 data-archetype="{{system.archetype}}"
+                 data-matches-archetype="{{system.matchesCharacterArchetype}}"
+                 data-is-calling-talent="{{system.isFreeCalling}}"
+                 data-matches-calling="{{system.matchesCharacterCalling}}"
+                 data-calling="{{system.callingName}}">
+              {{!-- Talent Header --}}
+              <div class="talent-card-header">
+                <img src="{{img}}" alt="{{name}}" class="talent-icon" />
+                <div class="talent-title-area">
+                  <span class="talent-name">{{name}}</span>
+                  {{!-- Talent Type Tag --}}
+                  <div class="talent-tags">
+                    {{#if (eq system.talentType "universal")}}
+                    <span class="talent-tag universal">
+                      <i class="fas fa-globe"></i> {{localize "AOA.Talent.Universal"}}
+                    </span>
+                    {{else if (eq system.talentType "archetype")}}
+                    <span class="talent-tag archetype">
+                      <i class="fas fa-shield-alt"></i> {{system.archetype}}
+                    </span>
+                    {{else if (eq system.talentType "signature")}}
+                    <span class="talent-tag calling {{#if system.isFreeCalling}}free{{/if}}">
+                      <i class="fas fa-star"></i> {{#if system.callingName}}{{system.callingName}}{{else}}Signature{{/if}}
+                      {{#if system.isFreeCalling}}
+                      <span class="free-badge">{{localize "AOA.CharacterCreation.Free"}}</span>
+                      {{/if}}
+                    </span>
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+              {{!-- Talent Description --}}
+              <div class="talent-card-body">
+                <div class="talent-description">{{{system.description}}}</div>
+                {{!-- Effect Preview (Rank 1) --}}
+                {{#with (lookup system.effects "1")}}
+                <div class="talent-effect-preview">
+                  <span class="effect-label">{{localize "AOA.Common.Rank"}} 1:</span>
+                  <span class="effect-text">{{this}}</span>
+                </div>
+                {{/with}}
+              </div>
+              {{!-- Add Button --}}
+              <div class="talent-card-footer">
+                <span class="talent-cost-badge">10 LP</span>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 9: PASSIONS --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "passions")}}
+    <div class="step-passions">
+      <p class="step-description">{{localize "AOA.CharacterCreation.PassionsDescription"}}</p>
+
+      <div class="passions-form">
+        <div class="passion-field">
+          <label for="motivation">{{localize "AOA.Passions.Motivation"}}</label>
+          <input type="text" name="motivation" id="motivation" value="{{passions.motivation}}"
+                 placeholder="{{localize 'AOA.CharacterCreation.MotivationHint'}}" />
+          <p class="passion-help">{{localize "AOA.CharacterCreation.MotivationHelp"}}</p>
+        </div>
+
+        <div class="passion-field">
+          <label for="nature">{{localize "AOA.Passions.Nature"}}</label>
+          <input type="text" name="nature" id="nature" value="{{passions.nature}}"
+                 placeholder="{{localize 'AOA.CharacterCreation.NatureHint'}}" />
+          <p class="passion-help">{{localize "AOA.CharacterCreation.NatureHelp"}}</p>
+        </div>
+
+        <div class="passion-field">
+          <label for="allegiance">{{localize "AOA.Passions.Allegiance"}}</label>
+          <input type="text" name="allegiance" id="allegiance" value="{{passions.allegiance}}"
+                 placeholder="{{localize 'AOA.CharacterCreation.AllegianceHint'}}" />
+          <p class="passion-help">{{localize "AOA.CharacterCreation.AllegianceHelp"}}</p>
+        </div>
+      </div>
+
+      <div class="fervor-info">
+        <h4>{{localize "AOA.Fervor.Title"}}</h4>
+        <p>{{localize "AOA.CharacterCreation.FervorInfo"}}</p>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ============================================ --}}
+    {{!-- STEP 10: FINALIZE --}}
+    {{!-- ============================================ --}}
+    {{#if (eq stepId "finalize")}}
+    <div class="step-finalize">
+      <p class="step-description">{{localize "AOA.CharacterCreation.FinalizeDescription"}}</p>
+
+      {{!-- Finalize Step Tabs --}}
+      <div class="finalize-tabs">
+        <button type="button" class="finalize-tab-btn {{#if (eq finalizeTab 'legacy')}}active{{/if}}" data-finalize-tab="legacy">
+          <i class="fas fa-scroll"></i> {{localize "AOA.CharacterCreation.LegacyTab"}}
+        </button>
+        <button type="button" class="finalize-tab-btn {{#if (eq finalizeTab 'equipment')}}active{{/if}}" data-finalize-tab="equipment">
+          <i class="fas fa-shield-alt"></i> {{localize "AOA.CharacterCreation.EquipmentTab"}}
+        </button>
+      </div>
+
+      {{!-- ========================================== --}}
+      {{!-- LEGACY TAB --}}
+      {{!-- ========================================== --}}
+      <div class="finalize-tab-panel {{#if (eq finalizeTab 'legacy')}}active{{/if}}" data-finalize-tab-panel="legacy">
+        {{!-- Character Name and Age --}}
+        <div class="name-age-row">
+          <div class="name-field">
+            <label for="name">{{localize "AOA.Common.Name"}}</label>
+            <input type="text" name="name" id="name" value="{{characterData.name}}"
+                   placeholder="{{localize 'AOA.CharacterCreation.EnterName'}}" required />
+          </div>
+          <div class="age-field">
+            <label for="age">{{localize "AOA.Identity.Age"}}</label>
+            <input type="number" name="age" id="age" value="{{characterData.age}}"
+                   placeholder="{{localize 'AOA.CharacterCreation.EnterAge'}}" min="0" />
+          </div>
+        </div>
+
+        {{!-- Character Summary --}}
+        <div class="character-summary">
+          <h3>{{localize "AOA.CharacterCreation.Summary"}}</h3>
+
+          <div class="summary-grid">
+            <div class="summary-item">
+              <span class="summary-label">{{localize "AOA.Lineage.Title"}}</span>
+              <span class="summary-value">{{characterSummary.lineage}}</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">{{localize "AOA.Background.Title"}}</span>
+              <span class="summary-value">{{characterSummary.background}}</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">{{localize "AOA.Archetype.Title"}}</span>
+              <span class="summary-value">{{characterSummary.archetype}} ({{characterSummary.calling}})</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">{{localize "AOA.Pathway.Title"}}</span>
+              <span class="summary-value">{{characterSummary.pathway}}</span>
+            </div>
+          </div>
+
+          <div class="summary-stats">
+            <div class="summary-item">
+              <span class="summary-label">{{localize "AOA.Section.Skills"}}</span>
+              <span class="summary-value">{{characterSummary.skillCount}}</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">{{localize "AOA.Section.Talents"}}</span>
+              <span class="summary-value">{{characterSummary.talentCount}}</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">{{localize "AOA.LifeEvent.Title"}}</span>
+              <span class="summary-value">{{characterSummary.lifeEventCount}}</span>
+            </div>
+            {{#if characterSummary.witchsight}}
+            <div class="summary-item witchsight">
+              <span class="summary-label">{{localize "AOA.Attributes.Witchsight"}}</span>
+              <span class="summary-value">{{characterSummary.witchsight}}</span>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+
+        {{!-- Derived Attributes --}}
+        <div class="derived-stats-compact">
+          <h3>{{localize "AOA.CharacterCreation.DerivedStats"}}</h3>
+          <div class="derived-grid">
+            <div class="derived-item">
+              <span class="derived-label">{{localize "AOA.Derived.Defense.label"}}</span>
+              <span class="derived-value highlight">{{derivedAttributes.defense}}</span>
+            </div>
+            <div class="derived-item">
+              <span class="derived-label">{{localize "AOA.Derived.Toughness.label"}}</span>
+              <span class="derived-value">{{derivedAttributes.toughness}}</span>
+            </div>
+            <div class="derived-item">
+              <span class="derived-label">{{localize "AOA.Derived.Reflex.label"}}</span>
+              <span class="derived-value">{{derivedAttributes.reflex}}</span>
+            </div>
+            <div class="derived-item">
+              <span class="derived-label">{{localize "AOA.Derived.Movement.label"}}</span>
+              <span class="derived-value">{{derivedAttributes.movement}}</span>
+            </div>
+            <div class="derived-item">
+              <span class="derived-label">{{localize "AOA.Derived.MaxTrauma.label"}}</span>
+              <span class="derived-value highlight">{{derivedAttributes.maxTrauma}}</span>
+            </div>
+            <div class="derived-item">
+              <span class="derived-label">{{localize "AOA.Derived.Wounds.label"}}</span>
+              <span class="derived-value highlight">{{derivedAttributes.wounds}}</span>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Starting Wealth --}}
+        <div class="starting-wealth-section">
+          <h3>{{localize "AOA.CharacterCreation.StartingWealth"}}</h3>
+          {{#if backgroundWealth}}
+          <p class="wealth-range">
+            {{localize "AOA.CharacterCreation.WealthRange"}}: {{backgroundWealth.min}} - {{backgroundWealth.max}}
+            {{localize (concat "AOA.Wealth." (capitalize backgroundWealth.currency))}}
+          </p>
+          {{#unless wealthRolled}}
+          <button type="button" class="roll-wealth-btn" data-action="rollStartingWealth">
+            <i class="fas fa-dice"></i>
+            {{localize "AOA.CharacterCreation.RollWealth"}}
+          </button>
+          {{/unless}}
+          {{#if wealthRolled}}
+          <p class="rolled-wealth">
+            <i class="fas fa-coins"></i>
+            {{localize "AOA.CharacterCreation.RolledWealth"}}:
+            <span class="wealth-value">
+              {{#if currentWealth.sovereigns}}<span class="currency sovereigns">{{currentWealth.sovereigns}} {{localize "AOA.Wealth.Sovereigns"}}</span>{{/if}}
+              {{#if currentWealth.crowns}}<span class="currency crowns">{{currentWealth.crowns}} {{localize "AOA.Wealth.Crowns"}}</span>{{/if}}
+              {{#if currentWealth.orin}}<span class="currency orin">{{currentWealth.orin}} {{localize "AOA.Wealth.Orin"}}</span>{{/if}}
+            </span>
+          </p>
+          {{/if}}
+          {{else}}
+          <p class="wealth-notice">{{localize "AOA.CharacterCreation.SelectBackgroundFirst"}}</p>
+          {{/if}}
+        </div>
+
+        {{!-- LP to XP Conversion --}}
+        <div class="lp-conversion">
+          <h3>{{localize "AOA.CharacterCreation.LPConversion"}}</h3>
+          <p>{{localize "AOA.CharacterCreation.RemainingLP"}}: {{lpRemaining}}</p>
+          {{#if lpRemaining}}
+          <button type="button" class="convert-btn" data-action="convertLPtoXP">
+            <i class="fas fa-exchange-alt"></i>
+            {{localize "AOA.CharacterCreation.ConvertToXP"}}
+          </button>
+          {{/if}}
+          {{#if startingXP}}
+          <p class="starting-xp">{{localize "AOA.CharacterCreation.StartingXP"}}: {{startingXP}}</p>
+          {{/if}}
+        </div>
+      </div>
+
+      {{!-- ========================================== --}}
+      {{!-- EQUIPMENT TAB --}}
+      {{!-- ========================================== --}}
+      <div class="finalize-tab-panel {{#if (eq finalizeTab 'equipment')}}active{{/if}}" data-finalize-tab-panel="equipment">
+        {{!-- Current Wealth --}}
+        <div class="wealth-section equipment-wealth">
+          <h3>{{localize "AOA.CharacterCreation.CurrentWealth"}}</h3>
+          {{#if wealthRolled}}
+          <div class="currency-display">
+            <div class="currency-group sovereigns" title="{{localize 'AOA.Wealth.Sovereigns'}}">
+              <i class="fas fa-coins currency-icon"></i>
+              <span class="currency-value">{{currentWealth.sovereigns}}</span>
+              <span class="currency-label">{{localize "AOA.Wealth.Sovereigns"}}</span>
+            </div>
+            <div class="currency-group crowns" title="{{localize 'AOA.Wealth.Crowns'}}">
+              <i class="fas fa-coins currency-icon"></i>
+              <span class="currency-value">{{currentWealth.crowns}}</span>
+              <span class="currency-label">{{localize "AOA.Wealth.Crowns"}}</span>
+            </div>
+            <div class="currency-group orin" title="{{localize 'AOA.Wealth.Orin'}}">
+              <i class="fas fa-coins currency-icon"></i>
+              <span class="currency-value">{{currentWealth.orin}}</span>
+              <span class="currency-label">{{localize "AOA.Wealth.Orin"}}</span>
+            </div>
+          </div>
+          {{else}}
+          <p class="wealth-notice">{{localize "AOA.CharacterCreation.RollWealthFirst"}}</p>
+          {{/if}}
+        </div>
+
+        <div class="equipment-section">
+        {{!-- Purchased Gear --}}
+        {{#if purchasedGear.length}}
+        <div class="purchased-gear">
+          <h4>{{localize "AOA.CharacterCreation.PurchasedItems"}}</h4>
+          <ul class="gear-list">
+            {{#each purchasedGear}}
+            <li class="gear-item purchased-item-{{type}}">
+              <img src="{{img}}" alt="{{name}}" class="gear-icon" />
+              <div class="gear-item-info">
+                <span class="gear-name">{{name}}</span>
+                <span class="gear-type-badge">{{type}}</span>
+              </div>
+              <div class="gear-item-actions">
+                <span class="gear-cost">
+                  {{#if price.sovereigns}}<span class="price-tag sovereigns">{{price.sovereigns}} SV</span>{{/if}}
+                  {{#if price.crowns}}<span class="price-tag crowns">{{price.crowns}} CR</span>{{/if}}
+                  {{#if price.orin}}<span class="price-tag orin">{{price.orin}} OR</span>{{/if}}
+                </span>
+                <button type="button" class="remove-gear" data-action="removeGear" data-index="{{@index}}">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{!-- Gear Category Tabs --}}
+        <div class="gear-tabs">
+          <button type="button" class="gear-tab-btn {{#if (eq gearTab 'weapons')}}active{{/if}}" data-gear-tab="weapons">
+            <i class="fas fa-sword"></i> {{localize "AOA.CharacterCreation.Weapons"}}
+          </button>
+          <button type="button" class="gear-tab-btn {{#if (eq gearTab 'armor')}}active{{/if}}" data-gear-tab="armor">
+            <i class="fas fa-shield-alt"></i> {{localize "AOA.CharacterCreation.Armor"}}
+          </button>
+          <button type="button" class="gear-tab-btn {{#if (eq gearTab 'gear')}}active{{/if}}" data-gear-tab="gear">
+            <i class="fas fa-backpack"></i> {{localize "AOA.CharacterCreation.Gear"}}
+          </button>
+        </div>
+
+        {{!-- Weapons Panel --}}
+        <div class="gear-tab-panel {{#if (eq gearTab 'weapons')}}active{{/if}}" data-gear-tab-panel="weapons">
+          {{!-- Weapon Group Filter --}}
+          <div class="gear-filter">
+            <label for="weapon-group-filter">{{localize "AOA.CharacterCreation.FilterByGroup"}}:</label>
+            <select class="weapon-group-filter" id="weapon-group-filter">
+              {{#each weaponGroups}}
+              <option value="{{this}}" {{#if (eq this ../equipmentFilters.weaponGroup)}}selected{{/if}}>
+                {{#if (eq this "all")}}
+                {{localize "AOA.Common.All"}}
+                {{else}}
+                {{localize (concat "AOA.Weapon.Group." (capitalize this))}}
+                {{/if}}
+              </option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="gear-grid">
+            {{#each availableWeapons}}
+            <div class="gear-card weapon-card" data-action="purchaseGear" data-item-id="{{id}}" data-group="{{system.group}}">
+              <div class="gear-card-top">
+                <img src="{{img}}" alt="{{name}}" class="gear-card-icon" />
+                <div class="gear-card-info">
+                  <div class="gear-card-title-row">
+                    <span class="gear-name">{{name}}</span>
+                    <span class="gear-cost">
+                      {{#if system.price.sovereigns}}<span class="price-tag sovereigns">{{system.price.sovereigns}} SV</span>{{/if}}
+                      {{#if system.price.crowns}}<span class="price-tag crowns">{{system.price.crowns}} CR</span>{{/if}}
+                      {{#if system.price.orin}}<span class="price-tag orin">{{system.price.orin}} OR</span>{{/if}}
+                    </span>
+                  </div>
+                  {{#if system.description}}
+                  <div class="gear-card-description">{{{system.description}}}</div>
+                  {{/if}}
+                </div>
+              </div>
+              <div class="gear-card-stats">
+                <span class="stat-badge damage">
+                  <i class="fas fa-burst"></i> {{system.baseDamage}}
+                </span>
+                <span class="stat-badge range">
+                  <i class="fas fa-bullseye"></i> {{system.displayRange}}
+                </span>
+                <span class="stat-badge group">
+                  {{localize (concat "AOA.Weapon.Group." (capitalize system.group))}}
+                </span>
+              </div>
+              {{#if system.properties.length}}
+              <div class="gear-card-properties">
+                {{#each system.properties}}
+                <span class="property-tag">{{this}}</span>
+                {{/each}}
+              </div>
+              {{/if}}
+            </div>
+            {{/each}}
+          </div>
+        </div>
+
+        {{!-- Armor Panel --}}
+        <div class="gear-tab-panel {{#if (eq gearTab 'armor')}}active{{/if}}" data-gear-tab-panel="armor">
+          {{!-- Armor Group Filter --}}
+          <div class="gear-filter">
+            <label for="armor-group-filter">{{localize "AOA.CharacterCreation.FilterByGroup"}}:</label>
+            <select class="armor-group-filter" id="armor-group-filter">
+              {{#each armorGroups}}
+              <option value="{{this}}" {{#if (eq this ../equipmentFilters.armorGroup)}}selected{{/if}}>
+                {{#if (eq this "all")}}
+                {{localize "AOA.Common.All"}}
+                {{else if (eq this "shield")}}
+                {{localize "AOA.Armor.Category.Shield"}}
+                {{else}}
+                {{localize (concat "AOA.Armor.Group." (capitalize this))}}
+                {{/if}}
+              </option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="gear-grid">
+            {{#each availableArmor}}
+            <div class="gear-card armor-card" data-action="purchaseGear" data-item-id="{{id}}" data-group="{{system.armorGroup}}" data-armor-category="{{system.armorCategory}}">
+              <div class="gear-card-top">
+                <img src="{{img}}" alt="{{name}}" class="gear-card-icon" />
+                <div class="gear-card-info">
+                  <div class="gear-card-title-row">
+                    <span class="gear-name">{{name}}</span>
+                    <span class="gear-cost">
+                      {{#if system.price.sovereigns}}<span class="price-tag sovereigns">{{system.price.sovereigns}} SV</span>{{/if}}
+                      {{#if system.price.crowns}}<span class="price-tag crowns">{{system.price.crowns}} CR</span>{{/if}}
+                      {{#if system.price.orin}}<span class="price-tag orin">{{system.price.orin}} OR</span>{{/if}}
+                    </span>
+                  </div>
+                  {{#if system.description}}
+                  <div class="gear-card-description">{{{system.description}}}</div>
+                  {{/if}}
+                </div>
+              </div>
+              <div class="gear-card-stats">
+                <span class="stat-badge dr">
+                  <i class="fas fa-shield"></i> DR {{system.drDisplay}}
+                </span>
+                {{#if system.armorCategory}}
+                <span class="stat-badge armor-category category-{{system.armorCategory}}">
+                  {{localize (concat "AOA.Armor.Category." (capitalize system.armorCategory))}}
+                </span>
+                {{/if}}
+                {{#if system.encumbering}}
+                <span class="stat-badge encumbering">
+                  <i class="fas fa-weight-hanging"></i> Enc {{system.encumbering}}
+                </span>
+                {{/if}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+
+        {{!-- Gear Panel --}}
+        <div class="gear-tab-panel {{#if (eq gearTab 'gear')}}active{{/if}}" data-gear-tab-panel="gear">
+          {{!-- Gear Group Filter --}}
+          <div class="gear-filter">
+            <label for="gear-group-filter">{{localize "AOA.CharacterCreation.FilterByGroup"}}:</label>
+            <select class="gear-group-filter" id="gear-group-filter">
+              {{#each gearGroups}}
+              <option value="{{this}}" {{#if (eq this ../equipmentFilters.gearGroup)}}selected{{/if}}>
+                {{#if (eq this "all")}}
+                {{localize "AOA.Common.All"}}
+                {{else}}
+                {{localize (concat "AOA.Gear.Group." (capitalize this))}}
+                {{/if}}
+              </option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="gear-grid">
+            {{#each availableGear}}
+            <div class="gear-card general-gear-card" data-action="purchaseGear" data-item-id="{{id}}" data-group="{{system.gearGroup}}">
+              <div class="gear-card-top">
+                <img src="{{img}}" alt="{{name}}" class="gear-card-icon" />
+                <div class="gear-card-info">
+                  <div class="gear-card-title-row">
+                    <span class="gear-name">{{name}}</span>
+                    <span class="gear-cost">
+                      {{#if system.price.sovereigns}}<span class="price-tag sovereigns">{{system.price.sovereigns}} SV</span>{{/if}}
+                      {{#if system.price.crowns}}<span class="price-tag crowns">{{system.price.crowns}} CR</span>{{/if}}
+                      {{#if system.price.orin}}<span class="price-tag orin">{{system.price.orin}} OR</span>{{/if}}
+                    </span>
+                  </div>
+                  {{#if system.description}}
+                  <div class="gear-card-description">{{{system.description}}}</div>
+                  {{/if}}
+                </div>
+              </div>
+              <div class="gear-card-stats">
+                <span class="stat-badge group">
+                  {{localize (concat "AOA.Gear.Group." (capitalize system.gearGroup))}}
+                </span>
+                {{#if system.weight}}
+                <span class="stat-badge weight">
+                  <i class="fas fa-weight"></i> {{system.weight}}
+                </span>
+                {{/if}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        </div>{{!-- /.equipment-section --}}
+      </div>
+    </div>
+    {{/if}}
+
+  </div>
+</div>

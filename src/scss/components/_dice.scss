@@ -1,0 +1,1957 @@
+// The Weight of Ruin - Dice and Roll Styles
+// Styles for roll cards, dice displays, and roll dialogs
+
+// ========================================
+// CHAT CARD BASE STYLES (Parchment Theme)
+// ========================================
+
+// Chat card header with actor portrait
+.chat-card-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm;
+  background: linear-gradient(135deg, rgba($c-dark, 0.08), rgba($c-dark, 0.12));
+  border-bottom: $border-width-thick solid rgba($c-dark, 0.1);
+  margin: (-$spacing-sm) (-$spacing-sm) $spacing-sm (-$spacing-sm);
+  border-radius: $border-radius-md $border-radius-md 0 0;
+
+  .actor-portrait {
+    width: 48px;
+    height: 48px;
+    border-radius: $border-radius-md;
+    border: $border-width-thick solid rgba($c-dark, 0.2);
+    object-fit: cover;
+    box-shadow: $shadow-sm;
+  }
+
+  .header-info {
+    flex: 1;
+
+    .actor-name {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+      margin: 0;
+      font-family: $font-primary;
+    }
+
+    .roll-type {
+      font-size: $font-size-sm;
+      color: $c-medium;
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      .roll-components {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+
+        .component-value {
+          font-weight: $font-weight-bold;
+          color: $c-accent-dark;
+        }
+
+        .separator {
+          color: $c-light;
+          font-size: $font-size-sm;
+        }
+      }
+    }
+  }
+}
+
+// Collapsible details section
+.collapsible-section {
+  margin: $spacing-sm 0;
+
+  .collapsible-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($c-dark, 0.05);
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    color: $c-medium;
+    transition: background $transition-fast;
+    user-select: none;
+
+    &:hover {
+      background: rgba($c-dark, 0.1);
+    }
+
+    .collapse-icon {
+      transition: transform $transition-fast;
+      font-size: $font-size-xs;
+    }
+
+    &.collapsed .collapse-icon {
+      transform: rotate(-90deg);
+    }
+
+    .section-title {
+      flex: 1;
+    }
+  }
+
+  .collapsible-content {
+    padding: $spacing-sm;
+    font-size: $font-size-sm;
+    max-height: 500px;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height $transition-normal, opacity $transition-fast, padding $transition-fast;
+
+    &.collapsed {
+      max-height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+// Interactive buttons
+.chat-card-buttons {
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+  padding-top: $spacing-sm;
+  border-top: $border-width dashed rgba($c-dark, 0.15);
+
+  button {
+    flex: 1;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    border: $border-width solid rgba($c-dark, 0.2);
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    font-family: $font-primary;
+
+    &.apply-damage {
+      @include button-danger;
+    }
+
+    &.apply-fatigue {
+      background: linear-gradient(135deg, $c-warning, var(--wor-warning-darker));
+      color: $c-white;
+      border-color: var(--wor-warning-darker);
+
+      &:hover {
+        background: linear-gradient(135deg, var(--wor-warning-lighter), $c-warning);
+      }
+    }
+
+    &.secondary-action {
+      @include button-secondary;
+    }
+  }
+}
+
+// ========================================
+// ROLL CARD STYLES
+// ========================================
+
+.roll-card {
+  background: transparent;
+  border-radius: $border-radius-md;
+  padding: $spacing-sm;
+
+  .roll-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: $border-width solid rgba($c-dark, 0.1);
+    padding-bottom: $spacing-xs;
+    margin-bottom: $spacing-sm;
+
+    .roll-title {
+      margin: 0;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      font-family: $font-primary;
+    }
+
+    .roll-actor {
+      font-size: $font-size-sm;
+      color: $c-medium;
+    }
+  }
+
+  .roll-pool-breakdown {
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-sm;
+
+    .pool-label {
+      font-weight: $font-weight-bold;
+    }
+
+    .component {
+      &.attribute { color: $c-accent-dark; }
+      &.skill { color: $c-success-dark; }
+      &.modifier { color: $c-medium; }
+      &.bonus-dice.zeal { color: $c-danger; }
+    }
+
+    .pool-total {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .roll-parameters {
+    display: flex;
+    gap: $spacing-lg;
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-sm;
+
+    .difficulty, .target-threshold {
+      i {
+        margin-right: $spacing-xs;
+        opacity: 0.7;
+      }
+    }
+
+    .tt-label {
+      font-size: $font-size-sm;
+      color: $c-medium;
+    }
+  }
+
+  // Dice Display
+  .roll-dice {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    margin: $spacing-sm 0;
+    justify-content: flex-start;
+  }
+
+  // Hits Display
+  .roll-hits {
+    font-size: $font-size-lg;
+    margin: $spacing-sm 0;
+
+    .hits-label {
+      font-weight: $font-weight-bold;
+    }
+
+    .hits-value {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $c-accent-dark;
+    }
+
+    .hits-vs {
+      color: $c-medium;
+    }
+  }
+
+  // Result Display
+  .roll-result {
+    padding: $spacing-sm;
+    border-radius: $border-radius-md;
+    text-align: center;
+    margin: $spacing-sm 0;
+
+    .result-degree {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      font-family: $font-primary;
+    }
+
+    .result-margin {
+      font-size: $font-size-sm;
+      opacity: 0.8;
+    }
+
+    &.critical-success {
+      background: linear-gradient(135deg, $c-success-dark, var(--wor-success-dark-darker));
+      color: $c-white;
+      box-shadow: $shadow-glow-accent;
+    }
+
+    &.success {
+      background: $c-success;
+      color: $c-white;
+    }
+
+    &.failure {
+      background: $c-danger;
+      color: $c-white;
+    }
+
+    &.critical-failure {
+      background: linear-gradient(135deg, $c-danger, $c-danger-dark);
+      color: $c-white;
+      box-shadow: 0 0 5px $c-danger;
+    }
+
+    &.auto-failure {
+      background: $c-medium;
+      color: $c-white;
+    }
+  }
+
+  // Zeal Spent
+  .roll-zeal-spent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    margin-top: $spacing-sm;
+    font-size: $font-size-sm;
+
+    .zeal-option {
+      background: var(--wor-accent-alpha-15);
+      color: $c-accent-dark;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-sm;
+
+      i {
+        margin-right: $spacing-xs;
+      }
+    }
+  }
+
+  // Reroll Info
+  .roll-reroll-info {
+    font-size: $font-size-sm;
+    font-style: italic;
+    color: $c-medium;
+    margin-top: $spacing-xs;
+  }
+
+  // Zero Pool
+  .roll-zero-pool {
+    font-size: $font-size-sm;
+    color: $c-danger;
+
+    i {
+      margin-right: $spacing-xs;
+    }
+  }
+
+  // Auto Success
+  .roll-auto-success {
+    font-size: $font-size-sm;
+    color: $c-accent-dark;
+    font-weight: $font-weight-bold;
+
+    i {
+      margin-right: $spacing-xs;
+    }
+  }
+}
+
+// D6 Die styling
+.die.d6 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 $spacing-xs;
+  border-radius: $border-radius-sm;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-base;
+  background: linear-gradient(145deg, $c-pale, var(--wor-pale-darker));
+  border: $border-width-thick solid $c-medium;
+  color: $c-dark;
+  box-shadow: $shadow-sm, inset 0 1px 0 var(--wor-white-alpha-40);
+  margin: 1px;
+
+  // Hit dice (met threshold)
+  &.hit {
+    background: linear-gradient(145deg, $c-success-light, $c-success);
+    border-color: $c-success-dark;
+    color: $c-white;
+  }
+
+  // Maximum roll (6)
+  &.max {
+    background: linear-gradient(145deg, $c-accent-light, $c-accent);
+    border-color: $c-accent-dark;
+    color: $c-dark;
+    box-shadow: $shadow-glow-accent, $shadow-sm;
+  }
+
+  // Minimum roll (1)
+  &.min {
+    background: linear-gradient(145deg, $c-danger-light, $c-danger);
+    border-color: $c-danger-dark;
+    color: $c-white;
+  }
+}
+
+// Crisis Roll Card
+.crisis-roll {
+  background: transparent;
+  border-radius: $border-radius-md;
+  padding: $spacing-sm;
+
+  .crisis-header {
+    .roll-title {
+      color: $c-danger;
+      font-family: $font-primary;
+
+      i {
+        margin-right: $spacing-xs;
+      }
+    }
+  }
+
+  .crisis-stats {
+    display: flex;
+    gap: $spacing-lg;
+    margin: $spacing-sm 0;
+    font-size: $font-size-sm;
+
+    .stat-label {
+      font-weight: $font-weight-bold;
+    }
+
+    .fatigue-value {
+      color: $c-danger;
+    }
+  }
+
+  .crisis-comparison {
+    .hits-vs {
+      margin: 0 $spacing-xs;
+    }
+
+    .fatigue-target {
+      color: $c-danger;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .crisis-result {
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    text-align: center;
+    margin-top: $spacing-sm;
+
+    &.injury {
+      background: linear-gradient(135deg, $c-danger, $c-danger-dark);
+      color: $c-white;
+
+      .result-injury {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+
+        i {
+          margin-right: $spacing-xs;
+        }
+      }
+
+      .injury-instruction {
+        font-size: $font-size-sm;
+        margin-top: $spacing-xs;
+        opacity: 0.9;
+      }
+    }
+
+    &.survived {
+      background: $c-success;
+      color: $c-white;
+
+      .result-survived {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+
+        i {
+          margin-right: $spacing-xs;
+        }
+      }
+    }
+  }
+}
+
+// Critical Injury Chat Card
+.critical-injury-card {
+  background: transparent;
+  border-left: $border-width-heavy solid $c-danger;
+  border-radius: $border-radius-md;
+  padding: 0;
+  overflow: hidden;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-sm;
+    background: linear-gradient(135deg, $c-danger, $c-danger-dark);
+    color: $c-white;
+
+    .actor-portrait {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: $border-width-thick solid rgba($c-white, 0.3);
+      object-fit: cover;
+    }
+
+    .card-title {
+      h3 {
+        margin: 0;
+        font-size: $font-size-lg;
+        font-family: $font-primary;
+      }
+
+      .actor-name {
+        font-size: $font-size-sm;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .card-content {
+    padding: $spacing-md;
+
+    .flavor-text {
+      font-style: italic;
+      color: $c-medium;
+      margin: 0 0 $spacing-md;
+      padding: $spacing-sm;
+      background: rgba($c-dark, 0.05);
+      border-radius: $border-radius-sm;
+
+      i {
+        color: $c-light;
+        font-size: $font-size-xs;
+        margin: 0 $spacing-xs;
+      }
+    }
+
+    .injury-status {
+      display: flex;
+      justify-content: center;
+      margin-bottom: $spacing-sm;
+
+      .injury-count {
+        font-weight: $font-weight-bold;
+        color: $c-danger;
+
+        i {
+          margin-right: $spacing-xs;
+        }
+      }
+    }
+
+    .status-alert {
+      text-align: center;
+      padding: $spacing-sm;
+      border-radius: $border-radius-sm;
+      font-weight: $font-weight-bold;
+      margin-top: $spacing-sm;
+
+      i {
+        margin-right: $spacing-xs;
+      }
+
+      &.unconscious {
+        background: rgba($c-warning, 0.15);
+        color: $c-warning-dark;
+        border: $border-width solid rgba($c-warning, 0.3);
+      }
+
+      &.dead {
+        background: rgba($c-dark, 0.8);
+        color: $c-danger;
+        border: $border-width solid $c-danger;
+      }
+    }
+  }
+}
+
+// Attack Card Styles
+.attack-card {
+  background: transparent;
+
+  .attack-header {
+    margin-bottom: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    border-bottom: $border-width solid rgba($c-dark, 0.1);
+
+    .combatants {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-sm;
+
+      .attacker, .target {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $spacing-xs;
+
+        .combatant-portrait {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: $border-width-thick solid $c-medium;
+          object-fit: cover;
+        }
+
+        .combatant-name {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          max-width: 80px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .attack-action {
+        color: $c-danger;
+        font-size: $font-size-xl;
+      }
+    }
+
+    .weapon-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+      font-size: $font-size-base;
+
+      .weapon-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: $border-radius-sm;
+      }
+
+      .weapon-name {
+        font-weight: $font-weight-bold;
+      }
+
+      .weapon-range {
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+    }
+  }
+
+  // Item Display (weapon card with small image)
+  .item-display {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-sm;
+    background: rgba($c-dark, 0.05);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-md;
+    margin: $spacing-sm 0;
+
+    .item-image {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      border-radius: $border-radius-md;
+      border: $border-width-thick solid $c-medium;
+      object-fit: cover;
+      background: $c-pale;
+    }
+
+    .item-info {
+      flex: 1;
+
+      .item-name {
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+        margin: 0;
+        font-family: $font-primary;
+      }
+
+      .item-details {
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+    }
+  }
+
+  // Damage Section
+  .attack-damage {
+    background: rgba($c-danger, 0.08);
+    border: $border-width solid rgba($c-danger, 0.2);
+    border-radius: $border-radius-md;
+    padding: $spacing-sm;
+    margin-top: $spacing-sm;
+
+    .damage-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      font-weight: $font-weight-bold;
+      color: $c-danger;
+      margin-bottom: $spacing-sm;
+      padding-bottom: $spacing-xs;
+      border-bottom: $border-width solid rgba($c-danger, 0.2);
+
+      i {
+        font-size: $font-size-sm;
+      }
+    }
+
+    .damage-breakdown {
+      .damage-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: $font-size-sm;
+        padding: $spacing-xs 0;
+
+        &.dr {
+          color: $c-success;
+        }
+
+        .damage-label {
+          color: $c-medium;
+        }
+
+        .damage-value {
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+
+    .damage-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: $spacing-xs;
+      margin-top: $spacing-xs;
+      border-top: $border-width solid rgba($c-danger, 0.2);
+      font-weight: $font-weight-bold;
+
+      .damage-value {
+        color: $c-danger;
+        font-size: $font-size-lg;
+
+        &.critical {
+          color: $c-danger-dark;
+          text-shadow: $shadow-glow-accent;
+        }
+      }
+    }
+
+    .fatigue-dealt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-xs;
+      margin-top: $spacing-sm;
+      padding-top: $spacing-xs;
+      border-top: $border-width dashed rgba($c-danger, 0.2);
+      color: $c-danger;
+      font-size: $font-size-sm;
+
+      .fatigue-value {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-lg;
+      }
+
+      .critical-bonus {
+        font-style: italic;
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  // Miss Section
+  .attack-miss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    margin-top: $spacing-sm;
+    background: rgba($c-medium, 0.1);
+    border-radius: $border-radius-md;
+    color: $c-medium;
+
+    i {
+      color: $c-success;
+    }
+
+    .miss-message {
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+// Spell Cast Chat Card
+.spell-card.chat-card {
+  background: transparent;
+  border-left: $border-width-heavy solid $c-magic;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: linear-gradient(135deg, rgba($c-magic, 0.8), rgba($c-magic-dark, 0.9));
+    color: $c-white;
+
+    .item-image {
+      width: 32px;
+      height: 32px;
+      border-radius: $border-radius-md;
+    }
+
+    .item-name {
+      margin: 0;
+      font-size: $font-size-lg;
+      flex: 1;
+      font-family: $font-primary;
+    }
+
+    .item-type {
+      font-size: $font-size-xs;
+      opacity: 0.8;
+    }
+  }
+
+  .card-content {
+    padding: $spacing-sm;
+  }
+
+  .spell-info {
+    margin-bottom: $spacing-sm;
+
+    .spell-components {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+      font-size: $font-size-sm;
+
+      .technique, .form {
+        padding: $spacing-xs $spacing-sm;
+        background: rgba($c-magic, 0.1);
+        border-radius: $border-radius-sm;
+        color: $c-magic-dark;
+      }
+
+      .separator {
+        color: $c-medium;
+      }
+    }
+  }
+
+  .backlash-section {
+    background: rgba($c-danger, 0.1);
+    border: $border-width solid rgba($c-danger, 0.3);
+    border-radius: $border-radius-md;
+    padding: $spacing-sm;
+    margin: $spacing-sm 0;
+
+    h4 {
+      margin: 0 0 $spacing-xs;
+      color: $c-danger;
+      font-size: $font-size-sm;
+
+      i {
+        margin-right: $spacing-xs;
+      }
+    }
+
+    .backlash-description {
+      font-size: $font-size-sm;
+      font-style: italic;
+      margin-bottom: $spacing-xs;
+    }
+
+    .backlash-cost {
+      display: block;
+      font-size: $font-size-sm;
+      color: $c-danger;
+
+      &.essence-loss {
+        color: $c-magic;
+      }
+    }
+  }
+}
+
+// Ritual Perform Chat Card
+.ritual-card.chat-card {
+  background: transparent;
+  border-left: $border-width-heavy solid $c-success;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: linear-gradient(135deg, rgba($c-success, 0.8), rgba($c-success-dark, 0.9));
+    color: $c-white;
+
+    .item-image {
+      width: 32px;
+      height: 32px;
+      border-radius: $border-radius-md;
+    }
+
+    .item-name {
+      margin: 0;
+      font-size: $font-size-lg;
+      flex: 1;
+      font-family: $font-primary;
+    }
+
+    .item-type {
+      font-size: $font-size-xs;
+      opacity: 0.8;
+    }
+  }
+
+  .card-content {
+    padding: $spacing-sm;
+  }
+}
+
+// Corruption/Leng Messages
+.corruption-message {
+  padding: $spacing-sm;
+  background: rgba($c-magic, 0.1);
+  border: $border-width solid rgba($c-magic, 0.3);
+  border-radius: $border-radius-md;
+  color: $c-magic;
+
+  i {
+    margin-right: $spacing-sm;
+  }
+}
+
+.leng-message {
+  padding: $spacing-md;
+  background: linear-gradient(135deg, rgba($c-dark, 0.9), rgba($c-magic-dark, 0.9));
+  border: $border-width-thick solid $c-magic;
+  border-radius: $border-radius-md;
+  color: $c-magic-light;
+  text-align: center;
+
+  i {
+    margin-right: $spacing-sm;
+    color: $c-magic-light;
+  }
+
+  strong {
+    color: $c-white;
+  }
+}
+
+// ========================================
+// ROLL DIALOG STYLES
+// ========================================
+
+.roll-dialog {
+  .roll-dialog-content {
+    section {
+      margin-bottom: $spacing-lg;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid rgba($c-dark, 0.1);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      h4 {
+        margin: 0 0 $spacing-sm;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        font-family: $font-primary;
+      }
+    }
+
+    .pool-breakdown {
+      .pool-component {
+        display: flex;
+        justify-content: space-between;
+        font-size: $font-size-sm;
+        padding: $spacing-xs 0;
+
+        .component-label {
+          color: $c-medium;
+        }
+      }
+    }
+
+    .modifier-input {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-top: $spacing-sm;
+
+      label {
+        font-size: $font-size-sm;
+      }
+
+      input {
+        width: 60px;
+        text-align: center;
+      }
+    }
+
+    .effective-pool {
+      margin-top: $spacing-sm;
+      font-size: $font-size-lg;
+
+      .pool-label {
+        font-weight: $font-weight-bold;
+      }
+
+      .pool-value {
+        color: $c-accent-dark;
+        font-weight: $font-weight-bold;
+      }
+
+      &.zero-pool {
+        .pool-value {
+          color: $c-danger;
+        }
+
+        .zero-pool-warning {
+          display: block;
+          color: $c-danger;
+          font-size: $font-size-sm;
+          margin-top: $spacing-xs;
+
+          i {
+            margin-right: $spacing-xs;
+          }
+        }
+      }
+    }
+
+    .zeal-section {
+      h4 {
+        color: $c-accent-dark;
+
+        i {
+          margin-right: $spacing-xs;
+        }
+
+        .zeal-current {
+          font-weight: $font-weight-normal;
+          font-size: $font-size-sm;
+        }
+      }
+
+      .zeal-options {
+        .zeal-option {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          padding: $spacing-xs;
+          border-radius: $border-radius-sm;
+
+          &:hover {
+            background: rgba($c-accent, 0.05);
+          }
+
+          &.disabled {
+            opacity: 0.5;
+
+            input {
+              cursor: not-allowed;
+            }
+          }
+
+          .zeal-label {
+            flex: 1;
+          }
+
+          .zeal-cost {
+            font-size: $font-size-sm;
+            color: $c-medium;
+          }
+        }
+      }
+    }
+
+    .dialog-buttons {
+      text-align: center;
+      margin-top: $spacing-lg;
+
+      .roll-button {
+        @include button-primary;
+        padding: $spacing-sm $spacing-xl;
+        font-size: $font-size-base;
+
+        i {
+          margin-right: $spacing-sm;
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// RESULT INDICATOR
+// ========================================
+
+.result-indicator {
+  text-align: center;
+  padding: $spacing-md;
+  margin: $spacing-sm 0;
+
+  .result-text {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $c-dark;
+    font-family: $font-primary;
+
+    .hit-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.8em;
+      height: 1.8em;
+      margin: 0 $spacing-xs;
+      background: $c-success-dark;
+      color: $c-white;
+      border-radius: $border-radius-md;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-lg;
+      box-shadow: $shadow-md, inset 0 1px 0 var(--wor-white-alpha-20), inset 0 -1px 0 var(--wor-dark-alpha-20);
+      border: $border-width-thick solid var(--wor-dark-alpha-30);
+      transform: rotate(-5deg);
+      position: relative;
+      vertical-align: middle;
+    }
+  }
+
+  &.success .result-text .hit-count {
+    background: linear-gradient(135deg, $c-success-light, $c-success-dark);
+    border-color: var(--wor-success-dark-darker);
+  }
+
+  &.critical-success .result-text .hit-count {
+    background: linear-gradient(135deg, $c-success-dark, var(--wor-success-darker));
+    border-color: var(--wor-success-dark-darker);
+    box-shadow: $shadow-glow-accent, $shadow-md, inset 0 1px 0 var(--wor-white-alpha-30);
+  }
+
+  &.failure .result-text .hit-count {
+    background: linear-gradient(135deg, $c-danger-light, $c-danger);
+    border-color: $c-danger-dark;
+  }
+
+  &.critical-failure .result-text .hit-count {
+    background: linear-gradient(135deg, $c-danger, $c-danger-dark);
+    border-color: var(--wor-danger-dark-darker);
+    box-shadow: 0 0 10px var(--wor-danger-alpha-50), $shadow-md, inset 0 1px 0 var(--wor-white-alpha-20);
+  }
+
+  &.auto-failure .result-text .hit-count {
+    background: linear-gradient(135deg, $c-medium, $c-light);
+    border-color: $c-medium;
+  }
+
+  .result-margin {
+    font-size: $font-size-sm;
+    color: $c-medium;
+    margin-top: $spacing-xs;
+
+    .margin-value {
+      font-weight: $font-weight-bold;
+
+      &.positive {
+        color: $c-success-dark;
+      }
+
+      &.negative {
+        color: $c-danger;
+      }
+    }
+  }
+}
+
+// ========================================
+// NOTIFICATION CARDS
+// ========================================
+
+.zeal-notification {
+  background: transparent;
+  border-radius: $border-radius-md;
+  padding: $spacing-sm;
+  border-left: $border-width-heavy solid $c-accent;
+
+  .notification-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+
+    i {
+      color: $c-accent;
+      font-size: $font-size-xl;
+    }
+
+    .notification-title {
+      font-weight: $font-weight-bold;
+      color: $c-accent-dark;
+      margin: 0;
+      font-family: $font-primary;
+    }
+
+    .actor-name {
+      font-size: $font-size-sm;
+      color: $c-medium;
+    }
+  }
+
+  .zeal-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm;
+    background: rgba($c-accent, 0.1);
+    border-radius: $border-radius-sm;
+
+    .zeal-spent {
+      font-weight: $font-weight-bold;
+      color: $c-accent-dark;
+    }
+
+    .zeal-remaining {
+      font-size: $font-size-sm;
+      color: $c-medium;
+
+      .value {
+        font-weight: $font-weight-bold;
+        color: $c-accent;
+      }
+    }
+  }
+
+  .zeal-effect {
+    margin-top: $spacing-sm;
+    font-size: $font-size-sm;
+    color: $c-medium;
+    font-style: italic;
+  }
+}
+
+.essence-notification {
+  background: transparent;
+  border-radius: $border-radius-md;
+  padding: $spacing-sm;
+  border-left: $border-width-heavy solid $c-magic;
+
+  .notification-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+
+    i {
+      color: $c-magic;
+      font-size: $font-size-xl;
+    }
+
+    .notification-title {
+      font-weight: $font-weight-bold;
+      color: $c-magic;
+      margin: 0;
+      font-family: $font-primary;
+    }
+  }
+
+  .essence-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-lg;
+    padding: $spacing-sm;
+    background: rgba($c-magic, 0.1);
+    border-radius: $border-radius-sm;
+
+    .essence-change {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-xl;
+      color: $c-magic;
+    }
+
+    .essence-arrow {
+      color: $c-light;
+    }
+
+    .essence-current {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-xl;
+
+      &.critical {
+        color: $c-danger;
+        animation: pulse-critical 1s infinite;
+      }
+
+      &.warning {
+        color: $c-warning;
+      }
+    }
+  }
+
+  .leng-warning {
+    margin-top: $spacing-sm;
+    padding: $spacing-md;
+    background: linear-gradient(135deg, rgba($c-dark, 0.9), rgba($c-magic-dark, 0.9));
+    border: $border-width-thick solid $c-magic;
+    border-radius: $border-radius-md;
+    color: $c-magic-light;
+    text-align: center;
+    font-weight: $font-weight-bold;
+
+    i {
+      margin-right: $spacing-sm;
+      color: $c-magic-light;
+    }
+  }
+}
+
+@keyframes pulse-critical {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+// Recovery Message
+.recovery-message {
+  padding: $spacing-sm;
+  border-radius: $border-radius-md;
+
+  i {
+    margin-right: $spacing-sm;
+  }
+
+  &:not(.stabilized):not(.revived) {
+    background: rgba($c-success, 0.1);
+    border: $border-width solid rgba($c-success, 0.3);
+    color: $c-success-dark;
+  }
+
+  &.stabilized {
+    background: rgba($c-warning, 0.1);
+    border: $border-width solid rgba($c-warning, 0.3);
+    color: $c-warning-dark;
+  }
+
+  &.revived {
+    background: rgba($c-accent, 0.1);
+    border: $border-width solid rgba($c-accent, 0.3);
+    color: $c-accent-dark;
+  }
+}
+
+// ========================================
+// CHARACTER CREATION ROLL CARD
+// ========================================
+
+.creation-roll-card {
+  background: transparent;
+  border-radius: $border-radius-md;
+  padding: 0;
+  overflow: hidden;
+
+  // Title
+  .creation-roll-title {
+    padding: $spacing-lg $spacing-md;
+    text-align: center;
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: $c-dark;
+      font-family: $font-primary;
+    }
+  }
+
+  // Roll Body
+  .creation-roll-body {
+    padding: $spacing-md $spacing-lg;
+    text-align: center;
+    background: rgba($c-dark, 0.03);
+
+    .roll-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+    }
+
+    .roll-formula {
+      font-size: $font-size-base;
+      color: $c-medium;
+      font-weight: $font-weight-normal;
+      font-family: $font-mono;
+    }
+
+    .roll-multiplier {
+      font-size: $font-size-base;
+      color: $c-medium;
+    }
+
+    .roll-total {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 $spacing-sm;
+      border-radius: $border-radius-sm;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-lg;
+      background: linear-gradient(145deg, $c-accent-light, $c-accent);
+      border: $border-width-thick solid $c-accent-dark;
+      color: $c-dark;
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  // Result Section
+  .creation-roll-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $spacing-lg $spacing-md;
+    border-top: $border-width solid rgba($c-dark, 0.1);
+
+    .result-label {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: $c-dark;
+      font-family: $font-primary;
+      margin-bottom: $spacing-md;
+    }
+
+    .result-image {
+      margin-bottom: $spacing-md;
+
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid rgba($c-dark, 0.2);
+        object-fit: cover;
+        box-shadow: $shadow-md;
+      }
+    }
+
+    .result-name {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $c-dark;
+      font-family: $font-primary;
+    }
+
+    .result-subtitle {
+      font-size: $font-size-sm;
+      color: $c-medium;
+      font-style: italic;
+      margin-top: $spacing-xs;
+    }
+  }
+
+  // Type-specific accent colors
+  &.lineage .roll-total {
+    background: linear-gradient(145deg, $c-magic-light, $c-magic);
+    border-color: $c-magic-dark;
+  }
+
+  &.archetype .roll-total {
+    background: linear-gradient(145deg, $c-danger-light, $c-danger);
+    border-color: $c-danger-dark;
+    color: $c-white;
+  }
+
+  &.pathway .roll-total {
+    background: linear-gradient(145deg, $c-success-light, $c-success);
+    border-color: $c-success-dark;
+    color: $c-white;
+  }
+
+  &.background .roll-total {
+    background: linear-gradient(145deg, $c-copper-light, $c-copper);
+    border-color: $c-copper-dark;
+  }
+
+  // Special Message (e.g., "Player's Choice")
+  .creation-roll-special {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: linear-gradient(135deg, rgba($c-accent, 0.15), rgba($c-accent-dark, 0.2));
+    border-top: $border-width solid rgba($c-accent, 0.3);
+    color: $c-accent-dark;
+    font-weight: $font-weight-bold;
+
+    i {
+      color: $c-accent;
+    }
+  }
+
+  // LP Award
+  .creation-roll-lp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-gold, 0.15);
+    border-top: $border-width solid rgba($c-gold, 0.3);
+    color: $c-gold-dark;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-sm;
+
+    i {
+      color: $c-gold;
+    }
+  }
+
+  // Background Roll specific styles
+  .roll-section-label {
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $c-medium;
+    margin-bottom: $spacing-xs;
+  }
+
+  .roll-arrow {
+    font-size: $font-size-base;
+    color: $c-medium;
+    margin: 0 $spacing-xs;
+  }
+
+  .roll-result-text {
+    font-weight: $font-weight-bold;
+    color: $c-copper-dark;
+    font-family: $font-primary;
+  }
+}
+
+// ========================================
+// DIALOG HEADER (Shared styles for attack/defense dialogs)
+// ========================================
+
+.dialog-header {
+  display: flex;
+  padding: $spacing-lg;
+  background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%);
+  border-bottom: $border-width-thick solid $c-copper;
+  border-radius: $border-radius-lg $border-radius-lg 0 0;
+  margin: 0 !important;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    width: 100%;
+  }
+
+  .actor-portrait {
+    width: 56px;
+    height: 56px;
+    border-radius: $border-radius-md;
+    border: $border-width-thick solid rgba($c-gold, 0.6);
+    object-fit: cover;
+    box-shadow: $shadow-md;
+  }
+
+  .header-info {
+    flex: 1;
+
+    .dialog-title {
+      margin: 0 0 $spacing-xs 0;
+      font-size: $font-size-lg;
+      font-family: $font-primary;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .actor-name {
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  // Attack header specific - shows weapon info
+  &.attack-header {
+    .weapon-display {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-top: $spacing-xs;
+
+      .weapon-icon {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: $border-radius-sm;
+        border: 1px solid rgba($c-gold, 0.4);
+      }
+
+      .weapon-name {
+        font-size: $font-size-sm;
+        color: $c-gold;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    .target-info {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-top: $spacing-xs;
+      padding-top: $spacing-xs;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+      .target-label {
+        font-size: $font-size-xs;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .target-name {
+        font-size: $font-size-sm;
+        color: #fff;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+
+  // Defense header specific
+  &.defense-header {
+    .header-info {
+      .dialog-title {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+
+        &::before {
+          content: "\f3ed"; // shield-alt
+          font-family: "Font Awesome 6 Free", FontAwesome;
+          font-weight: 900;
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// DEFENSE DIALOG
+// ========================================
+// NOTE: Defense dialog styles moved to _defense-dialog.scss
+// Imported in weight-of-ruin.scss as .wor.defense-dialog { @import ... }
+
+// ========================================
+// DEFENSE CHAT CARD
+// ========================================
+
+.defense-card {
+  background: transparent;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: rgba($c-dark, 0.05);
+    border-bottom: $border-width solid rgba($c-dark, 0.1);
+
+    .actor-portrait {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: $border-width-thick solid $c-medium;
+      object-fit: cover;
+    }
+
+    .header-info {
+      flex: 1;
+
+      h3 {
+        margin: 0;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        font-family: $font-primary;
+      }
+
+      .actor-name {
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+    }
+  }
+
+  .pool-breakdown {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    color: $c-medium;
+
+    .pool-component {
+      display: flex;
+      gap: $spacing-sm;
+      padding: $spacing-xs 0;
+
+      &.buy {
+        color: $c-accent;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+
+  .result-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+
+    .dice-pool {
+      color: $c-medium;
+    }
+
+    .result-arrow {
+      color: $c-light;
+    }
+
+    .hits-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacing-xs $spacing-md;
+      border-radius: $border-radius-sm;
+      background: linear-gradient(145deg, $c-accent-light, $c-accent);
+      color: $c-dark;
+      box-shadow: $shadow-sm;
+
+      &.auto-success {
+        background: linear-gradient(145deg, $c-success, $c-success-dark);
+        color: $c-white;
+        box-shadow: $shadow-glow-accent;
+
+        i {
+          margin-right: $spacing-sm;
+        }
+      }
+    }
+  }
+
+  .dice-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md $spacing-md;
+  }
+
+  .fervor-spent {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-accent, 0.08);
+    border-top: $border-width solid rgba($c-accent, 0.2);
+    font-size: $font-size-sm;
+    color: $c-accent-dark;
+
+    i {
+      color: $c-accent;
+    }
+
+    .fervor-tag {
+      padding: $spacing-xs $spacing-sm;
+      background: var(--wor-accent-alpha-15);
+      border-radius: $border-radius-sm;
+    }
+  }
+}
+
+// ========================================
+// FULL DEFENSE CHAT CARD
+// ========================================
+
+.full-defense-card {
+  background: transparent;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: linear-gradient(135deg, $c-success, $c-success-dark);
+    color: $c-white;
+
+    .actor-portrait {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: $border-width-thick solid rgba($c-white, 0.3);
+      object-fit: cover;
+    }
+
+    .header-info {
+      flex: 1;
+
+      h3 {
+        margin: 0;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        font-family: $font-primary;
+      }
+
+      .actor-name {
+        font-size: $font-size-sm;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .card-body {
+    padding: $spacing-md;
+    text-align: center;
+
+    p {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $c-dark;
+    }
+  }
+}
+
+// ========================================
+// INITIATIVE CHAT CARD
+// ========================================
+
+.initiative-card {
+  background: transparent;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: linear-gradient(135deg, $c-copper-dark, $c-copper);
+    color: $c-white;
+
+    .actor-portrait {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: $border-width-thick solid rgba($c-gold, 0.5);
+      object-fit: cover;
+      box-shadow: $shadow-md;
+    }
+
+    .header-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+
+      .actor-name {
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        font-family: $font-primary;
+      }
+
+      .roll-type {
+        font-size: $font-size-sm;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+
+  .card-body {
+    padding: $spacing-lg;
+    text-align: center;
+
+    .initiative-result {
+      margin-bottom: $spacing-md;
+
+      .result-value {
+        display: inline-block;
+        font-size: 2.5rem;
+        font-weight: $font-weight-bold;
+        font-family: $font-primary;
+        color: $c-accent-dark;
+        background: linear-gradient(145deg, $c-accent-light, $c-accent);
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $border-radius-md;
+        box-shadow: $shadow-md;
+        border: $border-width-thick solid $c-accent-dark;
+      }
+    }
+
+    .roll-breakdown {
+      margin-bottom: $spacing-sm;
+
+      .breakdown-formula {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $spacing-xs;
+        font-size: $font-size-sm;
+        color: $c-dark;
+
+        i {
+          color: $c-medium;
+        }
+
+        .modifier {
+          color: $c-accent-dark;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+
+    .reflex-breakdown {
+      font-size: $font-size-xs;
+      color: $c-medium;
+
+      .breakdown-label {
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
+
+// ========================================
+// ATTACK DIALOG
+// ========================================
+// NOTE: Attack dialog styles moved to _attack-dialog.scss
+// Imported in weight-of-ruin.scss as .wor.attack-dialog { @import ... }

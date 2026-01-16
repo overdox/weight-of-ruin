@@ -1,0 +1,1632 @@
+// The Weight of Ruin - Professional Item Sheet Styles
+// Two-column layout inspired by PF2e with medieval fantasy aesthetic
+
+// ============================================
+// ITEM SHEET BASE
+// ============================================
+// Note: This file is imported inside .weight-of-ruin {} so we use & prefix
+&.item-sheet {
+  .window-content {
+    padding: 0;
+    background: transparent;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: $c-parchment;
+  }
+}
+
+// ============================================
+// ITEM HEADER
+// ============================================
+.item-header {
+  display: flex;
+  gap: $spacing-lg;
+  padding: $spacing-lg;
+  background: linear-gradient(135deg, $c-copper-deep 0%, $c-burgundy 50%, $c-copper-dark 100%);
+  border-bottom: $border-width-heavy solid $c-copper;
+  min-height: 100px;
+
+  .item-img {
+    flex: 0 0 80px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: $border-width-heavy solid $c-gold;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-lg;
+    cursor: pointer;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+    background: $c-parchment;
+
+    &:hover {
+      border-color: $c-gold-light;
+      box-shadow: $shadow-glow-accent;
+    }
+  }
+
+  .item-header-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $spacing-sm;
+    min-width: 0;
+
+    .item-name {
+      margin: 0;
+      font-family: $font-primary;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: #fff !important;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+
+      input {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        color: inherit;
+        background: transparent;
+        border: none;
+        border-bottom: $border-width solid transparent;
+        width: 100%;
+        text-shadow: inherit;
+
+        &::placeholder {
+          color: var(--wor-text-inverse-alpha-50);
+        }
+
+        &:hover {
+          border-bottom-color: var(--wor-text-inverse-alpha-30);
+        }
+
+        &:focus {
+          outline: none;
+          border-bottom-color: $c-gold;
+        }
+      }
+    }
+
+    .item-type-row {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      .item-type {
+        margin: 0;
+        font-size: $font-size-sm;
+        color: var(--wor-text-inverse-alpha-75);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .item-category {
+        font-size: $font-size-xs;
+        padding: $spacing-xs $spacing-sm;
+        background: var(--wor-gold-alpha-20);
+        border: $border-width solid var(--wor-gold-alpha-40);
+        border-radius: $border-radius-sm;
+        color: $c-gold-light;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    // Trait/Property Tags
+    .item-traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+      margin-top: $spacing-xs;
+
+      .trait-tag {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-sm;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        // Default trait style
+        background: var(--wor-copper-alpha-80);
+        color: #fff;
+        border: $border-width solid var(--wor-copper-light-alpha-50);
+
+        // Special trait types
+        &.trait-damage-type {
+          background: var(--wor-danger-alpha-80);
+          border-color: var(--wor-danger-light-alpha-50);
+        }
+
+        &.trait-quality {
+          background: var(--wor-gold-alpha-20);
+          color: $c-gold-light;
+          border-color: var(--wor-gold-alpha-40);
+        }
+
+        &.trait-category {
+          background: var(--wor-stone-alpha-60);
+          border-color: var(--wor-stone-light-alpha-50);
+        }
+
+        &.trait-magic {
+          background: var(--wor-magic-alpha-80);
+          border-color: var(--wor-magic-light-alpha-50);
+        }
+
+        &.trait-property {
+          background: var(--wor-success-alpha-70);
+          border-color: var(--wor-success-light-alpha-50);
+        }
+      }
+    }
+
+    // Equipment Status
+    .equipped-status {
+      margin-top: $spacing-xs;
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: $spacing-sm;
+        font-size: $font-size-sm;
+        color: rgba($c-text-inverse, 0.6);
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        i {
+          font-size: $font-size-base;
+        }
+
+        &:hover {
+          color: $c-gold;
+        }
+      }
+
+      &.is-equipped a {
+        color: $c-success-light;
+
+        &:hover {
+          color: $c-success;
+        }
+      }
+    }
+
+    // Talent Rank Controls
+    .talent-rank-controls {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-top: $spacing-xs;
+
+      .rank-label {
+        font-size: $font-size-sm;
+        color: rgba($c-text-inverse, 0.75);
+      }
+
+      .rank-control {
+        @include button-base;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        font-size: $font-size-sm;
+        background: rgba($c-white, 0.1);
+        color: $c-text-inverse;
+        border: $border-width solid rgba($c-white, 0.3);
+
+        &:hover:not([disabled]) {
+          background: rgba($c-gold, 0.3);
+          border-color: $c-gold;
+        }
+
+        &[disabled] {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+      }
+
+      .rank-value {
+        font-size: $font-size-md;
+        font-weight: $font-weight-bold;
+        color: $c-gold-light;
+        min-width: 50px;
+        text-align: center;
+      }
+    }
+
+    // Skill Rank
+    .skill-rank {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-top: $spacing-xs;
+
+      .rank-label {
+        font-size: $font-size-sm;
+        color: rgba($c-text-inverse, 0.75);
+      }
+
+      input {
+        @include input-base;
+        width: 60px;
+        text-align: center;
+        background: rgba($c-white, 0.1);
+        color: $c-text-inverse;
+        border-color: rgba($c-white, 0.3);
+
+        &:focus {
+          background: rgba($c-white, 0.15);
+          border-color: $c-gold;
+        }
+      }
+
+      .rank-value {
+        font-size: $font-size-md;
+        font-weight: $font-weight-bold;
+        color: $c-gold-light;
+      }
+    }
+  }
+}
+
+// ============================================
+// TAB NAVIGATION
+// ============================================
+// Note: This file is imported inside .weight-of-ruin scope
+&.item-sheet {
+  // Target Foundry's generic tab navigation
+  nav.sheet-tabs,
+  .sheet-tabs {
+    display: flex;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    background: $c-parchment-dark;
+    border-bottom: $border-width-thick solid $c-copper;
+    margin: 0;
+
+    // Tab items - could be .item, a, or button depending on Foundry version
+    .item,
+    a[data-tab],
+    button[data-tab],
+    [role="tab"] {
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark !important;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: $border-width solid transparent;
+      border-bottom: none;
+      border-radius: $border-radius-sm $border-radius-sm 0 0;
+      background: transparent;
+      transition: all $transition-fast;
+      position: relative;
+      top: $border-width-thick;
+      text-decoration: none;
+
+      i {
+        margin-right: $spacing-sm;
+        color: $c-text-dark !important;
+      }
+
+      &:hover {
+        color: $c-copper !important;
+        background: rgba($c-copper, 0.1);
+
+        i {
+          color: $c-copper !important;
+        }
+      }
+
+      &.active {
+        color: $c-copper !important;
+        background: $c-parchment;
+        border-color: $c-copper;
+        border-bottom: $border-width-thick solid $c-parchment;
+
+        i {
+          color: $c-copper !important;
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// ITEM DETAILS - TWO COLUMN LAYOUT
+// ============================================
+.item-details {
+  flex: 1;
+  overflow: hidden;
+
+  .tab-content {
+    height: 100%;
+    overflow-y: auto;
+    @include custom-scrollbar;
+
+    > .tab {
+      display: none;
+      height: 100%;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+}
+
+// Two-column layout container
+.item-content-columns {
+  display: flex;
+  gap: 0;
+  height: 100%;
+  min-height: 300px;
+}
+
+// ============================================
+// SIDEBAR (Left Column)
+// ============================================
+.item-sidebar {
+  flex: 0 0 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: $spacing-md;
+  background: rgba($c-stone, 0.08);
+  border-right: $border-width solid $c-border-medium;
+
+  .sidebar-stat {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-sm $spacing-md;
+    border-bottom: $border-width solid $c-border-light;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      @include text-label;
+      font-size: 9px;
+      margin-bottom: $spacing-xs;
+    }
+
+    .stat-value {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+
+      &.highlight {
+        color: $c-gold-dark;
+        font-size: $font-size-md;
+      }
+
+      &.damage {
+        color: $c-danger;
+      }
+
+      &.defense {
+        color: $c-success-dark;
+      }
+
+      &.magic {
+        color: $c-magic;
+      }
+
+      &.bonus {
+        color: $c-success-dark;
+      }
+    }
+
+    .stat-unit {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-normal;
+      color: $c-text-dark;
+      margin-left: $spacing-xs;
+    }
+
+    input {
+      @include input-base;
+      width: 100%;
+      padding: $spacing-xs;
+      font-size: $font-size-sm;
+    }
+
+    select {
+      @include input-base;
+      width: 100%;
+      padding: $spacing-xs;
+      font-size: $font-size-sm;
+    }
+
+    // Multi-currency price stat
+    &.price-stat {
+      .price-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+
+        .currency-input {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+
+          i {
+            font-size: $font-size-xs;
+          }
+
+          input {
+            flex: 1;
+            width: 50px;
+            text-align: center;
+            padding: $spacing-xs;
+            font-size: $font-size-sm;
+          }
+
+          &.sovereigns i {
+            color: #9a7b0a;
+          }
+
+          &.crowns i {
+            color: #5a6068;
+          }
+
+          &.orin i {
+            color: #8b5a2b;
+          }
+        }
+      }
+
+      .price-display {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-xs;
+
+        .currency {
+          display: flex;
+          align-items: center;
+          gap: 3px;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+
+          i {
+            font-size: $font-size-xs;
+          }
+
+          &.sovereigns {
+            color: #9a7b0a;
+          }
+
+          &.crowns {
+            color: #5a6068;
+          }
+
+          &.orin {
+            color: #8b5a2b;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// MAIN CONTENT (Right Column)
+// ============================================
+.item-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-lg;
+  overflow-y: auto;
+  @include custom-scrollbar;
+}
+
+// ============================================
+// FIELDSET GROUPS
+// ============================================
+.item-fieldset {
+  @include section-container;
+  margin-bottom: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .fieldset-header {
+    @include section-header;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  .fieldset-content {
+    padding: $spacing-md;
+  }
+}
+
+// Form grid within fieldsets
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+
+  &.three-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &.four-col {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    &.full-width {
+      grid-column: 1 / -1;
+    }
+
+    &.span-2 {
+      grid-column: span 2;
+    }
+
+    label {
+      @include text-label;
+      font-size: 10px;
+    }
+
+    input,
+    select {
+      @include input-base;
+      width: 100%;
+      padding: $spacing-sm;
+      font-size: $font-size-sm;
+    }
+
+    input[type="number"] {
+      text-align: center;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+    }
+
+    textarea {
+      @include input-base;
+      width: 100%;
+      min-height: 60px;
+      resize: vertical;
+    }
+
+    // Display value (non-edit mode)
+    .field-value {
+      font-size: $font-size-base;
+      color: $c-text-dark;
+      padding: $spacing-sm;
+      background: rgba($c-stone, 0.04);
+      border-radius: $border-radius-sm;
+      min-height: 30px;
+
+      &.empty {
+        color: $c-text-light;
+        font-style: italic;
+      }
+    }
+
+    // Checkbox group
+    &.checkbox {
+      flex-direction: row;
+      align-items: center;
+      gap: $spacing-sm;
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        font-size: $font-size-sm;
+        color: $c-text-dark;
+        text-transform: none;
+        letter-spacing: 0;
+        cursor: pointer;
+
+        input[type="checkbox"] {
+          accent-color: $c-gold;
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// DESCRIPTION SECTION
+// ============================================
+.description-section {
+  @include section-container;
+  margin-bottom: $spacing-lg;
+
+  > h3 {
+    @include section-header;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    margin: 0;
+  }
+
+  .description-header {
+    @include section-header;
+    @include flex-between;
+    padding: $spacing-sm $spacing-md;
+    margin: 0;
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      color: $c-text-inverse;
+    }
+
+    .editor-edit-btn {
+      padding: $spacing-xs $spacing-sm;
+      background: $c-copper-dark;
+      color: $c-text-inverse;
+      border: 1px solid $c-copper;
+      border-radius: $border-radius-sm;
+      cursor: pointer;
+      font-size: $font-size-sm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      min-height: 28px;
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background: $c-copper;
+        color: $c-text-inverse;
+      }
+
+      i {
+        color: inherit;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .editor-container {
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    min-height: 120px;
+
+    // Style the built-in Foundry editor
+    .editor {
+      min-height: 100px;
+      position: relative;
+
+      // Make the edit button more visible
+      .editor-edit {
+        background: $c-copper-dark;
+        color: $c-text-inverse;
+        border: 1px solid $c-copper;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+        font-size: $font-size-sm;
+
+        &:hover {
+          background: $c-copper;
+          color: $c-text-inverse;
+        }
+
+        i {
+          color: inherit;
+        }
+      }
+
+      .editor-content {
+        color: $c-text-dark;
+        min-height: 80px;
+      }
+
+      // Style prosemirror when in edit mode
+      prose-mirror {
+        min-height: 100px;
+        padding: $spacing-sm;
+        border: 1px solid $c-border-medium;
+        border-radius: $border-radius-sm;
+        background: $c-bg-elevated;
+      }
+    }
+  }
+
+  .description-content {
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    min-height: 80px;
+    line-height: 1.6;
+    color: $c-text-dark;
+    font-size: $font-size-base;
+
+    p {
+      margin: 0 0 $spacing-md 0;
+      color: $c-text-dark;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Description tab (full width, no sidebar)
+.description-tab-content {
+  padding: $spacing-lg;
+  height: 100%;
+  overflow-y: auto;
+  @include custom-scrollbar;
+
+  .description-section {
+    margin-bottom: $spacing-xl;
+
+    .editor-container {
+      min-height: 200px;
+
+      prose-mirror {
+        min-height: 180px;
+      }
+    }
+
+    .description-content {
+      min-height: 150px;
+    }
+  }
+
+  // Stats that appear under description
+  .description-stats {
+    .item-fieldset {
+      margin-bottom: $spacing-lg;
+    }
+  }
+}
+
+// ============================================
+// TALENT EFFECT SECTION
+// ============================================
+.effect-section {
+  @include section-container;
+  margin-bottom: $spacing-lg;
+
+  h4 {
+    @include section-header;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    margin: 0;
+  }
+
+  .editor-container {
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+  }
+
+  .effect-content {
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    line-height: 1.5;
+  }
+}
+
+// ============================================
+// WEAPON DETAILS
+// ============================================
+.weapon-details {
+  h3 {
+    @include section-header;
+    margin-bottom: 0;
+  }
+
+  .stats-grid {
+    @extend .form-grid;
+  }
+}
+
+// ============================================
+// ARMOR DETAILS
+// ============================================
+.armor-details {
+  h3 {
+    @include section-header;
+    margin-bottom: 0;
+  }
+
+  .stats-grid {
+    @extend .form-grid;
+  }
+
+  // Properties section
+  .armor-properties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: var(--wor-stone-alpha-04);
+    border-top: $border-width solid $c-border-light;
+
+    .property-badge {
+      @include status-badge-copper;
+      font-size: $font-size-xs;
+
+      &.negative {
+        @include status-badge-danger;
+      }
+
+      &.positive {
+        @include status-badge-success;
+      }
+    }
+  }
+
+  .penalties-section {
+    padding: $spacing-md;
+    background: $c-danger-bg;
+    border-top: $border-width solid var(--wor-danger-alpha-20);
+
+    h4 {
+      @include text-label;
+      color: $c-danger;
+      margin-bottom: $spacing-sm;
+    }
+
+    .penalty {
+      display: inline-block;
+      font-size: $font-size-sm;
+      color: $c-danger;
+      margin-right: $spacing-lg;
+    }
+  }
+}
+
+// ============================================
+// EFFECTS TAB
+// ============================================
+.effects-section {
+  padding: $spacing-lg;
+
+  .effects-header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+    }
+
+    .effect-control {
+      @include button-secondary;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+    }
+  }
+
+  .effect-category {
+    margin-bottom: $spacing-xl;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    h4 {
+      @include text-label;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-border-light;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  .effect-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .effect-item {
+    @include list-row-alternating;
+    padding: $spacing-sm $spacing-md;
+
+    img {
+      width: 28px;
+      height: 28px;
+      border: $border-width solid $c-border-medium;
+      border-radius: $border-radius-sm;
+      margin-right: $spacing-sm;
+    }
+
+    .effect-name {
+      flex: 1;
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+    }
+
+    .effect-controls {
+      display: flex;
+      gap: $spacing-sm;
+      opacity: 0;
+      transition: opacity $transition-fast;
+
+      .effect-control {
+        @include clickable;
+        padding: $spacing-xs;
+        font-size: $font-size-sm;
+        color: $c-text-light;
+
+        &:hover {
+          color: $c-gold;
+        }
+      }
+    }
+
+    &:hover .effect-controls {
+      opacity: 1;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+
+      .effect-name {
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+
+// ============================================
+// CREATION ITEM TYPES (Lineage, Background, etc.)
+// ============================================
+.lineage-details,
+.background-details,
+.archetype-details,
+.pathway-details,
+.lifeevent-details {
+  h3 {
+    @include section-header;
+    margin-bottom: 0;
+  }
+
+  .attribute-modifiers,
+  .attribute-bonuses {
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+
+    h4 {
+      @include text-label;
+      margin-bottom: $spacing-md;
+    }
+
+    // Ensure text is dark on white background
+    color: $c-text-dark;
+
+    .modifier,
+    .bonus {
+      display: inline-block;
+      @include status-badge-gold;
+      margin-right: $spacing-sm;
+      margin-bottom: $spacing-sm;
+      color: $c-text-dark;
+    }
+
+    // Attribute modifier text display
+    p, span {
+      color: $c-text-dark;
+    }
+  }
+
+  .subtypes,
+  .callings,
+  .skill-grants {
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    border-top: $border-width solid $c-border-light;
+
+    h4 {
+      @include text-label;
+      margin-bottom: $spacing-md;
+    }
+
+    ul {
+      list-style: disc;
+      margin: 0;
+      padding: 0 0 0 $spacing-lg;
+      color: $c-text-dark;
+
+      li {
+        padding: $spacing-sm 0;
+        border-bottom: $border-width solid $c-border-light;
+        color: $c-text-dark;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        strong {
+          color: $c-text-dark;
+          font-weight: $font-weight-bold;
+        }
+
+        .subtype-name,
+        .calling-name {
+          color: $c-text-dark;
+          font-weight: $font-weight-bold;
+        }
+
+        .subtype-desc,
+        .calling-desc {
+          font-size: $font-size-sm;
+          color: $c-text-medium;
+          margin: $spacing-xs 0 0 0;
+        }
+
+        // Signature talents and suggested skills
+        .signature-talents,
+        .suggested-skills {
+          font-size: $font-size-sm;
+          color: $c-text-dark;
+          margin-top: $spacing-xs;
+
+          strong {
+            color: $c-text-dark;
+          }
+
+          span, em {
+            color: $c-text-medium;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// SPELL & RITUAL DETAILS
+// ============================================
+.spell-details,
+.ritual-details {
+  h3 {
+    @include section-header;
+    margin-bottom: 0;
+    background: linear-gradient(90deg, $c-magic-dark 0%, $c-magic 100%);
+  }
+
+  .stats-grid {
+    @extend .form-grid;
+    padding: $spacing-md;
+  }
+
+  .time-input {
+    display: flex;
+    gap: $spacing-sm;
+
+    input {
+      flex: 1;
+
+      &:first-child {
+        flex: 0 0 60px;
+      }
+    }
+  }
+}
+
+// ============================================
+// SKILL DETAILS
+// ============================================
+.skill-details {
+  h3 {
+    @include section-header;
+    margin-bottom: 0;
+  }
+
+  .form-group {
+    padding: $spacing-md;
+    border-bottom: $border-width solid $c-border-light;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// ============================================
+// GEAR DETAILS
+// ============================================
+.gear-details {
+  h3 {
+    @include section-header;
+    margin-bottom: 0;
+  }
+
+  .stats-grid {
+    @extend .form-grid;
+    padding: $spacing-md;
+  }
+}
+
+// ============================================
+// LIFE EVENT DETAILS
+// ============================================
+.lifeevent-details {
+  .benefits-section,
+  .complications-section {
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    border-top: $border-width solid $c-border-light;
+
+    h4 {
+      @include text-label;
+      margin-bottom: $spacing-sm;
+    }
+
+    &.benefits-section h4 {
+      color: $c-success-dark;
+    }
+
+    &.complications-section h4 {
+      color: $c-danger;
+    }
+
+    textarea {
+      @include input-base;
+      width: 100%;
+      min-height: 60px;
+    }
+
+    p {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Life Event Benefits/Complications in item sheets
+.benefits-list,
+.complications-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: $spacing-sm 0;
+    border-bottom: $border-width solid $c-border-light;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .benefit-item,
+  .complication-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  .benefit-type {
+    font-weight: $font-weight-bold;
+    color: $c-text-dark;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($c-success, 0.15);
+    border-radius: $border-radius-sm;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+  }
+
+  .complication-type {
+    font-weight: $font-weight-bold;
+    color: $c-text-dark;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($c-danger, 0.15);
+    border-radius: $border-radius-sm;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+  }
+
+  .benefit-target,
+  .complication-target {
+    color: $c-text-dark;
+    font-weight: 500;
+  }
+
+  .benefit-value {
+    font-weight: $font-weight-bold;
+    color: $c-success-dark;
+  }
+
+  .complication-severity {
+    font-size: $font-size-xs;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    text-transform: uppercase;
+
+    &.severity-minor {
+      background: var(--wor-warning-alpha-20);
+      color: var(--wor-warning-darker);
+    }
+    &.severity-moderate {
+      background: var(--wor-warning-alpha-30);
+      color: var(--wor-warning-darker);
+    }
+    &.severity-major {
+      background: var(--wor-danger-alpha-20);
+      color: $c-danger;
+    }
+    &.severity-severe {
+      background: var(--wor-danger-alpha-30);
+      color: var(--wor-danger-darker);
+    }
+  }
+
+  .benefit-description,
+  .complication-description {
+    flex-basis: 100%;
+    margin: $spacing-xs 0 0 0;
+    font-size: $font-size-sm;
+    color: $c-text-dark;
+    line-height: 1.4;
+  }
+}
+
+// ============================================
+// EMPTY NOTICES
+// ============================================
+.empty-notice {
+  font-size: $font-size-sm;
+  color: $c-text-light;
+  font-style: italic;
+  text-align: center;
+  padding: $spacing-xl;
+  margin: 0;
+}
+
+// ============================================
+// PATHWAY ITEM STYLES
+// ============================================
+
+// Pathway skill grants list
+.pathway-skill-grants {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .skill-grant-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    border-bottom: $border-width solid $c-border-light;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .skill-name {
+      font-size: $font-size-base;
+      font-weight: 500;
+      color: $c-text-dark;
+    }
+
+    .skill-rank {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-success;
+    }
+  }
+}
+
+// Narrative hooks list
+.narrative-hooks-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .hook-item {
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-md;
+    border-bottom: $border-width solid $c-border-light;
+
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .hook-name {
+      display: block;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+      margin-bottom: $spacing-xs;
+    }
+
+    .hook-description {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Contact styling
+.contact-type {
+  font-style: italic;
+  color: $c-copper;
+}
+
+// Resource subsections
+.resource-subsection {
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  > strong {
+    display: block;
+    font-size: $font-size-sm;
+    color: $c-text-dark;
+    margin-bottom: $spacing-xs;
+  }
+
+  ul {
+    list-style: disc;
+    margin: 0;
+    padding-left: $spacing-lg;
+
+    li {
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+      margin-bottom: $spacing-xs;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Archetype tags
+.archetype-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+
+  .archetype-tag {
+    display: inline-block;
+    padding: $spacing-xs $spacing-md;
+    background: rgba($c-copper, 0.1);
+    color: $c-copper;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    border-radius: $border-radius-sm;
+    border: $border-width solid rgba($c-copper, 0.2);
+  }
+}
+
+// Ensure text in fieldset content is dark
+.item-fieldset .fieldset-content {
+  p {
+    color: $c-text-dark;
+    font-size: $font-size-base;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  em {
+    color: $c-text-medium;
+    margin-left: $spacing-sm;
+  }
+}
+
+// ============================================
+// ITEM SHEET WINDOW - DARK TEXT OVERRIDES
+// ============================================
+// These rules ensure all text in item sheets (Lineage, Archetype, Calling, etc.)
+// is dark on light backgrounds
+// Note: This file is imported inside .weight-of-ruin {} so we just use &.item-sheet
+&.item-sheet {
+  // Attribute modifiers (e.g., FOR: -1 RES: +1)
+  .attribute-modifiers {
+    .modifier {
+      color: $c-text-dark !important;
+    }
+  }
+
+  // Form field values (e.g., Starting Witchsight: 1)
+  .form-group {
+    .field-value {
+      color: $c-text-dark;
+    }
+    label {
+      color: $c-text-dark;
+    }
+  }
+
+  // Signature talents list (Calling sheets)
+  .signature-talents-list {
+    .talent-item {
+      .talent-name {
+        color: $c-text-dark !important;
+      }
+      .talent-description {
+        color: $c-text-medium;
+      }
+    }
+  }
+
+  // Skill tags (Suggested Skills in Calling sheets)
+  .skill-tags {
+    .skill-tag {
+      color: $c-text-dark !important;
+      background: rgba($c-stone, 0.12);
+    }
+  }
+
+  // Features list
+  .features-list {
+    .feature-item {
+      .feature-name {
+        color: $c-text-dark !important;
+      }
+      .feature-description {
+        color: $c-text-medium;
+      }
+    }
+  }
+
+  // Subtypes/Callings lists (Archetype sheets)
+  .subtypes-list,
+  .callings-list {
+    li {
+      color: $c-text-dark;
+      strong {
+        color: $c-text-dark !important;
+      }
+    }
+  }
+
+  // Equipment lists
+  .equipment-list {
+    li {
+      color: $c-text-dark;
+    }
+  }
+
+  // General fieldset content
+  .fieldset-content {
+    color: $c-text-dark;
+
+    ul {
+      color: $c-text-dark;
+      li {
+        color: $c-text-dark;
+        strong {
+          color: $c-text-dark !important;
+        }
+      }
+    }
+  }
+
+  // ============================================
+  // ARRAY EDITORS (Bonuses, Applied Conditions)
+  // ============================================
+  .array-editor {
+    margin-top: $spacing-md;
+
+    .array-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-sm;
+
+      label {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+
+      .array-add-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: $border-radius-sm;
+        background: $c-success;
+        color: $c-light;
+        cursor: pointer;
+        transition: background $transition-fast;
+
+        &:hover {
+          background: $c-success-dark;
+        }
+      }
+    }
+
+    .array-list {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+    }
+
+    .array-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm;
+      background: rgba($c-dark, 0.05);
+      border-radius: $border-radius-sm;
+      border: 1px solid rgba($c-dark, 0.1);
+
+      select, input {
+        @include input-base;
+        font-size: $font-size-sm;
+        padding: $spacing-xs;
+      }
+
+      .bonus-type, .condition-select {
+        flex: 0 0 100px;
+      }
+
+      .bonus-value, .condition-threshold {
+        flex: 0 0 60px;
+        text-align: center;
+      }
+
+      .bonus-condition, .condition-duration {
+        flex: 1;
+        min-width: 100px;
+      }
+
+      .array-remove-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: $border-radius-sm;
+        background: $c-danger;
+        color: $c-light;
+        cursor: pointer;
+        transition: background $transition-fast;
+        flex-shrink: 0;
+
+        &:hover {
+          background: #8b2020;
+        }
+      }
+
+      .bonus-display, .condition-display {
+        flex: 1;
+        color: $c-text-dark;
+        font-size: $font-size-sm;
+      }
+    }
+
+    .field-value.empty {
+      color: $c-text-light;
+      font-style: italic;
+    }
+  }
+}

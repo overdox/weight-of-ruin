@@ -1,0 +1,38 @@
+{{!-- NPC Creation Wizard Footer --}}
+<footer class="creation-footer npc-creation-footer">
+  <div class="footer-info">
+    <span class="step-info">
+      {{localize "AOA.NPCCreation.StepLabel"}} {{add currentStep 1}} {{localize "AOA.Common.Of"}} 6
+    </span>
+  </div>
+
+  <div class="footer-actions">
+    {{!-- Start Over Button --}}
+    <button type="button" class="start-over-btn" data-action="startOver">
+      <i class="fas fa-redo"></i>
+      {{localize "AOA.NPCCreation.StartOver"}}
+    </button>
+
+    {{!-- Navigation Buttons --}}
+    <div class="nav-buttons">
+      {{#if (gt currentStep 0)}}
+      <button type="button" class="back-btn" data-action="previousStep">
+        <i class="fas fa-arrow-left"></i>
+        {{localize "AOA.NPCCreation.PreviousStep"}}
+      </button>
+      {{/if}}
+
+      {{#if isFinalStep}}
+      <button type="button" class="finalize-btn" data-action="finalize" {{#unless canProceed}}disabled{{/unless}}>
+        <i class="fas fa-check-circle"></i>
+        {{localize "AOA.NPCCreation.CreateNPC"}}
+      </button>
+      {{else}}
+      <button type="button" class="next-btn" data-action="nextStep" {{#unless canProceed}}disabled{{/unless}}>
+        {{localize "AOA.NPCCreation.NextStep"}}
+        <i class="fas fa-arrow-right"></i>
+      </button>
+      {{/if}}
+    </div>
+  </div>
+</footer>

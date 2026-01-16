@@ -1,0 +1,287 @@
+// The Weight of Ruin System Styles
+// A grimdark medieval fantasy RPG for Foundry VTT
+// Design Philosophy: "High Realism, Low Friction"
+
+// Import IM Fell English font from Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap');
+
+// Import utilities (order matters - colors before variables, variables before mixins)
+@import 'utils/colors';
+@import 'utils/typography';
+@import 'utils/variables';
+@import 'utils/mixins';
+
+// Global styles
+@import 'global/window';
+@import 'global/grid';
+@import 'global/flex';
+
+// Default canvas background - theme-aware
+body {
+  background: var(--wor-bg-body) repeat;
+  color: var(--wor-text-primary);
+}
+
+// Styles limited to The Weight of Ruin sheets
+.weight-of-ruin {
+  @import 'components/forms';
+  @import 'components/resource';
+  @import 'components/items';
+  @import 'components/effects';
+  @import 'components/sheets';
+  @import 'components/sheets-item';
+  @import 'components/sheets-loot';
+}
+
+// Character Creation Wizard - uses both classes on same element (ApplicationV2)
+.weight-of-ruin.character-creation {
+  @import 'components/character-creation';
+}
+
+// Advancement Wizard
+.weight-of-ruin.advancement-wizard {
+  @import 'components/advancement-wizard';
+}
+
+// NPC Creation Wizard
+.weight-of-ruin.npc-creation {
+  @import 'components/npc-creation';
+}
+
+// Roll and Dice styles (used in chat and dialogs)
+// Note: Chat cards have .wor class as container, dialog styles need special handling
+.wor {
+  @import 'components/dice';
+}
+
+// Defense Dialog - classes are on SAME element, not nested
+.wor.defense-dialog {
+  @import 'components/defense-dialog';
+}
+
+// Attack Dialog - classes are on SAME element, not nested
+.wor.attack-dialog {
+  @import 'components/attack-dialog';
+}
+
+// === GLOBAL D6 DIE STYLES ===
+// Applies anywhere in Foundry for WoR dice
+.die.d6,
+span.die.d6,
+.roll-dice .die,
+.chat-message .die {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 $spacing-xs;
+  border-radius: $border-radius-sm;
+  font-family: $font-primary;
+  font-weight: bold;
+  font-size: $font-size-base;
+  background: linear-gradient(145deg, $c-pale, var(--wor-pale-darker));
+  border: $border-width-thick solid $c-medium;
+  color: $c-dark;
+  box-shadow: $shadow-sm, inset 0 1px 0 var(--wor-white-alpha-40);
+  margin: 1px;
+
+  // Hit die (success)
+  &.hit {
+    background: linear-gradient(145deg, $c-success-light, $c-success);
+    border-color: $c-success-dark;
+    color: $c-white;
+  }
+
+  // Maximum value (6)
+  &.max {
+    background: linear-gradient(145deg, $c-accent-light, $c-accent);
+    border-color: $c-accent-dark;
+    color: $c-dark;
+    box-shadow: $shadow-glow-accent, $shadow-sm;
+  }
+
+  // Minimum value (1)
+  &.min {
+    background: linear-gradient(145deg, $c-danger-light, $c-danger);
+    border-color: $c-danger-dark;
+    color: $c-white;
+  }
+}
+
+// Result indicator styling
+.result-indicator {
+  font-family: $font-primary;
+
+  .dice-pool-display {
+    font-size: $font-size-base;
+    color: $c-medium;
+    margin-right: $spacing-xs;
+  }
+
+  .result-separator {
+    color: $c-light;
+    margin: 0 $spacing-xs;
+  }
+}
+
+// === SIDEBAR BACKGROUND ===
+// Apply custom sidebar background like WFRP4e
+#sidebar #sidebar-content {
+  background: url(../assets/ui/sidebar.webp) repeat !important;
+}
+
+// Make sidebar tabs transparent so background shows through
+#sidebar .sidebar-tab {
+  background: none !important;
+}
+
+// === UI CONTROL BUTTONS ===
+// Style the scene controls, token controls, measurement controls, etc.
+#interface .ui-control {
+  background: url(../assets/ui/button-wide-inactive.webp) repeat !important;
+  border: 1px solid black;
+  border-image: url(../assets/ui/button-frame.webp) 10 repeat;
+  border-image-width: 4px;
+  border-image-outset: 0px;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
+
+#interface .ui-control[aria-pressed="true"],
+#interface .ui-control.active {
+  background: url(../assets/ui/button-wide-active.webp) repeat !important;
+  box-shadow: inset 0 0 10px rgba($c-copper, 0.6);
+}
+
+// === CHAT CARD PARCHMENT BACKGROUND OVERRIDE ===
+// Must be outside .wor block since .chat-message contains .wor, not vice versa
+// Apply parchment background to entire chat message for our custom cards
+#chat-log .chat-message:has(.creation-roll-card),
+#chat-log .chat-message:has(.defense-card),
+#chat-log .chat-message:has(.attack-card),
+#chat-log .chat-message:has(.roll-card),
+#chat-log .chat-message:has(.crisis-roll),
+#chat-log .chat-message:has(.critical-injury-card),
+#chat-log .chat-message:has(.spell-card),
+#chat-log .chat-message:has(.ritual-card),
+#chat-log .chat-message:has(.zeal-notification),
+#chat-log .chat-message:has(.essence-notification),
+#chat-log .chat-message:has(.full-defense-card),
+#chat-log .chat-message:has(.initiative-card),
+.chat-message:has(.creation-roll-card),
+.chat-message:has(.defense-card),
+.chat-message:has(.attack-card),
+.chat-message:has(.roll-card),
+.chat-message:has(.crisis-roll),
+.chat-message:has(.critical-injury-card),
+.chat-message:has(.spell-card),
+.chat-message:has(.ritual-card),
+.chat-message:has(.zeal-notification),
+.chat-message:has(.essence-notification),
+.chat-message:has(.full-defense-card),
+.chat-message:has(.initiative-card) {
+  background-image: var(--wor-bg-parchment-texture) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: $border-radius-md !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+
+  .message-header {
+    background: var(--wor-dark-alpha-05);
+    border-bottom: 1px solid var(--wor-dark-alpha-10);
+
+    // Fix header text and icon colors for dark theme
+    .message-sender,
+    .message-metadata {
+      color: var(--wor-text-primary) !important;
+    }
+
+    // Delete and control buttons need bright colors on dark theme
+    .message-delete,
+    .message-controls button,
+    .control {
+      color: var(--wor-text-secondary) !important;
+
+      &:hover {
+        color: var(--wor-gold) !important;
+      }
+    }
+  }
+
+  .message-content {
+    padding: 0 !important;
+    background: transparent !important;
+  }
+}
+
+// === CHAT CARD IMAGE CONSTRAINTS ===
+// Force small weapon images in chat cards - AGGRESSIVE OVERRIDE
+#chat-log .chat-message,
+.chat-message {
+  // Target weapon images specifically by class
+  .item-image {
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    flex: 0 0 40px !important;
+    border-radius: $border-radius-md !important;
+    border: $border-width-thick solid $c-medium !important;
+    object-fit: cover !important;
+  }
+
+  // Item display container
+  .item-display {
+    display: flex !important;
+    align-items: center !important;
+    gap: $spacing-sm !important;
+    padding: $spacing-sm !important;
+    background: var(--wor-dark-alpha-05);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-md;
+    margin: $spacing-sm 0;
+
+    img {
+      flex: 0 0 40px !important;
+      width: 40px !important;
+      height: 40px !important;
+      max-width: 40px !important;
+      max-height: 40px !important;
+      border-radius: $border-radius-md !important;
+      object-fit: cover !important;
+    }
+
+    .item-info {
+      flex: 1;
+
+      .item-name {
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        margin: 0;
+      }
+
+      .item-details {
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+    }
+  }
+}
+
+// Additional aggressive selector for WoR cards
+.wor .item-image,
+.roll-card .item-image,
+.attack-card .item-image {
+  width: 40px !important;
+  height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+  object-fit: cover !important;
+}

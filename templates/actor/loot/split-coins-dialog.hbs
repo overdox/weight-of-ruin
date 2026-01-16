@@ -1,0 +1,36 @@
+<form class="split-coins-dialog">
+  <section class="wealth-summary">
+    <h4>{{localize "AOA.Loot.CoinsToSplit"}}</h4>
+    <div class="wealth-display">
+      <div class="currency sovereigns">
+        <span class="value">{{wealth.sovereigns}}</span>
+        <span class="label">{{localize "AOA.Wealth.Sovereigns"}}</span>
+      </div>
+      <div class="currency crowns">
+        <span class="value">{{wealth.crowns}}</span>
+        <span class="label">{{localize "AOA.Wealth.Crowns"}}</span>
+      </div>
+      <div class="currency orin">
+        <span class="value">{{wealth.orin}}</span>
+        <span class="label">{{localize "AOA.Wealth.Orin"}}</span>
+      </div>
+    </div>
+    <p class="total">{{localize "AOA.Loot.TotalInOrin"}}: <strong>{{totalInOrin}}</strong></p>
+  </section>
+
+  <section class="character-selection">
+    <h4>{{localize "AOA.Loot.SelectRecipients"}}</h4>
+    <p class="hint">{{localize "AOA.Loot.SelectRecipientsHint"}}</p>
+    <ul class="character-list">
+      {{#each playerCharacters}}
+      <li class="character-row">
+        <label>
+          <input type="checkbox" name="character" value="{{id}}" checked />
+          <img src="{{img}}" alt="{{name}}" class="character-img" />
+          <span class="character-name">{{name}}</span>
+        </label>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+</form>

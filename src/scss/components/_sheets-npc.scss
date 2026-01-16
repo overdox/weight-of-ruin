@@ -1,0 +1,915 @@
+// The Weight of Ruin - NPC Sheet Styles
+// Uses banner-based layout matching player character sheets
+// Note: Uses &.npc-sheet because ApplicationV2 puts all classes on same element
+
+&.npc-sheet {
+  // NPC-specific banner styling
+  .npc-banner {
+    height: 224px;
+
+    .banner-overlay {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: $spacing-lg;
+    }
+
+    .banner-name-section {
+      .actor-name {
+        margin: 0;
+        padding: 0;
+
+        input {
+          font-size: $font-size-xl;
+          font-weight: $font-weight-bold;
+          font-family: $font-primary;
+          color: #fff;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+          background: transparent;
+          border: none;
+          border-bottom: 1px solid transparent;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+
+          &:hover {
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+          }
+
+          &:focus {
+            outline: none;
+            border-bottom-color: $c-gold;
+          }
+        }
+      }
+
+      .npc-identity {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        margin-top: $spacing-xs;
+
+        .archetype-lineage {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: $font-size-sm;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        .npc-type-input,
+        .npc-role-input {
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: $border-radius-sm;
+          color: #fff;
+          font-size: $font-size-sm;
+          padding: $spacing-xs $spacing-sm;
+          width: 100px;
+
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+          }
+
+          &:focus {
+            outline: none;
+            border-color: $c-gold;
+          }
+        }
+
+        .identity-separator {
+          color: rgba(255, 255, 255, 0.5);
+        }
+      }
+    }
+
+    // Tier display positioned in banner
+    .threat-section {
+      margin-top: $spacing-lg;
+
+      .threat-level {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        border-radius: $border-radius-md;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+
+        // Tier-based colors (0-6)
+        &.tier-0 { background: rgba($c-faint, 0.6); }       // Dreg
+        &.tier-1 { background: rgba($c-success, 0.6); }     // Skirmisher
+        &.tier-2 { background: rgba($c-success, 0.7); }     // Enforcer
+        &.tier-3 { background: rgba($c-warning, 0.6); }     // Champion
+        &.tier-4 { background: rgba($c-warning, 0.7); }     // Elite
+        &.tier-5 { background: rgba($c-danger, 0.6); }      // Boss
+        &.tier-6 { background: rgba($c-magic, 0.6); }       // Exemplar
+
+        .threat-select {
+          font-size: $font-size-sm;
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: $border-radius-sm;
+          color: #fff;
+          padding: $spacing-xs $spacing-sm;
+        }
+
+        .threat-badge {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          text-transform: uppercase;
+          letter-spacing: $letter-spacing-wide;
+          color: #fff;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .threat-rating {
+          font-size: $font-size-md;
+          font-weight: $font-weight-bold;
+          color: #fff;
+          padding: $spacing-xs $spacing-md;
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: $border-radius-sm;
+        }
+      }
+    }
+  }
+
+  // NPC-specific header styling (below banner) - matches character sheet
+  .header-wrapper .sheet-header.npc-header {
+    display: flex;
+    align-items: flex-end;
+    gap: $spacing-md;
+    padding: 0 $spacing-lg $spacing-sm;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin-top: -112px; // Pull up to overlap banner (matches character sheet)
+    position: relative;
+    z-index: 10;
+    min-height: 100px;
+    overflow: visible;
+
+    .profile {
+      flex-shrink: 0;
+      position: relative;
+      z-index: 15;
+      align-self: flex-end;
+      margin-bottom: $spacing-sm;
+
+      .profile-img {
+        width: 125px;
+        height: 125px;
+        object-fit: cover;
+        border: 4px solid $c-copper;
+        border-radius: $border-radius-md;
+        cursor: pointer;
+        transition: border-color $transition-fast, box-shadow $transition-fast;
+        box-shadow: $shadow-lg;
+        background: $c-parchment;
+        display: block;
+
+        &:hover {
+          border-color: $c-gold;
+        }
+      }
+    }
+
+    .header-stats {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+      align-items: flex-end;
+    }
+  }
+
+  // Quick Stats Bar
+  .quick-stats {
+    display: flex;
+    gap: $spacing-sm;
+
+    .stat-box {
+      @include flex-column;
+      align-items: center;
+      padding: $spacing-sm $spacing-md;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-md;
+      min-width: 50px;
+
+      .stat-label {
+        @include text-label;
+        font-size: $font-size-xs;
+      }
+
+      .stat-value {
+        font-size: $font-size-md;
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+      }
+
+      &.defense {
+        border-color: $c-copper;
+      }
+    }
+  }
+
+  // Compact Health Display
+  .health-compact {
+    display: flex;
+    gap: $spacing-md;
+    align-items: center;
+
+    .trauma-tracker {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-md;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-md;
+
+      &.breaking-point {
+        background: var(--wor-danger-bg);
+        border-color: var(--wor-danger);
+      }
+
+      label {
+        @include text-label;
+        font-size: $font-size-xs;
+      }
+
+      .trauma-inline {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+
+        button {
+          @include button-secondary;
+          width: 22px;
+          height: 22px;
+          padding: 0;
+          font-size: $font-size-sm;
+          min-width: 22px;
+        }
+
+        .trauma-value {
+          font-weight: $font-weight-bold;
+          font-size: $font-size-base;
+          min-width: 50px;
+          text-align: center;
+        }
+      }
+    }
+
+    .resilience-compact {
+      .resilience-count {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        padding: $spacing-sm $spacing-md;
+        background: $c-bg-elevated;
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-md;
+
+        i {
+          color: $c-success;
+        }
+
+        &.critical {
+          color: $c-danger;
+          border-color: $c-danger;
+          i { color: $c-danger; }
+        }
+      }
+    }
+  }
+
+  // NPC Body content
+  .npc-body {
+    @include flex-column;
+    height: 100%;
+
+    .npc-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: $spacing-lg;
+      @include custom-scrollbar;
+    }
+  }
+
+  // Condensed Attributes Row
+  .attributes-condensed {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      @include section-header-bar;
+      margin-bottom: $spacing-md;
+    }
+
+    .attributes-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+    }
+
+    .witchsight-row {
+      margin-top: $spacing-md;
+    }
+
+    .attr-compact {
+      @include flex-column;
+      align-items: center;
+      padding: $spacing-sm $spacing-md;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-md;
+      min-width: 55px;
+
+      .attr-abbr {
+        @include text-label;
+        font-size: $font-size-xs;
+      }
+
+      .attr-value {
+        font-size: $font-size-md;
+        font-weight: $font-weight-bold;
+      }
+
+      input {
+        width: 40px;
+        text-align: center;
+        font-weight: $font-weight-bold;
+        @include input-base;
+        padding: $spacing-xs;
+      }
+
+      &.witchsight {
+        background: var(--wor-magic-bg);
+        border-color: var(--wor-magic-alpha-30);
+      }
+    }
+  }
+
+  // Attack List
+  .attacks-section,
+  .abilities-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      @include section-header-bar;
+      margin-bottom: $spacing-md;
+
+      .add-control {
+        @include clickable;
+        font-size: $font-size-sm;
+        color: #fff;
+
+        &:hover {
+          color: $c-gold;
+        }
+      }
+    }
+  }
+
+  .attack-list,
+  .ability-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .attack-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-sm;
+    margin-bottom: $spacing-sm;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $c-copper;
+      box-shadow: $shadow-sm;
+    }
+
+    .attack-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      .attack-name {
+        flex: 1;
+        font-weight: $font-weight-bold;
+      }
+
+      input.attack-name {
+        flex: 1;
+        @include input-base;
+        padding: $spacing-xs $spacing-md;
+      }
+    }
+
+    .attack-stats {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      font-size: $font-size-sm;
+      color: $c-medium;
+
+      input {
+        width: 40px;
+        text-align: center;
+        @include input-base;
+        padding: $spacing-xs;
+      }
+
+      .attack-damage i {
+        margin-right: $spacing-xs;
+        color: $c-danger;
+      }
+    }
+
+    .quick-roll-btn {
+      @include button-primary;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+    }
+
+    .remove-control {
+      @include clickable;
+      font-size: $font-size-sm;
+      color: $c-faint;
+
+      &:hover {
+        color: $c-danger;
+      }
+    }
+  }
+
+  .ability-item {
+    @include flex-column;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-sm;
+    margin-bottom: $spacing-sm;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $c-copper;
+      box-shadow: $shadow-sm;
+    }
+
+    .ability-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      .ability-name {
+        flex: 1;
+        font-weight: $font-weight-bold;
+      }
+
+      input.ability-name {
+        flex: 1;
+        @include input-base;
+        padding: $spacing-xs $spacing-md;
+      }
+
+      .quick-roll-btn,
+      .show-btn {
+        @include button-primary;
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-size-sm;
+      }
+
+      .show-btn {
+        background: $c-medium;
+      }
+    }
+
+    .ability-description {
+      font-size: $font-size-sm;
+      color: $c-medium;
+      margin: 0;
+      padding-left: $spacing-sm;
+    }
+
+    .ability-edit {
+      @include flex-column;
+      gap: $spacing-md;
+
+      textarea {
+        width: 100%;
+        min-height: 50px;
+        @include input-base;
+        resize: vertical;
+      }
+
+      .ability-roll-settings {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        font-size: $font-size-sm;
+
+        label {
+          color: $c-medium;
+        }
+
+        input {
+          width: 45px;
+          text-align: center;
+          @include input-base;
+          padding: $spacing-xs;
+        }
+
+        select {
+          font-size: $font-size-sm;
+          @include input-base;
+          padding: $spacing-xs $spacing-sm;
+        }
+      }
+    }
+
+    .remove-control {
+      align-self: flex-end;
+      @include clickable;
+      font-size: $font-size-sm;
+      color: $c-faint;
+
+      &:hover {
+        color: $c-danger;
+      }
+    }
+  }
+
+  // Morale Section
+  .morale-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      @include section-header-bar;
+      margin-bottom: $spacing-md;
+    }
+
+    .morale-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-md;
+
+      .morale-field {
+        @include flex-column;
+        gap: $spacing-xs;
+
+        label {
+          @include text-label;
+        }
+
+        input {
+          @include input-base;
+          padding: $spacing-sm $spacing-md;
+        }
+      }
+
+      .morale-threshold,
+      .morale-condition {
+        font-size: $font-size-base;
+        color: $c-medium;
+      }
+    }
+  }
+
+  // Tactics & GM Notes
+  .tactics-section,
+  .gm-notes-section,
+  .loot-section,
+  .biography-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      @include section-header-bar;
+      margin-bottom: $spacing-md;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+    }
+
+    .editor-container {
+      min-height: 80px;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-sm;
+      padding: $spacing-sm;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 60px;
+      @include input-base;
+      resize: vertical;
+    }
+
+    .tactics-content,
+    .gm-notes-content,
+    .loot-content,
+    .biography-content {
+      font-size: $font-size-base;
+      line-height: $line-height-base;
+      padding: $spacing-sm;
+    }
+  }
+
+  // Notes Section (Profile Tab)
+  .notes-section {
+    margin-bottom: $spacing-lg;
+    position: relative;
+
+    h3 {
+      @include section-header-bar;
+      margin-bottom: $spacing-md;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+    }
+
+    .toggle-editor-btn {
+      position: absolute;
+      top: 45px;
+      right: 15px;
+      left: auto;
+      cursor: pointer;
+      font-size: 24px;
+      color: $c-medium;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $border-radius-md;
+      transition: all $transition-fast;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        color: $c-gold;
+        background: rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    .notes-editor-container {
+      min-height: 200px;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-sm;
+      padding: $spacing-sm;
+      position: relative;
+
+      .notes-view {
+        font-size: $font-size-base;
+        line-height: $line-height-base;
+        padding: $spacing-md;
+        min-height: 150px;
+
+        &:empty::before {
+          content: "No notes yet...";
+          color: $c-faint;
+          font-style: italic;
+        }
+
+        &.hidden {
+          display: none !important;
+          visibility: hidden !important;
+          position: absolute !important;
+          pointer-events: none !important;
+          z-index: -1 !important;
+        }
+      }
+
+      .notes-edit {
+        min-height: 200px;
+
+        &.hidden {
+          display: none !important;
+        }
+
+        prose-mirror {
+          min-height: 200px;
+          display: block;
+
+          // ProseMirror wrapper
+          .editor.prosemirror {
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+          }
+
+          // Editor container
+          .editor-container {
+            min-height: 150px;
+          }
+
+          // Editable content area - target both classes
+          .editor-content,
+          .editor-content.ProseMirror,
+          .ProseMirror {
+            flex: 1;
+            min-height: 150px !important;
+            padding: $spacing-md !important;
+            background: #3a3530 !important;  // Explicit dark bg
+            color: #e8e0d5 !important;  // Explicit light text
+            font-size: $font-size-base;
+            line-height: $line-height-base;
+            overflow-y: auto;
+
+            &:focus {
+              outline: none;
+            }
+
+            // Ensure ALL text elements are visible
+            p, span, div, li, h1, h2, h3, h4, h5, h6 {
+              color: #e8e0d5 !important;  // Explicit light text
+              margin: 0 0 $spacing-sm 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ============================================
+  // TRAITS TAB
+  // ============================================
+  .traits-section {
+    .traits-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: $spacing-md;
+
+      h3 {
+        @include section-header-bar;
+        margin: 0;
+        flex: 1;
+      }
+
+      .trait-points {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        padding: $spacing-sm $spacing-md;
+        background: $c-bg-elevated;
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-sm;
+        margin-left: $spacing-md;
+      }
+    }
+
+    .trait-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+
+    .trait-item {
+      display: flex;
+      align-items: flex-start;
+      gap: $spacing-md;
+      padding: $spacing-md;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-sm;
+      transition: all $transition-fast;
+
+      &:hover {
+        border-color: $c-copper;
+        box-shadow: $shadow-sm;
+      }
+
+      .trait-icon {
+        flex-shrink: 0;
+
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: $border-radius-sm;
+          border: $border-width solid $c-border-medium;
+          object-fit: cover;
+        }
+      }
+
+      .trait-info {
+        flex: 1;
+        min-width: 0;
+
+        .trait-header-row {
+          display: flex;
+          align-items: flex-start;
+          gap: $spacing-sm;
+          flex-wrap: wrap;
+          margin-bottom: $spacing-xs;
+
+          .trait-name {
+            font-weight: $font-weight-bold;
+            font-size: $font-size-base;
+          }
+
+          .trait-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: $spacing-xs;
+          }
+
+          .trait-tag {
+            font-size: $font-size-xs;
+            padding: 2px $spacing-xs;
+            border-radius: $border-radius-sm;
+            text-transform: uppercase;
+            letter-spacing: $letter-spacing-wide;
+
+            &.trait-category {
+              background: rgba($c-copper, 0.2);
+              color: $c-copper;
+              border: 1px solid rgba($c-copper, 0.3);
+            }
+
+            &.trait-passive {
+              background: rgba($c-success, 0.2);
+              color: $c-success;
+              border: 1px solid rgba($c-success, 0.3);
+            }
+
+            &.trait-trigger {
+              background: rgba($c-warning, 0.2);
+              color: $c-warning;
+              border: 1px solid rgba($c-warning, 0.3);
+            }
+
+            &.trait-cooldown {
+              background: rgba($c-magic, 0.2);
+              color: $c-magic;
+              border: 1px solid rgba($c-magic, 0.3);
+            }
+          }
+        }
+
+        .trait-description {
+          font-size: $font-size-sm;
+          color: $c-medium;
+          margin: 0;
+          line-height: $line-height-base;
+        }
+      }
+
+      .trait-actions {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+
+        .trait-roll-btn {
+          @include button-primary;
+          padding: $spacing-sm $spacing-md;
+          font-size: $font-size-sm;
+          white-space: nowrap;
+        }
+
+        .item-control {
+          @include clickable;
+          font-size: $font-size-sm;
+          color: $c-faint;
+          padding: $spacing-xs;
+
+          &:hover {
+            color: $c-gold;
+          }
+
+          &[data-action="deleteItem"]:hover {
+            color: $c-danger;
+          }
+        }
+      }
+    }
+
+    .empty-notice {
+      font-size: $font-size-base;
+      color: $c-faint;
+      font-style: italic;
+      text-align: center;
+      padding: $spacing-xl;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-sm;
+    }
+  }
+}

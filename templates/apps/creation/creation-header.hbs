@@ -1,0 +1,28 @@
+{{!-- Character Creation Wizard Header --}}
+<header class="creation-header">
+  <div class="creation-title">
+    <h1>{{localize "AOA.CharacterCreation.Title"}}</h1>
+  </div>
+
+  {{!-- Step Progress Indicator --}}
+  <nav class="step-progress">
+    {{#each steps}}
+    <div class="step-indicator {{#if active}}active{{/if}} {{#if completed}}completed{{/if}} {{#if future}}future{{/if}}"
+         title="{{localize label}}">
+      <span class="step-number">{{number}}</span>
+      {{#if completed}}
+      <i class="fas fa-check"></i>
+      {{/if}}
+    </div>
+    {{/each}}
+  </nav>
+
+  {{!-- LP Tracker --}}
+  <div class="lp-tracker">
+    <span class="lp-label">{{localize "AOA.CharacterCreation.LPLabel"}}:</span>
+    <span class="lp-value">
+      <span class="lp-remaining">{{lp.remaining}}</span>
+      <span class="lp-total">/ {{lp.earned}}</span>
+    </span>
+  </div>
+</header>

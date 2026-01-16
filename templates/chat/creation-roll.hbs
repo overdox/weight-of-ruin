@@ -1,0 +1,50 @@
+{{!-- Character Creation Roll Chat Card --}}
+<div class="wor">
+  <div class="creation-roll-card {{resultType}}">
+    {{!-- Title --}}
+    <div class="creation-roll-title">
+      <h3>{{title}}</h3>
+    </div>
+
+    {{!-- Roll Display --}}
+    <div class="creation-roll-body">
+      <div class="roll-display">
+        <span class="roll-formula">{{formula}}</span>
+        <span class="roll-multiplier">×</span>
+        <span class="roll-total">{{total}}</span>
+      </div>
+    </div>
+
+    {{!-- Result --}}
+    {{#if result}}
+    <div class="creation-roll-result">
+      <div class="result-label">{{localize "AOA.Common.Result"}}</div>
+      {{#if result.img}}
+      <div class="result-image">
+        <img src="{{result.img}}" alt="{{result.name}}" />
+      </div>
+      {{/if}}
+      <div class="result-name">{{result.name}}</div>
+      {{#if result.subtitle}}
+      <div class="result-subtitle">{{result.subtitle}}</div>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- Special messages (like "Player's Choice") --}}
+    {{#if specialMessage}}
+    <div class="creation-roll-special">
+      <i class="fas fa-star"></i>
+      <span>{{specialMessage}}</span>
+    </div>
+    {{/if}}
+
+    {{!-- LP Award --}}
+    {{#if lpAward}}
+    <div class="creation-roll-lp">
+      <i class="fas fa-coins"></i>
+      <span>+{{lpAward}} {{localize "AOA.CharacterCreation.LP"}}</span>
+    </div>
+    {{/if}}
+  </div>
+</div>

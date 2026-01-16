@@ -1,0 +1,114 @@
+<div class="roll-dialog-content">
+  {{!-- Pool Summary --}}
+  <section class="pool-section">
+    <h4>{{localize "AOA.Roll.Pool"}}</h4>
+    <div class="pool-breakdown">
+      {{#if poolData.attribute.value}}
+      <div class="pool-component">
+        <span class="component-label">{{poolData.attribute.label}}</span>
+        <span class="component-value">{{poolData.attribute.value}}</span>
+      </div>
+      {{/if}}
+      {{#if poolData.skill.value}}
+      <div class="pool-component">
+        <span class="component-label">{{poolData.skill.name}}</span>
+        <span class="component-value">{{poolData.skill.value}}</span>
+      </div>
+      {{/if}}
+      {{#if poolData.modifier}}
+      <div class="pool-component">
+        <span class="component-label">{{localize "AOA.Roll.BaseModifier"}}</span>
+        <span class="component-value">{{#if (gt poolData.modifier 0)}}+{{/if}}{{poolData.modifier}}</span>
+      </div>
+      {{/if}}
+    </div>
+
+    {{!-- Modifier Input --}}
+    <div class="modifier-input">
+      <label for="modifier">{{localize "AOA.Roll.Modifier"}}</label>
+      <input type="number" name="modifier" value="{{modifier}}" />
+    </div>
+
+    {{!-- Effective Pool Display --}}
+    <div class="effective-pool {{#if isZeroPool}}zero-pool{{/if}}">
+      <span class="pool-label">{{localize "AOA.Roll.EffectivePool"}}:</span>
+      <span class="pool-value">{{effectivePool}}d6</span>
+      {{#if isZeroPool}}
+      <span class="zero-pool-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        {{localize "AOA.Roll.ZeroPoolWarning"}}
+      </span>
+      {{/if}}
+    </div>
+  </section>
+
+  {{!-- Difficulty Selection --}}
+  <section class="difficulty-section">
+    <h4>{{localize "AOA.Roll.Difficulty"}}</h4>
+    <div class="difficulty-selector">
+      <select name="difficulty">
+        {{#each difficultyTiers}}
+        <option value="{{key}}" {{#if selected}}selected{{/if}}>
+          {{label}} ({{threshold}}+)
+        </option>
+        {{/each}}
+      </select>
+    </div>
+    {{#if (ne effectiveDifficulty difficulty)}}
+    <div class="effective-difficulty">
+      <span class="shifted-label">{{localize "AOA.Roll.ShiftedTo"}}:</span>
+      <span class="shifted-value">{{localize (concat "AOA.Difficulty." effectiveDifficulty)}}</span>
+    </div>
+    {{/if}}
+  </section>
+
+  {{!-- Target Threshold --}}
+  <section class="tt-section">
+    <h4>{{localize "AOA.Roll.TargetThreshold"}}</h4>
+    <div class="tt-input">
+      <input type="number" name="targetThreshold" value="{{targetThreshold}}" min="1" placeholder="{{localize 'AOA.Roll.TTOptional'}}" />
+    </div>
+    <p class="tt-hint">{{localize "AOA.Roll.TTHint"}}</p>
+  </section>
+
+  {{!-- Zeal Options --}}
+  {{#if (and actor (gt currentZeal 0))}}
+  <section class="zeal-section">
+    <h4>
+      <i class="fas fa-fire"></i>
+      {{localize "AOA.Zeal.Spend"}}
+      <span class="zeal-current">({{currentZeal}} {{localize "AOA.Zeal.Available"}})</span>
+    </h4>
+    <div class="zeal-options">
+      {{#each zealOptions}}
+      <label class="zeal-option {{#if disabled}}disabled{{/if}}">
+        <input type="checkbox"
+               data-zeal-option="{{key}}"
+               {{#if checked}}checked{{/if}}
+               {{#if disabled}}disabled{{/if}} />
+        <span class="zeal-label">{{label}}</span>
+        <span class="zeal-cost">({{cost}} Zeal)</span>
+      </label>
+      {{/each}}
+    </div>
+  </section>
+  {{/if}}
+
+  {{!-- Zero Pool Zeal Option --}}
+  {{#if isZeroPool}}
+  <section class="zero-pool-section">
+    {{#if canAttemptZeroPool}}
+    <p class="zero-pool-info">
+      <i class="fas fa-info-circle"></i>
+      {{localize "AOA.Roll.ZeroPoolInfo"}}
+    </p>
+    {{else}}
+    <p class="zero-pool-error">
+      <i class="fas fa-times-circle"></i>
+      {{localize "AOA.Roll.ZeroPoolCannotAttempt"}}
+    </p>
+    {{/if}}
+  </section>
+  {{/if}}
+
+</div>

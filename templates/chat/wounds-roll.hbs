@@ -1,0 +1,94 @@
+<div class="wor roll-card wounds-roll {{#if passed}}passed{{else}}failed{{/if}}">
+  {{!-- Header with Actor Portrait --}}
+  <div class="chat-card-header">
+    {{#if actor.img}}
+    <img src="{{actor.img}}" alt="{{actor.name}}" class="actor-portrait" />
+    {{/if}}
+    <div class="header-info">
+      <h4 class="actor-name">{{actor}}</h4>
+      <div class="roll-type">
+        <span class="roll-label">
+          <i class="fas fa-heartbeat"></i>
+          {{localize "AOA.Roll.WoundsRoll"}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Result Indicator --}}
+  <div class="result-indicator {{#if passed}}success{{else}}failure{{/if}}">
+    <div class="result-text">
+      {{#if passed}}
+        <i class="fas fa-shield-alt"></i>
+        {{localize "AOA.Roll.WoundsEndure"}} ( <span class="hit-count">{{hits}}</span> )
+      {{else}}
+        <i class="fas fa-heart-broken"></i>
+        {{localize "AOA.Roll.WoundsFalter"}} ( <span class="hit-count">{{hits}}</span> )
+      {{/if}}
+    </div>
+    <div class="result-margin">
+      {{localize "AOA.Roll.Hits"}} <span class="margin-value {{#if passed}}positive{{else}}negative{{/if}}">{{hits}}</span> vs {{localize "AOA.TT.NetHits"}} <span class="tt-target">{{targetThreshold}}</span>
+    </div>
+  </div>
+
+  {{!-- Failure Consequences --}}
+  {{#if failed}}
+  <div class="wounds-result failure">
+    <p class="failure-instruction">
+      <i class="fas fa-exclamation-triangle"></i>
+      {{localize "AOA.Roll.WoundsFailedConsequences"}}
+    </p>
+    <div class="consequence-list">
+      <div class="consequence">
+        <i class="fas fa-minus-circle"></i>
+        {{localize "AOA.Health.LostWounds"}}: 1
+      </div>
+      <div class="consequence">
+        <i class="fas fa-heart-crack"></i>
+        {{localize "AOA.Health.MaxTraumaReduced"}}: 2
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+  {{!-- Collapsible Details --}}
+  <div class="collapsible-section" data-section="wounds-details">
+    <div class="collapsible-header collapsed" data-action="toggle-collapse">
+      <i class="fas fa-chevron-down collapse-icon"></i>
+      <span class="section-title">{{localize "AOA.Roll.Details"}}</span>
+    </div>
+    <div class="collapsible-content collapsed">
+      {{!-- Wounds Stats --}}
+      <div class="wounds-stats">
+        <div class="stat">
+          <span class="stat-label">{{localize "AOA.Health.Wounds"}}:</span>
+          <span class="stat-value">{{wounds}} / {{maxWounds}}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">{{localize "AOA.Health.Trauma"}}:</span>
+          <span class="stat-value trauma-value">{{trauma}} / {{maxTrauma}}</span>
+        </div>
+      </div>
+
+      {{!-- Dice Display --}}
+      <div class="roll-dice">
+        {{{diceDisplay}}}
+      </div>
+    </div>
+  </div>
+
+  {{!-- Status Alerts --}}
+  {{#if result.isUnconscious}}
+  <div class="status-alert unconscious">
+    <i class="fas fa-bed"></i>
+    {{localize "AOA.Health.Unconscious"}}
+  </div>
+  {{/if}}
+
+  {{#if result.isDead}}
+  <div class="status-alert dead">
+    <i class="fas fa-skull"></i>
+    {{localize "AOA.Health.Dead"}}
+  </div>
+  {{/if}}
+</div>

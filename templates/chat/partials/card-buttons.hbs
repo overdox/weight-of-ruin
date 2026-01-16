@@ -1,0 +1,19 @@
+{{!-- Chat Card Action Buttons Partial --}}
+{{!-- Required context: buttons (array of {action, label, icon, class, disabled, data}) --}}
+
+{{#if buttons}}
+<div class="chat-card-buttons">
+  {{#each buttons}}
+  <button
+    type="button"
+    class="{{this.class}}"
+    data-action="{{this.action}}"
+    {{#if this.disabled}}disabled{{/if}}
+    {{#each this.data}}data-{{@key}}="{{this}}"{{/each}}
+  >
+    {{#if this.icon}}<i class="{{this.icon}}"></i>{{/if}}
+    <span>{{this.label}}</span>
+  </button>
+  {{/each}}
+</div>
+{{/if}}

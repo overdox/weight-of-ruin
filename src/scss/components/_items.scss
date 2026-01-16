@@ -1,0 +1,658 @@
+// The Weight of Ruin - Professional Item List Styles
+// Styles for item lists, inventory, and equipment sections
+
+// ============================================
+// ITEMS LIST CONTAINER
+// ============================================
+.items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  @include custom-scrollbar;
+
+  .item-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // Item Name Column
+  .item-name {
+    flex: 2;
+    margin: 0;
+    overflow: hidden;
+    font-size: $font-size-base;
+    text-align: left;
+    align-items: center;
+    display: flex;
+    color: $c-text-dark;
+
+    h3, h4 {
+      margin: 0;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      font-family: $font-primary;
+    }
+  }
+
+  // Control Buttons
+  .item-controls {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+
+    a, .item-control {
+      @include clickable;
+      font-size: $font-size-base;
+      text-align: center;
+      padding: $spacing-sm;
+      color: $c-text-light;
+      border-radius: $border-radius-sm;
+      transition: all $transition-fast;
+
+      &:hover {
+        color: $c-gold;
+        background: rgba($c-gold, 0.1);
+      }
+
+      &.item-delete:hover,
+      &.item-remove:hover {
+        color: $c-danger;
+        background: rgba($c-danger, 0.1);
+      }
+    }
+  }
+
+  // Individual Item Row
+  .item {
+    @include list-row;
+    padding: $spacing-sm $spacing-lg;
+
+    &:nth-child(odd) {
+      background: $c-row-alt;
+    }
+
+    &:hover {
+      background: $c-row-hover;
+    }
+
+    .item-name {
+      color: $c-text-dark;
+
+      .item-image {
+        flex: 0 0 30px;
+        height: 30px;
+        width: 30px;
+        background-size: cover;
+        background-position: center;
+        border: $border-width solid $c-border-medium;
+        border-radius: $border-radius-sm;
+        margin-right: $spacing-sm;
+        cursor: pointer;
+        transition: border-color $transition-fast;
+
+        &:hover {
+          border-color: $c-gold;
+        }
+      }
+    }
+  }
+
+  // Item Property Column
+  .item-prop {
+    text-align: center;
+    border-left: $border-width solid $c-border-light;
+    border-right: $border-width solid $c-border-light;
+    font-size: $font-size-sm;
+    padding: $spacing-xs $spacing-sm;
+    color: $c-text-medium;
+  }
+}
+
+// ============================================
+// SECTION HEADER
+// ============================================
+.items-header {
+  @include section-header-bar;
+  height: auto;
+  min-height: 32px;
+  margin: 0;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: 0;
+
+  > * {
+    font-size: $font-size-sm;
+    text-align: center;
+  }
+
+  .item-name {
+    font-weight: $font-weight-bold;
+    text-align: left;
+    display: flex;
+    color: $c-header-text;
+  }
+
+  .item-control {
+    @include clickable;
+    margin-left: auto;
+    font-size: $font-size-sm;
+    color: $c-header-text;
+
+    &:hover {
+      color: $c-gold;
+    }
+  }
+}
+
+// ============================================
+// ITEM FORMULA (for rollable items)
+// ============================================
+.item-formula {
+  flex: 0 0 180px;
+  padding: 0 $spacing-md;
+  font-family: $font-mono;
+  font-size: $font-size-sm;
+  color: $c-text-medium;
+}
+
+// ============================================
+// EQUIPMENT SECTION
+// ============================================
+.equipment-section {
+  margin-bottom: $spacing-lg;
+
+  .equipment-header {
+    @include section-header;
+    margin-bottom: $spacing-md;
+
+    .item-control {
+      @include clickable;
+      font-size: $font-size-sm;
+      color: $c-header-text;
+    }
+  }
+
+  .equipment-category {
+    margin-bottom: $spacing-md;
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      color: $c-copper;
+      background: rgba($c-copper, 0.08);
+      border-bottom: $border-width solid $c-border-light;
+      margin-bottom: 0;
+
+      i {
+        color: $c-copper;
+      }
+    }
+  }
+}
+
+// ============================================
+// WEAPON ITEM
+// ============================================
+.weapon-item {
+  .weapon-damage {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-weight: $font-weight-bold;
+    color: $c-danger;
+
+    i {
+      font-size: $font-size-xs;
+    }
+  }
+
+  .weapon-properties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+
+    .property-tag {
+      font-size: $font-size-xs;
+      padding: $spacing-xs $spacing-sm;
+      background: rgba($c-stone, 0.1);
+      border-radius: $border-radius-sm;
+      color: $c-text-medium;
+    }
+  }
+}
+
+// ============================================
+// ARMOR ITEM
+// ============================================
+.armor-item {
+  .armor-category {
+    font-size: $font-size-xs;
+    color: $c-text-light;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    background: rgba($c-stone, 0.1);
+    border-radius: $border-radius-sm;
+  }
+
+  .armor-dr {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-weight: $font-weight-bold;
+    font-family: $font-mono;
+    color: $c-success;
+    font-size: $font-size-sm;
+
+    i {
+      font-size: $font-size-xs;
+    }
+  }
+
+  .armor-penalty {
+    color: $c-warning;
+    font-size: $font-size-sm;
+  }
+
+  &.equipped {
+    background: $c-success-bg;
+    border-left: $border-width-thick solid $c-success;
+  }
+}
+
+// ============================================
+// GEAR ITEM
+// ============================================
+.gear-item {
+  .gear-quantity {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    input {
+      width: 40px;
+      text-align: center;
+      @include input-base;
+      padding: $spacing-xs;
+    }
+  }
+
+  .gear-weight {
+    font-size: $font-size-sm;
+    color: $c-text-medium;
+  }
+}
+
+// ============================================
+// SPELL/RITUAL ITEM
+// ============================================
+.spell-item,
+.ritual-item {
+  .spell-tradition,
+  .ritual-path {
+    font-size: $font-size-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: $c-magic-bg;
+    border-radius: $border-radius-sm;
+    color: $c-magic;
+    font-weight: $font-weight-bold;
+  }
+
+  .spell-cost,
+  .ritual-complexity {
+    font-size: $font-size-sm;
+    color: $c-text-medium;
+
+    i {
+      margin-right: $spacing-xs;
+    }
+  }
+}
+
+// ============================================
+// SKILL ITEM
+// ============================================
+.skill-item {
+  .skill-rank {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    .rank-value {
+      min-width: 24px;
+      text-align: center;
+      font-weight: $font-weight-bold;
+      color: $c-gold;
+    }
+
+    .rank-control {
+      @include button-secondary;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      font-size: $font-size-sm;
+    }
+  }
+
+  .skill-attribute {
+    font-size: $font-size-xs;
+    color: $c-text-medium;
+    text-transform: uppercase;
+  }
+
+  &.rollable {
+    .item-name {
+      @include clickable;
+      color: $c-text-dark;
+
+      &:hover {
+        color: $c-gold;
+      }
+    }
+  }
+}
+
+// ============================================
+// TALENT ITEM
+// ============================================
+.talent-item {
+  .talent-rank {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    .rank-dots {
+      display: flex;
+      gap: 3px;
+
+      .rank-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: $c-border-light;
+        border: $border-width solid $c-border-medium;
+
+        &.filled {
+          background: $c-gold;
+          border-color: $c-gold-dark;
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// EMPTY STATE
+// ============================================
+.items-empty {
+  @include flex-center;
+  padding: $spacing-lg;
+  color: $c-text-light;
+  font-style: italic;
+  text-align: center;
+
+  i {
+    margin-right: $spacing-sm;
+  }
+}
+
+// ============================================
+// DRAG AND DROP
+// ============================================
+.item.dragging {
+  opacity: 0.5;
+}
+
+.item.drag-over {
+  border-top: $border-width-thick solid $c-gold;
+}
+
+// ============================================
+// EQUIPPED STATUS
+// ============================================
+.equipped-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: color $transition-fast;
+
+  i {
+    font-size: $font-size-sm;
+    color: $c-text-light;
+  }
+
+  &.is-equipped i {
+    color: $c-success;
+  }
+
+  &:hover i {
+    color: $c-gold;
+  }
+}
+
+// ============================================
+// CURRENCY/WEALTH
+// ============================================
+.currency-display {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background: $c-bg-elevated;
+  border: $border-width solid $c-border-light;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-md;
+
+  .currency-label {
+    @include text-label;
+  }
+
+  .currency-value {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $c-gold;
+  }
+
+  input.currency-value {
+    width: 80px;
+    text-align: center;
+    @include input-base;
+    padding: $spacing-sm;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+  }
+}
+
+// ============================================
+// WEALTH BAR (Inventory Header)
+// ============================================
+.wealth-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md $spacing-lg;
+  background: $c-bg-elevated;
+  border: $border-width solid $c-border-light;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-lg;
+
+  .currency-display {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+
+    .currency-group {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      .currency-icon {
+        font-size: $font-size-base;
+      }
+
+      .currency-value {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        min-width: 24px;
+        text-align: center;
+      }
+
+      .currency-label {
+        font-size: $font-size-xs;
+        color: var(--wor-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      // Gold sovereigns
+      &.sovereigns {
+        .currency-icon,
+        .currency-value {
+          color: #9a7b0a;
+        }
+      }
+
+      // Silver crowns
+      &.crowns {
+        .currency-icon,
+        .currency-value {
+          color: #5a6068;
+        }
+      }
+
+      // Copper/bronze orin
+      &.orin {
+        .currency-icon,
+        .currency-value {
+          color: #8b5a2b;
+        }
+      }
+    }
+  }
+
+  .wealth-edit-btn {
+    @include button-secondary;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+
+    i {
+      margin-right: $spacing-xs;
+    }
+  }
+}
+
+// ============================================
+// WEALTH EDIT FORM (Dialog)
+// ============================================
+.wealth-edit-form {
+  .form-group {
+    margin-bottom: $spacing-md;
+
+    label {
+      display: block;
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-xs;
+      color: $c-text-dark;
+    }
+
+    select,
+    input[type="number"] {
+      @include input-base;
+      width: 100%;
+    }
+
+    .currency-row {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      .current-value {
+        flex: 1;
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+      }
+
+      input {
+        flex: 1;
+        max-width: 100px;
+      }
+    }
+  }
+}
+
+// ============================================
+// ENCUMBRANCE
+// ============================================
+.encumbrance-bar {
+  margin-bottom: $spacing-md;
+
+  .encumbrance-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing-xs;
+
+    .encumbrance-label {
+      @include text-label;
+    }
+
+    .encumbrance-values {
+      font-size: $font-size-sm;
+      color: $c-text-medium;
+
+      .current-weight {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+    }
+  }
+
+  .encumbrance-track {
+    height: 8px;
+    background: $c-border-light;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+
+    .encumbrance-fill {
+      height: 100%;
+      background: $c-success;
+      border-radius: $border-radius-sm;
+      transition: width $transition-normal, background $transition-fast;
+
+      &.warning {
+        background: $c-warning;
+      }
+
+      &.danger {
+        background: $c-danger;
+      }
+    }
+  }
+}
+
+// ============================================
+// SUBSECTION HEADERS
+// ============================================
+.weapons-subsection,
+.armor-subsection,
+.gear-subsection {
+  margin-bottom: $spacing-xl;
+
+  > h3 {
+    @include section-header;
+    margin-bottom: 0;
+  }
+}

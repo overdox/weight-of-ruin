@@ -1,0 +1,123 @@
+{{!-- Defense Roll Dialog --}}
+<div class="defense-dialog-content">
+  {{!-- Full Defense Banner (if active) --}}
+  {{#if fullDefenseActive}}
+  <div class="full-defense-banner">
+    <i class="fas fa-shield-alt"></i>
+    <span>{{localize "AOA.Defense.FullDefense.Active"}} (+{{fullDefenseBonus}})</span>
+  </div>
+  {{/if}}
+
+  {{!-- Base Pool Section --}}
+  <div class="dialog-section">
+    <div class="section-header">
+      <i class="fas fa-shield-alt"></i>
+      <h2>{{localize "AOA.Defense.BasePool"}}</h2>
+    </div>
+    <div class="section-body">
+      <div class="pool-display">
+        <span class="pool-formula">
+          {{localize "AOA.Derived.Reflex.label"}} {{poolData.reflex}}
+          <span class="formula-breakdown">({{localize "AOA.Attribute.Agility.abbr"}} {{poolData.agility}} + {{localize "AOA.Attribute.Awareness.abbr"}} {{poolData.awareness}})</span>
+        </span>
+      </div>
+      {{#if fullDefenseActive}}
+      <div class="pool-display full-defense-row">
+        <span class="pool-formula">
+          {{localize "AOA.Defense.FullDefense.Title"}} +{{fullDefenseBonus}}
+        </span>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+
+  {{!-- Buy Options Section --}}
+  <div class="dialog-section">
+    <div class="section-header">
+      <i class="fas fa-plus-circle"></i>
+      <h2>{{localize "AOA.Defense.BuyOption.Label"}}</h2>
+    </div>
+    <div class="section-body">
+      <p class="buy-option-hint">{{localize "AOA.Defense.BuyOption.Hint"}}</p>
+      <div class="buy-options-grid">
+        {{#each buyOptions}}
+        <label class="buy-option {{#if selected}}selected{{/if}} {{#unless available}}unavailable{{/unless}} {{#if hasPenalty}}has-penalty{{/if}}">
+          <input type="radio" name="buyOption" value="{{key}}" {{#if selected}}checked{{/if}} {{#unless available}}disabled{{/unless}} />
+          <span class="option-content">
+            <span class="option-name">{{label}}</span>
+            {{#if (gt baseBonus 0)}}
+            <span class="option-bonus {{#if hasPenalty}}penalized{{/if}}">
+              +{{bonus}}
+              {{#if hasPenalty}}
+              <span class="penalty-indicator">(was +{{baseBonus}})</span>
+              {{/if}}
+            </span>
+            {{/if}}
+          </span>
+          {{#if (and requiresShield (not available))}}
+          <span class="option-note">{{localize "AOA.Defense.NoShieldEquipped"}}</span>
+          {{/if}}
+          {{#if hasPenalty}}
+          <span class="option-uses">{{localize "AOA.Defense.UsedTimes" count=usageCount penalty=usagePenalty}}</span>
+          {{/if}}
+        </label>
+        {{/each}}
+      </div>
+      {{#if buyWarning}}
+      <div class="buy-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        {{localize "AOA.Defense.BuyAlreadyUsed"}}
+      </div>
+      {{/if}}
+    </div>
+  </div>
+
+  {{!-- Modifier Section --}}
+  <div class="dialog-section modifier-section">
+    <div class="modifier-row">
+      <label class="modifier-label">{{localize "AOA.Roll.Modifier"}}</label>
+      <input type="number" name="modifier" value="{{modifier}}" class="modifier-input" />
+    </div>
+  </div>
+
+  {{!-- Fervor Options --}}
+  {{#if fervorOptions}}
+  <div class="dialog-section">
+    <div class="section-header fervor-header">
+      <i class="fas fa-fire"></i>
+      <h2>{{localize "AOA.Fervor.Title"}}</h2>
+      <span class="fervor-available">{{currentFervor}} {{localize "AOA.Fervor.Available"}}</span>
+    </div>
+    <div class="section-body">
+      <div class="fervor-options">
+        {{#each fervorOptions}}
+        <label class="fervor-option {{#if disabled}}disabled{{/if}}">
+          <input type="checkbox" data-fervor-option="{{key}}" {{#if checked}}checked{{/if}} {{#if disabled}}disabled{{/if}} />
+          <span class="option-label">{{label}}</span>
+          <span class="option-cost">({{cost}})</span>
+        </label>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+  {{!-- Effective Pool Summary --}}
+  <div class="effective-pool-summary">
+    <span class="pool-label">{{localize "AOA.Roll.EffectivePool"}}:</span>
+    <span class="pool-value {{#if isZeroPool}}zero-pool{{/if}}">{{effectivePool}}d6</span>
+  </div>
+
+  {{!-- Zero Pool Warning --}}
+  {{#if isZeroPool}}
+  <div class="zero-pool-warning">
+    {{#if canAttemptZeroPool}}
+    <i class="fas fa-exclamation-circle"></i>
+    {{localize "AOA.Roll.ZeroPoolWarning"}}
+    {{else}}
+    <i class="fas fa-times-circle"></i>
+    {{localize "AOA.Roll.ZeroPoolFailure"}}
+    {{/if}}
+  </div>
+  {{/if}}
+</div>

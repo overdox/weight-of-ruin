@@ -1,0 +1,12 @@
+{{!-- Collapsible Details Section Partial --}}
+{{!-- Required context: sectionId (string), title (string), startCollapsed (boolean, default false) --}}
+
+<div class="collapsible-section" data-section="{{sectionId}}">
+  <div class="collapsible-header {{#if startCollapsed}}collapsed{{/if}}" data-action="toggle-collapse">
+    <i class="fas fa-chevron-down collapse-icon"></i>
+    <span class="section-title">{{title}}</span>
+  </div>
+  <div class="collapsible-content {{#if startCollapsed}}collapsed{{/if}}">
+    {{> @partial-block}}
+  </div>
+</div>

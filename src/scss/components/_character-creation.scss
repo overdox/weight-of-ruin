@@ -1,0 +1,3591 @@
+// The Weight of Ruin - Character Creation Wizard Styles
+// Grimdark themed 10-step character creation process
+// Note: This file is imported inside .weight-of-ruin.character-creation selector
+
+// Use & to reference the parent selector for base styles
+& {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  @include parchment-bg;
+  background-color: $c-parchment;
+  font-family: $font-primary;
+  color: $c-text-dark;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+}
+
+// ========================================
+// HEADER
+// ========================================
+.creation-header {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
+    background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+    border-bottom: $border-width-thick solid $c-copper;
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+
+    .creation-title {
+      h1 {
+        margin: 0;
+        font-size: $font-size-xl;
+        font-family: $font-primary;
+        color: $c-text-inverse;
+        text-align: center;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    // Step Progress Indicator
+    .step-progress {
+      display: flex;
+      justify-content: center;
+      gap: $spacing-xs;
+
+      .step-indicator {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        transition: all $transition-fast;
+        position: relative;
+
+        .step-number {
+          z-index: 1;
+        }
+
+        i {
+          position: absolute;
+          font-size: $font-size-xs;
+        }
+
+        &.completed {
+          background: $c-success;
+          color: $c-white;
+
+          .step-number {
+            display: none;
+          }
+        }
+
+        &.active {
+          background: $c-gold;
+          color: $c-text-dark;
+          transform: scale(1.15);
+          box-shadow: 0 0 8px rgba($c-gold, 0.5);
+        }
+
+        &.future {
+          background: rgba($c-text-inverse, 0.2);
+          color: rgba($c-text-inverse, 0.5);
+        }
+      }
+    }
+
+    // LP Tracker
+    .lp-tracker {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-md;
+      background: rgba($c-text-inverse, 0.1);
+      border-radius: $border-radius-md;
+
+      .lp-label {
+        font-size: $font-size-sm;
+        color: $c-white;
+      }
+
+      .lp-value {
+        font-weight: $font-weight-bold;
+        color: $c-white;
+
+        .lp-remaining {
+          font-size: $font-size-lg;
+          color: $c-gold;
+        }
+
+        .lp-total {
+          font-size: $font-size-sm;
+          color: rgba($c-white, 0.8);
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // BODY
+  // ========================================
+  .creation-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .step-header {
+      @include section-header;
+      padding: $spacing-sm $spacing-lg;
+      margin: 0;
+
+      h2 {
+        margin: 0;
+        font-size: $font-size-base;
+        font-family: $font-primary;
+        color: $c-header-text;
+      }
+    }
+
+    .creation-step-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: $spacing-lg;
+      @include custom-scrollbar;
+    }
+  }
+
+  // ========================================
+  // FOOTER
+  // ========================================
+  .creation-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-md $spacing-lg;
+    background: rgba($c-faint, 0.3);
+    border-top: $border-width solid $c-faint;
+    border-radius: 0 0 $border-radius-lg $border-radius-lg;
+
+    .footer-info {
+      .step-info {
+        font-size: $font-size-sm;
+        color: $c-text-dark;
+      }
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: $spacing-md;
+
+      .back-btn,
+      .next-btn,
+      .finalize-btn {
+        padding: $spacing-sm $spacing-lg;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        border: none;
+        border-radius: $border-radius-md;
+        cursor: pointer;
+        transition: all $transition-fast;
+        font-family: $font-primary;
+
+        i {
+          margin: 0 $spacing-xs;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+
+      .back-btn {
+        @include button-secondary;
+      }
+
+      .next-btn {
+        @include button-primary;
+      }
+
+      .finalize-btn {
+        @include button-accent;
+      }
+    }
+  }
+
+  // ========================================
+  // COMMON STEP ELEMENTS
+  // ========================================
+  .step-description {
+    margin: 0 0 $spacing-lg 0;
+    padding: $spacing-lg;
+    background: $c-bg-elevated;
+    border: $border-width solid $c-border-light;
+    border-left: $border-width-thick solid $c-copper;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-base;
+    color: $c-text-dark;
+    line-height: $line-height-relaxed;
+  }
+
+  // Roll Section
+  .roll-section {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: rgba($c-dark, 0.05);
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-md;
+
+    .roll-btn {
+      @include button-primary;
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-sm;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+    }
+
+    .lp-award {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      color: $c-success;
+    }
+
+    .roll-result {
+      display: flex;
+      gap: $spacing-md;
+      align-items: center;
+      padding: $spacing-sm $spacing-md;
+      background: $c-bg-elevated;
+      border-radius: $border-radius-md;
+      border: $border-width solid $c-faint;
+
+      .roll-value {
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+      }
+
+      .roll-match {
+        color: $c-success;
+        font-weight: $font-weight-bold;
+      }
+
+      // Two-step roll display (for background)
+      .roll-details {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+
+        .standing-result {
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+        }
+
+        .background-result {
+          color: $c-success;
+          font-weight: $font-weight-bold;
+          font-size: $font-size-md;
+        }
+      }
+    }
+  }
+
+  // Divider
+  .divider-or {
+    display: flex;
+    align-items: center;
+    margin: $spacing-lg 0;
+    font-size: $font-size-sm;
+    color: $c-medium;
+    text-transform: uppercase;
+
+    &::before, &::after {
+      content: '';
+      flex: 1;
+      height: $border-width;
+      background: $c-faint;
+    }
+
+    &::before {
+      margin-right: $spacing-md;
+    }
+
+    &::after {
+      margin-left: $spacing-md;
+    }
+  }
+
+  // Selection Grid
+  .selection-grid {
+    display: grid;
+    gap: $spacing-md;
+
+    // Lineage, Archetype, and Pathway cards: 3 per row
+    &.lineage-grid,
+    &.archetype-grid,
+    &.pathway-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.background-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+
+    &.subtype-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
+
+  // Selection Card
+  .selection-card {
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    border: $border-width-thick solid $c-faint;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $c-medium;
+      box-shadow: $shadow-md;
+    }
+
+    &.selected {
+      border-color: $c-gold;
+      background: rgba($c-gold, 0.08);
+      box-shadow: 0 0 0 3px rgba($c-gold, 0.3);
+    }
+
+    .card-title {
+      margin: 0 0 $spacing-sm 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+    }
+
+    .card-modifiers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+      margin-bottom: $spacing-sm;
+
+      .modifier {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        padding: $spacing-sm $spacing-md;
+        border-radius: $border-radius-sm;
+
+        &.positive {
+          background: $c-success-bg;
+          color: $c-success-dark;
+        }
+
+        &.negative {
+          background: $c-danger-bg;
+          color: $c-danger;
+        }
+      }
+    }
+
+    .witchsight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      padding: $spacing-sm $spacing-md;
+      background: $c-magic-bg;
+      color: $c-magic;
+      border-radius: $border-radius-sm;
+
+      i {
+        font-size: $font-size-sm;
+      }
+    }
+
+    .card-description {
+      margin: $spacing-sm 0 0 0;
+      font-size: $font-size-sm;
+      color: $c-dark;
+      line-height: $line-height-base;
+
+      p {
+        margin: 0 0 $spacing-sm 0;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .card-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-md;
+      font-size: $font-size-sm;
+      color: $c-dark;
+
+      i {
+        margin-right: $spacing-xs;
+        color: $c-medium;
+      }
+    }
+
+    // Background card specific styling for larger, more readable info
+    &.background-card {
+      padding: $spacing-lg;
+      min-height: 180px;
+
+      .card-title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        margin-bottom: $spacing-sm;
+        color: $c-dark;
+      }
+
+      .card-description {
+        font-size: $font-size-sm;
+        line-height: 1.4;
+        color: $c-text-light;
+        margin: 0 0 $spacing-md 0;
+        padding-bottom: $spacing-sm;
+        border-bottom: 1px solid rgba($c-medium, 0.3);
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .card-details {
+        flex-direction: column;
+        gap: $spacing-xs;
+
+        .detail-row {
+          display: flex;
+          align-items: center;
+        }
+
+        .wealth-range,
+        .skill-ranks-info,
+        .contact-info {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          font-size: $font-size-sm;
+          padding: $spacing-xs $spacing-sm;
+          background: rgba($c-faint, 0.4);
+          border-radius: $border-radius-sm;
+
+          i {
+            font-size: $font-size-base;
+            width: 18px;
+            text-align: center;
+          }
+
+          .detail-value {
+            font-weight: $font-weight-bold;
+            font-size: $font-size-base;
+          }
+
+          .detail-label {
+            color: $c-text-light;
+            font-size: $font-size-xs;
+          }
+        }
+
+        .wealth-range {
+          .detail-value {
+            color: $c-gold-dark;
+          }
+
+          i {
+            color: $c-gold;
+          }
+        }
+
+        .skill-ranks-info {
+          .detail-value {
+            color: $c-success-dark;
+          }
+
+          i {
+            color: $c-success;
+          }
+        }
+
+        .contact-info {
+          i {
+            color: $c-stone;
+          }
+
+          .detail-label {
+            color: $c-dark;
+            font-size: $font-size-sm;
+          }
+        }
+
+        .social-standing-info {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          font-size: $font-size-sm;
+          padding: $spacing-xs $spacing-sm;
+          background: rgba($c-faint, 0.4);
+          border-radius: $border-radius-sm;
+
+          i {
+            font-size: $font-size-base;
+            width: 18px;
+            text-align: center;
+            color: $c-stone;
+          }
+        }
+      }
+    }
+
+    .skill-grants {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+      margin: $spacing-sm 0;
+
+      .skill-grant {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        padding: $spacing-sm $spacing-md;
+        background: $c-success-bg;
+        color: $c-success-dark;
+        border-radius: $border-radius-sm;
+      }
+    }
+  }
+
+  // Social Standing Section (Backgrounds)
+  .standing-section {
+    margin-bottom: $spacing-xl;
+
+    .standing-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width-thick solid $c-faint;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+      text-transform: uppercase;
+      letter-spacing: $letter-spacing-wide;
+
+      .standing-info {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-normal;
+        text-transform: none;
+        letter-spacing: normal;
+        color: $c-text-light;
+        margin-left: auto;
+      }
+    }
+
+    // Color coding for social standings (highest to lowest)
+    &.standing-exalted .standing-header { color: var(--wor-gold-dark-darker); border-color: $c-gold; }
+    &.standing-ordained .standing-header { color: var(--wor-gold-darker); }
+    &.standing-anointed .standing-header { color: $c-stone; }
+    &.standing-penitent .standing-header { color: var(--wor-medium-darker); }
+    &.standing-heretics .standing-header { color: var(--wor-success-dark-darker); }
+    &.standing-outcast .standing-header { color: $c-dark; }
+  }
+
+  // Subtype Section
+  .subtype-section {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: $border-width-thick solid $c-gold;
+
+    h3 {
+      margin: 0 0 $spacing-md 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+    }
+
+    .subtype-card {
+      &.selected {
+        border-color: $c-gold;
+        background: rgba($c-gold, 0.12);
+        box-shadow: 0 0 0 3px rgba($c-gold, 0.4);
+
+        .card-title {
+          color: $c-gold-dark;
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // LIFE EVENTS STEP
+  // ========================================
+  .step-life-events {
+    .life-events-controls {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-md;
+      background: rgba($c-dark, 0.05);
+      border-radius: $border-radius-md;
+      margin-bottom: $spacing-lg;
+
+      .draw-btn {
+        @include button-accent;
+        padding: $spacing-sm $spacing-lg;
+        font-size: $font-size-sm;
+
+        i {
+          margin-right: $spacing-sm;
+        }
+      }
+
+      .events-count {
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+
+      .lp-award {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $c-success;
+      }
+    }
+
+    // Pending Event
+    .pending-event {
+      padding: $spacing-lg;
+      background: rgba($c-gold, 0.1);
+      border: $border-width-thick solid $c-gold;
+      border-radius: $border-radius-lg;
+      margin-bottom: $spacing-lg;
+
+      h3 {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-lg;
+        color: $c-dark;
+      }
+
+      .event-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacing-lg;
+        margin-bottom: $spacing-lg;
+      }
+
+      .event-benefits, .event-complications {
+        h4 {
+          margin: 0 0 $spacing-sm 0;
+          font-size: $font-size-base;
+          font-weight: $font-weight-bold;
+
+          i {
+            margin-right: $spacing-xs;
+          }
+        }
+
+        ul {
+          margin: 0;
+          padding-left: $spacing-lg;
+          font-size: $font-size-base;
+          line-height: $line-height-relaxed;
+          color: $c-dark;
+
+          li {
+            margin-bottom: $spacing-sm;
+          }
+        }
+      }
+
+      .event-benefits h4 {
+        color: $c-success-dark;
+      }
+
+      .event-complications {
+        h4 {
+          color: $c-danger;
+        }
+
+        .severity {
+          font-size: $font-size-sm;
+          color: $c-medium;
+        }
+      }
+
+      .event-actions {
+        display: flex;
+        gap: $spacing-md;
+
+        button {
+          flex: 1;
+          padding: $spacing-sm $spacing-lg;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          border: none;
+          border-radius: $border-radius-md;
+          cursor: pointer;
+          font-family: $font-primary;
+
+          i {
+            margin-right: $spacing-xs;
+          }
+        }
+
+        .accept-btn {
+          @include button-accent;
+        }
+
+        .reject-btn {
+          @include button-secondary;
+        }
+      }
+    }
+
+    // Accepted Events
+    .accepted-events {
+      h3 {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-sm;
+        color: $c-dark;
+      }
+
+      .events-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        .event-item {
+          padding: $spacing-sm $spacing-md;
+          background: rgba($c-success, 0.1);
+          border-left: $border-width-thick solid $c-success;
+          margin-bottom: $spacing-sm;
+          border-radius: 0 $border-radius-md $border-radius-md 0;
+
+          .event-name {
+            font-weight: $font-weight-bold;
+          }
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // ATTRIBUTES STEP
+  // ========================================
+  .step-attributes {
+    .points-tracker {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-md;
+      background: rgba($c-dark, 0.08);
+      border-radius: $border-radius-md;
+      margin-bottom: $spacing-lg;
+
+      .points-label {
+        font-size: $font-size-base;
+        color: $c-dark;
+      }
+
+      .points-value {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+
+        &.complete {
+          color: $c-success;
+        }
+      }
+    }
+
+    // Flexible Bonus Section
+    .flexible-bonus-section {
+      padding: $spacing-md;
+      background: rgba($c-gold, 0.1);
+      border: $border-width solid rgba($c-gold, 0.3);
+      border-radius: $border-radius-md;
+      margin-bottom: $spacing-lg;
+
+      h4 {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-sm;
+        color: $c-dark;
+      }
+
+      p {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+
+      .flexible-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+
+        .flex-option {
+          padding: $spacing-sm $spacing-md;
+          font-size: $font-size-sm;
+          background: $c-bg-elevated;
+          border: $border-width solid $c-faint;
+          border-radius: $border-radius-md;
+          cursor: pointer;
+
+          &:hover {
+            border-color: $c-medium;
+          }
+
+          &.selected {
+            background: $c-gold;
+            color: $c-dark;
+            border-color: $c-gold;
+          }
+        }
+      }
+    }
+
+    // Attributes Allocation
+    .attributes-allocation {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      .attribute-row {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        padding: $spacing-sm $spacing-md;
+        background: rgba($c-faint, 0.2);
+        border-radius: $border-radius-md;
+
+        .attr-label {
+          flex: 0 0 100px;
+          font-weight: $font-weight-bold;
+          font-size: $font-size-base;
+          color: $c-dark;
+        }
+
+        .attr-breakdown {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: $spacing-md;
+        }
+
+        .attr-base {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+
+          .adjust-btn {
+            @include button-secondary;
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            font-size: $font-size-base;
+          }
+
+          .base-value {
+            width: 28px;
+            text-align: center;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-base;
+            color: $c-dark;
+          }
+        }
+
+        .attr-mods {
+          display: flex;
+          gap: $spacing-xs;
+
+          .mod {
+            font-size: $font-size-sm;
+            font-weight: $font-weight-bold;
+            padding: $spacing-sm $spacing-md;
+            border-radius: $border-radius-sm;
+
+            &.lineage {
+              background: $c-magic-bg;
+              color: $c-magic;
+            }
+
+            &.archetype {
+              background: rgba($c-gold, 0.15);
+              color: $c-gold-dark;
+            }
+
+            &.flexible {
+              background: $c-success-bg;
+              color: $c-success-dark;
+            }
+          }
+        }
+
+        .attr-total {
+          color: $c-dark;
+          font-size: $font-size-base;
+        }
+
+        .attr-final {
+          width: 35px;
+          text-align: center;
+          font-size: $font-size-lg;
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+        }
+      }
+    }
+
+    // Derived Preview
+    .derived-preview {
+      margin-top: $spacing-xl;
+      padding: $spacing-md;
+      background: rgba($c-faint, 0.2);
+      border-radius: $border-radius-md;
+
+      h4 {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-base;
+        color: $c-dark;
+      }
+
+      .derived-stats {
+        display: flex;
+        gap: $spacing-lg;
+        flex-wrap: wrap;
+
+        .derived-stat {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: $spacing-xs;
+
+          .stat-label {
+            font-size: $font-size-sm;
+            text-transform: uppercase;
+            letter-spacing: $letter-spacing-wider;
+            color: $c-medium;
+          }
+
+          .stat-value {
+            font-size: $font-size-xl;
+            font-weight: $font-weight-bold;
+            color: $c-dark;
+          }
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // SKILLS STEP
+  // ========================================
+  .step-skills {
+    // Sub-tabs Navigation
+    .skills-talents-tabs {
+      display: flex;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-lg;
+      padding: $spacing-sm;
+      background: rgba($c-dark, 0.05);
+      border-radius: $border-radius-lg;
+
+      .subtab-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $spacing-sm;
+        padding: $spacing-md $spacing-lg;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        font-family: $font-primary;
+        background: transparent;
+        border: $border-width solid transparent;
+        border-radius: $border-radius-md;
+        cursor: pointer;
+        color: $c-medium;
+        transition: all $transition-fast;
+
+        i {
+          font-size: $font-size-lg;
+        }
+
+        .subtab-badge {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 24px;
+          height: 24px;
+          padding: 0 $spacing-xs;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          background: rgba($c-dark, 0.1);
+          color: $c-medium;
+          border-radius: $border-radius-lg;
+
+          &.selected {
+            background: $c-success;
+            color: $c-white;
+          }
+        }
+
+        &:hover {
+          background: rgba($c-gold, 0.1);
+          color: $c-dark;
+        }
+
+        &.active {
+          background: $c-bg-elevated;
+          border-color: $c-gold;
+          color: $c-gold-dark;
+          box-shadow: $shadow-md;
+
+          i {
+            color: $c-gold;
+          }
+
+          .subtab-badge {
+            background: $c-gold;
+            color: $c-dark;
+          }
+        }
+      }
+    }
+
+    // Sub-tab Panels
+    .subtab-panel {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    // Points tracker in skills panel
+    .skills-panel .points-tracker {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-md;
+      background: rgba($c-dark, 0.08);
+      border-radius: $border-radius-md;
+      margin-bottom: $spacing-lg;
+
+      .points-label {
+        font-size: $font-size-base;
+        color: $c-dark;
+      }
+
+      .points-value {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+
+        &.complete {
+          color: $c-success;
+        }
+      }
+    }
+
+    .skills-section {
+      margin-bottom: $spacing-xl;
+
+      h3 {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-lg;
+        color: $c-dark;
+      }
+
+      .skill-category {
+        margin-bottom: $spacing-lg;
+
+        .category-header {
+          margin: 0 0 $spacing-sm 0;
+          padding-bottom: $spacing-xs;
+          border-bottom: $border-width solid $c-faint;
+          font-size: $font-size-base;
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+        }
+
+        .skills-list {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-xs;
+        }
+
+        .skill-row {
+          display: flex;
+          align-items: center;
+          gap: $spacing-md;
+          padding: $spacing-sm $spacing-md;
+          background: rgba($c-faint, 0.2);
+          border-radius: $border-radius-md;
+
+          .skill-name {
+            flex: 1;
+            font-size: $font-size-base;
+            font-weight: $font-weight-bold;
+            color: $c-dark;
+          }
+
+          .skill-attr {
+            font-size: $font-size-sm;
+            color: $c-medium;
+          }
+
+          .granted-rank {
+            font-size: $font-size-sm;
+            font-weight: $font-weight-bold;
+            padding: $spacing-sm $spacing-md;
+            background: $c-success-bg;
+            color: $c-success-dark;
+            border-radius: $border-radius-sm;
+          }
+
+          .skill-controls {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+
+            .skill-btn {
+              @include button-secondary;
+              width: 26px;
+              height: 26px;
+              padding: 0;
+              font-size: $font-size-base;
+            }
+
+            .skill-rank {
+              width: 24px;
+              text-align: center;
+              font-weight: $font-weight-bold;
+              font-size: $font-size-base;
+              color: $c-dark;
+            }
+          }
+        }
+      }
+    }
+
+    // Talents Section
+    .talents-section {
+      h3 {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-lg;
+        color: $c-dark;
+      }
+
+      // Purchased Talents Section
+      .purchased-talents-section {
+        margin-bottom: $spacing-lg;
+        padding: $spacing-md;
+        background: rgba($c-success, 0.08);
+        border: $border-width solid rgba($c-success, 0.3);
+        border-radius: $border-radius-lg;
+
+        .purchased-header {
+          margin: 0 0 $spacing-sm 0;
+          font-size: $font-size-base;
+          font-weight: $font-weight-bold;
+          color: $c-success-dark;
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+
+          i {
+            color: $c-success;
+          }
+
+          .talent-count {
+            margin-left: auto;
+            padding: $spacing-xs $spacing-sm;
+            background: $c-success;
+            color: $c-white;
+            border-radius: $border-radius-lg;
+            font-size: $font-size-xs;
+          }
+        }
+
+        .purchased-talents-list {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-xs;
+
+          .purchased-talent-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: $spacing-sm $spacing-md;
+            background: $c-bg-elevated;
+            border-radius: $border-radius-md;
+            border: $border-width solid rgba($c-success, 0.2);
+
+            .talent-info {
+              display: flex;
+              align-items: center;
+              gap: $spacing-md;
+
+              .talent-name {
+                font-weight: $font-weight-bold;
+                color: $c-dark;
+              }
+
+              .talent-rank {
+                font-size: $font-size-sm;
+                color: $c-medium;
+              }
+            }
+
+            .refund-talent {
+              display: flex;
+              align-items: center;
+              gap: $spacing-xs;
+              padding: $spacing-xs $spacing-sm;
+              font-size: $font-size-xs;
+              background: transparent;
+              border: $border-width solid $c-danger;
+              border-radius: $border-radius-sm;
+              color: $c-danger;
+              cursor: pointer;
+              transition: all $transition-fast;
+              font-family: $font-primary;
+
+              &:hover {
+                background: $c-danger;
+                color: $c-white;
+              }
+            }
+          }
+        }
+      }
+
+      .talents-info {
+        padding: $spacing-md;
+        background: rgba($c-gold, 0.1);
+        border-radius: $border-radius-md;
+        margin-bottom: $spacing-md;
+
+        .talent-cost {
+          margin: 0;
+          font-size: $font-size-base;
+          color: $c-dark;
+
+          i {
+            color: $c-gold;
+            margin-right: $spacing-xs;
+          }
+
+          strong {
+            color: $c-gold-dark;
+          }
+        }
+      }
+
+      // Talent Filter Tabs
+      .talent-filter-tabs {
+        display: flex;
+        gap: $spacing-xs;
+        margin-bottom: $spacing-md;
+        padding: $spacing-xs;
+        background: rgba($c-dark, 0.05);
+        border-radius: $border-radius-md;
+
+        .talent-filter-btn {
+          flex: 1;
+          padding: $spacing-sm $spacing-md;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          font-family: $font-primary;
+          background: transparent;
+          border: none;
+          border-radius: $border-radius-sm;
+          color: $c-medium;
+          cursor: pointer;
+          transition: all $transition-fast;
+
+          &:hover {
+            background: rgba($c-gold, 0.1);
+            color: $c-dark;
+          }
+
+          &.active {
+            background: $c-bg-elevated;
+            color: $c-gold-dark;
+            box-shadow: $shadow-sm;
+          }
+        }
+      }
+
+      .current-talents {
+        margin-bottom: $spacing-lg;
+
+        h4 {
+          margin: 0 0 $spacing-sm 0;
+          font-size: $font-size-base;
+          color: $c-dark;
+        }
+
+        .talents-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          .talent-item {
+            display: flex;
+            align-items: center;
+            gap: $spacing-md;
+            padding: $spacing-sm $spacing-md;
+            background: rgba($c-success, 0.1);
+            border-radius: $border-radius-md;
+            margin-bottom: $spacing-xs;
+
+            .talent-name {
+              flex: 1;
+              font-weight: $font-weight-bold;
+              color: $c-dark;
+            }
+
+            .talent-rank {
+              font-size: $font-size-sm;
+              color: $c-medium;
+            }
+
+            .remove-talent {
+              @include button-secondary;
+              width: 24px;
+              height: 24px;
+              padding: 0;
+              color: $c-danger;
+              background: transparent;
+              border: none;
+              opacity: 0.6;
+
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+
+      .available-talents {
+        h4 {
+          margin: 0 0 $spacing-sm 0;
+          font-size: $font-size-base;
+          color: $c-dark;
+        }
+
+        // Redesigned Talents Grid
+        .talents-grid.redesigned {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: $spacing-md;
+
+          .talent-card.redesigned {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            background: $c-bg-elevated;
+            border: $border-width-thick solid $c-faint;
+            border-radius: $border-radius-lg;
+            cursor: pointer;
+            transition: all $transition-fast;
+            overflow: hidden;
+
+            &:hover {
+              border-color: $c-gold;
+              box-shadow: $shadow-md;
+              transform: translateY(-2px);
+            }
+
+            // Talent type color variations
+            &.universal {
+              border-left: 4px solid $c-medium;
+            }
+
+            &.archetype {
+              border-left: 4px solid $c-copper;
+            }
+
+            &.signature {
+              border-left: 4px solid $c-gold;
+            }
+
+            // Free calling talent highlight
+            &.free-talent {
+              border-color: $c-success;
+              background: rgba($c-success, 0.03);
+
+              &:hover {
+                border-color: $c-success-dark;
+                box-shadow: 0 4px 12px rgba($c-success, 0.3);
+              }
+            }
+
+            .talent-card-header {
+              display: flex;
+              gap: $spacing-sm;
+              padding: $spacing-md;
+              background: rgba($c-faint, 0.3);
+              border-bottom: $border-width solid $c-faint;
+
+              .talent-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: $border-radius-md;
+                object-fit: cover;
+                border: $border-width solid $c-faint;
+              }
+
+              .talent-title-area {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: $spacing-xs;
+
+                .talent-name {
+                  font-size: $font-size-base;
+                  font-weight: $font-weight-bold;
+                  color: $c-dark;
+                  line-height: 1.2;
+                }
+
+                .talent-tags {
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: $spacing-xs;
+
+                  .talent-tag {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: $spacing-xs;
+                    padding: $spacing-xs $spacing-sm;
+                    font-size: $font-size-xs;
+                    font-weight: $font-weight-bold;
+                    border-radius: $border-radius-sm;
+                    text-transform: capitalize;
+
+                    i {
+                      font-size: $font-size-xs;
+                    }
+
+                    &.universal {
+                      background: rgba($c-medium, 0.15);
+                      color: $c-dark;
+                    }
+
+                    &.archetype {
+                      background: rgba($c-copper, 0.15);
+                      color: $c-copper;
+                    }
+
+                    &.calling {
+                      background: rgba($c-gold, 0.15);
+                      color: $c-gold-dark;
+
+                      &.free {
+                        background: rgba($c-success, 0.2);
+                        color: $c-success-dark;
+
+                        .free-badge {
+                          margin-left: $spacing-xs;
+                          padding: 1px $spacing-xs;
+                          background: $c-success;
+                          color: $c-white;
+                          border-radius: $border-radius-sm;
+                          font-size: 9px;
+                          font-weight: $font-weight-bold;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .talent-card-body {
+              flex: 1;
+              padding: $spacing-md;
+              display: flex;
+              flex-direction: column;
+              gap: $spacing-sm;
+
+              .talent-description {
+                font-size: $font-size-sm;
+                color: $c-dark;
+                line-height: $line-height-relaxed;
+
+                p {
+                  margin: 0;
+                }
+              }
+
+              .talent-effect-preview {
+                padding: $spacing-sm;
+                background: rgba($c-gold, 0.08);
+                border-radius: $border-radius-sm;
+                font-size: $font-size-xs;
+
+                .effect-label {
+                  font-weight: $font-weight-bold;
+                  color: $c-gold-dark;
+                  margin-right: $spacing-xs;
+                }
+
+                .effect-text {
+                  color: $c-dark;
+                }
+              }
+            }
+
+            .talent-card-footer {
+              padding: $spacing-sm $spacing-md;
+              background: rgba($c-faint, 0.3);
+              border-top: $border-width solid $c-faint;
+              text-align: center;
+
+              .talent-cost-badge {
+                display: inline-block;
+                padding: $spacing-xs $spacing-md;
+                background: $c-gold;
+                color: $c-dark;
+                font-size: $font-size-sm;
+                font-weight: $font-weight-bold;
+                border-radius: $border-radius-lg;
+              }
+            }
+          }
+        }
+
+        // Legacy grid support
+        .talents-grid:not(.redesigned) {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: $spacing-sm;
+
+          .talent-card:not(.redesigned) {
+            padding: $spacing-md;
+            background: $c-bg-elevated;
+            border: $border-width solid $c-faint;
+            border-radius: $border-radius-md;
+            cursor: pointer;
+            transition: all $transition-fast;
+
+            &:hover {
+              border-color: $c-gold;
+              @include hover-bg;
+            }
+
+            .talent-name {
+              font-size: $font-size-base;
+              font-weight: $font-weight-bold;
+              color: $c-dark;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // TALENTS STEP (Step 8)
+  // ========================================
+  .step-talents {
+    .talents-section {
+      h3 {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-lg;
+        color: $c-dark;
+      }
+
+      // Purchased Talents Section
+      .purchased-talents-section {
+        margin-bottom: $spacing-lg;
+        padding: $spacing-md;
+        background: rgba($c-success, 0.08);
+        border: $border-width solid rgba($c-success, 0.3);
+        border-radius: $border-radius-lg;
+
+        .purchased-header {
+          margin: 0 0 $spacing-sm 0;
+          font-size: $font-size-base;
+          font-weight: $font-weight-bold;
+          color: $c-success-dark;
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+
+          i {
+            color: $c-success;
+          }
+
+          .talent-count {
+            margin-left: auto;
+            padding: $spacing-xs $spacing-sm;
+            background: $c-success;
+            color: $c-white;
+            border-radius: $border-radius-sm;
+            font-size: $font-size-sm;
+          }
+        }
+
+        .purchased-talents-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: $spacing-sm;
+
+          .purchased-talent-tag {
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
+            padding: $spacing-sm $spacing-md;
+            background: $c-bg-elevated;
+            border: $border-width solid rgba($c-success, 0.3);
+            border-radius: $border-radius-md;
+
+            .talent-name {
+              font-size: $font-size-sm;
+              font-weight: $font-weight-bold;
+              color: $c-dark;
+            }
+
+            .talent-cost {
+              font-size: $font-size-xs;
+              color: $c-success-dark;
+            }
+
+            .remove-talent {
+              padding: $spacing-xs;
+              background: transparent;
+              border: none;
+              color: $c-danger;
+              cursor: pointer;
+              opacity: 0.6;
+              transition: opacity $transition-fast;
+
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+
+      // Talents filter tabs
+      .talents-info {
+        display: flex;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-lg;
+
+        .talent-filter-btn {
+          padding: $spacing-sm $spacing-md;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          font-family: $font-primary;
+          background: $c-bg-elevated;
+          border: $border-width solid $c-faint;
+          border-radius: $border-radius-md;
+          cursor: pointer;
+          transition: all $transition-fast;
+          color: $c-medium;
+
+          &:hover {
+            border-color: $c-copper;
+            color: $c-copper;
+          }
+
+          &.active {
+            background: $c-copper;
+            border-color: $c-copper;
+            color: $c-white;
+          }
+        }
+      }
+
+      // Available Talents Grid
+      .available-talents {
+        .talents-grid.redesigned {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-md;
+
+          .talent-card.redesigned {
+            background: $c-bg-elevated;
+            border: $border-width solid $c-faint;
+            border-radius: $border-radius-lg;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all $transition-fast;
+
+            &:hover {
+              border-color: $c-copper;
+              box-shadow: 0 4px 12px rgba($c-copper, 0.15);
+            }
+
+            // Talent type styling
+            &.universal {
+              border-left: 4px solid $c-copper;
+            }
+
+            &.archetype {
+              border-left: 4px solid $c-burgundy;
+            }
+
+            &.signature {
+              border-left: 4px solid $c-gold;
+
+              &.free-talent {
+                background: rgba($c-gold, 0.05);
+                border-color: $c-gold;
+              }
+            }
+
+            .talent-card-header {
+              display: flex;
+              gap: $spacing-sm;
+              padding: $spacing-md;
+              background: rgba($c-faint, 0.3);
+              border-bottom: $border-width solid $c-faint;
+
+              .talent-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: $border-radius-md;
+                object-fit: cover;
+                border: $border-width solid $c-faint;
+                flex-shrink: 0;
+              }
+
+              .talent-title-area {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: $spacing-xs;
+                min-width: 0;
+
+                .talent-name {
+                  font-size: $font-size-base;
+                  font-weight: $font-weight-bold;
+                  color: $c-dark;
+                  line-height: 1.2;
+                }
+
+                .talent-tags {
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: $spacing-xs;
+
+                  .talent-tag {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: $spacing-xs;
+                    padding: $spacing-xs $spacing-sm;
+                    font-size: $font-size-xs;
+                    font-weight: $font-weight-bold;
+                    border-radius: $border-radius-sm;
+                    text-transform: capitalize;
+
+                    i {
+                      font-size: $font-size-xs;
+                    }
+
+                    &.universal {
+                      background: rgba($c-copper, 0.15);
+                      color: $c-copper-dark;
+                    }
+
+                    &.archetype {
+                      background: rgba($c-burgundy, 0.15);
+                      color: $c-burgundy;
+                    }
+
+                    &.calling {
+                      background: rgba($c-gold, 0.2);
+                      color: $c-gold-dark;
+
+                      &.free {
+                        background: $c-gold;
+                        color: $c-text-inverse;
+                      }
+
+                      .free-badge {
+                        margin-left: $spacing-xs;
+                        padding: 0 $spacing-xs;
+                        background: $c-bg-elevated;
+                        color: $c-gold-dark;
+                        border-radius: $border-radius-sm;
+                        font-size: 9px;
+                        text-transform: uppercase;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .talent-card-body {
+              padding: $spacing-md;
+
+              .talent-description {
+                font-size: $font-size-sm;
+                color: $c-medium;
+                line-height: $line-height-base;
+                margin-bottom: $spacing-sm;
+
+                // Limit description height
+                max-height: 60px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+
+              .talent-effect-preview {
+                padding: $spacing-sm;
+                background: rgba($c-faint, 0.5);
+                border-radius: $border-radius-sm;
+                font-size: $font-size-xs;
+
+                .effect-label {
+                  font-weight: $font-weight-bold;
+                  color: $c-dark;
+                }
+
+                .effect-text {
+                  color: $c-medium;
+                }
+              }
+            }
+
+            .talent-card-footer {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: $spacing-sm $spacing-md;
+              background: rgba($c-faint, 0.2);
+              border-top: $border-width solid $c-faint;
+
+              .talent-cost {
+                font-size: $font-size-sm;
+                font-weight: $font-weight-bold;
+                color: $c-copper;
+              }
+
+              .add-talent-btn {
+                padding: $spacing-xs $spacing-md;
+                font-size: $font-size-sm;
+                font-weight: $font-weight-bold;
+                font-family: $font-primary;
+                background: $c-copper;
+                color: $c-white;
+                border: none;
+                border-radius: $border-radius-sm;
+                cursor: pointer;
+                transition: all $transition-fast;
+
+                &:hover {
+                  background: $c-copper-dark;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // DERIVED ATTRIBUTES STEP
+  // ========================================
+  .step-derived {
+    .derived-display {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: $spacing-md;
+
+      .derived-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: $spacing-lg;
+        background: $c-bg-elevated;
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-lg;
+
+        &.highlight {
+          border-color: $c-gold;
+          background: rgba($c-gold, 0.05);
+        }
+
+        .derived-label {
+          @include text-label;
+          margin-bottom: $spacing-sm;
+        }
+
+        .derived-value {
+          font-size: $font-size-2xl;
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+        }
+
+        .derived-formula {
+          font-size: $font-size-xs;
+          color: $c-light;
+          margin-top: $spacing-xs;
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // PASSIONS STEP
+  // ========================================
+  .step-passions {
+    .passions-form {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+
+      .passion-field {
+        label {
+          display: block;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+          margin-bottom: $spacing-sm;
+        }
+
+        input {
+          width: 100%;
+          @include input-base;
+          padding: $spacing-md;
+          font-size: $font-size-base;
+        }
+
+        .passion-help {
+          margin: $spacing-sm 0 0 0;
+          font-size: $font-size-xs;
+          color: $c-medium;
+          line-height: $line-height-tight;
+        }
+      }
+    }
+
+    .fervor-info {
+      margin-top: $spacing-xl;
+      padding: $spacing-md;
+      background: rgba($c-gold, 0.1);
+      border-radius: $border-radius-md;
+
+      h4 {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-sm;
+        color: $c-dark;
+      }
+
+      p {
+        margin: 0;
+        font-size: $font-size-sm;
+        color: $c-medium;
+        line-height: $line-height-base;
+      }
+    }
+  }
+
+  // ========================================
+  // FINALIZE STEP
+  // ========================================
+  .step-finalize {
+    // Finalize Step Tabs (Legacy / Equipment)
+    .finalize-tabs {
+      display: flex;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-lg;
+      padding-bottom: $spacing-md;
+      border-bottom: $border-width solid $c-faint;
+    }
+
+    .finalize-tab-btn {
+      flex: 1;
+      padding: $spacing-md $spacing-lg;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-md;
+      font-size: $font-size-md;
+      font-weight: $font-weight-bold;
+      color: $c-medium;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+
+      &:hover {
+        background: $c-faint;
+        color: $c-dark;
+      }
+
+      &.active {
+        background: $c-copper;
+        border-color: $c-copper-dark;
+        color: $c-white;
+      }
+    }
+
+    .finalize-tab-panel {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    // Equipment Filter Dropdown
+    .gear-filter {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+      padding: $spacing-sm $spacing-md;
+      background: rgba($c-faint, 0.3);
+      border-radius: $border-radius-md;
+
+      label {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+        white-space: nowrap;
+      }
+
+      select {
+        flex: 1;
+        max-width: 250px;
+        padding: $spacing-sm $spacing-md;
+        background: $c-bg-elevated;
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-sm;
+        font-size: $font-size-sm;
+        color: $c-dark;
+        cursor: pointer;
+
+        &:focus {
+          outline: none;
+          border-color: $c-accent;
+        }
+      }
+    }
+
+    .name-age-row {
+      display: flex;
+      gap: $spacing-lg;
+      margin-bottom: $spacing-xl;
+
+      .name-field {
+        flex: 1;
+      }
+
+      .age-field {
+        flex: 0 0 120px;
+      }
+
+      .name-field,
+      .age-field {
+        label {
+          display: block;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+          margin-bottom: $spacing-sm;
+        }
+
+        input {
+          width: 100%;
+          @include input-base;
+          padding: $spacing-md;
+          font-size: $font-size-lg;
+          font-weight: $font-weight-bold;
+        }
+      }
+
+      .name-field input {
+        font-size: $font-size-xl;
+      }
+
+      .age-field input {
+        text-align: center;
+      }
+    }
+
+    // Legacy standalone name-field support
+    > .name-field {
+      margin-bottom: $spacing-xl;
+
+      label {
+        display: block;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+        margin-bottom: $spacing-sm;
+      }
+
+      input {
+        width: 100%;
+        @include input-base;
+        padding: $spacing-md;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    // Character Summary
+    .character-summary {
+      padding: $spacing-lg;
+      background: rgba($c-faint, 0.2);
+      border-radius: $border-radius-lg;
+      margin-bottom: $spacing-xl;
+
+      h3 {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-lg;
+        color: $c-dark;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $spacing-md;
+        margin-bottom: $spacing-lg;
+      }
+
+      .summary-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-md;
+        padding-top: $spacing-md;
+        border-top: $border-width solid $c-faint;
+      }
+
+      .summary-item {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+
+        .summary-label {
+          @include text-label;
+        }
+
+        .summary-value {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+        }
+
+        &.witchsight .summary-value {
+          color: $c-magic;
+        }
+      }
+    }
+
+    // Derived Stats Compact (Legacy Tab)
+    .derived-stats-compact {
+      padding: $spacing-lg;
+      background: rgba($c-faint, 0.15);
+      border-radius: $border-radius-lg;
+      margin-bottom: $spacing-xl;
+      border: $border-width solid rgba($c-faint, 0.4);
+
+      h3 {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-lg;
+        color: $c-dark;
+        font-weight: $font-weight-bold;
+      }
+
+      .derived-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: $spacing-md;
+      }
+
+      .derived-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $spacing-sm $spacing-md;
+        background: $c-bg-elevated;
+        border-radius: $border-radius-sm;
+        border: $border-width solid $c-faint;
+
+        .derived-label {
+          font-size: $font-size-sm;
+          color: $c-medium;
+          font-weight: $font-weight-normal;
+        }
+
+        .derived-value {
+          font-size: $font-size-md;
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+
+          &.highlight {
+            color: $c-copper;
+          }
+        }
+      }
+    }
+
+    // Wealth Section
+    .wealth-section {
+      margin-bottom: $spacing-xl;
+
+      h3 {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-base;
+        color: $c-dark;
+      }
+
+      .wealth-display {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $c-gold;
+      }
+
+      .wealth-notice {
+        font-style: italic;
+        color: $c-text-medium;
+      }
+
+      // Equipment tab wealth display with light background
+      &.equipment-wealth {
+        padding: $spacing-lg;
+        background: $c-parchment;
+        border-radius: $border-radius-lg;
+        border: 1px solid $c-border-medium;
+
+        h3 {
+          margin-bottom: $spacing-md;
+          color: $c-text-dark;
+        }
+
+        .currency-display {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xl;
+
+          .currency-group {
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
+
+            .currency-icon {
+              font-size: $font-size-base;
+            }
+
+            .currency-value {
+              font-size: $font-size-lg;
+              font-weight: $font-weight-bold;
+              min-width: 24px;
+              text-align: center;
+            }
+
+            .currency-label {
+              font-size: $font-size-xs;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+
+            // Gold sovereigns
+            &.sovereigns {
+              .currency-icon,
+              .currency-value {
+                color: #9a7b0a;
+              }
+              .currency-label {
+                color: #6d5607;
+              }
+            }
+
+            // Silver crowns
+            &.crowns {
+              .currency-icon,
+              .currency-value {
+                color: #5a6068;
+              }
+              .currency-label {
+                color: #444a50;
+              }
+            }
+
+            // Copper/bronze orin
+            &.orin {
+              .currency-icon,
+              .currency-value {
+                color: #8b5a2b;
+              }
+              .currency-label {
+                color: #6d471f;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Starting Wealth Section (Legacy Tab)
+    .starting-wealth-section {
+      padding: $spacing-lg;
+      background: rgba($c-gold, 0.08);
+      border-radius: $border-radius-lg;
+      margin-bottom: $spacing-xl;
+      border: 1px solid rgba($c-gold, 0.2);
+
+      h3 {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        color: $c-gold-dark;
+      }
+
+      .wealth-range {
+        margin-bottom: $spacing-md;
+        font-size: $font-size-base;
+        color: $c-dark;
+      }
+
+      .roll-wealth-btn {
+        @include button-accent;
+        padding: $spacing-sm $spacing-lg;
+        font-size: $font-size-base;
+
+        i {
+          margin-right: $spacing-sm;
+        }
+      }
+
+      .rolled-wealth {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        font-size: $font-size-lg;
+        color: $c-gold-dark;
+
+        i {
+          color: $c-gold;
+        }
+
+        .wealth-value {
+          display: flex;
+          gap: $spacing-md;
+
+          .currency {
+            font-weight: $font-weight-bold;
+
+            &.sovereigns { color: #9a7b0a; }
+            &.crowns { color: #5a6068; }
+            &.orin { color: #8b5a2b; }
+          }
+        }
+      }
+
+      .wealth-notice {
+        font-style: italic;
+        color: $c-text-medium;
+      }
+    }
+
+    // Equipment Section
+    .equipment-section {
+      margin-bottom: $spacing-xl;
+
+      // Purchased gear list
+      .purchased-gear {
+        margin-bottom: $spacing-lg;
+        padding: $spacing-md;
+        background: rgba($c-success, 0.08);
+        border-radius: $border-radius-lg;
+        border: 1px solid rgba($c-success, 0.2);
+
+        h4 {
+          margin: 0 0 $spacing-sm 0;
+          font-size: $font-size-sm;
+          color: $c-success-dark;
+          font-weight: $font-weight-bold;
+        }
+
+        .gear-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          max-height: 150px;
+          overflow-y: auto;
+          @include custom-scrollbar;
+
+          .gear-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: $spacing-sm $spacing-md;
+            background: $c-bg-elevated;
+            border-radius: $border-radius-md;
+            margin-bottom: $spacing-xs;
+            border: 1px solid rgba($c-success, 0.15);
+
+            .gear-icon {
+              width: 24px;
+              height: 24px;
+              object-fit: contain;
+              margin-right: $spacing-sm;
+              border-radius: $border-radius-sm;
+            }
+
+            .gear-item-info {
+              display: flex;
+              align-items: center;
+              gap: $spacing-sm;
+
+              .gear-name {
+                font-weight: $font-weight-bold;
+                color: $c-dark;
+              }
+
+              .gear-type-badge {
+                font-size: $font-size-xs;
+                text-transform: uppercase;
+                padding: 2px 6px;
+                border-radius: $border-radius-sm;
+                background: $c-faint;
+                color: $c-medium;
+              }
+            }
+
+            .gear-item-actions {
+              display: flex;
+              align-items: center;
+              gap: $spacing-md;
+
+              .gear-cost {
+                display: flex;
+                gap: $spacing-xs;
+                font-size: $font-size-xs;
+                font-weight: $font-weight-bold;
+
+                .price-tag {
+                  padding: 2px 6px;
+                  border-radius: $border-radius-sm;
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                  white-space: nowrap;
+
+                  &.sovereigns {
+                    background: rgba(218, 165, 32, 0.85);
+                    color: #1a1400;
+                  }
+
+                  &.crowns {
+                    background: rgba(180, 190, 200, 0.85);
+                    color: #1a1a1a;
+                  }
+
+                  &.orin {
+                    background: rgba(184, 115, 51, 0.85);
+                    color: #1a0a00;
+                  }
+                }
+              }
+
+              .remove-gear {
+                background: transparent;
+                border: none;
+                color: $c-danger;
+                cursor: pointer;
+                opacity: 0.6;
+                padding: $spacing-xs;
+
+                &:hover {
+                  opacity: 1;
+                }
+              }
+            }
+
+            // Type-specific badges
+            &.purchased-item-weapon .gear-type-badge {
+              background: rgba($c-danger, 0.15);
+              color: $c-danger;
+            }
+
+            &.purchased-item-armor .gear-type-badge {
+              background: rgba($c-stone, 0.15);
+              color: $c-stone;
+            }
+
+            &.purchased-item-gear .gear-type-badge {
+              background: rgba($c-medium, 0.15);
+              color: $c-medium;
+            }
+          }
+        }
+      }
+
+      // Gear category tabs
+      .gear-tabs {
+        display: flex;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-md;
+        border-bottom: 2px solid $c-faint;
+        padding-bottom: $spacing-sm;
+
+        .gear-tab-btn {
+          @include button-secondary;
+          padding: $spacing-sm $spacing-lg;
+          font-size: $font-size-sm;
+          border-radius: $border-radius-md $border-radius-md 0 0;
+          border-bottom: none;
+          position: relative;
+
+          i {
+            margin-right: $spacing-sm;
+          }
+
+          &.active {
+            background: $c-copper;
+            color: $c-white;
+            border-color: $c-copper;
+
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: -3px;
+              left: 0;
+              right: 0;
+              height: 3px;
+              background: $c-copper;
+            }
+          }
+
+          &:hover:not(.active) {
+            background: rgba($c-copper, 0.1);
+          }
+        }
+      }
+
+      // Gear tab panels
+      .gear-tab-panel {
+        display: none;
+
+        &.active {
+          display: block;
+        }
+
+        .gear-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: $spacing-md;
+          max-height: 450px;
+          overflow-y: auto;
+          padding: $spacing-sm;
+          @include custom-scrollbar;
+
+          .gear-card {
+            display: flex;
+            flex-direction: column;
+            padding: $spacing-lg;
+            background: $c-bg-elevated;
+            border: $border-width solid $c-faint;
+            border-radius: $border-radius-md;
+            cursor: pointer;
+            transition: all $transition-fast;
+
+            &:hover {
+              border-color: $c-copper;
+              box-shadow: 0 2px 8px rgba($c-copper, 0.15);
+              transform: translateY(-1px);
+            }
+
+            // New layout: icon on left, info (title + description) on right
+            .gear-card-top {
+              display: flex;
+              gap: $spacing-sm;
+              margin-bottom: $spacing-sm;
+
+              .gear-card-icon {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                min-height: 48px;
+                max-width: 48px;
+                max-height: 48px;
+                object-fit: cover;
+                border-radius: $border-radius-sm;
+                flex-shrink: 0;
+              }
+
+              .gear-card-info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: $spacing-xs;
+                min-width: 0; // Allow text truncation
+
+                .gear-card-title-row {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: flex-start;
+                  gap: $spacing-sm;
+                  flex-wrap: wrap;
+
+                  .gear-name {
+                    font-weight: $font-weight-bold;
+                    color: $c-dark;
+                    font-size: $font-size-base;
+                    line-height: 1.2;
+                  }
+
+                  .gear-cost {
+                    display: flex;
+                    gap: $spacing-xs;
+                    flex-wrap: wrap;
+
+                    .price-tag {
+                      display: inline-block;
+                      font-size: $font-size-xs;
+                      font-weight: $font-weight-bold;
+                      padding: 2px 6px;
+                      border-radius: $border-radius-sm;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                      white-space: nowrap;
+
+                      // Sovereigns - Gold/yellow tag
+                      &.sovereigns {
+                        background: rgba(218, 165, 32, 0.85);
+                        color: #1a1400;
+                      }
+
+                      // Crowns - Silver/gray tag
+                      &.crowns {
+                        background: rgba(180, 190, 200, 0.85);
+                        color: #1a1a1a;
+                      }
+
+                      // Orin - Copper/bronze tag
+                      &.orin {
+                        background: rgba(184, 115, 51, 0.85);
+                        color: #1a0a00;
+                      }
+                    }
+                  }
+                }
+
+                // Description inside info block (above stats)
+                .gear-card-description {
+                  font-size: $font-size-xs;
+                  color: $c-medium;
+                  line-height: $line-height-relaxed;
+                  max-height: 48px;
+                  overflow-y: auto;
+                  @include custom-scrollbar;
+
+                  p {
+                    margin: 0;
+                  }
+                }
+              }
+            }
+
+            // Legacy header support (for backwards compatibility)
+            .gear-card-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              margin-bottom: $spacing-sm;
+              gap: $spacing-sm;
+
+              .gear-card-icon {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                min-height: 48px;
+                max-width: 48px;
+                max-height: 48px;
+                object-fit: cover;
+                border-radius: $border-radius-sm;
+                flex-shrink: 0;
+              }
+
+              .gear-name {
+                font-weight: $font-weight-bold;
+                color: $c-dark;
+                font-size: $font-size-base;
+              }
+
+              .gear-cost {
+                display: flex;
+                gap: $spacing-xs;
+                flex-wrap: wrap;
+
+                .price-tag {
+                  display: inline-block;
+                  font-size: $font-size-xs;
+                  font-weight: $font-weight-bold;
+                  padding: 2px 6px;
+                  border-radius: $border-radius-sm;
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                  white-space: nowrap;
+
+                  // Sovereigns - Gold/yellow tag
+                  &.sovereigns {
+                    background: rgba(218, 165, 32, 0.85);
+                    color: #1a1400;
+                  }
+
+                  // Crowns - Silver/gray tag
+                  &.crowns {
+                    background: rgba(180, 190, 200, 0.85);
+                    color: #1a1a1a;
+                  }
+
+                  // Orin - Copper/bronze tag
+                  &.orin {
+                    background: rgba(184, 115, 51, 0.85);
+                    color: #1a0a00;
+                  }
+                }
+              }
+            }
+
+            .gear-card-stats {
+              display: flex;
+              flex-wrap: wrap;
+              gap: $spacing-xs;
+              margin-bottom: $spacing-sm;
+
+              // Box-style stat badges with solid backgrounds for high contrast
+              .stat-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                font-size: $font-size-xs;
+                font-weight: $font-weight-bold;
+                padding: 3px 8px;
+                border-radius: $border-radius-sm;
+                white-space: nowrap;
+
+                i {
+                  font-size: 10px;
+                }
+
+                // Weapon damage - red/burgundy
+                &.damage {
+                  background: rgba(180, 60, 60, 0.85);
+                  color: #fff;
+                }
+
+                // Range - blue/slate
+                &.range {
+                  background: rgba(70, 90, 120, 0.85);
+                  color: #fff;
+                }
+
+                // Weapon group - neutral stone
+                &.group {
+                  background: rgba(100, 100, 100, 0.85);
+                  color: #e8e4d9;
+                }
+
+                // Armor DR - steel blue
+                &.dr {
+                  background: rgba(80, 100, 130, 0.85);
+                  color: #fff;
+                }
+
+                // Encumbrance - warning/orange
+                &.encumbering {
+                  background: rgba(200, 140, 50, 0.85);
+                  color: #1a1200;
+                }
+
+                // Weight - neutral
+                &.weight {
+                  background: rgba(90, 90, 90, 0.85);
+                  color: #e8e4d9;
+                }
+
+                // Armor categories - distinctive colors
+                &.armor-category {
+                  text-transform: uppercase;
+                  font-size: 9px;
+                  letter-spacing: 0.5px;
+
+                  &.category-outerlayer {
+                    background: rgba(140, 90, 60, 0.9);
+                    color: #fff;
+                  }
+
+                  &.category-underlayer {
+                    background: rgba(60, 120, 80, 0.9);
+                    color: #fff;
+                  }
+
+                  &.category-reinforcement {
+                    background: rgba(180, 140, 50, 0.9);
+                    color: #1a1200;
+                  }
+
+                  &.category-shield {
+                    background: rgba(100, 110, 130, 0.9);
+                    color: #fff;
+                  }
+                }
+              }
+            }
+
+            .gear-card-description {
+              font-size: $font-size-xs;
+              color: $c-medium;
+              line-height: $line-height-relaxed;
+              margin-bottom: $spacing-sm;
+              max-height: 60px;
+              overflow-y: auto;
+              @include custom-scrollbar;
+
+              p {
+                margin: 0;
+              }
+            }
+
+            .gear-card-properties {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 4px;
+              margin-top: auto;
+
+              // Box-style property tags with solid backgrounds for high contrast
+              .property-tag {
+                font-size: $font-size-xs;
+                font-weight: $font-weight-bold;
+                padding: 3px 8px;
+                border-radius: $border-radius-sm;
+                background: rgba(100, 70, 130, 0.85);
+                color: #fff;
+                text-transform: capitalize;
+                white-space: nowrap;
+              }
+            }
+
+            // Weapon-specific styling
+            &.weapon-card {
+              border-left: 3px solid $c-danger;
+            }
+
+            // Armor-specific styling
+            &.armor-card {
+              border-left: 3px solid $c-stone;
+            }
+
+            // General gear styling
+            &.general-gear-card {
+              border-left: 3px solid $c-medium;
+            }
+          }
+        }
+      }
+    }
+
+    // CP Conversion
+    .lp-conversion {
+      padding: $spacing-lg;
+      background: $c-magic-bg;
+      border-radius: $border-radius-lg;
+
+      h3 {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-base;
+        color: $c-dark;
+      }
+
+      p {
+        margin: 0 0 $spacing-md 0;
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+
+      .convert-btn {
+        @include button-accent;
+        padding: $spacing-sm $spacing-lg;
+        font-size: $font-size-sm;
+
+        i {
+          margin-right: $spacing-sm;
+        }
+      }
+
+      .starting-xp {
+        margin-top: $spacing-md;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $c-success;
+      }
+    }
+  }
+
+  // ========================================
+  // LINEAGE CARDS WITH COLORS
+  // ========================================
+  // Lineage Color Variables
+  $lineage-human-primary: #c4a35a;        // Gamboge (Tarnished Gold)
+  $lineage-human-secondary: #8b7355;      // Dusty bronze
+  $lineage-human-text: #2a2520;
+
+  $lineage-dwarf-primary: #a0522d;        // Deep Ochre (Earth-Stain)
+  $lineage-dwarf-secondary: #6b4423;      // Dark earth
+  $lineage-dwarf-text: #e8e4d9;
+
+  $lineage-elf-primary: #9b7b8e;          // Amaranth (Withered Violet)
+  $lineage-elf-secondary: #6d5a62;        // Faded violet
+  $lineage-elf-text: #e8e4d9;
+
+  $lineage-changeling-primary: #8a9a9a;   // Quicksilver (Living Grey)
+  $lineage-changeling-secondary: #5a6a6a; // Dark silver
+  $lineage-changeling-text: #1a1a1a;
+
+  $lineage-undine-primary: #2f5a5a;       // Abyssal Teal (Drowned Blue)
+  $lineage-undine-secondary: #1a3a3a;     // Deep water
+  $lineage-undine-text: #e8e4d9;
+
+  $lineage-helskari-primary: #b8d4e3;     // Hoarfrost (Pale Cyan)
+  $lineage-helskari-secondary: #8ab4c9;   // Ice blue
+  $lineage-helskari-text: #1a2530;
+
+  $lineage-jadwiga-primary: #6b7355;      // Lichen (Sickly Olive)
+  $lineage-jadwiga-secondary: #4a5240;    // Dark moss
+  $lineage-jadwiga-text: #e8e4d9;
+
+  .lineage-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: $spacing-lg;
+    border-width: $border-width-thick;
+    transition: all $transition-fast;
+    // A4-style aspect ratio (taller than wide)
+    aspect-ratio: 1 / 1.4;
+
+    .lineage-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: $spacing-md;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid currentColor;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .card-title {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-sm;
+    }
+
+    .card-modifiers {
+      justify-content: center;
+
+      // Box-style modifier tags with solid backgrounds for high contrast on colored cards
+      .modifier {
+        background: rgba(60, 120, 60, 0.9);
+        color: #fff;
+        text-transform: capitalize;
+
+        &.positive {
+          background: rgba(60, 120, 60, 0.9);
+          color: #fff;
+        }
+
+        &.negative {
+          background: rgba(160, 50, 50, 0.9);
+          color: #fff;
+        }
+
+        &.flexible {
+          background: rgba(180, 140, 50, 0.9);
+          color: #1a1200;
+          border: none;
+        }
+      }
+    }
+
+    .card-description {
+      margin-top: $spacing-md;
+      font-size: $font-size-base;
+      line-height: $line-height-relaxed;
+      // Grow to fill available space in the taller card
+      flex-grow: 1;
+      overflow-y: auto;
+      @include custom-scrollbar;
+      // Left-align story text for better readability
+      text-align: left;
+      // Text shadow for better readability on colored backgrounds
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+
+      p {
+        margin: 0 0 $spacing-sm 0;
+        &:last-child { margin-bottom: 0; }
+      }
+    }
+
+    // Human - Gamboge (Tarnished Gold) - Light background
+    &.lineage-human {
+      background: linear-gradient(135deg, lighten($lineage-human-primary, 25%) 0%, lighten($lineage-human-secondary, 20%) 100%);
+      border-color: $lineage-human-primary;
+      color: $lineage-human-text;
+
+      .lineage-icon {
+        border-color: $lineage-human-primary;
+        box-shadow: 0 2px 8px rgba($lineage-human-primary, 0.4);
+      }
+
+      .card-title { color: darken($lineage-human-text, 5%); }
+      // Light background needs dark text with no shadow
+      .card-description {
+        color: #2a2520;
+        text-shadow: none;
+      }
+
+      &:hover {
+        border-color: darken($lineage-human-primary, 10%);
+        box-shadow: 0 4px 16px rgba($lineage-human-primary, 0.4);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba($lineage-human-primary, 0.5), 0 4px 16px rgba($lineage-human-primary, 0.4);
+      }
+    }
+
+    // Dwarf - Deep Ochre (Earth-Stain)
+    &.lineage-dwarf {
+      background: linear-gradient(135deg, $lineage-dwarf-primary 0%, darken($lineage-dwarf-primary, 10%) 100%);
+      border-color: lighten($lineage-dwarf-secondary, 20%);
+      color: $lineage-dwarf-text;
+
+      .lineage-icon {
+        border-color: lighten($lineage-dwarf-secondary, 20%);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-title { color: lighten($lineage-dwarf-text, 5%); }
+      .card-description { color: rgba($lineage-dwarf-text, 0.85); }
+
+      .modifier.positive {
+        background: rgba(255, 255, 255, 0.15);
+        color: $lineage-dwarf-text;
+      }
+
+      &:hover {
+        border-color: lighten($lineage-dwarf-secondary, 30%);
+        box-shadow: 0 4px 16px rgba($lineage-dwarf-primary, 0.5);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba(lighten($lineage-dwarf-secondary, 20%), 0.6), 0 4px 16px rgba($lineage-dwarf-primary, 0.5);
+      }
+    }
+
+    // Elf - Amaranth (Withered Violet)
+    &.lineage-elf {
+      background: linear-gradient(135deg, $lineage-elf-primary 0%, darken($lineage-elf-secondary, 5%) 100%);
+      border-color: lighten($lineage-elf-primary, 15%);
+      color: $lineage-elf-text;
+
+      .lineage-icon {
+        border-color: lighten($lineage-elf-primary, 15%);
+        box-shadow: 0 2px 8px rgba($lineage-elf-secondary, 0.5);
+      }
+
+      .card-title { color: lighten($lineage-elf-text, 5%); }
+      .card-description { color: rgba($lineage-elf-text, 0.85); }
+
+      .modifier.positive {
+        background: rgba(255, 255, 255, 0.15);
+        color: $lineage-elf-text;
+      }
+
+      .witchsight-badge {
+        background: rgba(255, 255, 255, 0.2);
+        color: $lineage-elf-text;
+      }
+
+      &:hover {
+        border-color: lighten($lineage-elf-primary, 25%);
+        box-shadow: 0 4px 16px rgba($lineage-elf-primary, 0.4);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba(lighten($lineage-elf-primary, 15%), 0.6), 0 4px 16px rgba($lineage-elf-primary, 0.4);
+      }
+    }
+
+    // Changeling - Quicksilver (Living Grey) - Light background
+    &.lineage-changeling {
+      background: linear-gradient(135deg, lighten($lineage-changeling-primary, 15%) 0%, $lineage-changeling-secondary 100%);
+      border-color: $lineage-changeling-primary;
+      color: $lineage-changeling-text;
+
+      .lineage-icon {
+        border-color: $lineage-changeling-primary;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-title { color: darken($lineage-changeling-text, 5%); }
+      // Light background needs dark text with no shadow
+      .card-description {
+        color: #1a1a1a;
+        text-shadow: none;
+      }
+
+      &:hover {
+        border-color: lighten($lineage-changeling-primary, 10%);
+        box-shadow: 0 4px 16px rgba($lineage-changeling-secondary, 0.4);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba($lineage-changeling-primary, 0.5), 0 4px 16px rgba($lineage-changeling-secondary, 0.4);
+      }
+    }
+
+    // Undine - Abyssal Teal (Drowned Blue)
+    &.lineage-undine {
+      background: linear-gradient(135deg, $lineage-undine-primary 0%, $lineage-undine-secondary 100%);
+      border-color: lighten($lineage-undine-primary, 20%);
+      color: $lineage-undine-text;
+
+      .lineage-icon {
+        border-color: lighten($lineage-undine-primary, 20%);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .card-title { color: lighten($lineage-undine-text, 5%); }
+      .card-description { color: rgba($lineage-undine-text, 0.85); }
+
+      .modifier.positive {
+        background: rgba(255, 255, 255, 0.15);
+        color: $lineage-undine-text;
+      }
+
+      &:hover {
+        border-color: lighten($lineage-undine-primary, 30%);
+        box-shadow: 0 4px 16px rgba($lineage-undine-primary, 0.5);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba(lighten($lineage-undine-primary, 20%), 0.6), 0 4px 16px rgba($lineage-undine-primary, 0.5);
+      }
+    }
+
+    // Helskari - Hoarfrost (Pale Cyan) - Light background
+    &.lineage-helskari {
+      background: linear-gradient(135deg, $lineage-helskari-primary 0%, lighten($lineage-helskari-secondary, 10%) 100%);
+      border-color: $lineage-helskari-secondary;
+      color: $lineage-helskari-text;
+
+      .lineage-icon {
+        border-color: $lineage-helskari-secondary;
+        box-shadow: 0 2px 8px rgba($lineage-helskari-secondary, 0.4);
+      }
+
+      .card-title { color: darken($lineage-helskari-text, 5%); }
+      // Light background needs dark text with no shadow
+      .card-description {
+        color: #1a2530;
+        text-shadow: none;
+      }
+
+      &:hover {
+        border-color: darken($lineage-helskari-secondary, 10%);
+        box-shadow: 0 4px 16px rgba($lineage-helskari-secondary, 0.4);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba($lineage-helskari-secondary, 0.5), 0 4px 16px rgba($lineage-helskari-secondary, 0.4);
+      }
+    }
+
+    // Jadwiga - Lichen (Sickly Olive)
+    &.lineage-jadwiga {
+      background: linear-gradient(135deg, $lineage-jadwiga-primary 0%, $lineage-jadwiga-secondary 100%);
+      border-color: lighten($lineage-jadwiga-primary, 20%);
+      color: $lineage-jadwiga-text;
+
+      .lineage-icon {
+        border-color: lighten($lineage-jadwiga-primary, 20%);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-title { color: lighten($lineage-jadwiga-text, 5%); }
+      .card-description { color: rgba($lineage-jadwiga-text, 0.85); }
+
+      .modifier.positive {
+        background: rgba(255, 255, 255, 0.15);
+        color: $lineage-jadwiga-text;
+      }
+
+      .witchsight-badge {
+        background: rgba(255, 255, 255, 0.2);
+        color: $lineage-jadwiga-text;
+      }
+
+      &:hover {
+        border-color: lighten($lineage-jadwiga-primary, 30%);
+        box-shadow: 0 4px 16px rgba($lineage-jadwiga-primary, 0.4);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba(lighten($lineage-jadwiga-primary, 20%), 0.6), 0 4px 16px rgba($lineage-jadwiga-primary, 0.4);
+      }
+    }
+  }
+
+  // Lineage grid layout - 3 columns
+  .lineage-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  // ========================================
+  // ARCHETYPE CARDS WITH COLORS
+  // ========================================
+  // Archetype Color Variables
+  $archetype-zealot-primary: #e8e4d9;     // Bone White
+  $archetype-zealot-secondary: #c9b896;   // Pale Gold
+  $archetype-zealot-text: #2a2520;
+
+  $archetype-thaumaturge-primary: #5c3d6e; // Blight Purple
+  $archetype-thaumaturge-secondary: #b5a642; // Sulfur
+  $archetype-thaumaturge-text: #e8e4d9;
+
+  $archetype-warrior-primary: #6b2c2c;    // Dried Blood
+  $archetype-warrior-secondary: #5a5a5a;  // Iron
+  $archetype-warrior-text: #e8e4d9;
+
+  $archetype-rogue-primary: #1a2420;      // Shadow
+  $archetype-rogue-secondary: #3d5a4a;    // Forest Green
+  $archetype-rogue-text: #e8e4d9;
+
+  $archetype-sage-primary: #4a4a4a;       // Ashen Grey
+  $archetype-sage-secondary: #6b6b6b;     // Light Grey
+  $archetype-sage-text: #e8e4d9;
+
+  .archetype-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: $spacing-lg;
+    border-width: $border-width-thick;
+    transition: all $transition-fast;
+    // A4-style aspect ratio (taller than wide)
+    aspect-ratio: 1 / 1.4;
+
+    .archetype-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: $spacing-md;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid currentColor;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .card-title {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-sm;
+    }
+
+    .card-modifiers {
+      justify-content: center;
+
+      // Box-style modifier tags with solid backgrounds for high contrast on colored cards
+      .modifier {
+        background: rgba(60, 120, 60, 0.9);
+        color: #fff;
+        text-transform: capitalize;
+
+        &.positive {
+          background: rgba(60, 120, 60, 0.9);
+          color: #fff;
+        }
+
+        &.negative {
+          background: rgba(160, 50, 50, 0.9);
+          color: #fff;
+        }
+
+        &.flexible {
+          background: rgba(180, 140, 50, 0.9);
+          color: #1a1200;
+          border: none;
+        }
+      }
+    }
+
+    .card-description {
+      margin-top: $spacing-md;
+      font-size: $font-size-base;
+      line-height: $line-height-relaxed;
+      // Grow to fill available space in the taller card
+      flex-grow: 1;
+      overflow-y: auto;
+      @include custom-scrollbar;
+      // Left-align story text for better readability
+      text-align: left;
+      // Text shadow for better readability on colored backgrounds
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+
+      p {
+        margin: 0 0 $spacing-sm 0;
+        &:last-child { margin-bottom: 0; }
+      }
+    }
+
+    // Zealot - Bone White / Pale Gold - Light background
+    &.archetype-zealot {
+      background: linear-gradient(135deg, $archetype-zealot-primary 0%, lighten($archetype-zealot-secondary, 15%) 100%);
+      border-color: $archetype-zealot-secondary;
+      color: $archetype-zealot-text;
+
+      .archetype-icon {
+        border-color: $archetype-zealot-secondary;
+        box-shadow: 0 2px 8px rgba($archetype-zealot-secondary, 0.4);
+      }
+
+      .card-title { color: darken($archetype-zealot-text, 5%); }
+      // Light background needs dark text with no shadow
+      .card-description {
+        color: #2a2520;
+        text-shadow: none;
+      }
+
+      &:hover {
+        border-color: darken($archetype-zealot-secondary, 10%);
+        box-shadow: 0 4px 16px rgba($archetype-zealot-secondary, 0.4);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba($archetype-zealot-secondary, 0.5), 0 4px 16px rgba($archetype-zealot-secondary, 0.4);
+      }
+    }
+
+    // Thaumaturge - Blight Purple / Sulfur
+    &.archetype-thaumaturge {
+      background: linear-gradient(135deg, $archetype-thaumaturge-primary 0%, darken($archetype-thaumaturge-primary, 10%) 100%);
+      border-color: $archetype-thaumaturge-secondary;
+      color: $archetype-thaumaturge-text;
+
+      .archetype-icon {
+        border-color: $archetype-thaumaturge-secondary;
+        box-shadow: 0 2px 8px rgba($archetype-thaumaturge-secondary, 0.5);
+      }
+
+      .card-title { color: $archetype-thaumaturge-secondary; }
+      .card-description { color: rgba($archetype-thaumaturge-text, 0.85); }
+
+      .modifier.positive {
+        background: rgba($archetype-thaumaturge-secondary, 0.2);
+        color: $archetype-thaumaturge-secondary;
+      }
+
+      .witchsight-badge {
+        background: rgba($archetype-thaumaturge-secondary, 0.25);
+        color: $archetype-thaumaturge-secondary;
+      }
+
+      &:hover {
+        border-color: lighten($archetype-thaumaturge-secondary, 10%);
+        box-shadow: 0 4px 16px rgba($archetype-thaumaturge-secondary, 0.4);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba($archetype-thaumaturge-secondary, 0.5), 0 4px 16px rgba($archetype-thaumaturge-secondary, 0.4);
+      }
+    }
+
+    // Warrior - Dried Blood / Iron
+    &.archetype-warrior {
+      background: linear-gradient(135deg, $archetype-warrior-primary 0%, darken($archetype-warrior-primary, 8%) 100%);
+      border-color: $archetype-warrior-secondary;
+      color: $archetype-warrior-text;
+
+      .archetype-icon {
+        border-color: $archetype-warrior-secondary;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-title { color: lighten($archetype-warrior-text, 10%); }
+      .card-description { color: rgba($archetype-warrior-text, 0.85); }
+
+      .modifier.positive {
+        background: rgba($archetype-warrior-secondary, 0.3);
+        color: $archetype-warrior-text;
+      }
+
+      &:hover {
+        border-color: lighten($archetype-warrior-secondary, 15%);
+        box-shadow: 0 4px 16px rgba($archetype-warrior-primary, 0.5);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba($archetype-warrior-secondary, 0.6), 0 4px 16px rgba($archetype-warrior-primary, 0.5);
+      }
+    }
+
+    // Rogue - Shadow / Forest Green
+    &.archetype-rogue {
+      background: linear-gradient(135deg, $archetype-rogue-primary 0%, lighten($archetype-rogue-secondary, 5%) 100%);
+      border-color: $archetype-rogue-secondary;
+      color: $archetype-rogue-text;
+
+      .archetype-icon {
+        border-color: $archetype-rogue-secondary;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .card-title { color: lighten($archetype-rogue-secondary, 30%); }
+      .card-description { color: rgba($archetype-rogue-text, 0.85); }
+
+      .modifier.positive {
+        background: rgba($archetype-rogue-secondary, 0.4);
+        color: $archetype-rogue-text;
+      }
+
+      &:hover {
+        border-color: lighten($archetype-rogue-secondary, 15%);
+        box-shadow: 0 4px 16px rgba($archetype-rogue-secondary, 0.5);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba($archetype-rogue-secondary, 0.6), 0 4px 16px rgba($archetype-rogue-secondary, 0.5);
+      }
+    }
+
+    // Sage - Ashen Grey / Light Grey
+    &.archetype-sage {
+      background: linear-gradient(135deg, $archetype-sage-primary 0%, lighten($archetype-sage-secondary, 10%) 100%);
+      border-color: lighten($archetype-sage-secondary, 20%);
+      color: $archetype-sage-text;
+
+      .archetype-icon {
+        border-color: lighten($archetype-sage-secondary, 20%);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-title { color: lighten($archetype-sage-text, 5%); }
+      .card-description { color: rgba($archetype-sage-text, 0.85); }
+
+      .modifier.positive {
+        background: rgba(255, 255, 255, 0.15);
+        color: $archetype-sage-text;
+      }
+
+      &:hover {
+        border-color: lighten($archetype-sage-secondary, 30%);
+        box-shadow: 0 4px 16px rgba($archetype-sage-secondary, 0.4);
+      }
+
+      &.selected {
+        box-shadow: 0 0 0 4px rgba(lighten($archetype-sage-secondary, 20%), 0.6), 0 4px 16px rgba($archetype-sage-secondary, 0.4);
+      }
+    }
+  }
+
+  // Calling Section styling
+  .calling-section {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: $border-width-thick solid $c-gold;
+
+    h3 {
+      margin: 0 0 $spacing-md 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+    }
+  }
+
+  .calling-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+  }
+
+  .calling-card {
+    .card-title {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+    }
+
+    .card-description {
+      font-size: $font-size-sm;
+      color: $c-medium;
+    }
+
+    .calling-talents-preview {
+      margin-top: $spacing-md;
+      padding-top: $spacing-sm;
+      border-top: $border-width dashed $c-faint;
+
+      .talents-preview-header {
+        margin: 0 0 $spacing-xs 0;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        color: $c-gold-dark;
+        text-transform: uppercase;
+        letter-spacing: $letter-spacing-wide;
+
+        i {
+          margin-right: $spacing-xs;
+          color: $c-gold;
+        }
+      }
+
+      .signature-talents-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        .signature-talent {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          padding: $spacing-xs $spacing-sm;
+          margin-bottom: $spacing-xs;
+          background: rgba($c-gold, 0.08);
+          border-radius: $border-radius-sm;
+          font-size: $font-size-xs;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .talent-name {
+            font-weight: $font-weight-bold;
+            color: $c-dark;
+          }
+        }
+      }
+    }
+  }

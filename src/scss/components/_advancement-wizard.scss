@@ -1,0 +1,538 @@
+// The Weight of Ruin - Advancement Wizard Styles
+// Matches character creation wizard theme and layout
+// Note: This file is imported inside .weight-of-ruin.advancement-wizard selector
+
+// Use & to reference the parent selector for base styles
+& {
+  @include parchment-bg;
+  background-color: $c-parchment;
+  font-family: $font-primary;
+  color: $c-text-dark;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+}
+
+// Container wrapper
+.advancement-wizard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// ========================================
+// HEADER (matches character creation)
+// ========================================
+.creation-header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
+  background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+  border-bottom: $border-width-thick solid $c-copper;
+  border-radius: $border-radius-lg $border-radius-lg 0 0;
+
+  .creation-title {
+    h1 {
+      margin: 0;
+      font-size: $font-size-xl;
+      font-family: $font-primary;
+      color: $c-text-inverse;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Step Progress Indicator
+  .step-progress {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+
+    .step-indicator {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      transition: all $transition-fast;
+      position: relative;
+
+      .step-number {
+        z-index: 1;
+      }
+
+      i {
+        position: absolute;
+        font-size: $font-size-xs;
+      }
+
+      &.completed {
+        background: $c-success;
+        color: $c-white;
+
+        .step-number {
+          display: none;
+        }
+      }
+
+      &.active {
+        background: $c-gold;
+        color: $c-text-dark;
+        transform: scale(1.15);
+        box-shadow: 0 0 8px rgba($c-gold, 0.5);
+      }
+
+      &.future {
+        background: rgba($c-text-inverse, 0.2);
+        color: rgba($c-text-inverse, 0.5);
+      }
+    }
+  }
+
+  // XP/LP Tracker
+  .lp-tracker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-text-inverse, 0.1);
+    border-radius: $border-radius-md;
+
+    .lp-label {
+      font-size: $font-size-sm;
+      color: $c-white;
+    }
+
+    .lp-value {
+      font-weight: $font-weight-bold;
+      color: $c-white;
+
+      .lp-remaining {
+        font-size: $font-size-lg;
+        color: $c-gold;
+      }
+
+      .lp-total {
+        font-size: $font-size-sm;
+        color: rgba($c-white, 0.8);
+      }
+    }
+  }
+}
+
+// ========================================
+// BODY (matches character creation)
+// ========================================
+.creation-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .step-header {
+    @include section-header;
+    padding: $spacing-sm $spacing-lg;
+    margin: 0;
+
+    h2 {
+      margin: 0;
+      font-size: $font-size-base;
+      font-family: $font-primary;
+      color: $c-header-text;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+    }
+  }
+
+  .creation-step-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-lg;
+    @include custom-scrollbar;
+
+    .step-description {
+      margin: 0 0 $spacing-lg 0;
+      color: $c-text-medium;
+      font-size: $font-size-sm;
+      line-height: $line-height-base;
+    }
+  }
+}
+
+// ========================================
+// FOOTER (matches character creation)
+// ========================================
+.creation-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  background: rgba($c-faint, 0.3);
+  border-top: $border-width solid $c-faint;
+  border-radius: 0 0 $border-radius-lg $border-radius-lg;
+
+  .footer-info {
+    .step-info {
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+    }
+  }
+
+  .footer-actions {
+    display: flex;
+    gap: $spacing-md;
+
+    .back-btn,
+    .next-btn,
+    .finalize-btn {
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      border: none;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+      transition: all $transition-fast;
+      font-family: $font-primary;
+
+      i {
+        margin: 0 $spacing-xs;
+      }
+
+      &:disabled,
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .back-btn {
+      @include button-secondary;
+    }
+
+    .next-btn {
+      @include button-primary;
+    }
+
+    .finalize-btn {
+      background: $c-success;
+      color: $c-white;
+      border: $border-width solid $c-success-dark;
+
+      &:hover:not(:disabled) {
+        background: $c-success-dark;
+      }
+    }
+  }
+}
+
+// ========================================
+// ATTRIBUTE SELECTION
+// ========================================
+.attribute-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+
+  .attribute-card {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    border: 2px solid $c-faint;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &:hover:not(.disabled) {
+      border-color: $c-copper;
+      background: rgba($c-copper, 0.05);
+    }
+
+    &.selected {
+      border-color: $c-copper;
+      background: rgba($c-copper, 0.1);
+      box-shadow: 0 0 8px rgba($c-copper, 0.3);
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .attribute-card-header {
+      display: flex;
+      align-items: baseline;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-xs;
+
+      .attr-abbr {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $c-copper;
+      }
+
+      .attr-name {
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+      }
+    }
+
+    .attribute-card-value {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      .current-value {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+
+      .advance-arrow {
+        color: $c-copper;
+      }
+
+      .new-value {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $c-success;
+      }
+    }
+
+    .selected-indicator {
+      position: absolute;
+      top: $spacing-sm;
+      right: $spacing-sm;
+      color: $c-success;
+    }
+  }
+}
+
+// ========================================
+// SKILLS SELECTION
+// ========================================
+.selection-counter {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-sm $spacing-md;
+  background: $c-bg-elevated;
+  border-radius: $border-radius-md;
+  border: $border-width solid $c-faint;
+
+  .counter-label {
+    font-weight: $font-weight-bold;
+    color: $c-text-dark;
+  }
+
+  .counter-value {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $c-copper;
+
+    &.complete {
+      color: $c-success;
+    }
+  }
+}
+
+.skills-selection-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  .skill-category-group {
+    .category-header {
+      margin: 0 0 $spacing-sm 0;
+      font-size: $font-size-base;
+      color: $c-text-dark;
+      border-bottom: $border-width solid $c-faint;
+      padding-bottom: $spacing-xs;
+    }
+
+    .skill-options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-sm;
+
+      .skill-option-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $spacing-sm $spacing-md;
+        background: $c-bg-elevated;
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover:not(.disabled) {
+          border-color: $c-copper;
+          background: rgba($c-copper, 0.05);
+        }
+
+        &.selected {
+          border-color: $c-copper;
+          background: rgba($c-copper, 0.1);
+
+          .selected-check {
+            color: $c-success;
+          }
+        }
+
+        &.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        .skill-name {
+          font-size: $font-size-sm;
+          color: $c-text-dark;
+        }
+
+        .skill-rank-display {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          color: $c-text-medium;
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+
+          .fa-arrow-right {
+            color: $c-copper;
+          }
+
+          .new-rank {
+            color: $c-success;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// TALENT SELECTION
+// ========================================
+.talent-mode-tabs {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  .mode-tab {
+    flex: 1;
+    padding: $spacing-md;
+    background: $c-bg-elevated;
+    border: 2px solid $c-faint;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $c-text-medium;
+    font-family: $font-primary;
+
+    i {
+      margin-right: $spacing-sm;
+    }
+
+    &:hover:not(:disabled) {
+      border-color: $c-copper;
+      color: $c-copper;
+    }
+
+    &.active {
+      border-color: $c-copper;
+      background: $c-copper;
+      color: $c-white;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.talent-selection-list {
+  .talent-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    max-height: 300px;
+    overflow-y: auto;
+    @include custom-scrollbar;
+
+    .talent-option-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: $spacing-md;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover:not(.disabled) {
+        border-color: $c-copper;
+        background: rgba($c-copper, 0.05);
+      }
+
+      &.selected {
+        border-color: $c-copper;
+        background: rgba($c-copper, 0.1);
+
+        .selected-check {
+          color: $c-success;
+        }
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .talent-name {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+
+      .talent-rank-display {
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+
+        &.max {
+          color: $c-text-light;
+        }
+      }
+
+      .talent-type-badge {
+        font-size: $font-size-xs;
+        padding: $spacing-xs $spacing-sm;
+        background: rgba($c-faint, 0.5);
+        border-radius: $border-radius-sm;
+        color: $c-text-medium;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .empty-message {
+    color: $c-text-medium;
+    font-style: italic;
+    text-align: center;
+    padding: $spacing-lg;
+  }
+}

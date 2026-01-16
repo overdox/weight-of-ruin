@@ -1,0 +1,628 @@
+// The Weight of Ruin - Themeable Color System
+// Uses CSS Custom Properties for runtime theme switching
+// Dark theme is default, light theme available via settings
+
+// =============================================================================
+// CSS CUSTOM PROPERTIES - THEME DEFINITIONS
+// =============================================================================
+
+// Light Theme (parchment aesthetic)
+[data-wor-theme="light"] {
+  // === BACKGROUNDS ===
+  --wor-bg-body: url(../assets/ui/background.webp);
+  --wor-bg-parchment-texture: url(../assets/ui/parchment.webp);
+  --wor-bg-primary: #e8e0d0;
+  --wor-bg-secondary: #f0ebe0;
+  --wor-bg-tertiary: #d8d0c0;
+  --wor-bg-elevated: #f5f1e8;
+
+  // === TEXT COLORS ===
+  --wor-text-primary: #2a2520;
+  --wor-text-secondary: #5c5550;
+  --wor-text-muted: #8a857d;
+  --wor-text-faint: #a8a298;
+  --wor-text-inverse: #f5f0e5;
+
+  // === BORDERS ===
+  --wor-border-light: #d8d0c4;
+  --wor-border-medium: #b8b0a4;
+  --wor-border-dark: #908880;
+
+  // === STONE GRAYS ===
+  --wor-stone: #6b6560;
+  --wor-stone-light: #7a746e;
+  --wor-stone-dark: #5a5550;
+  --wor-stone-pale: #8a8580;
+  --wor-stone-alpha-03: rgba(107, 101, 96, 0.03);
+  --wor-stone-alpha-04: rgba(107, 101, 96, 0.04);
+  --wor-stone-alpha-05: rgba(107, 101, 96, 0.05);
+  --wor-stone-alpha-06: rgba(107, 101, 96, 0.06);
+  --wor-stone-alpha-08: rgba(107, 101, 96, 0.08);
+  --wor-stone-alpha-10: rgba(107, 101, 96, 0.10);
+  --wor-stone-alpha-12: rgba(107, 101, 96, 0.12);
+  --wor-stone-alpha-15: rgba(107, 101, 96, 0.15);
+  --wor-stone-alpha-25: rgba(107, 101, 96, 0.25);
+  --wor-stone-alpha-60: rgba(107, 101, 96, 0.60);
+  --wor-stone-light-alpha-50: rgba(122, 116, 110, 0.50);
+
+  // === COPPER/BROWN ===
+  --wor-copper: #6d4c35;
+  --wor-copper-light: #8a6245;
+  --wor-copper-dark: #4d3525;
+  --wor-copper-deep: #3d2a1d;
+  --wor-copper-darker: #3d2a1d;
+  --wor-copper-alpha-05: rgba(109, 76, 53, 0.05);
+  --wor-copper-alpha-08: rgba(109, 76, 53, 0.08);
+  --wor-copper-alpha-10: rgba(109, 76, 53, 0.10);
+  --wor-copper-alpha-15: rgba(109, 76, 53, 0.15);
+  --wor-copper-alpha-20: rgba(109, 76, 53, 0.20);
+  --wor-copper-alpha-30: rgba(109, 76, 53, 0.30);
+  --wor-copper-alpha-80: rgba(109, 76, 53, 0.80);
+  --wor-copper-light-alpha-50: rgba(138, 98, 69, 0.50);
+
+  // === BURGUNDY ===
+  --wor-burgundy: #5a2528;
+  --wor-burgundy-dark: #4a1d20;
+  --wor-burgundy-darker: #3a1518;
+  --wor-burgundy-alpha-08: rgba(90, 37, 40, 0.08);
+  --wor-burgundy-alpha-15: rgba(90, 37, 40, 0.15);
+  --wor-burgundy-alpha-20: rgba(90, 37, 40, 0.20);
+
+  // === GOLD ACCENTS ===
+  --wor-gold: #c9a227;
+  --wor-gold-light: #ddb832;
+  --wor-gold-dark: #9c7d1c;
+  --wor-gold-muted: #a8923d;
+  --wor-gold-darker: #8a6d14;
+  --wor-gold-dark-darker: #7c6514;
+  --wor-gold-alpha-05: rgba(201, 162, 39, 0.05);
+  --wor-gold-alpha-08: rgba(201, 162, 39, 0.08);
+  --wor-gold-alpha-10: rgba(201, 162, 39, 0.10);
+  --wor-gold-alpha-12: rgba(201, 162, 39, 0.12);
+  --wor-gold-alpha-15: rgba(201, 162, 39, 0.15);
+  --wor-gold-alpha-20: rgba(201, 162, 39, 0.20);
+  --wor-gold-alpha-30: rgba(201, 162, 39, 0.30);
+  --wor-gold-alpha-40: rgba(201, 162, 39, 0.40);
+  --wor-gold-alpha-50: rgba(201, 162, 39, 0.50);
+
+  // === BASE NEUTRALS ===
+  --wor-white: #f8f4f0;
+  --wor-off-white: #f5f1e8;
+  --wor-black: #1a1714;
+  --wor-black-alpha-10: rgba(26, 23, 20, 0.10);
+  --wor-white-alpha-10: rgba(248, 244, 240, 0.10);
+  --wor-white-alpha-15: rgba(248, 244, 240, 0.15);
+  --wor-white-alpha-20: rgba(248, 244, 240, 0.20);
+  --wor-white-alpha-25: rgba(248, 244, 240, 0.25);
+  --wor-white-alpha-30: rgba(248, 244, 240, 0.30);
+  --wor-white-alpha-40: rgba(248, 244, 240, 0.40);
+  --wor-white-alpha-50: rgba(248, 244, 240, 0.50);
+  --wor-white-alpha-80: rgba(248, 244, 240, 0.80);
+  --wor-white-alpha-85: rgba(248, 244, 240, 0.85);
+  --wor-white-alpha-90: rgba(248, 244, 240, 0.90);
+  --wor-dark-alpha-02: rgba(42, 37, 32, 0.02);
+  --wor-dark-alpha-03: rgba(42, 37, 32, 0.03);
+  --wor-dark-alpha-05: rgba(42, 37, 32, 0.05);
+  --wor-dark-alpha-08: rgba(42, 37, 32, 0.08);
+  --wor-dark-alpha-10: rgba(42, 37, 32, 0.10);
+  --wor-dark-alpha-12: rgba(42, 37, 32, 0.12);
+  --wor-dark-alpha-15: rgba(42, 37, 32, 0.15);
+  --wor-dark-alpha-20: rgba(42, 37, 32, 0.20);
+  --wor-dark-alpha-30: rgba(42, 37, 32, 0.30);
+  --wor-dark-alpha-50: rgba(42, 37, 32, 0.50);
+  --wor-dark-alpha-80: rgba(42, 37, 32, 0.80);
+  --wor-dark-alpha-90: rgba(42, 37, 32, 0.90);
+
+  // === PARCHMENT VARIANTS ===
+  --wor-pale: #f0ebe0;
+  --wor-pale-darker: #e0dbc8;
+  --wor-pale-alpha-20: rgba(240, 235, 224, 0.20);
+  --wor-pale-alpha-60: rgba(240, 235, 224, 0.60);
+  --wor-pale-alpha-70: rgba(240, 235, 224, 0.70);
+  --wor-pale-alpha-80: rgba(240, 235, 224, 0.80);
+  --wor-pale-alpha-90: rgba(240, 235, 224, 0.90);
+
+  // === FAINT/BORDER ===
+  --wor-faint: #d8d0c4;
+  --wor-faint-alpha-20: rgba(216, 208, 196, 0.20);
+  --wor-faint-alpha-30: rgba(216, 208, 196, 0.30);
+  --wor-faint-alpha-40: rgba(216, 208, 196, 0.40);
+  --wor-faint-alpha-50: rgba(216, 208, 196, 0.50);
+
+  // === MEDIUM TEXT ===
+  --wor-medium: #5c5550;
+  --wor-medium-alpha-10: rgba(92, 85, 80, 0.10);
+  --wor-medium-alpha-15: rgba(92, 85, 80, 0.15);
+  --wor-medium-alpha-30: rgba(92, 85, 80, 0.30);
+  --wor-medium-darker: #4c4540;
+
+  // === TEXT INVERSE ===
+  --wor-text-inverse-alpha-10: rgba(245, 240, 229, 0.10);
+  --wor-text-inverse-alpha-20: rgba(245, 240, 229, 0.20);
+  --wor-text-inverse-alpha-30: rgba(245, 240, 229, 0.30);
+  --wor-text-inverse-alpha-50: rgba(245, 240, 229, 0.50);
+  --wor-text-inverse-alpha-60: rgba(245, 240, 229, 0.60);
+  --wor-text-inverse-alpha-70: rgba(245, 240, 229, 0.70);
+  --wor-text-inverse-alpha-75: rgba(245, 240, 229, 0.75);
+
+  // === ACCENT (GOLD) ALIASES ===
+  --wor-accent: var(--wor-gold);
+  --wor-accent-alpha-05: var(--wor-gold-alpha-05);
+  --wor-accent-alpha-10: var(--wor-gold-alpha-10);
+  --wor-accent-alpha-15: var(--wor-gold-alpha-15);
+  --wor-accent-alpha-20: var(--wor-gold-alpha-20);
+
+  // === BORDER MEDIUM ===
+  --wor-border-medium-alpha-30: rgba(184, 176, 164, 0.30);
+
+  // === PARCHMENT DARK ===
+  --wor-parchment-dark-alpha-30: rgba(216, 208, 192, 0.30);
+  --wor-parchment-alpha-50: rgba(232, 224, 208, 0.50);
+
+  // === STATE COLORS - DANGER ===
+  --wor-danger: #8b3535;
+  --wor-danger-dark: #6b2525;
+  --wor-danger-light: #a84545;
+  --wor-danger-darker: #5b1515;
+  --wor-danger-dark-darker: #5b1515;
+  --wor-danger-bg: rgba(139, 53, 53, 0.12);
+  --wor-danger-alpha-08: rgba(139, 53, 53, 0.08);
+  --wor-danger-alpha-10: rgba(139, 53, 53, 0.10);
+  --wor-danger-alpha-12: rgba(139, 53, 53, 0.12);
+  --wor-danger-alpha-15: rgba(139, 53, 53, 0.15);
+  --wor-danger-alpha-20: rgba(139, 53, 53, 0.20);
+  --wor-danger-alpha-25: rgba(139, 53, 53, 0.25);
+  --wor-danger-alpha-30: rgba(139, 53, 53, 0.30);
+  --wor-danger-alpha-50: rgba(139, 53, 53, 0.50);
+  --wor-danger-alpha-80: rgba(139, 53, 53, 0.80);
+  --wor-danger-alpha-90: rgba(139, 53, 53, 0.90);
+  --wor-danger-light-alpha-50: rgba(168, 69, 69, 0.50);
+
+  // === STATE COLORS - SUCCESS ===
+  --wor-success: #3a6b3a;
+  --wor-success-dark: #2a5a2a;
+  --wor-success-light: #4a8b4a;
+  --wor-success-darker: #1a4a1a;
+  --wor-success-dark-darker: #1a4a1a;
+  --wor-success-bg: rgba(58, 107, 58, 0.12);
+  --wor-success-alpha-03: rgba(58, 107, 58, 0.03);
+  --wor-success-alpha-05: rgba(58, 107, 58, 0.05);
+  --wor-success-alpha-08: rgba(58, 107, 58, 0.08);
+  --wor-success-alpha-10: rgba(58, 107, 58, 0.10);
+  --wor-success-alpha-15: rgba(58, 107, 58, 0.15);
+  --wor-success-alpha-20: rgba(58, 107, 58, 0.20);
+  --wor-success-alpha-25: rgba(58, 107, 58, 0.25);
+  --wor-success-alpha-30: rgba(58, 107, 58, 0.30);
+  --wor-success-alpha-50: rgba(58, 107, 58, 0.50);
+  --wor-success-alpha-70: rgba(58, 107, 58, 0.70);
+  --wor-success-alpha-80: rgba(58, 107, 58, 0.80);
+  --wor-success-alpha-90: rgba(58, 107, 58, 0.90);
+  --wor-success-light-alpha-50: rgba(74, 139, 74, 0.50);
+  --wor-success-dark-alpha-90: rgba(42, 90, 42, 0.90);
+
+  // === STATE COLORS - WARNING ===
+  --wor-warning: #a86a28;
+  --wor-warning-dark: #8a5520;
+  --wor-warning-light: #c88838;
+  --wor-warning-lighter: #d89848;
+  --wor-warning-darker: #6a4518;
+  --wor-warning-bg: rgba(168, 106, 40, 0.12);
+  --wor-warning-alpha-10: rgba(168, 106, 40, 0.10);
+  --wor-warning-alpha-12: rgba(168, 106, 40, 0.12);
+  --wor-warning-alpha-15: rgba(168, 106, 40, 0.15);
+  --wor-warning-alpha-20: rgba(168, 106, 40, 0.20);
+  --wor-warning-alpha-25: rgba(168, 106, 40, 0.25);
+  --wor-warning-alpha-30: rgba(168, 106, 40, 0.30);
+  --wor-warning-alpha-50: rgba(168, 106, 40, 0.50);
+  --wor-warning-alpha-70: rgba(168, 106, 40, 0.70);
+  --wor-warning-alpha-90: rgba(168, 106, 40, 0.90);
+
+  // === STATE COLORS - MAGIC ===
+  --wor-magic: #6b4a8a;
+  --wor-magic-dark: #553a6b;
+  --wor-magic-light: #8a5aaa;
+  --wor-magic-darker: #453a5b;
+  --wor-magic-bg: rgba(107, 74, 138, 0.12);
+  --wor-magic-alpha-05: rgba(107, 74, 138, 0.05);
+  --wor-magic-alpha-10: rgba(107, 74, 138, 0.10);
+  --wor-magic-alpha-15: rgba(107, 74, 138, 0.15);
+  --wor-magic-alpha-20: rgba(107, 74, 138, 0.20);
+  --wor-magic-alpha-25: rgba(107, 74, 138, 0.25);
+  --wor-magic-alpha-30: rgba(107, 74, 138, 0.30);
+  --wor-magic-alpha-40: rgba(107, 74, 138, 0.40);
+  --wor-magic-alpha-50: rgba(107, 74, 138, 0.50);
+  --wor-magic-alpha-60: rgba(107, 74, 138, 0.60);
+  --wor-magic-alpha-70: rgba(107, 74, 138, 0.70);
+  --wor-magic-alpha-80: rgba(107, 74, 138, 0.80);
+  --wor-magic-alpha-90: rgba(107, 74, 138, 0.90);
+  --wor-magic-light-alpha-50: rgba(138, 90, 170, 0.50);
+  --wor-magic-dark-alpha-90: rgba(85, 58, 107, 0.90);
+
+  // === SPECIAL ROLE COLORS ===
+  --wor-header-bg: var(--wor-copper);
+  --wor-header-text: var(--wor-text-inverse);
+  --wor-attr-box-bg: var(--wor-stone);
+  --wor-attr-box-text: #f8f4f0;
+  --wor-row-alt: var(--wor-stone-alpha-06);
+  --wor-row-hover: var(--wor-copper-alpha-08);
+
+  // === SHADOWS ===
+  --wor-shadow-color: rgba(0, 0, 0, 0.15);
+  --wor-shadow-sm: 0 1px 2px var(--wor-shadow-color);
+  --wor-shadow-md: 0 2px 4px var(--wor-shadow-color);
+  --wor-shadow-lg: 0 4px 8px var(--wor-shadow-color);
+
+  // === INPUT/FORM ===
+  --wor-input-bg: #f5f1e8;
+  --wor-input-border: #b8b0a4;
+  --wor-input-focus-border: var(--wor-gold);
+  --wor-input-placeholder: #a8a298;
+}
+
+// =============================================================================
+// DARK THEME - Grimdark aesthetic (DEFAULT)
+// =============================================================================
+
+:root, [data-wor-theme="dark"] {
+  // === BACKGROUNDS ===
+  --wor-bg-body: url(../assets/ui/background.webp);
+  --wor-bg-parchment-texture: url(../assets/ui/parchment-dark.webp);
+  --wor-bg-primary: #1e1b18;
+  --wor-bg-secondary: #262320;
+  --wor-bg-tertiary: #2e2b28;
+  --wor-bg-elevated: #363330;
+
+  // === TEXT COLORS ===
+  --wor-text-primary: #e8e0d5;
+  --wor-text-secondary: #b8b0a5;
+  --wor-text-muted: #8a8580;
+  --wor-text-faint: #6a6560;
+  --wor-text-inverse: #1a1714;
+
+  // === BORDERS ===
+  --wor-border-light: #3a3735;
+  --wor-border-medium: #4a4745;
+  --wor-border-dark: #5a5755;
+
+  // === STONE GRAYS ===
+  --wor-stone: #4a4745;
+  --wor-stone-light: #5a5755;
+  --wor-stone-dark: #3a3735;
+  --wor-stone-pale: #6a6765;
+  --wor-stone-alpha-03: rgba(74, 71, 69, 0.08);
+  --wor-stone-alpha-04: rgba(74, 71, 69, 0.10);
+  --wor-stone-alpha-05: rgba(74, 71, 69, 0.12);
+  --wor-stone-alpha-06: rgba(74, 71, 69, 0.15);
+  --wor-stone-alpha-08: rgba(74, 71, 69, 0.18);
+  --wor-stone-alpha-10: rgba(74, 71, 69, 0.20);
+  --wor-stone-alpha-12: rgba(74, 71, 69, 0.22);
+  --wor-stone-alpha-15: rgba(74, 71, 69, 0.25);
+  --wor-stone-alpha-25: rgba(74, 71, 69, 0.35);
+  --wor-stone-alpha-60: rgba(74, 71, 69, 0.70);
+  --wor-stone-light-alpha-50: rgba(90, 87, 85, 0.55);
+
+  // === COPPER/BROWN ===
+  --wor-copper: #8a6245;
+  --wor-copper-light: #a87a55;
+  --wor-copper-dark: #6d4c35;
+  --wor-copper-deep: #4d3525;
+  --wor-copper-darker: #5d3c25;
+  --wor-copper-alpha-05: rgba(138, 98, 69, 0.10);
+  --wor-copper-alpha-08: rgba(138, 98, 69, 0.15);
+  --wor-copper-alpha-10: rgba(138, 98, 69, 0.18);
+  --wor-copper-alpha-15: rgba(138, 98, 69, 0.22);
+  --wor-copper-alpha-20: rgba(138, 98, 69, 0.28);
+  --wor-copper-alpha-30: rgba(138, 98, 69, 0.38);
+  --wor-copper-alpha-80: rgba(138, 98, 69, 0.85);
+  --wor-copper-light-alpha-50: rgba(168, 122, 85, 0.55);
+
+  // === BURGUNDY ===
+  --wor-burgundy: #7b4548;
+  --wor-burgundy-dark: #6b3538;
+  --wor-burgundy-darker: #5b2528;
+  --wor-burgundy-alpha-08: rgba(123, 69, 72, 0.15);
+  --wor-burgundy-alpha-15: rgba(123, 69, 72, 0.22);
+  --wor-burgundy-alpha-20: rgba(123, 69, 72, 0.28);
+
+  // === GOLD ACCENTS ===
+  --wor-gold: #ddb832;
+  --wor-gold-light: #eeca45;
+  --wor-gold-dark: #c9a227;
+  --wor-gold-muted: #b8a24d;
+  --wor-gold-darker: #a89217;
+  --wor-gold-dark-darker: #9c8217;
+  --wor-gold-alpha-05: rgba(221, 184, 50, 0.08);
+  --wor-gold-alpha-08: rgba(221, 184, 50, 0.12);
+  --wor-gold-alpha-10: rgba(221, 184, 50, 0.15);
+  --wor-gold-alpha-12: rgba(221, 184, 50, 0.18);
+  --wor-gold-alpha-15: rgba(221, 184, 50, 0.22);
+  --wor-gold-alpha-20: rgba(221, 184, 50, 0.28);
+  --wor-gold-alpha-30: rgba(221, 184, 50, 0.35);
+  --wor-gold-alpha-40: rgba(221, 184, 50, 0.45);
+  --wor-gold-alpha-50: rgba(221, 184, 50, 0.55);
+
+  // === BASE NEUTRALS ===
+  --wor-white: #e8e0d5;
+  --wor-off-white: #d8d0c5;
+  --wor-black: #0e0c0a;
+  --wor-black-alpha-10: rgba(14, 12, 10, 0.15);
+  --wor-white-alpha-10: rgba(232, 224, 213, 0.15);
+  --wor-white-alpha-15: rgba(232, 224, 213, 0.20);
+  --wor-white-alpha-20: rgba(232, 224, 213, 0.25);
+  --wor-white-alpha-25: rgba(232, 224, 213, 0.30);
+  --wor-white-alpha-30: rgba(232, 224, 213, 0.35);
+  --wor-white-alpha-40: rgba(232, 224, 213, 0.40);
+  --wor-white-alpha-50: rgba(232, 224, 213, 0.55);
+  --wor-white-alpha-80: rgba(232, 224, 213, 0.85);
+  --wor-white-alpha-85: rgba(232, 224, 213, 0.88);
+  --wor-white-alpha-90: rgba(232, 224, 213, 0.90);
+  --wor-dark-alpha-02: rgba(255, 255, 255, 0.02);
+  --wor-dark-alpha-03: rgba(255, 255, 255, 0.03);
+  --wor-dark-alpha-05: rgba(255, 255, 255, 0.05);
+  --wor-dark-alpha-08: rgba(255, 255, 255, 0.08);
+  --wor-dark-alpha-10: rgba(255, 255, 255, 0.10);
+  --wor-dark-alpha-12: rgba(255, 255, 255, 0.12);
+  --wor-dark-alpha-15: rgba(255, 255, 255, 0.15);
+  --wor-dark-alpha-20: rgba(255, 255, 255, 0.20);
+  --wor-dark-alpha-30: rgba(255, 255, 255, 0.30);
+  --wor-dark-alpha-50: rgba(255, 255, 255, 0.50);
+  --wor-dark-alpha-80: rgba(255, 255, 255, 0.80);
+  --wor-dark-alpha-90: rgba(255, 255, 255, 0.90);
+
+  // === PARCHMENT VARIANTS ===
+  --wor-pale: #363330;
+  --wor-pale-darker: #2e2b28;
+  --wor-pale-alpha-20: rgba(54, 51, 48, 0.40);
+  --wor-pale-alpha-60: rgba(54, 51, 48, 0.70);
+  --wor-pale-alpha-70: rgba(54, 51, 48, 0.80);
+  --wor-pale-alpha-80: rgba(54, 51, 48, 0.90);
+  --wor-pale-alpha-90: rgba(54, 51, 48, 0.95);
+
+  // === FAINT/BORDER ===
+  --wor-faint: #3a3735;
+  --wor-faint-alpha-20: rgba(58, 55, 53, 0.35);
+  --wor-faint-alpha-30: rgba(58, 55, 53, 0.45);
+  --wor-faint-alpha-40: rgba(58, 55, 53, 0.55);
+  --wor-faint-alpha-50: rgba(58, 55, 53, 0.65);
+
+  // === MEDIUM TEXT ===
+  --wor-medium: #b8b0a5;
+  --wor-medium-alpha-10: rgba(184, 176, 165, 0.15);
+  --wor-medium-alpha-15: rgba(184, 176, 165, 0.22);
+  --wor-medium-alpha-30: rgba(184, 176, 165, 0.40);
+  --wor-medium-darker: #a8a095;
+
+  // === TEXT INVERSE ===
+  --wor-text-inverse-alpha-10: rgba(26, 23, 20, 0.20);
+  --wor-text-inverse-alpha-20: rgba(26, 23, 20, 0.35);
+  --wor-text-inverse-alpha-30: rgba(26, 23, 20, 0.45);
+  --wor-text-inverse-alpha-50: rgba(26, 23, 20, 0.60);
+  --wor-text-inverse-alpha-60: rgba(26, 23, 20, 0.70);
+  --wor-text-inverse-alpha-70: rgba(26, 23, 20, 0.80);
+  --wor-text-inverse-alpha-75: rgba(26, 23, 20, 0.82);
+
+  // === ACCENT (GOLD) ALIASES ===
+  --wor-accent: var(--wor-gold);
+  --wor-accent-alpha-05: var(--wor-gold-alpha-05);
+  --wor-accent-alpha-10: var(--wor-gold-alpha-10);
+  --wor-accent-alpha-15: var(--wor-gold-alpha-15);
+  --wor-accent-alpha-20: var(--wor-gold-alpha-20);
+
+  // === BORDER MEDIUM ===
+  --wor-border-medium-alpha-30: rgba(74, 71, 69, 0.40);
+
+  // === PARCHMENT DARK ===
+  --wor-parchment-dark-alpha-30: rgba(46, 43, 40, 0.45);
+  --wor-parchment-alpha-50: rgba(30, 27, 24, 0.60);
+
+  // === STATE COLORS - DANGER ===
+  --wor-danger: #c45555;
+  --wor-danger-dark: #a84545;
+  --wor-danger-light: #d86565;
+  --wor-danger-darker: #984545;
+  --wor-danger-dark-darker: #884040;
+  --wor-danger-bg: rgba(196, 85, 85, 0.15);
+  --wor-danger-alpha-08: rgba(196, 85, 85, 0.12);
+  --wor-danger-alpha-10: rgba(196, 85, 85, 0.15);
+  --wor-danger-alpha-12: rgba(196, 85, 85, 0.18);
+  --wor-danger-alpha-15: rgba(196, 85, 85, 0.20);
+  --wor-danger-alpha-20: rgba(196, 85, 85, 0.25);
+  --wor-danger-alpha-25: rgba(196, 85, 85, 0.32);
+  --wor-danger-alpha-30: rgba(196, 85, 85, 0.35);
+  --wor-danger-alpha-50: rgba(196, 85, 85, 0.55);
+  --wor-danger-alpha-80: rgba(196, 85, 85, 0.85);
+  --wor-danger-alpha-90: rgba(196, 85, 85, 0.92);
+  --wor-danger-light-alpha-50: rgba(216, 101, 101, 0.55);
+
+  // === STATE COLORS - SUCCESS ===
+  --wor-success: #5a9b5a;
+  --wor-success-dark: #4a8b4a;
+  --wor-success-light: #6aab6a;
+  --wor-success-darker: #3a7b3a;
+  --wor-success-dark-darker: #2a6b2a;
+  --wor-success-bg: rgba(90, 155, 90, 0.15);
+  --wor-success-alpha-03: rgba(90, 155, 90, 0.05);
+  --wor-success-alpha-05: rgba(90, 155, 90, 0.08);
+  --wor-success-alpha-08: rgba(90, 155, 90, 0.12);
+  --wor-success-alpha-10: rgba(90, 155, 90, 0.15);
+  --wor-success-alpha-15: rgba(90, 155, 90, 0.20);
+  --wor-success-alpha-20: rgba(90, 155, 90, 0.25);
+  --wor-success-alpha-25: rgba(90, 155, 90, 0.32);
+  --wor-success-alpha-30: rgba(90, 155, 90, 0.35);
+  --wor-success-alpha-50: rgba(90, 155, 90, 0.55);
+  --wor-success-alpha-70: rgba(90, 155, 90, 0.75);
+  --wor-success-alpha-80: rgba(90, 155, 90, 0.85);
+  --wor-success-alpha-90: rgba(90, 155, 90, 0.92);
+  --wor-success-light-alpha-50: rgba(106, 171, 106, 0.55);
+  --wor-success-dark-alpha-90: rgba(74, 139, 74, 0.92);
+
+  // === STATE COLORS - WARNING ===
+  --wor-warning: #d88a38;
+  --wor-warning-dark: #c87a28;
+  --wor-warning-light: #e89a48;
+  --wor-warning-lighter: #f0aa58;
+  --wor-warning-darker: #b86a18;
+  --wor-warning-bg: rgba(216, 138, 56, 0.15);
+  --wor-warning-alpha-10: rgba(216, 138, 56, 0.15);
+  --wor-warning-alpha-12: rgba(216, 138, 56, 0.18);
+  --wor-warning-alpha-15: rgba(216, 138, 56, 0.20);
+  --wor-warning-alpha-20: rgba(216, 138, 56, 0.25);
+  --wor-warning-alpha-25: rgba(216, 138, 56, 0.32);
+  --wor-warning-alpha-30: rgba(216, 138, 56, 0.35);
+  --wor-warning-alpha-50: rgba(216, 138, 56, 0.55);
+  --wor-warning-alpha-70: rgba(216, 138, 56, 0.75);
+  --wor-warning-alpha-90: rgba(216, 138, 56, 0.92);
+
+  // === STATE COLORS - MAGIC ===
+  --wor-magic: #9a6aba;
+  --wor-magic-dark: #8a5aaa;
+  --wor-magic-light: #aa7aca;
+  --wor-magic-darker: #7a4a9a;
+  --wor-magic-bg: rgba(154, 106, 186, 0.15);
+  --wor-magic-alpha-05: rgba(154, 106, 186, 0.08);
+  --wor-magic-alpha-10: rgba(154, 106, 186, 0.15);
+  --wor-magic-alpha-15: rgba(154, 106, 186, 0.20);
+  --wor-magic-alpha-20: rgba(154, 106, 186, 0.25);
+  --wor-magic-alpha-25: rgba(154, 106, 186, 0.32);
+  --wor-magic-alpha-30: rgba(154, 106, 186, 0.35);
+  --wor-magic-alpha-40: rgba(154, 106, 186, 0.48);
+  --wor-magic-alpha-50: rgba(154, 106, 186, 0.55);
+  --wor-magic-alpha-60: rgba(154, 106, 186, 0.65);
+  --wor-magic-alpha-70: rgba(154, 106, 186, 0.75);
+  --wor-magic-alpha-80: rgba(154, 106, 186, 0.85);
+  --wor-magic-alpha-90: rgba(154, 106, 186, 0.92);
+  --wor-magic-light-alpha-50: rgba(170, 122, 202, 0.55);
+  --wor-magic-dark-alpha-90: rgba(138, 90, 170, 0.92);
+
+  // === SPECIAL ROLE COLORS ===
+  --wor-header-bg: var(--wor-copper);
+  --wor-header-text: var(--wor-text-primary);
+  --wor-attr-box-bg: var(--wor-stone);
+  --wor-attr-box-text: #e8e0d5;
+  --wor-row-alt: var(--wor-dark-alpha-03);
+  --wor-row-hover: var(--wor-gold-alpha-10);
+
+  // === SHADOWS ===
+  --wor-shadow-color: rgba(0, 0, 0, 0.4);
+  --wor-shadow-sm: 0 1px 3px var(--wor-shadow-color);
+  --wor-shadow-md: 0 2px 6px var(--wor-shadow-color);
+  --wor-shadow-lg: 0 4px 12px var(--wor-shadow-color);
+
+  // === INPUT/FORM ===
+  --wor-input-bg: #2a2725;
+  --wor-input-border: #4a4745;
+  --wor-input-focus-border: var(--wor-gold);
+  --wor-input-placeholder: #6a6560;
+}
+
+// =============================================================================
+// SCSS VARIABLES - Map to CSS Custom Properties
+// =============================================================================
+
+// Base Neutrals
+$c-white: var(--wor-white);
+$c-off-white: var(--wor-off-white);
+$c-black: var(--wor-black);
+
+// Backgrounds
+$c-parchment: var(--wor-bg-primary);
+$c-parchment-light: var(--wor-bg-secondary);
+$c-parchment-dark: var(--wor-bg-tertiary);
+
+// Stone Grays
+$c-stone: var(--wor-stone);
+$c-stone-light: var(--wor-stone-light);
+$c-stone-dark: var(--wor-stone-dark);
+$c-stone-pale: var(--wor-stone-pale);
+
+// Copper/Brown
+$c-copper: var(--wor-copper);
+$c-copper-light: var(--wor-copper-light);
+$c-copper-dark: var(--wor-copper-dark);
+$c-copper-deep: var(--wor-copper-deep);
+
+// Burgundy
+$c-burgundy: var(--wor-burgundy);
+$c-burgundy-dark: var(--wor-burgundy-dark);
+
+// Text Colors
+$c-text-dark: var(--wor-text-primary);
+$c-text-medium: var(--wor-text-secondary);
+$c-text-light: var(--wor-text-muted);
+$c-text-faint: var(--wor-text-faint);
+$c-text-inverse: var(--wor-text-inverse);
+
+// Borders
+$c-border-light: var(--wor-border-light);
+$c-border-medium: var(--wor-border-medium);
+$c-border-dark: var(--wor-border-dark);
+
+// Gold Accents
+$c-gold: var(--wor-gold);
+$c-gold-light: var(--wor-gold-light);
+$c-gold-dark: var(--wor-gold-dark);
+$c-gold-muted: var(--wor-gold-muted);
+
+// State Colors - Danger
+$c-danger: var(--wor-danger);
+$c-danger-dark: var(--wor-danger-dark);
+$c-danger-light: var(--wor-danger-light);
+$c-danger-bg: var(--wor-danger-bg);
+
+// State Colors - Success
+$c-success: var(--wor-success);
+$c-success-dark: var(--wor-success-dark);
+$c-success-light: var(--wor-success-light);
+$c-success-bg: var(--wor-success-bg);
+
+// State Colors - Warning
+$c-warning: var(--wor-warning);
+$c-warning-dark: var(--wor-warning-dark);
+$c-warning-light: var(--wor-warning-light);
+$c-warning-bg: var(--wor-warning-bg);
+
+// State Colors - Magic
+$c-magic: var(--wor-magic);
+$c-magic-dark: var(--wor-magic-dark);
+$c-magic-light: var(--wor-magic-light);
+$c-magic-bg: var(--wor-magic-bg);
+
+// Background Surfaces (theme-aware)
+$c-bg-elevated: var(--wor-bg-elevated);
+$c-bg-secondary: var(--wor-bg-secondary);
+$c-bg-primary: var(--wor-bg-primary);
+$c-bg-tertiary: var(--wor-bg-tertiary);
+
+// Legacy Aliases
+$c-dark: $c-text-dark;
+$c-medium: $c-text-medium;
+$c-light: $c-text-light;
+$c-faint: $c-border-light;
+$c-pale: var(--wor-pale);
+$c-accent: $c-gold;
+$c-accent-light: $c-gold-light;
+$c-accent-dark: $c-gold-dark;
+$c-accent-muted: $c-gold-muted;
+$c-bg-dark: $c-copper-deep;
+$c-bg-medium: $c-copper-dark;
+$c-bg-light: $c-copper;
+$c-bg-parchment: $c-parchment;
+
+// Special Role Colors
+$c-header-bg: var(--wor-header-bg);
+$c-header-text: var(--wor-header-text);
+$c-attr-box-bg: var(--wor-attr-box-bg);
+$c-attr-box-text: var(--wor-attr-box-text);
+$c-row-alt: var(--wor-row-alt);
+$c-row-hover: var(--wor-row-hover);
+
+// Input/Form
+$c-input-bg: var(--wor-input-bg);
+$c-input-border: var(--wor-input-border);
+$c-input-focus-border: var(--wor-input-focus-border);
+$c-input-placeholder: var(--wor-input-placeholder);
+
+// Shadows
+$shadow-sm: var(--wor-shadow-sm);
+$shadow-md: var(--wor-shadow-md);
+$shadow-lg: var(--wor-shadow-lg);

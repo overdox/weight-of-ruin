@@ -1,0 +1,24 @@
+{
+  "Actor": {
+    "types": ["character", "npc", "creature"],
+    "character": {},
+    "npc": {},
+    "creature": {}
+  },
+  "Item": {
+    "types": ["skill", "talent", "weapon", "armor", "gear", "spell", "ritual", "lineage", "background", "archetype", "calling", "pathway", "lifeEvent"],
+    "skill": {},
+    "talent": {},
+    "weapon": {},
+    "armor": {},
+    "gear": {},
+    "spell": {},
+    "ritual": {},
+    "lineage": {},
+    "background": {},
+    "archetype": {},
+    "calling": {},
+    "pathway": {},
+    "lifeEvent": {}
+  }
+}

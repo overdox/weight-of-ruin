@@ -1,0 +1,49 @@
+<div class="header-wrapper">
+  {{!-- Banner with overlaid name --}}
+  <div class="sheet-banner npc-banner">
+    <img src="systems/weight-of-ruin/assets/ui/banner-npc.jpg" alt="" />
+    <div class="banner-overlay">
+      <div class="banner-name-section">
+        <h1 class="actor-name">
+          <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'AOA.Common.Name'}}" />
+        </h1>
+        <div class="header-identity npc-identity">
+          {{#if isEditMode}}
+          <input type="text" name="system.npcType" value="{{npcType}}" placeholder="{{localize 'AOA.NPC.Type'}}" class="npc-type-input" />
+          {{#if role}}<span class="identity-separator">•</span>{{/if}}
+          <input type="text" name="system.role" value="{{role}}" placeholder="{{localize 'AOA.NPC.Role'}}" class="npc-role-input" />
+          {{else}}
+          <span class="archetype-lineage">
+            {{#if npcType}}{{npcType}}{{else}}{{localize "AOA.NPC.Generic"}}{{/if}}{{#if role}} • {{role}}{{/if}}
+          </span>
+          {{/if}}
+        </div>
+      </div>
+      {{!-- Tier Display in banner --}}
+      <div class="threat-section">
+        <div class="threat-level tier-{{system.tier}}">
+          {{#if isEditMode}}
+          <select name="system.tier" class="threat-select">
+            {{#each tierOptions}}
+            <option value="{{value}}" {{#if (eq value ../system.tier)}}selected{{/if}}>{{label}}</option>
+            {{/each}}
+          </select>
+          {{else}}
+          <span class="threat-badge">{{tierLabel}}</span>
+          {{/if}}
+          <span class="threat-rating" title="{{localize 'AOA.NPC.Tier'}}">
+            {{system.tier}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Header content below banner --}}
+  <header class="sheet-header npc-header">
+    {{!-- Portrait (overlaps banner) --}}
+    <div class="profile">
+      <img class="profile-img" src="{{portraitImg}}" alt="{{actor.name}}" data-action="editPortrait" title="Click to change portrait" />
+    </div>
+  </header>
+</div>

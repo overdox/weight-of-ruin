@@ -1,0 +1,46 @@
+<div class="wor zeal-notification">
+  {{!-- Header --}}
+  <div class="notification-header">
+    <i class="fas fa-fire"></i>
+    <h4 class="notification-title">{{localize "AOA.Zeal.Spent"}}</h4>
+    <span class="actor-name">{{actor.name}}</span>
+  </div>
+
+  {{!-- Zeal Info --}}
+  <div class="zeal-info">
+    <span class="zeal-spent">
+      {{#if spent}}
+      -{{spent}} {{localize "AOA.Zeal.label"}}
+      {{else if gained}}
+      +{{gained}} {{localize "AOA.Zeal.label"}}
+      {{/if}}
+    </span>
+    <span class="zeal-remaining">
+      {{localize "AOA.Zeal.Remaining"}}: <span class="value">{{remaining}}/{{max}}</span>
+    </span>
+  </div>
+
+  {{!-- Effect Description --}}
+  {{#if effect}}
+  <div class="zeal-effect">
+    {{#if effect.difficultyShift}}
+    <i class="fas fa-arrow-down"></i> {{localize "AOA.Zeal.DifficultyShiftDesc"}}
+    {{/if}}
+    {{#if effect.bonusDice}}
+    <i class="fas fa-dice"></i> {{localize "AOA.Zeal.BonusDiceDesc"}}
+    {{/if}}
+    {{#if effect.reroll}}
+    <i class="fas fa-redo"></i> {{localize "AOA.Zeal.RerollDesc"}}
+    {{/if}}
+    {{#if effect.autoSuccess}}
+    <i class="fas fa-star"></i> {{localize "AOA.Zeal.AutoSuccessDesc"}}
+    {{/if}}
+    {{#if effect.zeroPool}}
+    <i class="fas fa-dice-one"></i> {{localize "AOA.Zeal.ZeroPoolDesc"}}
+    {{/if}}
+    {{#if effect.passion}}
+    <i class="fas fa-heart"></i> {{effect.passion}}
+    {{/if}}
+  </div>
+  {{/if}}
+</div>

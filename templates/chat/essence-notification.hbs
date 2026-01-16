@@ -1,0 +1,58 @@
+<div class="wor essence-notification">
+  {{!-- Header --}}
+  <div class="notification-header">
+    <i class="fas fa-ghost"></i>
+    <h4 class="notification-title">{{localize "AOA.Essence.Changed"}}</h4>
+  </div>
+
+  {{!-- Actor Info --}}
+  <div class="actor-info">
+    {{#if actor.img}}
+    <img src="{{actor.img}}" alt="{{actor.name}}" class="actor-portrait" />
+    {{/if}}
+    <span class="actor-name">{{actor.name}}</span>
+  </div>
+
+  {{!-- Essence Change Info --}}
+  <div class="essence-info">
+    <span class="essence-change">
+      {{#if lost}}-{{lost}}{{else if gained}}+{{gained}}{{/if}}
+    </span>
+    <span class="essence-arrow"><i class="fas fa-arrow-right"></i></span>
+    <span class="essence-current {{#if isCritical}}critical{{else if isWarning}}warning{{/if}}">
+      {{current}}/{{max}}
+    </span>
+  </div>
+
+  {{!-- Reason --}}
+  {{#if reason}}
+  <div class="essence-reason">
+    <i class="fas fa-info-circle"></i>
+    {{reason}}
+  </div>
+  {{/if}}
+
+  {{!-- Corruption Sign Prompt --}}
+  {{#if showCorruptionPrompt}}
+  <div class="corruption-prompt">
+    <i class="fas fa-biohazard"></i>
+    {{localize "AOA.Essence.CorruptionSignPrompt"}}
+  </div>
+  {{/if}}
+
+  {{!-- Low Essence Warning --}}
+  {{#if isWarning}}
+  <div class="essence-warning">
+    <i class="fas fa-exclamation-triangle"></i>
+    {{localize "AOA.Essence.LowWarning"}}
+  </div>
+  {{/if}}
+
+  {{!-- Leng Transformation Warning --}}
+  {{#if isLeng}}
+  <div class="leng-warning">
+    <i class="fas fa-skull"></i>
+    {{localize "AOA.Essence.LengWarning"}}
+  </div>
+  {{/if}}
+</div>

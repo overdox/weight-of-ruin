@@ -1,0 +1,884 @@
+// The Weight of Ruin - Creature Sheet Styles
+// Bestiary-focused layout with Leng support
+
+.creature-sheet {
+  .creature-header {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-lg;
+    padding-bottom: $spacing-md;
+    border-bottom: $border-width-thick solid $c-faint;
+    margin-bottom: 0;
+
+    // Leng creatures get special styling
+    &.leng {
+      border-bottom-color: rgba($c-magic, 0.5);
+      background: linear-gradient(to right, transparent, rgba($c-magic, 0.05));
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: row;
+      gap: $spacing-md;
+      flex: 0 0 auto;
+
+      .profile {
+        position: relative;
+        flex: 0 0 $portrait-size-lg;
+        width: $portrait-size-lg;
+        height: $portrait-size-lg;
+
+        .profile-img {
+          width: $portrait-size-lg;
+          height: $portrait-size-lg;
+          object-fit: cover;
+          border: $border-width-thick solid $c-medium;
+          border-radius: $border-radius-md;
+          cursor: pointer;
+          transition: border-color $transition-fast;
+
+          &:hover {
+            border-color: $c-accent;
+          }
+        }
+
+        .leng-indicator {
+          position: absolute;
+          bottom: -$spacing-sm;
+          right: -$spacing-sm;
+          width: $icon-size-md;
+          height: $icon-size-md;
+          @include flex-center;
+          background: $c-magic;
+          color: $c-white;
+          border-radius: $border-radius-full;
+          font-size: $font-size-xs;
+          box-shadow: $shadow-md;
+        }
+      }
+
+      .header-fields {
+        @include flex-column;
+        justify-content: center;
+        min-width: 140px;
+
+        .actor-name {
+          margin: 0;
+          padding: 0;
+
+          input {
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+            font-family: $font-primary;
+            width: 100%;
+            @include input-transparent;
+          }
+        }
+
+        .creature-type-info {
+          display: flex;
+          gap: $spacing-md;
+          font-size: $font-size-sm;
+          color: $c-medium;
+          padding-left: $spacing-sm;
+
+          select {
+            font-size: $font-size-sm;
+            @include input-base;
+            padding: $spacing-xs $spacing-sm;
+          }
+
+          .creature-category {
+            font-style: italic;
+          }
+
+          .creature-size {
+            color: $c-light;
+          }
+        }
+
+        .creature-subcategory {
+          font-size: $font-size-xs;
+          color: $c-light;
+          padding-left: $spacing-sm;
+        }
+      }
+    }
+
+    .header-right {
+      flex: 1;
+      @include flex-column;
+      gap: $spacing-md;
+      min-width: 0;
+    }
+
+    // Creature Threat Section
+    .threat-section {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: $spacing-md;
+
+      .threat-level {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        padding: $spacing-sm $spacing-md;
+        border-radius: $border-radius-md;
+        background: rgba($c-dark, 0.05);
+
+        &.trivial { background: rgba($c-faint, 0.2); }
+        &.minor { background: $c-success-bg; }
+        &.moderate { background: $c-warning-bg; }
+        &.major { background: $c-danger-bg; }
+        &.severe { background: rgba($c-danger, 0.25); }
+        &.legendary {
+          background: linear-gradient(135deg, $c-magic-bg, $c-warning-bg);
+        }
+
+        .threat-select {
+          font-size: $font-size-sm;
+          @include input-base;
+          padding: $spacing-xs $spacing-sm;
+        }
+
+        .threat-badge {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          text-transform: uppercase;
+          letter-spacing: $letter-spacing-wide;
+        }
+
+        .threat-rating {
+          font-size: $font-size-md;
+          font-weight: $font-weight-bold;
+          padding: $spacing-xs $spacing-md;
+          background: rgba($c-dark, 0.1);
+          border-radius: $border-radius-sm;
+
+          input {
+            width: 40px;
+            text-align: center;
+            font-weight: $font-weight-bold;
+            @include input-base;
+            padding: $spacing-xs;
+          }
+        }
+      }
+
+      .party-size {
+        font-size: $font-size-sm;
+        color: $c-medium;
+
+        i {
+          margin-right: $spacing-xs;
+        }
+      }
+    }
+
+    // Quick Stats
+    .quick-stats {
+      display: flex;
+      gap: $spacing-md;
+      justify-content: flex-end;
+
+      .stat-box {
+        @include flex-column;
+        align-items: center;
+        padding: $spacing-sm $spacing-md;
+        background: rgba($c-dark, 0.05);
+        border-radius: $border-radius-md;
+        min-width: 55px;
+
+        .stat-label {
+          @include text-label;
+          font-size: $font-size-xs;
+        }
+
+        .stat-value {
+          font-size: $font-size-md;
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+        }
+      }
+    }
+
+    // Compact Health
+    .health-compact {
+      display: flex;
+      gap: $spacing-md;
+      align-items: center;
+      justify-content: flex-end;
+
+      .fatigue-tracker {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        padding: $spacing-sm $spacing-md;
+        background: rgba($c-dark, 0.05);
+        border-radius: $border-radius-md;
+
+        &.crisis {
+          background: $c-danger-bg;
+        }
+
+        label {
+          @include text-label;
+          font-size: $font-size-xs;
+        }
+
+        .fatigue-inline {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+
+          button {
+            @include button-secondary;
+            width: 22px;
+            height: 22px;
+            padding: 0;
+            font-size: $font-size-sm;
+          }
+
+          .fatigue-value {
+            font-weight: $font-weight-bold;
+            font-size: $font-size-base;
+          }
+        }
+      }
+
+      .injuries-compact {
+        .injury-count {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          font-size: $font-size-base;
+          font-weight: $font-weight-bold;
+
+          i {
+            color: $c-medium;
+          }
+
+          &.critical {
+            color: $c-danger;
+            i { color: $c-danger; }
+          }
+        }
+      }
+    }
+  }
+
+  .creature-body {
+    @include flex-column;
+    height: 100%;
+
+    .creature-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: $spacing-md 0;
+      @include custom-scrollbar;
+    }
+  }
+
+  // Natural Attacks Section
+  .natural-attacks-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      @include flex-between;
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-faint;
+
+      .add-control {
+        @include clickable;
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  .natural-attack-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .natural-attack-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    background: rgba($c-dark, 0.03);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-lg;
+
+    &:hover {
+      @include hover-bg;
+    }
+
+    .attack-info {
+      flex: 1;
+      @include flex-column;
+      gap: $spacing-sm;
+
+      .attack-name {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-md;
+      }
+
+      input.attack-name {
+        font-weight: $font-weight-bold;
+        @include input-base;
+        padding: $spacing-xs $spacing-md;
+      }
+
+      .attack-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-md;
+        font-size: $font-size-sm;
+        color: $c-medium;
+
+        span {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+        }
+
+        .attack-damage i {
+          color: $c-danger;
+        }
+
+        input,
+        select {
+          width: auto;
+          min-width: 40px;
+          font-size: $font-size-sm;
+          @include input-base;
+          padding: $spacing-xs $spacing-sm;
+        }
+      }
+    }
+
+    .attack-actions {
+      display: flex;
+      gap: $spacing-sm;
+
+      .quick-roll-btn {
+        @include button-accent;
+        padding: $spacing-md $spacing-lg;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+
+        i {
+          margin-right: $spacing-xs;
+        }
+      }
+
+      .remove-control {
+        padding: $spacing-md;
+        @include clickable;
+        color: $c-faint;
+
+        &:hover {
+          color: $c-danger;
+        }
+      }
+    }
+  }
+
+  // Natural Armor
+  .natural-armor-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-faint;
+    }
+
+    .armor-fields {
+      display: flex;
+      gap: $spacing-xl;
+
+      .armor-field {
+        @include flex-column;
+        gap: $spacing-xs;
+
+        label {
+          @include text-label;
+        }
+
+        input {
+          width: 55px;
+          text-align: center;
+          font-weight: $font-weight-bold;
+          @include input-base;
+          padding: $spacing-sm;
+        }
+
+        span {
+          font-size: $font-size-md;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+  }
+
+  // Defenses (Resistances, Vulnerabilities, Immunities)
+  .defenses-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-faint;
+    }
+
+    .defense-group {
+      margin-bottom: $spacing-md;
+
+      h4 {
+        @include flex-between;
+        font-size: $font-size-sm;
+        margin: 0 0 $spacing-sm 0;
+        color: $c-medium;
+
+        .add-control {
+          @include clickable;
+          font-size: $font-size-xs;
+        }
+      }
+    }
+
+    .defense-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+    }
+
+    .defense-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-xs $spacing-md;
+      font-size: $font-size-sm;
+      border-radius: $border-radius-md;
+
+      &.resistance {
+        background: $c-success-bg;
+        color: $c-success-dark;
+      }
+
+      &.vulnerability {
+        background: $c-danger-bg;
+        color: $c-danger-dark;
+      }
+
+      &.immunity {
+        background: $c-magic-bg;
+        color: $c-magic-dark;
+      }
+
+      .remove-control {
+        @include clickable;
+        opacity: 0.6;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .no-defenses {
+      font-size: $font-size-sm;
+      color: $c-light;
+      font-style: italic;
+    }
+  }
+
+  // Special Abilities
+  .special-abilities-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      @include flex-between;
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-faint;
+
+      .add-control {
+        @include clickable;
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  .special-ability-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .special-ability-item {
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    background: rgba($c-dark, 0.02);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-lg;
+
+    &.unavailable {
+      opacity: 0.5;
+    }
+
+    .ability-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      margin-bottom: $spacing-sm;
+
+      .availability-toggle {
+        @include clickable;
+
+        &.available {
+          color: $c-success;
+        }
+      }
+
+      .ability-name {
+        flex: 1;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-md;
+      }
+
+      input.ability-name {
+        flex: 1;
+        font-weight: $font-weight-bold;
+        @include input-base;
+        padding: $spacing-xs $spacing-md;
+      }
+
+      .ability-type-badge {
+        @include text-label;
+        padding: $spacing-xs $spacing-md;
+        border-radius: $border-radius-md;
+        background: rgba($c-medium, 0.15);
+
+        &.action {
+          background: $c-warning-bg;
+          color: $c-warning-dark;
+        }
+
+        &.reaction {
+          background: $c-magic-bg;
+          color: $c-magic-dark;
+        }
+
+        &.special {
+          background: $c-danger-bg;
+          color: $c-danger-dark;
+        }
+      }
+
+      .use-ability-btn {
+        @include button-primary;
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-size-sm;
+
+        i {
+          margin-right: $spacing-xs;
+        }
+      }
+
+      .remove-control {
+        @include clickable;
+        color: $c-faint;
+
+        &:hover {
+          color: $c-danger;
+        }
+      }
+    }
+
+    .ability-description {
+      font-size: $font-size-base;
+      color: $c-medium;
+      margin: 0;
+      padding-left: $spacing-2xl;
+    }
+
+    .ability-meta {
+      display: flex;
+      gap: $spacing-lg;
+      font-size: $font-size-sm;
+      color: $c-light;
+      margin-top: $spacing-sm;
+      padding-left: $spacing-2xl;
+    }
+
+    .ability-edit {
+      margin-top: $spacing-md;
+      padding-top: $spacing-md;
+      border-top: $border-width solid $c-faint;
+
+      textarea {
+        width: 100%;
+        min-height: 50px;
+        @include input-base;
+        resize: vertical;
+      }
+
+      .ability-edit-fields {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-md;
+        margin-top: $spacing-md;
+
+        .edit-field {
+          @include flex-column;
+          gap: $spacing-xs;
+
+          label {
+            @include text-label;
+          }
+
+          input,
+          select {
+            min-width: 60px;
+            font-size: $font-size-sm;
+            @include input-base;
+            padding: $spacing-xs $spacing-sm;
+          }
+        }
+      }
+    }
+  }
+
+  // Senses
+  .senses-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-faint;
+    }
+
+    .senses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: $spacing-md;
+
+      .sense-field {
+        @include flex-column;
+        gap: $spacing-xs;
+
+        label {
+          @include text-label;
+        }
+
+        input {
+          @include input-base;
+          padding: $spacing-sm $spacing-md;
+        }
+
+        span {
+          font-size: $font-size-base;
+        }
+      }
+    }
+
+    .sense-special {
+      margin-top: $spacing-md;
+
+      label {
+        @include text-label;
+      }
+
+      input,
+      span {
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  // Behavior
+  .behavior-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-faint;
+    }
+
+    .behavior-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+
+      .behavior-field {
+        @include flex-column;
+        gap: $spacing-xs;
+
+        label {
+          @include text-label;
+        }
+
+        select {
+          @include input-base;
+          padding: $spacing-sm $spacing-md;
+        }
+
+        span {
+          font-size: $font-size-base;
+        }
+      }
+    }
+
+    .behavior-tactics {
+      margin-top: $spacing-md;
+
+      label {
+        display: block;
+        @include text-label;
+        margin-bottom: $spacing-xs;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 60px;
+        @include input-base;
+        resize: vertical;
+      }
+
+      .tactics-content {
+        font-size: $font-size-base;
+        line-height: $line-height-base;
+      }
+    }
+  }
+
+  // Leng Section
+  .leng-section {
+    margin-bottom: $spacing-lg;
+    padding: $spacing-md;
+    background: linear-gradient(135deg, rgba($c-magic, 0.05), rgba($c-magic, 0.1));
+    border: $border-width solid rgba($c-magic, 0.2);
+    border-radius: $border-radius-lg;
+
+    h3 {
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid rgba($c-magic, 0.2);
+      color: $c-magic;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+    }
+
+    .leng-fields {
+      @include flex-column;
+      gap: $spacing-md;
+
+      .leng-field {
+        label {
+          display: block;
+          @include text-label;
+          color: rgba($c-magic, 0.7);
+          margin-bottom: $spacing-xs;
+        }
+
+        input {
+          width: 100%;
+          @include input-base;
+          border-color: rgba($c-magic, 0.3);
+          background: rgba($c-white, 0.7);
+        }
+
+        .leng-value {
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+
+  // Ecology
+  .ecology-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-faint;
+    }
+
+    .ecology-fields {
+      @include flex-column;
+      gap: $spacing-md;
+
+      .ecology-field {
+        label {
+          display: block;
+          @include text-label;
+          margin-bottom: $spacing-xs;
+        }
+
+        input {
+          width: 100%;
+          @include input-base;
+          padding: $spacing-sm $spacing-md;
+        }
+
+        textarea {
+          width: 100%;
+          min-height: 60px;
+          @include input-base;
+          resize: vertical;
+        }
+
+        span,
+        .description-content {
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+
+  // GM Notes (creature)
+  .gm-notes-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-md 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: $border-width solid $c-faint;
+
+      i {
+        margin-right: $spacing-sm;
+        color: $c-medium;
+      }
+    }
+
+    .editor-container {
+      min-height: 80px;
+    }
+
+    .gm-notes-content {
+      font-size: $font-size-base;
+      line-height: $line-height-base;
+    }
+  }
+}

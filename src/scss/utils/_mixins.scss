@@ -1,0 +1,440 @@
+// The Weight of Ruin - Professional Mixins
+// Reusable style patterns for medieval fantasy aesthetic
+
+// === VISIBILITY ===
+@mixin element-invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@mixin hide {
+  display: none;
+}
+
+// === BACKGROUNDS ===
+@mixin parchment-bg {
+  background-image: var(--wor-bg-parchment-texture);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@mixin dark-bg {
+  background: $c-copper-deep;
+  color: $c-text-inverse;
+}
+
+@mixin subtle-bg {
+  background: var(--wor-stone-alpha-04);
+}
+
+@mixin hover-bg {
+  background: $c-row-hover;
+}
+
+// === SECTION CONTAINER (Card with header) ===
+@mixin section-container {
+  background: $c-bg-elevated;
+  border: $border-width solid $c-border-medium;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  margin-bottom: $spacing-xl;
+  overflow: hidden;
+}
+
+@mixin section-content {
+  padding: $spacing-lg;
+  background: $c-bg-elevated;
+}
+
+// === SECTION HEADERS (Brown bar style with gradient) ===
+@mixin section-header-bar {
+  display: flex;
+  align-items: center;
+  padding: $spacing-sm $spacing-lg;
+  background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+  color: $c-header-text;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+  border: none;
+  border-radius: $border-radius-md $border-radius-md 0 0;
+
+  // Small caps effect
+  font-variant: small-caps;
+}
+
+@mixin section-header {
+  @include section-header-bar;
+}
+
+@mixin subsection-header {
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  color: $c-text-dark;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 $spacing-md 0;
+  padding-bottom: $spacing-sm;
+  border-bottom: $border-width solid $c-border-medium;
+}
+
+// === BORDERS ===
+@mixin section-border {
+  border-bottom: $border-width solid $c-border-light;
+  padding-bottom: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+@mixin card-border {
+  border: $border-width solid $c-border-light;
+  border-radius: $border-radius-md;
+}
+
+@mixin inset-border {
+  border: $border-width solid $c-border-medium;
+  box-shadow: $shadow-inset-sm;
+}
+
+// === STONE BOX (Attribute boxes) ===
+@mixin stone-box {
+  background: $c-attr-box-bg;
+  border: $border-width solid $c-stone-dark;
+  color: $c-attr-box-text;
+}
+
+@mixin stone-box-light {
+  background: var(--wor-stone-alpha-08);
+  border: $border-width solid $c-border-medium;
+}
+
+// === INTERACTIVE ===
+@mixin clickable {
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $c-gold;
+  }
+}
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all $transition-fast;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: $c-copper;
+  color: $c-text-inverse;
+
+  &:hover:not(:disabled) {
+    background: $c-copper-light;
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: $c-parchment;
+  color: $c-text-dark;
+  border: $border-width solid $c-border-medium;
+
+  &:hover:not(:disabled) {
+    background: $c-parchment-dark;
+    border-color: $c-border-dark;
+  }
+}
+
+@mixin button-accent {
+  @include button-base;
+  background: $c-gold;
+  color: $c-text-dark;
+
+  &:hover:not(:disabled) {
+    background: $c-gold-light;
+    box-shadow: $shadow-glow-accent;
+  }
+}
+
+@mixin button-danger {
+  @include button-base;
+  background: $c-danger;
+  color: $c-white;
+
+  &:hover:not(:disabled) {
+    background: $c-danger-light;
+  }
+}
+
+// === INPUTS ===
+@mixin input-base {
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  padding: $spacing-sm $spacing-md;
+  border: $border-width solid $c-border-medium;
+  border-radius: $border-radius-sm;
+  background: $c-input-bg;
+  color: $c-text-dark;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $c-gold;
+    box-shadow: 0 0 0 2px var(--wor-gold-alpha-20);
+  }
+
+  &::placeholder {
+    color: $c-text-light;
+    font-style: italic;
+  }
+}
+
+@mixin input-transparent {
+  background: transparent;
+  border: none;
+  border-bottom: $border-width solid transparent;
+  padding: $spacing-xs $spacing-sm;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  border-radius: 0;
+
+  &:hover {
+    border-bottom-color: $c-border-light;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $c-gold;
+  }
+}
+
+// === CARDS & CONTAINERS ===
+@mixin card {
+  @include card-border;
+  background: $c-bg-elevated;
+  padding: $spacing-md;
+}
+
+@mixin card-dark {
+  @include card-border;
+  background: $c-row-alt;
+  padding: $spacing-md;
+}
+
+// === ATTRIBUTE VALUE CIRCLE ===
+@mixin value-circle($size: 48px) {
+  @include flex-center;
+  width: $size;
+  height: $size;
+  background: $c-bg-elevated;
+  border: $border-width-thick solid $c-text-dark;
+  border-radius: $border-radius-full;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $c-text-dark;
+  transition: all $transition-fast;
+}
+
+@mixin value-circle-hover {
+  border-color: $c-gold;
+  box-shadow: 0 0 0 3px var(--wor-gold-alpha-20);
+  transform: scale(1.05);
+}
+
+// === DERIVED STAT BOX ===
+@mixin derived-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-md;
+  background: $c-bg-elevated;
+  border: $border-width solid $c-border-light;
+  text-align: center;
+}
+
+// === STATUS INDICATORS ===
+// Status badge with specific color support
+// Since SCSS variables map to CSS custom properties, we use specific variants
+@mixin status-badge($color-name) {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  border-radius: $border-radius-sm;
+
+  // Default fallback
+  background: var(--wor-dark-alpha-12);
+  color: var(--wor-text-primary);
+}
+
+@mixin status-badge-copper {
+  @include status-badge(copper);
+  background: var(--wor-copper-alpha-10);
+  color: var(--wor-copper-darker);
+}
+
+@mixin status-badge-danger {
+  @include status-badge(danger);
+  background: var(--wor-danger-alpha-12);
+  color: var(--wor-danger-darker);
+}
+
+@mixin status-badge-success {
+  @include status-badge(success);
+  background: var(--wor-success-alpha-10);
+  color: var(--wor-success-darker);
+}
+
+@mixin status-badge-gold {
+  @include status-badge(gold);
+  background: var(--wor-gold-alpha-12);
+  color: var(--wor-gold-darker);
+}
+
+@mixin danger-state {
+  background: $c-danger-bg;
+  border-color: var(--wor-danger-alpha-30);
+}
+
+@mixin success-state {
+  background: $c-success-bg;
+  border-color: var(--wor-success-alpha-30);
+}
+
+@mixin magic-state {
+  background: $c-magic-bg;
+  border-color: var(--wor-magic-alpha-30);
+}
+
+// === LIST ROWS ===
+@mixin list-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: $border-width solid $c-border-light;
+  transition: background $transition-fast;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: $c-row-hover;
+  }
+}
+
+@mixin list-row-alternating {
+  @include list-row;
+
+  &:nth-child(odd) {
+    background: $c-row-alt;
+  }
+
+  &:nth-child(even) {
+    background: transparent;
+  }
+
+  &:hover {
+    background: $c-row-hover;
+  }
+}
+
+// === FLEX HELPERS ===
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// === SCROLLBAR ===
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $c-parchment-dark;
+    border-radius: $border-radius-sm;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $c-border-dark;
+    border-radius: $border-radius-sm;
+
+    &:hover {
+      background: $c-stone;
+    }
+  }
+}
+
+// === TRUNCATION ===
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// === TEXT STYLES ===
+@mixin text-label {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $c-text-medium;
+}
+
+@mixin text-label-light {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: $c-text-light;
+}

@@ -1,0 +1,29 @@
+{{!-- Character Creation Wizard Footer --}}
+<footer class="creation-footer">
+  <div class="footer-info">
+    <span class="step-info">
+      {{localize "AOA.CharacterCreation.StepLabel"}} {{add currentStep 1}} {{localize "AOA.Common.Of"}} 10
+    </span>
+  </div>
+
+  <div class="footer-actions">
+    {{#if (gt currentStep 0)}}
+    <button type="button" class="back-btn" data-action="previousStep">
+      <i class="fas fa-arrow-left"></i>
+      {{localize "AOA.CharacterCreation.PreviousStep"}}
+    </button>
+    {{/if}}
+
+    {{#if isFinalStep}}
+    <button type="button" class="finalize-btn" data-action="finalize" {{#unless canProceed}}disabled{{/unless}}>
+      <i class="fas fa-check-circle"></i>
+      {{localize "AOA.CharacterCreation.CreateCharacter"}}
+    </button>
+    {{else}}
+    <button type="button" class="next-btn" data-action="nextStep" {{#unless canProceed}}disabled{{/unless}}>
+      {{localize "AOA.CharacterCreation.NextStep"}}
+      <i class="fas fa-arrow-right"></i>
+    </button>
+    {{/if}}
+  </div>
+</footer>

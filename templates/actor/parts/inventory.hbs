@@ -1,0 +1,147 @@
+<section class="inventory-section">
+  {{!-- Wealth --}}
+  <div class="wealth-bar">
+    <div class="currency-display">
+      <div class="currency-group sovereigns" title="{{localize 'AOA.Wealth.Sovereigns'}}">
+        <i class="fas fa-coins currency-icon"></i>
+        <span class="currency-value">{{system.wealth.sovereigns}}</span>
+        <span class="currency-label">{{localize "AOA.Wealth.Sovereigns"}}</span>
+      </div>
+      <div class="currency-group crowns" title="{{localize 'AOA.Wealth.Crowns'}}">
+        <i class="fas fa-coins currency-icon"></i>
+        <span class="currency-value">{{system.wealth.crowns}}</span>
+        <span class="currency-label">{{localize "AOA.Wealth.Crowns"}}</span>
+      </div>
+      <div class="currency-group orin" title="{{localize 'AOA.Wealth.Orin'}}">
+        <i class="fas fa-coins currency-icon"></i>
+        <span class="currency-value">{{system.wealth.orin}}</span>
+        <span class="currency-label">{{localize "AOA.Wealth.Orin"}}</span>
+      </div>
+    </div>
+    <button type="button" class="wealth-edit-btn" data-action="editWealth" title="{{localize 'AOA.Wealth.Edit'}}">
+      <i class="fas fa-edit"></i> {{localize "AOA.Common.Edit"}}
+    </button>
+  </div>
+
+  {{!-- Weapons --}}
+  <div class="weapons-subsection">
+    <h3>{{localize "AOA.Section.Weapons"}}</h3>
+    {{#if weapons.length}}
+    <ul class="weapon-list inventory-list">
+      {{#each weapons}}
+      <li class="weapon-item inventory-item {{#if isEquipped}}equipped{{/if}}" data-item-id="{{id}}">
+        <img class="item-icon" src="{{img}}" alt="{{name}}" width="32" height="32" />
+        <span class="item-name">{{name}}</span>
+        <span class="weapon-damage" title="{{localize 'AOA.Weapon.Damage'}}">{{system.damage}} dmg</span>
+        <span class="weapon-hands" title="{{localize 'AOA.Weapon.Hands'}}">{{system.hands}}H</span>
+        <span class="weapon-skill" title="{{localize 'AOA.Weapon.Skill'}}">{{system.skill}}</span>
+        <button type="button" class="equip-btn {{#if isEquipped}}equipped{{/if}}" data-action="toggleEquip">
+          {{#if isEquipped}}{{localize "AOA.Item.Unequip"}}{{else}}{{localize "AOA.Item.Equip"}}{{/if}}
+        </button>
+        <div class="item-controls">
+          <a class="item-control" data-action="editItem" title="{{localize 'AOA.Common.Edit'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          <a class="item-control item-delete" data-action="deleteItem" title="{{localize 'AOA.Common.Delete'}}">
+            <i class="fas fa-trash"></i>
+          </a>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p class="empty-notice">{{localize "AOA.Empty.Weapons"}}</p>
+    {{/if}}
+    {{#if isEditMode}}
+    <div class="item-create-row">
+      <a class="item-create" data-action="createItem" data-type="weapon">
+        <i class="fas fa-plus"></i> {{localize "AOA.Item.AddWeapon"}}
+      </a>
+    </div>
+    {{/if}}
+  </div>
+
+  {{!-- Armor --}}
+  <div class="armor-subsection">
+    <h3>{{localize "AOA.Section.Armor"}}</h3>
+    {{#if armor.length}}
+    <ul class="armor-list inventory-list">
+      {{#each armor}}
+      <li class="armor-item inventory-item {{#if isEquipped}}equipped{{/if}}" data-item-id="{{id}}">
+        <img class="item-icon" src="{{img}}" alt="{{name}}" width="32" height="32" />
+        <span class="item-name">{{name}}</span>
+        <span class="armor-category" title="{{localize 'AOA.Armor.Category.Label'}}">{{localize (concat "AOA.Armor.Category." (capitalize system.armorCategory))}}</span>
+        <span class="armor-dr" title="{{localize 'AOA.Armor.DR.Label'}} (S/P/B)">{{system.drDisplay}}</span>
+        {{#if system.cumbersome}}
+        <span class="armor-penalty" title="{{localize 'AOA.ArmorProperty.Cumbersome.label'}}">
+          <i class="fas fa-walking"></i>
+        </span>
+        {{/if}}
+        <button type="button" class="equip-btn {{#if isEquipped}}equipped{{/if}}" data-action="toggleEquip">
+          {{#if isEquipped}}{{localize "AOA.Item.Unequip"}}{{else}}{{localize "AOA.Item.Equip"}}{{/if}}
+        </button>
+        <div class="item-controls">
+          <a class="item-control" data-action="editItem" title="{{localize 'AOA.Common.Edit'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          <a class="item-control item-delete" data-action="deleteItem" title="{{localize 'AOA.Common.Delete'}}">
+            <i class="fas fa-trash"></i>
+          </a>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p class="empty-notice">{{localize "AOA.Empty.Armor"}}</p>
+    {{/if}}
+    {{#if isEditMode}}
+    <div class="item-create-row">
+      <a class="item-create" data-action="createItem" data-type="armor">
+        <i class="fas fa-plus"></i> {{localize "AOA.Item.AddArmor"}}
+      </a>
+    </div>
+    {{/if}}
+  </div>
+
+  {{!-- Gear --}}
+  <div class="gear-subsection">
+    <h3>{{localize "AOA.Section.Gear"}}</h3>
+    {{#if gear.length}}
+    <ul class="gear-list inventory-list">
+      {{#each gear}}
+      <li class="gear-item inventory-item" data-item-id="{{id}}">
+        <img class="item-icon" src="{{img}}" alt="{{name}}" width="32" height="32" />
+        <span class="item-name">{{name}}</span>
+        <span class="gear-quantity" title="{{localize 'AOA.Gear.Quantity'}}">x{{system.quantity}}</span>
+        {{#if system.weight}}
+        <span class="gear-weight" title="{{localize 'AOA.Gear.Weight'}}">{{system.weight}} lb</span>
+        {{/if}}
+        <div class="item-controls">
+          <a class="item-control" data-action="editItem" title="{{localize 'AOA.Common.Edit'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          <a class="item-control item-delete" data-action="deleteItem" title="{{localize 'AOA.Common.Delete'}}">
+            <i class="fas fa-trash"></i>
+          </a>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p class="empty-notice">{{localize "AOA.Empty.Gear"}}</p>
+    {{/if}}
+    {{#if isEditMode}}
+    <div class="item-create-row">
+      <a class="item-create" data-action="createItem" data-type="gear">
+        <i class="fas fa-plus"></i> {{localize "AOA.Item.AddGear"}}
+      </a>
+    </div>
+    {{/if}}
+  </div>
+
+  {{!-- Encumbrance Summary --}}
+  <div class="encumbrance-summary">
+    <label>{{localize "AOA.Combat.Encumbrance"}}</label>
+    <span class="encumbrance-value">{{encumbrance}}</span>
+  </div>
+</section>

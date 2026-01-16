@@ -1,0 +1,55 @@
+{{!-- Character Creation Background Roll Chat Card (Two Rolls) --}}
+<div class="wor">
+  <div class="creation-roll-card background">
+    {{!-- Title --}}
+    <div class="creation-roll-title">
+      <h3>{{localize "AOA.CharacterCreation.BackgroundRoll"}}</h3>
+    </div>
+
+    {{!-- Standing Roll --}}
+    <div class="creation-roll-body">
+      <div class="roll-section-label">{{localize "AOA.SocialStanding.Tier"}}</div>
+      <div class="roll-display">
+        <span class="roll-formula">{{standingFormula}}</span>
+        <span class="roll-multiplier">×</span>
+        <span class="roll-total">{{standingTotal}}</span>
+        <span class="roll-arrow">→</span>
+        <span class="roll-result-text">{{standingName}}</span>
+      </div>
+    </div>
+
+    {{!-- Background Roll --}}
+    <div class="creation-roll-body">
+      <div class="roll-section-label">{{localize "AOA.Background.Title"}}</div>
+      <div class="roll-display">
+        <span class="roll-formula">{{backgroundFormula}}</span>
+        <span class="roll-multiplier">×</span>
+        <span class="roll-total">{{backgroundTotal}}</span>
+      </div>
+    </div>
+
+    {{!-- Result --}}
+    {{#if result}}
+    <div class="creation-roll-result">
+      <div class="result-label">{{localize "AOA.Common.Result"}}</div>
+      {{#if result.img}}
+      <div class="result-image">
+        <img src="{{result.img}}" alt="{{result.name}}" />
+      </div>
+      {{/if}}
+      <div class="result-name">{{result.name}}</div>
+      {{#if standingName}}
+      <div class="result-subtitle">{{standingName}}</div>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- LP Award --}}
+    {{#if lpAward}}
+    <div class="creation-roll-lp">
+      <i class="fas fa-coins"></i>
+      <span>+{{lpAward}} {{localize "AOA.CharacterCreation.LP"}}</span>
+    </div>
+    {{/if}}
+  </div>
+</div>

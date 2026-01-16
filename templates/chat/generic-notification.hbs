@@ -1,0 +1,61 @@
+<div class="wor generic-notification {{type}}">
+  {{!-- Header --}}
+  <div class="notification-header">
+    <div class="notification-icon {{iconClass}}">
+      <i class="{{icon}}"></i>
+    </div>
+    <div class="notification-info">
+      <h4 class="notification-title">{{title}}</h4>
+      {{#if actor}}
+      <span class="actor-name">{{actor.name}}</span>
+      {{/if}}
+    </div>
+  </div>
+
+  {{!-- Content --}}
+  <div class="notification-content">
+    {{{content}}}
+  </div>
+
+  {{!-- Item Display (if applicable) --}}
+  {{#if item}}
+  <div class="item-display">
+    {{#if item.img}}
+    <img src="{{item.img}}" alt="{{item.name}}" class="item-image" />
+    {{/if}}
+    <div class="item-info">
+      <h5 class="item-name">{{item.name}}</h5>
+      {{#if item.details}}
+      <span class="item-details">{{item.details}}</span>
+      {{/if}}
+    </div>
+  </div>
+  {{/if}}
+
+  {{!-- Condition Info (for condition notifications) --}}
+  {{#if condition}}
+  <div class="condition-info">
+    <span class="condition-name">{{condition.name}}</span>
+    {{#if condition.description}}
+    <p class="condition-desc">{{condition.description}}</p>
+    {{/if}}
+    {{#if condition.duration}}
+    <span class="condition-duration">
+      <i class="fas fa-clock"></i> {{condition.duration}}
+    </span>
+    {{/if}}
+  </div>
+  {{/if}}
+
+  {{!-- Resource Change Info --}}
+  {{#if resource}}
+  <div class="resource-info">
+    <span class="resource-name">{{resource.name}}:</span>
+    <span class="resource-change {{#if (gt resource.change 0)}}positive{{else}}negative{{/if}}">
+      {{#if (gt resource.change 0)}}+{{/if}}{{resource.change}}
+    </span>
+    <span class="resource-arrow"><i class="fas fa-arrow-right"></i></span>
+    <span class="resource-current">{{resource.current}}</span>
+  </div>
+  {{/if}}
+</div>

@@ -1,0 +1,2116 @@
+<section class="item-details">
+  {{!-- Tab Content Container --}}
+  <div class="tab-content">
+
+    {{!-- ========== WEAPON TABS ========== --}}
+    {{#if isWeapon}}
+    {{!-- Description Tab --}}
+    <div class="tab description {{#if (eq currentTab 'description')}}active{{/if}}" data-group="primary" data-tab="description">
+      <div class="item-content-columns">
+        {{!-- Sidebar (Quantity, Hands, Weight, Value) --}}
+        <div class="item-sidebar">
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Gear.Quantity"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.quantity" value="{{system.quantity}}" min="1" />
+            {{else}}
+            <span class="stat-value">{{system.quantity}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Weapon.Hands"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.hands" value="{{system.hands}}" min="1" max="2" />
+            {{else}}
+            <span class="stat-value">{{system.hands}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Common.Weight"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.weight" value="{{system.weight}}" min="0" step="0.1" />
+            {{else}}
+            <span class="stat-value">{{system.weight}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat price-stat">
+            <span class="stat-label">{{localize "AOA.Common.Price"}}</span>
+            {{#if isEditMode}}
+            <div class="price-inputs">
+              <div class="currency-input sovereigns">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.sovereigns" value="{{system.price.sovereigns}}" min="0" />
+              </div>
+              <div class="currency-input crowns">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.crowns" value="{{system.price.crowns}}" min="0" />
+              </div>
+              <div class="currency-input orin">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.orin" value="{{system.price.orin}}" min="0" />
+              </div>
+            </div>
+            {{else}}
+            <div class="price-display">
+              {{#if system.price.sovereigns}}<span class="currency sovereigns"><i class="fas fa-coins"></i> {{system.price.sovereigns}}</span>{{/if}}
+              {{#if system.price.crowns}}<span class="currency crowns"><i class="fas fa-coins"></i> {{system.price.crowns}}</span>{{/if}}
+              <span class="currency orin"><i class="fas fa-coins"></i> {{system.price.orin}}</span>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+
+        {{!-- Main Content --}}
+        <div class="item-main-content">
+          {{!-- Description --}}
+          <div class="description-section">
+            <div class="description-header">
+              <h3>{{localize "AOA.Common.Description"}}</h3>
+              {{#if editable}}
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+                <i class="fas fa-edit"></i>
+              </a>
+              {{/if}}
+            </div>
+            <div class="description-content">
+              {{{enrichedDescription}}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Details Tab --}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        {{!-- Weapon Details Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Weapon.Details"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Weapon.Category"}}</label>
+                {{#if isEditMode}}
+                <select name="system.category">
+                  {{#each categoryOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.category)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Weapon.CategoryType." (capitalize system.category))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Weapon.ProwessLabel"}}</label>
+                {{#if isEditMode}}
+                <select name="system.prowess">
+                  {{#each prowessOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.prowess)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Derived." (capitalize system.prowess) ".label")}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Weapon.Range"}}</label>
+                {{#if isEditMode}}
+                <select name="system.range.type">
+                  {{#each rangeTypeOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.range.type)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Weapon.RangeType." (capitalize system.range.type))}}</span>
+                {{/if}}
+              </div>
+              {{#if (or (eq system.range.type "ranged") (eq system.range.type "thrown"))}}
+              <div class="form-group">
+                <label>{{localize "AOA.Weapon.RangeShort"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.range.short" value="{{system.range.short}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.range.short}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Weapon.RangeLong"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.range.long" value="{{system.range.long}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.range.long}}</span>
+                {{/if}}
+              </div>
+              {{/if}}
+              <div class="form-group">
+                <label>{{localize "AOA.Weapon.Reliability"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.reliability" value="{{system.reliability}}" min="1" max="6" />
+                {{else}}
+                <span class="field-value">{{system.reliability}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Quality.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.quality.level">
+                  {{#each qualityOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.quality.level)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Quality." (capitalize system.quality.level))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Weapon.Group"}}</label>
+                {{#if isEditMode}}
+                <select name="system.group">
+                  {{#each groupOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.group)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.WeaponGroup." (capitalize system.group))}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Damage & Rarity Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Weapon.Damage"}} & {{localize "AOA.Item.Rarity"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Weapon.BaseDamage"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.baseDamage" value="{{system.baseDamage}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.displayDamage}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleBooleanField" data-field="system.useStrengthBonus" {{#if system.useStrengthBonus}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.useStrengthBonus}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Weapon.UseStrengthBonus"}}
+                </label>
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Item.Rarity"}}</label>
+                {{#if isEditMode}}
+                <select name="system.rarity">
+                  {{#each rarityOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.rarity)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Rarity." (capitalize system.rarity))}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Weapon Properties Fieldset (Checkboxes) --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Weapon.Properties"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid three-col">
+              {{#each weaponProperties}}
+              <div class="form-group checkbox">
+                <label>
+                  {{#if @root.isEditMode}}
+                  <input type="checkbox" data-action="toggleWeaponProperty" data-property="{{key}}" {{#if checked}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if checked}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize label}}
+                </label>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== ARMOR TABS ========== --}}
+    {{#if isArmor}}
+    {{!-- Description Tab --}}
+    <div class="tab description {{#if (eq currentTab 'description')}}active{{/if}}" data-group="primary" data-tab="description">
+      <div class="item-content-columns">
+        {{!-- Sidebar --}}
+        <div class="item-sidebar">
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Gear.Quantity"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.quantity" value="{{system.quantity}}" min="1" />
+            {{else}}
+            <span class="stat-value">{{system.quantity}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Common.Weight"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.weight" value="{{system.weight}}" min="0" step="0.1" />
+            {{else}}
+            <span class="stat-value">{{system.weight}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat price-stat">
+            <span class="stat-label">{{localize "AOA.Common.Price"}}</span>
+            {{#if isEditMode}}
+            <div class="price-inputs">
+              <div class="currency-input sovereigns">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.sovereigns" value="{{system.price.sovereigns}}" min="0" />
+              </div>
+              <div class="currency-input crowns">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.crowns" value="{{system.price.crowns}}" min="0" />
+              </div>
+              <div class="currency-input orin">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.orin" value="{{system.price.orin}}" min="0" />
+              </div>
+            </div>
+            {{else}}
+            <div class="price-display">
+              {{#if system.price.sovereigns}}<span class="currency sovereigns"><i class="fas fa-coins"></i> {{system.price.sovereigns}}</span>{{/if}}
+              {{#if system.price.crowns}}<span class="currency crowns"><i class="fas fa-coins"></i> {{system.price.crowns}}</span>{{/if}}
+              <span class="currency orin"><i class="fas fa-coins"></i> {{system.price.orin}}</span>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+
+        {{!-- Main Content --}}
+        <div class="item-main-content">
+          {{!-- Description --}}
+          <div class="description-section">
+            <div class="description-header">
+              <h3>{{localize "AOA.Common.Description"}}</h3>
+              {{#if editable}}
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+                <i class="fas fa-edit"></i>
+              </a>
+              {{/if}}
+            </div>
+            <div class="description-content">
+              {{{enrichedDescription}}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Details Tab --}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        {{!-- Armor Details Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Armor.Details"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.Category.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.armorCategory">
+                  {{#each armorCategoryOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.armorCategory)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Armor.Category." (capitalize system.armorCategory))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.Group.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.armorGroup">
+                  {{#each currentGroupOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.armorGroup)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Armor.Group." (capitalize system.armorGroup))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Quality.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.quality.level">
+                  {{#each qualityOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.quality.level)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Quality." (capitalize system.quality.level))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Item.Rarity"}}</label>
+                {{#if isEditMode}}
+                <select name="system.rarity">
+                  {{#each rarityOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.rarity)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Rarity." (capitalize system.rarity))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.Encumbering"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.encumbering" value="{{system.encumbering}}" min="0" max="3" />
+                {{else}}
+                <span class="field-value">{{system.encumbering}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.Heat"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.heat" value="{{system.heat}}" min="0" max="5" />
+                {{else}}
+                <span class="field-value">{{system.heat}}</span>
+                {{/if}}
+              </div>
+              {{!-- Shield-specific fields --}}
+              {{#if isShieldCategory}}
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.DefenseBonus"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.shield.defenseBonus" value="{{system.shield.defenseBonus}}" min="0" />
+                {{else}}
+                <span class="field-value">+{{system.shield.defenseBonus}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.BlockDR"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.shield.blockDR" value="{{system.shield.blockDR}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.shield.blockDR}}</span>
+                {{/if}}
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+
+        {{!-- Damage Reduction Fieldset (S/P/B) --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Armor.DR.Label"}} ({{localize "AOA.Armor.DR.Slash"}}/{{localize "AOA.Armor.DR.Pierce"}}/{{localize "AOA.Armor.DR.Blunt"}})</div>
+          <div class="fieldset-content">
+            <div class="form-grid three-col">
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.DR.Slash"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.dr.slash" value="{{system.dr.slash}}" min="0" max="10" />
+                {{else}}
+                <span class="field-value">{{system.dr.slash}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.DR.Pierce"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.dr.pierce" value="{{system.dr.pierce}}" min="0" max="10" />
+                {{else}}
+                <span class="field-value">{{system.dr.pierce}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Armor.DR.Blunt"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.dr.blunt" value="{{system.dr.blunt}}" min="0" max="10" />
+                {{else}}
+                <span class="field-value">{{system.dr.blunt}}</span>
+                {{/if}}
+              </div>
+            </div>
+            {{!-- Display combined DR in view mode --}}
+            {{#unless isEditMode}}
+            <div class="dr-summary">
+              <span class="dr-combined">{{system.drDisplay}}</span>
+            </div>
+            {{/unless}}
+          </div>
+        </div>
+
+        {{!-- Armor Properties Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Armor.Properties"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid three-col">
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleArmorProperty" data-property="flexible" {{#if system.flexible}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.flexible}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Armor.Flexible"}}
+                </label>
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleArmorProperty" data-property="noisy" {{#if system.noisy}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.noisy}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Armor.Noisy"}}
+                </label>
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleArmorProperty" data-property="bulky" {{#if system.bulky}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.bulky}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Armor.Bulky"}}
+                </label>
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleArmorProperty" data-property="cumbersome" {{#if system.cumbersome}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.cumbersome}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Armor.Cumbersome"}}
+                </label>
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleArmorProperty" data-property="insulating" {{#if system.insulating}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.insulating}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Armor.Insulating"}}
+                </label>
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleArmorProperty" data-property="chafing" {{#if system.chafing}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.chafing}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Armor.Chafing"}}
+                </label>
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleArmorProperty" data-property="requiresUnderlayer" {{#if system.requiresUnderlayer}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.requiresUnderlayer}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Armor.RequiresUnderlayer"}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== GEAR TABS ========== --}}
+    {{#if isGear}}
+    {{!-- Description Tab --}}
+    <div class="tab description {{#if (eq currentTab 'description')}}active{{/if}}" data-group="primary" data-tab="description">
+      <div class="item-content-columns">
+        {{!-- Sidebar (Quantity, Weight, Value) --}}
+        <div class="item-sidebar">
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Gear.Quantity"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.quantity" value="{{system.quantity}}" min="0" />
+            {{else}}
+            <span class="stat-value highlight">{{system.quantity}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Common.Weight"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.weight" value="{{system.weight}}" min="0" step="0.1" />
+            {{else}}
+            <span class="stat-value">{{system.weight}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat price-stat">
+            <span class="stat-label">{{localize "AOA.Common.Price"}}</span>
+            {{#if isEditMode}}
+            <div class="price-inputs">
+              <div class="currency-input sovereigns">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.sovereigns" value="{{system.price.sovereigns}}" min="0" />
+              </div>
+              <div class="currency-input crowns">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.crowns" value="{{system.price.crowns}}" min="0" />
+              </div>
+              <div class="currency-input orin">
+                <i class="fas fa-coins"></i>
+                <input type="number" name="system.price.orin" value="{{system.price.orin}}" min="0" />
+              </div>
+            </div>
+            {{else}}
+            <div class="price-display">
+              {{#if system.price.sovereigns}}<span class="currency sovereigns"><i class="fas fa-coins"></i> {{system.price.sovereigns}}</span>{{/if}}
+              {{#if system.price.crowns}}<span class="currency crowns"><i class="fas fa-coins"></i> {{system.price.crowns}}</span>{{/if}}
+              <span class="currency orin"><i class="fas fa-coins"></i> {{system.price.orin}}</span>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+
+        {{!-- Main Content --}}
+        <div class="item-main-content">
+          {{!-- Description --}}
+          <div class="description-section">
+            <div class="description-header">
+              <h3>{{localize "AOA.Common.Description"}}</h3>
+              {{#if editable}}
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+                <i class="fas fa-edit"></i>
+              </a>
+              {{/if}}
+            </div>
+            <div class="description-content">
+              {{{enrichedDescription}}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Details Tab --}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        {{!-- Gear Details Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Gear.Details"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Gear.Group.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.gearGroup">
+                  {{#each gearGroupOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.gearGroup)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Gear.Group." (capitalize system.gearGroup))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Item.Rarity"}}</label>
+                {{#if isEditMode}}
+                <select name="system.rarity">
+                  {{#each rarityOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.rarity)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Rarity." (capitalize system.rarity))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleBooleanField" data-field="system.carried" {{#if system.carried}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.carried}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Gear.Carried"}}
+                </label>
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleBooleanField" data-field="system.equipped" {{#if system.equipped}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.equipped}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Gear.Equipped"}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Consumable Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Gear.Consumable.Label"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleBooleanField" data-field="system.consumable.isConsumable" {{#if system.consumable.isConsumable}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.consumable.isConsumable}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Gear.Consumable.IsConsumable"}}
+                </label>
+              </div>
+              {{#if system.consumable.isConsumable}}
+              <div class="form-group">
+                <label>{{localize "AOA.Gear.Consumable.Uses"}}</label>
+                {{#if isEditMode}}
+                <div style="display: flex; gap: 4px; align-items: center;">
+                  <input type="number" name="system.consumable.uses.current" value="{{system.consumable.uses.current}}" min="0" style="width: 60px;" />
+                  <span>/</span>
+                  <input type="number" name="system.consumable.uses.max" value="{{system.consumable.uses.max}}" min="0" style="width: 60px;" />
+                </div>
+                {{else}}
+                <span class="field-value">{{system.consumable.uses.current}} / {{system.consumable.uses.max}}</span>
+                {{/if}}
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+
+        {{!-- Container Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Gear.Container.Label"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleBooleanField" data-field="system.container.isContainer" {{#if system.container.isContainer}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.container.isContainer}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Gear.Container.IsContainer"}}
+                </label>
+              </div>
+              {{#if system.container.isContainer}}
+              <div class="form-group">
+                <label>{{localize "AOA.Gear.Container.Capacity"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.container.capacity" value="{{system.container.capacity}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.container.capacity}}</span>
+                {{/if}}
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+
+        {{!-- Associated Skill Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Gear.AssociatedSkill"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>{{localize "AOA.Gear.AssociatedSkill"}}</label>
+                {{#if isEditMode}}
+                <input type="text" name="system.associatedSkill" value="{{system.associatedSkill}}" placeholder="{{localize 'AOA.Gear.AssociatedSkillHint'}}" />
+                {{else}}
+                <span class="field-value">{{#if system.associatedSkill}}{{system.associatedSkill}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group full-width">
+                <label>{{localize "AOA.Gear.Formula"}}</label>
+                {{#if isEditMode}}
+                <input type="text" name="system.formula" value="{{system.formula}}" placeholder="{{localize 'AOA.Gear.FormulaHint'}}" />
+                {{else}}
+                <span class="field-value">{{#if system.formula}}{{system.formula}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== SKILL LAYOUT ========== --}}
+    {{#if isSkill}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        <div class="description-section">
+          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <div class="editor-container">
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Skill.Details"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Skill.Attribute"}}</label>
+                {{#if isEditMode}}
+                <select name="system.attribute">
+                  {{#each attributeOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.attribute)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Attribute." (capitalize system.attribute) ".long")}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Skill.Category"}}</label>
+                {{#if isEditMode}}
+                <select name="system.category">
+                  {{#each categoryOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.category)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.SkillCategory." (capitalize system.category))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleBooleanField" data-field="system.requiresWitchsight" {{#if system.requiresWitchsight}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.requiresWitchsight}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.Skill.RequiresWitchsight"}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== TALENT LAYOUT ========== --}}
+    {{#if isTalent}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        <div class="description-section">
+          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <div class="editor-container">
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Talent.Details"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Talent.Type"}}</label>
+                {{#if isEditMode}}
+                <select name="system.talentType">
+                  {{#each talentTypeOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.talentType)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.TalentType." system.talentType)}}</span>
+                {{/if}}
+              </div>
+              {{!-- Archetype field (for archetype and signature talents) --}}
+              {{#if (or (eq system.talentType "archetype") (eq system.talentType "signature"))}}
+              <div class="form-group">
+                <label>{{localize "AOA.Talent.AssociatedArchetype"}}</label>
+                {{#if isEditMode}}
+                <select name="system.archetype">
+                  <option value="">{{localize "AOA.Common.None"}}</option>
+                  <option value="zealot" {{#if (eq system.archetype "zealot")}}selected{{/if}}>{{localize "AOA.Archetype.Zealot"}}</option>
+                  <option value="thaumaturge" {{#if (eq system.archetype "thaumaturge")}}selected{{/if}}>{{localize "AOA.Archetype.Thaumaturge"}}</option>
+                  <option value="warrior" {{#if (eq system.archetype "warrior")}}selected{{/if}}>{{localize "AOA.Archetype.Warrior"}}</option>
+                  <option value="rogue" {{#if (eq system.archetype "rogue")}}selected{{/if}}>{{localize "AOA.Archetype.Rogue"}}</option>
+                  <option value="sage" {{#if (eq system.archetype "sage")}}selected{{/if}}>{{localize "AOA.Archetype.Sage"}}</option>
+                </select>
+                {{else}}
+                <span class="field-value">{{#if system.archetype}}{{localize (concat "AOA.Archetype." (capitalize system.archetype))}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+              {{/if}}
+              {{!-- Subtype/Calling field (for signature talents) --}}
+              {{#if (eq system.talentType "signature")}}
+              <div class="form-group">
+                <label>{{localize "AOA.Talent.AssociatedCalling"}}</label>
+                {{#if isEditMode}}
+                <input type="text" name="system.subtype" value="{{system.subtype}}" placeholder="{{localize 'AOA.Talent.SubtypeHint'}}" />
+                {{else}}
+                <span class="field-value">{{#if system.subtype}}{{system.subtype}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+
+        <div class="effect-section">
+          <h4>{{localize "AOA.Talent.Effect"}} ({{localize "AOA.Common.Rank"}} {{system.rank}})</h4>
+          <div class="editor-container">
+            {{editor enrichedEffect target="system.effect" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== SPELL LAYOUT ========== --}}
+    {{#if isSpell}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-content-columns">
+        <div class="item-sidebar">
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Spell.Rank"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.rank" value="{{system.rank}}" min="1" />
+            {{else}}
+            <span class="stat-value highlight">{{system.rank}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Spell.Cost.Trauma"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.costs.trauma" value="{{system.costs.trauma}}" min="0" />
+            {{else}}
+            <span class="stat-value">{{system.costs.trauma}}</span>
+            {{/if}}
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Spell.Cost.Essence"}}</span>
+            {{#if isEditMode}}
+            <input type="number" name="system.costs.essence" value="{{system.costs.essence}}" min="0" />
+            {{else}}
+            <span class="stat-value magic">{{system.costs.essence}}</span>
+            {{/if}}
+          </div>
+        </div>
+
+        <div class="item-main-content">
+          <div class="description-section">
+            <div class="description-header">
+              <h3>{{localize "AOA.Common.Description"}}</h3>
+              {{#if editable}}
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+                <i class="fas fa-edit"></i>
+              </a>
+              {{/if}}
+            </div>
+            <div class="description-content">
+              {{{enrichedDescription}}}
+            </div>
+          </div>
+
+          <div class="item-fieldset">
+            <div class="fieldset-header">{{localize "AOA.Spell.Details"}}</div>
+            <div class="fieldset-content">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>{{localize "AOA.Spell.Technique"}}</label>
+                  {{#if isEditMode}}
+                  <select name="system.technique">
+                    {{#each techniqueOptions as |label key|}}
+                    <option value="{{key}}" {{#if (eq key ../system.technique)}}selected{{/if}}>{{localize label}}</option>
+                    {{/each}}
+                  </select>
+                  {{else}}
+                  <span class="field-value">{{localize (concat "AOA.Sorcery.Technique." (capitalize system.technique))}}</span>
+                  {{/if}}
+                </div>
+                <div class="form-group">
+                  <label>{{localize "AOA.Spell.Form"}}</label>
+                  {{#if isEditMode}}
+                  <select name="system.form">
+                    {{#each formOptions as |label key|}}
+                    <option value="{{key}}" {{#if (eq key ../system.form)}}selected{{/if}}>{{localize label}}</option>
+                    {{/each}}
+                  </select>
+                  {{else}}
+                  <span class="field-value">{{localize (concat "AOA.Sorcery.Form." (capitalize system.form))}}</span>
+                  {{/if}}
+                </div>
+                <div class="form-group">
+                  <label>{{localize "AOA.Spell.Range"}}</label>
+                  {{#if isEditMode}}
+                  <input type="text" name="system.range" value="{{system.range}}" />
+                  {{else}}
+                  <span class="field-value">{{system.range}}</span>
+                  {{/if}}
+                </div>
+                <div class="form-group">
+                  <label>{{localize "AOA.Spell.Duration"}}</label>
+                  {{#if isEditMode}}
+                  <input type="text" name="system.duration" value="{{system.duration}}" />
+                  {{else}}
+                  <span class="field-value">{{system.duration}}</span>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== RITUAL LAYOUT ========== --}}
+    {{#if isRitual}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        <div class="description-section">
+          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <div class="editor-container">
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Ritual.Details"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Ritual.Path"}}</label>
+                {{#if isEditMode}}
+                <select name="system.path">
+                  {{#each pathOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.path)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Ritual.Path." (capitalize system.path))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Ritual.Complexity"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.complexity" value="{{system.complexity}}" min="1" />
+                {{else}}
+                <span class="field-value">{{system.complexity}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Ritual.Time"}}</label>
+                {{#if isEditMode}}
+                <div class="time-input">
+                  <input type="number" name="system.time.value" value="{{system.time.value}}" min="1" />
+                  <input type="text" name="system.time.unit" value="{{system.time.unit}}" placeholder="minutes/hours" />
+                </div>
+                {{else}}
+                <span class="field-value">{{system.timeSummary}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Ritual.Participants"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.participants.minimum" value="{{system.participants.minimum}}" min="1" />
+                {{else}}
+                <span class="field-value">{{system.participantSummary}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group full-width">
+                <label>{{localize "AOA.Ritual.Components"}}</label>
+                {{#if isEditMode}}
+                <textarea name="system.components">{{system.components}}</textarea>
+                {{else}}
+                <span class="field-value">{{system.components}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== LINEAGE LAYOUT ========== --}}
+    {{#if isLineage}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        <div class="description-section">
+          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <div class="editor-container">
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Lineage.AttributeModifiers"}}</div>
+          <div class="fieldset-content">
+            <div class="attribute-modifiers">
+              {{#each system.attributeModifiers as |value attr|}}
+              {{#if value}}
+              <span class="modifier">{{localize (concat "AOA.Attribute." (capitalize attr) ".abbr")}}: {{signedNumber value}}</span>
+              {{/if}}
+              {{/each}}
+            </div>
+            {{#if system.startingWitchsight}}
+            <div class="form-group">
+              <label>{{localize "AOA.Lineage.StartingWitchsight"}}</label>
+              <span class="field-value">{{system.startingWitchsight}}</span>
+            </div>
+            {{/if}}
+            {{#if system.bonusSkillRanks}}
+            <div class="form-group">
+              <label>{{localize "AOA.Lineage.BonusSkillRanks"}}</label>
+              <span class="field-value">+{{system.bonusSkillRanks}}</span>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== BACKGROUND TABS ========== --}}
+    {{#if isBackground}}
+    {{!-- Description Tab --}}
+    <div class="tab description {{#if (eq currentTab 'description')}}active{{/if}}" data-group="primary" data-tab="description">
+      <div class="item-content-columns">
+        {{!-- Sidebar --}}
+        <div class="item-sidebar">
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Background.EconomicTier"}}</span>
+            <span class="stat-value">{{localize (concat "AOA.EconomicTier." (capitalize system.economicTier))}}</span>
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Background.StartingWealth.Label"}}</span>
+            <span class="stat-value">{{system.startingWealth.min}}-{{system.startingWealth.max}}</span>
+            <span class="stat-unit">{{localize (concat "AOA.Wealth." (capitalize system.startingWealth.currency))}}</span>
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Background.FreeSkillRanks"}}</span>
+            <span class="stat-value highlight">{{system.freeSkillRanks}}</span>
+          </div>
+          {{#if system.lpAward}}
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.Background.LPAward"}}</span>
+            <span class="stat-value bonus">+{{system.lpAward}}</span>
+          </div>
+          {{/if}}
+        </div>
+
+        {{!-- Main Content --}}
+        <div class="item-main-content">
+          {{!-- Description --}}
+          <div class="description-section">
+            <div class="description-header">
+              <h3>{{localize "AOA.Common.Description"}}</h3>
+              {{#if editable}}
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+                <i class="fas fa-edit"></i>
+              </a>
+              {{/if}}
+            </div>
+            <div class="description-content">
+              {{{enrichedDescription}}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Details Tab --}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        {{!-- Background Details Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Background.Details"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Background.EconomicTier"}}</label>
+                {{#if isEditMode}}
+                <select name="system.economicTier">
+                  {{#each tierOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.economicTier)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.EconomicTier." (capitalize system.economicTier))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Background.FreeSkillRanks"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.freeSkillRanks" value="{{system.freeSkillRanks}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.freeSkillRanks}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Background.LPAward"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.lpAward" value="{{system.lpAward}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.lpAward}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Starting Wealth Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Background.StartingWealth.Label"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Background.StartingWealth.Min"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.startingWealth.min" value="{{system.startingWealth.min}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.startingWealth.min}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Background.StartingWealth.Max"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.startingWealth.max" value="{{system.startingWealth.max}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.startingWealth.max}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Background.StartingWealth.Currency"}}</label>
+                {{#if isEditMode}}
+                <select name="system.startingWealth.currency">
+                  {{#each currencyOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.startingWealth.currency)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.Wealth." (capitalize system.startingWealth.currency))}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Social Standing Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Background.SocialStanding"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Background.SocialStanding"}}</label>
+                {{#if isEditMode}}
+                <select name="system.socialStanding">
+                  {{#each socialStandingOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.socialStanding)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.SocialStanding." (capitalize system.socialStanding))}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Contact Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Background.Contact"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>{{localize "AOA.Background.Contact"}}</label>
+                {{#if isEditMode}}
+                <input type="text" name="system.contact" value="{{system.contact}}" placeholder="{{localize 'AOA.Background.ContactPlaceholder'}}" />
+                {{else}}
+                <span class="field-value">{{#if system.contact}}{{system.contact}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== ARCHETYPE LAYOUT ========== --}}
+    {{#if isArchetype}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        <div class="description-section">
+          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <div class="editor-container">
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Archetype.AttributeBonuses"}}</div>
+          <div class="fieldset-content">
+            <div class="attribute-bonuses">
+              {{#each system.attributeBonuses as |value attr|}}
+              {{#if value}}
+              <span class="bonus">{{localize (concat "AOA.Attribute." (capitalize attr) ".abbr")}}: {{signedNumber value}}</span>
+              {{/if}}
+              {{/each}}
+            </div>
+          </div>
+        </div>
+
+        {{#if system.subtypes.length}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Archetype.Subtypes"}}</div>
+          <div class="fieldset-content">
+            <div class="subtypes">
+              <ul>
+                {{#each system.subtypes}}
+                <li>
+                  <strong>{{this.name}}</strong>
+                  {{#if this.description}}<p class="subtype-desc">{{{this.description}}}</p>{{/if}}
+                </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== CALLING LAYOUT ========== --}}
+    {{#if isCalling}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        <div class="description-section">
+          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <div class="editor-container">
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+
+        {{!-- Parent Archetype --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Calling.Archetype"}}</div>
+          <div class="fieldset-content">
+            {{#if isEditMode}}
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Calling.ParentArchetype"}}</label>
+                <select name="system.archetype">
+                  <option value="cleric" {{#if (eq system.archetype "cleric")}}selected{{/if}}>{{localize "AOA.Archetype.Cleric"}}</option>
+                  <option value="enchanter" {{#if (eq system.archetype "enchanter")}}selected{{/if}}>{{localize "AOA.Archetype.Enchanter"}}</option>
+                  <option value="fighter" {{#if (eq system.archetype "fighter")}}selected{{/if}}>{{localize "AOA.Archetype.Fighter"}}</option>
+                  <option value="rogue" {{#if (eq system.archetype "rogue")}}selected{{/if}}>{{localize "AOA.Archetype.Rogue"}}</option>
+                  <option value="sage" {{#if (eq system.archetype "sage")}}selected{{/if}}>{{localize "AOA.Archetype.Sage"}}</option>
+                </select>
+              </div>
+            </div>
+            {{else}}
+            <p class="archetype-display">{{localize (concat "AOA.Archetype." (capitalize system.archetype))}}</p>
+            {{/if}}
+          </div>
+        </div>
+
+        {{!-- Focus --}}
+        {{#if (or system.focus isEditMode)}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Calling.Focus"}}</div>
+          <div class="fieldset-content">
+            {{#if isEditMode}}
+            <input type="text" name="system.focus" value="{{system.focus}}" placeholder="{{localize 'AOA.Calling.FocusPlaceholder'}}" />
+            {{else}}
+            <p>{{system.focus}}</p>
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Signature Talents --}}
+        {{#if system.signatureTalents.length}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Calling.SignatureTalents"}}</div>
+          <div class="fieldset-content">
+            <ul class="signature-talents-list">
+              {{#each system.signatureTalents}}
+              <li class="talent-item">
+                <strong class="talent-name">{{this.name}}</strong>
+                {{#if this.description}}<p class="talent-description">{{{this.description}}}</p>{{/if}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Features --}}
+        {{#if system.features.length}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Calling.Features"}}</div>
+          <div class="fieldset-content">
+            <ul class="features-list">
+              {{#each system.features}}
+              <li class="feature-item">
+                <strong class="feature-name">{{this.name}}</strong>
+                {{#if this.description}}<p class="feature-description">{{{this.description}}}</p>{{/if}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Suggested Skills --}}
+        {{#if system.suggestedSkills.length}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Calling.SuggestedSkills"}}</div>
+          <div class="fieldset-content">
+            <div class="skill-tags">
+              {{#each system.suggestedSkills}}
+              <span class="skill-tag">{{this}}</span>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Starting Equipment --}}
+        {{#if system.startingEquipment.length}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Calling.StartingEquipment"}}</div>
+          <div class="fieldset-content">
+            <ul class="equipment-list">
+              {{#each system.startingEquipment}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Flavor Text --}}
+        {{#if (or system.flavorText isEditMode)}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Calling.FlavorText"}}</div>
+          <div class="fieldset-content">
+            {{#if isEditMode}}
+            <div class="editor-container">
+              {{editor system.flavorText target="system.flavorText" button=true owner=owner editable=editable engine="prosemirror"}}
+            </div>
+            {{else}}
+            <div class="flavor-text prose">{{{system.flavorText}}}</div>
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== PATHWAY LAYOUT ========== --}}
+    {{#if isPathway}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        <div class="description-section">
+          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <div class="editor-container">
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+
+        {{!-- Duration --}}
+        {{#if (or system.duration.years system.duration.description)}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Pathway.Duration"}}</div>
+          <div class="fieldset-content">
+            {{#if isEditMode}}
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Common.Years"}}</label>
+                <input type="number" name="system.duration.years" value="{{system.duration.years}}" min="0" />
+              </div>
+              <div class="form-group full-width">
+                <label>{{localize "AOA.Common.Description"}}</label>
+                <input type="text" name="system.duration.description" value="{{system.duration.description}}" />
+              </div>
+            </div>
+            {{else}}
+            <p>{{system.duration.years}} {{localize "AOA.Common.Years"}}{{#if system.duration.description}} - {{system.duration.description}}{{/if}}</p>
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Skill Grants --}}
+        {{#if system.skillGrants.length}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Pathway.SkillGrants"}}</div>
+          <div class="fieldset-content">
+            <ul class="pathway-skill-grants">
+              {{#each system.skillGrants}}
+              <li class="skill-grant-row">
+                <span class="skill-name">{{this.skill}}</span>
+                <span class="skill-rank">+{{this.rank}}</span>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Contact --}}
+        {{#if (or system.contact.type system.contact.description)}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Pathway.Contact"}}</div>
+          <div class="fieldset-content">
+            {{#if isEditMode}}
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Pathway.Contact.Type"}}</label>
+                <input type="text" name="system.contact.type" value="{{system.contact.type}}" />
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Pathway.Contact.Relationship"}}</label>
+                <select name="system.contact.relationship">
+                  <option value="professional" {{#if (eq system.contact.relationship "professional")}}selected{{/if}}>Professional</option>
+                  <option value="mentor" {{#if (eq system.contact.relationship "mentor")}}selected{{/if}}>Mentor</option>
+                  <option value="peer" {{#if (eq system.contact.relationship "peer")}}selected{{/if}}>Peer</option>
+                  <option value="rival" {{#if (eq system.contact.relationship "rival")}}selected{{/if}}>Rival</option>
+                  <option value="family" {{#if (eq system.contact.relationship "family")}}selected{{/if}}>Family</option>
+                  <option value="romantic" {{#if (eq system.contact.relationship "romantic")}}selected{{/if}}>Romantic</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label>{{localize "AOA.Common.Description"}}</label>
+                <textarea name="system.contact.description">{{system.contact.description}}</textarea>
+              </div>
+            </div>
+            {{else}}
+            <p>
+              {{#if system.contact.type}}<strong class="contact-type">{{system.contact.type}}</strong>{{/if}}
+              {{#if system.contact.description}} - {{system.contact.description}}{{/if}}
+              {{#if system.contact.relationship}}<em>({{system.contact.relationship}})</em>{{/if}}
+            </p>
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Narrative Hooks --}}
+        {{#if system.narrativeHooks.length}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Pathway.NarrativeHooks"}}</div>
+          <div class="fieldset-content">
+            <ul class="narrative-hooks-list">
+              {{#each system.narrativeHooks}}
+              <li class="hook-item">
+                <strong class="hook-name">{{this.name}}</strong>
+                {{#if this.description}}<p class="hook-description">{{{this.description}}}</p>{{/if}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Resources --}}
+        {{#if (or system.resources.wealthModifier system.resources.equipment.length system.resources.privileges.length)}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Pathway.Resources"}}</div>
+          <div class="fieldset-content">
+            {{#if system.resources.wealthModifier}}
+            <p><strong>{{localize "AOA.Pathway.WealthModifier"}}:</strong> {{signedNumber system.resources.wealthModifier}}</p>
+            {{/if}}
+            {{#if system.resources.equipment.length}}
+            <div class="resource-subsection">
+              <strong>{{localize "AOA.Pathway.Equipment"}}:</strong>
+              <ul>
+                {{#each system.resources.equipment}}
+                <li>{{this}}</li>
+                {{/each}}
+              </ul>
+            </div>
+            {{/if}}
+            {{#if system.resources.privileges.length}}
+            <div class="resource-subsection">
+              <strong>{{localize "AOA.Pathway.Privileges"}}:</strong>
+              <ul>
+                {{#each system.resources.privileges}}
+                <li>{{this}}</li>
+                {{/each}}
+              </ul>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Associated Archetypes --}}
+        {{#if system.associatedArchetypes.length}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.Pathway.AssociatedArchetypes"}}</div>
+          <div class="fieldset-content">
+            <div class="archetype-tags">
+              {{#each system.associatedArchetypes}}
+              <span class="archetype-tag">{{this}}</span>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- LP Award (for edit mode) --}}
+        {{#if isEditMode}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.LP.label"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.Pathway.LPAward"}}</label>
+                <input type="number" name="system.lpAward" value="{{system.lpAward}}" min="0" />
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.Pathway.RollValue"}}</label>
+                <input type="number" name="system.rollValue" value="{{system.rollValue}}" min="1" max="6" />
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== LIFE EVENT LAYOUT ========== --}}
+    {{#if isLifeEvent}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        <div class="description-section">
+          <h3>{{localize "AOA.Common.Description"}}</h3>
+          <div class="editor-container">
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable engine="prosemirror"}}
+          </div>
+        </div>
+
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.LifeEvent.Details"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.LifeEvent.Suit.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.suit">
+                  {{#each suitOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.suit)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (concat "AOA.LifeEvent.Suit." (capitalize system.suit))}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.LifeEvent.Number"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.number" value="{{system.number}}" min="1" max="40" />
+                {{else}}
+                <span class="field-value">{{system.number}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.LifeEvent.LPValue"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.lpValue" value="{{system.lpValue}}" min="0" />
+                {{else}}
+                <span class="field-value">{{system.lpValue}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Benefits Section --}}
+        {{#if system.benefits.length}}
+        <div class="item-fieldset benefits-section">
+          <div class="fieldset-header"><i class="fas fa-plus-circle"></i> {{localize "AOA.LifeEvent.Benefits"}}</div>
+          <div class="fieldset-content">
+            <ul class="benefits-list">
+              {{#each system.benefits}}
+              <li class="benefit-item benefit-{{type}}">
+                <span class="benefit-type">{{localize (concat "AOA.LifeEvent.BenefitType." (capitalize type))}}</span>
+                {{#if target}}<span class="benefit-target">{{target}}</span>{{/if}}
+                {{#if value}}<span class="benefit-value">+{{value}}</span>{{/if}}
+                {{#if description}}<p class="benefit-description">{{description}}</p>{{/if}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Complications Section --}}
+        {{#if system.complications.length}}
+        <div class="item-fieldset complications-section">
+          <div class="fieldset-header"><i class="fas fa-exclamation-triangle"></i> {{localize "AOA.LifeEvent.Complications"}}</div>
+          <div class="fieldset-content">
+            <ul class="complications-list">
+              {{#each system.complications}}
+              <li class="complication-item complication-{{type}}">
+                <span class="complication-type">{{localize (concat "AOA.LifeEvent.ComplicationType." (capitalize type))}}</span>
+                {{#if target}}<span class="complication-target">{{target}}</span>{{/if}}
+                {{#if severity}}<span class="complication-severity severity-{{severity}}">{{localize (concat "AOA.Severity." (capitalize severity))}}</span>{{/if}}
+                {{#if description}}<p class="complication-description">{{description}}</p>{{/if}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{/if}}
+
+        {{!-- Empty State --}}
+        {{#unless (or system.benefits.length system.complications.length)}}
+        <div class="item-fieldset empty-section">
+          <div class="fieldset-content">
+            <p class="empty-notice">{{localize "AOA.Empty.LifeEventEffects"}}</p>
+          </div>
+        </div>
+        {{/unless}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== NPC TRAIT TABS ========== --}}
+    {{#if isNPCTrait}}
+    {{!-- Description Tab --}}
+    <div class="tab description {{#if (eq currentTab 'description')}}active{{/if}}" data-group="primary" data-tab="description">
+      <div class="item-content-columns">
+        {{!-- Sidebar --}}
+        <div class="item-sidebar">
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.NPCTrait.Cost"}}</span>
+            <span class="stat-value highlight">{{system.cost}}</span>
+          </div>
+          <div class="sidebar-stat">
+            <span class="stat-label">{{localize "AOA.NPCTrait.TierRange"}}</span>
+            <span class="stat-value">{{system.tierRequirement.min}}-{{system.tierRequirement.max}}</span>
+          </div>
+        </div>
+
+        {{!-- Main Content --}}
+        <div class="item-main-content">
+          {{!-- Description --}}
+          <div class="description-section">
+            <div class="description-header">
+              <h3>{{localize "AOA.Common.Description"}}</h3>
+              {{#if editable}}
+              <a class="editor-edit-btn" data-action="editDescription" data-field="system.description" title="{{localize 'AOA.Common.Edit'}}">
+                <i class="fas fa-edit"></i>
+              </a>
+              {{/if}}
+            </div>
+            <div class="description-content">
+              {{{enrichedDescription}}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Details Tab --}}
+    <div class="tab details {{#if (eq currentTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+      <div class="item-main-content" style="padding: 16px;">
+        {{!-- Classification Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.NPCTrait.Classification"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.NPCTrait.Category.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.category">
+                  {{#each categoryOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.category)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{localize (lookup categoryOptions system.category)}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.NPCTrait.Cost"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.cost" value="{{system.cost}}" min="0" max="10" />
+                {{else}}
+                <span class="field-value">{{system.cost}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Tier Requirement Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.NPCTrait.TierRequirement"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.NPCTrait.TierMin"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.tierRequirement.min" value="{{system.tierRequirement.min}}" min="0" max="6" />
+                {{else}}
+                <span class="field-value">{{system.tierRequirement.min}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.NPCTrait.TierMax"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.tierRequirement.max" value="{{system.tierRequirement.max}}" min="0" max="6" />
+                {{else}}
+                <span class="field-value">{{system.tierRequirement.max}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Restrictions Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.NPCTrait.Restrictions"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>{{localize "AOA.NPCTrait.AllowedClasses"}}</label>
+                {{#if isEditMode}}
+                <div class="checkbox-group">
+                  {{#each classOptions as |label key|}}
+                  <label class="checkbox-item">
+                    <input type="checkbox" data-action="toggleAllowedClass" data-class="{{key}}" {{#if (includes ../system.allowedClasses key)}}checked{{/if}} />
+                    {{localize label}}
+                  </label>
+                  {{/each}}
+                </div>
+                {{else}}
+                <span class="field-value">
+                  {{#if system.allowedClasses.length}}
+                    {{#each system.allowedClasses}}{{localize (lookup ../classOptions this)}}{{#unless @last}}, {{/unless}}{{/each}}
+                  {{else}}
+                    {{localize "AOA.Common.All"}}
+                  {{/if}}
+                </span>
+                {{/if}}
+              </div>
+              <div class="form-group full-width">
+                <label>{{localize "AOA.NPCTrait.TypeSpecific"}}</label>
+                {{#if isEditMode}}
+                <input type="text" name="system.typeSpecific" value="{{join system.typeSpecific ', '}}" placeholder="{{localize 'AOA.NPCTrait.TypeSpecificHint'}}" />
+                {{else}}
+                <span class="field-value">
+                  {{#if system.typeSpecific.length}}
+                    {{join system.typeSpecific ", "}}
+                  {{else}}
+                    —
+                  {{/if}}
+                </span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- Mechanics Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.NPCTrait.Mechanics"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>{{localize "AOA.NPCTrait.Trigger.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.mechanics.trigger">
+                  {{#each triggerOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.mechanics.trigger)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{#if system.mechanics.trigger}}{{localize (lookup triggerOptions system.mechanics.trigger)}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.NPCTrait.Cooldown.Label"}}</label>
+                {{#if isEditMode}}
+                <select name="system.mechanics.cooldown">
+                  {{#each cooldownOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.mechanics.cooldown)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{#if system.mechanics.cooldown}}{{localize (lookup cooldownOptions system.mechanics.cooldown)}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleBooleanField" data-field="system.mechanics.passive" {{#if system.mechanics.passive}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.mechanics.passive}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.NPCTrait.Passive"}}
+                </label>
+              </div>
+            </div>
+
+            {{!-- Special Abilities (text list) --}}
+            {{#if (or system.mechanics.special.length isEditMode)}}
+            <div class="form-group full-width">
+              <label>{{localize "AOA.NPCTrait.Special"}}</label>
+              {{#if isEditMode}}
+              <textarea name="system.mechanics.special" placeholder="{{localize 'AOA.NPCTrait.SpecialHint'}}">{{join system.mechanics.special "
+"}}</textarea>
+              {{else}}
+              <ul class="special-list">
+                {{#each system.mechanics.special}}
+                <li>{{this}}</li>
+                {{/each}}
+              </ul>
+              {{/if}}
+            </div>
+            {{/if}}
+
+            {{!-- Bonuses Array Editor --}}
+            <div class="form-group full-width array-editor">
+              <div class="array-header">
+                <label>{{localize "AOA.NPCTrait.Bonuses.Label"}}</label>
+                {{#if isEditMode}}
+                <a class="array-add-btn" data-action="addBonus" title="{{localize 'AOA.Common.Add'}}">
+                  <i class="fas fa-plus"></i>
+                </a>
+                {{/if}}
+              </div>
+              {{#if system.mechanics.bonuses.length}}
+              <div class="array-list bonuses-list">
+                {{#each system.mechanics.bonuses}}
+                <div class="array-item bonus-item" data-index="{{@index}}">
+                  {{#if ../isEditMode}}
+                  <select name="system.mechanics.bonuses.{{@index}}.type" class="bonus-type">
+                    <option value="attack" {{#if (eq type "attack")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Attack"}}</option>
+                    <option value="damage" {{#if (eq type "damage")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Damage"}}</option>
+                    <option value="defense" {{#if (eq type "defense")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Defense"}}</option>
+                    <option value="pool" {{#if (eq type "pool")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Pool"}}</option>
+                    <option value="other" {{#if (eq type "other")}}selected{{/if}}>{{localize "AOA.NPCTrait.Bonuses.Type.Other"}}</option>
+                  </select>
+                  <input type="number" name="system.mechanics.bonuses.{{@index}}.value" value="{{value}}" class="bonus-value" placeholder="±" />
+                  <input type="text" name="system.mechanics.bonuses.{{@index}}.condition" value="{{condition}}" class="bonus-condition" placeholder="{{localize 'AOA.NPCTrait.Bonuses.ConditionHint'}}" />
+                  <a class="array-remove-btn" data-action="removeBonus" data-index="{{@index}}" title="{{localize 'AOA.Common.Delete'}}">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                  {{else}}
+                  <span class="bonus-display">
+                    {{#if (gt value 0)}}+{{/if}}{{value}} {{localize (concat "AOA.NPCTrait.Bonuses.Type." (capitalize type))}}{{#if condition}} ({{condition}}){{/if}}
+                  </span>
+                  {{/if}}
+                </div>
+                {{/each}}
+              </div>
+              {{else}}
+              {{#unless isEditMode}}
+              <span class="field-value empty">—</span>
+              {{/unless}}
+              {{/if}}
+            </div>
+
+            {{!-- Applied Conditions Array Editor --}}
+            <div class="form-group full-width array-editor">
+              <div class="array-header">
+                <label>{{localize "AOA.NPCTrait.AppliedConditions.Label"}}</label>
+                {{#if isEditMode}}
+                <a class="array-add-btn" data-action="addAppliedCondition" title="{{localize 'AOA.Common.Add'}}">
+                  <i class="fas fa-plus"></i>
+                </a>
+                {{/if}}
+              </div>
+              {{#if system.mechanics.appliedConditions.length}}
+              <div class="array-list conditions-list">
+                {{#each system.mechanics.appliedConditions}}
+                <div class="array-item condition-item" data-index="{{@index}}">
+                  {{#if ../isEditMode}}
+                  <select name="system.mechanics.appliedConditions.{{@index}}.condition" class="condition-select">
+                    {{#each ../conditionOptions as |label key|}}
+                    <option value="{{key}}" {{#if (eq key ../condition)}}selected{{/if}}>{{localize label}}</option>
+                    {{/each}}
+                  </select>
+                  <input type="text" name="system.mechanics.appliedConditions.{{@index}}.duration" value="{{duration}}" class="condition-duration" placeholder="{{localize 'AOA.NPCTrait.AppliedConditions.DurationHint'}}" />
+                  <input type="number" name="system.mechanics.appliedConditions.{{@index}}.hitThreshold" value="{{hitThreshold}}" class="condition-threshold" placeholder="{{localize 'AOA.NPCTrait.AppliedConditions.ThresholdHint'}}" min="0" />
+                  <a class="array-remove-btn" data-action="removeAppliedCondition" data-index="{{@index}}" title="{{localize 'AOA.Common.Delete'}}">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                  {{else}}
+                  <span class="condition-display">
+                    {{localize (lookup ../conditionOptions condition)}}{{#if duration}} ({{duration}}){{/if}}{{#if hitThreshold}} @ {{hitThreshold}}+ hits{{/if}}
+                  </span>
+                  {{/if}}
+                </div>
+                {{/each}}
+              </div>
+              {{else}}
+              {{#unless isEditMode}}
+              <span class="field-value empty">—</span>
+              {{/unless}}
+              {{/if}}
+            </div>
+          </div>
+        </div>
+
+        {{!-- Roll Fieldset --}}
+        <div class="item-fieldset">
+          <div class="fieldset-header">{{localize "AOA.NPCTrait.Roll.Label"}}</div>
+          <div class="fieldset-content">
+            <div class="form-grid">
+              <div class="form-group checkbox">
+                <label>
+                  {{#if isEditMode}}
+                  <input type="checkbox" data-action="toggleBooleanField" data-field="system.roll.hasRoll" {{#if system.roll.hasRoll}}checked{{/if}} />
+                  {{else}}
+                  <i class="fas {{#if system.roll.hasRoll}}fa-check-square{{else}}fa-square{{/if}}"></i>
+                  {{/if}}
+                  {{localize "AOA.NPCTrait.Roll.HasRoll"}}
+                </label>
+              </div>
+              {{#if system.roll.hasRoll}}
+              <div class="form-group">
+                <label>{{localize "AOA.NPCTrait.Roll.Pool"}}</label>
+                {{#if isEditMode}}
+                <input type="text" name="system.roll.pool" value="{{system.roll.pool}}" placeholder="e.g., 5" />
+                {{else}}
+                <span class="field-value">{{#if system.roll.pool}}{{system.roll.pool}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+              <div class="form-group">
+                <label>{{localize "AOA.NPCTrait.Roll.Difficulty"}}</label>
+                {{#if isEditMode}}
+                <select name="system.roll.difficulty">
+                  {{#each difficultyOptions as |label key|}}
+                  <option value="{{key}}" {{#if (eq key ../system.roll.difficulty)}}selected{{/if}}>{{localize label}}</option>
+                  {{/each}}
+                </select>
+                {{else}}
+                <span class="field-value">{{#if system.roll.difficulty}}{{localize (lookup difficultyOptions system.roll.difficulty)}}{{else}}—{{/if}}</span>
+                {{/if}}
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- Effects Tab (for all item types) --}}
+    <div class="tab effects {{#if (eq currentTab 'effects')}}active{{/if}}" data-group="primary" data-tab="effects">
+      <div class="effects-section">
+        <div class="effects-header">
+          <h3>{{localize "AOA.Effect.ActiveEffects"}}</h3>
+          {{#if isEditMode}}
+          <a class="effect-control" data-action="createEffect">
+            <i class="fas fa-plus"></i> {{localize "AOA.Common.Add"}}
+          </a>
+          {{/if}}
+        </div>
+
+        {{!-- Passive Effects --}}
+        {{#if effects.passive.length}}
+        <div class="effect-category passive">
+          <h4>{{localize "AOA.Effect.Passive"}}</h4>
+          <ul class="effect-list">
+            {{#each effects.passive}}
+            <li class="effect-item" data-effect-id="{{id}}">
+              <img src="{{img}}" alt="{{name}}" />
+              <span class="effect-name">{{name}}</span>
+              <div class="effect-controls">
+                <a class="effect-control" data-action="toggleEffect" title="{{localize 'AOA.Effect.Toggle'}}">
+                  <i class="fas fa-power-off"></i>
+                </a>
+                <a class="effect-control" data-action="editEffect" title="{{localize 'AOA.Common.Edit'}}">
+                  <i class="fas fa-edit"></i>
+                </a>
+                {{#if @root.isEditMode}}
+                <a class="effect-control" data-action="deleteEffect" title="{{localize 'AOA.Common.Delete'}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+                {{/if}}
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{!-- Temporary Effects --}}
+        {{#if effects.temporary.length}}
+        <div class="effect-category temporary">
+          <h4>{{localize "AOA.Effect.Temporary"}}</h4>
+          <ul class="effect-list">
+            {{#each effects.temporary}}
+            <li class="effect-item" data-effect-id="{{id}}">
+              <img src="{{img}}" alt="{{name}}" />
+              <span class="effect-name">{{name}}</span>
+              <div class="effect-controls">
+                <a class="effect-control" data-action="toggleEffect" title="{{localize 'AOA.Effect.Toggle'}}">
+                  <i class="fas fa-power-off"></i>
+                </a>
+                <a class="effect-control" data-action="editEffect" title="{{localize 'AOA.Common.Edit'}}">
+                  <i class="fas fa-edit"></i>
+                </a>
+                {{#if @root.isEditMode}}
+                <a class="effect-control" data-action="deleteEffect" title="{{localize 'AOA.Common.Delete'}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+                {{/if}}
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{!-- Inactive Effects --}}
+        {{#if effects.inactive.length}}
+        <div class="effect-category inactive">
+          <h4>{{localize "AOA.Effect.Inactive"}}</h4>
+          <ul class="effect-list">
+            {{#each effects.inactive}}
+            <li class="effect-item disabled" data-effect-id="{{id}}">
+              <img src="{{img}}" alt="{{name}}" />
+              <span class="effect-name">{{name}}</span>
+              <div class="effect-controls">
+                <a class="effect-control" data-action="toggleEffect" title="{{localize 'AOA.Effect.Toggle'}}">
+                  <i class="fas fa-power-off"></i>
+                </a>
+                <a class="effect-control" data-action="editEffect" title="{{localize 'AOA.Common.Edit'}}">
+                  <i class="fas fa-edit"></i>
+                </a>
+                {{#if @root.isEditMode}}
+                <a class="effect-control" data-action="deleteEffect" title="{{localize 'AOA.Common.Delete'}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+                {{/if}}
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{!-- No Effects --}}
+        {{#unless (or effects.passive.length effects.temporary.length effects.inactive.length)}}
+        <p class="empty-notice">{{localize "AOA.Empty.Effects"}}</p>
+        {{/unless}}
+      </div>
+    </div>
+  </div>
+</section>

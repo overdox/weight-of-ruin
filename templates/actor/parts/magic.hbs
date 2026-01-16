@@ -1,0 +1,175 @@
+<section class="magic-section">
+  {{!-- Witchsight Check --}}
+  {{#unless system.witchsight}}
+  <div class="no-witchsight">
+    <p>{{localize "AOA.Magic.NoWitchsight"}}</p>
+  </div>
+  {{else}}
+
+  {{!-- Essence Tracker --}}
+  <div class="essence-section">
+    <h3>{{localize "AOA.Section.Essence"}}</h3>
+    <div class="essence-tracker {{#if system.essenceCritical}}critical{{/if}} {{#if system.isLeng}}leng{{/if}}">
+      <div class="essence-pips">
+        {{#times 10}}
+        <span class="essence-pip {{#if (lte this @root.system.essence.current)}}filled{{/if}} clickable"
+              data-action="setEssence" data-essence="{{this}}" title="{{localize 'AOA.Essence.ClickToSet'}} {{this}}"></span>
+        {{/times}}
+      </div>
+      <span class="essence-value">{{system.essence.current}} / {{system.essence.max}}</span>
+      <div class="essence-controls">
+        <button type="button" data-action="adjustEssence" data-adjust="-1" title="{{localize 'AOA.Essence.Decrease'}}">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button type="button" data-action="adjustEssence" data-adjust="1" title="{{localize 'AOA.Essence.Increase'}}">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+      {{#if system.isLeng}}
+      <div class="leng-warning">
+        <i class="fas fa-skull"></i>
+        {{localize "AOA.Essence.LengTransformation"}}
+      </div>
+      {{else if system.essenceCritical}}
+      <div class="essence-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        {{localize "AOA.Essence.Critical"}}
+      </div>
+      {{/if}}
+    </div>
+
+    {{!-- Corruption Signs --}}
+    {{#if system.essence.corruptionSigns.length}}
+    <div class="corruption-signs">
+      <h4>{{localize "AOA.Essence.CorruptionSigns"}}</h4>
+      <ul class="sign-list">
+        {{#each system.essence.corruptionSigns}}
+        <li class="sign-item">
+          <span class="sign-description">{{description}}</span>
+          {{#if essenceThreshold}}
+          <span class="sign-threshold">({{localize "AOA.Essence.Threshold"}}: {{essenceThreshold}})</span>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+  </div>
+
+  {{!-- Sorcery Section --}}
+  <div class="sorcery-section">
+    <h3>{{localize "AOA.Section.Sorcery"}}</h3>
+
+    {{!-- Techniques --}}
+    <div class="techniques">
+      <h4>{{localize "AOA.Sorcery.Techniques"}}</h4>
+      <div class="technique-grid">
+        {{#each system.sorcery.techniques as |value key|}}
+        <div class="technique" data-technique="{{key}}">
+          <label>{{localize (concat "AOA.Sorcery.Technique." (capitalize key))}}</label>
+          {{#if @root.isEditMode}}
+          <input type="number" name="system.sorcery.techniques.{{key}}" value="{{value}}" min="0" max="10" />
+          {{else}}
+          <span class="technique-value">{{value}}</span>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    {{!-- Forms --}}
+    <div class="forms">
+      <h4>{{localize "AOA.Sorcery.Forms"}}</h4>
+      <div class="form-grid">
+        {{#each system.sorcery.forms as |value key|}}
+        <div class="form" data-form="{{key}}">
+          <label>{{localize (concat "AOA.Sorcery.Form." (capitalize key))}}</label>
+          {{#if @root.isEditMode}}
+          <input type="number" name="system.sorcery.forms.{{key}}" value="{{value}}" min="0" max="10" />
+          {{else}}
+          <span class="form-value">{{value}}</span>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+  {{!-- Spells --}}
+  <div class="spells-section">
+    <h3>{{localize "AOA.Section.Spells"}}</h3>
+    {{#if spells.length}}
+    <ul class="spell-list">
+      {{#each spells}}
+      <li class="spell-item" data-item-id="{{id}}">
+        <span class="spell-name rollable" data-action="useItem" title="{{localize 'AOA.Spell.Cast'}}">
+          {{name}}
+        </span>
+        <span class="spell-technique">{{system.technique}}</span>
+        <span class="spell-form">{{system.form}}</span>
+        <span class="spell-cost">
+          {{#if system.costs.trauma}}{{system.costs.trauma}}T{{/if}}
+          {{#if system.costs.essence}}{{system.costs.essence}}E{{/if}}
+        </span>
+        <div class="spell-controls">
+          <a class="item-control" data-action="editItem" title="{{localize 'AOA.Common.Edit'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          {{#if @root.isEditMode}}
+          <a class="item-control" data-action="deleteItem" title="{{localize 'AOA.Common.Delete'}}">
+            <i class="fas fa-trash"></i>
+          </a>
+          {{/if}}
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p class="empty-notice">{{localize "AOA.Empty.Spells"}}</p>
+    {{/if}}
+    {{#if isEditMode}}
+    <div class="item-create-row">
+      <a class="item-create" data-action="createItem" data-type="spell">
+        <i class="fas fa-plus"></i> {{localize "AOA.Item.AddSpell"}}
+      </a>
+    </div>
+    {{/if}}
+  </div>
+
+  {{!-- Rituals --}}
+  <div class="rituals-section">
+    <h3>{{localize "AOA.Section.Rituals"}}</h3>
+    {{#if rituals.length}}
+    <ul class="ritual-list">
+      {{#each rituals}}
+      <li class="ritual-item" data-item-id="{{id}}">
+        <span class="ritual-name rollable" data-action="useItem">{{name}}</span>
+        <span class="ritual-path">{{system.path}}</span>
+        <span class="ritual-complexity">{{system.complexity}}</span>
+        <div class="ritual-controls">
+          <a class="item-control" data-action="editItem" title="{{localize 'AOA.Common.Edit'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          {{#if @root.isEditMode}}
+          <a class="item-control" data-action="deleteItem" title="{{localize 'AOA.Common.Delete'}}">
+            <i class="fas fa-trash"></i>
+          </a>
+          {{/if}}
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p class="empty-notice">{{localize "AOA.Empty.Rituals"}}</p>
+    {{/if}}
+    {{#if isEditMode}}
+    <div class="item-create-row">
+      <a class="item-create" data-action="createItem" data-type="ritual">
+        <i class="fas fa-plus"></i> {{localize "AOA.Item.AddRitual"}}
+      </a>
+    </div>
+    {{/if}}
+  </div>
+
+  {{/unless}}
+</section>

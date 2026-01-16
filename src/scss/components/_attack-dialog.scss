@@ -1,0 +1,360 @@
+// Attack Dialog Styles
+// Imported inside .wor.attack-dialog { } context
+
+// Parchment background for the content area
+.window-content {
+  @include parchment-bg;
+  background-color: $c-parchment;
+  padding: 0 !important;
+  border-radius: 0 0 $border-radius-lg $border-radius-lg;
+
+  // Override all possible nested wrappers
+  > * {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+// DialogV2 puts content inside .dialog-content with padding
+// We need to counteract that completely
+.dialog-content {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+// Reset any Foundry dialog classes that may add spacing
+.dialog-form-content,
+.dialog-buttons-wrapper {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+// Also target the form wrapper that DialogV2 may use
+form,
+form.dialog-form {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+// Dialog header
+.dialog-header {
+  display: flex;
+  padding: $spacing-lg;
+  background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%);
+  border-bottom: $border-width-thick solid $c-copper;
+  border-radius: $border-radius-lg $border-radius-lg 0 0;
+  margin: 0 !important;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    width: 100%;
+  }
+
+  .actor-portrait {
+    width: 56px;
+    height: 56px;
+    border-radius: $border-radius-md;
+    border: 3px solid $c-gold;
+    outline: 2px solid rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+    box-shadow: $shadow-lg, 0 0 0 1px rgba(255, 255, 255, 0.2);
+  }
+
+  .header-info {
+    flex: 1;
+
+    .dialog-title {
+      margin: 0 0 $spacing-xs 0;
+      font-size: $font-size-lg;
+      font-family: $font-primary;
+      color: #fff !important;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .actor-name {
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .weapon-display {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-top: $spacing-xs;
+
+      .weapon-icon {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: $border-radius-sm;
+        border: 1px solid rgba($c-gold, 0.4);
+      }
+
+      .weapon-name {
+        font-size: $font-size-sm;
+        color: $c-gold;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    .target-info {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-top: $spacing-xs;
+      padding-top: $spacing-xs;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+      .target-label {
+        font-size: $font-size-xs;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .target-name {
+        font-size: $font-size-sm;
+        color: #fff;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
+
+// Wrapper contains both header and content
+.attack-dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  // Header extends to edges
+  .dialog-header {
+    margin: 0 !important;
+  }
+}
+
+.attack-dialog-content {
+  padding: $spacing-xl;
+
+  // Section styling
+  .dialog-section {
+    margin-bottom: $spacing-xl;
+
+    .section-header {
+      @include section-header-bar;
+      gap: $spacing-sm;
+      border-radius: $border-radius-sm;
+
+      i {
+        font-size: $font-size-sm;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: $font-size-sm;
+        flex: 1;
+      }
+    }
+
+    .section-body {
+      padding: $spacing-md;
+      background: var(--wor-dark-alpha-08);
+      border: $border-width solid var(--wor-dark-alpha-10);
+      border-top: none;
+      border-radius: 0 0 $border-radius-sm $border-radius-sm;
+    }
+  }
+
+  // Pool breakdown
+  .pool-breakdown {
+    .pool-row {
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-sm $spacing-xs;
+      font-size: $font-size-base;
+      border-bottom: $border-width solid var(--wor-dark-alpha-05);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .pool-label {
+        color: $c-text-dark;
+        font-weight: $font-weight-normal;
+      }
+
+      .pool-value {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+        font-size: $font-size-lg;
+      }
+    }
+  }
+
+  // Modifier row
+  .modifier-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-top: $spacing-md;
+    padding: $spacing-md;
+    background: var(--wor-dark-alpha-05);
+    border: $border-width solid var(--wor-dark-alpha-08);
+    border-radius: $border-radius-sm;
+
+    .modifier-label {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+    }
+
+    .modifier-input {
+      width: 70px;
+      text-align: center;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  // Target stats
+  .target-stats {
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-sm $spacing-xs;
+      font-size: $font-size-base;
+      border-bottom: $border-width solid var(--wor-dark-alpha-05);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.highlight {
+        padding: $spacing-md;
+        margin-top: $spacing-sm;
+        background: var(--wor-copper-alpha-15);
+        border: $border-width solid var(--wor-copper-alpha-30);
+        border-radius: $border-radius-sm;
+
+        .stat-label {
+          font-weight: $font-weight-bold;
+          color: $c-text-dark;
+        }
+
+        .stat-value {
+          font-weight: $font-weight-bold;
+          color: $c-copper-dark;
+          font-size: $font-size-lg;
+        }
+      }
+
+      .stat-label {
+        color: $c-text-dark;
+      }
+
+      .stat-value {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+    }
+  }
+
+  // Target threshold input
+  .tt-input-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    label {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+    }
+
+    input {
+      width: 70px;
+      text-align: center;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .tt-hint {
+    margin-top: $spacing-sm;
+    font-size: $font-size-sm;
+    color: $c-text-medium;
+    font-style: italic;
+  }
+
+  // Weapon stats grid
+  .weapon-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: $spacing-md;
+      background: var(--wor-dark-alpha-05);
+      border: $border-width solid var(--wor-dark-alpha-10);
+      border-radius: $border-radius-sm;
+
+      .stat-label {
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: $font-weight-bold;
+      }
+
+      .stat-value {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+    }
+  }
+
+  // Effective pool summary
+  .effective-pool-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-md;
+    padding: $spacing-lg;
+    margin-top: $spacing-xl;
+    background: var(--wor-copper-alpha-15);
+    border: $border-width-thick solid var(--wor-copper-alpha-30);
+    border-radius: $border-radius-md;
+
+    .pool-label {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-base;
+      color: $c-text-dark;
+    }
+
+    .pool-value {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      color: $c-copper-dark;
+    }
+  }
+}
+
+// Dialog footer buttons (DialogV2 uses .dialog-buttons)
+footer.dialog-footer,
+.dialog-buttons {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg $spacing-xl;
+  background: var(--wor-dark-alpha-08);
+  border-top: $border-width solid var(--wor-dark-alpha-15);
+  justify-content: center;
+
+  button {
+    min-width: 120px;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+  }
+}

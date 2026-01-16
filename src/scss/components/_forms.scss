@@ -1,0 +1,470 @@
+// The Weight of Ruin - Forms & UI Components
+// Input fields, buttons, tabs, and common UI elements
+
+// === INPUTS ===
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+  @include input-base;
+}
+
+input[type="number"] {
+  text-align: center;
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+// Transparent input variant (for inline editing)
+.input-transparent,
+input.transparent {
+  @include input-transparent;
+}
+
+// Checkbox and radio styling
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: $c-accent;
+  cursor: pointer;
+
+  &:focus {
+    outline: $border-width solid $c-accent;
+    outline-offset: 2px;
+  }
+}
+
+// === BUTTONS ===
+button,
+.button {
+  @include button-secondary;
+
+  i {
+    margin-right: $spacing-sm;
+  }
+}
+
+button.primary,
+.button.primary {
+  @include button-primary;
+}
+
+button.accent,
+.button.accent {
+  @include button-accent;
+}
+
+button.danger,
+.button.danger {
+  @include button-danger;
+}
+
+// Small button variant
+button.small,
+.button.small {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+}
+
+// Icon-only button
+button.icon-only,
+.button.icon-only {
+  padding: $spacing-sm;
+
+  i {
+    margin: 0;
+  }
+}
+
+// === TABS ===
+.sheet-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: $border-width-thick solid $c-faint;
+  margin-bottom: $spacing-md;
+  background: linear-gradient(to bottom, rgba($c-dark, 0.03), transparent);
+
+  .item {
+    padding: $spacing-md $spacing-lg;
+    cursor: pointer;
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    color: $c-medium;
+    border: $border-width solid transparent;
+    border-bottom: none;
+    border-radius: $border-radius-md $border-radius-md 0 0;
+    background: transparent;
+    margin-bottom: -$border-width-thick;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $c-dark;
+      background: rgba($c-accent, 0.05);
+    }
+
+    // Active tab - muted dark yellow highlight
+    &.active {
+      color: $c-dark;
+      background: $c-bg-elevated;
+      border-color: $c-faint;
+      border-bottom-color: $c-bg-elevated;
+      font-weight: $font-weight-bold;
+
+      // Yellow accent line at top
+      box-shadow: inset 0 3px 0 $c-accent-muted;
+    }
+  }
+}
+
+// === SHEET STRUCTURE ===
+.sheet-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 $spacing-sm;
+  @include custom-scrollbar;
+}
+
+.tab {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+// === ITEM SHEET ===
+.item-form {
+  font-family: $font-primary;
+}
+
+.item-header {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-md;
+  border-bottom: $border-width solid $c-faint;
+}
+
+.item-img {
+  width: $portrait-size-md;
+  height: $portrait-size-md;
+  max-width: $portrait-size-md;
+  max-height: $portrait-size-md;
+  flex: 0 0 $portrait-size-md;
+  object-fit: cover;
+  border: $border-width-thick solid $c-medium;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $c-accent;
+  }
+}
+
+.item-header-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  min-width: 0;
+
+  input[name="name"] {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    font-family: $font-primary;
+    @include input-transparent;
+  }
+
+  .item-name {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-family: $font-primary;
+  }
+
+  .item-type {
+    margin: 0;
+    font-size: $font-size-base;
+    color: $c-medium;
+    font-style: italic;
+  }
+
+  .equipped-status {
+    font-size: $font-size-base;
+
+    a {
+      @include clickable;
+    }
+
+    &.is-equipped a {
+      color: $c-success;
+
+      &:hover {
+        color: $c-success-light;
+      }
+    }
+  }
+
+  // Talent/skill rank controls
+  .talent-rank-controls,
+  .skill-rank {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    font-size: $font-size-base;
+
+    .rank-label {
+      color: $c-medium;
+    }
+
+    .rank-value {
+      font-weight: $font-weight-bold;
+      color: $c-accent;
+    }
+
+    .rank-control {
+      @include button-secondary;
+      padding: $spacing-xs $spacing-md;
+    }
+
+    input[type="number"] {
+      width: 50px;
+    }
+  }
+}
+
+// === ACTOR SHEET HEADER ===
+.sheet-header {
+  flex: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: $spacing-md;
+
+  .profile {
+    flex: 0 0 $portrait-size-xl;
+    width: $portrait-size-xl;
+    height: $portrait-size-xl;
+    margin-right: $spacing-md;
+  }
+
+  .profile-img {
+    width: $portrait-size-xl;
+    height: $portrait-size-xl;
+    max-width: $portrait-size-xl;
+    max-height: $portrait-size-xl;
+    object-fit: cover;
+    border: $border-width-heavy solid $c-medium;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: border-color $transition-fast;
+
+    &:hover {
+      border-color: $c-accent;
+    }
+  }
+
+  .header-fields {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .actor-name {
+    margin: 0 0 $spacing-sm 0;
+    padding: 0;
+    font-size: $font-size-2xl;
+    font-family: $font-primary;
+    border-bottom: none;
+
+    input {
+      width: 100%;
+      font-size: $font-size-2xl;
+      font-family: $font-primary;
+      @include input-transparent;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .header-identity {
+    display: flex;
+    gap: $spacing-md;
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-base;
+    color: $c-medium;
+
+    .lineage,
+    .archetype {
+      font-style: italic;
+    }
+  }
+
+  .header-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-lg;
+    margin-top: $spacing-sm;
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      font-size: $font-size-base;
+
+      i {
+        color: $c-medium;
+      }
+
+      .value {
+        font-weight: $font-weight-bold;
+      }
+
+      // Status states
+      &.crisis {
+        @include danger-state;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-md;
+      }
+
+      &.critical {
+        color: $c-warning;
+        i {
+          color: $c-warning;
+        }
+      }
+
+      &.leng {
+        @include magic-state;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-md;
+      }
+    }
+  }
+
+  h1.charname {
+    height: 50px;
+    padding: 0;
+    margin: $spacing-sm 0;
+    border-bottom: 0;
+
+    input {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+  }
+}
+
+// === EDITOR (TinyMCE) ===
+.sheet-body .tab .editor {
+  height: 100%;
+}
+
+.tox {
+  .tox-editor-container {
+    background: $c-bg-elevated;
+  }
+
+  .tox-edit-area {
+    padding: 0 $spacing-md;
+  }
+
+  // Match font to system
+  .tox-edit-area__iframe {
+    font-family: $font-primary;
+  }
+}
+
+// === LABELS ===
+label {
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  color: $c-medium;
+
+  &.required::after {
+    content: "*";
+    color: $c-danger;
+    margin-left: $spacing-xs;
+  }
+}
+
+// Form groups
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+
+  label {
+    @include text-label;
+  }
+
+  .hint {
+    font-size: $font-size-sm;
+    color: $c-light;
+    font-style: italic;
+  }
+}
+
+// Inline form groups
+.form-group-inline {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  label {
+    flex: 0 0 auto;
+  }
+
+  input,
+  select {
+    flex: 1;
+  }
+}
+
+// === SECTION HEADERS ===
+h2,
+h3,
+h4 {
+  font-family: $font-primary;
+  font-weight: $font-weight-normal;
+  color: $c-dark;
+  margin: 0;
+}
+
+.section-header {
+  @include section-header;
+}
+
+// === UTILITY CLASSES ===
+.hidden {
+  display: none !important;
+}
+
+.empty-notice {
+  color: $c-light;
+  font-style: italic;
+  text-align: center;
+  padding: $spacing-lg;
+}
+
+.divider {
+  border: none;
+  border-top: $border-width solid $c-faint;
+  margin: $spacing-md 0;
+}

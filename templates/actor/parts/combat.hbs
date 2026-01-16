@@ -1,0 +1,189 @@
+<section class="combat-section">
+  {{!-- Combat Overview --}}
+  <div class="combat-overview">
+    <h3>{{localize "AOA.Section.CombatStats"}}</h3>
+    <div class="combat-stats-grid">
+      <div class="combat-stat">
+        <span class="stat-label">{{localize "AOA.Derived.Defense.label"}}</span>
+        <span class="stat-value">{{totalDefense}}</span>
+        {{#if armorDefenseModifier}}
+        <span class="stat-breakdown">({{defense}} base + {{armorDefenseModifier}} armor)</span>
+        {{/if}}
+      </div>
+      <div class="combat-stat dr-stat">
+        <span class="stat-label">{{localize "AOA.Combat.DamageReduction"}}</span>
+        <span class="stat-value dr-display">
+          <span class="dr-type" title="{{localize 'AOA.Armor.DR.Slash'}}">S:{{armorDR.slash}}</span>
+          <span class="dr-type" title="{{localize 'AOA.Armor.DR.Pierce'}}">P:{{armorDR.pierce}}</span>
+          <span class="dr-type" title="{{localize 'AOA.Armor.DR.Blunt'}}">B:{{armorDR.blunt}}</span>
+        </span>
+      </div>
+      <div class="combat-stat">
+        <span class="stat-label">{{localize "AOA.Derived.Movement.label"}}</span>
+        <span class="stat-value">{{effectiveMovement}}</span>
+        {{#if armorMovementPenalty}}
+        <span class="stat-breakdown">({{movement}} base - {{armorMovementPenalty}} penalty)</span>
+        {{/if}}
+      </div>
+      <div class="combat-stat">
+        <span class="stat-label">{{localize "AOA.Derived.Reflex.label"}}</span>
+        <span class="stat-value">{{reflex}}</span>
+      </div>
+    </div>
+
+    {{!-- Initiative Roll Button --}}
+    <div class="initiative-roll-section">
+      <button type="button" class="initiative-button rollable" data-action="rollInitiative">
+        <i class="fas fa-bolt"></i>
+        {{localize "AOA.Combat.RollInitiative"}}
+      </button>
+      <span class="initiative-hint">1d6 + {{localize "AOA.Derived.Reflex.abbr"}} ({{reflex}})</span>
+    </div>
+  </div>
+
+  {{!-- Active Conditions --}}
+  <div class="conditions-section">
+    <div class="conditions-header">
+      <h4>{{localize "AOA.Condition.ActiveConditions"}}</h4>
+      <button type="button" class="condition-reference-btn" data-action="openConditionReference" title="{{localize 'AOA.Condition.Reference'}}">
+        <i class="fas fa-book-medical"></i>
+      </button>
+    </div>
+    {{#if hasConditions}}
+    <ul class="condition-list">
+      {{#each conditions}}
+      <li class="condition-item" data-condition-id="{{id}}">
+        <img src="{{icon}}" class="condition-icon" alt="{{label}}" width="24" height="24"/>
+        <div class="condition-info">
+          <span class="condition-name">{{label}}</span>
+          {{#if duration}}
+          <span class="condition-duration">
+            <i class="fas fa-clock"></i> {{duration}} {{localize "AOA.Condition.Rounds"}}
+          </span>
+          {{/if}}
+        </div>
+        <div class="condition-actions">
+          <a class="condition-remove" data-action="removeCondition" data-condition-id="{{id}}" title="{{localize 'AOA.Common.Remove'}}">
+            <i class="fas fa-times"></i>
+          </a>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p class="no-conditions">{{localize "AOA.Condition.NoActiveConditions"}}</p>
+    {{/if}}
+  </div>
+
+  {{!-- Equipped Weapons for Attack --}}
+  <div class="equipped-weapons-section">
+    <h3>{{localize "AOA.Combat.EquippedWeapons"}}</h3>
+    {{#if equippedWeapons.length}}
+    <ul class="equipped-weapon-list">
+      {{#each equippedWeapons}}
+      <li class="equipped-weapon-item" data-item-id="{{_id}}">
+        <div class="weapon-info">
+          <span class="weapon-name">{{name}}</span>
+          <div class="weapon-stats">
+            <span class="weapon-damage" title="{{localize 'AOA.Weapon.Damage'}}">
+              <i class="fas fa-tint"></i> {{system.displayDamage}}
+            </span>
+            <span class="weapon-prowess" title="{{localize 'AOA.Weapon.ProwessLabel'}}">
+              {{localize (concat "AOA.Derived." (capitalize system.prowess) ".abbr")}}
+            </span>
+            {{#if system.range.type}}
+            <span class="weapon-range" title="{{localize 'AOA.Weapon.Range'}}">
+              {{localize (concat "AOA.Weapon.RangeType." (capitalize system.range.type))}}
+            </span>
+            {{/if}}
+          </div>
+        </div>
+        <div class="weapon-actions">
+          <button type="button" class="attack-button rollable" data-action="useItem" title="{{localize 'AOA.Combat.AttackWith' weapon=name}}">
+            <i class="fas fa-crosshairs"></i>
+            {{localize "AOA.Combat.Attack"}}
+          </button>
+          <button type="button" class="damage-button rollable" data-action="rollDamage" title="{{localize 'AOA.Combat.RollDamage'}}">
+            <i class="fas fa-dice-d6"></i>
+            {{localize "AOA.Combat.Damage"}}
+          </button>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <div class="no-weapons-equipped">
+      <p class="empty-notice">{{localize "AOA.Combat.NoWeaponsEquipped"}}</p>
+      <p class="equip-hint">{{localize "AOA.Combat.EquipWeaponsHint"}}</p>
+    </div>
+    {{/if}}
+  </div>
+
+  {{!-- Defense Roll Section --}}
+  <div class="defense-roll-section">
+    <h3>{{localize "AOA.Combat.Defense"}}</h3>
+    {{#if fullDefenseActive}}
+    <div class="full-defense-active">
+      <i class="fas fa-shield-alt"></i>
+      <span>{{localize "AOA.Defense.FullDefense.Active"}} (+5)</span>
+    </div>
+    {{/if}}
+    <div class="defense-pool-preview">
+      <span class="pool-label">{{localize "AOA.Defense.BasePool"}}:</span>
+      <span class="pool-value">{{reflex}}</span>
+      <span class="pool-breakdown">({{localize "AOA.Attribute.Agility.abbr"}} + {{localize "AOA.Attribute.Awareness.abbr"}})</span>
+    </div>
+    <div class="defense-buttons">
+      <button type="button" class="defense-button rollable" data-action="rollDefense">
+        <i class="fas fa-shield-alt"></i>
+        {{localize "AOA.Combat.RollDefense"}}
+      </button>
+      <button type="button" class="full-defense-button {{#if fullDefenseActive}}active{{/if}}" data-action="activateFullDefense" {{#if fullDefenseActive}}disabled{{/if}}>
+        <i class="fas fa-shield-virus"></i>
+        {{localize "AOA.Defense.FullDefense.Button"}}
+      </button>
+    </div>
+  </div>
+
+  {{!-- Combat Modifiers Reference --}}
+  <div class="combat-modifiers-section">
+    <h4>{{localize "AOA.Combat.CommonModifiers"}}</h4>
+    <div class="modifiers-grid">
+      <div class="modifier-item bonus">
+        <span class="modifier-name">{{localize "AOA.Combat.Modifier.Flanking"}}</span>
+      </div>
+      <div class="modifier-item bonus">
+        <span class="modifier-name">{{localize "AOA.Combat.Modifier.HighGround"}}</span>
+      </div>
+      <div class="modifier-item bonus">
+        <span class="modifier-name">{{localize "AOA.Combat.Modifier.PointBlank"}}</span>
+      </div>
+      <div class="modifier-item penalty">
+        <span class="modifier-name">{{localize "AOA.Combat.Modifier.Prone"}}</span>
+      </div>
+      <div class="modifier-item penalty">
+        <span class="modifier-name">{{localize "AOA.Combat.Modifier.Cover"}}</span>
+      </div>
+      <div class="modifier-item penalty">
+        <span class="modifier-name">{{localize "AOA.Combat.Modifier.LongRange"}}</span>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Critical Injuries List (collapsed) --}}
+  {{#if system.health.criticalInjuries.length}}
+  <div class="injuries-section">
+    <h4>{{localize "AOA.Health.CriticalInjuries"}} ({{system.health.criticalInjuries.length}})</h4>
+    <ul class="injury-list compact">
+      {{#each system.health.criticalInjuries}}
+      <li class="injury-item" data-injury-id="{{id}}">
+        <span class="injury-description">{{#if description}}{{description}}{{else}}{{localize "AOA.Health.CriticalInjury"}}{{/if}}</span>
+        <a class="injury-remove" data-action="removeInjury" data-injury-id="{{id}}" title="{{localize 'AOA.Common.Remove'}}">
+          <i class="fas fa-times"></i>
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/if}}
+</section>

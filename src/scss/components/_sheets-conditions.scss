@@ -1,0 +1,438 @@
+// The Weight of Ruin - Conditions Panel Styles
+// Styling for the conditions reference panel in sheets
+
+// === CONDITION REFERENCE PANEL ===
+.conditions-reference {
+  margin-top: $spacing-lg;
+  padding: $spacing-md;
+  background: rgba($c-dark, 0.03);
+  border: $border-width solid $c-faint;
+  border-radius: $border-radius-md;
+
+  h4 {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    margin: 0 0 $spacing-md 0;
+    padding-bottom: $spacing-sm;
+    border-bottom: $border-width solid $c-faint;
+    color: $c-dark;
+
+    i {
+      margin-right: $spacing-sm;
+      color: $c-medium;
+    }
+  }
+
+  .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: $spacing-md;
+  }
+
+  .condition-reference-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    border-radius: $border-radius-sm;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba($c-dark, 0.05);
+    }
+
+    .condition-icon {
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-sm;
+      color: $c-medium;
+    }
+
+    .condition-info {
+      flex: 1;
+      min-width: 0;
+
+      .condition-name {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-sm;
+        color: $c-dark;
+        margin-bottom: $spacing-xs;
+      }
+
+      .condition-desc {
+        font-size: $font-size-xs;
+        color: $c-medium;
+        line-height: $line-height-tight;
+      }
+    }
+  }
+}
+
+// === ACTIVE CONDITIONS DISPLAY ===
+.active-conditions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin: $spacing-sm 0;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.condition-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($c-warning, 0.15);
+  border: $border-width solid rgba($c-warning, 0.3);
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  color: $c-dark;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  i {
+    font-size: $font-size-xs;
+  }
+
+  &:hover {
+    background: rgba($c-warning, 0.25);
+    border-color: rgba($c-warning, 0.5);
+  }
+
+  // Severity variants
+  &.severity-minor {
+    background: rgba($c-success, 0.15);
+    border-color: rgba($c-success, 0.3);
+
+    &:hover {
+      background: rgba($c-success, 0.25);
+      border-color: rgba($c-success, 0.5);
+    }
+  }
+
+  &.severity-moderate {
+    background: rgba($c-warning, 0.15);
+    border-color: rgba($c-warning, 0.3);
+
+    &:hover {
+      background: rgba($c-warning, 0.25);
+      border-color: rgba($c-warning, 0.5);
+    }
+  }
+
+  &.severity-severe {
+    background: rgba($c-danger, 0.15);
+    border-color: rgba($c-danger, 0.3);
+
+    &:hover {
+      background: rgba($c-danger, 0.25);
+      border-color: rgba($c-danger, 0.5);
+    }
+  }
+
+  // Category variants
+  &.category-physical {
+    i { color: $c-danger; }
+  }
+
+  &.category-mental {
+    i { color: $c-magic; }
+  }
+
+  &.category-supernatural {
+    i { color: $c-magic; }
+    background: rgba($c-magic, 0.1);
+    border-color: rgba($c-magic, 0.2);
+  }
+
+  // Remove button
+  .condition-remove {
+    margin-left: $spacing-xs;
+    color: $c-faint;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $c-danger;
+    }
+  }
+}
+
+// === CONDITION SELECTOR DIALOG ===
+.condition-selector {
+  .condition-search {
+    margin-bottom: $spacing-md;
+
+    input {
+      width: 100%;
+      @include input-base;
+      padding: $spacing-sm $spacing-md;
+    }
+  }
+
+  .condition-categories {
+    display: flex;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+    flex-wrap: wrap;
+
+    .category-btn {
+      @include button-secondary;
+      padding: $spacing-xs $spacing-md;
+      font-size: $font-size-sm;
+
+      &.active {
+        @include button-primary;
+      }
+    }
+  }
+
+  .condition-list {
+    max-height: 400px;
+    overflow-y: auto;
+    @include custom-scrollbar;
+  }
+
+  .condition-option {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    border-bottom: $border-width solid $c-faint;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      @include hover-bg;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .condition-icon {
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba($c-dark, 0.05);
+      border-radius: $border-radius-sm;
+      font-size: $font-size-base;
+      color: $c-medium;
+    }
+
+    .condition-details {
+      flex: 1;
+      min-width: 0;
+
+      .condition-name {
+        font-weight: $font-weight-bold;
+        margin-bottom: $spacing-xs;
+      }
+
+      .condition-description {
+        font-size: $font-size-sm;
+        color: $c-medium;
+        line-height: $line-height-base;
+      }
+
+      .condition-meta {
+        display: flex;
+        gap: $spacing-md;
+        margin-top: $spacing-sm;
+        font-size: $font-size-xs;
+        color: $c-light;
+
+        span {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+        }
+      }
+    }
+
+    &.selected {
+      background: rgba($c-accent, 0.1);
+      border-color: rgba($c-accent, 0.3);
+
+      .condition-icon {
+        background: rgba($c-accent, 0.2);
+        color: $c-accent;
+      }
+    }
+  }
+}
+
+// === TOKEN CONDITIONS OVERLAY ===
+.token-conditions-hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  max-width: 100px;
+
+  .condition-icon-small {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($c-dark, 0.8);
+    border-radius: 2px;
+    font-size: 10px;
+    color: $c-pale;
+
+    &.active {
+      background: rgba($c-warning, 0.9);
+      color: $c-dark;
+    }
+  }
+}
+
+// === CONDITION EFFECTS IN CHAT ===
+.condition-chat-card {
+  .condition-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: rgba($c-dark, 0.05);
+    border-radius: $border-radius-md $border-radius-md 0 0;
+
+    .condition-icon-large {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba($c-dark, 0.1);
+      border-radius: $border-radius-md;
+      font-size: $font-size-xl;
+      color: $c-medium;
+    }
+
+    .condition-title {
+      flex: 1;
+
+      h3 {
+        margin: 0;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+      }
+
+      .condition-subtitle {
+        font-size: $font-size-sm;
+        color: $c-medium;
+        font-style: italic;
+      }
+    }
+  }
+
+  .condition-body {
+    padding: $spacing-md;
+
+    .condition-description {
+      margin-bottom: $spacing-md;
+      line-height: $line-height-base;
+    }
+
+    .condition-effects {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-sm;
+        padding: $spacing-sm 0;
+        border-bottom: $border-width dashed $c-faint;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        i {
+          flex: 0 0 auto;
+          margin-top: 2px;
+          color: $c-medium;
+        }
+      }
+    }
+  }
+
+  .condition-actions {
+    display: flex;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    border-top: $border-width solid $c-faint;
+
+    button {
+      flex: 1;
+      @include button-secondary;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+
+      &.apply-condition {
+        @include button-primary;
+      }
+
+      &.remove-condition {
+        @include button-danger;
+      }
+    }
+  }
+}
+
+// === CONDITION TOOLTIPS ===
+.condition-tooltip {
+  max-width: 250px;
+  padding: $spacing-md;
+  background: $c-bg-dark;
+  border: $border-width solid $c-accent-muted;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-lg;
+  color: $c-pale;
+  font-size: $font-size-sm;
+
+  .tooltip-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    border-bottom: $border-width solid rgba($c-pale, 0.2);
+
+    i {
+      color: $c-accent;
+    }
+
+    strong {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .tooltip-body {
+    line-height: $line-height-base;
+    color: rgba($c-pale, 0.9);
+  }
+
+  .tooltip-meta {
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: $border-width solid rgba($c-pale, 0.2);
+    font-size: $font-size-xs;
+    color: rgba($c-pale, 0.7);
+
+    span {
+      display: block;
+    }
+  }
+}

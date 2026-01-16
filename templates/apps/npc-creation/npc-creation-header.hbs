@@ -1,0 +1,28 @@
+{{!-- NPC Creation Wizard Header --}}
+<header class="creation-header npc-creation-header">
+  <div class="creation-title">
+    <h1>{{localize "AOA.NPCCreation.Title"}}</h1>
+  </div>
+
+  {{!-- Step Progress Indicator --}}
+  <nav class="step-progress">
+    {{#each steps}}
+    <div class="step-indicator {{#if active}}active{{/if}} {{#if completed}}completed{{/if}} {{#if future}}future{{/if}}"
+         title="{{localize label}}">
+      <span class="step-number">{{number}}</span>
+      {{#if completed}}
+      <i class="fas fa-check"></i>
+      {{/if}}
+    </div>
+    {{/each}}
+  </nav>
+
+  {{!-- Trait Points Tracker --}}
+  <div class="trait-points-tracker">
+    <span class="tracker-label">{{localize "AOA.NPCCreation.TraitPoints"}}:</span>
+    <span class="tracker-value">
+      <span class="points-remaining">{{traitPoints.remaining}}</span>
+      <span class="points-total">/ {{traitPoints.total}}</span>
+    </span>
+  </div>
+</header>

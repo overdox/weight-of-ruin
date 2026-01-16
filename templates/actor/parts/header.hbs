@@ -1,0 +1,29 @@
+<div class="header-wrapper">
+  {{!-- Banner with overlaid name --}}
+  <div class="sheet-banner">
+    <img src="systems/weight-of-ruin/assets/ui/banner-character.jpg" alt="" />
+    <div class="banner-overlay">
+      <div class="banner-name-section">
+        <h1 class="actor-name">
+          <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'AOA.Common.Name'}}" />
+        </h1>
+        {{#if system.identity.archetype}}
+        <div class="header-identity">
+          <span class="archetype-lineage">
+            {{system.identity.archetype}}{{#if system.identity.calling}} ({{system.identity.calling}}){{/if}}
+          </span>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  {{!-- Header content below banner --}}
+  <header class="sheet-header">
+    {{!-- Portrait (overlaps banner) --}}
+    <div class="profile">
+      <img class="profile-img" src="{{portraitImg}}" alt="{{actor.name}}" data-action="editPortrait" title="Click to change portrait" />
+    </div>
+
+  </header>
+</div>

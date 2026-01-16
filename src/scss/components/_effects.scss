@@ -1,0 +1,463 @@
+// The Weight of Ruin - Active Effects Styles
+// Styles for active effects, conditions, and status modifiers
+
+// === EFFECTS LIST ===
+.effects-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .effect-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-sm $spacing-md;
+    border-bottom: $border-width solid $c-faint;
+    transition: background $transition-fast;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      @include hover-bg;
+    }
+
+    // Effect icon/image
+    .effect-image {
+      flex: 0 0 32px;
+      width: 32px;
+      height: 32px;
+      border-radius: $border-radius-sm;
+      border: $border-width solid $c-faint;
+      object-fit: cover;
+      cursor: pointer;
+      transition: border-color $transition-fast;
+
+      &:hover {
+        border-color: $c-accent;
+      }
+    }
+
+    // Effect name
+    .effect-name {
+      flex: 1;
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+      cursor: pointer;
+
+      &:hover {
+        color: $c-accent;
+      }
+    }
+
+    // Effect source
+    .effect-source {
+      flex: 0 0 100px;
+      text-align: center;
+      font-size: $font-size-sm;
+      color: $c-medium;
+      border-left: $border-width solid $c-faint;
+      border-right: $border-width solid $c-faint;
+      padding: 0 $spacing-sm;
+    }
+
+    // Effect duration
+    .effect-duration {
+      flex: 0 0 80px;
+      text-align: center;
+      font-size: $font-size-sm;
+      color: $c-medium;
+      border-right: $border-width solid $c-faint;
+      padding: 0 $spacing-sm;
+
+      &.permanent {
+        color: $c-magic;
+        font-style: italic;
+      }
+
+      &.expiring {
+        color: $c-warning;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    // Effect controls
+    .effect-controls {
+      display: flex;
+      gap: $spacing-xs;
+
+      a {
+        @include clickable;
+        font-size: $font-size-sm;
+        padding: $spacing-xs;
+
+        &:hover {
+          color: $c-accent;
+        }
+
+        &.effect-delete:hover {
+          color: $c-danger;
+        }
+
+        &.effect-toggle {
+          &.disabled {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+
+    // Disabled/inactive effect
+    &.disabled {
+      opacity: 0.6;
+
+      .effect-name {
+        text-decoration: line-through;
+        color: $c-medium;
+      }
+    }
+
+    // Temporary effect
+    &.temporary {
+      .effect-name::before {
+        content: '\f017'; // clock icon
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 400;
+        margin-right: $spacing-xs;
+        color: $c-medium;
+        font-size: $font-size-xs;
+      }
+    }
+
+    // Suppressed effect
+    &.suppressed {
+      background: rgba($c-warning, 0.1);
+      border-left: $border-width-thick solid $c-warning;
+
+      .effect-name {
+        color: $c-warning-dark;
+      }
+    }
+  }
+}
+
+// === EFFECT TYPES ===
+.effect-item {
+  &.buff {
+    .effect-image {
+      border-color: rgba($c-success, 0.5);
+    }
+
+    .effect-name {
+      color: $c-success-dark;
+    }
+  }
+
+  &.debuff {
+    .effect-image {
+      border-color: rgba($c-danger, 0.5);
+    }
+
+    .effect-name {
+      color: $c-danger;
+    }
+  }
+
+  &.condition {
+    .effect-image {
+      border-color: rgba($c-warning, 0.5);
+    }
+  }
+
+  &.magical {
+    .effect-image {
+      border-color: rgba($c-magic, 0.5);
+      box-shadow: 0 0 4px rgba($c-magic, 0.3);
+    }
+
+    .effect-name {
+      color: $c-magic;
+    }
+  }
+}
+
+// === EFFECTS HEADER ===
+.effects-header {
+  display: flex;
+  align-items: center;
+  padding: $spacing-sm $spacing-md;
+  background: linear-gradient(to bottom, rgba($c-dark, 0.08), rgba($c-dark, 0.03));
+  border: $border-width solid $c-faint;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-sm;
+
+  .header-name {
+    flex: 1;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-sm;
+  }
+
+  .header-source {
+    flex: 0 0 100px;
+    text-align: center;
+    font-size: $font-size-xs;
+    color: $c-medium;
+  }
+
+  .header-duration {
+    flex: 0 0 80px;
+    text-align: center;
+    font-size: $font-size-xs;
+    color: $c-medium;
+  }
+
+  .header-controls {
+    flex: 0 0 60px;
+  }
+
+  .add-effect {
+    @include clickable;
+    margin-left: auto;
+    font-size: $font-size-sm;
+
+    &:hover {
+      color: $c-accent;
+    }
+  }
+}
+
+// === EFFECT CATEGORIES ===
+.effects-category {
+  margin-bottom: $spacing-lg;
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm 0;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $c-medium;
+    border-bottom: $border-width dashed $c-faint;
+    margin-bottom: $spacing-sm;
+
+    i {
+      color: $c-light;
+    }
+
+    .category-count {
+      font-size: $font-size-xs;
+      padding: $spacing-xs $spacing-sm;
+      background: rgba($c-dark, 0.05);
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  &.temporary .category-header {
+    color: $c-warning-dark;
+    border-color: rgba($c-warning, 0.3);
+  }
+
+  &.passive .category-header {
+    color: $c-success-dark;
+    border-color: rgba($c-success, 0.3);
+  }
+
+  &.inactive .category-header {
+    color: $c-light;
+    border-color: $c-faint;
+  }
+}
+
+// === EMPTY EFFECTS STATE ===
+.effects-empty {
+  @include flex-center;
+  padding: $spacing-lg;
+  color: $c-light;
+  font-style: italic;
+  text-align: center;
+
+  i {
+    margin-right: $spacing-sm;
+    font-size: $font-size-lg;
+  }
+}
+
+// === EFFECT TOOLTIP ===
+.effect-tooltip {
+  max-width: 300px;
+  padding: $spacing-md;
+  background: $c-bg-dark;
+  border: $border-width solid $c-accent-muted;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-lg;
+  color: $c-pale;
+
+  .tooltip-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    border-bottom: $border-width solid rgba($c-pale, 0.2);
+
+    .tooltip-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: $border-radius-sm;
+    }
+
+    .tooltip-name {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .tooltip-description {
+    font-size: $font-size-sm;
+    line-height: $line-height-base;
+    margin-bottom: $spacing-sm;
+  }
+
+  .tooltip-changes {
+    font-size: $font-size-xs;
+    color: rgba($c-pale, 0.8);
+    border-top: $border-width solid rgba($c-pale, 0.2);
+    padding-top: $spacing-sm;
+
+    .change-item {
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-xs 0;
+
+      .change-key {
+        color: rgba($c-pale, 0.6);
+      }
+
+      .change-value {
+        font-weight: $font-weight-bold;
+
+        &.positive {
+          color: $c-success-light;
+        }
+
+        &.negative {
+          color: $c-danger-light;
+        }
+      }
+    }
+  }
+
+  .tooltip-source {
+    font-size: $font-size-xs;
+    color: rgba($c-pale, 0.6);
+    margin-top: $spacing-sm;
+    font-style: italic;
+  }
+}
+
+// === EFFECT BADGES (for compact display) ===
+.effect-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+
+  .effect-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($c-dark, 0.05);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-xs;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    .badge-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 2px;
+    }
+
+    .badge-name {
+      color: $c-dark;
+    }
+
+    .badge-remove {
+      color: $c-light;
+      margin-left: $spacing-xs;
+
+      &:hover {
+        color: $c-danger;
+      }
+    }
+
+    &:hover {
+      border-color: $c-medium;
+      background: rgba($c-dark, 0.08);
+    }
+
+    // Badge type variants
+    &.buff {
+      background: rgba($c-success, 0.1);
+      border-color: rgba($c-success, 0.3);
+
+      .badge-name {
+        color: $c-success-dark;
+      }
+    }
+
+    &.debuff {
+      background: rgba($c-danger, 0.1);
+      border-color: rgba($c-danger, 0.3);
+
+      .badge-name {
+        color: $c-danger;
+      }
+    }
+
+    &.magical {
+      background: rgba($c-magic, 0.1);
+      border-color: rgba($c-magic, 0.3);
+
+      .badge-name {
+        color: $c-magic;
+      }
+    }
+  }
+}
+
+// === EFFECT CHANGE SUMMARY ===
+.effect-changes-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: $border-width dashed $c-faint;
+
+  .change-tag {
+    font-size: $font-size-xs;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+
+    &.positive {
+      background: $c-success-bg;
+      color: $c-success-dark;
+
+      &::before {
+        content: '+';
+      }
+    }
+
+    &.negative {
+      background: $c-danger-bg;
+      color: $c-danger;
+
+      &::before {
+        content: '-';
+      }
+    }
+  }
+}

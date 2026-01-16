@@ -1,0 +1,1702 @@
+// The Weight of Ruin - Professional Window Styles
+// Base styles for all application windows
+
+.window-app {
+  font-family: $font-primary;
+  color: $c-text-dark;
+
+  // Custom scrollbar for all content
+  @include custom-scrollbar;
+
+  // Window header styling - Rich copper/brown (default for non-sheet windows)
+  .window-header {
+    background: linear-gradient(135deg, $c-copper-dark 0%, $c-copper 100%);
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    padding: $spacing-sm $spacing-md;
+
+    .window-title {
+      font-family: $font-primary;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      letter-spacing: 0.5px;
+    }
+
+    .header-button,
+    .close {
+      color: #fff;
+      transition: all $transition-fast;
+
+      &:hover {
+        color: $c-gold;
+      }
+    }
+  }
+
+  // Window content area
+  .window-content {
+    @include parchment-bg;
+    background-color: $c-parchment;
+    padding: $spacing-lg;
+    color: $c-text-dark;
+  }
+
+  // Window resize handle
+  .window-resizable-handle {
+    border-color: transparent transparent $c-copper $c-copper;
+  }
+}
+
+// ============================================
+// ACTOR SHEET - Headerless/Seamless Look
+// ============================================
+// This creates a seamless look where the sheet content extends
+// to the top of the window, similar to DnD5e's modern sheets.
+
+.weight-of-ruin.actor-sheet {
+  // Remove any window-level borders/shadows that could cause black lines
+  border: none !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+
+  // Make the window header transparent when not minimized
+  &:not(.minimized) > .window-header {
+    --color-header-background: transparent;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    justify-content: flex-end;
+    padding: $spacing-xs $spacing-sm;
+    z-index: 100;
+    height: auto;
+
+    // Hide window title when not minimized (but keep in DOM for minimized state)
+    .window-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    // Style control buttons - Font Awesome icons are on the button itself via ::before
+    button.header-control {
+      // Reset any inherited button styles
+      font-family: var(--font-awesome) !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      font-weight: 900 !important;
+      background: rgba(0, 0, 0, 0.5) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 100% !important;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+      max-width: 24px !important;
+      max-height: 24px !important;
+      aspect-ratio: 1;
+      display: grid !important;
+      place-content: center;
+      line-height: 1 !important;
+      transition: all $transition-fast;
+      margin-left: $spacing-xs;
+      padding: 0 !important;
+      font-size: 11px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+
+      // Font Awesome renders icons via ::before pseudo-element
+      &::before {
+        color: #ffffff !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.7) !important;
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // When minimized, show the title normally
+  &.minimized > .window-header {
+    background: linear-gradient(135deg, $c-copper-dark 0%, $c-copper 100%) !important;
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    position: relative;
+
+    .window-title {
+      visibility: visible;
+      position: static;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    button.header-control {
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      min-width: unset !important;
+      min-height: unset !important;
+      max-width: unset !important;
+      max-height: unset !important;
+      border-radius: 0;
+      color: #fff !important;
+
+      &::before {
+        color: #fff !important;
+      }
+
+      &:hover {
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // Make window content background transparent and remove borders
+  &:not(.minimized) > .window-content {
+    background: transparent !important;
+    padding: 0;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// ============================================
+// ITEM SHEET - Headerless/Seamless Look
+// ============================================
+// Same seamless treatment as actor sheets
+.weight-of-ruin.item-sheet {
+  // Remove any window-level borders/shadows that could cause black lines
+  border: none !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+
+  // Make the window header transparent when not minimized
+  &:not(.minimized) > .window-header {
+    --color-header-background: transparent;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    justify-content: flex-end;
+    padding: $spacing-xs $spacing-sm;
+    z-index: 100;
+    height: auto;
+
+    // Hide window title when not minimized (but keep in DOM for minimized state)
+    .window-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    // Style control buttons - Font Awesome icons are on the button itself via ::before
+    button.header-control {
+      // Reset any inherited button styles
+      font-family: var(--font-awesome) !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      font-weight: 900 !important;
+      background: rgba(0, 0, 0, 0.5) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 100% !important;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+      max-width: 24px !important;
+      max-height: 24px !important;
+      aspect-ratio: 1;
+      display: grid !important;
+      place-content: center;
+      line-height: 1 !important;
+      transition: all $transition-fast;
+      margin-left: $spacing-xs;
+      padding: 0 !important;
+      font-size: 11px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+
+      // Font Awesome renders icons via ::before pseudo-element
+      &::before {
+        color: #ffffff !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.7) !important;
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // When minimized, show the title normally
+  &.minimized > .window-header {
+    background: linear-gradient(135deg, $c-copper-dark 0%, $c-copper 100%) !important;
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    position: relative;
+
+    .window-title {
+      visibility: visible;
+      position: static;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    button.header-control {
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      min-width: unset !important;
+      min-height: unset !important;
+      max-width: unset !important;
+      max-height: unset !important;
+      border-radius: 0;
+      color: #fff !important;
+
+      &::before {
+        color: #fff !important;
+      }
+
+      &:hover {
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // Make window content background transparent and remove borders
+  &:not(.minimized) > .window-content {
+    background: transparent !important;
+    padding: 0;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// ============================================
+// CHARACTER CREATION WIZARD - Headerless/Seamless Look
+// ============================================
+// Same seamless treatment as actor and item sheets
+.weight-of-ruin.character-creation {
+  // Remove any window-level borders/shadows that could cause black lines
+  border: none !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+
+  // Make the window header transparent when not minimized
+  &:not(.minimized) > .window-header {
+    --color-header-background: transparent;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    justify-content: flex-end;
+    padding: $spacing-xs $spacing-sm;
+    z-index: 100;
+    height: auto;
+
+    // Hide window title when not minimized (but keep in DOM for minimized state)
+    .window-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    // Style control buttons - Font Awesome icons are on the button itself via ::before
+    button.header-control {
+      // Reset any inherited button styles
+      font-family: var(--font-awesome) !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      font-weight: 900 !important;
+      background: rgba(0, 0, 0, 0.5) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 100% !important;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+      max-width: 24px !important;
+      max-height: 24px !important;
+      aspect-ratio: 1;
+      display: grid !important;
+      place-content: center;
+      line-height: 1 !important;
+      transition: all $transition-fast;
+      margin-left: $spacing-xs;
+      padding: 0 !important;
+      font-size: 11px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+
+      // Font Awesome renders icons via ::before pseudo-element
+      &::before {
+        color: #ffffff !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.7) !important;
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // When minimized, show the title normally
+  &.minimized > .window-header {
+    background: linear-gradient(135deg, $c-copper-dark 0%, $c-copper 100%) !important;
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    position: relative;
+
+    .window-title {
+      visibility: visible;
+      position: static;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    button.header-control {
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      min-width: unset !important;
+      min-height: unset !important;
+      max-width: unset !important;
+      max-height: unset !important;
+      border-radius: 0;
+      color: #fff !important;
+
+      &::before {
+        color: #fff !important;
+      }
+
+      &:hover {
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // Make window content background transparent and remove borders
+  &:not(.minimized) > .window-content {
+    background: transparent !important;
+    padding: 0;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// ============================================
+// ADVANCEMENT WIZARD - Headerless/Seamless Look
+// ============================================
+// Same seamless treatment as actor, item, and character creation sheets
+.weight-of-ruin.advancement-wizard {
+  // Remove any window-level borders/shadows that could cause black lines
+  border: none !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+
+  // Make the window header transparent when not minimized
+  &:not(.minimized) > .window-header {
+    --color-header-background: transparent;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    justify-content: flex-end;
+    padding: $spacing-xs $spacing-sm;
+    z-index: 100;
+    height: auto;
+
+    // Hide window title when not minimized (but keep in DOM for minimized state)
+    .window-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    // Style control buttons - Font Awesome icons are on the button itself via ::before
+    button.header-control {
+      // Reset any inherited button styles
+      font-family: var(--font-awesome) !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      font-weight: 900 !important;
+      background: rgba(0, 0, 0, 0.5) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 100% !important;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+      max-width: 24px !important;
+      max-height: 24px !important;
+      aspect-ratio: 1;
+      display: grid !important;
+      place-content: center;
+      line-height: 1 !important;
+      transition: all $transition-fast;
+      margin-left: $spacing-xs;
+      padding: 0 !important;
+      font-size: 11px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+
+      // Font Awesome renders icons via ::before pseudo-element
+      &::before {
+        color: #ffffff !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.7) !important;
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // When minimized, show the title normally
+  &.minimized > .window-header {
+    background: linear-gradient(135deg, $c-copper-dark 0%, $c-copper 100%) !important;
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    position: relative;
+
+    .window-title {
+      visibility: visible;
+      position: static;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    button.header-control {
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      min-width: unset !important;
+      min-height: unset !important;
+      max-width: unset !important;
+      max-height: unset !important;
+      border-radius: 0;
+      color: #fff !important;
+
+      &::before {
+        color: #fff !important;
+      }
+
+      &:hover {
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // Make window content background transparent and remove borders
+  &:not(.minimized) > .window-content {
+    background: transparent !important;
+    padding: 0;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// ============================================
+// DEFENSE DIALOG - Headerless/Seamless Look
+// ============================================
+.weight-of-ruin.defense-dialog {
+  border: none !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+
+  &:not(.minimized) > .window-header {
+    --color-header-background: transparent;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    justify-content: flex-end;
+    padding: $spacing-xs $spacing-sm;
+    z-index: 100;
+    height: auto;
+
+    .window-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    button.header-control {
+      font-family: var(--font-awesome) !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      font-weight: 900 !important;
+      background: rgba(0, 0, 0, 0.5) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 100% !important;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+      max-width: 24px !important;
+      max-height: 24px !important;
+      aspect-ratio: 1;
+      display: grid !important;
+      place-content: center;
+      line-height: 1 !important;
+      transition: all $transition-fast;
+      margin-left: $spacing-xs;
+      padding: 0 !important;
+      font-size: 11px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+
+      &::before {
+        color: #ffffff !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.7) !important;
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  &.minimized > .window-header {
+    background: linear-gradient(135deg, $c-copper-dark 0%, $c-copper 100%) !important;
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    position: relative;
+
+    .window-title {
+      visibility: visible;
+      position: static;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    button.header-control {
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      min-width: unset !important;
+      min-height: unset !important;
+      max-width: unset !important;
+      max-height: unset !important;
+      border-radius: 0;
+      color: #fff !important;
+
+      &::before {
+        color: #fff !important;
+      }
+
+      &:hover {
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  &:not(.minimized) > .window-content {
+    @include parchment-bg;
+    background-color: $c-parchment;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  }
+}
+
+// ============================================
+// ATTACK DIALOG - Headerless/Seamless Look
+// ============================================
+.weight-of-ruin.attack-dialog {
+  border: none !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+
+  &:not(.minimized) > .window-header {
+    --color-header-background: transparent;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    justify-content: flex-end;
+    padding: $spacing-xs $spacing-sm;
+    z-index: 100;
+    height: auto;
+
+    .window-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    button.header-control {
+      font-family: var(--font-awesome) !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      font-weight: 900 !important;
+      background: rgba(0, 0, 0, 0.5) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 100% !important;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+      max-width: 24px !important;
+      max-height: 24px !important;
+      aspect-ratio: 1;
+      display: grid !important;
+      place-content: center;
+      line-height: 1 !important;
+      transition: all $transition-fast;
+      margin-left: $spacing-xs;
+      padding: 0 !important;
+      font-size: 11px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+
+      &::before {
+        color: #ffffff !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.7) !important;
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  &.minimized > .window-header {
+    background: linear-gradient(135deg, $c-copper-dark 0%, $c-copper 100%) !important;
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    position: relative;
+
+    .window-title {
+      visibility: visible;
+      position: static;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    button.header-control {
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      min-width: unset !important;
+      min-height: unset !important;
+      max-width: unset !important;
+      max-height: unset !important;
+      border-radius: 0;
+      color: #fff !important;
+
+      &::before {
+        color: #fff !important;
+      }
+
+      &:hover {
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  &:not(.minimized) > .window-content {
+    @include parchment-bg;
+    background-color: $c-parchment;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  }
+}
+
+// ============================================
+// OTHER WINDOW TYPES (keep traditional look)
+// ============================================
+
+// The Weight of Ruin specific windows (non-actor sheets)
+.weight-of-ruin {
+  &.window-app .window-content {
+    @include parchment-bg;
+    background-color: $c-parchment;
+    padding: $spacing-lg;
+  }
+
+  // Dark header variant
+  .sheet-header-dark {
+    @include dark-bg;
+    padding: $spacing-md;
+    margin: (-$spacing-lg) (-$spacing-lg) $spacing-lg (-$spacing-lg);
+    border-bottom: $border-width-thick solid $c-gold-muted;
+  }
+}
+
+// Rollable elements - interactive styling
+.rollable {
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover,
+  &:focus {
+    color: $c-gold;
+    text-shadow: 0 0 4px var(--wor-gold-alpha-30);
+  }
+}
+
+// Clickable items and controls
+.item-control,
+.effect-control,
+.condition-control {
+  @include clickable;
+  padding: $spacing-xs;
+
+  &:hover {
+    color: $c-gold;
+  }
+
+  &.delete:hover,
+  &.remove:hover {
+    color: $c-danger;
+  }
+}
+
+// Application v2 specific overrides (non-actor sheets)
+.application.weight-of-ruin:not(.actor-sheet) {
+  .window-content {
+    @include parchment-bg;
+    background-color: $c-parchment;
+  }
+}
+
+// Dialog styling
+.dialog.weight-of-ruin {
+  .dialog-content {
+    padding: $spacing-lg;
+    color: $c-text-dark;
+  }
+
+  .dialog-buttons {
+    display: flex;
+    gap: $spacing-md;
+    justify-content: flex-end;
+    padding: $spacing-md;
+    border-top: $border-width solid $c-border-light;
+    background: var(--wor-stone-alpha-04);
+
+    button {
+      @include button-secondary;
+
+      &.default {
+        @include button-primary;
+      }
+    }
+  }
+}
+
+// Scoped form and button styles - ONLY for The Weight of Ruin windows
+.weight-of-ruin {
+  // Form elements
+  input, select, textarea {
+    &:not([type="checkbox"]):not([type="radio"]) {
+      @include input-base;
+    }
+  }
+
+  // Button styling - exclude header control buttons completely
+  .window-content button:not(.header-control),
+  .window-content .button {
+    @include button-secondary;
+
+    &.primary {
+      @include button-primary;
+    }
+
+    &.accent {
+      @include button-accent;
+    }
+
+    &.danger {
+      @include button-danger;
+    }
+  }
+}
+
+// ============================================
+// GLOBAL WINDOW TITLE - White text for all WoR windows
+// ============================================
+// Ensure ALL The Weight of Ruin windows have white title text
+.weight-of-ruin.window-app,
+.wor.window-app {
+  > .window-header .window-title {
+    color: #fff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// ============================================
+// ATTRIBUTE EDITOR DIALOG
+// ============================================
+// Styled to match Character Advancement dialog with dark gradient background
+// and card-style attribute layout
+
+// Style the DialogV2 container for attribute editor
+// Using explicit class instead of :has() for better browser support
+.wor.attribute-editor-dialog,
+.dialog-v2:has(.attribute-editor-wrapper) {
+  width: 700px !important;
+  max-width: 90vw !important;
+  border: none !important;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6) !important;
+  border-radius: $border-radius-lg !important;
+
+  &:not(.minimized) > .window-header {
+    --color-header-background: transparent;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    justify-content: flex-end;
+    padding: $spacing-sm;
+    z-index: 100;
+    height: auto;
+
+    .window-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    button.header-control {
+      font-family: var(--font-awesome) !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      font-weight: 900 !important;
+      background: rgba(0, 0, 0, 0.4) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 100% !important;
+      width: 28px !important;
+      height: 28px !important;
+      min-width: 28px !important;
+      min-height: 28px !important;
+      max-width: 28px !important;
+      max-height: 28px !important;
+      aspect-ratio: 1;
+      display: grid !important;
+      place-content: center;
+      line-height: 1 !important;
+      transition: all $transition-fast;
+      margin-left: $spacing-xs;
+      padding: 0 !important;
+      font-size: 12px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+
+      &::before {
+        color: #ffffff !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.6) !important;
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  &.minimized > .window-header {
+    background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%) !important;
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    position: relative;
+
+    .window-title {
+      visibility: visible;
+      position: static;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    button.header-control {
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      min-width: unset !important;
+      min-height: unset !important;
+      max-width: unset !important;
+      max-height: unset !important;
+      border-radius: 0;
+      color: #fff !important;
+
+      &::before {
+        color: #fff !important;
+      }
+
+      &:hover {
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // Dark gradient background - matching Character Advancement style
+  &:not(.minimized) > .window-content {
+    background: linear-gradient(180deg,
+      rgba(60, 30, 30, 0.98) 0%,
+      rgba(40, 25, 25, 0.98) 50%,
+      rgba(30, 20, 20, 0.98) 100%
+    ) !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: $border-radius-lg;
+  }
+}
+
+// Attribute editor wrapper - dark theme styling
+.attribute-editor-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  // Custom header inside content
+  .editor-header {
+    padding: $spacing-xl $spacing-xl $spacing-lg;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .editor-title {
+      margin: 0 0 $spacing-xs 0;
+      font-family: $font-primary;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      color: #fff !important;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .editor-subtitle {
+      margin: 0;
+      font-size: $font-size-base;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+// Direct selectors for attribute editor form elements (more robust)
+.attribute-editor-form {
+  padding: $spacing-lg !important;
+}
+
+// Section header bar (burgundy/copper gradient) - direct selector
+.attribute-editor-form .section-header {
+  display: flex !important;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%) !important;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-md;
+
+  i {
+    color: $c-gold !important;
+    font-size: $font-size-sm;
+  }
+
+  span {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: #fff !important;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+  }
+
+  &.witchsight {
+    margin-top: $spacing-lg;
+    background: linear-gradient(135deg, rgba($c-magic, 0.6) 0%, rgba($c-magic, 0.4) 100%) !important;
+
+    i {
+      color: #fff !important;
+    }
+  }
+}
+
+// 4-column grid for attribute cards - direct selector
+.attributes-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: $spacing-md !important;
+  margin-bottom: $spacing-md;
+}
+
+// Attribute card styling - direct selector
+.attribute-card {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: $spacing-md !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: $border-radius-sm !important;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: rgba($c-copper, 0.4) !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .card-header {
+    display: flex !important;
+    align-items: baseline;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xs;
+
+    .attribute-abbr {
+      font-family: $font-primary;
+      font-size: $font-size-xl !important;
+      font-weight: $font-weight-bold;
+      color: $c-gold !important;
+    }
+
+    .attribute-name {
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+  }
+
+  .card-value {
+    font-family: $font-primary;
+    font-size: $font-size-2xl !important;
+    font-weight: $font-weight-bold;
+    color: #fff !important;
+    margin-bottom: $spacing-xs;
+  }
+
+  .card-breakdown {
+    display: flex !important;
+    gap: $spacing-md;
+    margin-bottom: $spacing-sm;
+
+    .breakdown-item {
+      font-size: $font-size-xs;
+      color: rgba(255, 255, 255, 0.5) !important;
+    }
+  }
+
+  .card-modifier {
+    display: flex !important;
+    align-items: center;
+    gap: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    label {
+      font-size: $font-size-xs;
+      color: rgba(255, 255, 255, 0.6) !important;
+      text-transform: uppercase;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: $spacing-xs $spacing-sm;
+      text-align: center;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba($c-copper, 0.4) !important;
+      border-radius: $border-radius-sm;
+      color: #fff !important;
+
+      &:focus {
+        outline: none;
+        border-color: $c-copper !important;
+        box-shadow: 0 0 6px rgba($c-copper, 0.4);
+      }
+    }
+  }
+}
+
+// Witchsight display - direct selector
+.witchsight-display {
+  display: flex !important;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md !important;
+  background: rgba($c-magic, 0.15) !important;
+  border: 1px solid rgba($c-magic, 0.3) !important;
+  border-radius: $border-radius-sm;
+
+  .witchsight-abbr {
+    font-family: $font-primary;
+    font-size: $font-size-xl !important;
+    font-weight: $font-weight-bold;
+    color: $c-magic-light !important;
+  }
+
+  .witchsight-value {
+    font-family: $font-primary;
+    font-size: $font-size-2xl !important;
+    font-weight: $font-weight-bold;
+    color: $c-magic-light !important;
+  }
+
+  .witchsight-note {
+    font-size: $font-size-xs;
+    color: rgba($c-magic-light, 0.7) !important;
+    font-style: italic;
+    margin-left: auto;
+  }
+}
+
+// Dialog footer buttons for attribute editor
+.wor.attribute-editor-dialog,
+.dialog-v2:has(.attribute-editor-wrapper) {
+  footer,
+  .dialog-buttons {
+    display: flex;
+    gap: $spacing-md;
+    padding: $spacing-lg $spacing-xl;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: flex-end;
+
+    button {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      padding: $spacing-sm $spacing-xl;
+      border-radius: $border-radius-sm;
+      cursor: pointer;
+      transition: all $transition-fast;
+      min-width: 100px;
+
+      // Cancel button style
+      &[data-action="cancel"] {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.5);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      // Save/default button style
+      &.default,
+      &[data-action="save"] {
+        background: linear-gradient(135deg, $c-copper 0%, $c-copper-dark 100%);
+        border: 1px solid $c-copper-dark;
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+        &:hover {
+          background: linear-gradient(135deg, $c-copper-light 0%, $c-copper 100%);
+          box-shadow: 0 2px 8px rgba($c-copper, 0.4);
+        }
+      }
+
+      // Icon styling
+      i {
+        margin-right: $spacing-xs;
+      }
+    }
+  }
+}
+
+// ============================================
+// CONDITION REFERENCE DIALOG
+// ============================================
+// Dark gradient style matching Attribute Editor and Character Advancement
+
+.wor.condition-reference,
+.application:has(.condition-reference-wrapper) {
+  border: none !important;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6) !important;
+  border-radius: $border-radius-lg !important;
+
+  // Transparent floating header
+  &:not(.minimized) > .window-header {
+    --color-header-background: transparent;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    justify-content: flex-end;
+    padding: $spacing-sm;
+    z-index: 100;
+    height: auto;
+
+    .window-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+    }
+
+    button.header-control {
+      font-family: var(--font-awesome) !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      font-weight: 900 !important;
+      background: rgba(0, 0, 0, 0.4) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 100% !important;
+      width: 28px !important;
+      height: 28px !important;
+      min-width: 28px !important;
+      min-height: 28px !important;
+      max-width: 28px !important;
+      max-height: 28px !important;
+      aspect-ratio: 1;
+      display: grid !important;
+      place-content: center;
+      line-height: 1 !important;
+      transition: all $transition-fast;
+      margin-left: $spacing-xs;
+      padding: 0 !important;
+      font-size: 12px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+
+      &::before {
+        color: #ffffff !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.6) !important;
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // Minimized state
+  &.minimized > .window-header {
+    background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%) !important;
+    border-bottom: $border-width-thick solid $c-gold-muted;
+    position: relative;
+
+    .window-title {
+      visibility: visible;
+      position: static;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    button.header-control {
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      min-width: unset !important;
+      min-height: unset !important;
+      max-width: unset !important;
+      max-height: unset !important;
+      border-radius: 0;
+      color: #fff !important;
+
+      &::before {
+        color: #fff !important;
+      }
+
+      &:hover {
+        color: $c-gold !important;
+
+        &::before {
+          color: $c-gold !important;
+        }
+      }
+    }
+  }
+
+  // Dark gradient background
+  &:not(.minimized) > .window-content {
+    background: linear-gradient(180deg,
+      rgba(60, 30, 30, 0.98) 0%,
+      rgba(40, 25, 25, 0.98) 50%,
+      rgba(30, 20, 20, 0.98) 100%
+    ) !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: $border-radius-lg;
+  }
+}
+
+// Condition Reference Wrapper - Content styling
+.condition-reference-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+
+  // Header (reuse editor-header pattern)
+  .editor-header {
+    padding: $spacing-xl $spacing-xl $spacing-lg;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+
+    .editor-title {
+      margin: 0 0 $spacing-xs 0;
+      font-family: $font-primary;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      color: #fff !important;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .editor-subtitle {
+      margin: 0;
+      font-size: $font-size-base;
+      color: rgba(255, 255, 255, 0.7);
+
+      i {
+        color: $c-gold;
+        margin-right: $spacing-xs;
+      }
+
+      strong {
+        color: $c-gold;
+      }
+    }
+  }
+}
+
+// Condition Reference Content
+.condition-reference-content {
+  padding: $spacing-lg;
+  overflow-y: auto;
+  flex: 1;
+  @include custom-scrollbar;
+}
+
+// Conditions list - 3 column grid
+.conditions-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+}
+
+// Individual condition entry
+.condition-entry {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  transition: all $transition-fast;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    border-color: rgba($c-copper, 0.4);
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  // Condition header - card style layout
+  .condition-header {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    cursor: pointer;
+    min-height: 110px; // Ensure consistent card height for full description
+
+    // Top row: icon, name, and controls
+    .condition-top-row {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      .condition-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: $border-radius-sm;
+        border: 2px solid rgba($c-gold, 0.4);
+        background: rgba(0, 0, 0, 0.3);
+        flex-shrink: 0;
+      }
+
+      .condition-title {
+        flex: 1;
+        min-width: 0;
+
+        .condition-name {
+          margin: 0;
+          font-family: $font-primary;
+          font-size: $font-size-lg;
+          font-weight: $font-weight-bold;
+          color: $c-gold !important;
+        }
+      }
+
+      .toggle-icon {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: $font-size-sm;
+        transition: transform $transition-fast;
+        flex-shrink: 0;
+      }
+
+      .apply-btn {
+        background: linear-gradient(135deg, $c-copper 0%, $c-copper-dark 100%);
+        border: 1px solid $c-copper-dark;
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: $border-radius-sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all $transition-fast;
+        flex-shrink: 0;
+
+        &:hover {
+          background: linear-gradient(135deg, $c-copper-light 0%, $c-copper 100%);
+          box-shadow: 0 2px 8px rgba($c-copper, 0.4);
+        }
+
+        i {
+          font-size: $font-size-xs;
+        }
+      }
+    }
+
+    // Description area - full width below header row
+    > .condition-description {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+    }
+
+    &.expanded .condition-top-row .toggle-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  // Condition details (expandable)
+  .condition-details {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.2);
+
+    &.collapsed {
+      display: none;
+    }
+
+    .detail-section {
+      margin-bottom: $spacing-md;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h5 {
+        margin: 0 0 $spacing-sm 0;
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: $letter-spacing-wide;
+      }
+    }
+
+    // Modifier list styling
+    .modifier-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+
+      .modifier {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-xs $spacing-sm;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: $border-radius-sm;
+        font-size: $font-size-sm;
+
+        .modifier-label {
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        .modifier-value {
+          font-weight: $font-weight-bold;
+        }
+
+        &.positive .modifier-value {
+          color: $c-success;
+        }
+
+        &.negative .modifier-value {
+          color: $c-danger;
+        }
+      }
+    }
+
+    // Flag list styling
+    .flag-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+
+      .flag {
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-sm;
+        font-size: $font-size-sm;
+        color: rgba(255, 255, 255, 0.8);
+
+        i {
+          color: $c-gold;
+          font-size: $font-size-xs;
+          margin-top: 2px;
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    // Effect list styling
+    .effect-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+
+      .effect {
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-sm;
+        font-size: $font-size-sm;
+        color: rgba(255, 255, 255, 0.6);
+        font-style: italic;
+
+        i {
+          color: rgba(255, 255, 255, 0.4);
+          font-size: $font-size-xs;
+          margin-top: 2px;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+}

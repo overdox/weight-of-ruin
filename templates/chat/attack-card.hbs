@@ -1,0 +1,140 @@
+<div class="wor roll-card attack-card {{#if isHit}}hit{{else}}miss{{/if}} {{#if isCritical}}critical{{/if}} {{degreeCss}}">
+  {{!-- Header with Attacker Portrait --}}
+  <div class="chat-card-header">
+    {{#if attacker.img}}
+    <img src="{{attacker.img}}" alt="{{attacker.name}}" class="actor-portrait" />
+    {{/if}}
+    <div class="header-info">
+      <h4 class="actor-name">{{attacker.name}}</h4>
+      <div class="roll-type">
+        <span class="roll-label">{{localize "AOA.Combat.Attack"}}</span>
+        {{#if pool}}
+        <span class="roll-components">
+          <span class="component-value" title="{{pool.prowess.label}}">{{pool.prowess.value}}</span>
+          <span class="separator">+</span>
+          <span class="component-value" title="{{pool.skill.name}}">{{pool.skill.rank}}</span>
+          {{#if pool.modifier}}
+          <span class="separator">{{#if (gt pool.modifier 0)}}+{{/if}}</span>
+          <span class="component-value">{{pool.modifier}}</span>
+          {{/if}}
+        </span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  {{!-- Result Indicator (prominent display with dice pool) --}}
+  <div class="result-indicator {{degreeCss}}">
+    <div class="result-text">
+      <span class="dice-pool-display">{{pool.total}}d6</span>
+      <span class="result-separator">×</span>
+      ( <span class="hit-count">{{roll.hits}}</span> )
+    </div>
+  </div>
+
+  {{!-- Weapon Item Display --}}
+  <div class="item-display">
+    {{#if weapon.img}}
+    <img src="{{weapon.img}}" alt="{{weapon.name}}" class="item-image" />
+    {{/if}}
+    <div class="item-info">
+      <h5 class="item-name">{{weapon.name}}</h5>
+      <span class="item-details">
+        {{localize (concat "AOA.Weapon.RangeType." (capitalize weapon.range))}}
+      </span>
+    </div>
+  </div>
+
+  {{!-- Damage Display (prominent, like reference) --}}
+  {{#if damage}}
+  <div class="damage-display {{#if isCritical}}critical{{/if}}">
+    <div class="damage-label">{{localize "AOA.Combat.Damage"}}</div>
+    <div class="damage-value">{{damage.finalDamage}}</div>
+  </div>
+
+  {{!-- Trauma Dealt --}}
+  <div class="trauma-summary">
+    <i class="fas fa-heart-crack"></i>
+    <span class="trauma-label">{{localize "AOA.Combat.TraumaDealt"}}:</span>
+    <span class="trauma-value">{{damage.traumaDealt}}</span>
+    {{#if isCritical}}
+    <span class="critical-bonus">({{localize "AOA.Combat.Critical"}})</span>
+    {{/if}}
+  </div>
+  {{/if}}
+
+  {{!-- Miss Message --}}
+  {{#unless isHit}}
+  <div class="attack-miss">
+    <i class="fas fa-shield"></i>
+    <span class="miss-message">{{localize "AOA.Combat.AttackMissed"}}</span>
+  </div>
+  {{/unless}}
+
+  {{!-- Collapsible Details --}}
+  <div class="collapsible-section" data-section="attack-details">
+    <div class="collapsible-header collapsed" data-action="toggle-collapse">
+      <i class="fas fa-chevron-down collapse-icon"></i>
+      <span class="section-title">{{localize "AOA.Roll.Details"}}</span>
+    </div>
+    <div class="collapsible-content collapsed">
+      {{!-- Target Info --}}
+      {{#if target}}
+      <div class="target-info">
+        <span class="target-label">{{localize "AOA.Combat.Target"}}:</span>
+        <span class="target-name">{{target.name}}</span>
+        <span class="target-defense">({{localize "AOA.Defense.Label"}} {{target.defense}}, TT {{targetThreshold}})</span>
+      </div>
+      {{/if}}
+
+      {{!-- Dice Display (D6 icons) --}}
+      <div class="roll-dice">
+        {{{diceDisplay}}}
+      </div>
+
+      {{!-- Damage Breakdown (on hit) --}}
+      {{#if damage}}
+      <div class="damage-breakdown">
+        <div class="damage-row">
+          <span class="damage-label">{{localize "AOA.Weapon.BaseDamage"}}</span>
+          <span class="damage-value">{{damage.baseDamage}}</span>
+        </div>
+        {{#if damage.strengthBonus}}
+        <div class="damage-row">
+          <span class="damage-label">{{localize "AOA.Attribute.Str.long"}}</span>
+          <span class="damage-value">+{{damage.strengthBonus}}</span>
+        </div>
+        {{/if}}
+        {{#if damage.qualityBonus}}
+        <div class="damage-row">
+          <span class="damage-label">{{localize "AOA.Weapon.Quality"}}</span>
+          <span class="damage-value">+{{damage.qualityBonus}}</span>
+        </div>
+        {{/if}}
+        {{#if target.dr}}
+        <div class="damage-row dr">
+          <span class="damage-label">{{localize "AOA.Armor.DR.Label"}}</span>
+          <span class="damage-value">-{{target.dr}}</span>
+        </div>
+        {{/if}}
+        <div class="damage-row total">
+          <span class="damage-label">{{localize "AOA.Combat.TotalDamage"}}</span>
+          <span class="damage-value">{{damage.finalDamage}}</span>
+        </div>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+
+  {{!-- Action Buttons (on hit) --}}
+  {{#if isHit}}
+  {{#if target}}
+  <div class="chat-card-buttons">
+    <button type="button" class="apply-damage" data-action="apply-damage" data-target-id="{{target.id}}" data-damage="{{damage.traumaDealt}}">
+      <i class="fas fa-heart-crack"></i>
+      <span>{{localize "AOA.Combat.ApplyDamage"}}</span>
+    </button>
+  </div>
+  {{/if}}
+  {{/if}}
+</div>

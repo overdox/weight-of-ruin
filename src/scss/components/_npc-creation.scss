@@ -1,0 +1,1321 @@
+// The Weight of Ruin - NPC Creation Wizard Styles
+// Grimdark themed 6-step NPC creation process
+// Note: This file is imported inside .weight-of-ruin.npc-creation selector
+
+// Use & to reference the parent selector for base styles
+& {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  @include parchment-bg;
+  background-color: $c-parchment;
+  font-family: $font-primary;
+  color: $c-text-dark;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+}
+
+// ========================================
+// HEADER
+// ========================================
+.npc-creation-header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
+  background: linear-gradient(90deg, $c-dark 0%, $c-burgundy 100%);
+  border-bottom: $border-width-thick solid $c-copper;
+  border-radius: $border-radius-lg $border-radius-lg 0 0;
+
+  .creation-title {
+    h1 {
+      margin: 0;
+      font-size: $font-size-xl;
+      font-family: $font-primary;
+      color: $c-text-inverse;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Step Progress Indicator
+  .step-progress {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-xs;
+
+    .step-indicator {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      transition: all $transition-fast;
+      position: relative;
+
+      .step-number {
+        z-index: 1;
+      }
+
+      i {
+        position: absolute;
+        font-size: $font-size-xs;
+      }
+
+      &.completed {
+        background: $c-success;
+        color: $c-white;
+
+        .step-number {
+          display: none;
+        }
+      }
+
+      &.active {
+        background: $c-gold;
+        color: $c-text-dark;
+        transform: scale(1.15);
+        box-shadow: 0 0 8px rgba($c-gold, 0.5);
+      }
+
+      &.future {
+        background: rgba($c-text-inverse, 0.2);
+        color: rgba($c-text-inverse, 0.5);
+      }
+    }
+  }
+
+  // Trait Points Tracker
+  .trait-points-tracker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-text-inverse, 0.1);
+    border-radius: $border-radius-md;
+
+    .tracker-label {
+      font-size: $font-size-sm;
+      color: $c-white;
+    }
+
+    .tracker-value {
+      font-weight: $font-weight-bold;
+      color: $c-white;
+
+      .points-remaining {
+        font-size: $font-size-lg;
+        color: $c-gold;
+      }
+
+      .points-total {
+        font-size: $font-size-sm;
+        color: rgba($c-white, 0.8);
+      }
+    }
+  }
+}
+
+// ========================================
+// CONTENT
+// ========================================
+.npc-creation-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .creation-step-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-lg;
+    @include custom-scrollbar;
+  }
+
+  // Step titles
+  h2 {
+    margin: 0 0 $spacing-sm 0;
+    font-size: $font-size-lg;
+    font-family: $font-primary;
+    color: $c-header-text;
+  }
+
+  .step-description {
+    margin: 0 0 $spacing-lg 0;
+    color: $c-text-light;
+    font-size: $font-size-sm;
+  }
+}
+
+// ========================================
+// KIND & FORM STEP
+// ========================================
+.step-classtype {
+  .selection-section {
+    margin-bottom: $spacing-xl;
+
+    h3 {
+      margin: 0 0 $spacing-md 0;
+      font-size: $font-size-base;
+      color: $c-header-text;
+    }
+  }
+
+  .class-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-md;
+  }
+
+  .class-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+    background: rgba($c-faint, 0.3);
+    border: $border-width-thick solid $c-faint;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    i {
+      font-size: $font-size-2xl;
+      color: $c-medium;
+    }
+
+    .class-name {
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+    }
+
+    &:hover {
+      background: rgba($c-copper, 0.1);
+      border-color: $c-copper;
+    }
+
+    &.selected {
+      background: linear-gradient(145deg, rgba($c-burgundy, 0.2), rgba($c-copper, 0.2));
+      border-color: $c-copper;
+      box-shadow: 0 0 8px rgba($c-copper, 0.3);
+
+      i {
+        color: $c-burgundy;
+      }
+    }
+  }
+
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-sm;
+  }
+
+  .type-card {
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-faint, 0.3);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-align: center;
+
+    .type-name {
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+    }
+
+    &:hover {
+      background: rgba($c-copper, 0.1);
+      border-color: $c-copper;
+    }
+
+    &.selected {
+      background: linear-gradient(145deg, rgba($c-burgundy, 0.2), rgba($c-copper, 0.2));
+      border-color: $c-copper;
+
+      .type-name {
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
+
+// ========================================
+// TIER STEP
+// ========================================
+.step-tier {
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: $spacing-md;
+  }
+
+  .tier-card {
+    padding: $spacing-md;
+    background: rgba($c-faint, 0.3);
+    border: $border-width-thick solid $c-faint;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-sm;
+
+      .tier-id {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        background: $c-medium;
+        color: $c-white;
+        border-radius: 50%;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+      }
+
+      .tier-name {
+        font-weight: $font-weight-bold;
+        color: $c-header-text;
+      }
+    }
+
+    .tier-stats {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+      margin-bottom: $spacing-sm;
+
+      .tier-stat {
+        display: flex;
+        justify-content: space-between;
+        font-size: $font-size-sm;
+
+        .stat-label {
+          color: $c-text-light;
+        }
+
+        .stat-value {
+          font-weight: $font-weight-bold;
+          color: $c-text-dark;
+        }
+      }
+    }
+
+    .tier-description {
+      margin: 0;
+      font-size: $font-size-xs;
+      color: $c-text-light;
+      font-style: italic;
+    }
+
+    &:hover {
+      background: rgba($c-copper, 0.1);
+      border-color: $c-copper;
+    }
+
+    &.selected {
+      background: linear-gradient(145deg, rgba($c-burgundy, 0.2), rgba($c-copper, 0.2));
+      border-color: $c-copper;
+      box-shadow: 0 0 8px rgba($c-copper, 0.3);
+
+      .tier-header .tier-id {
+        background: $c-burgundy;
+      }
+    }
+  }
+}
+
+// ========================================
+// ATTRIBUTES & SKILLS STEPS
+// ========================================
+.step-attributes,
+.step-skills {
+  .points-counter {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-faint, 0.3);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-lg;
+
+    .points-label {
+      color: $c-text-light;
+    }
+
+    .points-value {
+      font-weight: $font-weight-bold;
+      color: $c-success;
+
+      &.over-budget {
+        color: $c-danger;
+      }
+    }
+
+    .points-hint {
+      color: $c-text-light;
+      font-size: $font-size-xs;
+    }
+  }
+
+  .templates-section {
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      margin: 0 0 $spacing-sm 0;
+      font-size: $font-size-base;
+      color: $c-header-text;
+    }
+
+    .template-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+    }
+
+    .template-btn {
+      padding: $spacing-xs $spacing-md;
+      background: rgba($c-faint, 0.3);
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-sm;
+      cursor: pointer;
+      transition: all $transition-fast;
+      font-size: $font-size-sm;
+      font-family: $font-primary;
+
+      &:hover {
+        background: rgba($c-copper, 0.1);
+        border-color: $c-copper;
+      }
+
+      &.selected {
+        background: linear-gradient(145deg, rgba($c-burgundy, 0.2), rgba($c-copper, 0.2));
+        border-color: $c-copper;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+
+  .attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm;
+  }
+
+  .attribute-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-faint, 0.2);
+    border-radius: $border-radius-sm;
+
+    .attribute-label {
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+    }
+
+    .attribute-controls {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      .adjust-btn {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba($c-faint, 0.5);
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover {
+          background: $c-copper;
+          color: $c-white;
+        }
+      }
+
+      .attribute-value {
+        min-width: 28px;
+        text-align: center;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-lg;
+        color: $c-burgundy;
+      }
+    }
+  }
+}
+
+// Skills-specific
+.step-skills {
+  .skills-categories {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .skill-category {
+    h4 {
+      margin: 0 0 $spacing-sm 0;
+      padding-bottom: $spacing-xs;
+      border-bottom: $border-width solid $c-faint;
+      color: $c-header-text;
+      font-size: $font-size-sm;
+    }
+
+    .skills-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-xs;
+    }
+  }
+
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($c-faint, 0.1);
+    border-radius: $border-radius-sm;
+
+    .skill-name {
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+    }
+
+    .skill-controls {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      .adjust-btn {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba($c-faint, 0.5);
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+        font-size: $font-size-xs;
+
+        &:hover {
+          background: $c-copper;
+          color: $c-white;
+        }
+      }
+
+      .skill-rank {
+        min-width: 20px;
+        text-align: center;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-sm;
+        color: $c-burgundy;
+      }
+    }
+  }
+}
+
+// ========================================
+// TRAITS STEP
+// ========================================
+.step-traits {
+  .traits-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: $spacing-lg;
+  }
+
+  .selected-traits-panel {
+    background: rgba($c-faint, 0.2);
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    border: $border-width solid $c-faint;
+
+    h3 {
+      margin: 0 0 $spacing-md 0;
+      font-size: $font-size-base;
+      color: $c-header-text;
+    }
+
+    .selected-traits-list {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+
+    .selected-trait {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm;
+      background: rgba($c-faint, 0.3);
+      border-radius: $border-radius-sm;
+
+      .trait-img {
+        width: 32px;
+        height: 32px;
+        border-radius: $border-radius-sm;
+        object-fit: cover;
+      }
+
+      .trait-name {
+        flex: 1;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+      }
+
+      .trait-cost {
+        font-size: $font-size-xs;
+        color: $c-text-light;
+        padding: 2px 6px;
+        background: rgba($c-faint, 0.5);
+        border-radius: $border-radius-sm;
+      }
+
+      .remove-btn {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba($c-danger, 0.2);
+        border: none;
+        border-radius: $border-radius-sm;
+        color: $c-danger;
+        cursor: pointer;
+
+        &:hover {
+          background: $c-danger;
+          color: $c-white;
+        }
+      }
+    }
+
+    .no-traits {
+      color: $c-text-light;
+      font-style: italic;
+      font-size: $font-size-sm;
+    }
+  }
+
+  .traits-browser {
+    h3 {
+      margin: 0 0 $spacing-md 0;
+      font-size: $font-size-base;
+      color: $c-header-text;
+    }
+
+    .trait-category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+      margin-bottom: $spacing-md;
+
+      .trait-category-btn {
+        padding: $spacing-xs $spacing-sm;
+        background: rgba($c-faint, 0.3);
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+        font-size: $font-size-xs;
+        font-family: $font-primary;
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+
+        &:hover {
+          background: rgba($c-copper, 0.1);
+          border-color: $c-copper;
+        }
+
+        &.active {
+          background: $c-burgundy;
+          border-color: $c-burgundy;
+          color: $c-white;
+        }
+      }
+    }
+
+    .type-specific-section {
+      margin-bottom: $spacing-lg;
+
+      h4 {
+        margin: 0 0 $spacing-sm 0;
+        color: $c-accent;
+        font-size: $font-size-sm;
+      }
+    }
+
+    .general-traits-section {
+      h4 {
+        margin: 0 0 $spacing-sm 0;
+        color: $c-header-text;
+        font-size: $font-size-sm;
+      }
+    }
+
+    .traits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: $spacing-sm;
+    }
+
+    .trait-card {
+      padding: $spacing-sm;
+      background: rgba($c-faint, 0.2);
+      border: $border-width solid $c-faint;
+      border-radius: $border-radius-md;
+      transition: all $transition-fast;
+
+      &.type-specific {
+        border-color: $c-accent;
+        background: rgba($c-accent, 0.05);
+      }
+
+      &.selected {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .trait-header {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-xs;
+
+        .trait-img {
+          width: 36px;
+          height: 36px;
+          border-radius: $border-radius-sm;
+          object-fit: cover;
+        }
+
+        .trait-name {
+          flex: 1;
+          font-weight: $font-weight-bold;
+          font-size: $font-size-sm;
+        }
+
+        .trait-cost {
+          font-size: $font-size-xs;
+          color: $c-text-light;
+          padding: 2px 6px;
+          background: rgba($c-faint, 0.5);
+          border-radius: $border-radius-sm;
+        }
+      }
+
+      .trait-description {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-xs;
+        color: $c-text-light;
+        line-height: 1.4;
+      }
+
+      .add-trait-btn {
+        width: 100%;
+        padding: $spacing-xs;
+        background: rgba($c-success, 0.2);
+        border: $border-width solid $c-success;
+        border-radius: $border-radius-sm;
+        color: $c-success;
+        font-size: $font-size-xs;
+        font-family: $font-primary;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover {
+          background: $c-success;
+          color: $c-white;
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// FINALIZE STEP
+// ========================================
+.step-finalize {
+  .finalize-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: $spacing-xl;
+  }
+
+  .finalize-inputs {
+    .name-section,
+    .notes-section {
+      margin-bottom: $spacing-lg;
+
+      label {
+        display: block;
+        margin-bottom: $spacing-xs;
+        font-weight: $font-weight-bold;
+        color: $c-header-text;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: $spacing-sm;
+        background: rgba($c-faint, 0.2);
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-sm;
+        font-family: $font-primary;
+        font-size: $font-size-base;
+        color: $c-text-dark;
+
+        &:focus {
+          outline: none;
+          border-color: $c-copper;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+    }
+
+    .equipment-section {
+      h3 {
+        margin: 0 0 $spacing-md 0;
+        color: $c-header-text;
+      }
+
+      .gear-tabs {
+        display: flex;
+        gap: $spacing-xs;
+        margin-bottom: $spacing-md;
+
+        .gear-tab-btn {
+          padding: $spacing-xs $spacing-md;
+          background: rgba($c-faint, 0.3);
+          border: $border-width solid $c-faint;
+          border-radius: $border-radius-sm;
+          cursor: pointer;
+          font-size: $font-size-sm;
+          font-family: $font-primary;
+
+          &:hover {
+            background: rgba($c-copper, 0.1);
+          }
+
+          &.active {
+            background: $c-burgundy;
+            border-color: $c-burgundy;
+            color: $c-white;
+          }
+        }
+      }
+
+      .gear-tab-panel {
+        display: none;
+
+        &.active {
+          display: block;
+        }
+      }
+
+      .gear-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: $spacing-sm;
+        max-height: 200px;
+        overflow-y: auto;
+        @include custom-scrollbar;
+      }
+
+      .gear-card {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-xs;
+        background: rgba($c-faint, 0.2);
+        border: $border-width solid $c-faint;
+        border-radius: $border-radius-sm;
+
+        .gear-img {
+          width: 28px;
+          height: 28px;
+          border-radius: $border-radius-sm;
+          object-fit: cover;
+        }
+
+        .gear-name {
+          flex: 1;
+          font-size: $font-size-xs;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .add-gear-btn {
+          width: 20px;
+          height: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba($c-success, 0.2);
+          border: none;
+          border-radius: $border-radius-sm;
+          color: $c-success;
+          cursor: pointer;
+
+          &:hover {
+            background: $c-success;
+            color: $c-white;
+          }
+        }
+      }
+
+      .selected-equipment {
+        margin-top: $spacing-md;
+        padding-top: $spacing-md;
+        border-top: $border-width solid $c-faint;
+
+        h4 {
+          margin: 0 0 $spacing-sm 0;
+          font-size: $font-size-sm;
+          color: $c-header-text;
+        }
+
+        .selected-equipment-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: $spacing-sm;
+        }
+
+        .selected-equipment-item {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          padding: $spacing-xs $spacing-sm;
+          background: rgba($c-faint, 0.3);
+          border-radius: $border-radius-sm;
+
+          .equip-img {
+            width: 24px;
+            height: 24px;
+            border-radius: $border-radius-sm;
+          }
+
+          .equip-name {
+            font-size: $font-size-sm;
+          }
+
+          .remove-btn {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba($c-danger, 0.2);
+            border: none;
+            border-radius: $border-radius-sm;
+            color: $c-danger;
+            cursor: pointer;
+            font-size: $font-size-xs;
+
+            &:hover {
+              background: $c-danger;
+              color: $c-white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .npc-summary {
+    background: rgba($c-faint, 0.2);
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    border: $border-width solid $c-faint;
+
+    h3 {
+      margin: 0 0 $spacing-md 0;
+      color: $c-header-text;
+      font-size: $font-size-base;
+    }
+
+    .summary-section {
+      margin-bottom: $spacing-md;
+      padding-bottom: $spacing-md;
+      border-bottom: $border-width solid $c-faint;
+
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      h4 {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-sm;
+        color: $c-text-light;
+      }
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: $spacing-xs;
+      font-size: $font-size-sm;
+
+      .summary-label {
+        color: $c-text-light;
+      }
+
+      .summary-value {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+    }
+
+    .summary-attributes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-xs;
+
+      .summary-attr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: $spacing-xs;
+        background: rgba($c-faint, 0.3);
+        border-radius: $border-radius-sm;
+
+        .attr-abbr {
+          font-size: $font-size-xs;
+          color: $c-text-light;
+        }
+
+        .attr-value {
+          font-size: $font-size-lg;
+          font-weight: $font-weight-bold;
+          color: $c-burgundy;
+        }
+      }
+    }
+
+    .summary-derived {
+      .derived-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $spacing-xs;
+        font-size: $font-size-sm;
+
+        span:first-child {
+          color: $c-text-light;
+        }
+
+        span:last-child {
+          font-weight: $font-weight-bold;
+          color: $c-text-dark;
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// FOOTER
+// ========================================
+.npc-creation-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  background: rgba($c-faint, 0.3);
+  border-top: $border-width solid $c-faint;
+  border-radius: 0 0 $border-radius-lg $border-radius-lg;
+
+  .footer-info {
+    .step-info {
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+    }
+  }
+
+  .footer-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    .start-over-btn {
+      padding: $spacing-sm $spacing-md;
+      background: rgba($c-danger, 0.1);
+      border: $border-width solid $c-danger;
+      border-radius: $border-radius-md;
+      color: $c-danger;
+      font-size: $font-size-sm;
+      font-family: $font-primary;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &:hover {
+        background: $c-danger;
+        color: $c-white;
+      }
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: $spacing-sm;
+    }
+
+    .back-btn,
+    .next-btn,
+    .finalize-btn {
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      border: none;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+      transition: all $transition-fast;
+      font-family: $font-primary;
+
+      i {
+        margin: 0 $spacing-xs;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .back-btn {
+      @include button-secondary;
+    }
+
+    .next-btn {
+      @include button-primary;
+    }
+
+    .finalize-btn {
+      @include button-accent;
+    }
+  }
+}
+
+// ========================================
+// KEYBOARD NAVIGATION & FOCUS STATES
+// ========================================
+// Focus visible styles for keyboard navigation
+.class-card,
+.type-card,
+.tier-card,
+.trait-card,
+.gear-card,
+.template-btn {
+  &:focus-visible {
+    outline: 2px solid $c-gold;
+    outline-offset: 2px;
+  }
+}
+
+.adjust-btn,
+.add-trait-btn,
+.remove-btn,
+.add-gear-btn,
+.back-btn,
+.next-btn,
+.finalize-btn,
+.start-over-btn,
+.gear-tab-btn,
+.trait-category-btn {
+  &:focus-visible {
+    outline: 2px solid $c-gold;
+    outline-offset: 2px;
+  }
+}
+
+// Input focus states
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid $c-gold;
+  outline-offset: -1px;
+}
+
+// ========================================
+// RESPONSIVE STYLING
+// ========================================
+@media screen and (max-width: 900px) {
+  // Narrower wizard
+  .step-classtype {
+    .class-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .type-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .step-traits {
+    .traits-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .selected-traits-panel {
+      order: 2;
+    }
+
+    .traits-browser {
+      order: 1;
+    }
+  }
+
+  .step-finalize {
+    .finalize-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .npc-summary {
+      order: 1;
+    }
+
+    .finalize-inputs {
+      order: 2;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  // Header adjustments
+  .npc-creation-header {
+    padding: $spacing-md;
+
+    .creation-title h1 {
+      font-size: $font-size-lg;
+    }
+
+    .step-progress .step-indicator {
+      width: 28px;
+      height: 28px;
+      font-size: $font-size-xs;
+    }
+  }
+
+  // Content padding
+  .npc-creation-content .creation-step-content {
+    padding: $spacing-md;
+  }
+
+  // Kind/Form
+  .step-classtype {
+    .class-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-sm;
+    }
+
+    .class-card {
+      padding: $spacing-md;
+
+      i {
+        font-size: $font-size-lg;
+      }
+    }
+
+    .type-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  // Tier
+  .step-tier .tier-grid {
+    grid-template-columns: 1fr;
+  }
+
+  // Attributes
+  .step-attributes .attributes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  // Skills
+  .step-skills .skill-category .skills-list {
+    grid-template-columns: 1fr;
+  }
+
+  // Traits
+  .step-traits .traits-browser .traits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  // Finalize
+  .step-finalize {
+    .npc-summary .summary-attributes {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .equipment-section .gear-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  // Footer
+  .npc-creation-footer {
+    flex-direction: column;
+    gap: $spacing-md;
+
+    .footer-info {
+      order: 2;
+    }
+
+    .footer-actions {
+      order: 1;
+      width: 100%;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      .start-over-btn {
+        order: 3;
+      }
+
+      .nav-buttons {
+        order: 1;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  // Very small screens
+  .step-classtype .class-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .step-finalize .npc-summary .summary-attributes {
+    grid-template-columns: 1fr 1fr;
+
+    .summary-attr {
+      padding: $spacing-xs;
+
+      .attr-value {
+        font-size: $font-size-base;
+      }
+    }
+  }
+}

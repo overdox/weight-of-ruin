@@ -1,0 +1,3797 @@
+// The Weight of Ruin - Professional Actor Sheet Styles
+// Medieval fantasy aesthetic with warm earth tones
+
+// ============================================
+// SHEET HEADER
+// ============================================
+.sheet-header {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-lg;
+  padding-bottom: $spacing-lg;
+  border-bottom: $border-width-thick solid $c-border-medium;
+  margin-bottom: $spacing-md;
+
+  .header-left {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-lg;
+    flex: 0 0 auto;
+
+    .profile {
+      flex: 0 0 $portrait-size-lg;
+      width: $portrait-size-lg;
+      height: $portrait-size-lg;
+    }
+
+    .profile-img {
+      width: $portrait-size-lg;
+      height: $portrait-size-lg;
+      object-fit: cover;
+      border: $border-width-heavy solid $c-copper;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+      box-shadow: $shadow-md;
+      transition: border-color $transition-fast, box-shadow $transition-fast;
+
+      &:hover {
+        border-color: $c-gold;
+        box-shadow: $shadow-lg;
+      }
+    }
+
+    .header-fields {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 140px;
+
+      .actor-name {
+        margin: 0;
+        padding: 0;
+
+        input {
+          font-size: $font-size-xl;
+          font-weight: $font-weight-bold;
+          font-family: $font-primary;
+          width: 100%;
+          color: $c-text-dark;
+          background: transparent;
+          border: none;
+          border-bottom: $border-width solid transparent;
+
+          &:hover {
+            border-bottom-color: $c-border-light;
+          }
+
+          &:focus {
+            outline: none;
+            border-bottom-color: $c-gold;
+          }
+        }
+      }
+
+      .header-identity {
+        display: flex;
+        flex-direction: column;
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+        padding-left: $spacing-sm;
+        margin-top: $spacing-xs;
+
+        .lineage,
+        .archetype {
+          font-style: italic;
+        }
+      }
+    }
+  }
+
+  .header-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    min-width: 0;
+  }
+}
+
+// ============================================
+// COMBAT STATS BAR (Header row)
+// ============================================
+.combat-stats-bar {
+  display: flex;
+  gap: $spacing-sm;
+  justify-content: flex-end;
+
+  .stat-box {
+    @include flex-column;
+    align-items: center;
+    padding: $spacing-xs $spacing-md;
+    background: rgba($c-stone, 0.06);
+    border: $border-width solid $c-border-light;
+    border-radius: $border-radius-sm;
+    min-width: 60px;
+
+    .stat-label {
+      @include text-label;
+      font-size: 9px;
+    }
+
+    .stat-value {
+      font-size: $font-size-md;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+    }
+  }
+}
+
+// ============================================
+// HEALTH BAR SECTION
+// ============================================
+.health-bar-section {
+  display: flex;
+  gap: $spacing-md;
+  align-items: stretch;
+
+  .fatigue-tracker {
+    flex: 1;
+    @include flex-column;
+    gap: $spacing-xs;
+
+    > label {
+      @include text-label;
+    }
+
+    .fatigue-bar {
+      position: relative;
+      height: 22px;
+      background: $c-parchment-dark;
+      border: $border-width solid $c-border-medium;
+      border-radius: $border-radius-sm;
+      overflow: hidden;
+
+      .fatigue-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: linear-gradient(to right, $c-success, $c-warning);
+        transition: width $transition-slow;
+      }
+
+      .fatigue-text {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        line-height: 22px;
+        color: $c-text-dark;
+      }
+    }
+
+    .fatigue-controls {
+      display: flex;
+      gap: $spacing-xs;
+      justify-content: center;
+
+      button {
+        @include button-secondary;
+        padding: $spacing-xs $spacing-sm;
+        font-size: $font-size-sm;
+        min-width: 28px;
+      }
+    }
+
+    &.crisis {
+      .fatigue-bar {
+        background: $c-danger-bg;
+        border-color: $c-danger;
+      }
+
+      .fatigue-fill {
+        background: $c-danger;
+      }
+
+      .fatigue-text {
+        color: $c-white;
+      }
+    }
+  }
+
+  .injuries-summary {
+    @include flex-column;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-stone, 0.06);
+    border: $border-width solid $c-border-light;
+    border-radius: $border-radius-sm;
+    min-width: 80px;
+
+    .injury-label {
+      @include text-label;
+      font-size: 9px;
+    }
+
+    .injury-count {
+      font-size: $font-size-md;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+
+      &.critical {
+        color: $c-danger;
+      }
+    }
+
+    .injury-add {
+      @include button-secondary;
+      padding: 2px $spacing-xs;
+      font-size: $font-size-xs;
+      margin-top: $spacing-xs;
+    }
+  }
+
+  // Inline Zeal Tracker (in header after injuries)
+  .zeal-tracker-inline {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-gold, 0.08);
+    border: $border-width solid rgba($c-gold, 0.2);
+    border-radius: $border-radius-sm;
+
+    .zeal-icon {
+      font-size: $font-size-md;
+      color: $c-gold;
+    }
+
+    .zeal-pips {
+      display: flex;
+      gap: 4px;
+    }
+
+    .zeal-pip {
+      width: 14px;
+      height: 14px;
+      border: $border-width-thick solid $c-gold;
+      border-radius: $border-radius-full;
+      background: transparent;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &.filled {
+        background: $c-gold;
+      }
+
+      &:hover {
+        background: rgba($c-gold, 0.4);
+        transform: scale(1.1);
+      }
+    }
+
+    .zeal-controls {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      button {
+        @include button-secondary;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        font-size: $font-size-xs;
+      }
+
+      .zeal-value {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $c-gold-dark;
+        min-width: 1rem;
+        text-align: center;
+      }
+    }
+
+    .zeal-label {
+      @include text-label;
+      color: $c-gold-dark;
+    }
+  }
+}
+
+// ============================================
+// RESOURCES BAR (Essence, Zeal)
+// ============================================
+.resources-bar {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: flex-end;
+  align-items: stretch;
+
+  .resource {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-stone, 0.06);
+    border: $border-width solid $c-border-light;
+    border-radius: $border-radius-sm;
+
+    i {
+      font-size: $font-size-md;
+      color: $c-text-medium;
+    }
+
+    .resource-value {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-md;
+      color: $c-text-dark;
+    }
+
+    .resource-label {
+      @include text-label;
+    }
+
+    &.essence {
+      i { color: $c-magic; }
+      .resource-value { color: $c-magic; }
+
+      &.danger {
+        background: $c-danger-bg;
+        border-color: rgba($c-danger, 0.3);
+        i { color: $c-danger; }
+        .resource-value { color: $c-danger; }
+      }
+    }
+
+    &.zeal {
+      @include flex-column;
+      align-items: center;
+      gap: $spacing-xs;
+      padding: $spacing-sm;
+
+      .zeal-pips {
+        display: flex;
+        gap: 4px;
+      }
+
+      .zeal-pip {
+        width: 14px;
+        height: 14px;
+        border: $border-width-thick solid $c-gold;
+        border-radius: $border-radius-full;
+        background: transparent;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &.filled {
+          background: $c-gold;
+        }
+
+        &:hover {
+          background: rgba($c-gold, 0.4);
+          transform: scale(1.1);
+        }
+      }
+
+      .zeal-controls {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+
+        button {
+          @include button-secondary;
+          width: 20px;
+          height: 20px;
+          padding: 0;
+          font-size: $font-size-xs;
+        }
+
+        .zeal-value {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          color: $c-gold-dark;
+          min-width: 1rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// ACTOR SHEET FORM - Reset borders/gaps
+// ============================================
+.weight-of-ruin.actor-sheet form {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+// ============================================
+// HEADER WRAPPER (contains banner + header)
+// ============================================
+.header-wrapper {
+  // Window-content now has no padding for actor sheets, so no negative margins needed
+  width: 100%;
+  margin: 0; // No margins at all - banner should be flush with window edge
+  padding: 0;
+  border: none; // No borders
+  box-shadow: none;
+  background: transparent;
+}
+
+// ============================================
+// SHEET BANNER
+// ============================================
+.sheet-banner {
+  height: 224px;
+  position: relative;
+  z-index: 1; // Lower than header so portrait appears above
+  margin: 0; // Ensure no margins - flush with window top
+  padding: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block; // Remove any inline spacing
+  }
+
+  // Overlay for name on banner (top-left positioning)
+  .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; // Align to left
+    justify-content: flex-start; // Align to top
+    padding: $spacing-sm $spacing-lg;
+  }
+
+  .banner-name-section {
+    .actor-name {
+      margin: 0;
+
+      input {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        font-family: $font-primary;
+        color: $c-white;
+        background: transparent;
+        border: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+
+        &::placeholder {
+          color: rgba($c-white, 0.5);
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .header-identity {
+      margin-top: 0;
+
+      .archetype-lineage {
+        font-size: $font-size-sm;
+        color: rgba($c-white, 0.85);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        font-style: italic;
+      }
+    }
+  }
+}
+
+// ============================================
+// SHEET HEADER (below banner)
+// ============================================
+.header-wrapper .sheet-header {
+  display: flex;
+  align-items: flex-end; // Align items to bottom
+  gap: $spacing-md;
+  padding: 0 $spacing-lg $spacing-sm;
+  border: none; // No borders at all
+  box-shadow: none;
+  background: transparent;
+  margin-bottom: 0;
+  margin-top: -112px; // Pull header up so it overlaps banner more
+  position: relative;
+  z-index: 10;
+  min-height: 100px; // Ensure space for portrait and stats
+  overflow: visible; // Don't clip the portrait
+
+  // Portrait - overlaps banner and extends below
+  .profile {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 15; // Higher z-index to ensure portrait is above banner
+    align-self: flex-end; // Align to bottom of flex container
+    margin-bottom: $spacing-sm; // Small gap between portrait and header bottom
+  }
+
+  .profile-img {
+    // 25% larger: 100px * 1.25 = 125px
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+    border: 4px solid $c-copper;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    box-shadow: $shadow-lg;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+    background: $c-parchment;
+    display: block; // Ensure no inline spacing issues
+
+    &:hover {
+      border-color: $c-gold;
+    }
+  }
+
+  // Stats section - aligned to bottom right of banner
+  .header-stats {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding-bottom: $spacing-xs;
+    justify-content: flex-end;
+  }
+}
+
+// ============================================
+// TAB NAVIGATION
+// ============================================
+.sheet-tabs {
+  display: flex;
+  gap: $spacing-xs;
+  border-top: none; // Ensure no top border
+  border-bottom: $border-width-thick solid $c-copper;
+  border-left: none;
+  border-right: none;
+  margin: 0;
+  margin-top: -1px; // Close any gap between header and tabs
+  padding: 0 $spacing-sm;
+  padding-left: $spacing-lg; // Normal padding - portrait no longer extends here
+  background: $c-parchment;
+  box-shadow: none;
+
+  .item {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $c-text-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: $border-width solid transparent;
+    border-bottom: none;
+    border-radius: $border-radius-sm $border-radius-sm 0 0;
+    background: transparent;
+    transition: all $transition-fast;
+    position: relative;
+    top: $border-width-thick;
+
+    &:hover {
+      color: $c-text-dark;
+      background: rgba($c-copper, 0.08);
+    }
+
+    &.active {
+      color: $c-copper;
+      background: $c-parchment;
+      border-color: $c-copper;
+      border-bottom: $border-width-thick solid $c-parchment;
+    }
+  }
+}
+
+.tab-content {
+  @include parchment-bg;
+  background-color: $c-parchment;
+  padding: $spacing-lg;
+  padding-top: $spacing-md;
+  min-height: 400px;
+}
+
+// ============================================
+// SECTION CONTAINER STYLING
+// ============================================
+.attributes-section,
+.derived-attributes,
+.talents-section,
+.skills-section,
+.inventory-section,
+.passions-section,
+.combat-section .combat-overview,
+.magic-section,
+.equipped-weapons-section {
+  @include section-container;
+}
+
+// ============================================
+// SECTION HEADERS (Brown bar style)
+// ============================================
+.section-header-bar,
+.attributes-section > h3,
+.derived-attributes > h3,
+.talents-section > h3,
+.skills-section > h3,
+.skills-section > .section-header,
+.inventory-section > h3,
+.combat-section h3,
+.magic-section h3,
+.passions-section > h3,
+.equipped-weapons-section > h3 {
+  @include section-header;
+}
+
+// ============================================
+// SECTION ACTIONS (Edit buttons above sections)
+// ============================================
+.section-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $spacing-sm;
+
+  .edit-section-btn {
+    @include button-secondary;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+
+    i {
+      margin-right: $spacing-xs;
+    }
+  }
+}
+
+// ============================================
+// ATTRIBUTES SECTION
+// ============================================
+.attributes-section {
+  > h3 {
+    margin-bottom: 0;
+  }
+
+  .attributes-content {
+    @include section-content;
+  }
+}
+
+// ============================================
+// ATTRIBUTES TABLE (Horizontal Layout)
+// ============================================
+.attributes-table-container {
+  padding: $spacing-md;
+  overflow-x: auto;
+}
+
+.attributes-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  th, td {
+    text-align: center;
+    padding: $spacing-sm $spacing-xs;
+    border: $border-width solid $c-border-light;
+  }
+
+  thead {
+    tr {
+      background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+    }
+
+    th {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $c-text-inverse;  // Light text on dark header
+      cursor: default;
+      padding: $spacing-sm $spacing-xs;
+      border-bottom: $border-width-thick solid $c-copper;
+
+      &.row-label {
+        width: 80px;
+        background: rgba($c-stone, 0.1);
+        color: $c-text-inverse;
+      }
+
+      &.attr-header {
+        min-width: 50px;
+        transition: background-color $transition-fast;
+
+        &:hover {
+          background: rgba($c-white, 0.15);
+        }
+
+        // Witchsight header styling
+        &.witchsight {
+          color: $c-magic-light;
+          background: rgba($c-magic, 0.3);
+
+          &:hover {
+            background: rgba($c-magic, 0.4);
+          }
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      transition: background-color $transition-fast;
+
+      &:hover {
+        background: rgba($c-stone, 0.05);
+      }
+
+      // Row label column
+      td.row-label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: $c-text-medium;
+        text-align: right;
+        padding-right: $spacing-md;
+        background: rgba($c-stone, 0.04);
+        border-right: $border-width-thick solid $c-border-medium;
+      }
+    }
+
+    // Base row
+    .base-row {
+      background: rgba($c-parchment-dark, 0.3);
+
+      td.row-label {
+        color: $c-text-dark;
+      }
+    }
+
+    // Advances row
+    .advances-row {
+      background: rgba($c-success, 0.05);
+
+      td.row-label {
+        color: $c-text-dark;
+      }
+    }
+
+    // Modifier row
+    .modifier-row {
+      background: rgba($c-stone, 0.03);
+
+      td.row-label {
+        color: $c-text-dark;
+      }
+    }
+
+    // Total row (emphasized)
+    .total-row {
+      background: linear-gradient(90deg, rgba($c-burgundy, 0.08) 0%, rgba($c-copper, 0.08) 100%);
+      border-top: $border-width-thick solid $c-copper;
+
+      td.row-label {
+        color: $c-text-dark;
+        font-weight: $font-weight-bold;
+        background: rgba($c-copper, 0.1);
+      }
+    }
+
+    // Attribute values
+    .attr-value {
+      font-size: $font-size-base;
+      color: $c-text-dark;
+
+      // N/A cells (Witchsight for base/advances/modifier)
+      &.na {
+        color: $c-text-light;
+        font-style: italic;
+      }
+
+      // Total values (emphasized and clickable)
+      &.total {
+        font-size: $font-size-md;
+        font-weight: $font-weight-bold;
+      }
+
+      // Rollable styling
+      &.rollable {
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover {
+          background: rgba($c-gold, 0.2);
+          color: $c-gold-dark;
+        }
+      }
+
+      // Witchsight column styling
+      &.witchsight {
+        background: rgba($c-magic, 0.05);
+        color: $c-magic-dark;
+
+        &.rollable:hover {
+          background: rgba($c-magic, 0.2);
+          color: $c-magic;
+        }
+      }
+    }
+  }
+}
+
+// Legacy .attribute-box styles for attribute editor dialog
+.attribute-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm;
+  border-radius: $border-radius-sm;
+  transition: all $transition-fast;
+  width: 100px;
+  height: 124px;
+  position: relative;
+  isolation: isolate;
+
+  // Inner tint contained within the border (behind content)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 7px;
+    right: 7px;
+    bottom: 8px;
+    background-color: rgba($c-stone, 0.15);
+    border-radius: 0;
+    z-index: -2;
+    transition: background-color $transition-fast;
+  }
+
+  // Border SVG as overlay
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/border.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  border: none;
+
+  &:hover::before {
+    background-color: rgba($c-stone, 0.25);
+  }
+
+  .attribute-name {
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $c-text-dark;
+    margin-bottom: $spacing-xs;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .attribute-value-container {
+    cursor: pointer;
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  .attribute-value {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $c-text-dark;
+  }
+
+  .attribute-abbr {
+    font-size: 10px;
+    color: $c-text-medium;
+    margin-top: $spacing-xs;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+  }
+
+  .attribute-input {
+    @include value-circle(44px);
+    text-align: center;
+    border: $border-width-thick solid $c-gold;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    padding: 0;
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  // Witchsight special styling - purple tint inside border
+  &.witchsight {
+    &::before {
+      background-color: rgba($c-magic, 0.15);
+    }
+
+    .attribute-name,
+    .attribute-abbr {
+      color: $c-magic;
+    }
+
+    .attribute-value {
+      color: $c-magic-dark;
+    }
+
+    &:hover::before {
+      background-color: rgba($c-magic, 0.25);
+    }
+  }
+}
+
+
+// ============================================
+// ATTRIBUTE EDITOR DIALOG
+// ============================================
+.attribute-editor-form {
+  padding: $spacing-md;
+
+  .attribute-editor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+  }
+
+  .attribute-editor-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($c-stone, 0.06);
+    border: $border-width solid $c-border-light;
+    border-radius: $border-radius-sm;
+
+    label {
+      flex: 1;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+      text-transform: uppercase;
+      font-size: $font-size-sm;
+      letter-spacing: 0.5px;
+
+      .attribute-abbr {
+        display: inline-block;
+        margin-left: $spacing-sm;
+        font-size: $font-size-xs;
+        color: $c-text-medium;
+        font-weight: $font-weight-normal;
+      }
+    }
+
+    input[type="number"] {
+      @include input-base;
+      width: 70px;
+      text-align: center;
+      font-size: $font-size-md;
+      font-weight: $font-weight-bold;
+    }
+
+    &.witchsight-row {
+      grid-column: span 2;
+      justify-content: center;
+      margin-top: $spacing-sm;
+      background: rgba($c-magic, 0.1);
+      border-color: rgba($c-magic, 0.3);
+
+      label {
+        color: $c-magic;
+      }
+    }
+  }
+
+  // Expanded attribute editor with base/advances/modifier
+  &.attribute-editor-expanded {
+    .attribute-editor-list {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+
+    .attribute-editor-row {
+      flex-direction: column;
+      align-items: stretch;
+      padding: $spacing-md;
+
+      label {
+        margin-bottom: $spacing-sm;
+        text-align: center;
+      }
+
+      .attribute-components {
+        display: flex;
+        gap: $spacing-md;
+        justify-content: center;
+
+        .component {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: $spacing-xs;
+
+          .component-label {
+            font-size: $font-size-xs;
+            color: $c-text-medium;
+            text-transform: uppercase;
+          }
+
+          input[type="number"] {
+            width: 60px;
+          }
+
+          &.readonly {
+            .component-value {
+              font-size: $font-size-md;
+              font-weight: $font-weight-bold;
+              color: $c-text-medium;
+              background: rgba($c-stone, 0.08);
+              padding: $spacing-xs $spacing-md;
+              border-radius: $border-radius-sm;
+              min-width: 50px;
+              text-align: center;
+            }
+          }
+
+          &.editable {
+            input[type="number"] {
+              border-color: $c-gold;
+              background: $c-input-bg;
+            }
+          }
+
+          &.total {
+            .total-value {
+              font-size: $font-size-md;
+              font-weight: $font-weight-bold;
+              color: $c-copper;
+              background: rgba($c-copper, 0.1);
+              padding: $spacing-xs $spacing-md;
+              border-radius: $border-radius-sm;
+              min-width: 60px;
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      .readonly-value {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $c-text-medium;
+        background: rgba($c-stone, 0.08);
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $border-radius-sm;
+      }
+
+      &.witchsight-row {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        label {
+          margin-bottom: 0;
+          flex: none;
+        }
+
+        input[type="number"] {
+          width: 80px;
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// DERIVED ATTRIBUTES (Standalone Section)
+// ============================================
+.derived-attributes {
+  > h3 {
+    margin-bottom: 0;
+  }
+}
+
+.derived-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.derived-box {
+  @include derived-box;
+  border-right: $border-width solid $c-border-light;
+
+  &:nth-child(3n) {
+    border-right: none;
+  }
+
+  .derived-label {
+    @include text-label;
+    margin-bottom: $spacing-xs;
+  }
+
+  .derived-value {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $c-text-dark;
+  }
+}
+
+// ============================================
+// RESOURCES SECTION (Trauma, Wounds, Zeal)
+// ============================================
+.resources-section {
+  margin-top: $spacing-lg;
+
+  > h3 {
+    margin-bottom: 0;
+    background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-md $border-radius-md 0 0;
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-variant: small-caps;
+    color: $c-text-inverse;
+  }
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid $c-border-medium;
+  border-top: none;
+  border-radius: 0 0 $border-radius-md $border-radius-md;
+  background: $c-parchment;
+}
+
+.resource-box {
+  padding: $spacing-lg;
+  border-right: 1px solid $c-border-light;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  .resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .resource-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $c-text-medium;
+  }
+
+  .resource-value {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $c-text-dark;
+
+    &.critical {
+      color: $c-danger;
+    }
+  }
+
+  .resource-bar-container {
+    width: 100%;
+  }
+
+  .resource-bar {
+    height: 12px;
+    background: rgba($c-border-medium, 0.3);
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    position: relative;
+
+    .resource-fill {
+      height: 100%;
+      background: linear-gradient(90deg, $c-copper 0%, $c-gold 100%);
+      border-radius: $border-radius-sm;
+      transition: width $transition-base;
+    }
+  }
+
+  &.trauma {
+    .resource-bar .resource-fill {
+      background: linear-gradient(90deg, $c-gold 0%, $c-copper 100%);
+    }
+
+    &.critical {
+      .resource-bar .resource-fill {
+        background: linear-gradient(90deg, $c-danger 0%, var(--wor-danger-darker) 100%);
+      }
+
+      .resource-value {
+        color: $c-danger;
+      }
+    }
+  }
+
+  .resource-pips {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: center;
+    padding: $spacing-sm 0;
+  }
+
+  .wound-pip {
+    font-size: $font-size-lg;
+    color: $c-border-medium;
+    transition: color $transition-fast;
+
+    &.filled {
+      color: $c-danger;
+    }
+  }
+
+  .zeal-pip {
+    font-size: $font-size-lg;
+    color: $c-border-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.filled {
+      color: $c-gold;
+      text-shadow: 0 0 4px rgba($c-gold, 0.5);
+    }
+
+    &:hover {
+      color: $c-gold;
+      transform: scale(1.1);
+    }
+  }
+
+  .resource-controls {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-xs;
+  }
+
+  .resource-btn {
+    @include clickable;
+    padding: $spacing-xs $spacing-sm;
+    border: 1px solid $c-border-medium;
+    border-radius: $border-radius-sm;
+    background: $c-parchment-light;
+    color: $c-text-medium;
+    font-size: $font-size-sm;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $c-copper;
+      color: $c-text-inverse;
+      border-color: $c-copper;
+    }
+
+    &.roll {
+      background: $c-burgundy;
+      color: $c-text-inverse;
+      border-color: $c-burgundy;
+
+      &:hover {
+        background: var(--wor-burgundy-darker);
+      }
+    }
+  }
+
+  .resource-warning {
+    font-size: $font-size-xs;
+    color: $c-danger;
+    text-align: center;
+    padding: $spacing-xs;
+    background: var(--wor-danger-alpha-10);
+    border-radius: $border-radius-sm;
+    margin-top: $spacing-xs;
+
+    i {
+      margin-right: $spacing-xs;
+    }
+  }
+
+  .stabilized-indicator {
+    font-size: $font-size-xs;
+    color: $c-success;
+    text-align: center;
+
+    i {
+      margin-right: $spacing-xs;
+    }
+  }
+
+  // Wounds specific
+  &.wounds {
+    &.unconscious {
+      .resource-label {
+        color: $c-warning;
+      }
+    }
+
+    &.dead {
+      .resource-label {
+        color: $c-danger;
+      }
+
+      .wound-pip {
+        color: $c-border-light;
+
+        &.filled {
+          color: $c-border-medium;
+        }
+      }
+    }
+  }
+
+  // Zeal specific
+  &.zeal {
+    .resource-label {
+      color: var(--wor-gold-darker);
+    }
+  }
+
+  // Fervor specific (renamed from Zeal)
+  &.fervor {
+    .resource-label {
+      color: var(--wor-gold-darker);
+    }
+  }
+
+  .fervor-pip {
+    font-size: $font-size-lg;
+    color: $c-border-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.filled {
+      color: $c-gold;
+      text-shadow: 0 0 4px var(--wor-gold-alpha-50);
+    }
+
+    &:hover {
+      color: $c-gold;
+      transform: scale(1.1);
+    }
+  }
+}
+
+// ============================================
+// HEALTH & FERVOR WRAPPER (Side by Side)
+// ============================================
+.health-fervor-wrapper {
+  display: flex;
+  gap: $spacing-lg;
+  margin-top: $spacing-lg;
+
+  .resources-section {
+    flex: 1;
+    margin-top: 0;
+  }
+
+  .health-section {
+    flex: 2;
+  }
+
+  .fervor-section {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
+// Section header with button (can be used as wrapper div or directly on h3)
+.section-header-with-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius-md $border-radius-md 0 0;
+
+  h3 {
+    margin: 0;
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-variant: small-caps;
+    color: $c-text-inverse;
+  }
+
+  // When applied directly to h3
+  .edit-section-btn {
+    @include clickable;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $c-text-inverse;
+    background: rgba($c-white, 0.15);
+    border: 1px solid rgba($c-white, 0.3);
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    margin-left: auto;
+
+    &:hover {
+      background: rgba($c-white, 0.25);
+      border-color: rgba($c-white, 0.5);
+    }
+
+    i {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// When h3 itself has the class
+h3.section-header-with-button {
+  margin: 0;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-variant: small-caps;
+  color: $c-text-inverse;
+}
+
+// Rest button
+.rest-btn {
+  @include clickable;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $c-text-inverse;
+  background: rgba($c-white, 0.15);
+  border: 1px solid rgba($c-white, 0.3);
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  i {
+    font-size: $font-size-sm;
+  }
+
+  &:hover {
+    background: rgba($c-white, 0.25);
+    border-color: rgba($c-white, 0.5);
+  }
+}
+
+// Health and Fervor grids (adjusted for side-by-side layout)
+.health-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+.fervor-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+// Rest dialog styles
+.rest-dialog-form {
+  padding: $spacing-md;
+
+  .rest-info {
+    font-size: $font-size-sm;
+    color: $c-text-medium;
+    margin: 0 0 $spacing-sm 0;
+
+    &:last-of-type {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  .form-group {
+    margin-bottom: $spacing-md;
+
+    label {
+      display: block;
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-xs;
+      color: $c-text-dark;
+    }
+
+    select,
+    input[type="number"] {
+      @include input-base;
+      width: 100%;
+    }
+
+    &.custom-duration {
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      font-weight: $font-weight-normal;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: $c-gold;
+      }
+    }
+
+    .hint {
+      margin: $spacing-xs 0 0 26px;
+      font-size: $font-size-xs;
+      color: $c-text-light;
+      font-style: italic;
+    }
+  }
+
+  .rest-preview {
+    margin-top: $spacing-lg;
+    padding: $spacing-md;
+    background: rgba($c-success, 0.1);
+    border: 1px solid rgba($c-success, 0.2);
+    border-radius: $border-radius-sm;
+
+    p {
+      margin: 0 0 $spacing-xs 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .preview-value {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $c-success-dark;
+    }
+  }
+}
+
+// Rest result chat message
+.wor.rest-result {
+  padding: $spacing-md;
+  background: rgba($c-success, 0.1);
+  border-radius: $border-radius-sm;
+
+  h3 {
+    margin: 0 0 $spacing-sm 0;
+    font-size: $font-size-md;
+    color: $c-success-dark;
+
+    i {
+      margin-right: $spacing-sm;
+    }
+  }
+
+  p {
+    margin: 0;
+    color: $c-text-dark;
+  }
+}
+
+// ============================================
+// TALENTS SECTION (Expandable)
+// ============================================
+.talents-section {
+  .section-header {
+    @include flex-between;
+    margin-bottom: 0;
+    background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+    border-radius: $border-radius-md $border-radius-md 0 0;
+    padding: $spacing-sm $spacing-lg;
+
+    h3 {
+      margin: 0;
+      flex: 1;
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-variant: small-caps;
+      color: $c-text-inverse;
+    }
+
+    .item-create {
+      color: $c-text-inverse;
+      opacity: 0.8;
+      transition: opacity $transition-fast;
+
+      &:hover {
+        opacity: 1;
+        color: $c-gold;
+      }
+    }
+  }
+}
+
+.talent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid $c-border-medium;
+  border-top: none;
+  border-radius: 0 0 $border-radius-md $border-radius-md;
+  background: $c-parchment;
+
+  .talent-item {
+    border-bottom: 1px solid $c-border-light;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:last-child {
+      border-bottom: none;
+      border-radius: 0 0 $border-radius-md $border-radius-md;
+    }
+
+    &:hover {
+      background: rgba($c-gold, 0.08);
+    }
+
+    // Talent Header (always visible)
+    .talent-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: $spacing-md $spacing-lg;
+      gap: $spacing-md;
+    }
+
+    .talent-main {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      flex: 1;
+    }
+
+    .talent-expand-icon {
+      color: $c-text-light;
+      width: 16px;
+      transition: transform $transition-fast;
+
+      i {
+        font-size: $font-size-sm;
+      }
+    }
+
+    .talent-name {
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+    }
+
+    .talent-type {
+      font-size: $font-size-xs;
+      padding: 2px 8px;
+      border-radius: $border-radius-sm;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      &.talent-type-universal {
+        background: var(--wor-copper-alpha-20);
+        color: var(--wor-copper-darker);
+      }
+
+      &.talent-type-archetype {
+        background: var(--wor-burgundy-alpha-20);
+        color: $c-burgundy;
+      }
+
+      &.talent-type-signature {
+        background: var(--wor-gold-alpha-30);
+        color: var(--wor-gold-darker);
+      }
+    }
+
+    .talent-meta {
+      display: flex;
+      align-items: center;
+      gap: $spacing-lg;
+    }
+
+    .talent-rank {
+      display: flex;
+      gap: 3px;
+
+      .talent-rank-pip {
+        font-size: 8px;
+        color: $c-border-medium;
+
+        &.filled {
+          color: $c-gold;
+        }
+      }
+    }
+
+    .talent-controls {
+      display: flex;
+      gap: $spacing-sm;
+      opacity: 0;
+      transition: opacity $transition-fast;
+
+      .item-control {
+        @include clickable;
+        padding: $spacing-xs;
+        color: $c-text-light;
+
+        &:hover {
+          color: $c-gold;
+        }
+      }
+    }
+
+    &:hover .talent-controls {
+      opacity: 1;
+    }
+
+    // Talent Details (hidden by default)
+    .talent-details {
+      display: none;
+      padding: 0 $spacing-lg $spacing-lg ($spacing-lg + 16px + $spacing-md);
+      border-top: 1px dashed $c-border-light;
+      background: rgba($c-parchment, 0.5);
+
+      h4 {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $c-burgundy;
+        margin: $spacing-md 0 $spacing-sm 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        &:first-child {
+          margin-top: 0;
+          padding-top: $spacing-md;
+        }
+      }
+
+      .talent-effect-text,
+      .talent-description-text {
+        font-size: $font-size-sm;
+        line-height: 1.5;
+        color: $c-text-dark;
+
+        p {
+          margin: 0 0 $spacing-sm 0;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .prereq-list,
+      .restriction-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          font-size: $font-size-sm;
+          padding: $spacing-xs 0;
+          color: $c-text-medium;
+
+          i {
+            width: 16px;
+            margin-right: $spacing-sm;
+            color: $c-copper;
+          }
+        }
+      }
+
+      .talent-bonuses,
+      .talent-abilities {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+        margin-top: $spacing-sm;
+      }
+
+      .bonus-tag,
+      .ability-tag {
+        font-size: $font-size-xs;
+        padding: 2px 8px;
+        border-radius: $border-radius-sm;
+        background: var(--wor-gold-alpha-15);
+        color: var(--wor-gold-darker);
+
+        i {
+          margin-right: 4px;
+        }
+      }
+
+      .ability-tag {
+        background: var(--wor-burgundy-alpha-15);
+        color: $c-burgundy;
+      }
+    }
+
+    // Expanded state
+    &.expanded {
+      background: var(--wor-gold-alpha-05);
+
+      .talent-expand-icon {
+        transform: rotate(90deg);
+      }
+
+      .talent-details {
+        display: block;
+      }
+    }
+  }
+}
+
+// ============================================
+// SKILLS SECTION
+// ============================================
+.skills-section {
+  .section-header {
+    @include flex-between;
+    margin-bottom: 0;
+    background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+    border-radius: $border-radius-md $border-radius-md 0 0;
+
+    h3 {
+      margin: 0;
+      flex: 1;
+      padding: $spacing-sm $spacing-lg;
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-variant: small-caps;
+      color: $c-header-text;
+    }
+
+    .skill-visibility-toggle {
+      padding: $spacing-sm $spacing-md;
+
+      .toggle-label {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        font-size: $font-size-sm;
+        color: $c-header-text;
+        cursor: pointer;
+
+        input {
+          cursor: pointer;
+          accent-color: $c-gold;
+        }
+      }
+    }
+  }
+
+  > h3 {
+    margin-bottom: 0;
+  }
+
+  .skill-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.skill-category {
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .category-header {
+    @include flex-between;
+    padding: $spacing-sm $spacing-lg;
+    background: rgba($c-copper, 0.1);
+    border-bottom: $border-width solid $c-border-light;
+    cursor: pointer;
+
+    h4 {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0;
+      color: $c-copper;
+    }
+
+    .category-count {
+      font-size: $font-size-sm;
+      color: $c-text-light;
+    }
+
+    .category-toggle {
+      color: $c-text-medium;
+      transition: transform $transition-fast;
+    }
+
+    &.collapsed .category-toggle {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.skill-item {
+  @include list-row-alternating;
+  padding: $spacing-sm $spacing-lg;
+
+  &.gated {
+    opacity: 0.5;
+  }
+
+  &.unranked {
+    .skill-name {
+      color: $c-text-light;
+    }
+  }
+
+  .skill-name {
+    flex: 1;
+    font-weight: $font-weight-normal;
+    color: $c-text-dark;
+    cursor: pointer;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $c-gold;
+    }
+
+    &.disabled {
+      color: $c-text-light;
+      cursor: not-allowed;
+    }
+
+    .witchsight-indicator {
+      margin-left: $spacing-sm;
+      color: $c-magic;
+      font-size: $font-size-xs;
+    }
+  }
+
+  .skill-attribute {
+    font-size: $font-size-sm;
+    color: $c-text-light;
+    min-width: 35px;
+    text-align: center;
+  }
+
+  .skill-rank {
+    font-weight: $font-weight-bold;
+    color: $c-gold;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .skill-pool {
+    font-size: $font-size-sm;
+    color: $c-text-dark;
+    min-width: 50px;
+    text-align: center;
+    font-weight: $font-weight-bold;
+  }
+
+  .skill-controls {
+    display: flex;
+    gap: $spacing-sm;
+    opacity: 0;
+    transition: opacity $transition-fast;
+
+    .item-control {
+      @include clickable;
+      padding: $spacing-xs;
+      color: $c-text-light;
+    }
+  }
+
+  &:hover .skill-controls {
+    opacity: 1;
+  }
+}
+
+// ============================================
+// INVENTORY SECTION
+// ============================================
+.inventory-section {
+  > h3 {
+    margin-bottom: 0;
+  }
+}
+
+.inventory-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.inventory-item {
+  @include list-row-alternating;
+  padding: $spacing-sm $spacing-lg;
+
+  &.equipped {
+    background: $c-success-bg;
+    border-left: $border-width-thick solid $c-success;
+  }
+
+  .item-equip {
+    @include clickable;
+    color: $c-text-light;
+
+    &:hover {
+      color: $c-success;
+    }
+  }
+
+  &.equipped .item-equip {
+    color: $c-success;
+  }
+
+  .item-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: $border-width solid $c-border-medium;
+    border-radius: $border-radius-sm;
+    object-fit: cover;
+    margin-right: $spacing-sm;
+    background: $c-parchment;
+  }
+
+  // Equip/Unequip Button
+  .equip-btn {
+    flex-shrink: 0;
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    border: $border-width solid $c-border-medium;
+    border-radius: $border-radius-sm;
+    background: $c-parchment-dark;
+    color: $c-text-dark;
+    cursor: pointer;
+    transition: all $transition-fast;
+    min-width: 60px;
+    text-align: center;
+
+    &:hover {
+      background: $c-success-bg;
+      border-color: $c-success;
+      color: $c-success;
+    }
+
+    &.equipped {
+      background: $c-success;
+      border-color: $c-success;
+      color: $c-white;
+
+      &:hover {
+        background: rgba($c-danger, 0.9);
+        border-color: $c-danger;
+        color: $c-white;
+      }
+    }
+  }
+
+  .item-name {
+    flex: 1;
+    font-weight: $font-weight-normal;
+    color: $c-text-dark;
+    cursor: pointer;
+
+    &:hover {
+      color: $c-gold;
+    }
+  }
+
+  .equipped-badge {
+    @include status-badge-success;
+    font-size: $font-size-xs;
+  }
+
+  .item-controls {
+    display: flex;
+    gap: $spacing-sm;
+    opacity: 0;
+    transition: opacity $transition-fast;
+
+    .item-control {
+      @include clickable;
+      padding: $spacing-xs;
+      color: $c-text-light;
+
+      &.item-delete:hover {
+        color: $c-danger;
+      }
+    }
+  }
+
+  &:hover .item-controls {
+    opacity: 1;
+  }
+
+  // Weapon stats
+  .weapon-damage,
+  .weapon-attribute,
+  .weapon-skill {
+    font-size: $font-size-sm;
+    color: $c-text-medium;
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  // Armor stats
+  .armor-dr,
+  .armor-defense,
+  .armor-penalty {
+    font-size: $font-size-sm;
+    color: $c-text-medium;
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  // Gear stats
+  .gear-quantity,
+  .gear-weight {
+    font-size: $font-size-sm;
+    color: $c-text-medium;
+  }
+}
+
+.encumbrance-summary {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  background: rgba($c-stone, 0.06);
+  border-top: $border-width solid $c-border-light;
+
+  label {
+    @include text-label;
+  }
+
+  .encumbrance-value {
+    font-weight: $font-weight-bold;
+    color: $c-text-dark;
+  }
+
+  &.encumbered {
+    @include danger-state;
+  }
+}
+
+// ============================================
+// PASSIONS SECTION
+// ============================================
+.passions-section {
+  > h3 {
+    margin-bottom: 0;
+  }
+}
+
+.passions-grid {
+  display: grid;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+
+  .passion {
+    padding: $spacing-md $spacing-lg;
+    background: rgba($c-stone, 0.04);
+    border: $border-width solid $c-border-light;
+    border-radius: $border-radius-sm;
+
+    label {
+      display: block;
+      @include text-label;
+      margin-bottom: $spacing-sm;
+    }
+
+    input {
+      @include input-base;
+      width: 100%;
+    }
+
+    .passion-value {
+      font-size: $font-size-base;
+      color: $c-text-dark;
+
+      em {
+        color: $c-text-light;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+.zeal-tracker {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  margin: 0 $spacing-lg $spacing-lg $spacing-lg;
+  padding: $spacing-md $spacing-lg;
+  background: rgba($c-gold, 0.08);
+  border: $border-width solid rgba($c-gold, 0.2);
+  border-radius: $border-radius-sm;
+
+  > label {
+    @include text-label;
+    color: $c-gold-dark;
+  }
+
+  .zeal-pips {
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  .zeal-pip {
+    width: 24px;
+    height: 24px;
+    border: $border-width-thick solid $c-gold;
+    border-radius: $border-radius-full;
+    background: transparent;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.filled {
+      background: $c-gold;
+    }
+
+    &:hover {
+      background: rgba($c-gold, 0.3);
+    }
+  }
+
+  .zeal-value {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $c-gold-dark;
+  }
+}
+
+// ============================================
+// CONDITIONS SECTION
+// ============================================
+.conditions-section {
+  margin: $spacing-xl 0;
+  padding: $spacing-lg;
+  background: $c-bg-elevated;
+  border: $border-width solid $c-border-light;
+  border-radius: $border-radius-md;
+
+  .conditions-header {
+    @include flex-between;
+    margin-bottom: $spacing-md;
+
+    h4 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      margin: 0;
+      color: $c-text-dark;
+    }
+
+    .condition-reference-btn {
+      @include button-secondary;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+    }
+  }
+
+  .condition-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+
+  .condition-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: $c-danger-bg;
+    border: $border-width solid rgba($c-danger, 0.2);
+    border-radius: $border-radius-sm;
+
+    .condition-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: $border-radius-sm;
+    }
+
+    .condition-info {
+      .condition-name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+
+      .condition-duration {
+        font-size: $font-size-xs;
+        color: $c-text-medium;
+
+        i { margin-right: $spacing-xs; }
+      }
+    }
+
+    .condition-remove {
+      @include clickable;
+      opacity: 0;
+      color: $c-text-light;
+
+      &:hover { color: $c-danger; }
+    }
+
+    &:hover .condition-remove {
+      opacity: 1;
+    }
+  }
+
+  .no-conditions {
+    font-size: $font-size-base;
+    color: $c-text-light;
+    font-style: italic;
+    text-align: center;
+    padding: $spacing-md;
+    margin: 0;
+  }
+}
+
+// ============================================
+// COMBAT TAB
+// ============================================
+.combat-section {
+  .combat-overview {
+    margin-bottom: $spacing-xl;
+
+    h3 {
+      margin-bottom: $spacing-md;
+    }
+  }
+}
+
+.combat-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+
+  .combat-stat {
+    @include derived-box;
+    border-right: $border-width solid $c-border-light;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    .stat-label {
+      @include text-label;
+      margin-bottom: $spacing-xs;
+    }
+
+    .stat-value {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+    }
+
+    .stat-breakdown {
+      font-size: $font-size-xs;
+      color: $c-text-light;
+      margin-top: $spacing-xs;
+    }
+
+    // DR display with S/P/B breakdown
+    &.dr-stat .dr-display {
+      display: flex;
+      gap: $spacing-sm;
+      font-size: $font-size-md;
+
+      .dr-type {
+        padding: 2px 6px;
+        border-radius: $border-radius-sm;
+        background: rgba($c-stone, 0.1);
+        font-weight: $font-weight-bold;
+
+        &:first-child { color: #c44; } // Slash - red tint
+        &:nth-child(2) { color: #48a; } // Pierce - blue tint
+        &:last-child { color: #a84; } // Blunt - brown tint
+      }
+    }
+  }
+}
+
+// Compact DR display for headers
+.dr-compact {
+  font-family: $font-mono;
+  letter-spacing: -0.5px;
+}
+
+// ============================================
+// INITIATIVE ROLL SECTION
+// ============================================
+.initiative-roll-section {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  margin-top: $spacing-lg;
+  padding: $spacing-md $spacing-lg;
+  background: var(--wor-bg-elevated);
+  border: $border-width solid var(--wor-border);
+  border-radius: $border-radius-md;
+
+  .initiative-button {
+    @include button-primary;
+    padding: $spacing-sm $spacing-lg;
+    white-space: nowrap;
+
+    i {
+      margin-right: $spacing-sm;
+    }
+  }
+
+  .initiative-hint {
+    font-size: $font-size-sm;
+    color: var(--wor-text-muted);
+    font-style: italic;
+  }
+}
+
+.equipped-weapons-section {
+  > h3 {
+    margin-bottom: 0;
+  }
+}
+
+.equipped-weapon-list {
+  list-style: none;
+  margin: 0;
+  padding: $spacing-lg;
+}
+
+.equipped-weapon-item {
+  @include flex-between;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  background: $c-bg-elevated;
+  border: $border-width solid $c-border-light;
+  border-radius: $border-radius-md;
+
+  .weapon-info {
+    @include flex-column;
+    gap: $spacing-sm;
+
+    .weapon-name {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-md;
+      color: $c-text-dark;
+    }
+
+    .weapon-stats {
+      display: flex;
+      gap: $spacing-lg;
+      font-size: $font-size-sm;
+      color: $c-text-medium;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+      }
+    }
+  }
+
+  .weapon-actions {
+    .attack-button {
+      @include button-accent;
+      padding: $spacing-md $spacing-xl;
+
+      i { margin-right: $spacing-sm; }
+    }
+  }
+}
+
+.no-weapons-equipped {
+  text-align: center;
+  padding: $spacing-2xl;
+  margin: $spacing-lg;
+  background: rgba($c-stone, 0.04);
+  border: $border-width dashed $c-border-light;
+  border-radius: $border-radius-sm;
+
+  .empty-notice {
+    color: $c-text-medium;
+    margin: 0 0 $spacing-sm 0;
+  }
+
+  .equip-hint {
+    font-size: $font-size-sm;
+    color: $c-text-light;
+    margin: 0;
+  }
+}
+
+// ============================================
+// DEFENSE ROLL SECTION
+// ============================================
+.defense-roll-section {
+  margin-top: $spacing-xl;
+  padding: $spacing-lg;
+  background: var(--wor-bg-elevated);
+  border: $border-width solid var(--wor-border);
+  border-radius: $border-radius-md;
+
+  h3 {
+    @include subsection-header;
+    margin: 0 0 $spacing-md 0;
+  }
+
+  // Full Defense Active Banner
+  .full-defense-active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    margin-bottom: $spacing-md;
+    background: linear-gradient(135deg, $c-success-light, $c-success);
+    border-radius: $border-radius-sm;
+    color: $c-white;
+    font-weight: $font-weight-bold;
+
+    i {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .defense-pool-preview {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-sm;
+
+    .pool-label {
+      color: var(--wor-text-muted);
+    }
+
+    .pool-value {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-lg;
+      color: var(--wor-text-primary);
+    }
+
+    .pool-breakdown {
+      color: var(--wor-text-muted);
+      font-size: $font-size-xs;
+    }
+  }
+
+  // Button container for defense actions
+  .defense-buttons {
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  .defense-button {
+    @include button-primary;
+    flex: 1;
+    padding: $spacing-md $spacing-lg;
+
+    i {
+      margin-right: $spacing-sm;
+    }
+  }
+
+  .full-defense-button {
+    @include button-secondary;
+    flex: 1;
+    padding: $spacing-md $spacing-lg;
+
+    i {
+      margin-right: $spacing-sm;
+    }
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, $c-success-light, $c-success);
+      border-color: $c-success-dark;
+      color: $c-white;
+    }
+
+    &.active,
+    &:disabled {
+      background: linear-gradient(135deg, $c-success-light, $c-success);
+      border-color: $c-success-dark;
+      color: $c-white;
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ============================================
+// COMBAT MODIFIERS
+// ============================================
+.combat-modifiers-section {
+  margin-top: $spacing-xl;
+  padding: $spacing-lg;
+  background: $c-bg-elevated;
+  border: $border-width solid $c-border-light;
+  border-radius: $border-radius-md;
+
+  h4 {
+    @include subsection-header;
+  }
+
+  .modifiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-sm;
+
+    .modifier-item {
+      padding: $spacing-sm $spacing-md;
+      border-radius: $border-radius-sm;
+      text-align: center;
+
+      .modifier-name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+      }
+
+      &.bonus {
+        background: $c-success-bg;
+        border: $border-width solid rgba($c-success, 0.2);
+        .modifier-name { color: $c-success-dark; }
+      }
+
+      &.penalty {
+        background: $c-danger-bg;
+        border: $border-width solid rgba($c-danger, 0.2);
+        .modifier-name { color: $c-danger; }
+      }
+    }
+  }
+}
+
+// ============================================
+// INJURIES SECTION
+// ============================================
+.injuries-section {
+  margin-top: $spacing-xl;
+
+  h4 {
+    @include subsection-header;
+  }
+
+  .injury-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &.compact .injury-item {
+      padding: $spacing-sm $spacing-md;
+    }
+  }
+
+  .injury-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md;
+    background: $c-danger-bg;
+    border-left: $border-width-thick solid $c-danger;
+    margin-bottom: $spacing-sm;
+
+    .injury-description {
+      flex: 1;
+      font-size: $font-size-sm;
+      color: $c-text-dark;
+    }
+
+    .injury-remove {
+      @include clickable;
+      color: $c-text-light;
+
+      &:hover { color: $c-danger; }
+    }
+  }
+}
+
+// ============================================
+// ITEM CREATE ROW
+// ============================================
+.item-create-row {
+  padding: $spacing-md;
+  text-align: center;
+  border-top: $border-width dashed $c-border-light;
+
+  .item-create {
+    @include clickable;
+    font-size: $font-size-sm;
+    color: $c-text-medium;
+
+    i { margin-right: $spacing-sm; }
+
+    &:hover {
+      color: $c-gold;
+    }
+  }
+}
+
+// ============================================
+// EMPTY STATE
+// ============================================
+.empty-notice {
+  font-size: $font-size-sm;
+  color: $c-text-light;
+  font-style: italic;
+  text-align: center;
+  padding: $spacing-lg;
+  margin: 0;
+}
+
+// ============================================
+// LEGACY SECTION WITH SUB-TABS
+// ============================================
+.legacy-section {
+  // Legacy Sub-tabs Navigation
+  .legacy-tabs {
+    display: flex;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-lg;
+    background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
+    border-radius: $border-radius-md $border-radius-md 0 0;
+    margin-bottom: 0;
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      color: rgba($c-text-inverse, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border-radius: $border-radius-sm;
+      transition: all $transition-fast;
+
+      i {
+        font-size: $font-size-sm;
+      }
+
+      &:hover {
+        color: $c-text-inverse;
+        background: rgba($c-white, 0.1);
+      }
+
+      &.active {
+        color: $c-text-inverse;
+        background: rgba($c-white, 0.2);
+      }
+    }
+  }
+
+  // Legacy Tab Content
+  .legacy-tab-content {
+    display: none;
+    padding: $spacing-lg;
+    background: $c-bg-elevated;
+    border: $border-width solid $c-border-medium;
+    border-top: none;
+    border-radius: 0 0 $border-radius-md $border-radius-md;
+    box-shadow: $shadow-md;
+    margin-bottom: $spacing-xl;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  // Identity Details Section
+  .identity-details-section,
+  .social-standing-section,
+  .life-events-section,
+  .contacts-section,
+  .passions-content-section,
+  .advancement-content-section,
+  .notes-content-section {
+    @include section-container;
+
+    > h3 {
+      @include section-header;
+      margin-bottom: 0;
+    }
+  }
+
+  // Identity Details Content
+  .identity-details-content {
+    padding: $spacing-lg;
+  }
+
+  .identity-row {
+    display: flex;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .identity-field {
+    flex: 1;
+
+    &.name-field {
+      flex: 2;
+    }
+
+    &.age-field {
+      flex: 0 0 100px;
+    }
+
+    label {
+      display: block;
+      @include text-label;
+      margin-bottom: $spacing-xs;
+    }
+
+    input {
+      @include input-base;
+      width: 100%;
+    }
+
+    .identity-value {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+
+      &.empty {
+        color: $c-text-light;
+        font-style: italic;
+        font-weight: $font-weight-normal;
+      }
+    }
+
+    .identity-item-display {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      .identity-name {
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+
+      .identity-subtype {
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+      }
+
+      .item-control {
+        @include clickable;
+        color: $c-text-light;
+        padding: $spacing-xs;
+
+        &:hover {
+          color: $c-gold;
+        }
+      }
+    }
+  }
+
+  // ============================================
+  // EXPANDABLE IDENTITY CARDS
+  // ============================================
+  .identity-card {
+    margin-bottom: $spacing-md;
+    border: $border-width solid $c-border-light;
+    border-radius: $border-radius-md;
+    background: $c-bg-elevated;
+    overflow: hidden;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.has-item {
+      .identity-card-header {
+        cursor: pointer;
+
+        &:hover {
+          background: rgba($c-copper, 0.08);
+        }
+      }
+    }
+
+    // Card Header
+    .identity-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: $spacing-md $spacing-lg;
+      background: rgba($c-stone, 0.04);
+      border-bottom: $border-width solid transparent;
+      transition: all $transition-fast;
+
+      .card-header-left {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+
+        > i {
+          font-size: $font-size-base;
+          color: $c-copper;
+          width: 20px;
+          text-align: center;
+        }
+
+        .card-label {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-bold;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: $c-text-medium;
+        }
+
+        .suit-badge {
+          font-size: $font-size-xs;
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $border-radius-sm;
+          text-transform: capitalize;
+
+          &.suit-love { background: rgba($c-danger, 0.15); color: $c-danger; }
+          &.suit-fortune { background: rgba($c-gold, 0.15); color: $c-gold-dark; }
+          &.suit-conflict { background: rgba($c-copper, 0.15); color: $c-copper; }
+          &.suit-knowledge { background: rgba($c-magic, 0.15); color: $c-magic; }
+        }
+      }
+
+      .card-header-right {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+
+        .card-value {
+          font-size: $font-size-base;
+          font-weight: $font-weight-bold;
+          color: $c-text-dark;
+
+          &.empty {
+            font-weight: $font-weight-normal;
+            font-style: italic;
+            color: $c-text-light;
+          }
+
+          .subtype-label {
+            font-weight: $font-weight-normal;
+            color: $c-text-medium;
+            margin-left: $spacing-xs;
+          }
+        }
+
+        .expand-icon {
+          font-size: $font-size-sm;
+          color: $c-text-light;
+          transition: transform $transition-fast;
+        }
+
+        .event-controls {
+          display: flex;
+          gap: $spacing-sm;
+
+          .item-control {
+            @include clickable;
+            color: $c-text-light;
+            padding: $spacing-xs;
+
+            &:hover {
+              color: $c-gold;
+            }
+
+            &.item-delete:hover {
+              color: $c-danger;
+            }
+          }
+        }
+      }
+    }
+
+    // Expanded State
+    &.expanded {
+      border-color: $c-copper;
+
+      .identity-card-header {
+        background: rgba($c-copper, 0.1);
+        border-bottom-color: $c-border-light;
+
+        .expand-icon {
+          transform: rotate(180deg);
+        }
+      }
+
+      .identity-card-details {
+        max-height: 2000px;
+        opacity: 1;
+        padding: $spacing-lg;
+      }
+    }
+
+    // Card Details (Expandable Content)
+    .identity-card-details {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0 $spacing-lg;
+      transition: all 0.25s ease-in-out;
+      background: $c-bg-elevated;
+    }
+
+    // Detail Sections
+    .detail-section {
+      margin-bottom: $spacing-lg;
+      padding-bottom: $spacing-md;
+      border-bottom: $border-width solid $c-border-light;
+
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      h4 {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $c-copper;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        i {
+          margin-right: $spacing-sm;
+        }
+      }
+
+      .detail-content {
+        font-size: $font-size-base;
+        color: $c-text-dark;
+        line-height: $line-height-relaxed;
+
+        &.prose {
+          p {
+            margin: 0 0 $spacing-sm 0;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+
+    // Modifier Tags
+    .modifier-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+
+      .modifier-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: $spacing-xs $spacing-md;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        border-radius: $border-radius-sm;
+
+        &.positive {
+          background: $c-success-bg;
+          color: $c-success-dark;
+        }
+
+        &.negative {
+          background: $c-danger-bg;
+          color: $c-danger;
+        }
+      }
+    }
+
+    // Skill Tags
+    .skill-tags,
+    .archetype-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+
+      .skill-tag,
+      .archetype-tag {
+        padding: $spacing-xs $spacing-md;
+        font-size: $font-size-sm;
+        background: rgba($c-stone, 0.1);
+        border-radius: $border-radius-sm;
+        color: $c-text-dark;
+      }
+    }
+
+    // Witchsight Badge
+    .witchsight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-md;
+      background: $c-magic-bg;
+      color: $c-magic;
+      border-radius: $border-radius-sm;
+      font-weight: $font-weight-bold;
+
+      i {
+        font-size: $font-size-sm;
+      }
+    }
+
+    // Tier Badge
+    .tier-badge {
+      display: inline-flex;
+      padding: $spacing-xs $spacing-md;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      border-radius: $border-radius-sm;
+      margin-right: $spacing-md;
+
+      &.tier-upper {
+        background: rgba($c-gold, 0.15);
+        color: $c-gold-dark;
+      }
+
+      &.tier-middle {
+        background: rgba($c-stone, 0.15);
+        color: $c-text-dark;
+      }
+
+      &.tier-lower {
+        background: rgba($c-success, 0.15);
+        color: $c-success-dark;
+      }
+
+      &.tier-struggling {
+        background: rgba($c-text-medium, 0.15);
+        color: $c-text-medium;
+      }
+    }
+
+    .wealth-range {
+      font-size: $font-size-sm;
+      color: $c-text-medium;
+    }
+
+    // Lists
+    .traits-list,
+    .talents-list,
+    .skill-grants-list,
+    .obligations-list,
+    .hooks-list,
+    .features-list,
+    .equipment-list,
+    .benefits-list,
+    .complications-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding: $spacing-sm 0;
+        border-bottom: $border-width solid $c-border-light;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    .trait-item,
+    .hook-item,
+    .obligation-item {
+      .trait-name,
+      .hook-name,
+      .obligation-name {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+
+      .trait-description,
+      .hook-description,
+      .obligation-description {
+        margin: $spacing-xs 0 0 0;
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+        line-height: $line-height-base;
+      }
+    }
+
+    .talent-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .talent-name {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+
+      .talent-rank {
+        font-size: $font-size-sm;
+        color: $c-gold;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    .skill-grant-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .skill-name {
+        color: $c-text-dark;
+      }
+
+      .skill-rank {
+        font-weight: $font-weight-bold;
+        color: $c-success;
+      }
+    }
+
+    // Role Descriptions
+    .role-descriptions,
+    .physical-details {
+      p {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-sm;
+        color: $c-text-dark;
+        line-height: $line-height-base;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        strong {
+          color: $c-text-dark;
+        }
+      }
+    }
+
+    // Subtype Details
+    .subtype-details {
+      background: rgba($c-gold, 0.05);
+      padding: $spacing-md;
+      border-radius: $border-radius-sm;
+      margin-top: $spacing-md;
+
+      h4 {
+        color: $c-gold-dark;
+      }
+
+      .subtype-description {
+        margin: 0 0 $spacing-sm 0;
+        font-size: $font-size-sm;
+        color: $c-text-dark;
+      }
+    }
+
+    // Benefits & Complications (Life Events)
+    .benefits-section {
+      h4 {
+        color: $c-success-dark;
+      }
+
+      .benefit-item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: $spacing-sm;
+
+        .benefit-type {
+          font-weight: $font-weight-bold;
+          color: $c-success-dark;
+          padding: $spacing-xs $spacing-sm;
+          background: $c-success-bg;
+          border-radius: $border-radius-sm;
+          font-size: $font-size-xs;
+          text-transform: uppercase;
+        }
+
+        .benefit-target {
+          color: $c-text-dark;
+        }
+
+        .benefit-value {
+          font-weight: $font-weight-bold;
+          color: $c-success;
+        }
+
+        .benefit-description {
+          flex-basis: 100%;
+          margin: $spacing-xs 0 0 0;
+          font-size: $font-size-sm;
+          color: $c-text-medium;
+        }
+      }
+    }
+
+    .complications-section {
+      h4 {
+        color: $c-danger;
+      }
+
+      .complication-item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: $spacing-sm;
+
+        .complication-type {
+          font-weight: $font-weight-bold;
+          color: $c-danger;
+          padding: $spacing-xs $spacing-sm;
+          background: $c-danger-bg;
+          border-radius: $border-radius-sm;
+          font-size: $font-size-xs;
+          text-transform: uppercase;
+        }
+
+        .complication-target {
+          color: $c-text-dark;
+        }
+
+        .complication-severity {
+          font-size: $font-size-xs;
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $border-radius-sm;
+
+          &.severity-minor { background: rgba($c-warning, 0.1); color: $c-warning; }
+          &.severity-moderate { background: rgba($c-warning, 0.2); color: $c-warning-dark; }
+          &.severity-major { background: rgba($c-danger, 0.15); color: $c-danger; }
+          &.severity-severe { background: rgba($c-danger, 0.25); color: $c-danger-dark; }
+        }
+
+        .complication-description {
+          flex-basis: 100%;
+          margin: $spacing-xs 0 0 0;
+          font-size: $font-size-sm;
+          color: $c-text-medium;
+        }
+      }
+    }
+
+    .cp-value-display {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $c-text-medium;
+
+      strong {
+        color: $c-gold;
+      }
+    }
+  }
+
+  // Life Events List Container
+  .life-events-list {
+    padding: $spacing-lg;
+  }
+
+  // Social Standing Content
+  .social-standing-content {
+    padding: $spacing-lg;
+    display: flex;
+    gap: $spacing-xl;
+  }
+
+  .social-field {
+    label {
+      display: block;
+      @include text-label;
+      margin-bottom: $spacing-xs;
+    }
+
+    select {
+      @include input-base;
+    }
+
+    .social-value {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+
+      &.tier-upper {
+        color: $c-gold-dark;
+      }
+
+      &.tier-middle {
+        color: $c-text-dark;
+      }
+
+      &.tier-lower {
+        color: $c-success-dark;
+      }
+
+      &.tier-struggling {
+        color: $c-text-medium;
+      }
+    }
+  }
+
+  // Life Events List
+  .life-event-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .life-event-item {
+      @include list-row-alternating;
+      padding: $spacing-md $spacing-lg;
+
+      .event-info {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+
+        .event-name {
+          font-weight: $font-weight-bold;
+          color: $c-text-dark;
+        }
+
+        .event-suit {
+          font-size: $font-size-sm;
+          color: $c-text-medium;
+          padding: $spacing-xs $spacing-sm;
+          background: rgba($c-stone, 0.1);
+          border-radius: $border-radius-sm;
+        }
+      }
+
+      .event-controls {
+        display: flex;
+        gap: $spacing-sm;
+        opacity: 0;
+        transition: opacity $transition-fast;
+
+        .item-control {
+          @include clickable;
+          color: $c-text-light;
+          padding: $spacing-xs;
+
+          &:hover {
+            color: $c-gold;
+          }
+
+          &.item-delete:hover {
+            color: $c-danger;
+          }
+        }
+      }
+
+      &:hover .event-controls {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Contacts List
+  .contact-list {
+    list-style: none;
+    margin: 0;
+    padding: $spacing-lg;
+
+    .contact-item {
+      padding: $spacing-md;
+      background: rgba($c-stone, 0.04);
+      border: $border-width solid $c-border-light;
+      border-radius: $border-radius-sm;
+      margin-bottom: $spacing-sm;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .contact-name {
+        font-weight: $font-weight-bold;
+        color: $c-text-dark;
+      }
+
+      .contact-source {
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+        margin-left: $spacing-sm;
+      }
+
+      .contact-description {
+        margin: $spacing-sm 0 0 0;
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+      }
+    }
+  }
+
+  // Passions Content - Override for sub-tab context
+  .passions-content-section {
+    .passions-grid {
+      padding: $spacing-lg;
+    }
+  }
+
+  // Advancement Content
+  .advancement-fields {
+    padding: $spacing-lg;
+  }
+
+  .cp-tracking,
+  .xp-tracking {
+    margin-bottom: $spacing-lg;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    > label {
+      display: block;
+      @include text-label;
+      margin-bottom: $spacing-sm;
+    }
+
+    .cp-values,
+    .xp-display {
+      display: flex;
+      align-items: center;
+      gap: $spacing-lg;
+      padding: $spacing-md;
+      background: rgba($c-stone, 0.04);
+      border: $border-width solid $c-border-light;
+      border-radius: $border-radius-sm;
+    }
+
+    .cp-values {
+      .cp-earned,
+      .cp-spent,
+      .cp-remaining {
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+      }
+
+      .cp-remaining {
+        font-weight: $font-weight-bold;
+        color: $c-success-dark;
+
+        &.negative {
+          color: $c-danger;
+        }
+      }
+    }
+
+    .cp-edit-fields {
+      display: flex;
+      gap: $spacing-md;
+      margin-top: $spacing-md;
+
+      .cp-field {
+        flex: 1;
+
+        label {
+          display: block;
+          font-size: $font-size-xs;
+          color: $c-text-medium;
+          margin-bottom: $spacing-xs;
+        }
+
+        input {
+          @include input-base;
+          width: 100%;
+        }
+      }
+    }
+
+    .xp-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-sm;
+
+      > label {
+        margin-bottom: 0;
+      }
+
+      .xp-adjust-btn {
+        padding: $spacing-xs $spacing-sm;
+        background: transparent;
+        border: $border-width solid $c-border-light;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: $c-text-medium;
+
+        &:hover {
+          background: rgba($c-copper, 0.1);
+          border-color: $c-copper;
+          color: $c-copper;
+        }
+      }
+    }
+
+    .xp-value {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $c-text-dark;
+
+      &.max-reached {
+        color: $c-success;
+      }
+    }
+
+    .xp-total {
+      font-size: $font-size-sm;
+      color: $c-text-medium;
+    }
+
+    .xp-current-input {
+      @include input-base;
+      width: 80px;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      text-align: center;
+    }
+
+    // XP Progress Bar
+    .xp-progress-container {
+      margin-top: $spacing-md;
+      margin-bottom: $spacing-md;
+
+      .xp-progress-bar {
+        height: 8px;
+        background: $c-border-light;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: $spacing-xs;
+
+        .xp-progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg, $c-copper, $c-gold);
+          border-radius: 4px;
+          transition: width 0.3s ease;
+        }
+      }
+
+      .xp-progress-label {
+        font-size: $font-size-xs;
+        color: $c-text-medium;
+        text-align: center;
+        display: block;
+      }
+    }
+
+    // Purchase Advancement Section
+    .advancement-purchase {
+      margin-top: $spacing-lg;
+      text-align: center;
+
+      .purchase-advancement-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-md $spacing-xl;
+        border-radius: $border-radius-md;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        .cost-badge {
+          padding: $spacing-xs $spacing-sm;
+          background: rgba($c-black, 0.1);
+          border-radius: $border-radius-sm;
+          font-size: $font-size-xs;
+        }
+
+        &.available {
+          background: $c-success;
+          border: $border-width solid $c-success-dark;
+          color: $c-white;
+
+          &:hover {
+            background: $c-success-dark;
+          }
+        }
+
+        &.disabled {
+          background: $c-border-light;
+          border: $border-width solid $c-border-medium;
+          color: $c-text-medium;
+          cursor: not-allowed;
+        }
+      }
+
+      .advancement-hint {
+        margin-top: $spacing-sm;
+        font-size: $font-size-sm;
+        color: $c-text-medium;
+
+        &.available {
+          color: $c-success;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+  }
+
+  // Notes Content
+  .notes-editor-container {
+    padding: $spacing-lg;
+
+    .editor {
+      min-height: 300px;
+      background: $c-bg-elevated;
+      border: $border-width solid $c-border-light;
+      border-radius: $border-radius-sm;
+
+      .editor-content {
+        padding: $spacing-md;
+        min-height: 250px;
+      }
+    }
+  }
+
+  // Zeal Tracker in Passions Tab
+  .passions-content-section + .zeal-tracker {
+    margin: 0 $spacing-lg $spacing-lg $spacing-lg;
+  }
+}
+
+// Include NPC and Creature sheet styles
+@import 'sheets-npc';
+@import 'sheets-creature';
+@import 'sheets-conditions';

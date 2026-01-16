@@ -1,0 +1,513 @@
+// The Weight of Ruin - Loot Sheet Styles
+// Styles for loot piles and merchant sheets
+// Note: Uses & to create compound selector with parent (.weight-of-ruin.loot-sheet)
+
+&.loot-sheet {
+  .loot-sheet-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: var(--wor-bg-primary);
+  }
+
+  // === HEADER ===
+  .loot-header {
+    display: flex;
+    gap: $spacing-lg;
+    padding: $spacing-md;
+    background: var(--wor-bg-secondary);
+    border: $border-subtle;
+    border-radius: $border-radius-md;
+
+    .portrait-container {
+      flex: 0 0 80px;
+
+      .portrait {
+        width: 80px;
+        height: 80px;
+        border-radius: $border-radius-md;
+        border: $border-width-thick solid var(--wor-border-medium);
+        object-fit: cover;
+        cursor: pointer;
+        transition: border-color $transition-fast;
+
+        &:hover {
+          border-color: var(--wor-gold);
+        }
+      }
+    }
+
+    .header-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: $spacing-sm;
+
+      .name-row {
+        input[type="text"] {
+          @include input-transparent;
+          font-size: $font-size-xl;
+          font-weight: $font-weight-bold;
+          width: 100%;
+        }
+      }
+
+      .mode-toggle {
+        .mode-button {
+          @include button-secondary;
+          padding: $spacing-sm $spacing-md;
+          font-size: $font-size-sm;
+
+          i {
+            margin-right: $spacing-xs;
+          }
+
+          &.active {
+            background: var(--wor-gold-alpha-20);
+            border-color: var(--wor-gold);
+          }
+        }
+      }
+    }
+  }
+
+  // === CURRENCY BAR ===
+  .currency-bar {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    padding: $spacing-md;
+    background: var(--wor-bg-elevated);
+    border: $border-subtle;
+    border-radius: $border-radius-md;
+    flex-wrap: wrap;
+
+    .currency-group {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      .currency-icon {
+        font-size: $font-size-base;
+      }
+
+      input[type="number"] {
+        @include input-base;
+        width: 60px;
+        text-align: center;
+        font-weight: $font-weight-bold;
+      }
+
+      .currency-label {
+        font-size: $font-size-xs;
+        color: var(--wor-text-muted);
+        text-transform: uppercase;
+        letter-spacing: $letter-spacing-wider;
+      }
+
+      // Currency-specific colors
+      &.sovereigns {
+        .currency-icon,
+        input {
+          color: #9a7b0a;
+        }
+      }
+
+      &.crowns {
+        .currency-icon,
+        input {
+          color: #5a6068;
+        }
+      }
+
+      &.orin {
+        .currency-icon,
+        input {
+          color: #8b5a2b;
+        }
+      }
+    }
+
+    .currency-total {
+      margin-left: auto;
+      font-size: $font-size-sm;
+      color: var(--wor-text-secondary);
+
+      .total-value {
+        font-weight: $font-weight-bold;
+        color: var(--wor-gold);
+      }
+    }
+  }
+
+  // === GM ACTIONS ===
+  .loot-actions {
+    display: flex;
+    gap: $spacing-md;
+
+    .action-button {
+      @include button-primary;
+      flex: 1;
+      padding: $spacing-sm $spacing-md;
+
+      i {
+        margin-right: $spacing-xs;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &.split-coins {
+        background: linear-gradient(to bottom, #9a7b0a, #7a5b00);
+
+        &:hover:not(:disabled) {
+          background: linear-gradient(to bottom, #b8920c, #9a7b0a);
+        }
+      }
+    }
+  }
+
+  // === MERCHANT SETTINGS ===
+  .merchant-settings {
+    padding: $spacing-sm $spacing-md;
+    background: var(--wor-bg-secondary);
+    border: $border-subtle;
+    border-radius: $border-radius-md;
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      input[type="number"] {
+        @include input-base;
+        width: 60px;
+        text-align: center;
+      }
+
+      .percent-sign {
+        color: var(--wor-text-muted);
+      }
+    }
+  }
+
+  // === INVENTORY ===
+  .loot-inventory {
+    flex: 1;
+    overflow-y: auto;
+    @include custom-scrollbar;
+
+    .inventory-section {
+      margin-bottom: $spacing-md;
+
+      .section-header {
+        @include section-header-bar;
+        padding: $spacing-sm $spacing-md;
+        margin-bottom: $spacing-xs;
+
+        i {
+          margin-right: $spacing-xs;
+        }
+      }
+
+      .item-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .item {
+        @include list-row;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        border-bottom: $border-subtle;
+
+        &:nth-child(odd) {
+          background: var(--wor-dark-alpha-03);
+        }
+
+        &:hover {
+          background: var(--wor-gold-alpha-05);
+        }
+
+        .item-img {
+          flex: 0 0 32px;
+          width: 32px;
+          height: 32px;
+          min-width: 32px;
+          max-width: 32px;
+          min-height: 32px;
+          max-height: 32px;
+          border-radius: $border-radius-sm;
+          border: $border-width solid var(--wor-border-light);
+          object-fit: cover;
+        }
+
+        .item-name {
+          flex: 1;
+          font-weight: $font-weight-bold;
+        }
+
+        .item-quantity {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+
+          .qty-btn {
+            @include button-base;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            font-size: $font-size-xs;
+            line-height: 1;
+          }
+
+          .qty-value {
+            min-width: 30px;
+            text-align: center;
+            font-size: $font-size-sm;
+            color: var(--wor-text-secondary);
+          }
+        }
+
+        .item-value {
+          min-width: 80px;
+          text-align: right;
+          font-size: $font-size-sm;
+          color: var(--wor-gold);
+          font-weight: $font-weight-bold;
+        }
+
+        .item-controls {
+          display: flex;
+          gap: $spacing-xs;
+
+          .item-control {
+            @include button-base;
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            font-size: $font-size-sm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.purchase,
+            &.take {
+              background: var(--wor-gold-alpha-20);
+              color: var(--wor-gold-dark);
+
+              &:hover {
+                background: var(--wor-gold-alpha-40);
+              }
+            }
+
+            &.delete:hover {
+              color: var(--wor-danger);
+            }
+          }
+        }
+      }
+    }
+
+    // Empty state
+    .empty-inventory {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: $spacing-3xl;
+      color: var(--wor-text-muted);
+      text-align: center;
+
+      i {
+        font-size: 48px;
+        margin-bottom: $spacing-md;
+        opacity: 0.5;
+      }
+
+      p {
+        margin: 0;
+
+        &.hint {
+          font-size: $font-size-sm;
+          font-style: italic;
+          margin-top: $spacing-sm;
+        }
+      }
+    }
+  }
+
+  // === FOOTER ===
+  .loot-footer {
+    padding: $spacing-sm $spacing-md;
+    border-top: $border-subtle;
+    background: var(--wor-bg-secondary);
+    border-radius: 0 0 $border-radius-md $border-radius-md;
+
+    .setting-checkbox {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      font-size: $font-size-sm;
+      color: var(--wor-text-secondary);
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        accent-color: var(--wor-gold);
+      }
+    }
+  }
+
+  // === MERCHANT MODE MODIFIER ===
+  &.merchant-mode {
+    .currency-bar {
+      background: linear-gradient(to right, var(--wor-bg-elevated), var(--wor-gold-alpha-05));
+    }
+  }
+}
+
+// === DIALOG STYLES ===
+// Note: Uses & to create compound selector with parent (.weight-of-ruin.split-coins-dialog)
+&.split-coins-dialog,
+&.loot-tokens-dialog {
+  .wealth-summary {
+    margin-bottom: $spacing-lg;
+    padding: $spacing-md;
+    background: var(--wor-bg-secondary);
+    border: $border-subtle;
+    border-radius: $border-radius-md;
+
+    h4 {
+      margin: 0 0 $spacing-md 0;
+      font-size: $font-size-base;
+      color: var(--wor-text-primary);
+    }
+
+    .wealth-display {
+      display: flex;
+      gap: $spacing-lg;
+      margin-bottom: $spacing-sm;
+
+      .currency {
+        text-align: center;
+
+        .value {
+          display: block;
+          font-size: $font-size-xl;
+          font-weight: $font-weight-bold;
+        }
+
+        .label {
+          font-size: $font-size-xs;
+          color: var(--wor-text-muted);
+          text-transform: uppercase;
+        }
+
+        &.sovereigns .value {
+          color: #9a7b0a;
+        }
+
+        &.crowns .value {
+          color: #5a6068;
+        }
+
+        &.orin .value {
+          color: #8b5a2b;
+        }
+      }
+    }
+
+    .total {
+      font-size: $font-size-sm;
+      color: var(--wor-text-secondary);
+      margin: 0;
+    }
+  }
+
+  .character-selection,
+  .token-selection {
+    h4 {
+      margin: 0 0 $spacing-sm 0;
+      font-size: $font-size-base;
+    }
+
+    .hint {
+      font-size: $font-size-sm;
+      color: var(--wor-text-muted);
+      font-style: italic;
+      margin: 0 0 $spacing-md 0;
+    }
+
+    .character-list,
+    .token-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      @include custom-scrollbar;
+
+      .character-row,
+      .token-row {
+        padding: $spacing-sm;
+        border-bottom: $border-subtle;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        label {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          cursor: pointer;
+        }
+
+        .character-img,
+        .token-img {
+          width: 32px;
+          height: 32px;
+          border-radius: $border-radius-sm;
+          object-fit: cover;
+        }
+
+        .character-name,
+        .token-name {
+          flex: 1;
+        }
+
+        .item-count {
+          font-size: $font-size-sm;
+          color: var(--wor-text-muted);
+        }
+      }
+    }
+  }
+}
+
+// === LOOT CHAT MESSAGES ===
+.wor.loot-split,
+.wor.loot-take {
+  h4 {
+    margin: 0 0 $spacing-sm 0;
+    font-size: $font-size-base;
+    color: var(--wor-gold);
+  }
+
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+
+    strong {
+      color: var(--wor-gold);
+    }
+  }
+}

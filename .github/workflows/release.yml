@@ -1,0 +1,82 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  SYSTEM_ID: weight-of-ruin
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build SCSS
+        run: npm run build
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Verify version match
+        run: |
+          SYSTEM_VERSION=$(jq -r '.version' system.json)
+          TAG_VERSION=${{ steps.version.outputs.version }}
+          if [ "$SYSTEM_VERSION" != "$TAG_VERSION" ]; then
+            echo "❌ Version mismatch: system.json has $SYSTEM_VERSION but tag is v$TAG_VERSION"
+            exit 1
+          fi
+          echo "✅ Version verified: $TAG_VERSION"
+
+      - name: Create release archive
+        run: |
+          zip -r ${{ env.SYSTEM_ID }}.zip \
+            system.json \
+            module/ \
+            templates/ \
+            css/ \
+            lang/ \
+            assets/ \
+            packs/ \
+            LICENSE* \
+            README.md \
+            CHANGELOG.md \
+            -x "*.scss" "src/*" ".git/*" "node_modules/*"
+
+      - name: Update manifest URLs for release
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          REPO=${{ github.repository }}
+
+          # Update system.json with release URLs
+          jq --arg manifest "https://github.com/${REPO}/releases/latest/download/system.json" \
+             --arg download "https://github.com/${REPO}/releases/download/v${VERSION}/${{ env.SYSTEM_ID }}.zip" \
+             '.manifest = $manifest | .download = $download' \
+             system.json > system.json.tmp && mv system.json.tmp system.json
+
+          cat system.json
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ${{ env.SYSTEM_ID }}.zip
+            system.json
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,24 @@
+{{!-- Chat Card Header Partial --}}
+{{!-- Required context: actor (object with name, img), rollLabel (string), rollComponents (optional array) --}}
+
+<div class="chat-card-header">
+  {{#if actor.img}}
+  <img src="{{actor.img}}" alt="{{actor.name}}" class="actor-portrait" />
+  {{/if}}
+  <div class="header-info">
+    <h4 class="actor-name">{{actor.name}}</h4>
+    <div class="roll-type">
+      {{#if rollLabel}}
+      <span class="roll-label">{{rollLabel}}</span>
+      {{/if}}
+      {{#if rollComponents}}
+      <span class="roll-components">
+        {{#each rollComponents}}
+        <span class="component-value" title="{{this.label}}">{{this.value}}</span>
+        {{#unless @last}}<span class="separator">+</span>{{/unless}}
+        {{/each}}
+      </span>
+      {{/if}}
+    </div>
+  </div>
+</div>

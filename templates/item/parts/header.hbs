@@ -1,0 +1,182 @@
+<header class="item-header">
+  <img class="item-img" src="{{item.img}}" alt="{{item.name}}" data-action="editImage" />
+  <div class="item-header-details">
+    {{!-- Item Name --}}
+    {{#if isEditMode}}
+    <input type="text" name="name" value="{{item.name}}" class="item-name" placeholder="{{localize 'AOA.Common.Name'}}" />
+    {{else}}
+    <h1 class="item-name">{{item.name}}</h1>
+    {{/if}}
+
+    {{!-- Item Type & Category Row --}}
+    <div class="item-type-row">
+      <p class="item-type">{{localize (concat "AOA.ItemTypes." item.type)}}</p>
+      {{#if isWeapon}}
+        {{#if system.category}}
+        <span class="item-category">{{localize (concat "AOA.Weapon.CategoryType." (capitalize system.category))}}</span>
+        {{/if}}
+      {{/if}}
+      {{#if isArmor}}
+        {{#if system.armorCategory}}
+        <span class="item-category">{{localize (concat "AOA.Armor.Category." (capitalize system.armorCategory))}}</span>
+        {{/if}}
+      {{/if}}
+      {{#if isSkill}}
+        {{#if system.category}}
+        <span class="item-category">{{localize (concat "AOA.SkillCategory." (capitalize system.category))}}</span>
+        {{/if}}
+      {{/if}}
+    </div>
+
+    {{!-- Trait Tags --}}
+    <div class="item-traits">
+      {{!-- Weapon Traits --}}
+      {{#if isWeapon}}
+        {{#if system.range.type}}
+        <span class="trait-tag trait-category">{{localize (concat "AOA.Weapon.RangeType." (capitalize system.range.type))}}</span>
+        {{/if}}
+        {{#if system.quality.level}}
+        <span class="trait-tag trait-quality">{{localize (concat "AOA.Quality." (capitalize system.quality.level))}}</span>
+        {{/if}}
+        {{#each system.properties}}
+        <span class="trait-tag trait-property">{{this}}</span>
+        {{/each}}
+      {{/if}}
+
+      {{!-- Armor Traits --}}
+      {{#if isArmor}}
+        {{#if system.quality.level}}
+        <span class="trait-tag trait-quality">{{localize (concat "AOA.Quality." (capitalize system.quality.level))}}</span>
+        {{/if}}
+        {{#if system.shield.isShield}}
+        <span class="trait-tag trait-category">{{localize "AOA.Armor.Shield"}}</span>
+        {{/if}}
+        {{#if system.flexible}}
+        <span class="trait-tag trait-property">{{localize "AOA.Armor.Flexible"}}</span>
+        {{/if}}
+        {{#if system.noisy}}
+        <span class="trait-tag trait-property">{{localize "AOA.Armor.Noisy"}}</span>
+        {{/if}}
+        {{#if system.bulky}}
+        <span class="trait-tag trait-property">{{localize "AOA.Armor.Bulky"}}</span>
+        {{/if}}
+        {{#if system.cumbersome}}
+        <span class="trait-tag trait-property">{{localize "AOA.Armor.Cumbersome"}}</span>
+        {{/if}}
+        {{#if system.insulating}}
+        <span class="trait-tag trait-property">{{localize "AOA.Armor.Insulating"}}</span>
+        {{/if}}
+      {{/if}}
+
+      {{!-- Skill Traits --}}
+      {{#if isSkill}}
+        {{#if system.requiresWitchsight}}
+        <span class="trait-tag trait-magic">{{localize "AOA.Skill.RequiresWitchsight"}}</span>
+        {{/if}}
+      {{/if}}
+
+      {{!-- Spell Traits --}}
+      {{#if isSpell}}
+        {{#if system.technique}}
+        <span class="trait-tag trait-magic">{{localize (concat "AOA.Sorcery.Technique." (capitalize system.technique))}}</span>
+        {{/if}}
+        {{#if system.form}}
+        <span class="trait-tag trait-magic">{{localize (concat "AOA.Sorcery.Form." (capitalize system.form))}}</span>
+        {{/if}}
+      {{/if}}
+
+      {{!-- Ritual Traits --}}
+      {{#if isRitual}}
+        {{#if system.path}}
+        <span class="trait-tag trait-magic">{{localize (concat "AOA.Ritual.Path." (capitalize system.path))}}</span>
+        {{/if}}
+      {{/if}}
+
+      {{!-- Talent Traits --}}
+      {{#if isTalent}}
+        {{#if system.talentType}}
+        <span class="trait-tag trait-category">{{localize (concat "AOA.TalentType." system.talentType)}}</span>
+        {{/if}}
+      {{/if}}
+
+      {{!-- Background Traits --}}
+      {{#if isBackground}}
+        {{#if system.economicTier}}
+        <span class="trait-tag trait-category">{{localize (concat "AOA.EconomicTier." (capitalize system.economicTier))}}</span>
+        {{/if}}
+      {{/if}}
+
+      {{!-- Life Event Traits --}}
+      {{#if isLifeEvent}}
+        {{#if system.suit}}
+        <span class="trait-tag trait-category">{{localize (concat "AOA.LifeEvent.Suit." (capitalize system.suit))}}</span>
+        {{/if}}
+      {{/if}}
+
+      {{!-- NPC Trait Tags --}}
+      {{#if isNPCTrait}}
+        {{#if system.category}}
+        <span class="trait-tag trait-category">{{localize (lookup categoryOptions system.category)}}</span>
+        {{/if}}
+        {{#if system.mechanics.passive}}
+        <span class="trait-tag trait-property">{{localize "AOA.NPCTrait.Passive"}}</span>
+        {{/if}}
+        {{#if system.mechanics.trigger}}
+        <span class="trait-tag trait-trigger">{{localize (lookup triggerOptions system.mechanics.trigger)}}</span>
+        {{/if}}
+        {{#if system.mechanics.cooldown}}
+        <span class="trait-tag trait-cooldown">{{localize (lookup cooldownOptions system.mechanics.cooldown)}}</span>
+        {{/if}}
+        {{#if system.allowedClasses.length}}
+        {{#each system.allowedClasses}}
+        <span class="trait-tag trait-class">{{localize (lookup ../classOptions this)}}</span>
+        {{/each}}
+        {{/if}}
+      {{/if}}
+    </div>
+
+    {{!-- Equipment Status --}}
+    {{#if canEquip}}
+    <div class="equipped-status {{#if isEquipped}}is-equipped{{/if}}">
+      <a data-action="toggleEquipped" title="{{localize 'AOA.Weapon.Equipped'}}">
+        <i class="fas {{#if isEquipped}}fa-check-circle{{else}}fa-circle{{/if}}"></i>
+        {{#if isEquipped}}
+        {{localize "AOA.Weapon.Equipped"}}
+        {{else}}
+        {{localize "AOA.Item.NotEquipped"}}
+        {{/if}}
+      </a>
+    </div>
+    {{/if}}
+
+    {{!-- Talent Rank --}}
+    {{#if isTalent}}
+    <div class="talent-rank-controls">
+      <span class="rank-label">{{localize "AOA.Common.Rank"}}:</span>
+      {{#if isEditMode}}
+      <a class="rank-control" data-action="reduceRank" {{#unless canReduce}}disabled{{/unless}}>
+        <i class="fas fa-minus"></i>
+      </a>
+      {{/if}}
+      <span class="rank-value">{{system.rank}} / {{system.maxRank}}</span>
+      {{#if isEditMode}}
+      <a class="rank-control" data-action="advanceRank" {{#unless canAdvance}}disabled{{/unless}}>
+        <i class="fas fa-plus"></i>
+      </a>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- Skill Rank --}}
+    {{#if isSkill}}
+    <div class="skill-rank">
+      <span class="rank-label">{{localize "AOA.Skill.Rank"}}:</span>
+      {{#if isEditMode}}
+      <input type="number" name="system.rank" value="{{system.rank}}" min="0" max="10" />
+      {{else}}
+      <span class="rank-value">{{system.rank}}</span>
+      {{/if}}
+    </div>
+    {{/if}}
+  </div>
+</header>

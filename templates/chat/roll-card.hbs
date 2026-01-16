@@ -1,0 +1,164 @@
+<div class="wor roll-card {{#if degree}}{{degree.cssClass}}{{/if}}">
+  {{!-- Header with Actor Portrait --}}
+  <div class="chat-card-header">
+    {{#if actor.img}}
+    <img src="{{actor.img}}" alt="{{actor.name}}" class="actor-portrait" />
+    {{/if}}
+    <div class="header-info">
+      <h4 class="actor-name">{{actor.name}}</h4>
+      <div class="roll-type">
+        <span class="roll-label">{{title}}</span>
+        {{#if poolData}}
+        <span class="roll-components">
+          {{#if poolData.attribute.value}}
+          <span class="component-value" title="{{poolData.attribute.label}}">{{poolData.attribute.value}}</span>
+          {{/if}}
+          {{#if poolData.skill.value}}
+          <span class="separator">+</span>
+          <span class="component-value" title="{{poolData.skill.name}}">{{poolData.skill.value}}</span>
+          {{/if}}
+          {{#if poolData.modifier}}
+          <span class="separator">{{#if (gt poolData.modifier 0)}}+{{else}}&minus;{{/if}}</span>
+          <span class="component-value">{{abs poolData.modifier}}</span>
+          {{/if}}
+        </span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  {{!-- Auto Failure (0 pool) --}}
+  {{#if isAutoFailure}}
+  <div class="result-indicator auto-failure">
+    <div class="result-text">
+      <span>{{localize "AOA.Roll.AutoFailure"}}</span>
+    </div>
+  </div>
+  {{else}}
+
+  {{!-- Result Indicator (prominent display like reference) --}}
+  {{#if degree}}
+  <div class="result-indicator {{degree.cssClass}}">
+    <div class="result-text">
+      {{localize degree.label}} ( <span class="hit-count">{{result.hits}}</span> )
+    </div>
+    {{#if margin}}
+    <div class="result-margin">
+      {{localize "AOA.Roll.Margin"}}: <span class="margin-value {{#if (gt margin 0)}}positive{{else}}negative{{/if}}">{{#if (gt margin 0)}}+{{/if}}{{margin}}</span>
+    </div>
+    {{/if}}
+  </div>
+  {{/if}}
+
+  {{!-- Collapsible Roll Details --}}
+  <div class="collapsible-section" data-section="roll-details">
+    <div class="collapsible-header collapsed" data-action="toggle-collapse">
+      <i class="fas fa-chevron-down collapse-icon"></i>
+      <span class="section-title">{{localize "AOA.Roll.Details"}}</span>
+    </div>
+    <div class="collapsible-content collapsed">
+      {{!-- Pool Breakdown --}}
+      <div class="roll-pool-breakdown">
+        <span class="pool-label">{{localize "AOA.Roll.Pool"}}:</span>
+        <span class="pool-components">
+          {{#if poolData.attribute.value}}
+            <span class="component attribute" title="{{poolData.attribute.label}}">{{poolData.attribute.value}}</span>
+          {{/if}}
+          {{#if poolData.skill.value}}
+            {{#if poolData.attribute.value}}+{{/if}}
+            <span class="component skill" title="{{poolData.skill.name}}">{{poolData.skill.value}}</span>
+          {{/if}}
+          {{#if poolData.modifier}}
+            {{#if (gt poolData.modifier 0)}}+{{/if}}
+            <span class="component modifier">{{poolData.modifier}}</span>
+          {{/if}}
+          {{#if poolData.bonusDice}}
+            +<span class="component bonus-dice zeal">{{poolData.bonusDice}}</span>
+          {{/if}}
+          = <span class="pool-total">{{poolData.total}}d6</span>
+        </span>
+      </div>
+
+      {{!-- Difficulty & TT --}}
+      <div class="roll-parameters">
+        <span class="difficulty">
+          <i class="fas fa-chart-bar"></i>
+          {{localize difficulty.label}}
+        </span>
+        {{#if targetThreshold}}
+        <span class="target-threshold">
+          <i class="fas fa-bullseye"></i>
+          TT {{targetThreshold}}
+          {{#if ttData}}
+          <span class="tt-label">({{localize ttData.label}})</span>
+          {{/if}}
+        </span>
+        {{/if}}
+      </div>
+
+      {{!-- Dice Display --}}
+      <div class="roll-dice">
+        {{{diceDisplay}}}
+      </div>
+
+      {{!-- Hits Count --}}
+      <div class="roll-hits">
+        <span class="hits-label">{{localize "AOA.Roll.Hits"}}:</span>
+        <span class="hits-value">{{result.hits}}</span>
+        {{#if targetThreshold}}
+        <span class="hits-vs">/ {{targetThreshold}}</span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  {{!-- Reroll Info --}}
+  {{#if isReroll}}
+  <div class="roll-reroll-info">
+    {{#if keptOriginal}}
+    <span class="reroll-kept">{{localize "AOA.Roll.KeptOriginal"}} ({{localize "AOA.Roll.RerollHits"}}: {{rerollHits}})</span>
+    {{else}}
+    <span class="reroll-improved">{{localize "AOA.Roll.ImprovedRoll"}} ({{localize "AOA.Roll.PreviousHits"}}: {{previousHits}})</span>
+    {{/if}}
+  </div>
+  {{/if}}
+
+  {{!-- Zero Pool Attempt --}}
+  {{#if isZeroPoolAttempt}}
+  <div class="roll-zero-pool">
+    <i class="fas fa-fire"></i>
+    {{localize "AOA.Roll.ZeroPoolAttempt"}}
+  </div>
+  {{/if}}
+
+  {{/if}}
+
+  {{!-- Zeal Spent --}}
+  {{#if zealSpend}}
+  <div class="roll-zeal-spent">
+    {{#if zealSpend.difficultyShift}}
+    <span class="zeal-option"><i class="fas fa-arrow-down"></i> {{localize "AOA.Zeal.DifficultyShift"}}</span>
+    {{/if}}
+    {{#if zealSpend.bonusDice}}
+    <span class="zeal-option"><i class="fas fa-dice"></i> {{localize "AOA.Zeal.BonusDice"}}</span>
+    {{/if}}
+    {{#if zealSpend.autoSuccess}}
+    <span class="zeal-option"><i class="fas fa-star"></i> {{localize "AOA.Zeal.AutoSuccess"}}</span>
+    {{/if}}
+    {{#if zealSpend.reroll}}
+    <span class="zeal-option"><i class="fas fa-redo"></i> {{localize "AOA.Zeal.Reroll"}}</span>
+    {{/if}}
+    {{#if zealSpend.zeroPool}}
+    <span class="zeal-option"><i class="fas fa-fire"></i> {{localize "AOA.Zeal.ZeroPool"}}</span>
+    {{/if}}
+  </div>
+  {{/if}}
+
+  {{!-- Auto Success --}}
+  {{#if result.isAutoSuccess}}
+  <div class="roll-auto-success">
+    <i class="fas fa-star"></i>
+    {{localize "AOA.Roll.AutoSuccess"}}
+  </div>
+  {{/if}}
+</div>

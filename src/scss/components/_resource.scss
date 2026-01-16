@@ -1,0 +1,653 @@
+// The Weight of Ruin - Resource Tracker Styles
+// Health, Fatigue, Essence, and other resource displays
+
+// === COMMON RESOURCE STYLES ===
+.resource-label {
+  @include text-label;
+  font-weight: $font-weight-bold;
+}
+
+.resource-value {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $c-dark;
+}
+
+// === HEALTH TRACKER ===
+.health-tracker {
+  @include flex-column;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background: rgba($c-dark, 0.03);
+  border: $border-width solid $c-faint;
+  border-radius: $border-radius-md;
+
+  .health-header {
+    @include flex-between;
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+
+      i {
+        margin-right: $spacing-sm;
+        color: $c-danger;
+      }
+    }
+
+    .health-status {
+      font-size: $font-size-sm;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-sm;
+      font-weight: $font-weight-bold;
+
+      &.healthy {
+        background: $c-success-bg;
+        color: $c-success-dark;
+      }
+
+      &.wounded {
+        background: $c-warning-bg;
+        color: $c-warning-dark;
+      }
+
+      &.critical {
+        background: $c-danger-bg;
+        color: $c-danger-dark;
+      }
+
+      &.crisis {
+        @include danger-state;
+        animation: pulse-danger 1.5s infinite;
+      }
+    }
+  }
+}
+
+// === FATIGUE BAR ===
+.fatigue-section {
+  @include flex-column;
+  gap: $spacing-sm;
+
+  .fatigue-header {
+    @include flex-between;
+
+    .fatigue-label {
+      @include text-label;
+    }
+
+    .fatigue-values {
+      font-size: $font-size-sm;
+
+      .fatigue-current {
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+      }
+
+      .fatigue-max {
+        color: $c-medium;
+      }
+    }
+  }
+
+  .fatigue-bar {
+    position: relative;
+    height: 20px;
+    background: $c-faint;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    border: $border-width solid rgba($c-dark, 0.1);
+
+    .fatigue-fill {
+      height: 100%;
+      background: linear-gradient(to right, $c-success, $c-warning);
+      border-radius: $border-radius-md;
+      transition: width $transition-normal, background $transition-fast;
+
+      // Degradation colors based on fill percentage
+      &.low {
+        background: linear-gradient(to right, $c-success, $c-success-light);
+      }
+
+      &.medium {
+        background: linear-gradient(to right, $c-warning-light, $c-warning);
+      }
+
+      &.high {
+        background: linear-gradient(to right, $c-warning, $c-danger);
+      }
+
+      &.critical {
+        background: linear-gradient(to right, $c-danger, $c-danger-dark);
+        animation: pulse-bar 1s infinite;
+      }
+    }
+
+    // Toughness threshold marker
+    .toughness-marker {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: $c-dark;
+      box-shadow: 0 0 4px rgba($c-dark, 0.5);
+
+      &::after {
+        content: 'T';
+        position: absolute;
+        top: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+      }
+    }
+  }
+
+  .fatigue-controls {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: flex-end;
+
+    button {
+      @include button-secondary;
+      padding: $spacing-xs $spacing-sm;
+      font-size: $font-size-sm;
+
+      &.add-fatigue {
+        &:hover {
+          background: $c-danger-bg;
+          border-color: $c-danger;
+          color: $c-danger;
+        }
+      }
+
+      &.remove-fatigue {
+        &:hover {
+          background: $c-success-bg;
+          border-color: $c-success;
+          color: $c-success;
+        }
+      }
+    }
+  }
+}
+
+// === CRITICAL INJURIES ===
+.injuries-section {
+  @include flex-column;
+  gap: $spacing-sm;
+  padding-top: $spacing-md;
+  border-top: $border-width dashed $c-faint;
+
+  .injuries-header {
+    @include flex-between;
+
+    .injuries-label {
+      @include text-label;
+      color: $c-danger;
+
+      i {
+        margin-right: $spacing-xs;
+      }
+    }
+
+    .injuries-count {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      .count-current {
+        font-weight: $font-weight-bold;
+        color: $c-danger;
+      }
+
+      .count-max {
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+    }
+  }
+
+  .injuries-display {
+    display: flex;
+    gap: $spacing-xs;
+
+    .injury-slot {
+      width: 24px;
+      height: 24px;
+      border-radius: $border-radius-sm;
+      background: $c-faint;
+      border: $border-width solid $c-medium;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &.filled {
+        background: $c-danger;
+        border-color: $c-danger-dark;
+        color: $c-white;
+
+        i {
+          font-size: $font-size-xs;
+        }
+      }
+
+      &:hover {
+        border-color: $c-accent;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .injury-warning {
+    font-size: $font-size-xs;
+    color: $c-danger;
+    font-style: italic;
+    padding: $spacing-xs $spacing-sm;
+    background: $c-danger-bg;
+    border-radius: $border-radius-sm;
+
+    i {
+      margin-right: $spacing-xs;
+    }
+
+    &.unconscious {
+      background: rgba($c-warning, 0.15);
+      color: $c-warning-dark;
+    }
+
+    &.dead {
+      background: rgba($c-dark, 0.9);
+      color: $c-danger;
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+// === ESSENCE TRACKER ===
+.essence-tracker {
+  @include flex-column;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background: rgba($c-magic, 0.05);
+  border: $border-width solid rgba($c-magic, 0.2);
+  border-radius: $border-radius-md;
+
+  .essence-header {
+    @include flex-between;
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-magic;
+
+      i {
+        margin-right: $spacing-sm;
+      }
+    }
+
+    .essence-status {
+      font-size: $font-size-sm;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-sm;
+      font-weight: $font-weight-bold;
+
+      &.pure {
+        background: rgba($c-magic, 0.1);
+        color: $c-magic;
+      }
+
+      &.tainted {
+        background: rgba($c-magic, 0.2);
+        color: $c-magic-dark;
+      }
+
+      &.corrupted {
+        background: rgba($c-danger, 0.15);
+        color: $c-danger;
+      }
+
+      &.leng {
+        @include magic-state;
+        animation: pulse-magic 2s infinite;
+      }
+    }
+  }
+
+  .essence-display {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    .essence-value {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      color: $c-magic;
+      min-width: 50px;
+      text-align: center;
+
+      &.low {
+        color: $c-warning;
+      }
+
+      &.critical {
+        color: $c-danger;
+        animation: pulse-danger 1s infinite;
+      }
+    }
+
+    .essence-bar-container {
+      flex: 1;
+    }
+  }
+
+  .essence-bar {
+    height: 16px;
+    background: rgba($c-dark, 0.1);
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    position: relative;
+
+    .essence-fill {
+      height: 100%;
+      background: linear-gradient(to right, $c-magic-dark, $c-magic);
+      border-radius: $border-radius-md;
+      transition: width $transition-normal, background $transition-slow;
+
+      // Visual degradation as essence drops
+      &.high {
+        background: linear-gradient(to right, $c-magic, $c-magic-light);
+      }
+
+      &.medium {
+        background: linear-gradient(to right, rgba($c-magic, 0.8), rgba($c-magic, 0.5));
+      }
+
+      &.low {
+        background: linear-gradient(to right, $c-warning, rgba($c-warning, 0.7));
+      }
+
+      &.critical {
+        background: linear-gradient(to right, $c-danger-dark, $c-danger);
+        animation: pulse-bar 1.5s infinite;
+      }
+
+      &.empty {
+        background: $c-dark;
+      }
+    }
+
+    // Corruption markers
+    .corruption-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 5px,
+        rgba($c-dark, 0.1) 5px,
+        rgba($c-dark, 0.1) 10px
+      );
+      pointer-events: none;
+    }
+  }
+
+  .essence-pips {
+    display: flex;
+    justify-content: space-between;
+    padding-top: $spacing-sm;
+
+    .essence-pip {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba($c-magic, 0.15);
+      border: $border-width solid rgba($c-magic, 0.3);
+      cursor: pointer;
+      transition: all $transition-fast;
+      position: relative;
+
+      &.filled {
+        background: $c-magic;
+        border-color: $c-magic-dark;
+        box-shadow: 0 0 4px rgba($c-magic, 0.4);
+      }
+
+      &.corrupted {
+        background: $c-danger;
+        border-color: $c-danger-dark;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 6px;
+          height: 6px;
+          background: $c-dark;
+          border-radius: 50%;
+        }
+      }
+
+      &:hover {
+        transform: scale(1.15);
+        border-color: $c-accent;
+      }
+    }
+  }
+
+  .corruption-warning {
+    font-size: $font-size-sm;
+    color: $c-magic;
+    font-style: italic;
+    padding: $spacing-sm;
+    background: rgba($c-magic, 0.1);
+    border-radius: $border-radius-sm;
+    text-align: center;
+
+    i {
+      margin-right: $spacing-sm;
+    }
+
+    &.leng-warning {
+      background: rgba($c-dark, 0.9);
+      color: $c-magic-light;
+      font-weight: $font-weight-bold;
+      animation: pulse-magic 2s infinite;
+    }
+  }
+}
+
+// === ZEAL TRACKER ===
+.zeal-tracker {
+  @include flex-column;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: rgba($c-accent, 0.05);
+  border: $border-width solid rgba($c-accent, 0.2);
+  border-radius: $border-radius-md;
+
+  .zeal-header {
+    @include flex-between;
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $c-accent-dark;
+
+      i {
+        margin-right: $spacing-sm;
+        color: $c-accent;
+      }
+    }
+
+    .zeal-value {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $c-accent;
+    }
+  }
+
+  .zeal-pips {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: center;
+
+    .zeal-pip {
+      width: 28px;
+      height: 28px;
+      border-radius: $border-radius-sm;
+      background: $c-faint;
+      border: $border-width-thick solid $c-medium;
+      cursor: pointer;
+      transition: all $transition-fast;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.filled {
+        background: linear-gradient(135deg, $c-accent-light, $c-accent);
+        border-color: $c-accent-dark;
+        box-shadow: $shadow-glow-accent;
+
+        i {
+          color: $c-dark;
+          font-size: $font-size-sm;
+        }
+      }
+
+      &:hover {
+        border-color: $c-accent;
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// === LIFEBLOOD DISPLAY ===
+.lifeblood-display {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($c-danger, 0.05);
+  border: $border-width solid rgba($c-danger, 0.2);
+  border-radius: $border-radius-md;
+
+  .lifeblood-label {
+    @include text-label;
+    color: $c-danger;
+  }
+
+  .lifeblood-value {
+    font-weight: $font-weight-bold;
+    color: $c-danger;
+
+    .dice-count {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .lifeblood-roll {
+    margin-left: auto;
+
+    button {
+      @include button-danger;
+      padding: $spacing-xs $spacing-md;
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// === ANIMATIONS ===
+@keyframes pulse-danger {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-magic {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba($c-magic, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba($c-magic, 0.6);
+  }
+}
+
+@keyframes pulse-bar {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+}
+
+// === COMPACT RESOURCE DISPLAY ===
+.resource-compact {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($c-dark, 0.03);
+  border-radius: $border-radius-sm;
+
+  .resource-icon {
+    font-size: $font-size-sm;
+    color: $c-medium;
+  }
+
+  .resource-name {
+    font-size: $font-size-sm;
+    color: $c-medium;
+  }
+
+  .resource-value {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    color: $c-dark;
+    margin-left: auto;
+  }
+
+  &.danger {
+    background: $c-danger-bg;
+
+    .resource-icon,
+    .resource-name {
+      color: $c-danger;
+    }
+
+    .resource-value {
+      color: $c-danger;
+    }
+  }
+
+  &.magic {
+    background: $c-magic-bg;
+
+    .resource-icon,
+    .resource-name {
+      color: $c-magic;
+    }
+
+    .resource-value {
+      color: $c-magic;
+    }
+  }
+}

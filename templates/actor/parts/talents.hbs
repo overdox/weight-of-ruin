@@ -1,0 +1,138 @@
+{{!-- Talents Tab Content --}}
+<section class="talents-section">
+  <div class="section-header">
+    <h3>{{localize "AOA.Section.Talents"}}</h3>
+    {{#if isEditMode}}
+    <a class="item-create" data-action="createItem" data-type="talent" title="{{localize 'AOA.Item.AddTalent'}}">
+      <i class="fas fa-plus"></i>
+    </a>
+    {{/if}}
+  </div>
+
+  {{#if talents.length}}
+  <ul class="talent-list">
+    {{#each talents}}
+    <li class="talent-item" data-item-id="{{id}}" data-action="toggleTalentExpand">
+      {{!-- Talent Header (always visible) --}}
+      <div class="talent-header">
+        <div class="talent-main">
+          <span class="talent-expand-icon">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+          <span class="talent-name">{{name}}</span>
+          {{#if system.talentType}}
+          <span class="talent-type talent-type-{{system.talentType}}">
+            {{localize (concat "AOA.TalentType." system.talentType)}}
+          </span>
+          {{/if}}
+        </div>
+        <div class="talent-meta">
+          <span class="talent-rank" title="{{localize 'AOA.Talent.Rank'}} {{system.rank}}/{{system.maxRank}}">
+            {{!-- Filled pips for current rank --}}
+            {{#times system.rank}}<i class="fas fa-circle talent-rank-pip filled"></i>{{/times}}
+            {{!-- Empty pips for remaining ranks --}}
+            {{#times (subtract system.maxRank system.rank)}}<i class="far fa-circle talent-rank-pip"></i>{{/times}}
+          </span>
+          <div class="talent-controls">
+            <a class="item-control" data-action="editItem" title="{{localize 'AOA.Common.Edit'}}">
+              <i class="fas fa-edit"></i>
+            </a>
+            {{#if @root.isEditMode}}
+            <a class="item-control" data-action="deleteItem" title="{{localize 'AOA.Common.Delete'}}">
+              <i class="fas fa-trash"></i>
+            </a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      {{!-- Talent Details (hidden until expanded) --}}
+      <div class="talent-details">
+        {{!-- Effect Description --}}
+        {{#if system.effect}}
+        <div class="talent-effect">
+          <h4>{{localize "AOA.Talent.Effect"}} ({{localize "AOA.Common.Rank"}} {{system.rank}})</h4>
+          <div class="talent-effect-text">{{{system.effect}}}</div>
+        </div>
+        {{/if}}
+
+        {{!-- Description if different from effect --}}
+        {{#if system.description}}
+        {{#unless (eq system.description system.effect)}}
+        <div class="talent-description">
+          <div class="talent-description-text">{{{system.description}}}</div>
+        </div>
+        {{/unless}}
+        {{/if}}
+
+        {{!-- Prerequisites --}}
+        {{#if (or system.prerequisites.talents.length system.prerequisites.attributes.length system.prerequisites.skills.length system.prerequisites.witchsight system.prerequisites.other)}}
+        <div class="talent-prerequisites">
+          <h4>{{localize "AOA.Talent.Prerequisites"}}</h4>
+          <ul class="prereq-list">
+            {{#each system.prerequisites.talents}}
+            <li><i class="fas fa-star"></i> {{name}} {{localize "AOA.Common.Rank"}} {{rank}}</li>
+            {{/each}}
+            {{#each system.prerequisites.attributes}}
+            <li><i class="fas fa-chart-bar"></i> {{attribute}} {{minimum}}+</li>
+            {{/each}}
+            {{#each system.prerequisites.skills}}
+            <li><i class="fas fa-book"></i> {{skill}} {{minimum}}+</li>
+            {{/each}}
+            {{#if system.prerequisites.witchsight}}
+            <li><i class="fas fa-eye"></i> {{localize "AOA.Attributes.Witchsight"}} {{system.prerequisites.witchsight}}+</li>
+            {{/if}}
+            {{#if system.prerequisites.other}}
+            <li><i class="fas fa-info-circle"></i> {{system.prerequisites.other}}</li>
+            {{/if}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{!-- Restrictions --}}
+        {{#if system.restrictions.exclusive}}
+        {{#if (or system.restrictions.archetypes.length system.restrictions.subtypes.length)}}
+        <div class="talent-restrictions">
+          <h4>{{localize "AOA.Talent.Restrictions"}}</h4>
+          <ul class="restriction-list">
+            {{#each system.restrictions.archetypes}}
+            <li><i class="fas fa-user-shield"></i> {{this}}</li>
+            {{/each}}
+            {{#each system.restrictions.subtypes}}
+            <li><i class="fas fa-user-tag"></i> {{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+        {{/if}}
+
+        {{!-- Mechanics Summary --}}
+        {{#if (or system.mechanics.bonuses.length system.mechanics.abilities.length)}}
+        <div class="talent-mechanics">
+          <h4>{{localize "AOA.Talent.Mechanics"}}</h4>
+          {{#if system.mechanics.bonuses.length}}
+          <div class="talent-bonuses">
+            {{#each system.mechanics.bonuses}}
+            <span class="bonus-tag">
+              {{#if target}}{{target}}{{else}}{{type}}{{/if}}: {{#if (gt value 0)}}+{{/if}}{{value}}
+            </span>
+            {{/each}}
+          </div>
+          {{/if}}
+          {{#if system.mechanics.abilities.length}}
+          <div class="talent-abilities">
+            {{#each system.mechanics.abilities}}
+            <span class="ability-tag"><i class="fas fa-bolt"></i> {{this}}</span>
+            {{/each}}
+          </div>
+          {{/if}}
+        </div>
+        {{/if}}
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+  {{else}}
+  <p class="empty-notice">{{localize "AOA.Empty.Talents"}}</p>
+  {{/if}}
+</section>

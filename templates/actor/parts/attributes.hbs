@@ -1,0 +1,345 @@
+<section class="attributes-section">
+  <h3 class="section-header-with-button">
+    {{localize "AOA.Section.Attributes"}}
+    <button type="button" class="edit-section-btn" data-action="openAttributeEditor" title="{{localize 'AOA.Attribute.EditAll'}}">
+      <i class="fas fa-edit"></i> {{localize "AOA.Common.Edit"}}
+    </button>
+  </h3>
+
+  {{!-- Horizontal Attribute Table --}}
+  <div class="attributes-table-container">
+    <table class="attributes-table">
+      <thead>
+        <tr>
+          <th class="row-label"></th>
+          {{!-- Core Attributes --}}
+          <th class="attr-header" title="{{localize 'AOA.Attribute.Strength.long'}}">
+            {{localize "AOA.Attribute.Strength.abbr"}}
+          </th>
+          <th class="attr-header" title="{{localize 'AOA.Attribute.Fortitude.long'}}">
+            {{localize "AOA.Attribute.Fortitude.abbr"}}
+          </th>
+          <th class="attr-header" title="{{localize 'AOA.Attribute.Agility.long'}}">
+            {{localize "AOA.Attribute.Agility.abbr"}}
+          </th>
+          <th class="attr-header" title="{{localize 'AOA.Attribute.Awareness.long'}}">
+            {{localize "AOA.Attribute.Awareness.abbr"}}
+          </th>
+          <th class="attr-header" title="{{localize 'AOA.Attribute.Resolve.long'}}">
+            {{localize "AOA.Attribute.Resolve.abbr"}}
+          </th>
+          <th class="attr-header" title="{{localize 'AOA.Attribute.Persona.long'}}">
+            {{localize "AOA.Attribute.Persona.abbr"}}
+          </th>
+          <th class="attr-header" title="{{localize 'AOA.Attribute.Ingenuity.long'}}">
+            {{localize "AOA.Attribute.Ingenuity.abbr"}}
+          </th>
+          <th class="attr-header" title="{{localize 'AOA.Attribute.Expertise.long'}}">
+            {{localize "AOA.Attribute.Expertise.abbr"}}
+          </th>
+          {{!-- Witchsight --}}
+          <th class="attr-header witchsight" title="{{localize 'AOA.Attribute.Witchsight.long'}}">
+            {{localize "AOA.Attribute.Witchsight.abbr"}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{!-- Base Row --}}
+        <tr class="attr-row base-row">
+          <td class="row-label">{{localize "AOA.Attribute.Base"}}</td>
+          <td class="attr-value" data-attribute="strength" data-component="base">
+            {{system.attributes.strength.base}}
+          </td>
+          <td class="attr-value" data-attribute="fortitude" data-component="base">
+            {{system.attributes.fortitude.base}}
+          </td>
+          <td class="attr-value" data-attribute="agility" data-component="base">
+            {{system.attributes.agility.base}}
+          </td>
+          <td class="attr-value" data-attribute="awareness" data-component="base">
+            {{system.attributes.awareness.base}}
+          </td>
+          <td class="attr-value" data-attribute="resolve" data-component="base">
+            {{system.attributes.resolve.base}}
+          </td>
+          <td class="attr-value" data-attribute="persona" data-component="base">
+            {{system.attributes.persona.base}}
+          </td>
+          <td class="attr-value" data-attribute="ingenuity" data-component="base">
+            {{system.attributes.ingenuity.base}}
+          </td>
+          <td class="attr-value" data-attribute="expertise" data-component="base">
+            {{system.attributes.expertise.base}}
+          </td>
+          <td class="attr-value witchsight na">—</td>
+        </tr>
+
+        {{!-- Advances Row --}}
+        <tr class="attr-row advances-row">
+          <td class="row-label">{{localize "AOA.Attribute.Advances"}}</td>
+          <td class="attr-value" data-attribute="strength" data-component="advances">
+            {{system.attributes.strength.advances}}
+          </td>
+          <td class="attr-value" data-attribute="fortitude" data-component="advances">
+            {{system.attributes.fortitude.advances}}
+          </td>
+          <td class="attr-value" data-attribute="agility" data-component="advances">
+            {{system.attributes.agility.advances}}
+          </td>
+          <td class="attr-value" data-attribute="awareness" data-component="advances">
+            {{system.attributes.awareness.advances}}
+          </td>
+          <td class="attr-value" data-attribute="resolve" data-component="advances">
+            {{system.attributes.resolve.advances}}
+          </td>
+          <td class="attr-value" data-attribute="persona" data-component="advances">
+            {{system.attributes.persona.advances}}
+          </td>
+          <td class="attr-value" data-attribute="ingenuity" data-component="advances">
+            {{system.attributes.ingenuity.advances}}
+          </td>
+          <td class="attr-value" data-attribute="expertise" data-component="advances">
+            {{system.attributes.expertise.advances}}
+          </td>
+          <td class="attr-value witchsight na">—</td>
+        </tr>
+
+        {{!-- Modifier Row --}}
+        <tr class="attr-row modifier-row">
+          <td class="row-label">{{localize "AOA.Attribute.Modifier"}}</td>
+          <td class="attr-value" data-attribute="strength" data-component="modifier">
+            {{#if (ne system.attributes.strength.modifier 0)}}
+              {{#if (gte system.attributes.strength.modifier 0)}}+{{/if}}{{system.attributes.strength.modifier}}
+            {{else}}
+              0
+            {{/if}}
+          </td>
+          <td class="attr-value" data-attribute="fortitude" data-component="modifier">
+            {{#if (ne system.attributes.fortitude.modifier 0)}}
+              {{#if (gte system.attributes.fortitude.modifier 0)}}+{{/if}}{{system.attributes.fortitude.modifier}}
+            {{else}}
+              0
+            {{/if}}
+          </td>
+          <td class="attr-value" data-attribute="agility" data-component="modifier">
+            {{#if (ne system.attributes.agility.modifier 0)}}
+              {{#if (gte system.attributes.agility.modifier 0)}}+{{/if}}{{system.attributes.agility.modifier}}
+            {{else}}
+              0
+            {{/if}}
+          </td>
+          <td class="attr-value" data-attribute="awareness" data-component="modifier">
+            {{#if (ne system.attributes.awareness.modifier 0)}}
+              {{#if (gte system.attributes.awareness.modifier 0)}}+{{/if}}{{system.attributes.awareness.modifier}}
+            {{else}}
+              0
+            {{/if}}
+          </td>
+          <td class="attr-value" data-attribute="resolve" data-component="modifier">
+            {{#if (ne system.attributes.resolve.modifier 0)}}
+              {{#if (gte system.attributes.resolve.modifier 0)}}+{{/if}}{{system.attributes.resolve.modifier}}
+            {{else}}
+              0
+            {{/if}}
+          </td>
+          <td class="attr-value" data-attribute="persona" data-component="modifier">
+            {{#if (ne system.attributes.persona.modifier 0)}}
+              {{#if (gte system.attributes.persona.modifier 0)}}+{{/if}}{{system.attributes.persona.modifier}}
+            {{else}}
+              0
+            {{/if}}
+          </td>
+          <td class="attr-value" data-attribute="ingenuity" data-component="modifier">
+            {{#if (ne system.attributes.ingenuity.modifier 0)}}
+              {{#if (gte system.attributes.ingenuity.modifier 0)}}+{{/if}}{{system.attributes.ingenuity.modifier}}
+            {{else}}
+              0
+            {{/if}}
+          </td>
+          <td class="attr-value" data-attribute="expertise" data-component="modifier">
+            {{#if (ne system.attributes.expertise.modifier 0)}}
+              {{#if (gte system.attributes.expertise.modifier 0)}}+{{/if}}{{system.attributes.expertise.modifier}}
+            {{else}}
+              0
+            {{/if}}
+          </td>
+          <td class="attr-value witchsight na">—</td>
+        </tr>
+
+        {{!-- Total Row --}}
+        <tr class="attr-row total-row">
+          <td class="row-label">{{localize "AOA.Attribute.Total"}}</td>
+          <td class="attr-value total rollable" data-action="rollAttribute" data-attribute="strength" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{#if (gte attributeTotals.strength 0)}}+{{/if}}{{attributeTotals.strength}}
+          </td>
+          <td class="attr-value total rollable" data-action="rollAttribute" data-attribute="fortitude" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{#if (gte attributeTotals.fortitude 0)}}+{{/if}}{{attributeTotals.fortitude}}
+          </td>
+          <td class="attr-value total rollable" data-action="rollAttribute" data-attribute="agility" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{#if (gte attributeTotals.agility 0)}}+{{/if}}{{attributeTotals.agility}}
+          </td>
+          <td class="attr-value total rollable" data-action="rollAttribute" data-attribute="awareness" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{#if (gte attributeTotals.awareness 0)}}+{{/if}}{{attributeTotals.awareness}}
+          </td>
+          <td class="attr-value total rollable" data-action="rollAttribute" data-attribute="resolve" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{#if (gte attributeTotals.resolve 0)}}+{{/if}}{{attributeTotals.resolve}}
+          </td>
+          <td class="attr-value total rollable" data-action="rollAttribute" data-attribute="persona" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{#if (gte attributeTotals.persona 0)}}+{{/if}}{{attributeTotals.persona}}
+          </td>
+          <td class="attr-value total rollable" data-action="rollAttribute" data-attribute="ingenuity" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{#if (gte attributeTotals.ingenuity 0)}}+{{/if}}{{attributeTotals.ingenuity}}
+          </td>
+          <td class="attr-value total rollable" data-action="rollAttribute" data-attribute="expertise" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{#if (gte attributeTotals.expertise 0)}}+{{/if}}{{attributeTotals.expertise}}
+          </td>
+          <td class="attr-value witchsight total rollable" data-action="rollAttribute" data-attribute="witchsight" title="{{localize 'AOA.Roll.ClickToRoll'}}">
+            {{system.witchsight}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{{!-- Derived Attributes (Standalone Section) --}}
+<section class="derived-attributes">
+  <h3>{{localize "AOA.Section.DerivedAttributes"}}</h3>
+  <div class="derived-grid">
+    <div class="derived-box" title="{{localize 'AOA.Derived.Toughness.formula'}}">
+      <span class="derived-label">{{localize "AOA.Derived.Toughness.label"}}</span>
+      <span class="derived-value">{{toughness}}</span>
+    </div>
+    <div class="derived-box" title="{{localize 'AOA.Derived.Reflex.formula'}}">
+      <span class="derived-label">{{localize "AOA.Derived.Reflex.label"}}</span>
+      <span class="derived-value">{{reflex}}</span>
+    </div>
+    <div class="derived-box" title="{{localize 'AOA.Derived.Defense.formula'}}">
+      <span class="derived-label">{{localize "AOA.Derived.Defense.label"}}</span>
+      <span class="derived-value">{{totalDefense}}</span>
+    </div>
+    <div class="derived-box" title="{{localize 'AOA.Derived.Movement.formula'}}">
+      <span class="derived-label">{{localize "AOA.Derived.Movement.label"}}</span>
+      <span class="derived-value">{{effectiveMovement}}</span>
+    </div>
+    <div class="derived-box" title="{{localize 'AOA.Derived.MaxTrauma.formula'}}">
+      <span class="derived-label">{{localize "AOA.Derived.MaxTrauma.label"}}</span>
+      <span class="derived-value">{{maxTrauma}}</span>
+    </div>
+    <div class="derived-box" title="{{localize 'AOA.Derived.Wounds.formula'}}">
+      <span class="derived-label">{{localize "AOA.Derived.Wounds.label"}}</span>
+      <span class="derived-value">{{wounds}}</span>
+    </div>
+    {{!-- Attack Pools (Prowess + Skill) --}}
+    <div class="derived-box attack" title="WP ({{weaponProwess}}) + Arms ({{armsRank}})">
+      <span class="derived-label">{{localize "AOA.Combat.MeleeAttack"}}</span>
+      <span class="derived-value">{{meleeAttack}}</span>
+    </div>
+    <div class="derived-box attack" title="BP ({{ballisticProwess}}) + Marksmanship ({{marksmanshipRank}})">
+      <span class="derived-label">{{localize "AOA.Combat.RangedAttack"}}</span>
+      <span class="derived-value">{{rangedAttack}}</span>
+    </div>
+    <div class="derived-box attack" title="UP ({{unarmedProwess}}) + Brawling ({{brawlingRank}})">
+      <span class="derived-label">{{localize "AOA.Combat.UnarmedAttack"}}</span>
+      <span class="derived-value">{{unarmedAttack}}</span>
+    </div>
+  </div>
+</section>
+
+{{!-- Health & Fervor Section (Side by Side) --}}
+<div class="health-fervor-wrapper">
+  {{!-- Health Section --}}
+  <section class="resources-section health-section">
+    <div class="section-header-with-button">
+      <h3>{{localize "AOA.Section.Health"}}</h3>
+      <button type="button" class="rest-btn" data-action="openRestDialog" title="{{localize 'AOA.Rest.Title'}}">
+        <i class="fas fa-bed"></i> {{localize "AOA.Rest.Button"}}
+      </button>
+    </div>
+    <div class="resources-grid health-grid">
+      {{!-- Trauma Resource --}}
+      <div class="resource-box trauma {{#if system.atBreakingPoint}}critical{{/if}}">
+        <div class="resource-header">
+          <span class="resource-label">{{localize "AOA.Health.Trauma"}}</span>
+          <span class="resource-value">{{system.health.trauma}} / {{maxTrauma}}</span>
+        </div>
+        <div class="resource-bar-container">
+          <div class="resource-bar trauma-bar">
+            <div class="resource-fill" style="width: {{percentage system.health.trauma maxTrauma}}%"></div>
+          </div>
+        </div>
+        <div class="resource-controls">
+          <button type="button" class="resource-btn decrease" data-action="adjustTrauma" data-adjust="-1" title="{{localize 'AOA.Health.DecreaseTrauma'}}">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="resource-btn increase" data-action="adjustTrauma" data-adjust="1" title="{{localize 'AOA.Health.IncreaseTrauma'}}">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        {{#if system.atBreakingPoint}}
+        <div class="resource-warning">
+          <i class="fas fa-exclamation-triangle"></i> {{localize "AOA.Health.BreakingPoint"}}
+        </div>
+        {{/if}}
+      </div>
+
+      {{!-- Wounds Resource --}}
+      <div class="resource-box wounds {{#if system.isUnconscious}}unconscious{{/if}} {{#if system.isDead}}dead{{/if}}">
+        <div class="resource-header">
+          <span class="resource-label">{{localize "AOA.Health.Wounds"}}</span>
+          <span class="resource-value {{#if (lte wounds 1)}}critical{{/if}}">
+            {{wounds}} / {{maxWounds}}
+          </span>
+        </div>
+        <div class="resource-pips">
+          {{#times maxWounds}}
+          <span class="wound-pip {{#if (gt ../wounds this)}}filled{{/if}}">
+            <i class="{{#if (gt ../wounds this)}}fas{{else}}far{{/if}} fa-heart"></i>
+          </span>
+          {{/times}}
+        </div>
+        {{#if system.health.stabilized}}
+        <div class="stabilized-indicator">
+          <i class="fas fa-heart-pulse"></i> {{localize "AOA.Health.Stabilized"}}
+        </div>
+        {{/if}}
+        {{#if system.atBreakingPoint}}
+        <div class="resource-controls">
+          <button type="button" class="resource-btn roll" data-action="rollWounds" title="{{localize 'AOA.Health.RollWounds'}}">
+            <i class="fas fa-dice"></i> {{localize "AOA.Health.RollWounds"}}
+          </button>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </section>
+
+  {{!-- Fervor Section --}}
+  {{#if system.fervor}}
+  <section class="resources-section fervor-section">
+    <h3>{{localize "AOA.Fervor.Title"}}</h3>
+    <div class="resources-grid fervor-grid">
+      <div class="resource-box fervor">
+        <div class="resource-pips fervor-pips">
+          {{#each fervorPips}}
+          <span class="fervor-pip {{#if filled}}filled{{/if}}"
+                data-action="setFervor"
+                data-fervor="{{value}}"
+                title="{{localize 'AOA.Fervor.SetTo'}} {{value}}">
+            <i class="{{#if filled}}fas{{else}}far{{/if}} fa-fire-flame-curved"></i>
+          </span>
+          {{/each}}
+        </div>
+        <div class="resource-controls">
+          <button type="button" class="resource-btn decrease" data-action="adjustFervor" data-adjust="-1" title="{{localize 'AOA.Fervor.Decrease'}}">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="resource-btn increase" data-action="adjustFervor" data-adjust="1" title="{{localize 'AOA.Fervor.Increase'}}">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{/if}}
+</div>

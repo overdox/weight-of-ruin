@@ -1,0 +1,37 @@
+{{!-- Initiative Roll Chat Card --}}
+<div class="wor">
+  <div class="initiative-card">
+    {{!-- Card Header --}}
+    <div class="card-header">
+      <img src="{{actor.img}}" alt="{{actor.name}}" class="actor-portrait" />
+      <div class="header-info">
+        <span class="actor-name">{{actor.name}}</span>
+        <span class="roll-type">{{localize "AOA.Combat.Initiative"}}</span>
+      </div>
+    </div>
+
+    {{!-- Roll Result --}}
+    <div class="card-body">
+      <div class="initiative-result">
+        <span class="result-value">{{roll.total}}</span>
+      </div>
+
+      <div class="roll-breakdown">
+        <span class="breakdown-formula">
+          <i class="fas fa-dice-d6"></i>
+          {{#each roll.dice}}
+          <span class="die d6">{{this}}</span>
+          {{/each}}
+          <span class="modifier">+ {{reflex}}</span>
+        </span>
+      </div>
+
+      <div class="reflex-breakdown">
+        <span class="breakdown-label">{{localize "AOA.Derived.Reflex.label"}}:</span>
+        <span class="breakdown-value">
+          {{localize "AOA.Attribute.Agility.abbr"}} {{agility}} + {{localize "AOA.Attribute.Awareness.abbr"}} {{awareness}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

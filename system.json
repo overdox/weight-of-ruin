@@ -1,0 +1,241 @@
+{
+  "id": "weight-of-ruin",
+  "title": "The Weight of Ruin",
+  "description": "A grimdark medieval fantasy RPG where magic corrupts and choices have lasting consequences. Features Threshold Compression dice mechanics, lethal combat, and the Essence corruption system.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "The Weight of Ruin Development Team"
+    }
+  ],
+  "url": "https://github.com/overdox/weight-of-ruin",
+  "license": "LICENSE.txt",
+  "readme": "README.md",
+  "bugs": "https://github.com/overdox/weight-of-ruin/issues",
+  "changelog": "CHANGELOG.md",
+  "media": [
+    {
+      "type": "setup",
+      "url": "systems/weight-of-ruin/assets/anvil-impact.png",
+      "thumbnail": "systems/weight-of-ruin/assets/splash-card.webp"
+    }
+  ],
+  "esmodules": ["module/weight-of-ruin.mjs"],
+  "styles": ["css/weight-of-ruin.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "packs": [
+    {
+      "name": "skills",
+      "label": "Skills",
+      "path": "packs/skills",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-red.webp"
+    },
+    {
+      "name": "talents",
+      "label": "Talents",
+      "path": "packs/talents",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-red.webp"
+    },
+    {
+      "name": "lineages",
+      "label": "Lineages",
+      "path": "packs/lineages",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-green.webp"
+    },
+    {
+      "name": "backgrounds",
+      "label": "Backgrounds",
+      "path": "packs/backgrounds",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-green.webp"
+    },
+    {
+      "name": "archetypes",
+      "label": "Archetypes",
+      "path": "packs/archetypes",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-green.webp"
+    },
+    {
+      "name": "callings",
+      "label": "Callings",
+      "path": "packs/callings",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-green.webp"
+    },
+    {
+      "name": "pathways",
+      "label": "Pathways",
+      "path": "packs/pathways",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-green.webp"
+    },
+    {
+      "name": "life-events",
+      "label": "Life Events",
+      "path": "packs/life-events",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-green.webp"
+    },
+    {
+      "name": "weapons",
+      "label": "Weapons",
+      "path": "packs/weapons",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-purple.webp"
+    },
+    {
+      "name": "armor",
+      "label": "Armor",
+      "path": "packs/armor",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-purple.webp"
+    },
+    {
+      "name": "gear",
+      "label": "Gear",
+      "path": "packs/gear",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-purple.webp"
+    },
+    {
+      "name": "npc-traits",
+      "label": "NPC Traits",
+      "path": "packs/npc-traits",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "weight-of-ruin",
+      "banner": "systems/weight-of-ruin/assets/ui/compendium/banner-yellow.webp"
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Character Creation",
+      "sorting": "a",
+      "color": "#376022",
+      "packs": ["lineages", "backgrounds", "archetypes", "callings", "pathways", "life-events"]
+    },
+    {
+      "name": "Character Options",
+      "sorting": "a",
+      "color": "#5e2822",
+      "packs": ["skills", "talents"]
+    },
+    {
+      "name": "Equipment",
+      "sorting": "a",
+      "color": "#6a2667",
+      "packs": ["weapons", "armor", "gear"]
+    },
+    {
+      "name": "NPC Options",
+      "sorting": "a",
+      "color": "#646625",
+      "packs": ["npc-traits"]
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {},
+      "loot": {}
+    },
+    "Item": {
+      "skill": {},
+      "talent": {},
+      "weapon": {},
+      "armor": {},
+      "gear": {},
+      "spell": {},
+      "ritual": {},
+      "lineage": {},
+      "background": {},
+      "archetype": {},
+      "calling": {},
+      "pathway": {},
+      "lifeEvent": {},
+      "npcTrait": {}
+    }
+  },
+  "socket": true,
+  "manifest": "https://raw.githubusercontent.com/overdox/weight-of-ruin/main/system.json",
+  "download": "https://github.com/overdox/weight-of-ruin/releases/download/v0.1.0/weight-of-ruin.zip",
+  "background": "systems/weight-of-ruin/assets/splash-card.webp",
+  "grid": {
+    "distance": 1,
+    "units": "space"
+  },
+  "primaryTokenAttribute": "health.trauma",
+  "secondaryTokenAttribute": "essence.current"
+}

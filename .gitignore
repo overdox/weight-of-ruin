@@ -1,0 +1,28 @@
+# IDE
+.idea/
+.vs/
+
+# Node Modules
+node_modules/
+npm-debug.log
+
+# Foundry
+*.lock
+jsconfig.json
+foundry
+
+# Build artifacts and generator files
+build/
+src/datamodels/
+src/generate-boilerplate-system.mjs
+
+# Claude (project-specific documentation)
+.claude
+CLAUDE.md
+implement_phases.sh
+project_plan.md
+talents.md
+items.md
+skills.md
+
+.docs/*.md
