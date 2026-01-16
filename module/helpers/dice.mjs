@@ -21,19 +21,19 @@
 export const DIFFICULTY_TIERS = {
   trivial: {
     key: 'trivial',
-    label: 'AOA.Difficulty.Trivial',
+    label: 'WOR.Difficulty.Trivial',
     threshold: 4,
     probability: 0.5
   },
   standard: {
     key: 'standard',
-    label: 'AOA.Difficulty.Standard',
+    label: 'WOR.Difficulty.Standard',
     threshold: 5,
     probability: 0.333
   },
   hard: {
     key: 'hard',
-    label: 'AOA.Difficulty.Hard',
+    label: 'WOR.Difficulty.Hard',
     threshold: 6,
     probability: 0.167
   }
@@ -45,22 +45,22 @@ export const DIFFICULTY_TIERS = {
 export const DEGREE_OF_SUCCESS = {
   criticalFailure: {
     key: 'criticalFailure',
-    label: 'AOA.Roll.CriticalFailure',
+    label: 'WOR.Roll.CriticalFailure',
     cssClass: 'critical-failure'
   },
   failure: {
     key: 'failure',
-    label: 'AOA.Roll.Failure',
+    label: 'WOR.Roll.Failure',
     cssClass: 'failure'
   },
   success: {
     key: 'success',
-    label: 'AOA.Roll.Success',
+    label: 'WOR.Roll.Success',
     cssClass: 'success'
   },
   criticalSuccess: {
     key: 'criticalSuccess',
-    label: 'AOA.Roll.CriticalSuccess',
+    label: 'WOR.Roll.CriticalSuccess',
     cssClass: 'critical-success'
   }
 };
@@ -128,35 +128,35 @@ export const FERVOR_OPTIONS = {
   difficultyShift: {
     key: 'difficultyShift',
     cost: 1,
-    label: 'AOA.Fervor.DifficultyShift',
+    label: 'WOR.Fervor.DifficultyShift',
     description: 'Shift difficulty one tier easier',
     timing: 'pre-roll'
   },
   reroll: {
     key: 'reroll',
     cost: 2,
-    label: 'AOA.Fervor.Reroll',
+    label: 'WOR.Fervor.Reroll',
     description: 'Reroll and take better result',
     timing: 'post-roll'
   },
   bonusDice: {
     key: 'bonusDice',
     cost: 3,
-    label: 'AOA.Fervor.BonusDice',
+    label: 'WOR.Fervor.BonusDice',
     description: 'Add +3 dice to pool',
     timing: 'pre-roll'
   },
   autoSuccess: {
     key: 'autoSuccess',
     cost: 5,
-    label: 'AOA.Fervor.AutoSuccess',
+    label: 'WOR.Fervor.AutoSuccess',
     description: 'Automatic Critical Success',
     timing: 'pre-roll'
   },
   zeroPool: {
     key: 'zeroPool',
     cost: 1,
-    label: 'AOA.Fervor.ZeroPool',
+    label: 'WOR.Fervor.ZeroPool',
     description: 'Attempt roll with 0 dice (1d6 at Hard)',
     timing: 'pre-roll'
   }
@@ -197,7 +197,7 @@ export function buildPool({ actor, attribute, skill, modifier = 0, bonusDice = 0
         ? (attr.base || 0) + (attr.advances || 0) + (attr.modifier || 0)
         : attr || 0;
     }
-    breakdown.attribute.label = game.i18n.localize(`AOA.Attributes.${attribute.charAt(0).toUpperCase() + attribute.slice(1)}`);
+    breakdown.attribute.label = game.i18n.localize(`WOR.Attributes.${attribute.charAt(0).toUpperCase() + attribute.slice(1)}`);
   }
 
   // Get skill value
@@ -290,16 +290,16 @@ export function calculateTTFromDefense(defense) {
  */
 export function getTTData(tt) {
   const ttLabels = {
-    1: 'AOA.TT.Simple',
-    2: 'AOA.TT.Moderate',
-    3: 'AOA.TT.Challenging',
-    4: 'AOA.TT.Difficult',
-    5: 'AOA.TT.Exceptional'
+    1: 'WOR.TT.Simple',
+    2: 'WOR.TT.Moderate',
+    3: 'WOR.TT.Challenging',
+    4: 'WOR.TT.Difficult',
+    5: 'WOR.TT.Exceptional'
   };
 
   return {
     value: tt,
-    label: ttLabels[tt] || 'AOA.TT.Legendary'
+    label: ttLabels[tt] || 'WOR.TT.Legendary'
   };
 }
 
@@ -802,7 +802,7 @@ export async function rollWounds(actor, options = {}) {
 
   // If stabilized, no roll needed
   if (isStabilized) {
-    ui.notifications.info(game.i18n.format('AOA.Health.StabilizedNoRoll', { name: actor.name }));
+    ui.notifications.info(game.i18n.format('WOR.Health.StabilizedNoRoll', { name: actor.name }));
     return { skipped: true, reason: 'stabilized' };
   }
 

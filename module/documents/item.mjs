@@ -273,13 +273,13 @@ export class WoRItem extends Item {
    */
   async _useSkill(options = {}) {
     if (!this.actor) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.NoActorForRoll'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.NoActorForRoll'));
       return null;
     }
 
     // Check if skill is gated by Witchsight
     if (this.system.gated) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.SkillRequiresWitchsight'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.SkillRequiresWitchsight'));
       return null;
     }
 
@@ -292,7 +292,7 @@ export class WoRItem extends Item {
    */
   async _useWeapon(options = {}) {
     if (!this.actor) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.NoActorForRoll'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.NoActorForRoll'));
       return null;
     }
 
@@ -305,7 +305,7 @@ export class WoRItem extends Item {
    */
   async _useSpell(options = {}) {
     if (!this.actor) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.NoActorForRoll'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.NoActorForRoll'));
       return null;
     }
 
@@ -321,7 +321,7 @@ export class WoRItem extends Item {
    */
   async _useRitual(options = {}) {
     if (!this.actor) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.NoActorForRoll'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.NoActorForRoll'));
       return null;
     }
 
@@ -343,8 +343,8 @@ export class WoRItem extends Item {
     const content = `
       <div class="wor talent-card">
         <h4>${this.name}</h4>
-        <p class="talent-rank">${game.i18n.localize('AOA.Common.Rank')}: ${this.system.rank}/${this.system.maxRank}</p>
-        <p class="talent-type">${game.i18n.localize(`AOA.TalentType.${this.system.talentType}`)}</p>
+        <p class="talent-rank">${game.i18n.localize('WOR.Common.Rank')}: ${this.system.rank}/${this.system.maxRank}</p>
+        <p class="talent-type">${game.i18n.localize(`WOR.TalentType.${this.system.talentType}`)}</p>
         ${this.system.effect ? `<div class="talent-effect">${this.system.effect}</div>` : ''}
       </div>
     `;
@@ -352,7 +352,7 @@ export class WoRItem extends Item {
     return ChatMessage.create({
       speaker,
       rollMode,
-      flavor: `[${game.i18n.localize('AOA.ItemTypes.talent')}] ${this.name}`,
+      flavor: `[${game.i18n.localize('WOR.ItemTypes.talent')}] ${this.name}`,
       content
     });
   }
@@ -363,7 +363,7 @@ export class WoRItem extends Item {
   async _useDefault(options = {}) {
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
-    const label = `[${game.i18n.localize(`AOA.ItemTypes.${this.type}`)}] ${this.name}`;
+    const label = `[${game.i18n.localize(`WOR.ItemTypes.${this.type}`)}] ${this.name}`;
 
     return ChatMessage.create({
       speaker,
@@ -384,7 +384,7 @@ export class WoRItem extends Item {
   async advanceRank() {
     if (this.type !== 'talent') return null;
     if (!this.system.canAdvance) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.TalentMaxRank'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.TalentMaxRank'));
       return null;
     }
 
@@ -398,7 +398,7 @@ export class WoRItem extends Item {
   async reduceRank() {
     if (this.type !== 'talent') return null;
     if (this.system.rank <= 1) {
-      ui.notifications.warn(game.i18n.localize('AOA.Warnings.TalentMinRank'));
+      ui.notifications.warn(game.i18n.localize('WOR.Warnings.TalentMinRank'));
       return null;
     }
 

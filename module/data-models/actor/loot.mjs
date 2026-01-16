@@ -13,7 +13,7 @@ export default class LootData extends foundry.abstract.TypeDataModel {
       sheetType: new fields.StringField({
         initial: 'loot',
         choices: ['loot', 'merchant'],
-        label: 'AOA.Loot.SheetType'
+        label: 'WOR.Loot.SheetType'
       }),
 
       // Currency (same structure as character wealth)
@@ -22,32 +22,32 @@ export default class LootData extends foundry.abstract.TypeDataModel {
           ...requiredInteger,
           initial: 0,
           min: 0,
-          label: 'AOA.Wealth.Orin'
+          label: 'WOR.Wealth.Orin'
         }),
         crowns: new fields.NumberField({
           ...requiredInteger,
           initial: 0,
           min: 0,
-          label: 'AOA.Wealth.Crowns'
+          label: 'WOR.Wealth.Crowns'
         }),
         sovereigns: new fields.NumberField({
           ...requiredInteger,
           initial: 0,
           min: 0,
-          label: 'AOA.Wealth.Sovereigns'
+          label: 'WOR.Wealth.Sovereigns'
         })
       }),
 
       // Auto-hide token when inventory is empty
       hiddenWhenEmpty: new fields.BooleanField({
         initial: false,
-        label: 'AOA.Loot.HiddenWhenEmpty'
+        label: 'WOR.Loot.HiddenWhenEmpty'
       }),
 
       // Description/notes for this loot pile or merchant
       description: new fields.HTMLField({
         initial: '',
-        label: 'AOA.Common.Description'
+        label: 'WOR.Common.Description'
       }),
 
       // Merchant-specific: price modifier as percentage (100 = normal, 150 = 50% markup)
@@ -56,7 +56,7 @@ export default class LootData extends foundry.abstract.TypeDataModel {
         initial: 100,
         min: 0,
         max: 500,
-        label: 'AOA.Loot.PriceModifier'
+        label: 'WOR.Loot.PriceModifier'
       })
     };
   }

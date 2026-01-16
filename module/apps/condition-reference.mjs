@@ -4,7 +4,7 @@
  * Can be used to apply conditions to a target actor.
  */
 
-import { AOA } from '../helpers/config.mjs';
+import { WOR } from '../helpers/config.mjs';
 import { applyCondition } from '../helpers/conditions.mjs';
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -20,7 +20,7 @@ export class ConditionReferencePanel extends HandlebarsApplicationMixin(Applicat
       height: 'auto'
     },
     window: {
-      title: 'AOA.Condition.Reference',
+      title: 'WOR.Condition.Reference',
       icon: 'fas fa-book-medical',
       resizable: true,
       minimizable: true
@@ -62,7 +62,7 @@ export class ConditionReferencePanel extends HandlebarsApplicationMixin(Applicat
 
     // Build condition data with localized strings
     const conditions = [];
-    for (const [id, condition] of Object.entries(AOA.conditions)) {
+    for (const [id, condition] of Object.entries(WOR.conditions)) {
       const conditionData = {
         id,
         label: game.i18n.localize(condition.label),
@@ -129,14 +129,14 @@ export class ConditionReferencePanel extends HandlebarsApplicationMixin(Applicat
 
     const formatted = [];
     const modifierLabels = {
-      attack: 'AOA.Modifier.Attack',
-      defense: 'AOA.Modifier.Defense',
-      defenseMelee: 'AOA.Modifier.DefenseMelee',
-      defenseRanged: 'AOA.Modifier.DefenseRanged',
-      physical: 'AOA.Modifier.Physical',
-      allRolls: 'AOA.Modifier.AllRolls',
-      awarenessHearing: 'AOA.Modifier.AwarenessHearing',
-      attackFromHiding: 'AOA.Modifier.AttackFromHiding'
+      attack: 'WOR.Modifier.Attack',
+      defense: 'WOR.Modifier.Defense',
+      defenseMelee: 'WOR.Modifier.DefenseMelee',
+      defenseRanged: 'WOR.Modifier.DefenseRanged',
+      physical: 'WOR.Modifier.Physical',
+      allRolls: 'WOR.Modifier.AllRolls',
+      awarenessHearing: 'WOR.Modifier.AwarenessHearing',
+      attackFromHiding: 'WOR.Modifier.AttackFromHiding'
     };
 
     for (const [key, value] of Object.entries(modifiers)) {
@@ -163,25 +163,25 @@ export class ConditionReferencePanel extends HandlebarsApplicationMixin(Applicat
 
     const formatted = [];
     const flagDescriptions = {
-      endOfTurnDamage: 'AOA.Condition.Flag.EndOfTurnDamage',
-      cannotSee: 'AOA.Condition.Flag.CannotSee',
-      cannotHear: 'AOA.Condition.Flag.CannotHear',
-      cannotMove: 'AOA.Condition.Flag.CannotMove',
-      cannotAct: 'AOA.Condition.Flag.CannotAct',
-      cannotAttackSource: 'AOA.Condition.Flag.CannotAttackSource',
-      socialAdvantage: 'AOA.Condition.Flag.SocialAdvantage',
-      attacksAreTrivial: 'AOA.Condition.Flag.AttacksAreTrivial',
-      attackersGainBonus: 'AOA.Condition.Flag.AttackersGainBonus',
-      mustMoveAway: 'AOA.Condition.Flag.MustMoveAway',
-      invisible: 'AOA.Condition.Flag.Invisible',
-      lostOnAttack: 'AOA.Condition.Flag.LostOnAttack',
-      standUpCost: 'AOA.Condition.Flag.StandUpCost',
-      loseActions: 'AOA.Condition.Flag.LoseActions',
-      isDefenseless: 'AOA.Condition.Flag.IsDefenseless',
-      autoProne: 'AOA.Condition.Flag.AutoProne',
-      deathSaves: 'AOA.Condition.Flag.DeathSaves',
-      isDead: 'AOA.Condition.Flag.IsDead',
-      crisisState: 'AOA.Condition.Flag.CrisisState'
+      endOfTurnDamage: 'WOR.Condition.Flag.EndOfTurnDamage',
+      cannotSee: 'WOR.Condition.Flag.CannotSee',
+      cannotHear: 'WOR.Condition.Flag.CannotHear',
+      cannotMove: 'WOR.Condition.Flag.CannotMove',
+      cannotAct: 'WOR.Condition.Flag.CannotAct',
+      cannotAttackSource: 'WOR.Condition.Flag.CannotAttackSource',
+      socialAdvantage: 'WOR.Condition.Flag.SocialAdvantage',
+      attacksAreTrivial: 'WOR.Condition.Flag.AttacksAreTrivial',
+      attackersGainBonus: 'WOR.Condition.Flag.AttackersGainBonus',
+      mustMoveAway: 'WOR.Condition.Flag.MustMoveAway',
+      invisible: 'WOR.Condition.Flag.Invisible',
+      lostOnAttack: 'WOR.Condition.Flag.LostOnAttack',
+      standUpCost: 'WOR.Condition.Flag.StandUpCost',
+      loseActions: 'WOR.Condition.Flag.LoseActions',
+      isDefenseless: 'WOR.Condition.Flag.IsDefenseless',
+      autoProne: 'WOR.Condition.Flag.AutoProne',
+      deathSaves: 'WOR.Condition.Flag.DeathSaves',
+      isDead: 'WOR.Condition.Flag.IsDead',
+      crisisState: 'WOR.Condition.Flag.CrisisState'
     };
 
     for (const [key, value] of Object.entries(flags)) {
@@ -214,7 +214,7 @@ export class ConditionReferencePanel extends HandlebarsApplicationMixin(Applicat
     const conditionId = target.dataset.conditionId;
 
     if (!this.#targetActor) {
-      ui.notifications.warn(game.i18n.localize('AOA.Condition.NoTarget'));
+      ui.notifications.warn(game.i18n.localize('WOR.Condition.NoTarget'));
       return;
     }
 
@@ -226,8 +226,8 @@ export class ConditionReferencePanel extends HandlebarsApplicationMixin(Applicat
       duration: duration > 0 ? duration : null
     });
 
-    ui.notifications.info(game.i18n.format('AOA.Condition.Applied', {
-      condition: game.i18n.localize(AOA.conditions[conditionId].label),
+    ui.notifications.info(game.i18n.format('WOR.Condition.Applied', {
+      condition: game.i18n.localize(WOR.conditions[conditionId].label),
       actor: this.#targetActor.name
     }));
   }
@@ -252,11 +252,11 @@ export class ConditionReferencePanel extends HandlebarsApplicationMixin(Applicat
    * @returns {Promise<number|false>} Duration in rounds, 0 for indefinite, or false if cancelled
    */
   async #promptDuration(conditionId) {
-    const condition = AOA.conditions[conditionId];
+    const condition = WOR.conditions[conditionId];
 
     return foundry.applications.api.DialogV2.prompt({
       window: {
-        title: game.i18n.format('AOA.Condition.SetDuration', {
+        title: game.i18n.format('WOR.Condition.SetDuration', {
           condition: game.i18n.localize(condition.label)
         }),
         icon: 'fas fa-clock'
@@ -264,16 +264,16 @@ export class ConditionReferencePanel extends HandlebarsApplicationMixin(Applicat
       content: `
         <form class="condition-duration-form">
           <div class="form-group">
-            <label>${game.i18n.localize('AOA.Condition.Duration')}</label>
+            <label>${game.i18n.localize('WOR.Condition.Duration')}</label>
             <div class="form-fields">
               <input type="number" name="duration" value="0" min="0" max="100" step="1"/>
-              <span class="hint">${game.i18n.localize('AOA.Condition.DurationHint')}</span>
+              <span class="hint">${game.i18n.localize('WOR.Condition.DurationHint')}</span>
             </div>
           </div>
         </form>
       `,
       ok: {
-        label: game.i18n.localize('AOA.Common.Apply'),
+        label: game.i18n.localize('WOR.Common.Apply'),
         icon: 'fas fa-check',
         callback: (event, button, dialog) => {
           const form = dialog.element.querySelector('form');

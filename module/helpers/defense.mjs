@@ -52,31 +52,31 @@ import {
 export const DEFENSE_BUY_OPTIONS = {
   none: {
     key: 'none',
-    label: 'AOA.Defense.BuyOption.None',
+    label: 'WOR.Defense.BuyOption.None',
     skillKey: null,
     requiresShield: false
   },
   parry: {
     key: 'parry',
-    label: 'AOA.Defense.BuyOption.Parry',
+    label: 'WOR.Defense.BuyOption.Parry',
     skillKey: 'arms',
     requiresShield: false
   },
   block: {
     key: 'block',
-    label: 'AOA.Defense.BuyOption.Block',
+    label: 'WOR.Defense.BuyOption.Block',
     skillKey: null, // Uses shield defense bonus
     requiresShield: true
   },
   dodge: {
     key: 'dodge',
-    label: 'AOA.Defense.BuyOption.Dodge',
+    label: 'WOR.Defense.BuyOption.Dodge',
     skillKey: 'dodge',
     requiresShield: false
   },
   feint: {
     key: 'feint',
-    label: 'AOA.Defense.BuyOption.Feint',
+    label: 'WOR.Defense.BuyOption.Feint',
     skillKey: 'deception',
     requiresShield: false
   }
@@ -115,7 +115,7 @@ export function buildDefensePool(actor, buyOption = 'none', modifier = 0, previe
         const shield = actor.equippedShield;
         if (shield) {
           baseBuyBonus = shield.system.shield?.defenseBonus ?? 0;
-          buyLabel = game.i18n.localize('AOA.Defense.BuyOption.Block');
+          buyLabel = game.i18n.localize('WOR.Defense.BuyOption.Block');
           buySkill = shield.name;
         }
       } else if (option.skillKey) {
@@ -355,14 +355,14 @@ export function isFullDefenseActive(actor) {
  */
 export async function activateFullDefense(actor) {
   if (!game.combat) {
-    ui.notifications.warn(game.i18n.localize('AOA.Defense.FullDefense.NoCombat'));
+    ui.notifications.warn(game.i18n.localize('WOR.Defense.FullDefense.NoCombat'));
     return false;
   }
 
   // Find the actor's position in the turn order
   const combatant = game.combat.combatants.find(c => c.actorId === actor.id);
   if (!combatant) {
-    ui.notifications.warn(game.i18n.localize('AOA.Defense.FullDefense.NotInCombat'));
+    ui.notifications.warn(game.i18n.localize('WOR.Defense.FullDefense.NotInCombat'));
     return false;
   }
 
@@ -386,7 +386,7 @@ export async function activateFullDefense(actor) {
   });
 
   // Notify
-  ui.notifications.info(game.i18n.format('AOA.Defense.FullDefense.Activated', { name: actor.name }));
+  ui.notifications.info(game.i18n.format('WOR.Defense.FullDefense.Activated', { name: actor.name }));
 
   // Send chat message
   await sendFullDefenseToChat(actor);
@@ -416,12 +416,12 @@ async function sendFullDefenseToChat(actor) {
         <div class="card-header">
           <img src="${actor.img}" class="actor-portrait" />
           <div class="header-info">
-            <h3>${game.i18n.localize('AOA.Defense.FullDefense.Title')}</h3>
+            <h3>${game.i18n.localize('WOR.Defense.FullDefense.Title')}</h3>
             <span class="actor-name">${actor.name}</span>
           </div>
         </div>
         <div class="card-body">
-          <p>${game.i18n.format('AOA.Defense.FullDefense.ChatMessage', { bonus: FULL_DEFENSE_BONUS })}</p>
+          <p>${game.i18n.format('WOR.Defense.FullDefense.ChatMessage', { bonus: FULL_DEFENSE_BONUS })}</p>
         </div>
       </div>
     </div>

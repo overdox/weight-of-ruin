@@ -29,7 +29,7 @@ export default class CallingData extends ItemBaseData {
       blank: false,
       initial: 'warrior',
       choices: ['zealot', 'thaumaturge', 'warrior', 'rogue', 'sage', 'cleric', 'enchanter', 'fighter'],
-      label: "AOA.Calling.Archetype"
+      label: "WOR.Calling.Archetype"
     });
 
     // ========================================
@@ -39,7 +39,7 @@ export default class CallingData extends ItemBaseData {
     schema.focus = new fields.StringField({
       required: false,
       blank: true,
-      label: "AOA.Calling.Focus"
+      label: "WOR.Calling.Focus"
     });
 
     // ========================================
@@ -102,7 +102,7 @@ export default class CallingData extends ItemBaseData {
     schema.flavorText = new fields.HTMLField({
       required: false,
       blank: true,
-      label: "AOA.Calling.FlavorText"
+      label: "WOR.Calling.FlavorText"
     });
 
     return schema;

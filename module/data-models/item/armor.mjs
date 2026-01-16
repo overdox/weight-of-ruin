@@ -58,21 +58,21 @@ export default class ArmorData extends ItemBaseData {
         initial: 0,
         min: 0,
         max: 10,
-        label: "AOA.Armor.DR.Slash"
+        label: "WOR.Armor.DR.Slash"
       }),
       pierce: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
         max: 10,
-        label: "AOA.Armor.DR.Pierce"
+        label: "WOR.Armor.DR.Pierce"
       }),
       blunt: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
         max: 10,
-        label: "AOA.Armor.DR.Blunt"
+        label: "WOR.Armor.DR.Blunt"
       })
     });
 
@@ -87,7 +87,7 @@ export default class ArmorData extends ItemBaseData {
       initial: "outerlayer",
       // Include old material values for migration compatibility
       choices: ["underlayer", "outerlayer", "reinforcement", "shield", "quilted", "mail", "composite", "scale", "plate", "none"],
-      label: "AOA.Armor.Category"
+      label: "WOR.Armor.Category"
     });
 
     // ========================================
@@ -102,7 +102,7 @@ export default class ArmorData extends ItemBaseData {
       blank: false,
       initial: "mail",
       choices: ["quilted", "mail", "composite", "scale", "plate", "hide", "wood", "metal"],
-      label: "AOA.Armor.Group"
+      label: "WOR.Armor.Group"
     });
 
     // ========================================
@@ -115,7 +115,7 @@ export default class ArmorData extends ItemBaseData {
       initial: 0,
       min: 0,
       max: 3,
-      label: "AOA.Armor.Property.Encumbering"
+      label: "WOR.Armor.Property.Encumbering"
     });
 
     // Heat: Adds to Heat total for trauma checks (0-5)
@@ -124,49 +124,49 @@ export default class ArmorData extends ItemBaseData {
       initial: 0,
       min: 0,
       max: 5,
-      label: "AOA.Armor.Property.Heat"
+      label: "WOR.Armor.Property.Heat"
     });
 
     // Noisy: -2 dice to Stealth checks
     schema.noisy = new fields.BooleanField({
       initial: false,
-      label: "AOA.Armor.Property.Noisy"
+      label: "WOR.Armor.Property.Noisy"
     });
 
     // Bulky: Cannot be concealed under normal clothing
     schema.bulky = new fields.BooleanField({
       initial: false,
-      label: "AOA.Armor.Property.Bulky"
+      label: "WOR.Armor.Property.Bulky"
     });
 
     // Cumbersome: -1 to Movement speed
     schema.cumbersome = new fields.BooleanField({
       initial: false,
-      label: "AOA.Armor.Property.Cumbersome"
+      label: "WOR.Armor.Property.Cumbersome"
     });
 
     // Flexible: Reduces Encumbering by 1 (minimum 0)
     schema.flexible = new fields.BooleanField({
       initial: false,
-      label: "AOA.Armor.Property.Flexible"
+      label: "WOR.Armor.Property.Flexible"
     });
 
     // Insulating: +2 dice to resist cold exposure
     schema.insulating = new fields.BooleanField({
       initial: false,
-      label: "AOA.Armor.Property.Insulating"
+      label: "WOR.Armor.Property.Insulating"
     });
 
     // Chafing: Penalty after strenuous activity without underlayer
     schema.chafing = new fields.BooleanField({
       initial: false,
-      label: "AOA.Armor.Property.Chafing"
+      label: "WOR.Armor.Property.Chafing"
     });
 
     // Requires Underlayer: Metal armor that needs padding beneath
     schema.requiresUnderlayer = new fields.BooleanField({
       initial: false,
-      label: "AOA.Armor.RequiresUnderlayer"
+      label: "WOR.Armor.RequiresUnderlayer"
     });
 
     // ========================================
@@ -177,7 +177,7 @@ export default class ArmorData extends ItemBaseData {
       blank: false,
       initial: "common",
       choices: ["common", "uncommon", "rare", "exotic"],
-      label: "AOA.Armor.Rarity"
+      label: "WOR.Armor.Rarity"
     });
 
     // ========================================
@@ -190,18 +190,18 @@ export default class ArmorData extends ItemBaseData {
         blank: false,
         initial: "standard",
         choices: ["poor", "standard", "fine", "superior", "masterwork"],
-        label: "AOA.Armor.Quality"
+        label: "WOR.Armor.Quality"
       }),
       drModifier: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
-        label: "AOA.Armor.Quality.DRModifier"
+        label: "WOR.Armor.Quality.DRModifier"
       }),
       encumberingReduction: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Armor.Quality.EncumberingReduction"
+        label: "WOR.Armor.Quality.EncumberingReduction"
       })
     });
 
@@ -210,7 +210,7 @@ export default class ArmorData extends ItemBaseData {
     // ========================================
     schema.equipped = new fields.BooleanField({
       initial: false,
-      label: "AOA.Armor.Equipped"
+      label: "WOR.Armor.Equipped"
     });
 
     // ========================================
@@ -230,7 +230,7 @@ export default class ArmorData extends ItemBaseData {
       nullable: false,
       initial: 5,
       min: 0,
-      label: "AOA.Armor.Weight"
+      label: "WOR.Armor.Weight"
     });
 
     // ========================================
@@ -241,19 +241,19 @@ export default class ArmorData extends ItemBaseData {
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Sovereigns"
+        label: "WOR.Wealth.Sovereigns"
       }),
       crowns: new fields.NumberField({
         ...requiredInteger,
         initial: 5,
         min: 0,
-        label: "AOA.Wealth.Crowns"
+        label: "WOR.Wealth.Crowns"
       }),
       orin: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Orin"
+        label: "WOR.Wealth.Orin"
       })
     });
 
@@ -277,7 +277,7 @@ export default class ArmorData extends ItemBaseData {
       ...requiredInteger,
       initial: 1,
       min: 1,
-      label: "AOA.Gear.Quantity"
+      label: "WOR.Gear.Quantity"
     });
 
     return schema;

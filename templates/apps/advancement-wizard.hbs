@@ -5,7 +5,7 @@
 {{!-- HEADER --}}
 <header class="creation-header">
   <div class="creation-title">
-    <h1>{{localize "AOA.Advancement.Wizard.Title"}}</h1>
+    <h1>{{localize "WOR.Advancement.Wizard.Title"}}</h1>
   </div>
 
   {{!-- Step Progress Indicator --}}
@@ -23,7 +23,7 @@
 
   {{!-- XP Cost Tracker --}}
   <div class="lp-tracker">
-    <span class="lp-label">{{localize "AOA.Advancement.XP.label"}}:</span>
+    <span class="lp-label">{{localize "WOR.Advancement.XP.label"}}:</span>
     <span class="lp-value">
       <span class="lp-remaining">{{actor.system.advancement.xp.current}}</span>
       <span class="lp-total">(-1000)</span>
@@ -41,11 +41,11 @@
   <div class="step-header">
     <h2>
       <i class="fas fa-fist-raised"></i>
-      {{localize "AOA.Advancement.Wizard.Attribute"}}
+      {{localize "WOR.Advancement.Wizard.Attribute"}}
     </h2>
   </div>
   <div class="creation-step-content">
-    <p class="step-description">{{localize "AOA.Advancement.Wizard.AttributeDescription"}}</p>
+    <p class="step-description">{{localize "WOR.Advancement.Wizard.AttributeDescription"}}</p>
 
     <div class="attribute-selection-grid">
       {{#each stepContext.attributes}}
@@ -82,14 +82,14 @@
   <div class="step-header">
     <h2>
       <i class="fas fa-graduation-cap"></i>
-      {{localize "AOA.Advancement.Wizard.Skills"}}
+      {{localize "WOR.Advancement.Wizard.Skills"}}
     </h2>
   </div>
   <div class="creation-step-content">
-    <p class="step-description">{{localize "AOA.Advancement.Wizard.SkillsDescription"}}</p>
+    <p class="step-description">{{localize "WOR.Advancement.Wizard.SkillsDescription"}}</p>
 
     <div class="selection-counter">
-      <span class="counter-label">{{localize "AOA.Advancement.Wizard.Selected"}}:</span>
+      <span class="counter-label">{{localize "WOR.Advancement.Wizard.Selected"}}:</span>
       <span class="counter-value {{#if (eq stepContext.remainingSkills 0)}}complete{{/if}}">
         {{subtract 3 stepContext.remainingSkills}} / 3
       </span>
@@ -99,7 +99,7 @@
       {{#each stepContext.skills}}
       {{#if this.length}}
       <div class="skill-category-group">
-        <h4 class="category-header">{{localize (concat "AOA.SkillCategory." (capitalize @key))}}</h4>
+        <h4 class="category-header">{{localize (concat "WOR.SkillCategory." (capitalize @key))}}</h4>
         <div class="skill-options-grid">
           {{#each this}}
           <div class="skill-option-card {{#if selected}}selected{{/if}} {{#if maxReached}}disabled{{/if}}"
@@ -134,11 +134,11 @@
   <div class="step-header">
     <h2>
       <i class="fas fa-star"></i>
-      {{localize "AOA.Advancement.Wizard.Talent"}}
+      {{localize "WOR.Advancement.Wizard.Talent"}}
     </h2>
   </div>
   <div class="creation-step-content">
-    <p class="step-description">{{localize "AOA.Advancement.Wizard.TalentDescription"}}</p>
+    <p class="step-description">{{localize "WOR.Advancement.Wizard.TalentDescription"}}</p>
 
     {{!-- Talent Mode Selection --}}
     <div class="talent-mode-tabs">
@@ -146,12 +146,12 @@
               data-action="selectTalentMode" data-mode="advance"
               {{#unless stepContext.existingTalents.length}}disabled{{/unless}}>
         <i class="fas fa-arrow-up"></i>
-        {{localize "AOA.Advancement.Wizard.AdvanceTalent"}}
+        {{localize "WOR.Advancement.Wizard.AdvanceTalent"}}
       </button>
       <button type="button" class="mode-tab {{#if (eq stepContext.talentMode 'purchase')}}active{{/if}}"
               data-action="selectTalentMode" data-mode="purchase">
         <i class="fas fa-plus"></i>
-        {{localize "AOA.Advancement.Wizard.PurchaseTalent"}}
+        {{localize "WOR.Advancement.Wizard.PurchaseTalent"}}
       </button>
     </div>
 
@@ -220,7 +220,7 @@
 <footer class="creation-footer">
   <div class="footer-info">
     <span class="step-info">
-      {{localize "AOA.Advancement.Wizard.Step"}} {{currentStepNumber}} / 3
+      {{localize "WOR.Advancement.Wizard.Step"}} {{currentStepNumber}} / 3
     </span>
   </div>
 
@@ -228,24 +228,24 @@
     {{#if canGoBack}}
     <button type="button" class="back-btn" data-action="prevStep">
       <i class="fas fa-arrow-left"></i>
-      {{localize "AOA.Advancement.Wizard.Previous"}}
+      {{localize "WOR.Advancement.Wizard.Previous"}}
     </button>
     {{/if}}
 
     <button type="button" class="back-btn" data-action="cancel">
-      {{localize "AOA.Advancement.Wizard.Cancel"}}
+      {{localize "WOR.Advancement.Wizard.Cancel"}}
     </button>
 
     {{#if isLastStep}}
     <button type="button" class="finalize-btn {{#unless canComplete}}disabled{{/unless}}"
             data-action="completeAdvancement" {{#unless canComplete}}disabled{{/unless}}>
       <i class="fas fa-check"></i>
-      {{localize "AOA.Advancement.Wizard.Complete"}}
+      {{localize "WOR.Advancement.Wizard.Complete"}}
     </button>
     {{else}}
     <button type="button" class="next-btn {{#unless canGoForward}}disabled{{/unless}}"
             data-action="nextStep" {{#unless canGoForward}}disabled{{/unless}}>
-      {{localize "AOA.Advancement.Wizard.Next"}}
+      {{localize "WOR.Advancement.Wizard.Next"}}
       <i class="fas fa-arrow-right"></i>
     </button>
     {{/if}}

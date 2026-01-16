@@ -6,7 +6,7 @@
       <img src="{{attacker.img}}" alt="{{attacker.name}}" class="actor-portrait" />
       {{/if}}
       <div class="header-info">
-        <h3 class="attack-roll-title">{{localize "AOA.Combat.AttackRoll"}}</h3>
+        <h3 class="attack-roll-title">{{localize "WOR.Combat.AttackRoll"}}</h3>
         <span class="actor-name">{{attacker.name}}</span>
       </div>
     </div>
@@ -16,7 +16,7 @@
     <div class="result-display attack-result">
       <span class="dice-pool">{{pool.total}}d6</span>
       <span class="result-arrow">→</span>
-      <span class="hits-count">{{roll.hits}} {{localize "AOA.Roll.Hits"}}</span>
+      <span class="hits-count">{{roll.hits}} {{localize "WOR.Roll.Hits"}}</span>
     </div>
   </div>
 
@@ -28,7 +28,7 @@
     <div class="item-info">
       <h5 class="item-name weapon-name">{{weapon.name}}</h5>
       <span class="item-details">
-        {{localize (concat "AOA.Weapon.RangeType." (capitalize weapon.range))}}
+        {{localize (concat "WOR.Weapon.RangeType." (capitalize weapon.range))}}
       </span>
     </div>
   </div>
@@ -37,12 +37,12 @@
   {{#if damage}}
   <div class="damage-section">
     <div class="section-header damage-header">
-      <span class="section-title">{{localize "AOA.Combat.Damage"}}</span>
+      <span class="section-title">{{localize "WOR.Combat.Damage"}}</span>
     </div>
     <div class="damage-result">
       <span class="dice-pool">{{damage.rawDamage}}d6</span>
       <span class="result-arrow">→</span>
-      <span class="damage-hits">{{damage.traumaDealt}} {{localize "AOA.Roll.Hits"}}</span>
+      <span class="damage-hits">{{damage.traumaDealt}} {{localize "WOR.Roll.Hits"}}</span>
     </div>
   </div>
   {{/if}}
@@ -51,7 +51,7 @@
   {{#unless isHit}}
   <div class="attack-miss">
     <i class="fas fa-shield"></i>
-    <span class="miss-message">{{localize "AOA.Combat.AttackMissed"}}</span>
+    <span class="miss-message">{{localize "WOR.Combat.AttackMissed"}}</span>
   </div>
   {{/unless}}
 
@@ -59,15 +59,15 @@
   <div class="collapsible-section" data-section="attack-details">
     <div class="collapsible-header collapsed" data-action="toggle-collapse">
       <i class="fas fa-chevron-down collapse-icon"></i>
-      <span class="section-title">{{localize "AOA.Roll.Details"}}</span>
+      <span class="section-title">{{localize "WOR.Roll.Details"}}</span>
     </div>
     <div class="collapsible-content collapsed">
       {{!-- Target Info --}}
       {{#if target}}
       <div class="target-info">
-        <span class="target-label">{{localize "AOA.Combat.Target"}}:</span>
+        <span class="target-label">{{localize "WOR.Combat.Target"}}:</span>
         <span class="target-name">{{target.name}}</span>
-        <span class="target-defense">({{localize "AOA.Defense.Label"}} {{target.defense}}, TT {{targetThreshold}})</span>
+        <span class="target-defense">({{localize "WOR.Defense.Label"}} {{target.defense}}, TT {{targetThreshold}})</span>
       </div>
       {{/if}}
 
@@ -80,29 +80,29 @@
       {{#if damage}}
       <div class="damage-breakdown">
         <div class="damage-row">
-          <span class="damage-label">{{localize "AOA.Weapon.BaseDamage"}}</span>
+          <span class="damage-label">{{localize "WOR.Weapon.BaseDamage"}}</span>
           <span class="damage-value">{{damage.baseDamage}}</span>
         </div>
         {{#if damage.strengthBonus}}
         <div class="damage-row">
-          <span class="damage-label">{{localize "AOA.Attribute.Str.long"}}</span>
+          <span class="damage-label">{{localize "WOR.Attribute.Str.long"}}</span>
           <span class="damage-value">+{{damage.strengthBonus}}</span>
         </div>
         {{/if}}
         {{#if damage.qualityBonus}}
         <div class="damage-row">
-          <span class="damage-label">{{localize "AOA.Weapon.Quality"}}</span>
+          <span class="damage-label">{{localize "WOR.Weapon.Quality"}}</span>
           <span class="damage-value">+{{damage.qualityBonus}}</span>
         </div>
         {{/if}}
         {{#if target.dr}}
         <div class="damage-row dr">
-          <span class="damage-label">{{localize "AOA.Armor.DR.Label"}}</span>
+          <span class="damage-label">{{localize "WOR.Armor.DR.Label"}}</span>
           <span class="damage-value">-{{target.dr}}</span>
         </div>
         {{/if}}
         <div class="damage-row total">
-          <span class="damage-label">{{localize "AOA.Combat.TotalDamage"}}</span>
+          <span class="damage-label">{{localize "WOR.Combat.TotalDamage"}}</span>
           <span class="damage-value">{{damage.finalDamage}}</span>
         </div>
       </div>
@@ -116,7 +116,7 @@
   <div class="chat-card-buttons">
     <button type="button" class="apply-damage" data-action="apply-damage" data-target-id="{{target.id}}" data-damage="{{damage.traumaDealt}}">
       <i class="fas fa-heart-crack"></i>
-      <span>{{localize "AOA.Combat.ApplyDamage"}}</span>
+      <span>{{localize "WOR.Combat.ApplyDamage"}}</span>
     </button>
   </div>
   {{/if}}

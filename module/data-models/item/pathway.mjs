@@ -37,12 +37,12 @@ export default class PathwayData extends ItemBaseData {
       type: new fields.StringField({
         required: false,
         blank: true,
-        label: "AOA.Pathway.Contact.Type"
+        label: "WOR.Pathway.Contact.Type"
       }),
       description: new fields.StringField({
         required: false,
         blank: true,
-        label: "AOA.Pathway.Contact.Description"
+        label: "WOR.Pathway.Contact.Description"
       }),
       relationship: new fields.StringField({
         required: false,
@@ -115,7 +115,7 @@ export default class PathwayData extends ItemBaseData {
       initial: 1,
       min: 1,
       max: 6,
-      label: "AOA.Pathway.RollValue"
+      label: "WOR.Pathway.RollValue"
     });
 
     // ========================================
@@ -126,7 +126,7 @@ export default class PathwayData extends ItemBaseData {
       ...requiredInteger,
       initial: 25,
       min: 0,
-      label: "AOA.Pathway.LPAward"
+      label: "WOR.Pathway.LPAward"
     });
 
     return schema;

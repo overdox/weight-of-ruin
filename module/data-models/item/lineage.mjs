@@ -37,7 +37,7 @@ export default class LineageData extends ItemBaseData {
       initial: 0,
       min: 0,
       max: 5,
-      label: "AOA.Lineage.BonusSkillRanks"
+      label: "WOR.Lineage.BonusSkillRanks"
     });
 
     // ========================================
@@ -49,7 +49,7 @@ export default class LineageData extends ItemBaseData {
       initial: 2,
       min: 0,
       max: 5,
-      label: "AOA.Lineage.BaseSpeed"
+      label: "WOR.Lineage.BaseSpeed"
     });
 
     // ========================================
@@ -61,7 +61,7 @@ export default class LineageData extends ItemBaseData {
       initial: 0,
       min: 0,
       max: 10,
-      label: "AOA.Lineage.StartingWitchsight"
+      label: "WOR.Lineage.StartingWitchsight"
     });
 
     // ========================================
@@ -113,7 +113,7 @@ export default class LineageData extends ItemBaseData {
     schema.culture = new fields.HTMLField({
       required: false,
       blank: true,
-      label: "AOA.Lineage.Culture"
+      label: "WOR.Lineage.Culture"
     });
 
     // ========================================

@@ -3,7 +3,7 @@
  * Manages status conditions, duration tracking, and their effects on actors.
  */
 
-import { AOA } from './config.mjs';
+import { WOR } from './config.mjs';
 
 /**
  * Check if an actor has a specific condition.
@@ -26,9 +26,9 @@ export function hasCondition(actor, conditionId) {
  * @returns {Promise<ActiveEffect|null>} The created effect or null
  */
 export async function applyCondition(actor, conditionId, options = {}) {
-  const condition = AOA.conditions[conditionId];
+  const condition = WOR.conditions[conditionId];
   if (!condition) {
-    console.warn(`AOA | Unknown condition: ${conditionId}`);
+    console.warn(`WOR | Unknown condition: ${conditionId}`);
     return null;
   }
 
@@ -101,7 +101,7 @@ export async function removeCondition(actor, conditionId, silent = false) {
 
     // Also remove conditions that were applied due to this condition
     // e.g., removing Unconscious should remove Defenseless and Prone that were auto-applied
-    const condition = AOA.conditions[conditionId];
+    const condition = WOR.conditions[conditionId];
     if (condition?.flags?.isDefenseless) {
       const defenselessEffect = actor.effects.find(e =>
         e.statuses?.has('defenseless') &&
@@ -177,8 +177,8 @@ export function getActiveConditions(actor) {
   const active = [];
   for (const effect of actor.effects) {
     const conditionId = effect.flags?.['weight-of-ruin']?.conditionId;
-    if (conditionId && AOA.conditions[conditionId]) {
-      const condition = AOA.conditions[conditionId];
+    if (conditionId && WOR.conditions[conditionId]) {
+      const condition = WOR.conditions[conditionId];
       active.push({
         id: conditionId,
         effectId: effect.id,
@@ -383,7 +383,7 @@ export async function processEndOfTurn(actor) {
     if (condition.flags.endOfTurnDamage) {
       const damage = condition.flags.endOfTurnDamage;
       summary.traumaTaken += damage;
-      summary.messages.push(game.i18n.format('AOA.Condition.EndOfTurnDamage', {
+      summary.messages.push(game.i18n.format('WOR.Condition.EndOfTurnDamage', {
         name: actor.name,
         condition: condition.label,
         damage
@@ -403,7 +403,7 @@ export async function processEndOfTurn(actor) {
   if (atBreakingPoint && !isStabilized) {
     summary.resilienceRollNeeded = true;
     // The actual roll is triggered by the actor - prompt the user
-    summary.messages.push(game.i18n.format('AOA.Health.ResilienceRollRequired', {
+    summary.messages.push(game.i18n.format('WOR.Health.ResilienceRollRequired', {
       name: actor.name
     }));
   }
@@ -430,7 +430,7 @@ export async function processStartOfTurn(actor) {
     // Process action loss (Stunned)
     if (condition.flags.loseActions) {
       summary.actionsLost += condition.flags.loseActions;
-      summary.messages.push(game.i18n.format('AOA.Condition.LostActions', {
+      summary.messages.push(game.i18n.format('WOR.Condition.LostActions', {
         name: actor.name,
         condition: condition.label,
         actions: condition.flags.loseActions
@@ -472,7 +472,7 @@ export async function decrementConditionDurations(combat) {
             actorId: actor.id,
             actorName: actor.name,
             conditionId,
-            conditionLabel: game.i18n.localize(AOA.conditions[conditionId]?.label)
+            conditionLabel: game.i18n.localize(WOR.conditions[conditionId]?.label)
           });
         } else {
           // Decrement duration
@@ -543,12 +543,12 @@ export async function updateHealthConditions(actor) {
  * @returns {Promise<ChatMessage>}
  */
 async function sendConditionMessage(actor, conditionId, gained, duration = null) {
-  const condition = AOA.conditions[conditionId];
+  const condition = WOR.conditions[conditionId];
   if (!condition) return;
 
   // Don't send messages for certain auto-applied conditions
 
-  const messageKey = gained ? 'AOA.Condition.Gained' : 'AOA.Condition.Removed';
+  const messageKey = gained ? 'WOR.Condition.Gained' : 'WOR.Condition.Removed';
   let content = `<div class="wor condition-message ${gained ? 'gained' : 'removed'}">`;
   content += `<img src="${condition.icon}" class="condition-icon" width="24" height="24"/>`;
   content += `<span class="condition-text">${game.i18n.format(messageKey, {
@@ -556,7 +556,7 @@ async function sendConditionMessage(actor, conditionId, gained, duration = null)
     condition: game.i18n.localize(condition.label)
   })}</span>`;
   if (gained && duration) {
-    content += `<span class="condition-duration">(${game.i18n.format('AOA.Condition.DurationRounds', { rounds: duration })})</span>`;
+    content += `<span class="condition-duration">(${game.i18n.format('WOR.Condition.DurationRounds', { rounds: duration })})</span>`;
   }
   content += `</div>`;
 
@@ -580,24 +580,24 @@ export async function promptResilienceRoll(actor) {
   const maxTrauma = actor.system.maxTrauma ?? 3;
 
   const content = `
-    <p>${game.i18n.format('AOA.Health.ResilienceRollPrompt', { name: actor.name })}</p>
-    <p><strong>${game.i18n.localize('AOA.Health.Resilience')}:</strong> ${resilience}/${maxResilience}</p>
-    <p><strong>${game.i18n.localize('AOA.Health.Trauma')}:</strong> ${trauma}/${maxTrauma}</p>
-    <p>${game.i18n.localize('AOA.Health.ResilienceRollInfo')}</p>
+    <p>${game.i18n.format('WOR.Health.ResilienceRollPrompt', { name: actor.name })}</p>
+    <p><strong>${game.i18n.localize('WOR.Health.Resilience')}:</strong> ${resilience}/${maxResilience}</p>
+    <p><strong>${game.i18n.localize('WOR.Health.Trauma')}:</strong> ${trauma}/${maxTrauma}</p>
+    <p>${game.i18n.localize('WOR.Health.ResilienceRollInfo')}</p>
   `;
 
   return foundry.applications.api.DialogV2.confirm({
     window: {
-      title: game.i18n.localize('AOA.Health.ResilienceRollTitle'),
+      title: game.i18n.localize('WOR.Health.ResilienceRollTitle'),
       icon: 'fas fa-heartbeat'
     },
     content,
     yes: {
-      label: game.i18n.localize('AOA.Health.RollResilience'),
+      label: game.i18n.localize('WOR.Health.RollResilience'),
       icon: 'fas fa-dice'
     },
     no: {
-      label: game.i18n.localize('AOA.Common.Cancel'),
+      label: game.i18n.localize('WOR.Common.Cancel'),
       icon: 'fas fa-times'
     },
     rejectClose: false,
@@ -617,7 +617,7 @@ export function registerCombatHooks() {
 
       // Notify about expired conditions
       for (const expired of summary.expired) {
-        ui.notifications.info(game.i18n.format('AOA.Condition.Expired', {
+        ui.notifications.info(game.i18n.format('WOR.Condition.Expired', {
           actor: expired.actorName,
           condition: expired.conditionLabel
         }));
@@ -636,7 +636,7 @@ export function registerCombatHooks() {
 
     // Notify about lost actions
     if (startSummary.actionsLost > 0) {
-      ui.notifications.warn(game.i18n.format('AOA.Condition.TurnStartLostActions', {
+      ui.notifications.warn(game.i18n.format('WOR.Condition.TurnStartLostActions', {
         actor: combatant.actor.name,
         actions: startSummary.actionsLost
       }));
@@ -678,7 +678,7 @@ export function registerCombatHooks() {
  */
 export function registerStatusEffects() {
   // Build status effects array for Foundry v13+
-  const statusEffects = Object.entries(AOA.conditions).map(([id, condition]) => ({
+  const statusEffects = Object.entries(WOR.conditions).map(([id, condition]) => ({
     id: id,
     name: game.i18n.localize(condition.label),
     img: condition.icon

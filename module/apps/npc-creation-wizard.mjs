@@ -48,7 +48,7 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
       height: 700
     },
     window: {
-      title: 'AOA.NPCCreation.Title',
+      title: 'WOR.NPCCreation.Title',
       icon: 'fas fa-skull',
       resizable: true
     },
@@ -92,12 +92,12 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
    * @type {Object[]}
    */
   static STEPS = [
-    { id: 'classType', label: 'AOA.NPCCreation.Step.ClassType', number: 1 },
-    { id: 'tier', label: 'AOA.NPCCreation.Step.Tier', number: 2 },
-    { id: 'attributes', label: 'AOA.NPCCreation.Step.Attributes', number: 3 },
-    { id: 'skills', label: 'AOA.NPCCreation.Step.Skills', number: 4 },
-    { id: 'traits', label: 'AOA.NPCCreation.Step.Traits', number: 5 },
-    { id: 'finalize', label: 'AOA.NPCCreation.Step.Finalize', number: 6 }
+    { id: 'classType', label: 'WOR.NPCCreation.Step.ClassType', number: 1 },
+    { id: 'tier', label: 'WOR.NPCCreation.Step.Tier', number: 2 },
+    { id: 'attributes', label: 'WOR.NPCCreation.Step.Attributes', number: 3 },
+    { id: 'skills', label: 'WOR.NPCCreation.Step.Skills', number: 4 },
+    { id: 'traits', label: 'WOR.NPCCreation.Step.Traits', number: 5 },
+    { id: 'finalize', label: 'WOR.NPCCreation.Step.Finalize', number: 6 }
   ];
 
   /* -------------------------------------------- */
@@ -551,14 +551,14 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
         context.attributePointsRemaining = tierDataAttr.suggestedAttributes.total - this.npcData.attributePointsSpent;
         context.attributeMax = tierDataAttr.suggestedAttributes.max;
         context.attributeList = [
-          { key: 'strength', label: 'AOA.Attribute.Strength.long', abbr: 'AOA.Attribute.Strength.abbr' },
-          { key: 'fortitude', label: 'AOA.Attribute.Fortitude.long', abbr: 'AOA.Attribute.Fortitude.abbr' },
-          { key: 'agility', label: 'AOA.Attribute.Agility.long', abbr: 'AOA.Attribute.Agility.abbr' },
-          { key: 'awareness', label: 'AOA.Attribute.Awareness.long', abbr: 'AOA.Attribute.Awareness.abbr' },
-          { key: 'resolve', label: 'AOA.Attribute.Resolve.long', abbr: 'AOA.Attribute.Resolve.abbr' },
-          { key: 'persona', label: 'AOA.Attribute.Persona.long', abbr: 'AOA.Attribute.Persona.abbr' },
-          { key: 'ingenuity', label: 'AOA.Attribute.Ingenuity.long', abbr: 'AOA.Attribute.Ingenuity.abbr' },
-          { key: 'expertise', label: 'AOA.Attribute.Expertise.long', abbr: 'AOA.Attribute.Expertise.abbr' }
+          { key: 'strength', label: 'WOR.Attribute.Strength.long', abbr: 'WOR.Attribute.Strength.abbr' },
+          { key: 'fortitude', label: 'WOR.Attribute.Fortitude.long', abbr: 'WOR.Attribute.Fortitude.abbr' },
+          { key: 'agility', label: 'WOR.Attribute.Agility.long', abbr: 'WOR.Attribute.Agility.abbr' },
+          { key: 'awareness', label: 'WOR.Attribute.Awareness.long', abbr: 'WOR.Attribute.Awareness.abbr' },
+          { key: 'resolve', label: 'WOR.Attribute.Resolve.long', abbr: 'WOR.Attribute.Resolve.abbr' },
+          { key: 'persona', label: 'WOR.Attribute.Persona.long', abbr: 'WOR.Attribute.Persona.abbr' },
+          { key: 'ingenuity', label: 'WOR.Attribute.Ingenuity.long', abbr: 'WOR.Attribute.Ingenuity.abbr' },
+          { key: 'expertise', label: 'WOR.Attribute.Expertise.long', abbr: 'WOR.Attribute.Expertise.abbr' }
         ];
         // Use tier-scaled templates from npc-templates.mjs
         context.attributeTemplates = getAttributeTemplatesForClass(this.npcData.npcClass || 'humanoid');
@@ -718,7 +718,7 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
     const tierData = getTierData(this.npcData.tier);
 
     return {
-      name: this.npcData.name || game.i18n.localize('AOA.NPCCreation.UnnamedNPC'),
+      name: this.npcData.name || game.i18n.localize('WOR.NPCCreation.UnnamedNPC'),
       npcClass: this.npcData.npcClass ? game.i18n.localize(NPC_CLASSES[this.npcData.npcClass].label) : '-',
       npcType: this.npcData.npcType ? game.i18n.localize(NPC_TYPES[this.npcData.npcClass]?.find(t => t.id === this.npcData.npcType)?.label || this.npcData.npcType) : '-',
       tier: game.i18n.localize(tierData.label),
@@ -960,7 +960,7 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
 
     // Check if already has this trait
     if (this.npcData.traits.find(t => t.id === traitId)) {
-      ui.notifications.warn(game.i18n.localize('AOA.NPCCreation.TraitAlreadyAdded'));
+      ui.notifications.warn(game.i18n.localize('WOR.NPCCreation.TraitAlreadyAdded'));
       return;
     }
 
@@ -968,7 +968,7 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
     const tierData = getTierData(this.npcData.tier);
     const cost = trait.system.cost || 1;
     if (this.npcData.traitPointsSpent + cost > tierData.traitPoints) {
-      ui.notifications.warn(game.i18n.localize('AOA.NPCCreation.InsufficientTraitPoints'));
+      ui.notifications.warn(game.i18n.localize('WOR.NPCCreation.InsufficientTraitPoints'));
       return;
     }
 
@@ -1055,7 +1055,7 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
    */
   static async #onNextStep(event, target) {
     if (!this._canProceedToNextStep()) {
-      ui.notifications.warn(game.i18n.localize('AOA.NPCCreation.StepIncomplete'));
+      ui.notifications.warn(game.i18n.localize('WOR.NPCCreation.StepIncomplete'));
       return;
     }
 
@@ -1070,10 +1070,10 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
    */
   static async #onStartOver(event, target) {
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: { title: game.i18n.localize('AOA.NPCCreation.StartOver') },
-      content: `<p>${game.i18n.localize('AOA.NPCCreation.StartOverConfirm')}</p>`,
-      yes: { label: game.i18n.localize('AOA.Common.Yes') },
-      no: { label: game.i18n.localize('AOA.Common.No') }
+      window: { title: game.i18n.localize('WOR.NPCCreation.StartOver') },
+      content: `<p>${game.i18n.localize('WOR.NPCCreation.StartOverConfirm')}</p>`,
+      yes: { label: game.i18n.localize('WOR.Common.Yes') },
+      no: { label: game.i18n.localize('WOR.Common.No') }
     });
 
     if (confirmed) {
@@ -1090,7 +1090,7 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
    */
   static async #onFinalize(event, target) {
     if (!this._canProceedToNextStep()) {
-      ui.notifications.warn(game.i18n.localize('AOA.NPCCreation.StepIncomplete'));
+      ui.notifications.warn(game.i18n.localize('WOR.NPCCreation.StepIncomplete'));
       return;
     }
 
@@ -1166,7 +1166,7 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
     this.close();
     actor.sheet.render(true);
 
-    ui.notifications.info(game.i18n.format('AOA.NPCCreation.Complete', { name: actor.name }));
+    ui.notifications.info(game.i18n.format('WOR.NPCCreation.Complete', { name: actor.name }));
   }
 
   /**
@@ -1251,7 +1251,7 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
    */
   static launch() {
     if (!game.user.isGM) {
-      ui.notifications.error(game.i18n.localize('AOA.NPCCreation.GMOnly'));
+      ui.notifications.error(game.i18n.localize('WOR.NPCCreation.GMOnly'));
       return null;
     }
 
@@ -1262,5 +1262,5 @@ export class NPCCreationWizard extends HandlebarsApplicationMixin(ApplicationV2)
 }
 
 // Register for global access
-globalThis.AOA = globalThis.AOA || {};
-globalThis.AOA.NPCCreationWizard = NPCCreationWizard;
+globalThis.WOR = globalThis.WOR || {};
+globalThis.WOR.NPCCreationWizard = NPCCreationWizard;

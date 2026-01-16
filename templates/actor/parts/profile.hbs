@@ -4,19 +4,19 @@
   <nav class="profile-tabs">
     <a class="item {{#if (eq profileTab 'identity')}}active{{/if}}" data-tab="identity" data-group="profile">
       <i class="fas fa-id-card"></i>
-      {{localize "AOA.Section.Identity"}}
+      {{localize "WOR.Section.Identity"}}
     </a>
     <a class="item {{#if (eq profileTab 'passions')}}active{{/if}}" data-tab="passions" data-group="profile">
       <i class="fas fa-fire"></i>
-      {{localize "AOA.Section.Passions"}}
+      {{localize "WOR.Section.Passions"}}
     </a>
     <a class="item {{#if (eq profileTab 'advancement')}}active{{/if}}" data-tab="advancement" data-group="profile">
       <i class="fas fa-chart-line"></i>
-      {{localize "AOA.Section.Advancement"}}
+      {{localize "WOR.Section.Advancement"}}
     </a>
     <a class="item {{#if (eq profileTab 'notes')}}active{{/if}}" data-tab="notes" data-group="profile">
       <i class="fas fa-book"></i>
-      {{localize "AOA.Section.Notes"}}
+      {{localize "WOR.Section.Notes"}}
     </a>
   </nav>
 
@@ -27,13 +27,13 @@
 
     {{!-- Character Details Section --}}
     <div class="identity-details-section">
-      <h3>{{localize "AOA.Section.CharacterDetails"}}</h3>
+      <h3>{{localize "WOR.Section.CharacterDetails"}}</h3>
       <div class="identity-details-content">
 
         {{!-- Basic Info Row --}}
         <div class="identity-row">
           <div class="identity-field name-field">
-            <label>{{localize "AOA.Common.Name"}}</label>
+            <label>{{localize "WOR.Common.Name"}}</label>
             {{#if isEditMode}}
             <input type="text" name="name" value="{{actor.name}}" />
             {{else}}
@@ -41,7 +41,7 @@
             {{/if}}
           </div>
           <div class="identity-field age-field">
-            <label>{{localize "AOA.Identity.Age"}}</label>
+            <label>{{localize "WOR.Identity.Age"}}</label>
             {{#if isEditMode}}
             <input type="number" name="system.identity.age" value="{{system.identity.age}}" min="0" />
             {{else}}
@@ -57,14 +57,14 @@
           <div class="identity-card-header" data-action="toggleExpand">
             <div class="card-header-left">
               <i class="fas fa-dna"></i>
-              <span class="card-label">{{localize "AOA.ItemType.Lineage"}}</span>
+              <span class="card-label">{{localize "WOR.ItemType.Lineage"}}</span>
             </div>
             <div class="card-header-right">
               {{#if items.lineage}}
               <span class="card-value">{{items.lineage.name}}</span>
               <i class="fas fa-chevron-down expand-icon"></i>
               {{else}}
-              <span class="card-value empty">{{localize "AOA.Common.NotSet"}}</span>
+              <span class="card-value empty">{{localize "WOR.Common.NotSet"}}</span>
               {{/if}}
             </div>
           </div>
@@ -80,12 +80,12 @@
             {{!-- Attribute Modifiers --}}
             {{#if items.lineage.system.totalModifiers}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Lineage.AttributeModifiers"}}</h4>
+              <h4>{{localize "WOR.Lineage.AttributeModifiers"}}</h4>
               <div class="modifier-tags">
                 {{#each items.lineage.system.attributeModifiers}}
                 {{#if this}}
                 <span class="modifier-tag {{#if (gt this 0)}}positive{{else}}negative{{/if}}">
-                  {{#if (eq @key "any")}}{{localize "AOA.Attributes.Any"}}{{else}}{{localize (concat "AOA.Attributes." (capitalize @key))}}{{/if}} {{#if (gt this 0)}}+{{/if}}{{this}}
+                  {{#if (eq @key "any")}}{{localize "WOR.Attributes.Any"}}{{else}}{{localize (concat "WOR.Attributes." (capitalize @key))}}{{/if}} {{#if (gt this 0)}}+{{/if}}{{this}}
                 </span>
                 {{/if}}
                 {{/each}}
@@ -96,7 +96,7 @@
             {{!-- Witchsight --}}
             {{#if items.lineage.system.startingWitchsight}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Attributes.Witchsight"}}</h4>
+              <h4>{{localize "WOR.Attributes.Witchsight"}}</h4>
               <span class="witchsight-badge">
                 <i class="fas fa-eye"></i> {{items.lineage.system.startingWitchsight}}
               </span>
@@ -106,7 +106,7 @@
             {{!-- Traits --}}
             {{#if items.lineage.system.traits.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Lineage.Traits"}}</h4>
+              <h4>{{localize "WOR.Lineage.Traits"}}</h4>
               <ul class="traits-list">
                 {{#each items.lineage.system.traits}}
                 <li class="trait-item">
@@ -121,11 +121,11 @@
             {{!-- Physical Characteristics --}}
             {{#if items.lineage.system.physical}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Lineage.Physical"}}</h4>
+              <h4>{{localize "WOR.Lineage.Physical"}}</h4>
               <div class="physical-details">
-                {{#if items.lineage.system.physical.height}}<p><strong>{{localize "AOA.Lineage.Height"}}:</strong> {{items.lineage.system.physical.height}}</p>{{/if}}
-                {{#if items.lineage.system.physical.build}}<p><strong>{{localize "AOA.Lineage.Build"}}:</strong> {{items.lineage.system.physical.build}}</p>{{/if}}
-                {{#if items.lineage.system.physical.distinctiveFeatures}}<p><strong>{{localize "AOA.Lineage.Features"}}:</strong> {{items.lineage.system.physical.distinctiveFeatures}}</p>{{/if}}
+                {{#if items.lineage.system.physical.height}}<p><strong>{{localize "WOR.Lineage.Height"}}:</strong> {{items.lineage.system.physical.height}}</p>{{/if}}
+                {{#if items.lineage.system.physical.build}}<p><strong>{{localize "WOR.Lineage.Build"}}:</strong> {{items.lineage.system.physical.build}}</p>{{/if}}
+                {{#if items.lineage.system.physical.distinctiveFeatures}}<p><strong>{{localize "WOR.Lineage.Features"}}:</strong> {{items.lineage.system.physical.distinctiveFeatures}}</p>{{/if}}
               </div>
             </div>
             {{/if}}
@@ -133,15 +133,15 @@
             {{!-- Lifespan --}}
             {{#if items.lineage.system.lifespan}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Lineage.Lifespan"}}</h4>
-              <p>{{localize "AOA.Lineage.Average"}}: {{items.lineage.system.lifespan.average}} | {{localize "AOA.Lineage.Maximum"}}: {{items.lineage.system.lifespan.maximum}}</p>
+              <h4>{{localize "WOR.Lineage.Lifespan"}}</h4>
+              <p>{{localize "WOR.Lineage.Average"}}: {{items.lineage.system.lifespan.average}} | {{localize "WOR.Lineage.Maximum"}}: {{items.lineage.system.lifespan.maximum}}</p>
             </div>
             {{/if}}
 
             {{!-- Culture --}}
             {{#if items.lineage.system.culture}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Lineage.Culture"}}</h4>
+              <h4>{{localize "WOR.Lineage.Culture"}}</h4>
               <div class="detail-content prose">{{{items.lineage.system.culture}}}</div>
             </div>
             {{/if}}
@@ -156,7 +156,7 @@
           <div class="identity-card-header" data-action="toggleExpand">
             <div class="card-header-left">
               <i class="fas fa-chess-knight"></i>
-              <span class="card-label">{{localize "AOA.ItemType.Archetype"}}</span>
+              <span class="card-label">{{localize "WOR.ItemType.Archetype"}}</span>
             </div>
             <div class="card-header-right">
               {{#if items.archetype}}
@@ -166,7 +166,7 @@
               </span>
               <i class="fas fa-chevron-down expand-icon"></i>
               {{else}}
-              <span class="card-value empty">{{localize "AOA.Common.NotSet"}}</span>
+              <span class="card-value empty">{{localize "WOR.Common.NotSet"}}</span>
               {{/if}}
             </div>
           </div>
@@ -182,12 +182,12 @@
             {{!-- Attribute Bonuses --}}
             {{#if items.archetype.system.totalBonuses}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Archetype.AttributeBonuses"}}</h4>
+              <h4>{{localize "WOR.Archetype.AttributeBonuses"}}</h4>
               <div class="modifier-tags">
                 {{#each items.archetype.system.attributeBonuses}}
                 {{#if this}}
                 <span class="modifier-tag positive">
-                  {{localize (concat "AOA.Attributes." (capitalize @key))}} +{{this}}
+                  {{localize (concat "WOR.Attributes." (capitalize @key))}} +{{this}}
                 </span>
                 {{/if}}
                 {{/each}}
@@ -198,7 +198,7 @@
             {{!-- Witchsight --}}
             {{#if items.archetype.system.startingWitchsight}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Attributes.Witchsight"}}</h4>
+              <h4>{{localize "WOR.Attributes.Witchsight"}}</h4>
               <span class="witchsight-badge">
                 <i class="fas fa-eye"></i> {{items.archetype.system.startingWitchsight}}
               </span>
@@ -208,12 +208,12 @@
             {{!-- Role Descriptions --}}
             {{#if items.archetype.system.role}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Archetype.Role"}}</h4>
+              <h4>{{localize "WOR.Archetype.Role"}}</h4>
               <div class="role-descriptions">
-                {{#if items.archetype.system.role.combat}}<p><strong>{{localize "AOA.Archetype.RoleCombat"}}:</strong> {{items.archetype.system.role.combat}}</p>{{/if}}
-                {{#if items.archetype.system.role.exploration}}<p><strong>{{localize "AOA.Archetype.RoleExploration"}}:</strong> {{items.archetype.system.role.exploration}}</p>{{/if}}
-                {{#if items.archetype.system.role.social}}<p><strong>{{localize "AOA.Archetype.RoleSocial"}}:</strong> {{items.archetype.system.role.social}}</p>{{/if}}
-                {{#if items.archetype.system.role.magic}}<p><strong>{{localize "AOA.Archetype.RoleMagic"}}:</strong> {{items.archetype.system.role.magic}}</p>{{/if}}
+                {{#if items.archetype.system.role.combat}}<p><strong>{{localize "WOR.Archetype.RoleCombat"}}:</strong> {{items.archetype.system.role.combat}}</p>{{/if}}
+                {{#if items.archetype.system.role.exploration}}<p><strong>{{localize "WOR.Archetype.RoleExploration"}}:</strong> {{items.archetype.system.role.exploration}}</p>{{/if}}
+                {{#if items.archetype.system.role.social}}<p><strong>{{localize "WOR.Archetype.RoleSocial"}}:</strong> {{items.archetype.system.role.social}}</p>{{/if}}
+                {{#if items.archetype.system.role.magic}}<p><strong>{{localize "WOR.Archetype.RoleMagic"}}:</strong> {{items.archetype.system.role.magic}}</p>{{/if}}
               </div>
             </div>
             {{/if}}
@@ -221,12 +221,12 @@
             {{!-- Starting Talents --}}
             {{#if items.archetype.system.startingTalents.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Archetype.StartingTalents"}}</h4>
+              <h4>{{localize "WOR.Archetype.StartingTalents"}}</h4>
               <ul class="talents-list">
                 {{#each items.archetype.system.startingTalents}}
                 <li class="talent-item">
                   <span class="talent-name">{{name}}</span>
-                  {{#if rank}}<span class="talent-rank">{{localize "AOA.Common.Rank"}} {{rank}}</span>{{/if}}
+                  {{#if rank}}<span class="talent-rank">{{localize "WOR.Common.Rank"}} {{rank}}</span>{{/if}}
                 </li>
                 {{/each}}
               </ul>
@@ -236,7 +236,7 @@
             {{!-- Suggested Skills --}}
             {{#if items.archetype.system.suggestedSkills.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Archetype.SuggestedSkills"}}</h4>
+              <h4>{{localize "WOR.Archetype.SuggestedSkills"}}</h4>
               <div class="skill-tags">
                 {{#each items.archetype.system.suggestedSkills}}
                 <span class="skill-tag">{{this}}</span>
@@ -250,7 +250,7 @@
             {{#with (lookup items.archetype.system.subtypes system.identity.calling)}}
             {{#if this}}
             <div class="detail-section calling-details">
-              <h4>{{localize "AOA.Calling.Title"}}: {{../system.identity.calling}}</h4>
+              <h4>{{localize "WOR.Calling.Title"}}: {{../system.identity.calling}}</h4>
               {{#if description}}<p class="calling-description">{{{description}}}</p>{{/if}}
               {{#if features.length}}
               <ul class="features-list">
@@ -274,14 +274,14 @@
           <div class="identity-card-header" data-action="toggleExpand">
             <div class="card-header-left">
               <i class="fas fa-scroll"></i>
-              <span class="card-label">{{localize "AOA.ItemType.Background"}}</span>
+              <span class="card-label">{{localize "WOR.ItemType.Background"}}</span>
             </div>
             <div class="card-header-right">
               {{#if items.background}}
               <span class="card-value">{{items.background.name}}</span>
               <i class="fas fa-chevron-down expand-icon"></i>
               {{else}}
-              <span class="card-value empty">{{localize "AOA.Common.NotSet"}}</span>
+              <span class="card-value empty">{{localize "WOR.Common.NotSet"}}</span>
               {{/if}}
             </div>
           </div>
@@ -296,11 +296,11 @@
 
             {{!-- Economic Tier & Wealth --}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Background.EconomicTier"}}</h4>
+              <h4>{{localize "WOR.Background.EconomicTier"}}</h4>
               <p>
-                <span class="tier-badge tier-{{items.background.system.economicTier}}">{{localize (concat "AOA.EconomicTier." (capitalize items.background.system.economicTier))}}</span>
+                <span class="tier-badge tier-{{items.background.system.economicTier}}">{{localize (concat "WOR.EconomicTier." (capitalize items.background.system.economicTier))}}</span>
                 {{#if items.background.system.startingWealth}}
-                <span class="wealth-range">{{items.background.system.startingWealth.min}} - {{items.background.system.startingWealth.max}} {{localize "AOA.Currency.Orin"}}</span>
+                <span class="wealth-range">{{items.background.system.startingWealth.min}} - {{items.background.system.startingWealth.max}} {{localize "WOR.Currency.Orin"}}</span>
                 {{/if}}
               </p>
             </div>
@@ -308,7 +308,7 @@
             {{!-- Skill Grants --}}
             {{#if items.background.system.skillGrants.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Background.SkillGrants"}}</h4>
+              <h4>{{localize "WOR.Background.SkillGrants"}}</h4>
               <ul class="skill-grants-list">
                 {{#each items.background.system.skillGrants}}
                 <li class="skill-grant-item">
@@ -323,7 +323,7 @@
             {{!-- Contact --}}
             {{#if items.background.system.contact}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Background.Contact"}}</h4>
+              <h4>{{localize "WOR.Background.Contact"}}</h4>
               <p>
                 {{#if items.background.system.contact.type}}<strong>{{items.background.system.contact.type}}</strong>{{/if}}
                 {{#if items.background.system.contact.description}} - {{items.background.system.contact.description}}{{/if}}
@@ -334,7 +334,7 @@
             {{!-- Obligations --}}
             {{#if items.background.system.obligations.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Background.Obligations"}}</h4>
+              <h4>{{localize "WOR.Background.Obligations"}}</h4>
               <ul class="obligations-list">
                 {{#each items.background.system.obligations}}
                 <li class="obligation-item">
@@ -349,7 +349,7 @@
             {{!-- Social Standing --}}
             {{#if items.background.system.socialStanding}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Background.SocialStanding"}}</h4>
+              <h4>{{localize "WOR.Background.SocialStanding"}}</h4>
               <p>{{items.background.system.socialStanding.rank}}{{#if items.background.system.socialStanding.notes}} - {{items.background.system.socialStanding.notes}}{{/if}}</p>
             </div>
             {{/if}}
@@ -357,7 +357,7 @@
             {{!-- Starting Equipment --}}
             {{#if items.background.system.startingEquipment.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Background.StartingEquipment"}}</h4>
+              <h4>{{localize "WOR.Background.StartingEquipment"}}</h4>
               <ul class="equipment-list">
                 {{#each items.background.system.startingEquipment}}
                 <li>{{name}}{{#if (gt quantity 1)}} x{{quantity}}{{/if}}</li>
@@ -376,14 +376,14 @@
           <div class="identity-card-header" data-action="toggleExpand">
             <div class="card-header-left">
               <i class="fas fa-road"></i>
-              <span class="card-label">{{localize "AOA.ItemType.Pathway"}}</span>
+              <span class="card-label">{{localize "WOR.ItemType.Pathway"}}</span>
             </div>
             <div class="card-header-right">
               {{#if items.pathway}}
               <span class="card-value">{{items.pathway.name}}</span>
               <i class="fas fa-chevron-down expand-icon"></i>
               {{else}}
-              <span class="card-value empty">{{localize "AOA.Common.NotSet"}}</span>
+              <span class="card-value empty">{{localize "WOR.Common.NotSet"}}</span>
               {{/if}}
             </div>
           </div>
@@ -399,15 +399,15 @@
             {{!-- Duration --}}
             {{#if items.pathway.system.duration}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Pathway.Duration"}}</h4>
-              <p>{{items.pathway.system.duration.years}} {{localize "AOA.Common.Years"}}{{#if items.pathway.system.duration.description}} - {{items.pathway.system.duration.description}}{{/if}}</p>
+              <h4>{{localize "WOR.Pathway.Duration"}}</h4>
+              <p>{{items.pathway.system.duration.years}} {{localize "WOR.Common.Years"}}{{#if items.pathway.system.duration.description}} - {{items.pathway.system.duration.description}}{{/if}}</p>
             </div>
             {{/if}}
 
             {{!-- Skill Grants --}}
             {{#if items.pathway.system.skillGrants.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Pathway.SkillGrants"}}</h4>
+              <h4>{{localize "WOR.Pathway.SkillGrants"}}</h4>
               <ul class="skill-grants-list">
                 {{#each items.pathway.system.skillGrants}}
                 <li class="skill-grant-item">
@@ -422,7 +422,7 @@
             {{!-- Contact --}}
             {{#if items.pathway.system.contact}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Pathway.Contact"}}</h4>
+              <h4>{{localize "WOR.Pathway.Contact"}}</h4>
               <p>
                 {{#if items.pathway.system.contact.type}}<strong>{{items.pathway.system.contact.type}}</strong>{{/if}}
                 {{#if items.pathway.system.contact.description}} - {{items.pathway.system.contact.description}}{{/if}}
@@ -434,7 +434,7 @@
             {{!-- Narrative Hooks --}}
             {{#if items.pathway.system.narrativeHooks.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Pathway.NarrativeHooks"}}</h4>
+              <h4>{{localize "WOR.Pathway.NarrativeHooks"}}</h4>
               <ul class="hooks-list">
                 {{#each items.pathway.system.narrativeHooks}}
                 <li class="hook-item">
@@ -449,12 +449,12 @@
             {{!-- Resources --}}
             {{#if items.pathway.system.resources}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Pathway.Resources"}}</h4>
+              <h4>{{localize "WOR.Pathway.Resources"}}</h4>
               {{#if items.pathway.system.resources.wealthModifier}}
-              <p><strong>{{localize "AOA.Pathway.WealthModifier"}}:</strong> {{items.pathway.system.resources.wealthModifier}}</p>
+              <p><strong>{{localize "WOR.Pathway.WealthModifier"}}:</strong> {{items.pathway.system.resources.wealthModifier}}</p>
               {{/if}}
               {{#if items.pathway.system.resources.equipment.length}}
-              <p><strong>{{localize "AOA.Pathway.Equipment"}}:</strong></p>
+              <p><strong>{{localize "WOR.Pathway.Equipment"}}:</strong></p>
               <ul>
                 {{#each items.pathway.system.resources.equipment}}
                 <li>{{this}}</li>
@@ -462,7 +462,7 @@
               </ul>
               {{/if}}
               {{#if items.pathway.system.resources.privileges.length}}
-              <p><strong>{{localize "AOA.Pathway.Privileges"}}:</strong></p>
+              <p><strong>{{localize "WOR.Pathway.Privileges"}}:</strong></p>
               <ul>
                 {{#each items.pathway.system.resources.privileges}}
                 <li>{{this}}</li>
@@ -475,7 +475,7 @@
             {{!-- Associated Archetypes --}}
             {{#if items.pathway.system.associatedArchetypes.length}}
             <div class="detail-section">
-              <h4>{{localize "AOA.Pathway.AssociatedArchetypes"}}</h4>
+              <h4>{{localize "WOR.Pathway.AssociatedArchetypes"}}</h4>
               <div class="archetype-tags">
                 {{#each items.pathway.system.associatedArchetypes}}
                 <span class="archetype-tag">{{this}}</span>
@@ -492,27 +492,27 @@
 
     {{!-- Social Standing Section --}}
     <div class="social-standing-section">
-      <h3>{{localize "AOA.Section.Social"}}</h3>
+      <h3>{{localize "WOR.Section.Social"}}</h3>
       <div class="social-standing-content">
         <div class="social-field tier">
-          <label>{{localize "AOA.SocialStanding.Tier"}}</label>
+          <label>{{localize "WOR.SocialStanding.Tier"}}</label>
           {{#if isEditMode}}
           <select name="system.socialStanding.tier">
-            <option value="exalted" {{#if (eq system.socialStanding.tier "exalted")}}selected{{/if}}>{{localize "AOA.SocialStanding.Exalted"}}</option>
-            <option value="ordained" {{#if (eq system.socialStanding.tier "ordained")}}selected{{/if}}>{{localize "AOA.SocialStanding.Ordained"}}</option>
-            <option value="anointed" {{#if (eq system.socialStanding.tier "anointed")}}selected{{/if}}>{{localize "AOA.SocialStanding.Anointed"}}</option>
-            <option value="penitent" {{#if (eq system.socialStanding.tier "penitent")}}selected{{/if}}>{{localize "AOA.SocialStanding.Penitent"}}</option>
-            <option value="heretics" {{#if (eq system.socialStanding.tier "heretics")}}selected{{/if}}>{{localize "AOA.SocialStanding.Heretics"}}</option>
-            <option value="outcast" {{#if (eq system.socialStanding.tier "outcast")}}selected{{/if}}>{{localize "AOA.SocialStanding.Outcast"}}</option>
+            <option value="exalted" {{#if (eq system.socialStanding.tier "exalted")}}selected{{/if}}>{{localize "WOR.SocialStanding.Exalted"}}</option>
+            <option value="ordained" {{#if (eq system.socialStanding.tier "ordained")}}selected{{/if}}>{{localize "WOR.SocialStanding.Ordained"}}</option>
+            <option value="anointed" {{#if (eq system.socialStanding.tier "anointed")}}selected{{/if}}>{{localize "WOR.SocialStanding.Anointed"}}</option>
+            <option value="penitent" {{#if (eq system.socialStanding.tier "penitent")}}selected{{/if}}>{{localize "WOR.SocialStanding.Penitent"}}</option>
+            <option value="heretics" {{#if (eq system.socialStanding.tier "heretics")}}selected{{/if}}>{{localize "WOR.SocialStanding.Heretics"}}</option>
+            <option value="outcast" {{#if (eq system.socialStanding.tier "outcast")}}selected{{/if}}>{{localize "WOR.SocialStanding.Outcast"}}</option>
           </select>
           {{else}}
-          <span class="social-value standing-{{system.socialStanding.tier}}">{{localize (concat "AOA.SocialStanding." (capitalize system.socialStanding.tier))}}</span>
+          <span class="social-value standing-{{system.socialStanding.tier}}">{{localize (concat "WOR.SocialStanding." (capitalize system.socialStanding.tier))}}</span>
           {{/if}}
         </div>
 
         {{#if system.identity.province}}
         <div class="social-field province">
-          <label>{{localize "AOA.Identity.Province"}}</label>
+          <label>{{localize "WOR.Identity.Province"}}</label>
           <span class="social-value">{{system.identity.province}}</span>
         </div>
         {{/if}}
@@ -524,7 +524,7 @@
     {{!-- ============================================ --}}
     {{#if items.lifeEvents.length}}
     <div class="life-events-section">
-      <h3>{{localize "AOA.Section.LifeEvents"}}</h3>
+      <h3>{{localize "WOR.Section.LifeEvents"}}</h3>
       <div class="life-events-list">
         {{#each items.lifeEvents}}
         <div class="identity-card life-event-card has-item" data-expand-type="lifeEvent" data-item-id="{{id}}">
@@ -532,15 +532,15 @@
             <div class="card-header-left">
               <i class="fas fa-star"></i>
               <span class="card-label">{{name}}</span>
-              <span class="suit-badge suit-{{system.suit}}">{{localize (concat "AOA.LifeEvent.Suit." (capitalize system.suit))}}</span>
+              <span class="suit-badge suit-{{system.suit}}">{{localize (concat "WOR.LifeEvent.Suit." (capitalize system.suit))}}</span>
             </div>
             <div class="card-header-right">
               <i class="fas fa-chevron-down expand-icon"></i>
               <div class="event-controls">
-                <a class="item-control" data-action="editItem" data-item-id="{{id}}" title="{{localize 'AOA.Common.Edit'}}">
+                <a class="item-control" data-action="editItem" data-item-id="{{id}}" title="{{localize 'WOR.Common.Edit'}}">
                   <i class="fas fa-edit"></i>
                 </a>
-                <a class="item-control item-delete" data-action="deleteItem" data-item-id="{{id}}" title="{{localize 'AOA.Common.Delete'}}">
+                <a class="item-control item-delete" data-action="deleteItem" data-item-id="{{id}}" title="{{localize 'WOR.Common.Delete'}}">
                   <i class="fas fa-trash"></i>
                 </a>
               </div>
@@ -556,7 +556,7 @@
             {{!-- Narrative Prompt (if different from description) --}}
             {{#if system.narrativePrompt}}
             <div class="detail-section narrative-prompt">
-              <h4>{{localize "AOA.LifeEvent.NarrativePrompt"}}</h4>
+              <h4>{{localize "WOR.LifeEvent.NarrativePrompt"}}</h4>
               <div class="detail-content prose">{{{system.narrativePrompt}}}</div>
             </div>
             {{/if}}
@@ -564,11 +564,11 @@
             {{!-- Benefits --}}
             {{#if system.benefits.length}}
             <div class="detail-section benefits-section">
-              <h4><i class="fas fa-plus-circle"></i> {{localize "AOA.LifeEvent.Benefits"}}</h4>
+              <h4><i class="fas fa-plus-circle"></i> {{localize "WOR.LifeEvent.Benefits"}}</h4>
               <ul class="benefits-list">
                 {{#each system.benefits}}
                 <li class="benefit-item benefit-{{type}}">
-                  <span class="benefit-type">{{localize (concat "AOA.LifeEvent.BenefitType." (capitalize type))}}</span>
+                  <span class="benefit-type">{{localize (concat "WOR.LifeEvent.BenefitType." (capitalize type))}}</span>
                   {{#if target}}<span class="benefit-target">{{target}}</span>{{/if}}
                   {{#if value}}<span class="benefit-value">+{{value}}</span>{{/if}}
                   {{#if description}}<p class="benefit-description">{{description}}</p>{{/if}}
@@ -581,13 +581,13 @@
             {{!-- Complications --}}
             {{#if system.complications.length}}
             <div class="detail-section complications-section">
-              <h4><i class="fas fa-exclamation-triangle"></i> {{localize "AOA.LifeEvent.Complications"}}</h4>
+              <h4><i class="fas fa-exclamation-triangle"></i> {{localize "WOR.LifeEvent.Complications"}}</h4>
               <ul class="complications-list">
                 {{#each system.complications}}
                 <li class="complication-item complication-{{type}}">
-                  <span class="complication-type">{{localize (concat "AOA.LifeEvent.ComplicationType." (capitalize type))}}</span>
+                  <span class="complication-type">{{localize (concat "WOR.LifeEvent.ComplicationType." (capitalize type))}}</span>
                   {{#if target}}<span class="complication-target">{{target}}</span>{{/if}}
-                  {{#if severity}}<span class="complication-severity severity-{{severity}}">{{localize (concat "AOA.Severity." (capitalize severity))}}</span>{{/if}}
+                  {{#if severity}}<span class="complication-severity severity-{{severity}}">{{localize (concat "WOR.Severity." (capitalize severity))}}</span>{{/if}}
                   {{#if description}}<p class="complication-description">{{description}}</p>{{/if}}
                 </li>
                 {{/each}}
@@ -598,7 +598,7 @@
             {{!-- LP Value --}}
             {{#if system.lpValue}}
             <div class="detail-section">
-              <p class="lp-value-display"><strong>{{localize "AOA.LP.label"}}:</strong> {{system.lpValue}}</p>
+              <p class="lp-value-display"><strong>{{localize "WOR.LP.label"}}:</strong> {{system.lpValue}}</p>
             </div>
             {{/if}}
           </div>
@@ -611,7 +611,7 @@
     {{!-- Contacts --}}
     {{#if system.contacts.length}}
     <div class="contacts-section">
-      <h3>{{localize "AOA.Section.Contacts"}}</h3>
+      <h3>{{localize "WOR.Section.Contacts"}}</h3>
       <ul class="contact-list">
         {{#each system.contacts}}
         <li class="contact-item">
@@ -631,33 +631,33 @@
   <div class="tab profile-tab-content {{#if (eq profileTab 'passions')}}active{{/if}}" data-tab="passions" data-group="profile">
 
     <section class="passions-content-section">
-      <h3>{{localize "AOA.Section.Passions"}}</h3>
+      <h3>{{localize "WOR.Section.Passions"}}</h3>
 
       <div class="passions-grid">
         <div class="passion motivation">
-          <label>{{localize "AOA.Passions.Motivation"}}</label>
+          <label>{{localize "WOR.Passions.Motivation"}}</label>
           {{#if isEditMode}}
-          <input type="text" name="system.passions.motivation" value="{{system.passions.motivation}}" placeholder="{{localize 'AOA.Passions.MotivationHint'}}" />
+          <input type="text" name="system.passions.motivation" value="{{system.passions.motivation}}" placeholder="{{localize 'WOR.Passions.MotivationHint'}}" />
           {{else}}
-          <span class="passion-value">{{#if system.passions.motivation}}{{system.passions.motivation}}{{else}}<em>{{localize "AOA.Passions.MotivationHint"}}</em>{{/if}}</span>
+          <span class="passion-value">{{#if system.passions.motivation}}{{system.passions.motivation}}{{else}}<em>{{localize "WOR.Passions.MotivationHint"}}</em>{{/if}}</span>
           {{/if}}
         </div>
 
         <div class="passion nature">
-          <label>{{localize "AOA.Passions.Nature"}}</label>
+          <label>{{localize "WOR.Passions.Nature"}}</label>
           {{#if isEditMode}}
-          <input type="text" name="system.passions.nature" value="{{system.passions.nature}}" placeholder="{{localize 'AOA.Passions.NatureHint'}}" />
+          <input type="text" name="system.passions.nature" value="{{system.passions.nature}}" placeholder="{{localize 'WOR.Passions.NatureHint'}}" />
           {{else}}
-          <span class="passion-value">{{#if system.passions.nature}}{{system.passions.nature}}{{else}}<em>{{localize "AOA.Passions.NatureHint"}}</em>{{/if}}</span>
+          <span class="passion-value">{{#if system.passions.nature}}{{system.passions.nature}}{{else}}<em>{{localize "WOR.Passions.NatureHint"}}</em>{{/if}}</span>
           {{/if}}
         </div>
 
         <div class="passion allegiance">
-          <label>{{localize "AOA.Passions.Allegiance"}}</label>
+          <label>{{localize "WOR.Passions.Allegiance"}}</label>
           {{#if isEditMode}}
-          <input type="text" name="system.passions.allegiance" value="{{system.passions.allegiance}}" placeholder="{{localize 'AOA.Passions.AllegianceHint'}}" />
+          <input type="text" name="system.passions.allegiance" value="{{system.passions.allegiance}}" placeholder="{{localize 'WOR.Passions.AllegianceHint'}}" />
           {{else}}
-          <span class="passion-value">{{#if system.passions.allegiance}}{{system.passions.allegiance}}{{else}}<em>{{localize "AOA.Passions.AllegianceHint"}}</em>{{/if}}</span>
+          <span class="passion-value">{{#if system.passions.allegiance}}{{system.passions.allegiance}}{{else}}<em>{{localize "WOR.Passions.AllegianceHint"}}</em>{{/if}}</span>
           {{/if}}
         </div>
       </div>
@@ -665,7 +665,7 @@
 
     {{!-- Fervor Tracker --}}
     <div class="fervor-tracker">
-      <label>{{localize "AOA.Fervor.Title"}}</label>
+      <label>{{localize "WOR.Fervor.Title"}}</label>
       <div class="fervor-pips">
         {{#times 5}}
         <span class="fervor-pip {{#if (lt this ../system.fervor.current)}}filled{{/if}}" data-pip="{{this}}" data-action="setFervor"></span>
@@ -680,31 +680,31 @@
   <div class="tab profile-tab-content {{#if (eq profileTab 'advancement')}}active{{/if}}" data-tab="advancement" data-group="profile">
 
     <div class="advancement-content-section">
-      <h3>{{localize "AOA.Section.Experience"}}</h3>
+      <h3>{{localize "WOR.Section.Experience"}}</h3>
       <div class="advancement-fields">
         {{!-- Legacy Points (shown if not complete or has LP) --}}
         {{#if (or (not system.creation.complete) system.advancement.lp.earned)}}
         <div class="lp-tracking">
-          <label>{{localize "AOA.LP.label"}}</label>
+          <label>{{localize "WOR.LP.label"}}</label>
           <div class="lp-values">
-            <span class="lp-earned" title="{{localize 'AOA.LP.Earned'}}">
-              {{localize "AOA.LP.Earned"}}: {{system.advancement.lp.earned}}
+            <span class="lp-earned" title="{{localize 'WOR.LP.Earned'}}">
+              {{localize "WOR.LP.Earned"}}: {{system.advancement.lp.earned}}
             </span>
-            <span class="lp-spent" title="{{localize 'AOA.LP.Spent'}}">
-              {{localize "AOA.LP.Spent"}}: {{system.advancement.lp.spent}}
+            <span class="lp-spent" title="{{localize 'WOR.LP.Spent'}}">
+              {{localize "WOR.LP.Spent"}}: {{system.advancement.lp.spent}}
             </span>
-            <span class="lp-remaining {{#if (lt lpRemaining 0)}}negative{{/if}}" title="{{localize 'AOA.LP.Remaining'}}">
-              {{localize "AOA.LP.Remaining"}}: {{lpRemaining}}
+            <span class="lp-remaining {{#if (lt lpRemaining 0)}}negative{{/if}}" title="{{localize 'WOR.LP.Remaining'}}">
+              {{localize "WOR.LP.Remaining"}}: {{lpRemaining}}
             </span>
           </div>
           {{#if isEditMode}}
           <div class="lp-edit-fields">
             <div class="lp-field">
-              <label>{{localize "AOA.LP.Earned"}}</label>
+              <label>{{localize "WOR.LP.Earned"}}</label>
               <input type="number" name="system.advancement.lp.earned" value="{{system.advancement.lp.earned}}" min="0" />
             </div>
             <div class="lp-field">
-              <label>{{localize "AOA.LP.Spent"}}</label>
+              <label>{{localize "WOR.LP.Spent"}}</label>
               <input type="number" name="system.advancement.lp.spent" value="{{system.advancement.lp.spent}}" min="0" />
             </div>
           </div>
@@ -715,15 +715,15 @@
         {{!-- Experience Points --}}
         <div class="xp-tracking">
           <div class="xp-header">
-            <label>{{localize "AOA.Advancement.XP.label"}}</label>
-            <button type="button" class="xp-adjust-btn" data-action="adjustXP" title="{{localize 'AOA.Advancement.XP.Adjust'}}">
+            <label>{{localize "WOR.Advancement.XP.label"}}</label>
+            <button type="button" class="xp-adjust-btn" data-action="adjustXP" title="{{localize 'WOR.Advancement.XP.Adjust'}}">
               <i class="fas fa-plus"></i>
-              {{localize "AOA.Advancement.XP.Add"}}
+              {{localize "WOR.Advancement.XP.Add"}}
             </button>
           </div>
           <div class="xp-display">
             <span class="xp-value {{#if (gte system.advancement.xp.current 1000)}}max-reached{{/if}}">{{system.advancement.xp.current}}</span>
-            <span class="xp-total">({{localize "AOA.Advancement.XP.Total"}}: {{system.advancement.xp.total}})</span>
+            <span class="xp-total">({{localize "WOR.Advancement.XP.Total"}}: {{system.advancement.xp.total}})</span>
           </div>
 
           {{!-- XP Progress Bar towards 1000 --}}
@@ -739,17 +739,17 @@
             {{#if (gte system.advancement.xp.current 1000)}}
             <button type="button" class="purchase-advancement-btn available" data-action="purchaseAdvancement">
               <i class="fas fa-level-up-alt"></i>
-              {{localize "AOA.Advancement.Purchase"}}
-              <span class="cost-badge">{{localize "AOA.Advancement.PurchaseCost"}}</span>
+              {{localize "WOR.Advancement.Purchase"}}
+              <span class="cost-badge">{{localize "WOR.Advancement.PurchaseCost"}}</span>
             </button>
-            <p class="advancement-hint available">{{localize "AOA.Advancement.PurchaseAvailable"}}</p>
+            <p class="advancement-hint available">{{localize "WOR.Advancement.PurchaseAvailable"}}</p>
             {{else}}
             <button type="button" class="purchase-advancement-btn disabled" disabled>
               <i class="fas fa-lock"></i>
-              {{localize "AOA.Advancement.Purchase"}}
-              <span class="cost-badge">{{localize "AOA.Advancement.PurchaseCost"}}</span>
+              {{localize "WOR.Advancement.Purchase"}}
+              <span class="cost-badge">{{localize "WOR.Advancement.PurchaseCost"}}</span>
             </button>
-            <p class="advancement-hint">{{localize "AOA.Advancement.PurchaseDisabled"}}</p>
+            <p class="advancement-hint">{{localize "WOR.Advancement.PurchaseDisabled"}}</p>
             {{/if}}
           </div>
         </div>
@@ -763,9 +763,9 @@
   <div class="tab profile-tab-content {{#if (eq profileTab 'notes')}}active{{/if}}" data-tab="notes" data-group="profile">
 
     <section class="notes-section">
-      <h3><i class="fas fa-scroll"></i> {{localize "AOA.Section.Notes"}}</h3>
+      <h3><i class="fas fa-scroll"></i> {{localize "WOR.Section.Notes"}}</h3>
       {{#if isEditable}}
-      <a class="toggle-editor-btn" data-action="toggleNotesEditor" title="{{localize 'AOA.Common.Edit'}}">
+      <a class="toggle-editor-btn" data-action="toggleNotesEditor" title="{{localize 'WOR.Common.Edit'}}">
         <i class="fas fa-edit"></i>
       </a>
       {{/if}}

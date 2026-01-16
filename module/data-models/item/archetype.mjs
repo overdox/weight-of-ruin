@@ -56,7 +56,7 @@ export default class ArchetypeData extends ItemBaseData {
       initial: 0,
       min: 0,
       max: 10,
-      label: "AOA.Archetype.StartingWitchsight"
+      label: "WOR.Archetype.StartingWitchsight"
     });
 
     // ========================================
@@ -123,7 +123,7 @@ export default class ArchetypeData extends ItemBaseData {
       initial: 1,
       min: 1,
       max: 6,
-      label: "AOA.Archetype.RollValue"
+      label: "WOR.Archetype.RollValue"
     });
 
     // ========================================
@@ -134,7 +134,7 @@ export default class ArchetypeData extends ItemBaseData {
       ...requiredInteger,
       initial: 25,
       min: 0,
-      label: "AOA.Archetype.LPAward"
+      label: "WOR.Archetype.LPAward"
     });
 
     return schema;

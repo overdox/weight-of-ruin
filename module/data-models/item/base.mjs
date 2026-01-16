@@ -14,13 +14,13 @@ export default class ItemBaseData extends foundry.abstract.TypeDataModel {
     schema.description = new fields.HTMLField({
       required: false,
       blank: true,
-      label: "AOA.Item.Description"
+      label: "WOR.Item.Description"
     });
 
     schema.source = new fields.StringField({
       required: false,
       blank: true,
-      label: "AOA.Item.Source"
+      label: "WOR.Item.Source"
     });
 
     return schema;

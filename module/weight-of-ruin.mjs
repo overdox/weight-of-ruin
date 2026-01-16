@@ -12,7 +12,7 @@ import { CharacterCreationWizard } from './apps/character-creation.mjs';
 import { NPCCreationWizard } from './apps/npc-creation-wizard.mjs';
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
-import { AOA } from './helpers/config.mjs';
+import { WOR } from './helpers/config.mjs';
 import { registerDiceFunctions } from './helpers/dice.mjs';
 import { registerConditions, registerStatusEffects } from './helpers/conditions.mjs';
 import { registerCombatFunctions } from './helpers/combat.mjs';
@@ -82,7 +82,7 @@ Hooks.once('init', function () {
       // For players, find their incomplete character
       const incompleteActor = game.wor.getIncompleteCharacter();
       if (!incompleteActor) {
-        ui.notifications.warn(game.i18n.localize('AOA.CharacterCreation.NoIncompleteCharacter'));
+        ui.notifications.warn(game.i18n.localize('WOR.CharacterCreation.NoIncompleteCharacter'));
         return null;
       }
 
@@ -119,7 +119,7 @@ Hooks.once('init', function () {
      */
     openNPCCreation() {
       if (!game.user.isGM) {
-        ui.notifications.warn(game.i18n.localize('AOA.NPCCreation.GMOnly'));
+        ui.notifications.warn(game.i18n.localize('WOR.NPCCreation.GMOnly'));
         return null;
       }
       return NPCCreationWizard.launch();
@@ -127,7 +127,7 @@ Hooks.once('init', function () {
   };
 
   // Add custom constants for configuration.
-  CONFIG.AOA = AOA;
+  CONFIG.WOR = WOR;
 
   /**
    * Set an initiative formula for the system
@@ -194,28 +194,28 @@ Hooks.once('init', function () {
   Actors.registerSheet('weight-of-ruin', WoRBaseActorSheet, {
     types: ['character'],
     makeDefault: true,
-    label: 'AOA.SheetLabels.Character',
+    label: 'WOR.SheetLabels.Character',
   });
 
   // NPC sheet (default for NPCs)
   Actors.registerSheet('weight-of-ruin', WoRNPCSheet, {
     types: ['npc'],
     makeDefault: true,
-    label: 'AOA.SheetLabels.NPC',
+    label: 'WOR.SheetLabels.NPC',
   });
 
   // Loot sheet (default for loot/merchants)
   Actors.registerSheet('weight-of-ruin', WoRLootSheet, {
     types: ['loot'],
     makeDefault: true,
-    label: 'AOA.SheetLabels.Loot',
+    label: 'WOR.SheetLabels.Loot',
   });
 
   // Register Item sheet (ApplicationV2)
   Items.unregisterSheet('core', ItemSheet);
   Items.registerSheet('weight-of-ruin', WoRBaseItemSheet, {
     makeDefault: true,
-    label: 'AOA.SheetLabels.Item',
+    label: 'WOR.SheetLabels.Item',
   });
 
   // Register UI settings (theme, etc.)

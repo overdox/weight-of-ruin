@@ -9,7 +9,7 @@
       <div class="roll-type">
         <span class="roll-label">
           <i class="fas fa-heartbeat"></i>
-          {{localize "AOA.Roll.WoundsRoll"}}
+          {{localize "WOR.Roll.WoundsRoll"}}
         </span>
       </div>
     </div>
@@ -20,14 +20,14 @@
     <div class="result-text">
       {{#if passed}}
         <i class="fas fa-shield-alt"></i>
-        {{localize "AOA.Roll.WoundsEndure"}} ( <span class="hit-count">{{hits}}</span> )
+        {{localize "WOR.Roll.WoundsEndure"}} ( <span class="hit-count">{{hits}}</span> )
       {{else}}
         <i class="fas fa-heart-broken"></i>
-        {{localize "AOA.Roll.WoundsFalter"}} ( <span class="hit-count">{{hits}}</span> )
+        {{localize "WOR.Roll.WoundsFalter"}} ( <span class="hit-count">{{hits}}</span> )
       {{/if}}
     </div>
     <div class="result-margin">
-      {{localize "AOA.Roll.Hits"}} <span class="margin-value {{#if passed}}positive{{else}}negative{{/if}}">{{hits}}</span> vs {{localize "AOA.TT.NetHits"}} <span class="tt-target">{{targetThreshold}}</span>
+      {{localize "WOR.Roll.Hits"}} <span class="margin-value {{#if passed}}positive{{else}}negative{{/if}}">{{hits}}</span> vs {{localize "WOR.TT.NetHits"}} <span class="tt-target">{{targetThreshold}}</span>
     </div>
   </div>
 
@@ -36,16 +36,16 @@
   <div class="wounds-result failure">
     <p class="failure-instruction">
       <i class="fas fa-exclamation-triangle"></i>
-      {{localize "AOA.Roll.WoundsFailedConsequences"}}
+      {{localize "WOR.Roll.WoundsFailedConsequences"}}
     </p>
     <div class="consequence-list">
       <div class="consequence">
         <i class="fas fa-minus-circle"></i>
-        {{localize "AOA.Health.LostWounds"}}: 1
+        {{localize "WOR.Health.LostWounds"}}: 1
       </div>
       <div class="consequence">
         <i class="fas fa-heart-crack"></i>
-        {{localize "AOA.Health.MaxTraumaReduced"}}: 2
+        {{localize "WOR.Health.MaxTraumaReduced"}}: 2
       </div>
     </div>
   </div>
@@ -55,17 +55,17 @@
   <div class="collapsible-section" data-section="wounds-details">
     <div class="collapsible-header collapsed" data-action="toggle-collapse">
       <i class="fas fa-chevron-down collapse-icon"></i>
-      <span class="section-title">{{localize "AOA.Roll.Details"}}</span>
+      <span class="section-title">{{localize "WOR.Roll.Details"}}</span>
     </div>
     <div class="collapsible-content collapsed">
       {{!-- Wounds Stats --}}
       <div class="wounds-stats">
         <div class="stat">
-          <span class="stat-label">{{localize "AOA.Health.Wounds"}}:</span>
+          <span class="stat-label">{{localize "WOR.Health.Wounds"}}:</span>
           <span class="stat-value">{{wounds}} / {{maxWounds}}</span>
         </div>
         <div class="stat">
-          <span class="stat-label">{{localize "AOA.Health.Trauma"}}:</span>
+          <span class="stat-label">{{localize "WOR.Health.Trauma"}}:</span>
           <span class="stat-value trauma-value">{{trauma}} / {{maxTrauma}}</span>
         </div>
       </div>
@@ -81,14 +81,14 @@
   {{#if result.isUnconscious}}
   <div class="status-alert unconscious">
     <i class="fas fa-bed"></i>
-    {{localize "AOA.Health.Unconscious"}}
+    {{localize "WOR.Health.Unconscious"}}
   </div>
   {{/if}}
 
   {{#if result.isDead}}
   <div class="status-alert dead">
     <i class="fas fa-skull"></i>
-    {{localize "AOA.Health.Dead"}}
+    {{localize "WOR.Health.Dead"}}
   </div>
   {{/if}}
 </div>

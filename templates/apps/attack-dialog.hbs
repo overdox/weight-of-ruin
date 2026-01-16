@@ -5,7 +5,7 @@
     <div class="header-content">
       <img src="{{attacker.img}}" alt="{{attacker.name}}" class="actor-portrait" />
       <div class="header-info">
-        <h1 class="dialog-title">{{localize "AOA.Combat.AttackRoll"}}</h1>
+        <h1 class="dialog-title">{{localize "WOR.Combat.AttackRoll"}}</h1>
         <span class="actor-name">{{attacker.name}}</span>
         <div class="weapon-display">
           <img src="{{weapon.img}}" alt="{{weapon.name}}" class="weapon-icon" />
@@ -13,7 +13,7 @@
         </div>
         {{#if target}}
         <div class="target-info">
-          <span class="target-label">{{localize "AOA.Combat.Target"}}:</span>
+          <span class="target-label">{{localize "WOR.Combat.Target"}}:</span>
           <span class="target-name">{{target.name}}</span>
         </div>
         {{/if}}
@@ -27,7 +27,7 @@
   <div class="dialog-section">
     <div class="section-header">
       <i class="fas fa-fist-raised"></i>
-      <h2>{{localize "AOA.Roll.Pool"}}</h2>
+      <h2>{{localize "WOR.Roll.Pool"}}</h2>
     </div>
     <div class="section-body">
       <div class="pool-breakdown">
@@ -45,7 +45,7 @@
         {{/if}}
       </div>
       <div class="modifier-row">
-        <label class="modifier-label">{{localize "AOA.Roll.Modifier"}}</label>
+        <label class="modifier-label">{{localize "WOR.Roll.Modifier"}}</label>
         <input type="number" name="modifier" value="0" class="modifier-input" />
       </div>
     </div>
@@ -55,26 +55,26 @@
   <div class="dialog-section">
     <div class="section-header">
       <i class="fas fa-crosshairs"></i>
-      <h2>{{localize "AOA.Combat.Target"}}</h2>
+      <h2>{{localize "WOR.Combat.Target"}}</h2>
     </div>
     <div class="section-body">
       {{#if target}}
       <div class="target-stats">
         <div class="stat-row">
-          <span class="stat-label">{{localize "AOA.Defense.Label"}}</span>
+          <span class="stat-label">{{localize "WOR.Defense.Label"}}</span>
           <span class="stat-value">{{targetDefense}}</span>
         </div>
         <div class="stat-row highlight">
-          <span class="stat-label">{{localize "AOA.Combat.TargetThreshold"}}</span>
+          <span class="stat-label">{{localize "WOR.Combat.TargetThreshold"}}</span>
           <span class="stat-value tt-value">{{targetThreshold}}</span>
         </div>
       </div>
       {{else}}
       <div class="tt-input-row">
-        <label>{{localize "AOA.Combat.TargetThreshold"}}</label>
+        <label>{{localize "WOR.Combat.TargetThreshold"}}</label>
         <input type="number" name="targetThreshold" value="{{targetThreshold}}" min="1" />
       </div>
-      <p class="tt-hint">{{localize "AOA.Combat.TTFromDefense"}}</p>
+      <p class="tt-hint">{{localize "WOR.Combat.TTFromDefense"}}</p>
       {{/if}}
     </div>
   </div>
@@ -83,17 +83,17 @@
   <div class="dialog-section">
     <div class="section-header">
       <i class="fas fa-sword"></i>
-      <h2>{{localize "AOA.Combat.WeaponStats"}}</h2>
+      <h2>{{localize "WOR.Combat.WeaponStats"}}</h2>
     </div>
     <div class="section-body">
       <div class="weapon-stats-grid">
         <div class="stat-box">
-          <span class="stat-label">{{localize "AOA.Weapon.Damage"}}</span>
+          <span class="stat-label">{{localize "WOR.Weapon.Damage"}}</span>
           <span class="stat-value">{{weapon.system.baseDamage}}</span>
         </div>
         <div class="stat-box">
-          <span class="stat-label">{{localize "AOA.Weapon.Range"}}</span>
-          <span class="stat-value">{{#if weapon.system.range.type}}{{localize (concat "AOA.Weapon.RangeType." (capitalize weapon.system.range.type))}}{{else}}{{localize "AOA.Weapon.RangeType.Melee"}}{{/if}}</span>
+          <span class="stat-label">{{localize "WOR.Weapon.Range"}}</span>
+          <span class="stat-value">{{#if weapon.system.range.type}}{{localize (concat "WOR.Weapon.RangeType." (capitalize weapon.system.range.type))}}{{else}}{{localize "WOR.Weapon.RangeType.Melee"}}{{/if}}</span>
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@
 
   {{!-- Effective Pool Summary --}}
   <div class="effective-pool-summary">
-    <span class="pool-label">{{localize "AOA.Roll.EffectivePool"}}:</span>
+    <span class="pool-label">{{localize "WOR.Roll.EffectivePool"}}:</span>
     <span class="pool-value">{{poolData.total}}d6</span>
   </div>
   </div>

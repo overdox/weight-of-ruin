@@ -14,44 +14,44 @@ import { WoRRollDialog } from '../apps/roll-dialog.mjs';
  * Sorcery Techniques (verbs)
  */
 export const SORCERY_TECHNIQUES = {
-  create: { label: 'AOA.Sorcery.Technique.Create', description: 'AOA.Sorcery.Technique.CreateDesc' },
-  perceive: { label: 'AOA.Sorcery.Technique.Perceive', description: 'AOA.Sorcery.Technique.PerceiveDesc' },
-  transform: { label: 'AOA.Sorcery.Technique.Transform', description: 'AOA.Sorcery.Technique.TransformDesc' },
-  destroy: { label: 'AOA.Sorcery.Technique.Destroy', description: 'AOA.Sorcery.Technique.DestroyDesc' },
-  control: { label: 'AOA.Sorcery.Technique.Control', description: 'AOA.Sorcery.Technique.ControlDesc' }
+  create: { label: 'WOR.Sorcery.Technique.Create', description: 'WOR.Sorcery.Technique.CreateDesc' },
+  perceive: { label: 'WOR.Sorcery.Technique.Perceive', description: 'WOR.Sorcery.Technique.PerceiveDesc' },
+  transform: { label: 'WOR.Sorcery.Technique.Transform', description: 'WOR.Sorcery.Technique.TransformDesc' },
+  destroy: { label: 'WOR.Sorcery.Technique.Destroy', description: 'WOR.Sorcery.Technique.DestroyDesc' },
+  control: { label: 'WOR.Sorcery.Technique.Control', description: 'WOR.Sorcery.Technique.ControlDesc' }
 };
 
 /**
  * Sorcery Forms (nouns)
  */
 export const SORCERY_FORMS = {
-  elements: { label: 'AOA.Sorcery.Form.Elements', description: 'AOA.Sorcery.Form.ElementsDesc' },
-  living: { label: 'AOA.Sorcery.Form.Living', description: 'AOA.Sorcery.Form.LivingDesc' },
-  mind: { label: 'AOA.Sorcery.Form.Mind', description: 'AOA.Sorcery.Form.MindDesc' },
-  matter: { label: 'AOA.Sorcery.Form.Matter', description: 'AOA.Sorcery.Form.MatterDesc' },
-  spirit: { label: 'AOA.Sorcery.Form.Spirit', description: 'AOA.Sorcery.Form.SpiritDesc' },
-  space: { label: 'AOA.Sorcery.Form.Space', description: 'AOA.Sorcery.Form.SpaceDesc' },
-  time: { label: 'AOA.Sorcery.Form.Time', description: 'AOA.Sorcery.Form.TimeDesc' }
+  elements: { label: 'WOR.Sorcery.Form.Elements', description: 'WOR.Sorcery.Form.ElementsDesc' },
+  living: { label: 'WOR.Sorcery.Form.Living', description: 'WOR.Sorcery.Form.LivingDesc' },
+  mind: { label: 'WOR.Sorcery.Form.Mind', description: 'WOR.Sorcery.Form.MindDesc' },
+  matter: { label: 'WOR.Sorcery.Form.Matter', description: 'WOR.Sorcery.Form.MatterDesc' },
+  spirit: { label: 'WOR.Sorcery.Form.Spirit', description: 'WOR.Sorcery.Form.SpiritDesc' },
+  space: { label: 'WOR.Sorcery.Form.Space', description: 'WOR.Sorcery.Form.SpaceDesc' },
+  time: { label: 'WOR.Sorcery.Form.Time', description: 'WOR.Sorcery.Form.TimeDesc' }
 };
 
 /**
  * Ritefocus Paths
  */
 export const RITEFOCUS_PATHS = {
-  circlecasting: { label: 'AOA.Ritefocus.Path.Circlecasting', skill: 'ritefocus' },
-  binding: { label: 'AOA.Ritefocus.Path.Binding', skill: 'ritefocus' },
-  hexing: { label: 'AOA.Ritefocus.Path.Hexing', skill: 'ritefocus' }
+  circlecasting: { label: 'WOR.Ritefocus.Path.Circlecasting', skill: 'ritefocus' },
+  binding: { label: 'WOR.Ritefocus.Path.Binding', skill: 'ritefocus' },
+  hexing: { label: 'WOR.Ritefocus.Path.Hexing', skill: 'ritefocus' }
 };
 
 /**
  * Backlash severity levels
  */
 export const BACKLASH_SEVERITY = {
-  trivial: { label: 'AOA.Backlash.Trivial', traumaMultiplier: 0.5 },
-  minor: { label: 'AOA.Backlash.Minor', traumaMultiplier: 1 },
-  moderate: { label: 'AOA.Backlash.Moderate', traumaMultiplier: 1.5 },
-  severe: { label: 'AOA.Backlash.Severe', traumaMultiplier: 2, essenceRisk: true },
-  catastrophic: { label: 'AOA.Backlash.Catastrophic', traumaMultiplier: 3, essenceRisk: true }
+  trivial: { label: 'WOR.Backlash.Trivial', traumaMultiplier: 0.5 },
+  minor: { label: 'WOR.Backlash.Minor', traumaMultiplier: 1 },
+  moderate: { label: 'WOR.Backlash.Moderate', traumaMultiplier: 1.5 },
+  severe: { label: 'WOR.Backlash.Severe', traumaMultiplier: 2, essenceRisk: true },
+  catastrophic: { label: 'WOR.Backlash.Catastrophic', traumaMultiplier: 3, essenceRisk: true }
 };
 
 /**
@@ -81,7 +81,7 @@ export function buildSorceryPool(actor, technique, form, modifier = 0) {
 
   return {
     witchsight: {
-      label: game.i18n.localize('AOA.Attribute.Witchsight.long'),
+      label: game.i18n.localize('WOR.Attribute.Witchsight.long'),
       value: witchsight
     },
     technique: {
@@ -175,7 +175,7 @@ export function validateSpellCasting(actor, spell) {
   if (witchsight <= 0) {
     return {
       valid: false,
-      message: game.i18n.localize('AOA.Magic.NoWitchsight')
+      message: game.i18n.localize('WOR.Magic.NoWitchsight')
     };
   }
 
@@ -184,7 +184,7 @@ export function validateSpellCasting(actor, spell) {
   if (witchsight < reqWitchsight) {
     return {
       valid: false,
-      message: game.i18n.format('AOA.Magic.InsufficientWitchsight', {
+      message: game.i18n.format('WOR.Magic.InsufficientWitchsight', {
         required: reqWitchsight,
         current: witchsight
       })
@@ -198,7 +198,7 @@ export function validateSpellCasting(actor, spell) {
   if (techniqueRank < reqTechniqueRank) {
     return {
       valid: false,
-      message: game.i18n.format('AOA.Magic.InsufficientTechnique', {
+      message: game.i18n.format('WOR.Magic.InsufficientTechnique', {
         technique: game.i18n.localize(SORCERY_TECHNIQUES[technique]?.label),
         required: reqTechniqueRank,
         current: techniqueRank
@@ -213,7 +213,7 @@ export function validateSpellCasting(actor, spell) {
   if (formRank < reqFormRank) {
     return {
       valid: false,
-      message: game.i18n.format('AOA.Magic.InsufficientForm', {
+      message: game.i18n.format('WOR.Magic.InsufficientForm', {
         form: game.i18n.localize(SORCERY_FORMS[form]?.label),
         required: reqFormRank,
         current: formRank
@@ -228,7 +228,7 @@ export function validateSpellCasting(actor, spell) {
     if (currentEssence < essenceCost) {
       return {
         valid: false,
-        message: game.i18n.format('AOA.Magic.InsufficientEssence', {
+        message: game.i18n.format('WOR.Magic.InsufficientEssence', {
           required: essenceCost,
           current: currentEssence
         })
@@ -285,7 +285,7 @@ export async function handleBacklash(actor, spell, result) {
   // Apply backlash Trauma
   if (backlashTrauma > 0) {
     await actor.modifyTrauma(backlashTrauma);
-    ui.notifications.warn(game.i18n.format('AOA.Magic.BacklashTrauma', {
+    ui.notifications.warn(game.i18n.format('WOR.Magic.BacklashTrauma', {
       amount: backlashTrauma
     }));
   }
@@ -294,7 +294,7 @@ export async function handleBacklash(actor, spell, result) {
   if (severity.essenceRisk && isCriticalFailure) {
     const essenceLoss = effect?.essenceCost ?? 1;
     await modifyEssenceWithCorruption(actor, -essenceLoss);
-    ui.notifications.error(game.i18n.format('AOA.Magic.BacklashEssence', {
+    ui.notifications.error(game.i18n.format('WOR.Magic.BacklashEssence', {
       amount: essenceLoss
     }));
   }
@@ -330,16 +330,16 @@ export function buildRitualPool(actor, ritual, additionalParticipants = 0, modif
 
   return {
     witchsight: {
-      label: game.i18n.localize('AOA.Attribute.Witchsight.long'),
+      label: game.i18n.localize('WOR.Attribute.Witchsight.long'),
       value: witchsight
     },
     skill: {
-      label: game.i18n.localize('AOA.Skill.Ritefocus'),
+      label: game.i18n.localize('WOR.Skill.Ritefocus'),
       name: 'Ritefocus',
       value: ritefocusRank
     },
     participants: {
-      label: game.i18n.localize('AOA.Ritual.ParticipantBonus'),
+      label: game.i18n.localize('WOR.Ritual.ParticipantBonus'),
       count: additionalParticipants,
       value: participantBonus
     },
@@ -444,18 +444,18 @@ async function performExtendedRitual(actor, ritual, poolData, options) {
 
   while (rollsMade < rollsAllowed && totalHits < hitsRequired) {
     const continueRitual = await foundry.applications.api.DialogV2.confirm({
-      window: { title: game.i18n.localize('AOA.Ritual.ExtendedRoll') },
+      window: { title: game.i18n.localize('WOR.Ritual.ExtendedRoll') },
       content: `
-        <p>${game.i18n.format('AOA.Ritual.ExtendedProgress', {
+        <p>${game.i18n.format('WOR.Ritual.ExtendedProgress', {
           hits: totalHits,
           required: hitsRequired,
           rolls: rollsMade,
           allowed: rollsAllowed
         })}</p>
-        <p>${game.i18n.localize('AOA.Ritual.ContinuePrompt')}</p>
+        <p>${game.i18n.localize('WOR.Ritual.ContinuePrompt')}</p>
       `,
-      yes: { label: game.i18n.localize('AOA.Ritual.Continue') },
-      no: { label: game.i18n.localize('AOA.Ritual.Abandon') }
+      yes: { label: game.i18n.localize('WOR.Ritual.Continue') },
+      no: { label: game.i18n.localize('WOR.Ritual.Abandon') }
     });
 
     if (!continueRitual) {
@@ -467,7 +467,7 @@ async function performExtendedRitual(actor, ritual, poolData, options) {
         targetThreshold: hitsRequired,
         degree: {
           key: 'abandoned',
-          label: 'AOA.Ritual.Abandoned',
+          label: 'WOR.Ritual.Abandoned',
           cssClass: 'failure'
         },
         isExtended: true,
@@ -499,7 +499,7 @@ async function performExtendedRitual(actor, ritual, poolData, options) {
     targetThreshold: hitsRequired,
     degree: {
       key: success ? (margin >= 3 ? 'criticalSuccess' : 'success') : 'failure',
-      label: success ? (margin >= 3 ? 'AOA.Roll.CriticalSuccess' : 'AOA.Roll.Success') : 'AOA.Roll.Failure',
+      label: success ? (margin >= 3 ? 'WOR.Roll.CriticalSuccess' : 'WOR.Roll.Success') : 'WOR.Roll.Failure',
       cssClass: success ? (margin >= 3 ? 'critical-success' : 'success') : 'failure',
       margin
     },
@@ -523,7 +523,7 @@ export function validateRitualPerformance(actor, ritual, participantCount = 1) {
   if (witchsight <= 0) {
     return {
       valid: false,
-      message: game.i18n.localize('AOA.Magic.NoWitchsight')
+      message: game.i18n.localize('WOR.Magic.NoWitchsight')
     };
   }
 
@@ -532,7 +532,7 @@ export function validateRitualPerformance(actor, ritual, participantCount = 1) {
   if (witchsight < reqWitchsight) {
     return {
       valid: false,
-      message: game.i18n.format('AOA.Magic.InsufficientWitchsight', {
+      message: game.i18n.format('WOR.Magic.InsufficientWitchsight', {
         required: reqWitchsight,
         current: witchsight
       })
@@ -545,7 +545,7 @@ export function validateRitualPerformance(actor, ritual, participantCount = 1) {
   if (ritefocusRank < reqRitefocus) {
     return {
       valid: false,
-      message: game.i18n.format('AOA.Magic.InsufficientRitefocus', {
+      message: game.i18n.format('WOR.Magic.InsufficientRitefocus', {
         required: reqRitefocus,
         current: ritefocusRank
       })
@@ -557,7 +557,7 @@ export function validateRitualPerformance(actor, ritual, participantCount = 1) {
   if (participantCount < minParticipants) {
     return {
       valid: false,
-      message: game.i18n.format('AOA.Ritual.InsufficientParticipants', {
+      message: game.i18n.format('WOR.Ritual.InsufficientParticipants', {
         required: minParticipants,
         current: participantCount
       })
@@ -592,7 +592,7 @@ export async function applyRitualCosts(actor, ritual, result) {
   // Apply Blood cost (additional self-inflicted Trauma)
   if (costs.blood > 0) {
     await actor.modifyTrauma(costs.blood);
-    ui.notifications.warn(game.i18n.format('AOA.Magic.BloodCost', { amount: costs.blood }));
+    ui.notifications.warn(game.i18n.format('WOR.Magic.BloodCost', { amount: costs.blood }));
   }
 }
 
@@ -660,7 +660,7 @@ export async function modifyEssenceWithCorruption(actor, amount) {
 
   // Warn on critical Essence
   if (newEssence <= 2 && newEssence > 0 && newEssence !== currentEssence) {
-    ui.notifications.warn(game.i18n.format('AOA.Warnings.EssenceCritical', {
+    ui.notifications.warn(game.i18n.format('WOR.Warnings.EssenceCritical', {
       name: actor.name,
       essence: newEssence
     }));
@@ -695,22 +695,22 @@ function checkCorruptionThreshold(oldEssence, newEssence) {
 export async function promptCorruptionSign(actor, threshold) {
   const result = await foundry.applications.api.DialogV2.prompt({
     window: {
-      title: game.i18n.localize('AOA.Essence.CorruptionSignPrompt')
+      title: game.i18n.localize('WOR.Essence.CorruptionSignPrompt')
     },
     content: `
       <div class="corruption-sign-prompt">
-        <p>${game.i18n.format('AOA.Essence.CorruptionSignMessage', {
+        <p>${game.i18n.format('WOR.Essence.CorruptionSignMessage', {
           name: actor.name,
           threshold
         })}</p>
         <div class="form-group">
-          <label>${game.i18n.localize('AOA.Essence.CorruptionSignDescription')}</label>
-          <input type="text" name="description" placeholder="${game.i18n.localize('AOA.Essence.CorruptionSignPlaceholder')}" />
+          <label>${game.i18n.localize('WOR.Essence.CorruptionSignDescription')}</label>
+          <input type="text" name="description" placeholder="${game.i18n.localize('WOR.Essence.CorruptionSignPlaceholder')}" />
         </div>
       </div>
     `,
     ok: {
-      label: game.i18n.localize('AOA.Common.Add'),
+      label: game.i18n.localize('WOR.Common.Add'),
       callback: (event, button, dialog) => {
         const input = dialog.element.querySelector('input[name="description"]');
         return input?.value ?? '';
@@ -741,7 +741,7 @@ export async function addCorruptionSign(actor, description, threshold = null) {
   await actor.update({ 'system.essence.corruptionSigns': signs });
 
   // Send chat message
-  const content = game.i18n.format('AOA.Essence.CorruptionSignAdded', {
+  const content = game.i18n.format('WOR.Essence.CorruptionSignAdded', {
     name: actor.name,
     sign: description
   });
@@ -758,30 +758,30 @@ export async function addCorruptionSign(actor, description, threshold = null) {
  * @param {Actor} actor - The actor
  */
 async function showLengWarning(actor) {
-  ui.notifications.error(game.i18n.format('AOA.Warnings.LengTransformation', {
+  ui.notifications.error(game.i18n.format('WOR.Warnings.LengTransformation', {
     name: actor.name
   }));
 
   // Show dramatic dialog
   await foundry.applications.api.DialogV2.prompt({
     window: {
-      title: game.i18n.localize('AOA.Essence.LengTransformation')
+      title: game.i18n.localize('WOR.Essence.LengTransformation')
     },
     content: `
       <div class="leng-warning">
         <i class="fas fa-skull fa-3x"></i>
-        <h2>${game.i18n.localize('AOA.Essence.LengTransformation')}</h2>
-        <p>${game.i18n.format('AOA.Essence.LengWarningMessage', { name: actor.name })}</p>
-        <p class="leng-consequence">${game.i18n.localize('AOA.Essence.LengConsequence')}</p>
+        <h2>${game.i18n.localize('WOR.Essence.LengTransformation')}</h2>
+        <p>${game.i18n.format('WOR.Essence.LengWarningMessage', { name: actor.name })}</p>
+        <p class="leng-consequence">${game.i18n.localize('WOR.Essence.LengConsequence')}</p>
       </div>
     `,
     ok: {
-      label: game.i18n.localize('AOA.Common.Acknowledge')
+      label: game.i18n.localize('WOR.Common.Acknowledge')
     }
   });
 
   // Send chat message
-  const content = game.i18n.format('AOA.Essence.LengChatMessage', { name: actor.name });
+  const content = game.i18n.format('WOR.Essence.LengChatMessage', { name: actor.name });
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     content: `<div class="wor leng-message"><i class="fas fa-skull"></i> <strong>${content}</strong></div>`,
@@ -808,7 +808,7 @@ export async function sendSpellChatMessage(actor, spell, result, poolData) {
     poolData,
     isSuccess: result.degree?.key === 'success' || result.degree?.key === 'criticalSuccess',
     isCritical: result.degree?.key === 'criticalSuccess' || result.degree?.key === 'criticalFailure',
-    degreeLabel: game.i18n.localize(result.degree?.label ?? 'AOA.Roll.Unknown'),
+    degreeLabel: game.i18n.localize(result.degree?.label ?? 'WOR.Roll.Unknown'),
     costs: {
       trauma: spell.system.costs?.trauma ?? 0,
       essence: spell.system.costs?.essence ?? 0
@@ -845,7 +845,7 @@ export async function sendRitualChatMessage(actor, ritual, result, poolData) {
     isSuccess: result.degree?.key === 'success' || result.degree?.key === 'criticalSuccess',
     isCritical: result.degree?.key === 'criticalSuccess' || result.degree?.key === 'criticalFailure',
     wasAbandoned: result.abandoned,
-    degreeLabel: game.i18n.localize(result.degree?.label ?? 'AOA.Roll.Unknown'),
+    degreeLabel: game.i18n.localize(result.degree?.label ?? 'WOR.Roll.Unknown'),
     costs: {
       trauma: ritual.system.costs?.trauma ?? 0,
       essence: ritual.system.costs?.essence ?? 0,

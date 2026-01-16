@@ -37,7 +37,7 @@ export default class GearData extends ItemBaseData {
       ...requiredInteger,
       initial: 1,
       min: 0,
-      label: "AOA.Gear.Quantity"
+      label: "WOR.Gear.Quantity"
     });
 
     // ========================================
@@ -48,7 +48,7 @@ export default class GearData extends ItemBaseData {
       nullable: false,
       initial: 0.5,
       min: 0,
-      label: "AOA.Gear.Weight"
+      label: "WOR.Gear.Weight"
     });
 
     // ========================================
@@ -59,19 +59,19 @@ export default class GearData extends ItemBaseData {
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Sovereigns"
+        label: "WOR.Wealth.Sovereigns"
       }),
       crowns: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Crowns"
+        label: "WOR.Wealth.Crowns"
       }),
       orin: new fields.NumberField({
         ...requiredInteger,
         initial: 1,
         min: 0,
-        label: "AOA.Wealth.Orin"
+        label: "WOR.Wealth.Orin"
       })
     });
 
@@ -91,7 +91,7 @@ export default class GearData extends ItemBaseData {
         "remedy",
         "tool"
       ],
-      label: "AOA.Gear.Group.Label"
+      label: "WOR.Gear.Group.Label"
     });
 
     // ========================================
@@ -130,12 +130,12 @@ export default class GearData extends ItemBaseData {
     // ========================================
     schema.carried = new fields.BooleanField({
       initial: true,
-      label: "AOA.Gear.Carried"
+      label: "WOR.Gear.Carried"
     });
 
     schema.equipped = new fields.BooleanField({
       initial: false,
-      label: "AOA.Gear.Equipped"
+      label: "WOR.Gear.Equipped"
     });
 
     // ========================================
@@ -144,7 +144,7 @@ export default class GearData extends ItemBaseData {
     schema.associatedSkill = new fields.StringField({
       required: false,
       blank: true,
-      label: "AOA.Gear.AssociatedSkill"
+      label: "WOR.Gear.AssociatedSkill"
     });
 
     // ========================================
@@ -153,7 +153,7 @@ export default class GearData extends ItemBaseData {
     schema.formula = new fields.StringField({
       required: false,
       blank: true,
-      label: "AOA.Gear.Formula"
+      label: "WOR.Gear.Formula"
     });
 
     // ========================================
@@ -164,7 +164,7 @@ export default class GearData extends ItemBaseData {
       blank: false,
       initial: "common",
       choices: ["common", "uncommon", "rare", "exotic"],
-      label: "AOA.Item.Rarity"
+      label: "WOR.Item.Rarity"
     });
 
     return schema;

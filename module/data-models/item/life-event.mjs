@@ -21,7 +21,7 @@ export default class LifeEventData extends ItemBaseData {
       blank: false,
       initial: "fortune",
       choices: ["love", "fortune", "conflict", "knowledge"],
-      label: "AOA.LifeEvent.Suit"
+      label: "WOR.LifeEvent.Suit"
     });
 
     // ========================================
@@ -33,7 +33,7 @@ export default class LifeEventData extends ItemBaseData {
       initial: 1,
       min: 1,
       max: 10,
-      label: "AOA.LifeEvent.Number"
+      label: "WOR.LifeEvent.Number"
     });
 
     // ========================================
@@ -121,7 +121,7 @@ export default class LifeEventData extends ItemBaseData {
       ...requiredInteger,
       initial: 10,
       min: 0,
-      label: "AOA.LifeEvent.LPValue"
+      label: "WOR.LifeEvent.LPValue"
     });
 
     // ========================================
@@ -131,7 +131,7 @@ export default class LifeEventData extends ItemBaseData {
     schema.narrativePrompt = new fields.HTMLField({
       required: false,
       blank: true,
-      label: "AOA.LifeEvent.NarrativePrompt"
+      label: "WOR.LifeEvent.NarrativePrompt"
     });
 
     // ========================================

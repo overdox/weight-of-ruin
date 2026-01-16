@@ -10,38 +10,38 @@
 export const NPC_CLASSES = {
   humanoid: {
     id: "humanoid",
-    label: "AOA.NPC.Class.Humanoid",
-    description: "AOA.NPC.Class.HumanoidDesc",
+    label: "WOR.NPC.Class.Humanoid",
+    description: "WOR.NPC.Class.HumanoidDesc",
     icon: "fas fa-user"
   },
   beast: {
     id: "beast",
-    label: "AOA.NPC.Class.Beast",
-    description: "AOA.NPC.Class.BeastDesc",
+    label: "WOR.NPC.Class.Beast",
+    description: "WOR.NPC.Class.BeastDesc",
     icon: "fas fa-paw"
   },
   vermin: {
     id: "vermin",
-    label: "AOA.NPC.Class.Vermin",
-    description: "AOA.NPC.Class.VerminDesc",
+    label: "WOR.NPC.Class.Vermin",
+    description: "WOR.NPC.Class.VerminDesc",
     icon: "fas fa-bug"
   },
   afflicted: {
     id: "afflicted",
-    label: "AOA.NPC.Class.Afflicted",
-    description: "AOA.NPC.Class.AfflictedDesc",
+    label: "WOR.NPC.Class.Afflicted",
+    description: "WOR.NPC.Class.AfflictedDesc",
     icon: "fas fa-skull"
   },
   apparition: {
     id: "apparition",
-    label: "AOA.NPC.Class.Apparition",
-    description: "AOA.NPC.Class.ApparitionDesc",
+    label: "WOR.NPC.Class.Apparition",
+    description: "WOR.NPC.Class.ApparitionDesc",
     icon: "fas fa-ghost"
   },
   fiend: {
     id: "fiend",
-    label: "AOA.NPC.Class.Fiend",
-    description: "AOA.NPC.Class.FiendDesc",
+    label: "WOR.NPC.Class.Fiend",
+    description: "WOR.NPC.Class.FiendDesc",
     icon: "fas fa-fire"
   }
 };
@@ -52,86 +52,86 @@ export const NPC_CLASSES = {
 
 export const NPC_TYPES = {
   humanoid: [
-    { id: "human", label: "AOA.NPC.Type.Human" },
-    { id: "dwarf", label: "AOA.NPC.Type.Dwarf" },
-    { id: "elf", label: "AOA.NPC.Type.Elf" },
-    { id: "undine", label: "AOA.NPC.Type.Undine" },
-    { id: "changeling", label: "AOA.NPC.Type.Changeling" },
-    { id: "helskari", label: "AOA.NPC.Type.Helskari" },
-    { id: "jadwiga", label: "AOA.NPC.Type.Jadwiga" },
-    { id: "goblin", label: "AOA.NPC.Type.Goblin" },
-    { id: "ogre", label: "AOA.NPC.Type.Ogre" },
-    { id: "troll", label: "AOA.NPC.Type.Troll" }
+    { id: "human", label: "WOR.NPC.Type.Human" },
+    { id: "dwarf", label: "WOR.NPC.Type.Dwarf" },
+    { id: "elf", label: "WOR.NPC.Type.Elf" },
+    { id: "undine", label: "WOR.NPC.Type.Undine" },
+    { id: "changeling", label: "WOR.NPC.Type.Changeling" },
+    { id: "helskari", label: "WOR.NPC.Type.Helskari" },
+    { id: "jadwiga", label: "WOR.NPC.Type.Jadwiga" },
+    { id: "goblin", label: "WOR.NPC.Type.Goblin" },
+    { id: "ogre", label: "WOR.NPC.Type.Ogre" },
+    { id: "troll", label: "WOR.NPC.Type.Troll" }
   ],
   beast: [
-    { id: "ape", label: "AOA.NPC.Type.Ape" },
-    { id: "badger", label: "AOA.NPC.Type.Badger" },
-    { id: "bat", label: "AOA.NPC.Type.Bat" },
-    { id: "bear", label: "AOA.NPC.Type.Bear" },
-    { id: "beaver", label: "AOA.NPC.Type.Beaver" },
-    { id: "bull", label: "AOA.NPC.Type.Bull" },
-    { id: "camel", label: "AOA.NPC.Type.Camel" },
-    { id: "cat", label: "AOA.NPC.Type.Cat" },
-    { id: "cobra", label: "AOA.NPC.Type.Cobra" },
-    { id: "crocodile", label: "AOA.NPC.Type.Crocodile" },
-    { id: "doe", label: "AOA.NPC.Type.Doe" },
-    { id: "dog", label: "AOA.NPC.Type.Dog" },
-    { id: "dolphin", label: "AOA.NPC.Type.Dolphin" },
-    { id: "elephant", label: "AOA.NPC.Type.Elephant" },
-    { id: "elk", label: "AOA.NPC.Type.Elk" },
-    { id: "falcon", label: "AOA.NPC.Type.Falcon" },
-    { id: "fox", label: "AOA.NPC.Type.Fox" },
-    { id: "hawk", label: "AOA.NPC.Type.Hawk" },
-    { id: "horse", label: "AOA.NPC.Type.Horse" },
-    { id: "leopard", label: "AOA.NPC.Type.Leopard" },
-    { id: "lion", label: "AOA.NPC.Type.Lion" },
-    { id: "lynx", label: "AOA.NPC.Type.Lynx" },
-    { id: "octopus", label: "AOA.NPC.Type.Octopus" },
-    { id: "orca", label: "AOA.NPC.Type.Orca" },
-    { id: "owl", label: "AOA.NPC.Type.Owl" },
-    { id: "raven", label: "AOA.NPC.Type.Raven" },
-    { id: "stag", label: "AOA.NPC.Type.Stag" },
-    { id: "tiger", label: "AOA.NPC.Type.Tiger" },
-    { id: "wolf", label: "AOA.NPC.Type.Wolf" }
+    { id: "ape", label: "WOR.NPC.Type.Ape" },
+    { id: "badger", label: "WOR.NPC.Type.Badger" },
+    { id: "bat", label: "WOR.NPC.Type.Bat" },
+    { id: "bear", label: "WOR.NPC.Type.Bear" },
+    { id: "beaver", label: "WOR.NPC.Type.Beaver" },
+    { id: "bull", label: "WOR.NPC.Type.Bull" },
+    { id: "camel", label: "WOR.NPC.Type.Camel" },
+    { id: "cat", label: "WOR.NPC.Type.Cat" },
+    { id: "cobra", label: "WOR.NPC.Type.Cobra" },
+    { id: "crocodile", label: "WOR.NPC.Type.Crocodile" },
+    { id: "doe", label: "WOR.NPC.Type.Doe" },
+    { id: "dog", label: "WOR.NPC.Type.Dog" },
+    { id: "dolphin", label: "WOR.NPC.Type.Dolphin" },
+    { id: "elephant", label: "WOR.NPC.Type.Elephant" },
+    { id: "elk", label: "WOR.NPC.Type.Elk" },
+    { id: "falcon", label: "WOR.NPC.Type.Falcon" },
+    { id: "fox", label: "WOR.NPC.Type.Fox" },
+    { id: "hawk", label: "WOR.NPC.Type.Hawk" },
+    { id: "horse", label: "WOR.NPC.Type.Horse" },
+    { id: "leopard", label: "WOR.NPC.Type.Leopard" },
+    { id: "lion", label: "WOR.NPC.Type.Lion" },
+    { id: "lynx", label: "WOR.NPC.Type.Lynx" },
+    { id: "octopus", label: "WOR.NPC.Type.Octopus" },
+    { id: "orca", label: "WOR.NPC.Type.Orca" },
+    { id: "owl", label: "WOR.NPC.Type.Owl" },
+    { id: "raven", label: "WOR.NPC.Type.Raven" },
+    { id: "stag", label: "WOR.NPC.Type.Stag" },
+    { id: "tiger", label: "WOR.NPC.Type.Tiger" },
+    { id: "wolf", label: "WOR.NPC.Type.Wolf" }
   ],
   vermin: [
-    { id: "ant", label: "AOA.NPC.Type.Ant" },
-    { id: "beetle", label: "AOA.NPC.Type.Beetle" },
-    { id: "cockroach", label: "AOA.NPC.Type.Cockroach" },
-    { id: "grub", label: "AOA.NPC.Type.Grub" },
-    { id: "leech", label: "AOA.NPC.Type.Leech" },
-    { id: "locust", label: "AOA.NPC.Type.Locust" },
-    { id: "maggot", label: "AOA.NPC.Type.Maggot" },
-    { id: "mite", label: "AOA.NPC.Type.Mite" },
-    { id: "scorpion", label: "AOA.NPC.Type.Scorpion" },
-    { id: "spider", label: "AOA.NPC.Type.Spider" },
-    { id: "termite", label: "AOA.NPC.Type.Termite" },
-    { id: "tick", label: "AOA.NPC.Type.Tick" },
-    { id: "worm", label: "AOA.NPC.Type.Worm" }
+    { id: "ant", label: "WOR.NPC.Type.Ant" },
+    { id: "beetle", label: "WOR.NPC.Type.Beetle" },
+    { id: "cockroach", label: "WOR.NPC.Type.Cockroach" },
+    { id: "grub", label: "WOR.NPC.Type.Grub" },
+    { id: "leech", label: "WOR.NPC.Type.Leech" },
+    { id: "locust", label: "WOR.NPC.Type.Locust" },
+    { id: "maggot", label: "WOR.NPC.Type.Maggot" },
+    { id: "mite", label: "WOR.NPC.Type.Mite" },
+    { id: "scorpion", label: "WOR.NPC.Type.Scorpion" },
+    { id: "spider", label: "WOR.NPC.Type.Spider" },
+    { id: "termite", label: "WOR.NPC.Type.Termite" },
+    { id: "tick", label: "WOR.NPC.Type.Tick" },
+    { id: "worm", label: "WOR.NPC.Type.Worm" }
   ],
   afflicted: [
-    { id: "blighted", label: "AOA.NPC.Type.Blighted" },
-    { id: "ghul", label: "AOA.NPC.Type.Ghul" },
-    { id: "revenant", label: "AOA.NPC.Type.Revenant" },
-    { id: "vampire", label: "AOA.NPC.Type.Vampire" },
-    { id: "vargin", label: "AOA.NPC.Type.Vargin" },
-    { id: "wendigo", label: "AOA.NPC.Type.Wendigo" },
-    { id: "werewolf", label: "AOA.NPC.Type.Werewolf" },
-    { id: "wight", label: "AOA.NPC.Type.Wight" }
+    { id: "blighted", label: "WOR.NPC.Type.Blighted" },
+    { id: "ghul", label: "WOR.NPC.Type.Ghul" },
+    { id: "revenant", label: "WOR.NPC.Type.Revenant" },
+    { id: "vampire", label: "WOR.NPC.Type.Vampire" },
+    { id: "vargin", label: "WOR.NPC.Type.Vargin" },
+    { id: "wendigo", label: "WOR.NPC.Type.Wendigo" },
+    { id: "werewolf", label: "WOR.NPC.Type.Werewolf" },
+    { id: "wight", label: "WOR.NPC.Type.Wight" }
   ],
   apparition: [
-    { id: "banshee", label: "AOA.NPC.Type.Banshee" },
-    { id: "phantom", label: "AOA.NPC.Type.Phantom" },
-    { id: "sprite", label: "AOA.NPC.Type.Sprite" },
-    { id: "wraith", label: "AOA.NPC.Type.Wraith" }
+    { id: "banshee", label: "WOR.NPC.Type.Banshee" },
+    { id: "phantom", label: "WOR.NPC.Type.Phantom" },
+    { id: "sprite", label: "WOR.NPC.Type.Sprite" },
+    { id: "wraith", label: "WOR.NPC.Type.Wraith" }
   ],
   fiend: [
-    { id: "demon", label: "AOA.NPC.Type.Demon" },
-    { id: "hellhound", label: "AOA.NPC.Type.Hellhound" },
-    { id: "imp", label: "AOA.NPC.Type.Imp" },
-    { id: "incubus", label: "AOA.NPC.Type.Incubus" },
-    { id: "jinn", label: "AOA.NPC.Type.Jinn" },
-    { id: "succubus", label: "AOA.NPC.Type.Succubus" }
+    { id: "demon", label: "WOR.NPC.Type.Demon" },
+    { id: "hellhound", label: "WOR.NPC.Type.Hellhound" },
+    { id: "imp", label: "WOR.NPC.Type.Imp" },
+    { id: "incubus", label: "WOR.NPC.Type.Incubus" },
+    { id: "jinn", label: "WOR.NPC.Type.Jinn" },
+    { id: "succubus", label: "WOR.NPC.Type.Succubus" }
   ]
 };
 
@@ -143,8 +143,8 @@ export const NPC_TIERS = {
   0: {
     id: 0,
     name: "dreg",
-    label: "AOA.NPC.Tier.Dreg",
-    description: "AOA.NPC.Tier.DregDesc",
+    label: "WOR.NPC.Tier.Dreg",
+    description: "WOR.NPC.Tier.DregDesc",
     baseDicePool: 5,
     traitPoints: 1,
     suggestedAttributes: {
@@ -156,8 +156,8 @@ export const NPC_TIERS = {
   1: {
     id: 1,
     name: "skirmisher",
-    label: "AOA.NPC.Tier.Skirmisher",
-    description: "AOA.NPC.Tier.SkirmisherDesc",
+    label: "WOR.NPC.Tier.Skirmisher",
+    description: "WOR.NPC.Tier.SkirmisherDesc",
     baseDicePool: 6,
     traitPoints: 3,
     suggestedAttributes: {
@@ -169,8 +169,8 @@ export const NPC_TIERS = {
   2: {
     id: 2,
     name: "enforcer",
-    label: "AOA.NPC.Tier.Enforcer",
-    description: "AOA.NPC.Tier.EnforcerDesc",
+    label: "WOR.NPC.Tier.Enforcer",
+    description: "WOR.NPC.Tier.EnforcerDesc",
     baseDicePool: 8,
     traitPoints: 5,
     suggestedAttributes: {
@@ -182,8 +182,8 @@ export const NPC_TIERS = {
   3: {
     id: 3,
     name: "veteran",
-    label: "AOA.NPC.Tier.Veteran",
-    description: "AOA.NPC.Tier.VeteranDesc",
+    label: "WOR.NPC.Tier.Veteran",
+    description: "WOR.NPC.Tier.VeteranDesc",
     baseDicePool: 10,
     traitPoints: 7,
     suggestedAttributes: {
@@ -195,8 +195,8 @@ export const NPC_TIERS = {
   4: {
     id: 4,
     name: "elite",
-    label: "AOA.NPC.Tier.Elite",
-    description: "AOA.NPC.Tier.EliteDesc",
+    label: "WOR.NPC.Tier.Elite",
+    description: "WOR.NPC.Tier.EliteDesc",
     baseDicePool: 13,
     traitPoints: 9,
     suggestedAttributes: {
@@ -208,8 +208,8 @@ export const NPC_TIERS = {
   5: {
     id: 5,
     name: "champion",
-    label: "AOA.NPC.Tier.Champion",
-    description: "AOA.NPC.Tier.ChampionDesc",
+    label: "WOR.NPC.Tier.Champion",
+    description: "WOR.NPC.Tier.ChampionDesc",
     baseDicePool: 17,
     traitPoints: 11,
     suggestedAttributes: {
@@ -221,8 +221,8 @@ export const NPC_TIERS = {
   6: {
     id: 6,
     name: "exemplar",
-    label: "AOA.NPC.Tier.Exemplar",
-    description: "AOA.NPC.Tier.ExemplarDesc",
+    label: "WOR.NPC.Tier.Exemplar",
+    description: "WOR.NPC.Tier.ExemplarDesc",
     baseDicePool: 20,
     traitPoints: 13,
     suggestedAttributes: {
@@ -240,62 +240,62 @@ export const NPC_TIERS = {
 export const TRAIT_CATEGORIES = {
   offense: {
     id: "offense",
-    label: "AOA.NPCTrait.Category.Offense",
-    description: "AOA.NPCTrait.Category.OffenseDesc",
+    label: "WOR.NPCTrait.Category.Offense",
+    description: "WOR.NPCTrait.Category.OffenseDesc",
     icon: "fas fa-sword"
   },
   defense: {
     id: "defense",
-    label: "AOA.NPCTrait.Category.Defense",
-    description: "AOA.NPCTrait.Category.DefenseDesc",
+    label: "WOR.NPCTrait.Category.Defense",
+    description: "WOR.NPCTrait.Category.DefenseDesc",
     icon: "fas fa-shield-alt"
   },
   mobility: {
     id: "mobility",
-    label: "AOA.NPCTrait.Category.Mobility",
-    description: "AOA.NPCTrait.Category.MobilityDesc",
+    label: "WOR.NPCTrait.Category.Mobility",
+    description: "WOR.NPCTrait.Category.MobilityDesc",
     icon: "fas fa-running"
   },
   control: {
     id: "control",
-    label: "AOA.NPCTrait.Category.Control",
-    description: "AOA.NPCTrait.Category.ControlDesc",
+    label: "WOR.NPCTrait.Category.Control",
+    description: "WOR.NPCTrait.Category.ControlDesc",
     icon: "fas fa-hand-paper"
   },
   teamplay: {
     id: "teamplay",
-    label: "AOA.NPCTrait.Category.Teamplay",
-    description: "AOA.NPCTrait.Category.TeamplayDesc",
+    label: "WOR.NPCTrait.Category.Teamplay",
+    description: "WOR.NPCTrait.Category.TeamplayDesc",
     icon: "fas fa-users"
   },
   leadership: {
     id: "leadership",
-    label: "AOA.NPCTrait.Category.Leadership",
-    description: "AOA.NPCTrait.Category.LeadershipDesc",
+    label: "WOR.NPCTrait.Category.Leadership",
+    description: "WOR.NPCTrait.Category.LeadershipDesc",
     icon: "fas fa-crown"
   },
   supernatural: {
     id: "supernatural",
-    label: "AOA.NPCTrait.Category.Supernatural",
-    description: "AOA.NPCTrait.Category.SupernaturalDesc",
+    label: "WOR.NPCTrait.Category.Supernatural",
+    description: "WOR.NPCTrait.Category.SupernaturalDesc",
     icon: "fas fa-magic"
   },
   ranged: {
     id: "ranged",
-    label: "AOA.NPCTrait.Category.Ranged",
-    description: "AOA.NPCTrait.Category.RangedDesc",
+    label: "WOR.NPCTrait.Category.Ranged",
+    description: "WOR.NPCTrait.Category.RangedDesc",
     icon: "fas fa-crosshairs"
   },
   signature: {
     id: "signature",
-    label: "AOA.NPCTrait.Category.Signature",
-    description: "AOA.NPCTrait.Category.SignatureDesc",
+    label: "WOR.NPCTrait.Category.Signature",
+    description: "WOR.NPCTrait.Category.SignatureDesc",
     icon: "fas fa-skull-crossbones"
   },
   typeTrait: {
     id: "typeTrait",
-    label: "AOA.NPCTrait.Category.TypeTrait",
-    description: "AOA.NPCTrait.Category.TypeTraitDesc",
+    label: "WOR.NPCTrait.Category.TypeTrait",
+    description: "WOR.NPCTrait.Category.TypeTraitDesc",
     icon: "fas fa-dna"
   }
 };

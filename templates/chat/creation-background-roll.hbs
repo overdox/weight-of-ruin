@@ -3,12 +3,12 @@
   <div class="creation-roll-card background">
     {{!-- Title --}}
     <div class="creation-roll-title">
-      <h3>{{localize "AOA.CharacterCreation.BackgroundRoll"}}</h3>
+      <h3>{{localize "WOR.CharacterCreation.BackgroundRoll"}}</h3>
     </div>
 
     {{!-- Standing Roll --}}
     <div class="creation-roll-body">
-      <div class="roll-section-label">{{localize "AOA.SocialStanding.Tier"}}</div>
+      <div class="roll-section-label">{{localize "WOR.SocialStanding.Tier"}}</div>
       <div class="roll-display">
         <span class="roll-formula">{{standingFormula}}</span>
         <span class="roll-multiplier">×</span>
@@ -20,7 +20,7 @@
 
     {{!-- Background Roll --}}
     <div class="creation-roll-body">
-      <div class="roll-section-label">{{localize "AOA.Background.Title"}}</div>
+      <div class="roll-section-label">{{localize "WOR.Background.Title"}}</div>
       <div class="roll-display">
         <span class="roll-formula">{{backgroundFormula}}</span>
         <span class="roll-multiplier">×</span>
@@ -31,7 +31,7 @@
     {{!-- Result --}}
     {{#if result}}
     <div class="creation-roll-result">
-      <div class="result-label">{{localize "AOA.Common.Result"}}</div>
+      <div class="result-label">{{localize "WOR.Common.Result"}}</div>
       {{#if result.img}}
       <div class="result-image">
         <img src="{{result.img}}" alt="{{result.name}}" />
@@ -48,7 +48,7 @@
     {{#if lpAward}}
     <div class="creation-roll-lp">
       <i class="fas fa-coins"></i>
-      <span>+{{lpAward}} {{localize "AOA.CharacterCreation.LP"}}</span>
+      <span>+{{lpAward}} {{localize "WOR.CharacterCreation.LP"}}</span>
     </div>
     {{/if}}
   </div>

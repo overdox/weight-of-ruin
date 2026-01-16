@@ -3,32 +3,32 @@
   <header class="card-header">
     <img src="{{ritual.img}}" alt="{{ritual.name}}" class="item-image" />
     <h3 class="item-name">{{ritual.name}}</h3>
-    <span class="item-type">{{localize "AOA.ItemTypes.ritual"}}</span>
+    <span class="item-type">{{localize "WOR.ItemTypes.ritual"}}</span>
   </header>
 
   {{!-- Ritual Info --}}
   <div class="card-content">
     <div class="ritual-info">
       <div class="ritual-details">
-        <span class="ritual-path" title="{{localize 'AOA.Ritual.Path'}}">
-          {{localize (concat "AOA.Ritefocus.Path." (capitalize ritual.system.path))}}
+        <span class="ritual-path" title="{{localize 'WOR.Ritual.Path'}}">
+          {{localize (concat "WOR.Ritefocus.Path." (capitalize ritual.system.path))}}
         </span>
-        <span class="ritual-complexity" title="{{localize 'AOA.Ritual.Complexity'}}">
-          {{localize "AOA.Ritual.Complexity"}}: {{ritual.system.complexity}}
+        <span class="ritual-complexity" title="{{localize 'WOR.Ritual.Complexity'}}">
+          {{localize "WOR.Ritual.Complexity"}}: {{ritual.system.complexity}}
         </span>
       </div>
     </div>
 
     {{!-- Pool Breakdown --}}
     <div class="pool-breakdown">
-      <span class="pool-label">{{localize "AOA.Roll.Pool"}}:</span>
+      <span class="pool-label">{{localize "WOR.Roll.Pool"}}:</span>
       <span class="pool-component">{{poolData.witchsight.label}} ({{poolData.witchsight.value}})</span>
       <span class="pool-component">+ {{poolData.skill.label}} ({{poolData.skill.value}})</span>
       {{#if poolData.participants.count}}
       <span class="pool-component">+ {{poolData.participants.label}} ({{poolData.participants.value}})</span>
       {{/if}}
       {{#if poolData.modifier}}
-      <span class="pool-component">+ {{localize "AOA.Roll.Modifier"}} ({{poolData.modifier}})</span>
+      <span class="pool-component">+ {{localize "WOR.Roll.Modifier"}} ({{poolData.modifier}})</span>
       {{/if}}
       <span class="pool-total">= {{poolData.total}}d6</span>
     </div>
@@ -36,9 +36,9 @@
     {{!-- Extended Ritual Progress --}}
     {{#if isExtended}}
     <div class="extended-info">
-      <span class="extended-label">{{localize "AOA.Ritual.ExtendedRitual"}}</span>
+      <span class="extended-label">{{localize "WOR.Ritual.ExtendedRitual"}}</span>
       <span class="extended-progress">
-        {{result.rollsMade}} / {{result.rollsAllowed}} {{localize "AOA.Ritual.Rolls"}}
+        {{result.rollsMade}} / {{result.rollsAllowed}} {{localize "WOR.Ritual.Rolls"}}
       </span>
     </div>
     {{/if}}
@@ -48,12 +48,12 @@
       {{#if wasAbandoned}}
       <div class="abandoned">
         <i class="fas fa-times-circle"></i>
-        {{localize "AOA.Ritual.Abandoned"}}
+        {{localize "WOR.Ritual.Abandoned"}}
       </div>
       {{else}}
       <div class="result-line">
-        <span class="difficulty">{{localize (concat "AOA.Difficulty." result.difficulty.key)}}</span>
-        <span class="hits">{{result.hits}} {{localize "AOA.Roll.Hits"}}</span>
+        <span class="difficulty">{{localize (concat "WOR.Difficulty." result.difficulty.key)}}</span>
+        <span class="hits">{{result.hits}} {{localize "WOR.Roll.Hits"}}</span>
         <span class="vs">vs</span>
         <span class="threshold">TT {{result.targetThreshold}}</span>
       </div>
@@ -68,21 +68,21 @@
     {{!-- Costs Applied --}}
     {{#unless wasAbandoned}}
     <div class="costs-section">
-      <span class="costs-label">{{localize "AOA.Ritual.CostsApplied"}}:</span>
+      <span class="costs-label">{{localize "WOR.Ritual.CostsApplied"}}:</span>
       <div class="costs-list">
         {{#if costs.trauma}}
         <span class="cost trauma">
-          <i class="fas fa-heartbeat"></i> {{costs.trauma}} {{localize "AOA.Health.Trauma"}}
+          <i class="fas fa-heartbeat"></i> {{costs.trauma}} {{localize "WOR.Health.Trauma"}}
         </span>
         {{/if}}
         {{#if costs.essence}}
         <span class="cost essence">
-          <i class="fas fa-ghost"></i> {{costs.essence}} {{localize "AOA.Essence.label"}}
+          <i class="fas fa-ghost"></i> {{costs.essence}} {{localize "WOR.Essence.label"}}
         </span>
         {{/if}}
         {{#if costs.blood}}
         <span class="cost blood">
-          <i class="fas fa-tint"></i> {{costs.blood}} {{localize "AOA.Ritual.BloodCost"}}
+          <i class="fas fa-tint"></i> {{costs.blood}} {{localize "WOR.Ritual.BloodCost"}}
         </span>
         {{/if}}
       </div>
@@ -92,19 +92,19 @@
     {{!-- Failure Effect --}}
     {{#if hasFailureEffect}}
     <div class="failure-section">
-      <h4><i class="fas fa-exclamation-triangle"></i> {{localize "AOA.Ritual.FailureConsequence"}}</h4>
+      <h4><i class="fas fa-exclamation-triangle"></i> {{localize "WOR.Ritual.FailureConsequence"}}</h4>
       <div class="failure-details">
         {{#if result.failureEffect.description}}
         <p class="failure-description">{{result.failureEffect.description}}</p>
         {{/if}}
         {{#if result.failureEffect.traumaCost}}
         <span class="failure-cost">
-          <i class="fas fa-heartbeat"></i> +{{result.failureEffect.traumaCost}} {{localize "AOA.Health.Trauma"}}
+          <i class="fas fa-heartbeat"></i> +{{result.failureEffect.traumaCost}} {{localize "WOR.Health.Trauma"}}
         </span>
         {{/if}}
         {{#if result.failureEffect.essenceCost}}
         <span class="failure-cost essence-loss">
-          <i class="fas fa-ghost"></i> -{{result.failureEffect.essenceCost}} {{localize "AOA.Essence.label"}}
+          <i class="fas fa-ghost"></i> -{{result.failureEffect.essenceCost}} {{localize "WOR.Essence.label"}}
         </span>
         {{/if}}
       </div>
@@ -115,13 +115,13 @@
     {{#if isSuccess}}
     {{#if ritual.system.effect.description}}
     <div class="effect-section">
-      <h4>{{localize "AOA.Ritual.Effect"}}</h4>
+      <h4>{{localize "WOR.Ritual.Effect"}}</h4>
       <div class="effect-description">{{{ritual.system.effect.description}}}</div>
       <div class="effect-duration">
-        <span class="duration-label">{{localize "AOA.Ritual.Duration"}}:</span>
+        <span class="duration-label">{{localize "WOR.Ritual.Duration"}}:</span>
         <span class="duration-value">
           {{#if ritual.system.effect.duration.value}}{{ritual.system.effect.duration.value}}{{/if}}
-          {{localize (concat "AOA.Duration." (capitalize ritual.system.effect.duration.type))}}
+          {{localize (concat "WOR.Duration." (capitalize ritual.system.effect.duration.type))}}
         </span>
       </div>
     </div>
@@ -131,13 +131,13 @@
     {{!-- Components Used --}}
     {{#if ritual.system.components.length}}
     <div class="components-section">
-      <h4>{{localize "AOA.Ritual.ComponentsUsed"}}</h4>
+      <h4>{{localize "WOR.Ritual.ComponentsUsed"}}</h4>
       <ul class="components-list">
         {{#each ritual.system.components}}
         <li class="component {{#if consumed}}consumed{{/if}}">
           <span class="component-name">{{name}}</span>
           {{#if (gt quantity 1)}}<span class="component-qty">x{{quantity}}</span>{{/if}}
-          {{#if consumed}}<span class="consumed-tag">({{localize "AOA.Ritual.Consumed"}})</span>{{/if}}
+          {{#if consumed}}<span class="consumed-tag">({{localize "WOR.Ritual.Consumed"}})</span>{{/if}}
         </li>
         {{/each}}
       </ul>

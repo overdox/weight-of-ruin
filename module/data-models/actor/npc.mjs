@@ -20,7 +20,7 @@ export default class NPCData extends ActorBaseData {
       initial: 1,
       min: 0,
       max: 6,
-      label: "AOA.NPC.Tier.Label"
+      label: "WOR.NPC.Tier.Label"
     });
 
     // ========================================
@@ -32,13 +32,13 @@ export default class NPCData extends ActorBaseData {
         ...requiredInteger,
         initial: 3,
         min: 0,
-        label: "AOA.NPC.TraitPoints.Max"
+        label: "WOR.NPC.TraitPoints.Max"
       }),
       spent: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.NPC.TraitPoints.Spent"
+        label: "WOR.NPC.TraitPoints.Spent"
       })
     });
 
@@ -52,7 +52,7 @@ export default class NPCData extends ActorBaseData {
         blank: true,
         initial: "minor",
         choices: ["trivial", "minor", "moderate", "major", "severe", "legendary"],
-        label: "AOA.NPC.ThreatLevel"
+        label: "WOR.NPC.ThreatLevel"
       }),
       // Numeric rating for comparison (1-10)
       rating: new fields.NumberField({
@@ -60,7 +60,7 @@ export default class NPCData extends ActorBaseData {
         initial: 1,
         min: 1,
         max: 10,
-        label: "AOA.NPC.ThreatRating"
+        label: "WOR.NPC.ThreatRating"
       })
     });
 
@@ -71,13 +71,13 @@ export default class NPCData extends ActorBaseData {
       required: false,
       blank: true,
       initial: "generic",
-      label: "AOA.NPC.Type"
+      label: "WOR.NPC.Type"
     });
 
     schema.role = new fields.StringField({
       required: false,
       blank: true,
-      label: "AOA.NPC.Role"
+      label: "WOR.NPC.Role"
     });
 
     // ========================================
@@ -89,14 +89,14 @@ export default class NPCData extends ActorBaseData {
       blank: true,
       initial: "humanoid",
       choices: ["humanoid", "beast", "vermin", "afflicted", "apparition", "fiend"],
-      label: "AOA.NPC.Class.Label"
+      label: "WOR.NPC.Class.Label"
     });
 
     schema.npcType = new fields.StringField({
       required: false,
       blank: true,
       initial: "",
-      label: "AOA.NPC.Type.Label"
+      label: "WOR.NPC.Type.Label"
     });
 
     // ========================================
@@ -140,13 +140,13 @@ export default class NPCData extends ActorBaseData {
     schema.tactics = new fields.HTMLField({
       required: false,
       blank: true,
-      label: "AOA.NPC.Tactics"
+      label: "WOR.NPC.Tactics"
     });
 
     schema.gmNotes = new fields.HTMLField({
       required: false,
       blank: true,
-      label: "AOA.NPC.GMNotes"
+      label: "WOR.NPC.GMNotes"
     });
 
     // ========================================
@@ -158,12 +158,12 @@ export default class NPCData extends ActorBaseData {
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.NPC.MoraleThreshold"
+        label: "WOR.NPC.MoraleThreshold"
       }),
       condition: new fields.StringField({
         required: false,
         blank: true,
-        label: "AOA.NPC.MoraleCondition"
+        label: "WOR.NPC.MoraleCondition"
       })
     });
 
@@ -173,7 +173,7 @@ export default class NPCData extends ActorBaseData {
     schema.loot = new fields.StringField({
       required: false,
       blank: true,
-      label: "AOA.NPC.Loot"
+      label: "WOR.NPC.Loot"
     });
 
     // ========================================
@@ -183,7 +183,7 @@ export default class NPCData extends ActorBaseData {
     schema.notes = new fields.HTMLField({
       required: false,
       blank: true,
-      label: "AOA.NPC.Notes"
+      label: "WOR.NPC.Notes"
     });
 
     return schema;

@@ -7,7 +7,7 @@
     <div class="header-info">
       <h4 class="actor-name">{{caster.name}}</h4>
       <div class="roll-type">
-        <span class="roll-label">{{localize "AOA.Spell.Cast"}}</span>
+        <span class="roll-label">{{localize "WOR.Spell.Cast"}}</span>
       </div>
     </div>
   </div>
@@ -20,9 +20,9 @@
     <div class="item-info">
       <h5 class="item-name">{{spell.name}}</h5>
       <span class="item-details">
-        {{localize (concat "AOA.Sorcery.Technique." (capitalize spell.system.technique))}}
+        {{localize (concat "WOR.Sorcery.Technique." (capitalize spell.system.technique))}}
         +
-        {{localize (concat "AOA.Sorcery.Form." (capitalize spell.system.form))}}
+        {{localize (concat "WOR.Sorcery.Form." (capitalize spell.system.form))}}
       </span>
     </div>
   </div>
@@ -32,7 +32,7 @@
     <div class="result-text">
       {{#if result.isAutoSuccess}}
       <i class="fas fa-fire"></i>
-      {{localize "AOA.Zeal.AutoSuccess"}}
+      {{localize "WOR.Zeal.AutoSuccess"}}
       {{else}}
       {{#if isCritical}}<i class="fas fa-star"></i>{{/if}}
       {{degreeLabel}} ( <span class="hit-count">{{result.hits}}</span> )
@@ -40,7 +40,7 @@
     </div>
     {{#if result.margin}}
     <div class="result-margin">
-      {{localize "AOA.Roll.Margin"}}: <span class="margin-value {{#if (gt result.margin 0)}}positive{{else}}negative{{/unless}}">{{#if (gt result.margin 0)}}+{{/if}}{{result.margin}}</span>
+      {{localize "WOR.Roll.Margin"}}: <span class="margin-value {{#if (gt result.margin 0)}}positive{{else}}negative{{/unless}}">{{#if (gt result.margin 0)}}+{{/if}}{{result.margin}}</span>
     </div>
     {{/if}}
   </div>
@@ -48,16 +48,16 @@
   {{!-- Costs Applied --}}
   {{#if costs}}
   <div class="costs-section">
-    <span class="costs-label">{{localize "AOA.Spell.CostsApplied"}}:</span>
+    <span class="costs-label">{{localize "WOR.Spell.CostsApplied"}}:</span>
     <div class="costs-list">
       {{#if costs.trauma}}
       <span class="cost trauma">
-        <i class="fas fa-heartbeat"></i> {{costs.trauma}} {{localize "AOA.Health.Trauma"}}
+        <i class="fas fa-heartbeat"></i> {{costs.trauma}} {{localize "WOR.Health.Trauma"}}
       </span>
       {{/if}}
       {{#if costs.essence}}
       <span class="cost essence">
-        <i class="fas fa-ghost"></i> {{costs.essence}} {{localize "AOA.Essence.label"}}
+        <i class="fas fa-ghost"></i> {{costs.essence}} {{localize "WOR.Essence.label"}}
       </span>
       {{/if}}
     </div>
@@ -67,19 +67,19 @@
   {{!-- Backlash --}}
   {{#if hasBacklash}}
   <div class="backlash-section">
-    <h4><i class="fas fa-bolt"></i> {{localize "AOA.Spell.Backlash"}}</h4>
+    <h4><i class="fas fa-bolt"></i> {{localize "WOR.Spell.Backlash"}}</h4>
     <div class="backlash-details">
       {{#if result.backlash.description}}
       <p class="backlash-description">{{result.backlash.description}}</p>
       {{/if}}
       {{#if result.backlash.traumaDealt}}
       <span class="backlash-cost">
-        <i class="fas fa-heartbeat"></i> +{{result.backlash.traumaDealt}} {{localize "AOA.Health.Trauma"}}
+        <i class="fas fa-heartbeat"></i> +{{result.backlash.traumaDealt}} {{localize "WOR.Health.Trauma"}}
       </span>
       {{/if}}
       {{#if result.backlash.essenceLost}}
       <span class="backlash-cost essence-loss">
-        <i class="fas fa-ghost"></i> -{{result.backlash.essenceLost}} {{localize "AOA.Essence.label"}}
+        <i class="fas fa-ghost"></i> -{{result.backlash.essenceLost}} {{localize "WOR.Essence.label"}}
       </span>
       {{/if}}
     </div>
@@ -90,17 +90,17 @@
   {{#if isSuccess}}
   {{#if spell.system.effect.description}}
   <div class="effect-section">
-    <h4>{{localize "AOA.Spell.Effect"}}</h4>
+    <h4>{{localize "WOR.Spell.Effect"}}</h4>
     <div class="effect-description">{{{spell.system.effect.description}}}</div>
     {{#if spell.system.effect.damage}}
     <div class="effect-damage">
-      <i class="fas fa-tint"></i> {{spell.system.effect.damage}} {{localize "AOA.Combat.Damage"}}
+      <i class="fas fa-tint"></i> {{spell.system.effect.damage}} {{localize "WOR.Combat.Damage"}}
       {{#if spell.system.effect.damageType}}({{spell.system.effect.damageType}}){{/if}}
     </div>
     {{/if}}
     {{#if spell.system.effect.healing}}
     <div class="effect-healing">
-      <i class="fas fa-heart"></i> {{spell.system.effect.healing}} {{localize "AOA.Spell.Healing"}}
+      <i class="fas fa-heart"></i> {{spell.system.effect.healing}} {{localize "WOR.Spell.Healing"}}
     </div>
     {{/if}}
   </div>
@@ -111,24 +111,24 @@
   <div class="collapsible-section" data-section="spell-details">
     <div class="collapsible-header collapsed" data-action="toggle-collapse">
       <i class="fas fa-chevron-down collapse-icon"></i>
-      <span class="section-title">{{localize "AOA.Roll.Details"}}</span>
+      <span class="section-title">{{localize "WOR.Roll.Details"}}</span>
     </div>
     <div class="collapsible-content collapsed">
       {{!-- Pool Breakdown --}}
       <div class="pool-breakdown">
-        <span class="pool-label">{{localize "AOA.Roll.Pool"}}:</span>
+        <span class="pool-label">{{localize "WOR.Roll.Pool"}}:</span>
         <span class="pool-component">{{poolData.witchsight.label}} ({{poolData.witchsight.value}})</span>
         <span class="pool-component">+ {{poolData.technique.label}} ({{poolData.technique.value}})</span>
         <span class="pool-component">+ {{poolData.form.label}} ({{poolData.form.value}})</span>
         {{#if poolData.modifier}}
-        <span class="pool-component">+ {{localize "AOA.Roll.Modifier"}} ({{poolData.modifier}})</span>
+        <span class="pool-component">+ {{localize "WOR.Roll.Modifier"}} ({{poolData.modifier}})</span>
         {{/if}}
         <span class="pool-total">= {{poolData.total}}d6</span>
       </div>
 
       {{!-- Roll Result Details --}}
       <div class="roll-result-details">
-        <span class="difficulty">{{localize (concat "AOA.Difficulty." result.difficulty.key)}}</span>
+        <span class="difficulty">{{localize (concat "WOR.Difficulty." result.difficulty.key)}}</span>
         <span class="vs">vs</span>
         <span class="threshold">TT {{result.targetThreshold}}</span>
       </div>
@@ -141,7 +141,7 @@
   <div class="chat-card-buttons">
     <button type="button" class="apply-damage" data-action="apply-spell-damage" data-damage="{{spell.system.effect.damage}}">
       <i class="fas fa-magic"></i>
-      <span>{{localize "AOA.Spell.ApplyEffect"}}</span>
+      <span>{{localize "WOR.Spell.ApplyEffect"}}</span>
     </button>
   </div>
   {{/if}}

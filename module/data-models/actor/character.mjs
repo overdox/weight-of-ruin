@@ -50,14 +50,14 @@ export default class CharacterData extends ActorBaseData {
         initial: 10,
         min: 0,
         max: 10,
-        label: "AOA.Essence.Current"
+        label: "WOR.Essence.Current"
       }),
       max: new fields.NumberField({
         ...requiredInteger,
         initial: 10,
         min: 0,
         max: 10,
-        label: "AOA.Essence.Max"
+        label: "WOR.Essence.Max"
       }),
       // Corruption signs manifest as Essence degrades
       corruptionSigns: new fields.ArrayField(
@@ -81,14 +81,14 @@ export default class CharacterData extends ActorBaseData {
         initial: 0,
         min: 0,
         max: 5,
-        label: "AOA.Fervor.Current"
+        label: "WOR.Fervor.Current"
       }),
       max: new fields.NumberField({
         ...requiredInteger,
         initial: 5,
         min: 0,
         max: 5,
-        label: "AOA.Fervor.Max"
+        label: "WOR.Fervor.Max"
       })
     });
 
@@ -100,17 +100,17 @@ export default class CharacterData extends ActorBaseData {
       motivation: new fields.StringField({
         required: false,
         blank: true,
-        label: "AOA.Passions.Motivation"
+        label: "WOR.Passions.Motivation"
       }),
       nature: new fields.StringField({
         required: false,
         blank: true,
-        label: "AOA.Passions.Nature"
+        label: "WOR.Passions.Nature"
       }),
       allegiance: new fields.StringField({
         required: false,
         blank: true,
-        label: "AOA.Passions.Allegiance"
+        label: "WOR.Passions.Allegiance"
       })
     });
 
@@ -124,7 +124,7 @@ export default class CharacterData extends ActorBaseData {
         nullable: true,
         integer: true,
         min: 0,
-        label: "AOA.Identity.Age"
+        label: "WOR.Identity.Age"
       }),
       lineage: new fields.StringField({ required: false, blank: true }),
       lineageId: new fields.StringField({ required: false, blank: true }),
@@ -148,7 +148,7 @@ export default class CharacterData extends ActorBaseData {
       required: false,
       blank: true,
       initial: "",
-      label: "AOA.Section.Notes"
+      label: "WOR.Section.Notes"
     });
 
     // ========================================
@@ -161,18 +161,18 @@ export default class CharacterData extends ActorBaseData {
         blank: true,
         initial: "penitent",
         choices: ["exalted", "ordained", "anointed", "penitent", "heretics", "outcast"],
-        label: "AOA.SocialStanding.Tier"
+        label: "WOR.SocialStanding.Tier"
       }),
       rank: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.SocialStanding.Rank"
+        label: "WOR.SocialStanding.Rank"
       }),
       reputation: new fields.StringField({
         required: false,
         blank: true,
-        label: "AOA.SocialStanding.Reputation"
+        label: "WOR.SocialStanding.Reputation"
       })
     });
 
@@ -185,19 +185,19 @@ export default class CharacterData extends ActorBaseData {
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Orin"
+        label: "WOR.Wealth.Orin"
       }),
       crowns: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Crowns"
+        label: "WOR.Wealth.Crowns"
       }),
       sovereigns: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
         min: 0,
-        label: "AOA.Wealth.Sovereigns"
+        label: "WOR.Wealth.Sovereigns"
       })
     });
 
@@ -210,13 +210,13 @@ export default class CharacterData extends ActorBaseData {
           ...requiredInteger,
           initial: 0,
           min: 0,
-          label: "AOA.Advancement.XP.Current"
+          label: "WOR.Advancement.XP.Current"
         }),
         total: new fields.NumberField({
           ...requiredInteger,
           initial: 0,
           min: 0,
-          label: "AOA.Advancement.XP.Total"
+          label: "WOR.Advancement.XP.Total"
         })
       }),
       // Legacy Points (used during character creation)
@@ -225,13 +225,13 @@ export default class CharacterData extends ActorBaseData {
           ...requiredInteger,
           initial: 0,
           min: 0,
-          label: "AOA.LP.Earned"
+          label: "WOR.LP.Earned"
         }),
         spent: new fields.NumberField({
           ...requiredInteger,
           initial: 0,
           min: 0,
-          label: "AOA.LP.Spent"
+          label: "WOR.LP.Spent"
         })
       })
     });
