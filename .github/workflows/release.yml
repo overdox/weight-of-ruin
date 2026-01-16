@@ -8,6 +8,9 @@ on:
 env:
   SYSTEM_ID: weight-of-ruin
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest

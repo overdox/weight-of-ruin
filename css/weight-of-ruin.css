@@ -22592,11 +22592,11 @@ span.die.d6.min,
 
 #chat-log .chat-message .item-image,
 .chat-message .item-image {
-  width: 40px !important;
-  height: 40px !important;
-  max-width: 40px !important;
-  max-height: 40px !important;
-  flex: 0 0 40px !important;
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  flex: 0 0 48px !important;
   border-radius: 4px !important;
   border: 2px solid var(--wor-text-secondary) !important;
   object-fit: cover !important;
@@ -22614,11 +22614,11 @@ span.die.d6.min,
 }
 #chat-log .chat-message .item-display img,
 .chat-message .item-display img {
-  flex: 0 0 40px !important;
-  width: 40px !important;
-  height: 40px !important;
-  max-width: 40px !important;
-  max-height: 40px !important;
+  flex: 0 0 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
   border-radius: 4px !important;
   object-fit: cover !important;
 }
@@ -22641,10 +22641,10 @@ span.die.d6.min,
 .wor .item-image,
 .roll-card .item-image,
 .attack-card .item-image {
-  width: 40px !important;
-  height: 40px !important;
-  max-width: 40px !important;
-  max-height: 40px !important;
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
   object-fit: cover !important;
 }
 
