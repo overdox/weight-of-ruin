@@ -2,7 +2,7 @@
   "id": "weight-of-ruin",
   "title": "The Weight of Ruin",
   "description": "A grimdark medieval fantasy RPG where magic corrupts and choices have lasting consequences.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
