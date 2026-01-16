@@ -4,6 +4,15 @@
  */
 const fields = foundry.data.fields;
 
+/**
+ * Default images for loot actor modes.
+ * Used to dynamically swap when no custom image is set.
+ */
+export const LOOT_DEFAULT_IMAGES = {
+  loot: 'systems/weight-of-ruin/assets/icons/loot/treasure.svg',
+  merchant: 'systems/weight-of-ruin/assets/icons/loot/merchant.svg'
+};
+
 export default class LootData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const requiredInteger = { required: true, nullable: false, integer: true };
@@ -127,5 +136,25 @@ export default class LootData extends foundry.abstract.TypeDataModel {
    */
   getModifiedPrice(basePrice) {
     return Math.ceil(basePrice * (this.priceModifier / 100));
+  }
+
+  /**
+   * Check if the actor's current image is a default/system image.
+   * Returns true if the image is the Foundry default, empty, or one of the loot default images.
+   * @returns {boolean}
+   */
+  get isUsingDefaultImage() {
+    const actorImg = this.parent?.img;
+    if (!actorImg || actorImg === CONST.DEFAULT_TOKEN) return true;
+    // Check if it's one of our loot default images
+    return Object.values(LOOT_DEFAULT_IMAGES).includes(actorImg);
+  }
+
+  /**
+   * Get the appropriate default image for the current sheet type.
+   * @returns {string}
+   */
+  get defaultImageForMode() {
+    return LOOT_DEFAULT_IMAGES[this.sheetType] || LOOT_DEFAULT_IMAGES.loot;
   }
 }

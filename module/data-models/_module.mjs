@@ -7,7 +7,7 @@
 export { default as ActorBaseData } from './actor/base.mjs';
 export { default as CharacterData } from './actor/character.mjs';
 export { default as NPCData } from './actor/npc.mjs';
-export { default as LootData } from './actor/loot.mjs';
+export { default as LootData, LOOT_DEFAULT_IMAGES } from './actor/loot.mjs';
 
 // Item DataModels
 export { default as ItemBaseData } from './item/base.mjs';
