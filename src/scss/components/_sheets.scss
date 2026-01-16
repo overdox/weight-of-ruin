@@ -1699,130 +1699,191 @@ h3.section-header-with-button {
   }
 }
 
-.talent-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border: 1px solid $c-border-medium;
-  border-top: none;
-  border-radius: 0 0 $border-radius-md $border-radius-md;
-  background: rgba(0, 0, 0, 0.3);
+// ============================================
+// TALENTS SECTION (Trait-style layout)
+// ============================================
+.talents-section {
+  .talents-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-md;
 
-  .talent-item {
-    border-bottom: 1px solid $c-border-light;
-    cursor: pointer;
-    transition: background $transition-fast;
-
-    &:last-child {
-      border-bottom: none;
-      border-radius: 0 0 $border-radius-md $border-radius-md;
-    }
-
-    &:hover {
-      background: rgba($c-gold, 0.08);
-    }
-
-    // Talent Header (always visible)
-    .talent-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: $spacing-md $spacing-lg;
-      gap: $spacing-md;
-    }
-
-    .talent-main {
-      display: flex;
-      align-items: center;
-      gap: $spacing-md;
+    h3 {
+      @include section-header-bar;
+      margin: 0;
       flex: 1;
     }
 
-    .talent-expand-icon {
-      color: $c-text-light;
-      width: 16px;
-      transition: transform $transition-fast;
+    .item-create {
+      @include clickable;
+      font-size: $font-size-sm;
+      color: #fff;
+      padding: $spacing-sm $spacing-md;
 
-      i {
-        font-size: $font-size-sm;
+      &:hover {
+        color: $c-gold;
+      }
+    }
+  }
+
+  .talent-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .talent-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.3);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-sm;
+    transition: all $transition-fast;
+    cursor: pointer;
+    flex-wrap: wrap;
+
+    &:hover {
+      border-color: $c-copper;
+      box-shadow: $shadow-sm;
+    }
+
+    .talent-icon {
+      flex-shrink: 0;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: $border-radius-sm;
+        border: $border-width solid $c-border-medium;
+        object-fit: cover;
       }
     }
 
-    .talent-name {
-      font-weight: $font-weight-bold;
-      color: $c-text-dark;
-    }
+    .talent-info {
+      flex: 1;
+      min-width: 0;
 
-    .talent-type {
-      font-size: $font-size-xs;
-      padding: 2px 8px;
-      border-radius: $border-radius-sm;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      .talent-header-row {
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-sm;
+        flex-wrap: wrap;
+        margin-bottom: $spacing-xs;
 
-      &.talent-type-universal {
-        background: var(--wor-copper-alpha-20);
-        color: var(--wor-copper-darker);
-      }
+        .talent-expand-icon {
+          color: $c-text-light;
+          width: 16px;
+          transition: transform $transition-fast;
 
-      &.talent-type-archetype {
-        background: var(--wor-burgundy-alpha-20);
-        color: $c-burgundy;
-      }
+          i {
+            font-size: $font-size-sm;
+          }
+        }
 
-      &.talent-type-signature {
-        background: var(--wor-gold-alpha-30);
-        color: var(--wor-gold-darker);
-      }
-    }
+        .talent-name {
+          font-weight: $font-weight-bold;
+          font-size: $font-size-base;
+        }
 
-    .talent-meta {
-      display: flex;
-      align-items: center;
-      gap: $spacing-lg;
-    }
+        .talent-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: $spacing-xs;
+        }
 
-    .talent-rank {
-      display: flex;
-      gap: 3px;
+        .talent-tag {
+          font-size: $font-size-xs;
+          padding: 2px $spacing-xs;
+          border-radius: $border-radius-sm;
+          text-transform: uppercase;
+          letter-spacing: $letter-spacing-wide;
 
-      .talent-rank-pip {
-        font-size: 8px;
-        color: $c-border-medium;
+          &.talent-type-universal {
+            background: rgba($c-copper, 0.2);
+            color: $c-copper;
+            border: 1px solid rgba($c-copper, 0.3);
+          }
 
-        &.filled {
-          color: $c-gold;
+          &.talent-type-archetype {
+            background: rgba($c-burgundy, 0.2);
+            color: $c-burgundy;
+            border: 1px solid rgba($c-burgundy, 0.3);
+          }
+
+          &.talent-type-signature {
+            background: rgba($c-gold, 0.2);
+            color: $c-gold;
+            border: 1px solid rgba($c-gold, 0.3);
+          }
+
+          &.talent-rank-tag {
+            background: rgba($c-success, 0.2);
+            color: $c-success;
+            border: 1px solid rgba($c-success, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+
+            .talent-rank-pip {
+              font-size: 6px;
+              color: rgba($c-success, 0.4);
+
+              &.filled {
+                color: $c-success;
+              }
+            }
+          }
         }
       }
+
+      .talent-description {
+        font-size: $font-size-sm;
+        color: $c-medium;
+        margin: 0;
+        line-height: $line-height-base;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
     }
 
-    .talent-controls {
+    .talent-actions {
+      flex-shrink: 0;
       display: flex;
-      gap: $spacing-sm;
-      opacity: 0;
-      transition: opacity $transition-fast;
+      align-items: center;
+      gap: $spacing-xs;
 
       .item-control {
         @include clickable;
+        font-size: $font-size-sm;
+        color: $c-faint;
         padding: $spacing-xs;
-        color: $c-text-light;
 
         &:hover {
           color: $c-gold;
         }
+
+        &[data-action="deleteItem"]:hover {
+          color: $c-danger;
+        }
       }
     }
 
-    &:hover .talent-controls {
-      opacity: 1;
-    }
-
-    // Talent Details (hidden by default)
+    // Talent Details (hidden by default, full width when shown)
     .talent-details {
       display: none;
-      padding: 0 $spacing-lg $spacing-lg ($spacing-lg + 16px + $spacing-md);
+      width: 100%;
+      padding-top: $spacing-md;
+      margin-top: $spacing-md;
       border-top: 1px dashed $c-border-light;
-      background: rgba(rgba(0, 0, 0, 0.3), 0.5);
 
       h4 {
         font-size: $font-size-sm;
@@ -1834,7 +1895,6 @@ h3.section-header-with-button {
 
         &:first-child {
           margin-top: 0;
-          padding-top: $spacing-md;
         }
       }
 
@@ -1901,7 +1961,8 @@ h3.section-header-with-button {
 
     // Expanded state
     &.expanded {
-      background: var(--wor-gold-alpha-05);
+      background: rgba($c-gold, 0.05);
+      border-color: $c-copper;
 
       .talent-expand-icon {
         transform: rotate(90deg);
@@ -1911,6 +1972,17 @@ h3.section-header-with-button {
         display: block;
       }
     }
+  }
+
+  .empty-notice {
+    font-size: $font-size-base;
+    color: $c-faint;
+    font-style: italic;
+    text-align: center;
+    padding: $spacing-xl;
+    background: rgba(0, 0, 0, 0.3);
+    border: $border-width solid $c-faint;
+    border-radius: $border-radius-sm;
   }
 }
 

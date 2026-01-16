@@ -364,6 +364,15 @@ Handlebars.registerHelper('capitalize', function (str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 });
 
+// Helper to strip HTML tags from a string (for plain text previews)
+Handlebars.registerHelper('stripTags', function (str) {
+  if (!str) return '';
+  // Create a temporary div to leverage browser's HTML parsing
+  const tmp = document.createElement('div');
+  tmp.innerHTML = str;
+  return tmp.textContent || tmp.innerText || '';
+});
+
 // Helper to lookup a value in an object
 Handlebars.registerHelper('lookup', function (obj, key) {
   return obj?.[key];

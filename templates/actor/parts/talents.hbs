@@ -1,6 +1,6 @@
 {{!-- Talents Tab Content --}}
 <section class="talents-section">
-  <div class="section-header">
+  <div class="talents-header">
     <h3>{{localize "AOA.Section.Talents"}}</h3>
     {{#if isEditMode}}
     <a class="item-create" data-action="createItem" data-type="talent" title="{{localize 'AOA.Item.AddTalent'}}">
@@ -13,37 +13,47 @@
   <ul class="talent-list">
     {{#each talents}}
     <li class="talent-item" data-item-id="{{id}}" data-action="toggleTalentExpand">
-      {{!-- Talent Header (always visible) --}}
-      <div class="talent-header">
-        <div class="talent-main">
+      {{!-- Talent Icon --}}
+      <div class="talent-icon">
+        <img src="{{img}}" alt="{{name}}" />
+      </div>
+
+      {{!-- Talent Info --}}
+      <div class="talent-info">
+        <div class="talent-header-row">
           <span class="talent-expand-icon">
             <i class="fas fa-chevron-right"></i>
           </span>
           <span class="talent-name">{{name}}</span>
-          {{#if system.talentType}}
-          <span class="talent-type talent-type-{{system.talentType}}">
-            {{localize (concat "AOA.TalentType." system.talentType)}}
-          </span>
-          {{/if}}
-        </div>
-        <div class="talent-meta">
-          <span class="talent-rank" title="{{localize 'AOA.Talent.Rank'}} {{system.rank}}/{{system.maxRank}}">
-            {{!-- Filled pips for current rank --}}
-            {{#times system.rank}}<i class="fas fa-circle talent-rank-pip filled"></i>{{/times}}
-            {{!-- Empty pips for remaining ranks --}}
-            {{#times (subtract system.maxRank system.rank)}}<i class="far fa-circle talent-rank-pip"></i>{{/times}}
-          </span>
-          <div class="talent-controls">
-            <a class="item-control" data-action="editItem" title="{{localize 'AOA.Common.Edit'}}">
-              <i class="fas fa-edit"></i>
-            </a>
-            {{#if @root.isEditMode}}
-            <a class="item-control" data-action="deleteItem" title="{{localize 'AOA.Common.Delete'}}">
-              <i class="fas fa-trash"></i>
-            </a>
+          <div class="talent-tags">
+            {{#if system.talentType}}
+            <span class="talent-tag talent-type-{{system.talentType}}">
+              {{localize (concat "AOA.TalentType." system.talentType)}}
+            </span>
             {{/if}}
+            <span class="talent-tag talent-rank-tag" title="{{localize 'AOA.Talent.Rank'}} {{system.rank}}/{{system.maxRank}}">
+              {{!-- Filled pips for current rank --}}
+              {{#times system.rank}}<i class="fas fa-circle talent-rank-pip filled"></i>{{/times}}
+              {{!-- Empty pips for remaining ranks --}}
+              {{#times (subtract system.maxRank system.rank)}}<i class="far fa-circle talent-rank-pip"></i>{{/times}}
+            </span>
           </div>
         </div>
+        {{#if system.effect}}
+        <p class="talent-description">{{stripTags system.effect}}</p>
+        {{/if}}
+      </div>
+
+      {{!-- Talent Actions --}}
+      <div class="talent-actions">
+        <a class="item-control" data-action="editItem" title="{{localize 'AOA.Common.Edit'}}">
+          <i class="fas fa-edit"></i>
+        </a>
+        {{#if @root.isEditMode}}
+        <a class="item-control" data-action="deleteItem" title="{{localize 'AOA.Common.Delete'}}">
+          <i class="fas fa-trash"></i>
+        </a>
+        {{/if}}
       </div>
 
       {{!-- Talent Details (hidden until expanded) --}}
@@ -59,7 +69,7 @@
         {{!-- Description if different from effect --}}
         {{#if system.description}}
         {{#unless (eq system.description system.effect)}}
-        <div class="talent-description">
+        <div class="talent-description-full">
           <div class="talent-description-text">{{{system.description}}}</div>
         </div>
         {{/unless}}
