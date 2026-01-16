@@ -1,8 +1,8 @@
 {
   "id": "weight-of-ruin",
   "title": "The Weight of Ruin",
-  "description": "A grimdark medieval fantasy RPG where magic corrupts and choices have lasting consequences. Features Threshold Compression dice mechanics, lethal combat, and the Essence corruption system.",
-  "version": "0.1.0",
+  "description": "A grimdark medieval fantasy RPG where magic corrupts and choices have lasting consequences.",
+  "version": "0.1.1",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
