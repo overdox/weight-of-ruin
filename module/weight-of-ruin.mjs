@@ -28,6 +28,7 @@ import {
   CharacterData,
   NPCData,
   LootData,
+  LOOT_DEFAULT_IMAGES,
   // Item DataModels
   SkillData,
   TalentData,
@@ -685,16 +686,74 @@ Hooks.once('ready', async function () {
 
 /**
  * Set default ownership for loot actors to "All Players: Limited"
+ * and set appropriate default image based on sheet type.
+ * Also configures token defaults: neutral disposition, no vision.
  * This allows players to view and interact with loot sheets.
  */
 Hooks.on('preCreateActor', (actor, data, options, userId) => {
   if (actor.type !== 'loot') return;
 
-  // Set default ownership to LIMITED (1) for all players
-  // Permission levels: NONE=0, LIMITED=1, OBSERVER=2, OWNER=3
-  actor.updateSource({
-    'ownership.default': CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED
-  });
+  const updates = {
+    // Set default ownership to LIMITED (1) for all players
+    // Permission levels: NONE=0, LIMITED=1, OBSERVER=2, OWNER=3
+    'ownership.default': CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED,
+    // Set token disposition to neutral
+    'prototypeToken.disposition': CONST.TOKEN_DISPOSITIONS.NEUTRAL,
+    // Disable vision for loot tokens
+    'prototypeToken.sight.enabled': false
+  };
+
+  // Set default image based on sheet type if no custom image provided
+  const providedImg = data.img;
+  const providedTokenImg = data.prototypeToken?.texture?.src;
+  if (!providedImg || providedImg === CONST.DEFAULT_TOKEN) {
+    const sheetType = data.system?.sheetType || 'loot';
+    const defaultImg = LOOT_DEFAULT_IMAGES[sheetType] || LOOT_DEFAULT_IMAGES.loot;
+    updates.img = defaultImg;
+    // Also set token image if not custom
+    if (!providedTokenImg || providedTokenImg === CONST.DEFAULT_TOKEN) {
+      updates['prototypeToken.texture.src'] = defaultImg;
+    }
+  }
+
+  actor.updateSource(updates);
+});
+
+/**
+ * Handle loot actor image swapping when sheet type changes.
+ * Only swaps if the current image is a default image (not custom).
+ * Also swaps token image if it's using a default.
+ */
+Hooks.on('preUpdateActor', (actor, changes, options, userId) => {
+  if (actor.type !== 'loot') return;
+
+  // Check if sheetType is being changed
+  const newSheetType = changes.system?.sheetType;
+  if (!newSheetType) return;
+
+  const newDefaultImg = LOOT_DEFAULT_IMAGES[newSheetType] || LOOT_DEFAULT_IMAGES.loot;
+
+  // Only swap portrait if the actor is using a default image
+  const currentImg = actor.img;
+  const isDefaultPortrait = !currentImg ||
+    currentImg === CONST.DEFAULT_TOKEN ||
+    Object.values(LOOT_DEFAULT_IMAGES).includes(currentImg);
+
+  if (isDefaultPortrait) {
+    changes.img = newDefaultImg;
+  }
+
+  // Only swap token image if it's using a default image
+  const currentTokenImg = actor.prototypeToken?.texture?.src;
+  const isDefaultToken = !currentTokenImg ||
+    currentTokenImg === CONST.DEFAULT_TOKEN ||
+    Object.values(LOOT_DEFAULT_IMAGES).includes(currentTokenImg);
+
+  if (isDefaultToken) {
+    changes.prototypeToken = changes.prototypeToken || {};
+    changes.prototypeToken.texture = changes.prototypeToken.texture || {};
+    changes.prototypeToken.texture.src = newDefaultImg;
+  }
 });
 
 /* -------------------------------------------- */
