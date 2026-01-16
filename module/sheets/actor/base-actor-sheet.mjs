@@ -479,11 +479,13 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
       }
     });
 
-    // Update save button tooltip to "Save and Close" when ProseMirror initializes
+    // Update save button text and tooltip to "Save and Close" when ProseMirror initializes
     const updateSaveButton = () => {
       const saveBtn = section.querySelector('button[data-action="save"]');
       if (saveBtn) {
-        saveBtn.setAttribute('data-tooltip', game.i18n.localize('AOA.Common.SaveAndClose'));
+        const saveAndCloseText = game.i18n.localize('AOA.Common.SaveAndClose');
+        saveBtn.setAttribute('data-tooltip', saveAndCloseText);
+        saveBtn.textContent = saveAndCloseText;
       }
     };
     // Try immediately and also after a short delay for async initialization
