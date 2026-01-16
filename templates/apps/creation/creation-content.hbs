@@ -652,8 +652,8 @@
 
       {{!-- Finalize Step Tabs --}}
       <div class="finalize-tabs">
-        <button type="button" class="finalize-tab-btn {{#if (eq finalizeTab 'legacy')}}active{{/if}}" data-finalize-tab="legacy">
-          <i class="fas fa-scroll"></i> {{localize "AOA.CharacterCreation.LegacyTab"}}
+        <button type="button" class="finalize-tab-btn {{#if (eq finalizeTab 'profile')}}active{{/if}}" data-finalize-tab="profile">
+          <i class="fas fa-scroll"></i> {{localize "AOA.CharacterCreation.ProfileTab"}}
         </button>
         <button type="button" class="finalize-tab-btn {{#if (eq finalizeTab 'equipment')}}active{{/if}}" data-finalize-tab="equipment">
           <i class="fas fa-shield-alt"></i> {{localize "AOA.CharacterCreation.EquipmentTab"}}
@@ -661,9 +661,9 @@
       </div>
 
       {{!-- ========================================== --}}
-      {{!-- LEGACY TAB --}}
+      {{!-- PROFILE TAB --}}
       {{!-- ========================================== --}}
-      <div class="finalize-tab-panel {{#if (eq finalizeTab 'legacy')}}active{{/if}}" data-finalize-tab-panel="legacy">
+      <div class="finalize-tab-panel {{#if (eq finalizeTab 'profile')}}active{{/if}}" data-finalize-tab-panel="profile">
         {{!-- Character Name and Age --}}
         <div class="name-age-row">
           <div class="name-field">

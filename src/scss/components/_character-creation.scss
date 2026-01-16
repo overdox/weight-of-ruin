@@ -7,10 +7,13 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  @include parchment-bg;
-  background-color: $c-parchment;
+  background: linear-gradient(180deg,
+    rgba(60, 30, 30, 0.98) 0%,
+    rgba(40, 25, 25, 0.98) 50%,
+    rgba(30, 20, 20, 0.98) 100%
+  );
   font-family: $font-primary;
-  color: $c-text-dark;
+  color: #fff;
   border-radius: $border-radius-lg;
   overflow: hidden;
 }
@@ -23,8 +26,9 @@
     flex-direction: column;
     gap: $spacing-md;
     padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
-    background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
-    border-bottom: $border-width-thick solid $c-copper;
+    // Use global dark brown gradient
+    background: linear-gradient(90deg, #4d3535 0%, #755550 100%);
+    border-bottom: $border-width-thick solid #755550;
     border-radius: $border-radius-lg $border-radius-lg 0 0;
 
     .creation-title {
@@ -32,7 +36,7 @@
         margin: 0;
         font-size: $font-size-xl;
         font-family: $font-primary;
-        color: $c-text-inverse;
+        color: $c-gold !important;
         text-align: center;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
       }
@@ -151,21 +155,21 @@
   }
 
   // ========================================
-  // FOOTER
+  // FOOTER - Dark Theme
   // ========================================
   .creation-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: $spacing-md $spacing-lg;
-    background: rgba($c-faint, 0.3);
-    border-top: $border-width solid $c-faint;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0 0 $border-radius-lg $border-radius-lg;
 
     .footer-info {
       .step-info {
         font-size: $font-size-sm;
-        color: $c-text-dark;
+        color: rgba(255, 255, 255, 0.7);
       }
     }
 
@@ -210,27 +214,27 @@
   }
 
   // ========================================
-  // COMMON STEP ELEMENTS
+  // COMMON STEP ELEMENTS - Dark Theme
   // ========================================
   .step-description {
     margin: 0 0 $spacing-lg 0;
     padding: $spacing-lg;
-    background: $c-bg-elevated;
-    border: $border-width solid $c-border-light;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: $border-width-thick solid $c-copper;
     border-radius: $border-radius-sm;
     font-size: $font-size-base;
-    color: $c-text-dark;
+    color: rgba(255, 255, 255, 0.8);
     line-height: $line-height-relaxed;
   }
 
-  // Roll Section
+  // Roll Section - Dark Theme
   .roll-section {
     display: flex;
     align-items: center;
     gap: $spacing-md;
     padding: $spacing-md;
-    background: rgba($c-dark, 0.05);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: $border-radius-md;
     margin-bottom: $spacing-md;
 
@@ -255,17 +259,17 @@
       gap: $spacing-md;
       align-items: center;
       padding: $spacing-sm $spacing-md;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.4);
       border-radius: $border-radius-md;
-      border: $border-width solid $c-faint;
+      border: 1px solid rgba(255, 255, 255, 0.1);
 
       .roll-value {
         font-weight: $font-weight-bold;
-        color: $c-dark;
+        color: $c-gold;
       }
 
       .roll-match {
-        color: $c-success;
+        color: var(--wor-success-light);
         font-weight: $font-weight-bold;
       }
 
@@ -277,11 +281,11 @@
 
         .standing-result {
           font-weight: $font-weight-bold;
-          color: $c-dark;
+          color: $c-gold;
         }
 
         .background-result {
-          color: $c-success;
+          color: var(--wor-success-light);
           font-weight: $font-weight-bold;
           font-size: $font-size-md;
         }
@@ -335,23 +339,23 @@
     }
   }
 
-  // Selection Card
+  // Selection Card - Dark Theme
   .selection-card {
     padding: $spacing-md;
-    background: $c-bg-elevated;
-    border: $border-width-thick solid $c-faint;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-md;
     cursor: pointer;
     transition: all $transition-fast;
 
     &:hover {
-      border-color: $c-medium;
-      box-shadow: $shadow-md;
+      border-color: rgba($c-copper, 0.4);
+      background: rgba(0, 0, 0, 0.4);
     }
 
     &.selected {
       border-color: $c-gold;
-      background: rgba($c-gold, 0.08);
+      background: rgba($c-gold, 0.15);
       box-shadow: 0 0 0 3px rgba($c-gold, 0.3);
     }
 
@@ -359,7 +363,7 @@
       margin: 0 0 $spacing-sm 0;
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
-      color: $c-dark;
+      color: $c-gold !important;
     }
 
     .card-modifiers {
@@ -405,7 +409,7 @@
     .card-description {
       margin: $spacing-sm 0 0 0;
       font-size: $font-size-sm;
-      color: $c-dark;
+      color: rgba(255, 255, 255, 0.7);
       line-height: $line-height-base;
 
       p {
@@ -422,11 +426,11 @@
       flex-wrap: wrap;
       gap: $spacing-md;
       font-size: $font-size-sm;
-      color: $c-dark;
+      color: rgba(255, 255, 255, 0.7);
 
       i {
         margin-right: $spacing-xs;
-        color: $c-medium;
+        color: rgba(255, 255, 255, 0.5);
       }
     }
 
@@ -555,6 +559,90 @@
         background: $c-success-bg;
         color: $c-success-dark;
         border-radius: $border-radius-sm;
+      }
+    }
+
+  }
+
+  // Pathway cards - target via parent grid to match background-card aesthetic
+  .pathway-grid .selection-card {
+    padding: $spacing-lg;
+    min-height: 180px;
+    background: rgba(0, 0, 0, 0.4);
+    border: none;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+    }
+
+    &.selected {
+      background: rgba($c-gold, 0.12);
+      border: none;
+      box-shadow: inset 0 0 0 2px $c-gold;
+    }
+
+    .card-title {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-sm;
+      color: $c-gold !important;
+      border-bottom: 1px solid rgba($c-gold, 0.3);
+      padding-bottom: $spacing-xs;
+    }
+
+    .skill-grants {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+      margin: $spacing-sm 0;
+
+      .skill-grant {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        padding: $spacing-xs $spacing-sm;
+        background: rgba($c-gold, 0.15);
+        color: $c-gold;
+        border: 1px solid rgba($c-gold, 0.3);
+        border-radius: $border-radius-sm;
+      }
+    }
+
+    .card-tagline {
+      font-size: $font-size-sm;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.6);
+      margin: $spacing-sm 0;
+      padding-bottom: $spacing-sm;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card-description {
+      font-size: $font-size-sm;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+
+      p {
+        margin: 0 0 $spacing-sm 0;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        // First paragraph (tagline) styling
+        &:first-child {
+          font-style: italic;
+          color: rgba(255, 255, 255, 0.5);
+          padding-bottom: $spacing-sm;
+          margin-bottom: $spacing-sm;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      // Italic text (taglines) styling
+      em, i {
+        color: rgba(255, 255, 255, 0.5);
       }
     }
   }
@@ -831,7 +919,7 @@
         .flex-option {
           padding: $spacing-sm $spacing-md;
           font-size: $font-size-sm;
-          background: $c-bg-elevated;
+          background: rgba(0, 0, 0, 0.3);
           border: $border-width solid $c-faint;
           border-radius: $border-radius-md;
           cursor: pointer;
@@ -1041,7 +1129,7 @@
         }
 
         &.active {
-          background: $c-bg-elevated;
+          background: rgba(0, 0, 0, 0.3);
           border-color: $c-gold;
           color: $c-gold-dark;
           box-shadow: $shadow-md;
@@ -1107,18 +1195,27 @@
         margin-bottom: $spacing-lg;
 
         .category-header {
-          margin: 0 0 $spacing-sm 0;
-          padding-bottom: $spacing-xs;
-          border-bottom: $border-width solid $c-faint;
-          font-size: $font-size-base;
+          // Use section header style for category headers
+          display: flex;
+          align-items: center;
+          min-height: 28px;
+          height: 28px;
+          padding: 0 $spacing-md;
+          margin: 0;
+          background: linear-gradient(90deg, #4d3535 0%, #755550 100%);
+          font-size: $font-size-sm;
           font-weight: $font-weight-bold;
-          color: $c-dark;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-variant: small-caps;
+          color: $c-gold !important;
         }
 
         .skills-list {
           display: flex;
           flex-direction: column;
-          gap: $spacing-xs;
+          // Remove gap to allow seamless alternating rows
+          gap: 0;
         }
 
         .skill-row {
@@ -1126,27 +1223,40 @@
           align-items: center;
           gap: $spacing-md;
           padding: $spacing-sm $spacing-md;
-          background: rgba($c-faint, 0.2);
-          border-radius: $border-radius-md;
+          // Alternating row colors for better readability
+          background: rgba(0, 0, 0, 0.15);
+          transition: background $transition-fast;
+
+          &:nth-child(odd) {
+            background: rgba(0, 0, 0, 0.25);
+          }
+
+          &:nth-child(even) {
+            background: rgba(0, 0, 0, 0.15);
+          }
+
+          &:hover {
+            background: rgba(0, 0, 0, 0.35);
+          }
 
           .skill-name {
             flex: 1;
             font-size: $font-size-base;
             font-weight: $font-weight-bold;
-            color: $c-dark;
+            color: #fff;
           }
 
           .skill-attr {
             font-size: $font-size-sm;
-            color: $c-medium;
+            color: rgba(255, 255, 255, 0.6);
           }
 
           .granted-rank {
             font-size: $font-size-sm;
             font-weight: $font-weight-bold;
             padding: $spacing-sm $spacing-md;
-            background: $c-success-bg;
-            color: $c-success-dark;
+            background: rgba($c-success, 0.2);
+            color: $c-success-light;
             border-radius: $border-radius-sm;
           }
 
@@ -1168,7 +1278,7 @@
               text-align: center;
               font-weight: $font-weight-bold;
               font-size: $font-size-base;
-              color: $c-dark;
+              color: #fff;
             }
           }
         }
@@ -1224,7 +1334,7 @@
             align-items: center;
             justify-content: space-between;
             padding: $spacing-sm $spacing-md;
-            background: $c-bg-elevated;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: $border-radius-md;
             border: $border-width solid rgba($c-success, 0.2);
 
@@ -1317,7 +1427,7 @@
           }
 
           &.active {
-            background: $c-bg-elevated;
+            background: rgba(0, 0, 0, 0.3);
             color: $c-gold-dark;
             box-shadow: $shadow-sm;
           }
@@ -1393,7 +1503,7 @@
             display: flex;
             flex-direction: column;
             padding: 0;
-            background: $c-bg-elevated;
+            background: rgba(0, 0, 0, 0.3);
             border: $border-width-thick solid $c-faint;
             border-radius: $border-radius-lg;
             cursor: pointer;
@@ -1573,7 +1683,7 @@
 
           .talent-card:not(.redesigned) {
             padding: $spacing-md;
-            background: $c-bg-elevated;
+            background: rgba(0, 0, 0, 0.3);
             border: $border-width solid $c-faint;
             border-radius: $border-radius-md;
             cursor: pointer;
@@ -1647,7 +1757,7 @@
             align-items: center;
             gap: $spacing-sm;
             padding: $spacing-sm $spacing-md;
-            background: $c-bg-elevated;
+            background: rgba(0, 0, 0, 0.3);
             border: $border-width solid rgba($c-success, 0.3);
             border-radius: $border-radius-md;
 
@@ -1690,7 +1800,7 @@
           font-size: $font-size-sm;
           font-weight: $font-weight-bold;
           font-family: $font-primary;
-          background: $c-bg-elevated;
+          background: rgba(0, 0, 0, 0.3);
           border: $border-width solid $c-faint;
           border-radius: $border-radius-md;
           cursor: pointer;
@@ -1718,7 +1828,7 @@
           gap: $spacing-md;
 
           .talent-card.redesigned {
-            background: $c-bg-elevated;
+            background: rgba(0, 0, 0, 0.3);
             border: $border-width solid $c-faint;
             border-radius: $border-radius-lg;
             overflow: hidden;
@@ -1819,7 +1929,7 @@
                       .free-badge {
                         margin-left: $spacing-xs;
                         padding: 0 $spacing-xs;
-                        background: $c-bg-elevated;
+                        background: rgba(0, 0, 0, 0.3);
                         color: $c-gold-dark;
                         border-radius: $border-radius-sm;
                         font-size: 9px;
@@ -1914,7 +2024,7 @@
         flex-direction: column;
         align-items: center;
         padding: $spacing-lg;
-        background: $c-bg-elevated;
+        background: rgba(0, 0, 0, 0.3);
         border: $border-width solid $c-faint;
         border-radius: $border-radius-lg;
 
@@ -2014,7 +2124,7 @@
     .finalize-tab-btn {
       flex: 1;
       padding: $spacing-md $spacing-lg;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border: $border-width solid $c-faint;
       border-radius: $border-radius-md;
       font-size: $font-size-md;
@@ -2068,7 +2178,7 @@
         flex: 1;
         max-width: 250px;
         padding: $spacing-sm $spacing-md;
-        background: $c-bg-elevated;
+        background: rgba(0, 0, 0, 0.3);
         border: $border-width solid $c-faint;
         border-radius: $border-radius-sm;
         font-size: $font-size-sm;
@@ -2219,7 +2329,7 @@
         justify-content: space-between;
         align-items: center;
         padding: $spacing-sm $spacing-md;
-        background: $c-bg-elevated;
+        background: rgba(0, 0, 0, 0.3);
         border-radius: $border-radius-sm;
         border: $border-width solid $c-faint;
 
@@ -2262,16 +2372,16 @@
         color: $c-text-medium;
       }
 
-      // Equipment tab wealth display with light background
+      // Equipment tab wealth display with dark background
       &.equipment-wealth {
         padding: $spacing-lg;
-        background: $c-parchment;
+        background: rgba(0, 0, 0, 0.3);
         border-radius: $border-radius-lg;
-        border: 1px solid $c-border-medium;
+        border: 1px solid rgba(255, 255, 255, 0.1);
 
         h3 {
           margin-bottom: $spacing-md;
-          color: $c-text-dark;
+          color: #fff;
         }
 
         .currency-display {
@@ -2432,7 +2542,7 @@
             align-items: center;
             justify-content: space-between;
             padding: $spacing-sm $spacing-md;
-            background: $c-bg-elevated;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: $border-radius-md;
             margin-bottom: $spacing-xs;
             border: 1px solid rgba($c-success, 0.15);
@@ -2596,7 +2706,7 @@
             display: flex;
             flex-direction: column;
             padding: $spacing-lg;
-            background: $c-bg-elevated;
+            background: rgba(0, 0, 0, 0.3);
             border: $border-width solid $c-faint;
             border-radius: $border-radius-md;
             cursor: pointer;

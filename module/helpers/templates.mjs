@@ -14,7 +14,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/weight-of-ruin/templates/actor/parts/combat.hbs',
     'systems/weight-of-ruin/templates/actor/parts/inventory.hbs',
     'systems/weight-of-ruin/templates/actor/parts/magic.hbs',
-    'systems/weight-of-ruin/templates/actor/parts/legacy.hbs',
+    'systems/weight-of-ruin/templates/actor/parts/profile.hbs',
     // NPC sheet templates
     'systems/weight-of-ruin/templates/actor/npc/npc-header.hbs',
     'systems/weight-of-ruin/templates/actor/npc/npc-body.hbs',
@@ -46,7 +46,6 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/weight-of-ruin/templates/apps/roll-dialog.hbs',
     'systems/weight-of-ruin/templates/apps/attack-dialog.hbs',
     'systems/weight-of-ruin/templates/apps/defense-dialog.hbs',
-    'systems/weight-of-ruin/templates/apps/defense-header.hbs',
     'systems/weight-of-ruin/templates/apps/condition-reference.hbs',
     // Character Creation Wizard templates
     'systems/weight-of-ruin/templates/apps/creation/creation-header.hbs',

@@ -189,10 +189,10 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     this._gearTab = 'weapons';
 
     /**
-     * Finalize step tab state (legacy or equipment)
+     * Finalize step tab state (profile or equipment)
      * @type {string}
      */
-    this._finalizeTab = 'legacy';
+    this._finalizeTab = 'profile';
 
     /**
      * Equipment filter states
@@ -876,8 +876,8 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
         break;
 
       case 'finalize':
-        // Finalize tab state (legacy or equipment)
-        context.finalizeTab = this._finalizeTab || 'legacy';
+        // Finalize tab state (profile or equipment)
+        context.finalizeTab = this._finalizeTab || 'profile';
 
         // Load gear by category
         const availableWeapons = await this._loadCompendiumItems('weapon');

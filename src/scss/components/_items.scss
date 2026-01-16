@@ -448,7 +448,7 @@
   align-items: center;
   gap: $spacing-md;
   padding: $spacing-md;
-  background: $c-bg-elevated;
+  background: rgba(0, 0, 0, 0.3);
   border: $border-width solid $c-border-light;
   border-radius: $border-radius-md;
   margin-bottom: $spacing-md;
@@ -481,7 +481,7 @@
   align-items: center;
   justify-content: space-between;
   padding: $spacing-md $spacing-lg;
-  background: $c-bg-elevated;
+  background: rgba(0, 0, 0, 0.3);
   border: $border-width solid $c-border-light;
   border-radius: $border-radius-md;
   margin-bottom: $spacing-lg;

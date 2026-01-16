@@ -111,9 +111,9 @@ button.icon-only,
     // Active tab - muted dark yellow highlight
     &.active {
       color: $c-dark;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border-color: $c-faint;
-      border-bottom-color: $c-bg-elevated;
+      border-bottom-color: rgba(0, 0, 0, 0.3);
       font-weight: $font-weight-bold;
 
       // Yellow accent line at top
@@ -377,7 +377,7 @@ button.icon-only,
 
 .tox {
   .tox-editor-container {
-    background: $c-bg-elevated;
+    background: rgba(0, 0, 0, 0.3);
   }
 
   .tox-edit-area {

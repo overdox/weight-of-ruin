@@ -7,10 +7,13 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  @include parchment-bg;
-  background-color: $c-parchment;
+  background: linear-gradient(180deg,
+    rgba(60, 30, 30, 0.98) 0%,
+    rgba(40, 25, 25, 0.98) 50%,
+    rgba(30, 20, 20, 0.98) 100%
+  );
   font-family: $font-primary;
-  color: $c-text-dark;
+  color: #fff;
   border-radius: $border-radius-lg;
   overflow: hidden;
 }
@@ -23,8 +26,9 @@
   flex-direction: column;
   gap: $spacing-md;
   padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
-  background: linear-gradient(90deg, $c-dark 0%, $c-burgundy 100%);
-  border-bottom: $border-width-thick solid $c-copper;
+  // Use global dark brown gradient
+  background: linear-gradient(90deg, #4d3535 0%, #755550 100%);
+  border-bottom: $border-width-thick solid #755550;
   border-radius: $border-radius-lg $border-radius-lg 0 0;
 
   .creation-title {
@@ -32,7 +36,7 @@
       margin: 0;
       font-size: $font-size-xl;
       font-family: $font-primary;
-      color: $c-text-inverse;
+      color: $c-gold !important;
       text-align: center;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
     }
@@ -141,18 +145,18 @@
     margin: 0 0 $spacing-sm 0;
     font-size: $font-size-lg;
     font-family: $font-primary;
-    color: $c-header-text;
+    color: $c-gold !important;
   }
 
   .step-description {
     margin: 0 0 $spacing-lg 0;
-    color: $c-text-light;
+    color: rgba(255, 255, 255, 0.7);
     font-size: $font-size-sm;
   }
 }
 
 // ========================================
-// KIND & FORM STEP
+// KIND & FORM STEP - Dark Theme
 // ========================================
 .step-classtype {
   .selection-section {
@@ -161,7 +165,7 @@
     h3 {
       margin: 0 0 $spacing-md 0;
       font-size: $font-size-base;
-      color: $c-header-text;
+      color: #fff;
     }
   }
 
@@ -177,34 +181,34 @@
     align-items: center;
     gap: $spacing-sm;
     padding: $spacing-lg;
-    background: rgba($c-faint, 0.3);
-    border: $border-width-thick solid $c-faint;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-md;
     cursor: pointer;
     transition: all $transition-fast;
 
     i {
       font-size: $font-size-2xl;
-      color: $c-medium;
+      color: rgba(255, 255, 255, 0.6);
     }
 
     .class-name {
       font-weight: $font-weight-bold;
-      color: $c-text-dark;
+      color: $c-gold !important;
     }
 
     &:hover {
-      background: rgba($c-copper, 0.1);
-      border-color: $c-copper;
+      background: rgba(0, 0, 0, 0.4);
+      border-color: rgba($c-copper, 0.4);
     }
 
     &.selected {
-      background: linear-gradient(145deg, rgba($c-burgundy, 0.2), rgba($c-copper, 0.2));
-      border-color: $c-copper;
-      box-shadow: 0 0 8px rgba($c-copper, 0.3);
+      background: rgba($c-gold, 0.15);
+      border-color: $c-gold;
+      box-shadow: 0 0 8px rgba($c-gold, 0.3);
 
       i {
-        color: $c-burgundy;
+        color: $c-gold;
       }
     }
   }
@@ -217,8 +221,8 @@
 
   .type-card {
     padding: $spacing-sm $spacing-md;
-    background: rgba($c-faint, 0.3);
-    border: $border-width solid $c-faint;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-sm;
     cursor: pointer;
     transition: all $transition-fast;
@@ -226,27 +230,28 @@
 
     .type-name {
       font-size: $font-size-sm;
-      color: $c-text-dark;
+      color: rgba(255, 255, 255, 0.8);
     }
 
     &:hover {
-      background: rgba($c-copper, 0.1);
-      border-color: $c-copper;
+      background: rgba(0, 0, 0, 0.4);
+      border-color: rgba($c-copper, 0.4);
     }
 
     &.selected {
-      background: linear-gradient(145deg, rgba($c-burgundy, 0.2), rgba($c-copper, 0.2));
-      border-color: $c-copper;
+      background: rgba($c-gold, 0.15);
+      border-color: $c-gold;
 
       .type-name {
         font-weight: $font-weight-bold;
+        color: $c-gold !important;
       }
     }
   }
 }
 
 // ========================================
-// TIER STEP
+// TIER STEP - Dark Theme
 // ========================================
 .step-tier {
   .tier-grid {
@@ -257,8 +262,8 @@
 
   .tier-card {
     padding: $spacing-md;
-    background: rgba($c-faint, 0.3);
-    border: $border-width-thick solid $c-faint;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-md;
     cursor: pointer;
     transition: all $transition-fast;
@@ -275,8 +280,8 @@
         justify-content: center;
         width: 28px;
         height: 28px;
-        background: $c-medium;
-        color: $c-white;
+        background: rgba($c-copper, 0.6);
+        color: #fff;
         border-radius: 50%;
         font-size: $font-size-sm;
         font-weight: $font-weight-bold;
@@ -284,7 +289,7 @@
 
       .tier-name {
         font-weight: $font-weight-bold;
-        color: $c-header-text;
+        color: $c-gold !important;
       }
     }
 
@@ -300,12 +305,12 @@
         font-size: $font-size-sm;
 
         .stat-label {
-          color: $c-text-light;
+          color: rgba(255, 255, 255, 0.6);
         }
 
         .stat-value {
           font-weight: $font-weight-bold;
-          color: $c-text-dark;
+          color: #fff;
         }
       }
     }
@@ -313,29 +318,30 @@
     .tier-description {
       margin: 0;
       font-size: $font-size-xs;
-      color: $c-text-light;
+      color: rgba(255, 255, 255, 0.6);
       font-style: italic;
     }
 
     &:hover {
-      background: rgba($c-copper, 0.1);
-      border-color: $c-copper;
+      background: rgba(0, 0, 0, 0.4);
+      border-color: rgba($c-copper, 0.4);
     }
 
     &.selected {
-      background: linear-gradient(145deg, rgba($c-burgundy, 0.2), rgba($c-copper, 0.2));
-      border-color: $c-copper;
-      box-shadow: 0 0 8px rgba($c-copper, 0.3);
+      background: rgba($c-gold, 0.15);
+      border-color: $c-gold;
+      box-shadow: 0 0 8px rgba($c-gold, 0.3);
 
       .tier-header .tier-id {
-        background: $c-burgundy;
+        background: $c-gold;
+        color: #1a1a1a;
       }
     }
   }
 }
 
 // ========================================
-// ATTRIBUTES & SKILLS STEPS
+// ATTRIBUTES & SKILLS STEPS - Dark Theme
 // ========================================
 .step-attributes,
 .step-skills {
@@ -344,26 +350,26 @@
     align-items: center;
     gap: $spacing-sm;
     padding: $spacing-sm $spacing-md;
-    background: rgba($c-faint, 0.3);
-    border: $border-width solid $c-faint;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-md;
     margin-bottom: $spacing-lg;
 
     .points-label {
-      color: $c-text-light;
+      color: rgba(255, 255, 255, 0.7);
     }
 
     .points-value {
       font-weight: $font-weight-bold;
-      color: $c-success;
+      color: var(--wor-success-light);
 
       &.over-budget {
-        color: $c-danger;
+        color: var(--wor-danger-light);
       }
     }
 
     .points-hint {
-      color: $c-text-light;
+      color: rgba(255, 255, 255, 0.6);
       font-size: $font-size-xs;
     }
   }
@@ -374,7 +380,7 @@
     h3 {
       margin: 0 0 $spacing-sm 0;
       font-size: $font-size-base;
-      color: $c-header-text;
+      color: #fff;
     }
 
     .template-buttons {
@@ -385,13 +391,14 @@
 
     .template-btn {
       padding: $spacing-xs $spacing-md;
-      background: rgba($c-faint, 0.3);
-      border: $border-width solid $c-faint;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: $border-radius-sm;
       cursor: pointer;
       transition: all $transition-fast;
       font-size: $font-size-sm;
       font-family: $font-primary;
+      color: rgba(255, 255, 255, 0.8);
 
       &:hover {
         background: rgba($c-copper, 0.1);
@@ -399,8 +406,8 @@
       }
 
       &.selected {
-        background: linear-gradient(145deg, rgba($c-burgundy, 0.2), rgba($c-copper, 0.2));
-        border-color: $c-copper;
+        background: linear-gradient(145deg, rgba(77, 53, 53, 0.3), rgba(117, 85, 80, 0.3));
+        border-color: #755550;
         font-weight: $font-weight-bold;
       }
     }
@@ -417,12 +424,13 @@
     justify-content: space-between;
     align-items: center;
     padding: $spacing-sm $spacing-md;
-    background: rgba($c-faint, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-sm;
 
     .attribute-label {
       font-weight: $font-weight-bold;
-      color: $c-text-dark;
+      color: #fff;
     }
 
     .attribute-controls {
@@ -436,11 +444,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba($c-faint, 0.5);
-        border: $border-width solid $c-faint;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: $border-radius-sm;
         cursor: pointer;
         transition: all $transition-fast;
+        color: rgba(255, 255, 255, 0.7);
 
         &:hover {
           background: $c-copper;
@@ -453,7 +462,7 @@
         text-align: center;
         font-weight: $font-weight-bold;
         font-size: $font-size-lg;
-        color: $c-burgundy;
+        color: $c-gold;
       }
     }
   }
@@ -471,8 +480,8 @@
     h4 {
       margin: 0 0 $spacing-sm 0;
       padding-bottom: $spacing-xs;
-      border-bottom: $border-width solid $c-faint;
-      color: $c-header-text;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: $c-gold !important;
       font-size: $font-size-sm;
     }
 
@@ -488,12 +497,13 @@
     justify-content: space-between;
     align-items: center;
     padding: $spacing-xs $spacing-sm;
-    background: rgba($c-faint, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-sm;
 
     .skill-name {
       font-size: $font-size-sm;
-      color: $c-text-dark;
+      color: #fff;
     }
 
     .skill-controls {
@@ -507,11 +517,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba($c-faint, 0.5);
-        border: $border-width solid $c-faint;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: $border-radius-sm;
         cursor: pointer;
         font-size: $font-size-xs;
+        color: rgba(255, 255, 255, 0.7);
 
         &:hover {
           background: $c-copper;
@@ -524,7 +535,7 @@
         text-align: center;
         font-weight: $font-weight-bold;
         font-size: $font-size-sm;
-        color: $c-burgundy;
+        color: $c-gold;
       }
     }
   }
@@ -541,15 +552,15 @@
   }
 
   .selected-traits-panel {
-    background: rgba($c-faint, 0.2);
+    background: rgba(0, 0, 0, 0.3);
     padding: $spacing-md;
     border-radius: $border-radius-md;
-    border: $border-width solid $c-faint;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     h3 {
       margin: 0 0 $spacing-md 0;
       font-size: $font-size-base;
-      color: $c-header-text;
+      color: $c-gold !important;
     }
 
     .selected-traits-list {
@@ -563,7 +574,8 @@
       align-items: center;
       gap: $spacing-sm;
       padding: $spacing-sm;
-      background: rgba($c-faint, 0.3);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: $border-radius-sm;
 
       .trait-img {
@@ -577,13 +589,14 @@
         flex: 1;
         font-size: $font-size-sm;
         font-weight: $font-weight-bold;
+        color: #fff;
       }
 
       .trait-cost {
         font-size: $font-size-xs;
-        color: $c-text-light;
+        color: rgba(255, 255, 255, 0.6);
         padding: 2px 6px;
-        background: rgba($c-faint, 0.5);
+        background: rgba(0, 0, 0, 0.4);
         border-radius: $border-radius-sm;
       }
 
@@ -607,7 +620,7 @@
     }
 
     .no-traits {
-      color: $c-text-light;
+      color: rgba(255, 255, 255, 0.5);
       font-style: italic;
       font-size: $font-size-sm;
     }
@@ -617,7 +630,7 @@
     h3 {
       margin: 0 0 $spacing-md 0;
       font-size: $font-size-base;
-      color: $c-header-text;
+      color: $c-gold !important;
     }
 
     .trait-category-filters {
@@ -628,8 +641,8 @@
 
       .trait-category-btn {
         padding: $spacing-xs $spacing-sm;
-        background: rgba($c-faint, 0.3);
-        border: $border-width solid $c-faint;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: $border-radius-sm;
         cursor: pointer;
         font-size: $font-size-xs;
@@ -637,10 +650,12 @@
         display: flex;
         align-items: center;
         gap: $spacing-xs;
+        color: rgba(255, 255, 255, 0.7);
 
         &:hover {
           background: rgba($c-copper, 0.1);
           border-color: $c-copper;
+          color: #fff;
         }
 
         &.active {
@@ -656,7 +671,7 @@
 
       h4 {
         margin: 0 0 $spacing-sm 0;
-        color: $c-accent;
+        color: $c-gold !important;
         font-size: $font-size-sm;
       }
     }
@@ -664,7 +679,7 @@
     .general-traits-section {
       h4 {
         margin: 0 0 $spacing-sm 0;
-        color: $c-header-text;
+        color: $c-gold !important;
         font-size: $font-size-sm;
       }
     }
@@ -677,14 +692,14 @@
 
     .trait-card {
       padding: $spacing-sm;
-      background: rgba($c-faint, 0.2);
-      border: $border-width solid $c-faint;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: $border-radius-md;
       transition: all $transition-fast;
 
       &.type-specific {
-        border-color: $c-accent;
-        background: rgba($c-accent, 0.05);
+        border-color: $c-gold;
+        background: rgba($c-gold, 0.1);
       }
 
       &.selected {
@@ -709,13 +724,14 @@
           flex: 1;
           font-weight: $font-weight-bold;
           font-size: $font-size-sm;
+          color: $c-gold !important;
         }
 
         .trait-cost {
           font-size: $font-size-xs;
-          color: $c-text-light;
+          color: rgba(255, 255, 255, 0.6);
           padding: 2px 6px;
-          background: rgba($c-faint, 0.5);
+          background: rgba(0, 0, 0, 0.4);
           border-radius: $border-radius-sm;
         }
       }
@@ -723,7 +739,7 @@
       .trait-description {
         margin: 0 0 $spacing-sm 0;
         font-size: $font-size-xs;
-        color: $c-text-light;
+        color: rgba(255, 255, 255, 0.7);
         line-height: 1.4;
       }
 
@@ -767,23 +783,27 @@
         display: block;
         margin-bottom: $spacing-xs;
         font-weight: $font-weight-bold;
-        color: $c-header-text;
+        color: $c-gold !important;
       }
 
       input,
       textarea {
         width: 100%;
         padding: $spacing-sm;
-        background: rgba($c-faint, 0.2);
-        border: $border-width solid $c-faint;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: $border-radius-sm;
         font-family: $font-primary;
         font-size: $font-size-base;
-        color: $c-text-dark;
+        color: #fff;
 
         &:focus {
           outline: none;
           border-color: $c-copper;
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.4);
         }
       }
 
@@ -796,7 +816,7 @@
     .equipment-section {
       h3 {
         margin: 0 0 $spacing-md 0;
-        color: $c-header-text;
+        color: $c-gold !important;
       }
 
       .gear-tabs {
@@ -806,15 +826,18 @@
 
         .gear-tab-btn {
           padding: $spacing-xs $spacing-md;
-          background: rgba($c-faint, 0.3);
-          border: $border-width solid $c-faint;
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           border-radius: $border-radius-sm;
           cursor: pointer;
           font-size: $font-size-sm;
           font-family: $font-primary;
+          color: rgba(255, 255, 255, 0.7);
 
           &:hover {
             background: rgba($c-copper, 0.1);
+            border-color: $c-copper;
+            color: #fff;
           }
 
           &.active {
@@ -847,8 +870,8 @@
         align-items: center;
         gap: $spacing-xs;
         padding: $spacing-xs;
-        background: rgba($c-faint, 0.2);
-        border: $border-width solid $c-faint;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: $border-radius-sm;
 
         .gear-img {
@@ -864,6 +887,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          color: #fff;
         }
 
         .add-gear-btn {
@@ -888,12 +912,12 @@
       .selected-equipment {
         margin-top: $spacing-md;
         padding-top: $spacing-md;
-        border-top: $border-width solid $c-faint;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
 
         h4 {
           margin: 0 0 $spacing-sm 0;
           font-size: $font-size-sm;
-          color: $c-header-text;
+          color: $c-gold !important;
         }
 
         .selected-equipment-list {
@@ -907,7 +931,8 @@
           align-items: center;
           gap: $spacing-xs;
           padding: $spacing-xs $spacing-sm;
-          background: rgba($c-faint, 0.3);
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: $border-radius-sm;
 
           .equip-img {
@@ -918,6 +943,7 @@
 
           .equip-name {
             font-size: $font-size-sm;
+            color: #fff;
           }
 
           .remove-btn {
@@ -944,21 +970,21 @@
   }
 
   .npc-summary {
-    background: rgba($c-faint, 0.2);
+    background: rgba(0, 0, 0, 0.3);
     padding: $spacing-md;
     border-radius: $border-radius-md;
-    border: $border-width solid $c-faint;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     h3 {
       margin: 0 0 $spacing-md 0;
-      color: $c-header-text;
+      color: $c-gold !important;
       font-size: $font-size-base;
     }
 
     .summary-section {
       margin-bottom: $spacing-md;
       padding-bottom: $spacing-md;
-      border-bottom: $border-width solid $c-faint;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
       &:last-child {
         margin-bottom: 0;
@@ -969,7 +995,7 @@
       h4 {
         margin: 0 0 $spacing-sm 0;
         font-size: $font-size-sm;
-        color: $c-text-light;
+        color: rgba(255, 255, 255, 0.6);
       }
     }
 
@@ -980,12 +1006,12 @@
       font-size: $font-size-sm;
 
       .summary-label {
-        color: $c-text-light;
+        color: rgba(255, 255, 255, 0.6);
       }
 
       .summary-value {
         font-weight: $font-weight-bold;
-        color: $c-text-dark;
+        color: #fff;
       }
     }
 
@@ -999,18 +1025,19 @@
         flex-direction: column;
         align-items: center;
         padding: $spacing-xs;
-        background: rgba($c-faint, 0.3);
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: $border-radius-sm;
 
         .attr-abbr {
           font-size: $font-size-xs;
-          color: $c-text-light;
+          color: rgba(255, 255, 255, 0.6);
         }
 
         .attr-value {
           font-size: $font-size-lg;
           font-weight: $font-weight-bold;
-          color: $c-burgundy;
+          color: $c-gold;
         }
       }
     }
@@ -1023,12 +1050,12 @@
         font-size: $font-size-sm;
 
         span:first-child {
-          color: $c-text-light;
+          color: rgba(255, 255, 255, 0.6);
         }
 
         span:last-child {
           font-weight: $font-weight-bold;
-          color: $c-text-dark;
+          color: #fff;
         }
       }
     }
@@ -1043,14 +1070,14 @@
   justify-content: space-between;
   align-items: center;
   padding: $spacing-md $spacing-lg;
-  background: rgba($c-faint, 0.3);
-  border-top: $border-width solid $c-faint;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0 0 $border-radius-lg $border-radius-lg;
 
   .footer-info {
     .step-info {
       font-size: $font-size-sm;
-      color: $c-text-dark;
+      color: rgba(255, 255, 255, 0.7);
     }
   }
 

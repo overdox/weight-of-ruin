@@ -266,11 +266,11 @@
 :root, [data-wor-theme="dark"] {
   // === BACKGROUNDS ===
   --wor-bg-body: url(../assets/ui/background.webp);
-  --wor-bg-parchment-texture: url(../assets/ui/parchment-dark.webp);
-  --wor-bg-primary: #1e1b18;
-  --wor-bg-secondary: #262320;
-  --wor-bg-tertiary: #2e2b28;
-  --wor-bg-elevated: #363330;
+  --wor-bg-parchment-texture: none;
+  --wor-bg-primary: #1a1212;
+  --wor-bg-secondary: #231818;
+  --wor-bg-tertiary: #2a1e1e;
+  --wor-bg-elevated: rgba(0, 0, 0, 0.3);
 
   // === TEXT COLORS ===
   --wor-text-primary: #e8e0d5;

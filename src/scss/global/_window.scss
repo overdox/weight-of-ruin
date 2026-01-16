@@ -34,12 +34,15 @@
     }
   }
 
-  // Window content area
+  // Window content area - Dark gradient (grimdark aesthetic)
   .window-content {
-    @include parchment-bg;
-    background-color: $c-parchment;
+    background: linear-gradient(180deg,
+      rgba(60, 30, 30, 0.98) 0%,
+      rgba(40, 25, 25, 0.98) 50%,
+      rgba(30, 20, 20, 0.98) 100%
+    );
     padding: $spacing-lg;
-    color: $c-text-dark;
+    color: #fff;
   }
 
   // Window resize handle
@@ -669,12 +672,40 @@
   }
 
   &:not(.minimized) > .window-content {
-    @include parchment-bg;
-    background-color: $c-parchment;
+    background: linear-gradient(180deg,
+      rgba(60, 30, 30, 0.98) 0%,
+      rgba(40, 25, 25, 0.98) 50%,
+      rgba(30, 20, 20, 0.98) 100%
+    ) !important;
     padding: 0 !important;
     border: none !important;
     box-shadow: none !important;
     border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  }
+
+  // Dialog buttons for defense dialog (outside window-content)
+  .form-footer,
+  footer.form-footer,
+  .dialog-buttons {
+    display: flex !important;
+    gap: $spacing-md !important;
+    padding: $spacing-lg !important;
+    margin: $spacing-md $spacing-xl $spacing-xl $spacing-xl !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: $border-radius-md !important;
+    justify-content: center !important;
+
+    button {
+      flex: 1 !important;
+      min-width: 120px !important;
+      min-height: 42px !important;
+      height: 42px !important;
+      padding: 0 $spacing-lg !important;
+      font-size: $font-size-base !important;
+      font-weight: $font-weight-bold !important;
+      line-height: 42px !important;
+    }
   }
 }
 
@@ -789,12 +820,40 @@
   }
 
   &:not(.minimized) > .window-content {
-    @include parchment-bg;
-    background-color: $c-parchment;
+    background: linear-gradient(180deg,
+      rgba(60, 30, 30, 0.98) 0%,
+      rgba(40, 25, 25, 0.98) 50%,
+      rgba(30, 20, 20, 0.98) 100%
+    ) !important;
     padding: 0 !important;
     border: none !important;
     box-shadow: none !important;
     border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  }
+
+  // Dialog buttons for attack dialog (outside window-content)
+  .form-footer,
+  footer.form-footer,
+  .dialog-buttons {
+    display: flex !important;
+    gap: $spacing-md !important;
+    padding: $spacing-lg !important;
+    margin: $spacing-md $spacing-xl $spacing-xl $spacing-xl !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: $border-radius-md !important;
+    justify-content: center !important;
+
+    button {
+      flex: 1 !important;
+      min-width: 120px !important;
+      min-height: 42px !important;
+      height: 42px !important;
+      padding: 0 $spacing-lg !important;
+      font-size: $font-size-base !important;
+      font-weight: $font-weight-bold !important;
+      line-height: 42px !important;
+    }
   }
 }
 
@@ -805,9 +864,13 @@
 // The Weight of Ruin specific windows (non-actor sheets)
 .weight-of-ruin {
   &.window-app .window-content {
-    @include parchment-bg;
-    background-color: $c-parchment;
+    background: linear-gradient(180deg,
+      rgba(60, 30, 30, 0.98) 0%,
+      rgba(40, 25, 25, 0.98) 50%,
+      rgba(30, 20, 20, 0.98) 100%
+    );
     padding: $spacing-lg;
+    color: #fff;
   }
 
   // Dark header variant
@@ -849,10 +912,14 @@
 }
 
 // Application v2 specific overrides (non-actor sheets)
-.application.weight-of-ruin:not(.actor-sheet) {
+.application.weight-of-ruin:not(.actor-sheet):not(.item-sheet) {
   .window-content {
-    @include parchment-bg;
-    background-color: $c-parchment;
+    background: linear-gradient(180deg,
+      rgba(60, 30, 30, 0.98) 0%,
+      rgba(40, 25, 25, 0.98) 50%,
+      rgba(30, 20, 20, 0.98) 100%
+    );
+    color: #fff;
   }
 }
 
@@ -1004,7 +1071,7 @@
   }
 
   &.minimized > .window-header {
-    background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%) !important;
+    background: linear-gradient(135deg, #4d3535 0%, #755550 100%) !important;
     border-bottom: $border-width-thick solid $c-gold-muted;
     position: relative;
 
@@ -1093,7 +1160,7 @@
   align-items: center;
   gap: $spacing-sm;
   padding: $spacing-sm $spacing-lg;
-  background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%) !important;
+  background: linear-gradient(135deg, #4d3535 0%, #755550 100%) !important;
   border-radius: $border-radius-sm;
   margin-bottom: $spacing-md;
 
@@ -1383,7 +1450,7 @@
 
   // Minimized state
   &.minimized > .window-header {
-    background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%) !important;
+    background: linear-gradient(135deg, #4d3535 0%, #755550 100%) !important;
     border-bottom: $border-width-thick solid $c-gold-muted;
     position: relative;
 

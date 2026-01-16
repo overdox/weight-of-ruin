@@ -1,65 +1,21 @@
 // Defense Dialog Styles
 // Imported inside .wor.defense-dialog { } context
+//
+// NOTE: Base dark theme styling comes from _dark-theme-defaults.scss
+// This file only contains defense-dialog-specific overrides and additions.
 
-// Parchment background for the content area
-.window-content {
-  @include parchment-bg;
-  background-color: $c-parchment;
-  padding: 0 !important;
-  border-radius: 0 0 $border-radius-lg $border-radius-lg;
+// Wrapper contains both header and content
+.defense-dialog-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
-// Dialog header
-.dialog-header {
-  display: flex;
-  padding: $spacing-lg;
-  background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%);
-  border-bottom: $border-width-thick solid $c-copper;
-  border-radius: $border-radius-lg $border-radius-lg 0 0;
-  margin: 0 !important;
-
-  .header-content {
-    display: flex;
-    align-items: center;
-    gap: $spacing-md;
-    width: 100%;
-  }
-
-  .actor-portrait {
-    width: 56px;
-    height: 56px;
-    border-radius: $border-radius-md;
-    border: 3px solid $c-gold;
-    outline: 2px solid rgba(0, 0, 0, 0.4);
-    object-fit: cover;
-    box-shadow: $shadow-lg, 0 0 0 1px rgba(255, 255, 255, 0.2);
-  }
-
-  .header-info {
-    flex: 1;
-
-    .dialog-title {
-      margin: 0 0 $spacing-xs 0;
-      font-size: $font-size-lg;
-      font-family: $font-primary;
-      color: #fff !important;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-      display: flex;
-      align-items: center;
-      gap: $spacing-sm;
-
-      &::before {
-        content: "\f3ed"; // shield-alt
-        font-family: "Font Awesome 6 Free", FontAwesome;
-        font-weight: 900;
-      }
-    }
-
-    .actor-name {
-      font-size: $font-size-sm;
-      color: rgba(255, 255, 255, 0.9);
-    }
-  }
+// Dialog title icon
+.dialog-header .header-info .dialog-title::before {
+  content: "\f3ed"; // shield-alt icon
+  font-family: "Font Awesome 6 Free", FontAwesome;
+  font-weight: 900;
+  margin-right: $spacing-sm;
 }
 
 .defense-dialog-content {
@@ -75,8 +31,8 @@
     gap: $spacing-sm;
     padding: $spacing-sm $spacing-md;
     margin-bottom: $spacing-lg;
-    background: linear-gradient(135deg, $c-success, $c-success-dark);
-    color: $c-white;
+    background: linear-gradient(135deg, var(--wor-success) 0%, var(--wor-success-dark) 100%);
+    color: #fff;
     border-radius: $border-radius-sm;
     font-weight: $font-weight-bold;
     box-shadow: $shadow-sm;
@@ -86,73 +42,67 @@
     }
   }
 
-  // Section styling
-  .dialog-section {
-    margin-bottom: $spacing-xl;
-
-    .section-header {
-      @include section-header-bar;
-      gap: $spacing-sm;
-      border-radius: $border-radius-sm;
-
-      i {
-        font-size: $font-size-sm;
-      }
-
-      h2 {
-        margin: 0;
-        font-size: $font-size-sm;
-        flex: 1;
-      }
-
-      .fervor-available {
-        font-size: $font-size-xs;
-        font-weight: $font-weight-normal;
-        opacity: 0.9;
-      }
-    }
-
-    .section-body {
-      padding: $spacing-md;
-      background: var(--wor-dark-alpha-08);
-      border: $border-width solid var(--wor-dark-alpha-10);
-      border-top: none;
-      border-radius: 0 0 $border-radius-sm $border-radius-sm;
-    }
-  }
-
   // Buy option hint
   .buy-option-hint {
     margin: 0 0 $spacing-sm 0;
     font-size: $font-size-sm;
-    color: $c-text-medium;
+    color: rgba(255, 255, 255, 0.6);
     font-style: italic;
     text-align: center;
   }
 
-  // Pool display
-  .pool-display {
-    text-align: center;
+  // Pool breakdown (matching Attack dialog style)
+  .pool-breakdown {
+    .pool-row {
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-sm $spacing-xs;
+      font-size: $font-size-base;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-    .pool-formula {
-      font-size: $font-size-lg;
-      font-weight: $font-weight-bold;
-      color: $c-text-dark;
+      &:last-child {
+        border-bottom: none;
+      }
 
-      .formula-breakdown {
-        font-size: $font-size-base;
+      .pool-label {
+        color: #fff;
         font-weight: $font-weight-normal;
-        color: $c-text-medium;
-        margin-left: $spacing-sm;
+      }
+
+      .pool-value {
+        font-weight: $font-weight-bold;
+        color: $c-gold;
+        font-size: $font-size-lg;
       }
     }
+  }
 
-    &.full-defense-row {
-      margin-top: $spacing-xs;
+  // Modifier row (matching Attack dialog style)
+  .modifier-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-top: $spacing-md;
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $border-radius-sm;
 
-      .pool-formula {
-        color: $c-success-dark;
-      }
+    .modifier-label {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: #fff;
+    }
+
+    .modifier-input {
+      width: 70px;
+      text-align: center;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba($c-copper, 0.4) !important;
+      color: #fff !important;
+      border-radius: $border-radius-sm;
     }
   }
 
@@ -167,21 +117,21 @@
       flex-direction: column;
       gap: $spacing-xs;
       padding: $spacing-sm;
-      background: var(--wor-dark-alpha-05);
-      border: $border-width-thick solid var(--wor-dark-alpha-10);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: $border-radius-sm;
       cursor: pointer;
       transition: all $transition-fast;
 
       &:hover:not(.unavailable) {
-        border-color: $c-copper;
-        background: var(--wor-copper-alpha-10);
+        border-color: rgba($c-copper, 0.6);
+        background: rgba($c-copper, 0.15);
       }
 
       &.selected {
         border-color: $c-copper;
-        background: var(--wor-copper-alpha-15);
-        box-shadow: 0 0 6px var(--wor-copper-alpha-30);
+        background: rgba($c-copper, 0.2);
+        box-shadow: 0 0 6px rgba($c-copper, 0.4);
       }
 
       &.unavailable {
@@ -190,12 +140,12 @@
       }
 
       &.has-penalty {
-        border-color: $c-warning;
+        border-color: var(--wor-warning);
 
         &.selected {
-          border-color: $c-warning;
-          background: rgba($c-warning, 0.1);
-          box-shadow: 0 0 6px rgba($c-warning, 0.3);
+          border-color: var(--wor-warning);
+          background: rgba(216, 138, 56, 0.15);
+          box-shadow: 0 0 6px rgba(216, 138, 56, 0.3);
         }
       }
 
@@ -210,22 +160,22 @@
 
         .option-name {
           font-size: $font-size-base;
-          color: $c-text-dark;
+          color: #fff;
           flex: 1;
         }
 
         .option-bonus {
           font-weight: $font-weight-bold;
           font-size: $font-size-lg;
-          color: $c-copper-dark;
+          color: $c-gold;
 
           &.penalized {
-            color: $c-warning-dark;
+            color: var(--wor-warning);
 
             .penalty-indicator {
               font-size: $font-size-xs;
               font-weight: $font-weight-normal;
-              color: $c-text-medium;
+              color: rgba(255, 255, 255, 0.5);
               text-decoration: line-through;
               margin-left: $spacing-xs;
             }
@@ -235,13 +185,13 @@
 
       .option-note {
         font-size: $font-size-sm;
-        color: $c-danger;
+        color: var(--wor-danger);
         font-style: italic;
       }
 
       .option-uses {
         font-size: $font-size-sm;
-        color: $c-warning-dark;
+        color: var(--wor-warning);
         font-style: italic;
       }
     }
@@ -253,40 +203,12 @@
     gap: $spacing-sm;
     margin-top: $spacing-sm;
     padding: $spacing-sm;
-    background: rgba($c-danger, 0.1);
-    border: $border-width solid rgba($c-danger, 0.3);
+    background: rgba(196, 85, 85, 0.15);
+    border: 1px solid rgba(196, 85, 85, 0.3);
     border-radius: $border-radius-sm;
-    color: $c-danger;
+    color: var(--wor-danger);
     font-size: $font-size-sm;
     font-style: italic;
-  }
-
-  // Modifier section
-  .modifier-section {
-    margin-bottom: $spacing-xl;
-
-    .modifier-row {
-      display: flex;
-      align-items: center;
-      gap: $spacing-lg;
-      padding: $spacing-md;
-      background: var(--wor-dark-alpha-05);
-      border: $border-width solid var(--wor-dark-alpha-08);
-      border-radius: $border-radius-sm;
-
-      .modifier-label {
-        font-size: $font-size-base;
-        font-weight: $font-weight-bold;
-        color: $c-text-dark;
-      }
-
-      .modifier-input {
-        width: 80px;
-        text-align: center;
-        font-size: $font-size-base;
-        font-weight: $font-weight-bold;
-      }
-    }
   }
 
   // Fervor options
@@ -300,15 +222,15 @@
       align-items: center;
       gap: $spacing-sm;
       padding: $spacing-sm;
-      background: var(--wor-dark-alpha-05);
-      border: $border-width solid var(--wor-dark-alpha-10);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: $border-radius-sm;
       cursor: pointer;
       transition: all $transition-fast;
 
       &:hover:not(.disabled) {
-        border-color: $c-accent;
-        background: var(--wor-magic-alpha-10);
+        border-color: rgba(154, 106, 186, 0.6);
+        background: rgba(154, 106, 186, 0.15);
       }
 
       &.disabled {
@@ -318,52 +240,24 @@
 
       input[type="checkbox"] {
         margin: 0;
-        accent-color: $c-accent;
+        accent-color: var(--wor-magic);
       }
 
       .option-label {
         flex: 1;
         font-size: $font-size-base;
-        color: $c-text-dark;
+        color: #fff;
       }
 
       .option-cost {
         font-size: $font-size-base;
-        color: $c-text-medium;
+        color: rgba(255, 255, 255, 0.6);
         font-weight: $font-weight-bold;
       }
     }
   }
 
-  // Effective pool summary
-  .effective-pool-summary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: $spacing-md;
-    padding: $spacing-lg;
-    margin-top: $spacing-xl;
-    background: var(--wor-copper-alpha-15);
-    border: $border-width-thick solid var(--wor-copper-alpha-30);
-    border-radius: $border-radius-md;
-
-    .pool-label {
-      font-weight: $font-weight-bold;
-      font-size: $font-size-base;
-      color: $c-text-dark;
-    }
-
-    .pool-value {
-      font-size: $font-size-2xl;
-      font-weight: $font-weight-bold;
-      color: $c-copper-dark;
-
-      &.zero-pool {
-        color: $c-danger;
-      }
-    }
-  }
-
+  // Zero pool warning
   .zero-pool-warning {
     display: flex;
     align-items: center;
@@ -371,27 +265,37 @@
     gap: $spacing-sm;
     margin-top: $spacing-md;
     padding: $spacing-md;
-    background: rgba($c-danger, 0.1);
-    border: $border-width solid rgba($c-danger, 0.3);
+    background: rgba(196, 85, 85, 0.15);
+    border: 1px solid rgba(196, 85, 85, 0.3);
     border-radius: $border-radius-sm;
-    color: $c-danger;
+    color: var(--wor-danger);
     font-size: $font-size-sm;
   }
 }
 
-// Dialog footer buttons
+// Effective pool uses global .effective-pool-summary styling
+// with zero-pool color override
+.effective-pool-summary .pool-value.zero-pool {
+  color: var(--wor-danger);
+}
+
+// Dialog footer buttons (match Attack dialog styling)
 footer.dialog-footer,
 .dialog-buttons {
-  display: flex;
-  gap: $spacing-md;
-  padding: $spacing-lg $spacing-xl;
-  background: var(--wor-dark-alpha-08);
-  border-top: $border-width solid var(--wor-dark-alpha-15);
-  justify-content: center;
+  display: flex !important;
+  gap: $spacing-md !important;
+  padding: $spacing-lg !important;
+  margin: $spacing-lg $spacing-xl $spacing-xl $spacing-xl !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border-top: none !important;
+  border-radius: $border-radius-md !important;
+  justify-content: center !important;
 
   button {
-    min-width: 120px;
-    font-size: $font-size-base;
-    font-weight: $font-weight-bold;
+    flex: 1 !important;
+    min-width: 120px !important;
+    padding: $spacing-md $spacing-lg !important;
+    font-size: $font-size-base !important;
+    font-weight: $font-weight-bold !important;
   }
 }

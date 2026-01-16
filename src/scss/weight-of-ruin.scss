@@ -12,6 +12,7 @@
 @import 'utils/mixins';
 
 // Global styles
+@import 'global/dark-theme-defaults';  // MUST come first - establishes baseline grimdark aesthetic
 @import 'global/window';
 @import 'global/grid';
 @import 'global/flex';
@@ -183,11 +184,11 @@ span.die.d6,
 .chat-message:has(.essence-notification),
 .chat-message:has(.full-defense-card),
 .chat-message:has(.initiative-card) {
-  background-image: var(--wor-bg-parchment-texture) !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-color: transparent !important;
+  background: linear-gradient(180deg,
+    rgba(60, 30, 30, 0.98) 0%,
+    rgba(40, 25, 25, 0.98) 50%,
+    rgba(30, 20, 20, 0.98) 100%
+  ) !important;
   border: none !important;
   border-radius: $border-radius-md !important;
   overflow: hidden !important;
@@ -284,4 +285,49 @@ span.die.d6,
   max-width: 40px !important;
   max-height: 40px !important;
   object-fit: cover !important;
+}
+
+// === CHAT CARD WIDTH FIX ===
+// Ensure .wor wrapper and attack cards always have proper width in chat
+#chat-log .chat-message .message-content,
+.chat-message .message-content {
+  // The .wor wrapper must take full width
+  > .wor {
+    display: block !important;
+    width: 100% !important;
+    min-width: 280px !important;
+    box-sizing: border-box !important;
+  }
+
+  // Attack card specific fixes
+  .attack-card {
+    display: block !important;
+    width: 100% !important;
+    min-width: 280px !important;
+    box-sizing: border-box !important;
+
+    // All sections need full width
+    > * {
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    // Flex containers must stay flex (not block)
+    .card-header,
+    .item-display {
+      display: flex !important;
+      align-items: center !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    // Other sections need full width
+    .result-indicator,
+    .damage-section,
+    .collapsible-section,
+    .chat-card-buttons {
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+  }
 }

@@ -1,0 +1,596 @@
+// ============================================
+// THE WEIGHT OF RUIN - GLOBAL DARK THEME DEFAULTS
+// ============================================
+// This file establishes the default grimdark aesthetic for ALL WoR windows.
+// Individual components can override specific styles as needed.
+//
+// Design Philosophy:
+// - Dark gradient backgrounds (not parchment)
+// - Gold accents for highlights and important text
+// - Burgundy-copper gradients for headers
+// - White/light text on dark backgrounds
+// - Consistent spacing and border treatments
+
+// ============================================
+// BASE WINDOW STYLING
+// ============================================
+// All .wor and .weight-of-ruin windows get these defaults
+
+.wor,
+.weight-of-ruin {
+  // Default window styling
+  &.window-app,
+  &.application {
+    border: none !important;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6) !important;
+    border-radius: $border-radius-lg !important;
+
+    // Default dark gradient background for window content
+    .window-content {
+      background: linear-gradient(180deg,
+        rgba(60, 30, 30, 0.98) 0%,
+        rgba(40, 25, 25, 0.98) 50%,
+        rgba(30, 20, 20, 0.98) 100%
+      ) !important;
+      padding: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 0 $border-radius-lg $border-radius-lg;
+      color: #fff;
+    }
+
+    // Headerless window style (floating controls)
+    &:not(.minimized) > .window-header {
+      --color-header-background: transparent;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      overflow: visible;
+      justify-content: flex-end;
+      padding: $spacing-sm;
+      z-index: 100;
+      height: auto;
+
+      .window-title {
+        visibility: hidden;
+        position: absolute;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+      }
+
+      // Floating control buttons
+      button.header-control {
+        font-family: var(--font-awesome) !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        font-weight: 900 !important;
+        background: rgba(0, 0, 0, 0.4) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 100% !important;
+        width: 28px !important;
+        height: 28px !important;
+        min-width: 28px !important;
+        min-height: 28px !important;
+        max-width: 28px !important;
+        max-height: 28px !important;
+        aspect-ratio: 1;
+        display: grid !important;
+        place-content: center;
+        line-height: 1 !important;
+        transition: all $transition-fast;
+        margin-left: $spacing-xs;
+        padding: 0 !important;
+        font-size: 12px !important;
+        box-shadow: none !important;
+        cursor: pointer;
+
+        &::before {
+          color: #ffffff !important;
+          font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", FontAwesome !important;
+          font-weight: 900 !important;
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.6) !important;
+          color: $c-gold !important;
+
+          &::before {
+            color: $c-gold !important;
+          }
+        }
+      }
+    }
+
+    // Minimized state - restore header
+    &.minimized > .window-header {
+      background: linear-gradient(135deg, #4d3535 0%, #755550 100%) !important;
+      border-bottom: $border-width-thick solid $c-gold-muted;
+      position: relative;
+
+      .window-title {
+        visibility: visible;
+        position: static;
+        color: #fff;
+        pointer-events: auto;
+      }
+
+      button.header-control {
+        background: transparent !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: unset !important;
+        min-height: unset !important;
+        max-width: unset !important;
+        max-height: unset !important;
+        border-radius: 0;
+        color: #fff !important;
+
+        &::before {
+          color: #fff !important;
+        }
+
+        &:hover {
+          color: $c-gold !important;
+
+          &::before {
+            color: $c-gold !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// GLOBAL ELEMENT DEFAULTS
+// ============================================
+// These apply inside any .wor or .weight-of-ruin context
+
+.wor,
+.weight-of-ruin {
+  // Custom scrollbar for dark theme
+  @include custom-scrollbar;
+
+  // ----- DIALOG HEADER (Burgundy-Copper Gradient) -----
+  .dialog-header {
+    display: flex;
+    padding: $spacing-lg;
+    background: linear-gradient(135deg, #4d3535 0%, #755550 100%);
+    border-bottom: $border-width-thick solid $c-copper;
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+    margin: 0 !important;
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      width: 100%;
+    }
+
+    .actor-portrait,
+    .header-portrait {
+      width: 56px;
+      height: 56px;
+      border-radius: $border-radius-md;
+      border: 3px solid $c-gold;
+      outline: 2px solid rgba(0, 0, 0, 0.4);
+      object-fit: cover;
+      box-shadow: $shadow-lg, 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .header-info {
+      flex: 1;
+
+      .dialog-title,
+      .editor-title {
+        margin: 0 0 $spacing-xs 0;
+        font-size: $font-size-lg;
+        font-family: $font-primary;
+        color: #fff !important;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      }
+
+      .actor-name,
+      .editor-subtitle {
+        font-size: $font-size-sm;
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+  }
+
+  // Alternate header style (centered, no portrait)
+  .editor-header {
+    padding: $spacing-xl $spacing-xl $spacing-lg;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .editor-title {
+      margin: 0 0 $spacing-xs 0;
+      font-family: $font-primary;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      color: #fff !important;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .editor-subtitle {
+      margin: 0;
+      font-size: $font-size-base;
+      color: rgba(255, 255, 255, 0.7);
+
+      i {
+        color: $c-gold;
+        margin-right: $spacing-xs;
+      }
+
+      strong {
+        color: $c-gold;
+      }
+    }
+  }
+
+  // ----- SECTION HEADER (Burgundy-Copper Bar) -----
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    background: linear-gradient(135deg, #4d3535 0%, #755550 100%);
+    border-radius: $border-radius-sm;
+
+    i {
+      font-size: $font-size-sm;
+      color: $c-gold;
+    }
+
+    h2, h3, span {
+      margin: 0;
+      font-size: $font-size-sm;
+      font-family: $font-primary;
+      font-weight: $font-weight-bold;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: $letter-spacing-wide;
+      flex: 1;
+    }
+  }
+
+  // ----- SECTION BODY (Dark Semi-transparent) -----
+  .section-body {
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    border-radius: 0 0 $border-radius-sm $border-radius-sm;
+  }
+
+  // ----- DIALOG SECTION (Header + Body combo) -----
+  .dialog-section {
+    margin-bottom: $spacing-xl;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // ----- FORM INPUTS (Dark Theme) -----
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="email"],
+  input[type="search"],
+  select,
+  textarea {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba($c-copper, 0.4) !important;
+    color: #fff !important;
+    border-radius: $border-radius-sm;
+    padding: $spacing-sm;
+
+    &:focus {
+      outline: none;
+      border-color: $c-copper !important;
+      box-shadow: 0 0 6px rgba($c-copper, 0.4);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  // Checkbox and radio styling
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: $c-gold;
+  }
+
+  // ----- BUTTONS (Dark Theme) -----
+  button,
+  .button {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    // Default secondary button
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    // Primary button (copper gradient)
+    &.primary,
+    &.default,
+    &[type="submit"] {
+      background: linear-gradient(135deg, $c-copper 0%, var(--wor-copper-dark) 100%);
+      border: 1px solid var(--wor-copper-dark);
+      color: #fff;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        background: linear-gradient(135deg, var(--wor-copper-light) 0%, $c-copper 100%);
+        box-shadow: 0 2px 8px rgba($c-copper, 0.4);
+      }
+    }
+
+    // Danger button
+    &.danger {
+      background: linear-gradient(135deg, var(--wor-danger) 0%, var(--wor-danger-dark) 100%);
+      border: 1px solid var(--wor-danger-dark);
+      color: #fff;
+
+      &:hover {
+        background: linear-gradient(135deg, var(--wor-danger-light) 0%, var(--wor-danger) 100%);
+        box-shadow: 0 2px 8px rgba(196, 85, 85, 0.4);
+      }
+    }
+
+    // Icon spacing
+    i {
+      margin-right: $spacing-xs;
+    }
+  }
+
+  // ----- DIALOG FOOTER -----
+  footer.dialog-footer,
+  .dialog-buttons {
+    display: flex;
+    gap: $spacing-md;
+    padding: $spacing-lg $spacing-xl;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: center;
+
+    button {
+      min-width: 120px;
+    }
+  }
+
+  // ----- TEXT COLORS -----
+  // Default text is white/light on dark backgrounds
+  color: #fff;
+
+  .text-gold,
+  .highlight {
+    color: $c-gold !important;
+  }
+
+  .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  .text-danger {
+    color: var(--wor-danger) !important;
+  }
+
+  .text-success {
+    color: var(--wor-success) !important;
+  }
+
+  .text-warning {
+    color: var(--wor-warning) !important;
+  }
+
+  // ----- CARD/BOX STYLING -----
+  .card,
+  .box,
+  .entry {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: rgba($c-copper, 0.4);
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // ----- SUMMARY/HIGHLIGHT BOX -----
+  .summary-box,
+  .effective-pool-summary,
+  .pool-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-md;
+    padding: $spacing-lg;
+    background: rgba($c-copper, 0.2);
+    border: 2px solid rgba($c-copper, 0.4);
+    border-radius: $border-radius-md;
+
+    .label,
+    .pool-label {
+      font-weight: $font-weight-bold;
+      color: #fff;
+    }
+
+    .value,
+    .pool-value {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      color: $c-gold;
+    }
+  }
+
+  // ----- WARNING/ALERT BOXES -----
+  .warning,
+  .alert-warning {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: rgba(216, 138, 56, 0.15);
+    border: 1px solid rgba(216, 138, 56, 0.3);
+    border-radius: $border-radius-sm;
+    color: var(--wor-warning);
+    font-size: $font-size-sm;
+  }
+
+  .error,
+  .alert-danger {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: rgba(196, 85, 85, 0.15);
+    border: 1px solid rgba(196, 85, 85, 0.3);
+    border-radius: $border-radius-sm;
+    color: var(--wor-danger);
+    font-size: $font-size-sm;
+  }
+
+  .success,
+  .alert-success {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: rgba(90, 155, 90, 0.15);
+    border: 1px solid rgba(90, 155, 90, 0.3);
+    border-radius: $border-radius-sm;
+    color: var(--wor-success);
+    font-size: $font-size-sm;
+  }
+
+  // ----- GRID LAYOUTS -----
+  .grid-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+  }
+
+  .grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-md;
+  }
+
+  .grid-4col {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-md;
+  }
+
+  // ----- SELECTABLE OPTIONS -----
+  .option,
+  .selectable {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(.unavailable):not(.disabled) {
+      border-color: rgba($c-copper, 0.6);
+      background: rgba($c-copper, 0.15);
+    }
+
+    &.selected {
+      border-color: $c-copper;
+      background: rgba($c-copper, 0.2);
+      box-shadow: 0 0 6px rgba($c-copper, 0.4);
+    }
+
+    &.unavailable,
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    // Hide actual radio/checkbox inputs
+    input[type="radio"],
+    input[type="checkbox"] {
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+
+  // ----- LISTS -----
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}
+
+// ============================================
+// RESET FOUNDRY DEFAULTS
+// ============================================
+// Ensure Foundry's default styles don't override our dark theme
+
+.wor,
+.weight-of-ruin {
+  .dialog-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  .dialog-form-content,
+  .dialog-buttons-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  form,
+  form.dialog-form {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}

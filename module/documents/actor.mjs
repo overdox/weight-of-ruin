@@ -281,6 +281,7 @@ export class WoRActor extends Actor {
    */
   _sortSkillsByCategory() {
     this._skillsByCategory = {
+      martial: [],
       physical: [],
       social: [],
       knowledge: [],

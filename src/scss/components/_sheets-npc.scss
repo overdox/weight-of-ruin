@@ -165,7 +165,7 @@
         cursor: pointer;
         transition: border-color $transition-fast, box-shadow $transition-fast;
         box-shadow: $shadow-lg;
-        background: $c-parchment;
+        background: rgba(0, 0, 0, 0.3);
         display: block;
 
         &:hover {
@@ -192,7 +192,7 @@
       @include flex-column;
       align-items: center;
       padding: $spacing-sm $spacing-md;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border: $border-width solid $c-faint;
       border-radius: $border-radius-md;
       min-width: 50px;
@@ -225,7 +225,7 @@
       align-items: center;
       gap: $spacing-sm;
       padding: $spacing-sm $spacing-md;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border: $border-width solid $c-faint;
       border-radius: $border-radius-md;
 
@@ -270,7 +270,7 @@
         font-size: $font-size-base;
         font-weight: $font-weight-bold;
         padding: $spacing-sm $spacing-md;
-        background: $c-bg-elevated;
+        background: rgba(0, 0, 0, 0.3);
         border: $border-width solid $c-faint;
         border-radius: $border-radius-md;
 
@@ -323,7 +323,7 @@
       @include flex-column;
       align-items: center;
       padding: $spacing-sm $spacing-md;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border: $border-width solid $c-faint;
       border-radius: $border-radius-md;
       min-width: 55px;
@@ -386,7 +386,7 @@
     align-items: center;
     gap: $spacing-md;
     padding: $spacing-md;
-    background: $c-bg-elevated;
+    background: rgba(0, 0, 0, 0.3);
     border: $border-width solid $c-faint;
     border-radius: $border-radius-sm;
     margin-bottom: $spacing-sm;
@@ -456,7 +456,7 @@
     @include flex-column;
     gap: $spacing-sm;
     padding: $spacing-md;
-    background: $c-bg-elevated;
+    background: rgba(0, 0, 0, 0.3);
     border: $border-width solid $c-faint;
     border-radius: $border-radius-sm;
     margin-bottom: $spacing-sm;
@@ -604,7 +604,7 @@
 
     .editor-container {
       min-height: 80px;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border: $border-width solid $c-faint;
       border-radius: $border-radius-sm;
       padding: $spacing-sm;
@@ -667,7 +667,7 @@
 
     .notes-editor-container {
       min-height: 200px;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border: $border-width solid $c-faint;
       border-radius: $border-radius-sm;
       padding: $spacing-sm;
@@ -765,7 +765,7 @@
         font-size: $font-size-sm;
         font-weight: $font-weight-bold;
         padding: $spacing-sm $spacing-md;
-        background: $c-bg-elevated;
+        background: rgba(0, 0, 0, 0.3);
         border: $border-width solid $c-faint;
         border-radius: $border-radius-sm;
         margin-left: $spacing-md;
@@ -786,7 +786,7 @@
       align-items: flex-start;
       gap: $spacing-md;
       padding: $spacing-md;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border: $border-width solid $c-faint;
       border-radius: $border-radius-sm;
       transition: all $transition-fast;
@@ -907,7 +907,7 @@
       font-style: italic;
       text-align: center;
       padding: $spacing-xl;
-      background: $c-bg-elevated;
+      background: rgba(0, 0, 0, 0.3);
       border: $border-width solid $c-faint;
       border-radius: $border-radius-sm;
     }

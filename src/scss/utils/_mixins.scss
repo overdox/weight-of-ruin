@@ -18,11 +18,14 @@
 }
 
 // === BACKGROUNDS ===
+// Updated for dark grimdark theme - no longer uses parchment texture
 @mixin parchment-bg {
-  background-image: var(--wor-bg-parchment-texture);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(180deg,
+    rgba(60, 30, 30, 0.98) 0%,
+    rgba(40, 25, 25, 0.98) 50%,
+    rgba(30, 20, 20, 0.98) 100%
+  );
+  color: #fff;
 }
 
 @mixin dark-bg {
@@ -38,10 +41,10 @@
   background: $c-row-hover;
 }
 
-// === SECTION CONTAINER (Card with header) ===
+// === SECTION CONTAINER (Card with header) - Dark Theme ===
 @mixin section-container {
-  background: $c-bg-elevated;
-  border: $border-width solid $c-border-medium;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: $border-radius-md;
   box-shadow: $shadow-md;
   margin-bottom: $spacing-xl;
@@ -50,16 +53,20 @@
 
 @mixin section-content {
   padding: $spacing-lg;
-  background: $c-bg-elevated;
+  background: rgba(0, 0, 0, 0.2);
 }
 
-// === SECTION HEADERS (Brown bar style with gradient) ===
+// === SECTION HEADERS (Unified dark brown gradient with gold text) ===
 @mixin section-header-bar {
   display: flex;
   align-items: center;
-  padding: $spacing-sm $spacing-lg;
-  background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
-  color: $c-header-text;
+  // Fixed 32px height for consistency across all section headers
+  min-height: 32px;
+  height: 32px;
+  padding: 0 $spacing-lg;
+  // Dark brown gradient: dark maroon-brown to slightly lighter warm brown
+  background: linear-gradient(90deg, #4d3535 0%, #755550 100%);
+  color: $c-gold !important;
   font-family: $font-primary;
   font-size: $font-size-base;
   font-weight: $font-weight-bold;
@@ -71,6 +78,11 @@
 
   // Small caps effect
   font-variant: small-caps;
+
+  // Ensure all text inside is gold
+  * {
+    color: $c-gold !important;
+  }
 }
 
 @mixin section-header {
@@ -80,12 +92,12 @@
 @mixin subsection-header {
   font-size: $font-size-base;
   font-weight: $font-weight-bold;
-  color: $c-text-dark;
+  color: $c-gold !important;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0 0 $spacing-md 0;
   padding-bottom: $spacing-sm;
-  border-bottom: $border-width solid $c-border-medium;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 // === BORDERS ===
@@ -160,13 +172,13 @@
 
 @mixin button-secondary {
   @include button-base;
-  background: $c-parchment;
-  color: $c-text-dark;
-  border: $border-width solid $c-border-medium;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: $border-width solid rgba(255, 255, 255, 0.3);
 
   &:hover:not(:disabled) {
-    background: $c-parchment-dark;
-    border-color: $c-border-dark;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
   }
 }
 
@@ -237,13 +249,13 @@
 // === CARDS & CONTAINERS ===
 @mixin card {
   @include card-border;
-  background: $c-bg-elevated;
+  background: rgba(0, 0, 0, 0.3);
   padding: $spacing-md;
 }
 
 @mixin card-dark {
   @include card-border;
-  background: $c-row-alt;
+  background: rgba(0, 0, 0, 0.4);
   padding: $spacing-md;
 }
 
@@ -252,17 +264,17 @@
   @include flex-center;
   width: $size;
   height: $size;
-  background: $c-bg-elevated;
-  border: $border-width-thick solid $c-text-dark;
+  background: rgba(0, 0, 0, 0.4);
+  border: $border-width-thick solid $c-gold;
   border-radius: $border-radius-full;
   font-size: $font-size-lg;
   font-weight: $font-weight-bold;
-  color: $c-text-dark;
+  color: #fff;
   transition: all $transition-fast;
 }
 
 @mixin value-circle-hover {
-  border-color: $c-gold;
+  border-color: $c-gold-light;
   box-shadow: 0 0 0 3px var(--wor-gold-alpha-20);
   transform: scale(1.05);
 }
@@ -273,8 +285,8 @@
   flex-direction: column;
   align-items: center;
   padding: $spacing-md;
-  background: $c-bg-elevated;
-  border: $border-width solid $c-border-light;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
 }
 
@@ -394,7 +406,7 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: $c-parchment-dark;
+    background: rgba(0, 0, 0, 0.4);
     border-radius: $border-radius-sm;
   }
 
@@ -428,7 +440,7 @@
   font-weight: $font-weight-bold;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: $c-text-medium;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 @mixin text-label-light {
@@ -436,5 +448,5 @@
   font-weight: $font-weight-normal;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: $c-text-light;
+  color: rgba(255, 255, 255, 0.5);
 }

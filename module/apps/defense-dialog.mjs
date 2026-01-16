@@ -77,9 +77,6 @@ export class WoRDefenseDialog extends HandlebarsApplicationMixin(ApplicationV2) 
 
   /** @override */
   static PARTS = {
-    header: {
-      template: 'systems/weight-of-ruin/templates/apps/defense-header.hbs'
-    },
     content: {
       template: 'systems/weight-of-ruin/templates/apps/defense-dialog.hbs',
       scrollable: ['.defense-dialog-content']

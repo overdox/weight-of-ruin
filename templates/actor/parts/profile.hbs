@@ -1,20 +1,20 @@
-<section class="legacy-section">
+<section class="profile-section">
 
-  {{!-- Legacy Sub-tabs Navigation --}}
-  <nav class="legacy-tabs">
-    <a class="item {{#if (eq legacyTab 'identity')}}active{{/if}}" data-tab="identity" data-group="legacy">
+  {{!-- Profile Sub-tabs Navigation --}}
+  <nav class="profile-tabs">
+    <a class="item {{#if (eq profileTab 'identity')}}active{{/if}}" data-tab="identity" data-group="profile">
       <i class="fas fa-id-card"></i>
       {{localize "AOA.Section.Identity"}}
     </a>
-    <a class="item {{#if (eq legacyTab 'passions')}}active{{/if}}" data-tab="passions" data-group="legacy">
+    <a class="item {{#if (eq profileTab 'passions')}}active{{/if}}" data-tab="passions" data-group="profile">
       <i class="fas fa-fire"></i>
       {{localize "AOA.Section.Passions"}}
     </a>
-    <a class="item {{#if (eq legacyTab 'advancement')}}active{{/if}}" data-tab="advancement" data-group="legacy">
+    <a class="item {{#if (eq profileTab 'advancement')}}active{{/if}}" data-tab="advancement" data-group="profile">
       <i class="fas fa-chart-line"></i>
       {{localize "AOA.Section.Advancement"}}
     </a>
-    <a class="item {{#if (eq legacyTab 'notes')}}active{{/if}}" data-tab="notes" data-group="legacy">
+    <a class="item {{#if (eq profileTab 'notes')}}active{{/if}}" data-tab="notes" data-group="profile">
       <i class="fas fa-book"></i>
       {{localize "AOA.Section.Notes"}}
     </a>
@@ -23,7 +23,7 @@
   {{!-- ============================================ --}}
   {{!-- IDENTITY TAB --}}
   {{!-- ============================================ --}}
-  <div class="tab legacy-tab-content {{#if (eq legacyTab 'identity')}}active{{/if}}" data-tab="identity" data-group="legacy">
+  <div class="tab profile-tab-content {{#if (eq profileTab 'identity')}}active{{/if}}" data-tab="identity" data-group="profile">
 
     {{!-- Character Details Section --}}
     <div class="identity-details-section">
@@ -628,7 +628,7 @@
   {{!-- ============================================ --}}
   {{!-- PASSIONS TAB --}}
   {{!-- ============================================ --}}
-  <div class="tab legacy-tab-content {{#if (eq legacyTab 'passions')}}active{{/if}}" data-tab="passions" data-group="legacy">
+  <div class="tab profile-tab-content {{#if (eq profileTab 'passions')}}active{{/if}}" data-tab="passions" data-group="profile">
 
     <section class="passions-content-section">
       <h3>{{localize "AOA.Section.Passions"}}</h3>
@@ -677,7 +677,7 @@
   {{!-- ============================================ --}}
   {{!-- ADVANCEMENT TAB --}}
   {{!-- ============================================ --}}
-  <div class="tab legacy-tab-content {{#if (eq legacyTab 'advancement')}}active{{/if}}" data-tab="advancement" data-group="legacy">
+  <div class="tab profile-tab-content {{#if (eq profileTab 'advancement')}}active{{/if}}" data-tab="advancement" data-group="profile">
 
     <div class="advancement-content-section">
       <h3>{{localize "AOA.Section.Experience"}}</h3>
@@ -760,7 +760,7 @@
   {{!-- ============================================ --}}
   {{!-- NOTES TAB --}}
   {{!-- ============================================ --}}
-  <div class="tab legacy-tab-content {{#if (eq legacyTab 'notes')}}active{{/if}}" data-tab="notes" data-group="legacy">
+  <div class="tab profile-tab-content {{#if (eq profileTab 'notes')}}active{{/if}}" data-tab="notes" data-group="profile">
 
     <div class="notes-content-section">
       <h3>{{localize "AOA.Section.Notes"}}</h3>

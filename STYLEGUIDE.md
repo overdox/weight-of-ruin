@@ -6,62 +6,103 @@ This document provides reference for styling patterns used throughout the The We
 
 ## Table of Contents
 
-1. [Dialog Styles](#dialog-styles)
-2. [Color Palette](#color-palette)
-3. [Component Patterns](#component-patterns)
-4. [CSS Variables](#css-variables)
-5. [Typography](#typography)
-6. [Spacing](#spacing)
+1. [Global Dark Theme (Default)](#global-dark-theme-default)
+2. [Dialog Styles](#dialog-styles)
+3. [Color Palette](#color-palette)
+4. [Component Patterns](#component-patterns)
+5. [CSS Variables](#css-variables)
+6. [Typography](#typography)
+7. [Spacing](#spacing)
+
+---
+
+## Global Dark Theme (Default)
+
+**IMPORTANT:** All WoR windows automatically inherit the grimdark dark theme from `_dark-theme-defaults.scss`. You do NOT need to specify dark gradient backgrounds, button styles, or section headers - these are provided automatically.
+
+### What's Provided Automatically
+
+All `.wor` and `.weight-of-ruin` windows get these defaults:
+
+- **Dark gradient background** (burgundy-brown gradient)
+- **Headerless window style** with floating close/minimize buttons
+- **White text** on dark backgrounds
+- **Section headers** with burgundy-copper gradient
+- **Section bodies** with semi-transparent dark backgrounds
+- **Form inputs** styled for dark theme (dark background, copper border)
+- **Buttons** styled for dark theme (secondary and primary copper variants)
+- **Dialog footers** with dark background
+- **Cards/boxes** with dark semi-transparent backgrounds
+- **Alert/warning boxes** for danger, warning, success states
+
+### Creating a New Dialog
+
+For new dialogs, you typically only need:
+
+1. Add the `wor` class to the dialog
+2. Use standard HTML structure with `.dialog-header`, `.section-header`, `.section-body`
+3. Only add component-specific SCSS for unique styling needs
+
+**JavaScript:**
+```javascript
+classes: ['wor', 'your-dialog-class'],
+```
+
+**HTML Template:**
+```html
+<div class="your-dialog-wrapper">
+  <!-- Header with portrait (optional) -->
+  <header class="dialog-header">
+    <div class="header-content">
+      <img class="actor-portrait" src="..." />
+      <div class="header-info">
+        <h1 class="dialog-title">Dialog Title</h1>
+        <span class="actor-name">Actor Name</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="your-dialog-content">
+    <!-- Section with header bar -->
+    <div class="dialog-section">
+      <div class="section-header">
+        <i class="fas fa-icon"></i>
+        <h2>Section Title</h2>
+      </div>
+      <div class="section-body">
+        <!-- Content automatically gets dark styling -->
+      </div>
+    </div>
+
+    <!-- Summary box (automatically styled) -->
+    <div class="effective-pool-summary">
+      <span class="pool-label">Label:</span>
+      <span class="pool-value">Value</span>
+    </div>
+  </div>
+</div>
+```
+
+**Component SCSS (only for overrides):**
+```scss
+// In _your-dialog.scss - only add what's SPECIFIC to this dialog
+.your-dialog-content {
+  padding: $spacing-xl;
+  max-height: 500px;
+  overflow-y: auto;
+
+  // Only add custom elements not covered by defaults
+  .your-unique-element {
+    // styles
+  }
+}
+```
 
 ---
 
 ## Dialog Styles
 
-The system uses two primary dialog styles:
-
-### 1. Parchment Style (Attack/Defense Dialogs)
-
-Used for combat-related dialogs with a warm, parchment texture background.
-
-**Characteristics:**
-- Parchment texture background (`parchment.webp` / `parchment-dark.webp`)
-- Burgundy-copper gradient header with actor portrait
-- Section headers with `@include section-header-bar`
-- Copper accent colors
-
-**CSS Pattern:**
-```scss
-.dialog-v2:has(.your-dialog-wrapper) {
-  &:not(.minimized) > .window-content {
-    @include parchment-bg;
-    background-color: $c-parchment;
-    padding: 0 !important;
-    border-radius: 0 0 $border-radius-lg $border-radius-lg;
-  }
-}
-```
-
-**HTML Structure:**
-```html
-<div class="your-dialog-wrapper">
-  <div class="dialog-header">
-    <div class="header-content">
-      <img class="actor-portrait" src="..." />
-      <div class="header-info">
-        <h3 class="dialog-title">Title</h3>
-        <span class="actor-name">Actor Name</span>
-      </div>
-    </div>
-  </div>
-  <div class="dialog-content">
-    <!-- Content here -->
-  </div>
-</div>
-```
-
----
-
-### 2. Dark Gradient Style (Attribute Editor, Character Advancement)
+### Dark Gradient Style (DEFAULT - All Dialogs)
 
 Used for editors and wizards with a dark, immersive background.
 
@@ -609,9 +650,10 @@ Common key patterns:
 
 | File | Purpose |
 |------|---------|
-| `src/scss/global/_window.scss` | Dialog and window styles |
-| `src/scss/components/_attack-dialog.scss` | Attack dialog specific styles |
-| `src/scss/components/_defense-dialog.scss` | Defense dialog specific styles |
+| `src/scss/global/_dark-theme-defaults.scss` | **GLOBAL DEFAULTS** - Base grimdark styling for ALL WoR windows |
+| `src/scss/global/_window.scss` | Window-specific overrides and special cases |
+| `src/scss/components/_attack-dialog.scss` | Attack dialog specific overrides |
+| `src/scss/components/_defense-dialog.scss` | Defense dialog specific overrides |
 | `src/scss/utils/_colors.scss` | Color variables and CSS custom properties |
 | `src/scss/utils/_variables.scss` | Spacing, typography, other variables |
 | `src/scss/utils/_mixins.scss` | Reusable mixins including `parchment-bg` |

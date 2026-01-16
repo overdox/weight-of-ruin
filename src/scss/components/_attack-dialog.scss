@@ -1,12 +1,19 @@
 // Attack Dialog Styles
 // Imported inside .wor.attack-dialog { } context
+//
+// NOTE: Base dark theme styling comes from _dark-theme-defaults.scss
+// This file only contains attack-dialog-specific overrides and additions.
 
-// Parchment background for the content area
+// Dark gradient background for the content area
 .window-content {
-  @include parchment-bg;
-  background-color: $c-parchment;
+  background: linear-gradient(180deg,
+    rgba(60, 30, 30, 0.98) 0%,
+    rgba(40, 25, 25, 0.98) 50%,
+    rgba(30, 20, 20, 0.98) 100%
+  ) !important;
   padding: 0 !important;
   border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  color: #fff;
 
   // Override all possible nested wrappers
   > * {
@@ -41,8 +48,9 @@ form.dialog-form {
 .dialog-header {
   display: flex;
   padding: $spacing-lg;
-  background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%);
-  border-bottom: $border-width-thick solid $c-copper;
+  // Use global dark brown gradient
+  background: linear-gradient(135deg, #4d3535 0%, #755550 100%);
+  border-bottom: $border-width-thick solid #755550;
   border-radius: $border-radius-lg $border-radius-lg 0 0;
   margin: 0 !important;
 
@@ -157,8 +165,8 @@ form.dialog-form {
 
     .section-body {
       padding: $spacing-md;
-      background: var(--wor-dark-alpha-08);
-      border: $border-width solid var(--wor-dark-alpha-10);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-top: none;
       border-radius: 0 0 $border-radius-sm $border-radius-sm;
     }
@@ -171,20 +179,20 @@ form.dialog-form {
       justify-content: space-between;
       padding: $spacing-sm $spacing-xs;
       font-size: $font-size-base;
-      border-bottom: $border-width solid var(--wor-dark-alpha-05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
       &:last-child {
         border-bottom: none;
       }
 
       .pool-label {
-        color: $c-text-dark;
+        color: #fff;
         font-weight: $font-weight-normal;
       }
 
       .pool-value {
         font-weight: $font-weight-bold;
-        color: $c-text-dark;
+        color: $c-gold;
         font-size: $font-size-lg;
       }
     }
@@ -197,14 +205,14 @@ form.dialog-form {
     gap: $spacing-md;
     margin-top: $spacing-md;
     padding: $spacing-md;
-    background: var(--wor-dark-alpha-05);
-    border: $border-width solid var(--wor-dark-alpha-08);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-sm;
 
     .modifier-label {
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
-      color: $c-text-dark;
+      color: #fff;
     }
 
     .modifier-input {
@@ -212,6 +220,10 @@ form.dialog-form {
       text-align: center;
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba($c-copper, 0.4) !important;
+      color: #fff !important;
+      border-radius: $border-radius-sm;
     }
   }
 
@@ -222,7 +234,7 @@ form.dialog-form {
       justify-content: space-between;
       padding: $spacing-sm $spacing-xs;
       font-size: $font-size-base;
-      border-bottom: $border-width solid var(--wor-dark-alpha-05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
       &:last-child {
         border-bottom: none;
@@ -231,29 +243,29 @@ form.dialog-form {
       &.highlight {
         padding: $spacing-md;
         margin-top: $spacing-sm;
-        background: var(--wor-copper-alpha-15);
-        border: $border-width solid var(--wor-copper-alpha-30);
+        background: rgba($c-copper, 0.2);
+        border: 2px solid rgba($c-copper, 0.4);
         border-radius: $border-radius-sm;
 
         .stat-label {
           font-weight: $font-weight-bold;
-          color: $c-text-dark;
+          color: #fff;
         }
 
         .stat-value {
           font-weight: $font-weight-bold;
-          color: $c-copper-dark;
+          color: $c-gold;
           font-size: $font-size-lg;
         }
       }
 
       .stat-label {
-        color: $c-text-dark;
+        color: #fff;
       }
 
       .stat-value {
         font-weight: $font-weight-bold;
-        color: $c-text-dark;
+        color: $c-gold;
       }
     }
   }
@@ -267,7 +279,7 @@ form.dialog-form {
     label {
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
-      color: $c-text-dark;
+      color: #fff;
     }
 
     input {
@@ -275,13 +287,17 @@ form.dialog-form {
       text-align: center;
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba($c-copper, 0.4) !important;
+      color: #fff !important;
+      border-radius: $border-radius-sm;
     }
   }
 
   .tt-hint {
     margin-top: $spacing-sm;
     font-size: $font-size-sm;
-    color: $c-text-medium;
+    color: rgba(255, 255, 255, 0.6);
     font-style: italic;
   }
 
@@ -296,13 +312,13 @@ form.dialog-form {
       flex-direction: column;
       align-items: center;
       padding: $spacing-md;
-      background: var(--wor-dark-alpha-05);
-      border: $border-width solid var(--wor-dark-alpha-10);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: $border-radius-sm;
 
       .stat-label {
         font-size: $font-size-sm;
-        color: $c-text-medium;
+        color: rgba(255, 255, 255, 0.6);
         text-transform: uppercase;
         letter-spacing: 0.5px;
         font-weight: $font-weight-bold;
@@ -311,7 +327,7 @@ form.dialog-form {
       .stat-value {
         font-size: $font-size-xl;
         font-weight: $font-weight-bold;
-        color: $c-text-dark;
+        color: $c-gold;
       }
     }
   }
@@ -324,20 +340,20 @@ form.dialog-form {
     gap: $spacing-md;
     padding: $spacing-lg;
     margin-top: $spacing-xl;
-    background: var(--wor-copper-alpha-15);
-    border: $border-width-thick solid var(--wor-copper-alpha-30);
+    background: rgba($c-copper, 0.2);
+    border: 2px solid rgba($c-copper, 0.4);
     border-radius: $border-radius-md;
 
     .pool-label {
       font-weight: $font-weight-bold;
       font-size: $font-size-base;
-      color: $c-text-dark;
+      color: #fff;
     }
 
     .pool-value {
       font-size: $font-size-2xl;
       font-weight: $font-weight-bold;
-      color: $c-copper-dark;
+      color: $c-gold;
     }
   }
 }
@@ -345,16 +361,20 @@ form.dialog-form {
 // Dialog footer buttons (DialogV2 uses .dialog-buttons)
 footer.dialog-footer,
 .dialog-buttons {
-  display: flex;
-  gap: $spacing-md;
-  padding: $spacing-lg $spacing-xl;
-  background: var(--wor-dark-alpha-08);
-  border-top: $border-width solid var(--wor-dark-alpha-15);
-  justify-content: center;
+  display: flex !important;
+  gap: $spacing-md !important;
+  padding: $spacing-lg !important;
+  margin: $spacing-lg $spacing-xl $spacing-xl $spacing-xl !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border-top: none !important;
+  border-radius: $border-radius-md !important;
+  justify-content: center !important;
 
   button {
-    min-width: 120px;
-    font-size: $font-size-base;
-    font-weight: $font-weight-bold;
+    flex: 1 !important;
+    min-width: 120px !important;
+    padding: $spacing-md $spacing-lg !important;
+    font-size: $font-size-base !important;
+    font-weight: $font-weight-bold !important;
   }
 }

@@ -4,10 +4,13 @@
 
 // Use & to reference the parent selector for base styles
 & {
-  @include parchment-bg;
-  background-color: $c-parchment;
+  background: linear-gradient(180deg,
+    rgba(60, 30, 30, 0.98) 0%,
+    rgba(40, 25, 25, 0.98) 50%,
+    rgba(30, 20, 20, 0.98) 100%
+  );
   font-family: $font-primary;
-  color: $c-text-dark;
+  color: #fff;
   border-radius: $border-radius-lg;
   overflow: hidden;
 }
@@ -27,8 +30,8 @@
   flex-direction: column;
   gap: $spacing-md;
   padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
-  background: linear-gradient(90deg, $c-burgundy 0%, $c-copper 100%);
-  border-bottom: $border-width-thick solid $c-copper;
+  background: linear-gradient(90deg, #4d3535 0%, #755550 100%);
+  border-bottom: $border-width-thick solid #755550;
   border-radius: $border-radius-lg $border-radius-lg 0 0;
 
   .creation-title {
@@ -36,7 +39,7 @@
       margin: 0;
       font-size: $font-size-xl;
       font-family: $font-primary;
-      color: $c-text-inverse;
+      color: $c-gold !important;
       text-align: center;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
     }
@@ -80,7 +83,7 @@
 
       &.active {
         background: $c-gold;
-        color: $c-text-dark;
+        color: #fff;
         transform: scale(1.15);
         box-shadow: 0 0 8px rgba($c-gold, 0.5);
       }
@@ -173,14 +176,14 @@
   justify-content: space-between;
   align-items: center;
   padding: $spacing-md $spacing-lg;
-  background: rgba($c-faint, 0.3);
-  border-top: $border-width solid $c-faint;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: $border-width solid rgba(255, 255, 255, 0.1);
   border-radius: 0 0 $border-radius-lg $border-radius-lg;
 
   .footer-info {
     .step-info {
       font-size: $font-size-sm;
-      color: $c-text-dark;
+      color: rgba(255, 255, 255, 0.7);
     }
   }
 
@@ -243,8 +246,8 @@
     display: flex;
     flex-direction: column;
     padding: $spacing-md;
-    background: $c-bg-elevated;
-    border: 2px solid $c-faint;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-md;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -292,7 +295,7 @@
       .current-value {
         font-size: $font-size-xl;
         font-weight: $font-weight-bold;
-        color: $c-text-dark;
+        color: #fff;
       }
 
       .advance-arrow {
@@ -324,13 +327,13 @@
   gap: $spacing-sm;
   margin-bottom: $spacing-lg;
   padding: $spacing-sm $spacing-md;
-  background: $c-bg-elevated;
+  background: rgba(0, 0, 0, 0.3);
   border-radius: $border-radius-md;
-  border: $border-width solid $c-faint;
+  border: $border-width solid rgba(255, 255, 255, 0.1);
 
   .counter-label {
     font-weight: $font-weight-bold;
-    color: $c-text-dark;
+    color: #fff;
   }
 
   .counter-value {
@@ -353,8 +356,8 @@
     .category-header {
       margin: 0 0 $spacing-sm 0;
       font-size: $font-size-base;
-      color: $c-text-dark;
-      border-bottom: $border-width solid $c-faint;
+      color: #fff;
+      border-bottom: $border-width solid rgba(255, 255, 255, 0.1);
       padding-bottom: $spacing-xs;
     }
 
@@ -368,8 +371,8 @@
         align-items: center;
         justify-content: space-between;
         padding: $spacing-sm $spacing-md;
-        background: $c-bg-elevated;
-        border: $border-width solid $c-faint;
+        background: rgba(0, 0, 0, 0.3);
+        border: $border-width solid rgba(255, 255, 255, 0.1);
         border-radius: $border-radius-sm;
         cursor: pointer;
         transition: all 0.2s ease;
@@ -395,7 +398,7 @@
 
         .skill-name {
           font-size: $font-size-sm;
-          color: $c-text-dark;
+          color: #fff;
         }
 
         .skill-rank-display {
@@ -430,8 +433,8 @@
   .mode-tab {
     flex: 1;
     padding: $spacing-md;
-    background: $c-bg-elevated;
-    border: 2px solid $c-faint;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-md;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -476,8 +479,8 @@
       align-items: center;
       justify-content: space-between;
       padding: $spacing-md;
-      background: $c-bg-elevated;
-      border: $border-width solid $c-faint;
+      background: rgba(0, 0, 0, 0.3);
+      border: $border-width solid rgba(255, 255, 255, 0.1);
       border-radius: $border-radius-md;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -503,7 +506,7 @@
 
       .talent-name {
         font-weight: $font-weight-bold;
-        color: $c-text-dark;
+        color: #fff;
       }
 
       .talent-rank-display {
@@ -521,7 +524,7 @@
       .talent-type-badge {
         font-size: $font-size-xs;
         padding: $spacing-xs $spacing-sm;
-        background: rgba($c-faint, 0.5);
+        background: rgba(rgba(255, 255, 255, 0.1), 0.5);
         border-radius: $border-radius-sm;
         color: $c-text-medium;
         text-transform: capitalize;

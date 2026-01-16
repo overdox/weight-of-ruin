@@ -575,6 +575,179 @@
 // Attack Card Styles
 .attack-card {
   background: transparent;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  width: 100%;
+  min-width: 250px;
+  box-sizing: border-box;
+
+  // Ensure all direct children take full width
+  > * {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  // Card header styled like Defense Card
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: rgba($c-dark, 0.05);
+    border-bottom: $border-width solid rgba($c-dark, 0.1);
+    flex-wrap: nowrap;
+    min-width: 0;
+
+    .actor-portrait {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      border: $border-width-thick solid $c-medium;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .header-info {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+
+      // Attack Roll title in golden yellow (like Defense Roll)
+      .attack-roll-title {
+        margin: 0;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        font-family: $font-primary;
+        color: $c-gold;
+
+        .roll-components {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-normal;
+          color: $c-medium;
+          margin-left: $spacing-sm;
+
+          .component-value {
+            color: $c-accent-dark;
+            font-weight: $font-weight-bold;
+          }
+
+          .separator {
+            color: $c-light;
+          }
+        }
+      }
+
+      .actor-name {
+        font-size: $font-size-sm;
+        color: $c-medium;
+      }
+    }
+  }
+
+  // Result display styled like Defense Card
+  .result-indicator {
+    padding: $spacing-md;
+    margin: $spacing-sm 0;
+    text-align: center;
+
+    .result-display.attack-result {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-md;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+
+      .dice-pool {
+        color: $c-medium;
+        font-size: $font-size-lg;
+      }
+
+      .result-arrow {
+        color: $c-light;
+        font-size: $font-size-lg;
+      }
+
+      .hits-count {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: $spacing-sm $spacing-xl !important;
+        border-radius: $border-radius-md !important;
+        background: linear-gradient(145deg, $c-success-light, $c-success) !important;
+        color: $c-white !important;
+        font-size: $font-size-xl !important;
+        font-weight: $font-weight-bold !important;
+        box-shadow: $shadow-md !important;
+        border: $border-width-thick solid $c-success-dark !important;
+        width: auto !important;
+        height: auto !important;
+        transform: none !important;
+        min-width: 90px !important;
+        margin: 0 !important;
+      }
+    }
+  }
+
+  // Weapon name in golden yellow
+  .item-display .item-info .weapon-name {
+    color: $c-gold;
+  }
+
+  // Damage Section (styled like result indicator)
+  .damage-section {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: $spacing-sm;
+
+    .section-header.damage-header {
+      background: linear-gradient(135deg, rgba($c-danger, 0.3), rgba($c-danger-dark, 0.4));
+      padding: $spacing-xs $spacing-md;
+      border-radius: $border-radius-sm $border-radius-sm 0 0;
+
+      .section-title {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $c-gold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .damage-result {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-md;
+      padding: $spacing-md;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 0 0 $border-radius-sm $border-radius-sm;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+
+      .dice-pool {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .result-arrow {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .damage-hits {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $border-radius-md;
+        background: linear-gradient(145deg, $c-success-light, $c-success);
+        color: $c-white;
+        font-size: $font-size-lg;
+        box-shadow: $shadow-sm;
+        border: $border-width-thick solid $c-success-dark;
+      }
+    }
+  }
 
   .attack-header {
     margin-bottom: $spacing-sm;
@@ -652,19 +825,27 @@
     border: $border-width solid $c-faint;
     border-radius: $border-radius-md;
     margin: $spacing-sm 0;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    min-width: 0;
 
     .item-image {
       flex: 0 0 48px;
       width: 48px;
       height: 48px;
+      min-width: 48px;
       border-radius: $border-radius-md;
       border: $border-width-thick solid $c-medium;
       object-fit: cover;
       background: $c-pale;
+      flex-shrink: 0;
     }
 
     .item-info {
       flex: 1;
+      min-width: 0;
+      overflow: hidden;
 
       .item-name {
         font-size: $font-size-base;
@@ -672,11 +853,17 @@
         color: $c-dark;
         margin: 0;
         font-family: $font-primary;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .item-details {
         font-size: $font-size-sm;
         color: $c-medium;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }
@@ -786,6 +973,78 @@
     .miss-message {
       font-weight: $font-weight-bold;
     }
+  }
+
+  // Trauma Summary Section
+  .trauma-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    margin-top: $spacing-sm;
+    background: rgba($c-danger, 0.1);
+    border: $border-width solid rgba($c-danger, 0.2);
+    border-radius: $border-radius-md;
+    width: 100%;
+    box-sizing: border-box;
+
+    i {
+      color: $c-danger;
+    }
+
+    .trauma-label {
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+    }
+
+    .trauma-value {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-lg;
+      color: $c-danger;
+    }
+
+    .critical-bonus {
+      font-size: $font-size-sm;
+      color: $c-danger-dark;
+      font-style: italic;
+    }
+  }
+
+  // Target Info (in collapsible section)
+  .target-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: rgba($c-dark, 0.05);
+    border-radius: $border-radius-sm;
+    margin-bottom: $spacing-sm;
+    width: 100%;
+    box-sizing: border-box;
+
+    .target-label {
+      font-weight: $font-weight-bold;
+      color: $c-medium;
+    }
+
+    .target-name {
+      font-weight: $font-weight-bold;
+      color: $c-dark;
+    }
+
+    .target-defense {
+      font-size: $font-size-sm;
+      color: $c-medium;
+    }
+  }
+
+  // Collapsible section
+  .collapsible-section {
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -1560,8 +1819,9 @@
 .dialog-header {
   display: flex;
   padding: $spacing-lg;
-  background: linear-gradient(135deg, $c-burgundy 0%, $c-copper 100%);
-  border-bottom: $border-width-thick solid $c-copper;
+  // Use global dark brown gradient
+  background: linear-gradient(135deg, #4d3535 0%, #755550 100%);
+  border-bottom: $border-width-thick solid #755550;
   border-radius: $border-radius-lg $border-radius-lg 0 0;
   margin: 0 !important;
 
@@ -1700,6 +1960,11 @@
         font-family: $font-primary;
       }
 
+      // Defense Roll title in golden yellow
+      .defense-roll-title {
+        color: $c-gold;
+      }
+
       .actor-name {
         font-size: $font-size-sm;
         color: $c-medium;
@@ -1747,8 +2012,9 @@
       justify-content: center;
       padding: $spacing-xs $spacing-md;
       border-radius: $border-radius-sm;
-      background: linear-gradient(145deg, $c-accent-light, $c-accent);
-      color: $c-dark;
+      // Changed from gold to green for consistency with Attack card
+      background: linear-gradient(145deg, $c-success-light, $c-success);
+      color: $c-white;
       box-shadow: $shadow-sm;
 
       &.auto-success {

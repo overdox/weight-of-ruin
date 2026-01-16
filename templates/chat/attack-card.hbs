@@ -1,34 +1,22 @@
-<div class="wor roll-card attack-card {{#if isHit}}hit{{else}}miss{{/if}} {{#if isCritical}}critical{{/if}} {{degreeCss}}">
-  {{!-- Header with Attacker Portrait --}}
-  <div class="chat-card-header">
-    {{#if attacker.img}}
-    <img src="{{attacker.img}}" alt="{{attacker.name}}" class="actor-portrait" />
-    {{/if}}
-    <div class="header-info">
-      <h4 class="actor-name">{{attacker.name}}</h4>
-      <div class="roll-type">
-        <span class="roll-label">{{localize "AOA.Combat.Attack"}}</span>
-        {{#if pool}}
-        <span class="roll-components">
-          <span class="component-value" title="{{pool.prowess.label}}">{{pool.prowess.value}}</span>
-          <span class="separator">+</span>
-          <span class="component-value" title="{{pool.skill.name}}">{{pool.skill.rank}}</span>
-          {{#if pool.modifier}}
-          <span class="separator">{{#if (gt pool.modifier 0)}}+{{/if}}</span>
-          <span class="component-value">{{pool.modifier}}</span>
-          {{/if}}
-        </span>
-        {{/if}}
+<div class="wor">
+  <div class="attack-card {{#if isHit}}hit{{else}}miss{{/if}} {{#if isCritical}}critical{{/if}} {{degreeCss}}">
+    {{!-- Header with Attacker Portrait (styled like Defense Card) --}}
+    <div class="card-header">
+      {{#if attacker.img}}
+      <img src="{{attacker.img}}" alt="{{attacker.name}}" class="actor-portrait" />
+      {{/if}}
+      <div class="header-info">
+        <h3 class="attack-roll-title">{{localize "AOA.Combat.AttackRoll"}}</h3>
+        <span class="actor-name">{{attacker.name}}</span>
       </div>
     </div>
-  </div>
 
-  {{!-- Result Indicator (prominent display with dice pool) --}}
+  {{!-- Result Indicator (styled like Defense Card) --}}
   <div class="result-indicator {{degreeCss}}">
-    <div class="result-text">
-      <span class="dice-pool-display">{{pool.total}}d6</span>
-      <span class="result-separator">×</span>
-      ( <span class="hit-count">{{roll.hits}}</span> )
+    <div class="result-display attack-result">
+      <span class="dice-pool">{{pool.total}}d6</span>
+      <span class="result-arrow">→</span>
+      <span class="hits-count">{{roll.hits}} {{localize "AOA.Roll.Hits"}}</span>
     </div>
   </div>
 
@@ -38,28 +26,24 @@
     <img src="{{weapon.img}}" alt="{{weapon.name}}" class="item-image" />
     {{/if}}
     <div class="item-info">
-      <h5 class="item-name">{{weapon.name}}</h5>
+      <h5 class="item-name weapon-name">{{weapon.name}}</h5>
       <span class="item-details">
         {{localize (concat "AOA.Weapon.RangeType." (capitalize weapon.range))}}
       </span>
     </div>
   </div>
 
-  {{!-- Damage Display (prominent, like reference) --}}
+  {{!-- Damage Section (styled like result indicator) --}}
   {{#if damage}}
-  <div class="damage-display {{#if isCritical}}critical{{/if}}">
-    <div class="damage-label">{{localize "AOA.Combat.Damage"}}</div>
-    <div class="damage-value">{{damage.finalDamage}}</div>
-  </div>
-
-  {{!-- Trauma Dealt --}}
-  <div class="trauma-summary">
-    <i class="fas fa-heart-crack"></i>
-    <span class="trauma-label">{{localize "AOA.Combat.TraumaDealt"}}:</span>
-    <span class="trauma-value">{{damage.traumaDealt}}</span>
-    {{#if isCritical}}
-    <span class="critical-bonus">({{localize "AOA.Combat.Critical"}})</span>
-    {{/if}}
+  <div class="damage-section">
+    <div class="section-header damage-header">
+      <span class="section-title">{{localize "AOA.Combat.Damage"}}</span>
+    </div>
+    <div class="damage-result">
+      <span class="dice-pool">{{damage.rawDamage}}d6</span>
+      <span class="result-arrow">→</span>
+      <span class="damage-hits">{{damage.traumaDealt}} {{localize "AOA.Roll.Hits"}}</span>
+    </div>
   </div>
   {{/if}}
 
@@ -137,4 +121,5 @@
   </div>
   {{/if}}
   {{/if}}
+  </div>
 </div>

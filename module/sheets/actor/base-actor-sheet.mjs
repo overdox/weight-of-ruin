@@ -142,7 +142,7 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     combat: { id: 'combat', group: 'primary', label: 'AOA.Tabs.Combat' },
     inventory: { id: 'inventory', group: 'primary', label: 'AOA.Tabs.Inventory' },
     thaumaturgy: { id: 'thaumaturgy', group: 'primary', label: 'AOA.Tabs.Thaumaturgy' },
-    legacy: { id: 'legacy', group: 'primary', label: 'AOA.Tabs.Legacy' }
+    profile: { id: 'profile', group: 'primary', label: 'AOA.Tabs.Profile' }
   };
 
   /**
@@ -160,10 +160,10 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
   showAllSkills = false;
 
   /**
-   * The current sub-tab in the Legacy tab.
+   * The current sub-tab in the Profile tab.
    * @type {string}
    */
-  legacyTab = 'identity';
+  profileTab = 'identity';
 
   /* -------------------------------------------- */
   /*  Context Preparation                         */
@@ -257,8 +257,8 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     // Skills visibility toggle
     context.showAllSkills = this.showAllSkills;
 
-    // Biography sub-tab
-    context.legacyTab = this.legacyTab;
+    // Profile sub-tab
+    context.profileTab = this.profileTab;
 
     // Enriched HTML for rich text fields
     context.enrichedNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
@@ -437,8 +437,8 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
     // Setup tab navigation
     this._setupTabNavigation();
 
-    // Setup legacy sub-tab navigation
-    this._setupLegacyTabNavigation();
+    // Setup profile sub-tab navigation
+    this._setupProfileTabNavigation();
 
     // Setup editor button handlers for ProseMirror
     this._setupEditorButtons();
@@ -514,25 +514,25 @@ export class WoRBaseActorSheet extends HandlebarsApplicationMixin(DocumentSheetV
   }
 
   /**
-   * Set up legacy sub-tab navigation click handlers.
+   * Set up profile sub-tab navigation click handlers.
    */
-  _setupLegacyTabNavigation() {
-    const tabs = this.element.querySelectorAll('.legacy-tabs .item[data-tab]');
+  _setupProfileTabNavigation() {
+    const tabs = this.element.querySelectorAll('.profile-tabs .item[data-tab]');
     tabs.forEach(tab => {
       tab.addEventListener('click', (event) => {
         event.preventDefault();
         const tabId = tab.dataset.tab;
-        this.changeLegacyTab(tabId);
+        this.changeProfileTab(tabId);
       });
     });
   }
 
   /**
-   * Change the active legacy sub-tab.
+   * Change the active profile sub-tab.
    * @param {string} tab - The tab ID to switch to
    */
-  changeLegacyTab(tab) {
-    this.legacyTab = tab;
+  changeProfileTab(tab) {
+    this.profileTab = tab;
     this.render();
   }
 

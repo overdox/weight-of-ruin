@@ -18,7 +18,12 @@
     margin: 0;
     padding: 0;
     border: none;
-    background: $c-parchment;
+    background: linear-gradient(180deg,
+      rgba(60, 30, 30, 0.98) 0%,
+      rgba(40, 25, 25, 0.98) 50%,
+      rgba(30, 20, 20, 0.98) 100%
+    );
+    color: #fff;
   }
 }
 
@@ -29,8 +34,9 @@
   display: flex;
   gap: $spacing-lg;
   padding: $spacing-lg;
-  background: linear-gradient(135deg, $c-copper-deep 0%, $c-burgundy 50%, $c-copper-dark 100%);
-  border-bottom: $border-width-heavy solid $c-copper;
+  // Use global dark brown gradient
+  background: linear-gradient(135deg, #4d3535 0%, #5a4040 50%, #755550 100%);
+  border-bottom: $border-width-heavy solid #755550;
   min-height: 100px;
 
   .item-img {
@@ -43,7 +49,7 @@
     box-shadow: $shadow-lg;
     cursor: pointer;
     transition: border-color $transition-fast, box-shadow $transition-fast;
-    background: $c-parchment;
+    background: rgba(0, 0, 0, 0.3);
 
     &:hover {
       border-color: $c-gold-light;
@@ -280,13 +286,13 @@
 // ============================================
 // Note: This file is imported inside .weight-of-ruin scope
 &.item-sheet {
-  // Target Foundry's generic tab navigation
+  // Target Foundry's generic tab navigation - Dark theme
   nav.sheet-tabs,
   .sheet-tabs {
     display: flex;
     gap: $spacing-xs;
     padding: $spacing-xs $spacing-md;
-    background: $c-parchment-dark;
+    background: rgba(0, 0, 0, 0.3);
     border-bottom: $border-width-thick solid $c-copper;
     margin: 0;
 
@@ -298,7 +304,7 @@
       padding: $spacing-sm $spacing-lg;
       font-size: $font-size-sm;
       font-weight: $font-weight-bold;
-      color: $c-text-dark !important;
+      color: rgba(255, 255, 255, 0.7) !important;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       cursor: pointer;
@@ -313,26 +319,26 @@
 
       i {
         margin-right: $spacing-sm;
-        color: $c-text-dark !important;
+        color: rgba(255, 255, 255, 0.7) !important;
       }
 
       &:hover {
-        color: $c-copper !important;
-        background: rgba($c-copper, 0.1);
+        color: $c-gold !important;
+        background: rgba($c-copper, 0.2);
 
         i {
-          color: $c-copper !important;
+          color: $c-gold !important;
         }
       }
 
       &.active {
-        color: $c-copper !important;
-        background: $c-parchment;
+        color: $c-gold !important;
+        background: rgba(0, 0, 0, 0.4);
         border-color: $c-copper;
-        border-bottom: $border-width-thick solid $c-parchment;
+        border-bottom: $border-width-thick solid rgba(0, 0, 0, 0.4);
 
         i {
-          color: $c-copper !important;
+          color: $c-gold !important;
         }
       }
     }
@@ -371,7 +377,7 @@
 }
 
 // ============================================
-// SIDEBAR (Left Column)
+// SIDEBAR (Left Column) - Dark Theme
 // ============================================
 .item-sidebar {
   flex: 0 0 160px;
@@ -379,56 +385,59 @@
   flex-direction: column;
   gap: 0;
   padding: $spacing-md;
-  background: rgba($c-stone, 0.08);
-  border-right: $border-width solid $c-border-medium;
+  background: rgba(0, 0, 0, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 
   .sidebar-stat {
     display: flex;
     flex-direction: column;
     padding: $spacing-sm $spacing-md;
-    border-bottom: $border-width solid $c-border-light;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
     &:last-child {
       border-bottom: none;
     }
 
     .stat-label {
-      @include text-label;
       font-size: 9px;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.5);
       margin-bottom: $spacing-xs;
     }
 
     .stat-value {
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
-      color: $c-text-dark;
+      color: #fff;
 
       &.highlight {
-        color: $c-gold-dark;
+        color: $c-gold;
         font-size: $font-size-md;
       }
 
       &.damage {
-        color: $c-danger;
+        color: var(--wor-danger-light);
       }
 
       &.defense {
-        color: $c-success-dark;
+        color: var(--wor-success-light);
       }
 
       &.magic {
-        color: $c-magic;
+        color: var(--wor-magic-light);
       }
 
       &.bonus {
-        color: $c-success-dark;
+        color: var(--wor-success-light);
       }
     }
 
     .stat-unit {
       font-size: $font-size-xs;
       font-weight: $font-weight-normal;
-      color: $c-text-dark;
+      color: rgba(255, 255, 255, 0.6);
       margin-left: $spacing-xs;
     }
 
@@ -530,7 +539,7 @@
 }
 
 // ============================================
-// FIELDSET GROUPS
+// FIELDSET GROUPS - Dark Theme
 // ============================================
 .item-fieldset {
   @include section-container;
@@ -548,6 +557,8 @@
 
   .fieldset-content {
     padding: $spacing-md;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -585,10 +596,19 @@
 
     input,
     select {
-      @include input-base;
       width: 100%;
       padding: $spacing-sm;
       font-size: $font-size-sm;
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba($c-copper, 0.4) !important;
+      color: #fff !important;
+      border-radius: $border-radius-sm;
+
+      &:focus {
+        outline: none;
+        border-color: $c-copper !important;
+        box-shadow: 0 0 6px rgba($c-copper, 0.4);
+      }
     }
 
     input[type="number"] {
@@ -600,23 +620,32 @@
     }
 
     textarea {
-      @include input-base;
       width: 100%;
       min-height: 60px;
       resize: vertical;
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba($c-copper, 0.4) !important;
+      color: #fff !important;
+      border-radius: $border-radius-sm;
+
+      &:focus {
+        outline: none;
+        border-color: $c-copper !important;
+        box-shadow: 0 0 6px rgba($c-copper, 0.4);
+      }
     }
 
     // Display value (non-edit mode)
     .field-value {
       font-size: $font-size-base;
-      color: $c-text-dark;
+      color: #fff;
       padding: $spacing-sm;
-      background: rgba($c-stone, 0.04);
+      background: rgba(0, 0, 0, 0.2);
       border-radius: $border-radius-sm;
       min-height: 30px;
 
       &.empty {
-        color: $c-text-light;
+        color: rgba(255, 255, 255, 0.5);
         font-style: italic;
       }
     }
@@ -632,7 +661,7 @@
         align-items: center;
         gap: $spacing-sm;
         font-size: $font-size-sm;
-        color: $c-text-dark;
+        color: #fff;
         text-transform: none;
         letter-spacing: 0;
         cursor: pointer;
@@ -646,7 +675,7 @@
 }
 
 // ============================================
-// DESCRIPTION SECTION
+// DESCRIPTION SECTION - Dark Theme
 // ============================================
 .description-section {
   @include section-container;
@@ -669,14 +698,14 @@
       margin: 0;
       font-size: $font-size-sm;
       font-weight: $font-weight-bold;
-      color: $c-text-inverse;
+      color: #fff;
     }
 
     .editor-edit-btn {
       padding: $spacing-xs $spacing-sm;
-      background: $c-copper-dark;
-      color: $c-text-inverse;
-      border: 1px solid $c-copper;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border: 1px solid rgba($c-copper, 0.4);
       border-radius: $border-radius-sm;
       cursor: pointer;
       font-size: $font-size-sm;
@@ -689,8 +718,8 @@
       transition: background-color 0.2s ease, color 0.2s ease;
 
       &:hover {
-        background: $c-copper;
-        color: $c-text-inverse;
+        background: rgba($c-copper, 0.3);
+        color: $c-gold;
       }
 
       i {
@@ -702,7 +731,7 @@
 
   .editor-container {
     padding: $spacing-md;
-    background: $c-bg-elevated;
+    background: rgba(0, 0, 0, 0.2);
     min-height: 120px;
 
     // Style the built-in Foundry editor
@@ -712,17 +741,17 @@
 
       // Make the edit button more visible
       .editor-edit {
-        background: $c-copper-dark;
-        color: $c-text-inverse;
-        border: 1px solid $c-copper;
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        border: 1px solid rgba($c-copper, 0.4);
         padding: $spacing-xs $spacing-sm;
         border-radius: $border-radius-sm;
         cursor: pointer;
         font-size: $font-size-sm;
 
         &:hover {
-          background: $c-copper;
-          color: $c-text-inverse;
+          background: rgba($c-copper, 0.3);
+          color: $c-gold;
         }
 
         i {
@@ -731,7 +760,7 @@
       }
 
       .editor-content {
-        color: $c-text-dark;
+        color: #fff;
         min-height: 80px;
       }
 
@@ -739,24 +768,25 @@
       prose-mirror {
         min-height: 100px;
         padding: $spacing-sm;
-        border: 1px solid $c-border-medium;
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: $border-radius-sm;
-        background: $c-bg-elevated;
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
       }
     }
   }
 
   .description-content {
     padding: $spacing-md;
-    background: $c-bg-elevated;
+    background: rgba(0, 0, 0, 0.2);
     min-height: 80px;
     line-height: 1.6;
-    color: $c-text-dark;
+    color: #fff;
     font-size: $font-size-base;
 
     p {
       margin: 0 0 $spacing-md 0;
-      color: $c-text-dark;
+      color: #fff;
 
       &:last-child {
         margin-bottom: 0;
@@ -797,7 +827,7 @@
 }
 
 // ============================================
-// TALENT EFFECT SECTION
+// TALENT EFFECT SECTION - Dark Theme
 // ============================================
 .effect-section {
   @include section-container;
@@ -812,13 +842,14 @@
 
   .editor-container {
     padding: $spacing-md;
-    background: $c-bg-elevated;
+    background: rgba(0, 0, 0, 0.2);
   }
 
   .effect-content {
     padding: $spacing-md;
-    background: $c-bg-elevated;
+    background: rgba(0, 0, 0, 0.2);
     line-height: 1.5;
+    color: #fff;
   }
 }
 
@@ -906,7 +937,7 @@
       margin: 0;
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
-      color: $c-text-dark;
+      color: $c-gold !important;
     }
 
     .effect-control {
@@ -956,7 +987,7 @@
     .effect-name {
       flex: 1;
       font-size: $font-size-sm;
-      color: $c-text-dark;
+      color: #fff;
     }
 
     .effect-controls {
@@ -969,7 +1000,7 @@
         @include clickable;
         padding: $spacing-xs;
         font-size: $font-size-sm;
-        color: $c-text-light;
+        color: rgba(255, 255, 255, 0.6);
 
         &:hover {
           color: $c-gold;
@@ -1007,15 +1038,18 @@
   .attribute-modifiers,
   .attribute-bonuses {
     padding: $spacing-md;
-    background: $c-bg-elevated;
+    background: rgba(0, 0, 0, 0.3);
 
     h4 {
-      @include text-label;
+      color: $c-gold !important;
+      font-size: $font-size-sm;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: $spacing-md;
     }
 
-    // Ensure text is dark on white background
-    color: $c-text-dark;
+    // Dark theme text
+    color: #fff;
 
     .modifier,
     .bonus {
@@ -1023,12 +1057,12 @@
       @include status-badge-gold;
       margin-right: $spacing-sm;
       margin-bottom: $spacing-sm;
-      color: $c-text-dark;
+      color: #fff;
     }
 
     // Attribute modifier text display
     p, span {
-      color: $c-text-dark;
+      color: #fff;
     }
   }
 
@@ -1036,11 +1070,14 @@
   .callings,
   .skill-grants {
     padding: $spacing-md;
-    background: $c-bg-elevated;
-    border-top: $border-width solid $c-border-light;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 
     h4 {
-      @include text-label;
+      color: $c-gold !important;
+      font-size: $font-size-sm;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: $spacing-md;
     }
 
@@ -1048,32 +1085,32 @@
       list-style: disc;
       margin: 0;
       padding: 0 0 0 $spacing-lg;
-      color: $c-text-dark;
+      color: #fff;
 
       li {
         padding: $spacing-sm 0;
-        border-bottom: $border-width solid $c-border-light;
-        color: $c-text-dark;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
 
         &:last-child {
           border-bottom: none;
         }
 
         strong {
-          color: $c-text-dark;
+          color: $c-gold;
           font-weight: $font-weight-bold;
         }
 
         .subtype-name,
         .calling-name {
-          color: $c-text-dark;
+          color: $c-gold !important;
           font-weight: $font-weight-bold;
         }
 
         .subtype-desc,
         .calling-desc {
           font-size: $font-size-sm;
-          color: $c-text-medium;
+          color: rgba(255, 255, 255, 0.7);
           margin: $spacing-xs 0 0 0;
         }
 
@@ -1081,15 +1118,15 @@
         .signature-talents,
         .suggested-skills {
           font-size: $font-size-sm;
-          color: $c-text-dark;
+          color: #fff;
           margin-top: $spacing-xs;
 
           strong {
-            color: $c-text-dark;
+            color: $c-gold;
           }
 
           span, em {
-            color: $c-text-medium;
+            color: rgba(255, 255, 255, 0.7);
           }
         }
       }
@@ -1168,16 +1205,18 @@
   .benefits-section,
   .complications-section {
     padding: $spacing-md;
-    background: $c-bg-elevated;
-    border-top: $border-width solid $c-border-light;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 
     h4 {
-      @include text-label;
+      font-size: $font-size-sm;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: $spacing-sm;
     }
 
     &.benefits-section h4 {
-      color: $c-success-dark;
+      color: $c-success-light;
     }
 
     &.complications-section h4 {
@@ -1188,12 +1227,15 @@
       @include input-base;
       width: 100%;
       min-height: 60px;
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      color: #fff !important;
     }
 
     p {
       margin: 0;
       font-size: $font-size-sm;
-      color: $c-text-dark;
+      color: rgba(255, 255, 255, 0.7);
       line-height: 1.5;
     }
   }
@@ -1208,7 +1250,7 @@
 
   li {
     padding: $spacing-sm 0;
-    border-bottom: $border-width solid $c-border-light;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     &:last-child {
       border-bottom: none;
@@ -1225,9 +1267,9 @@
 
   .benefit-type {
     font-weight: $font-weight-bold;
-    color: $c-text-dark;
+    color: #fff;
     padding: $spacing-xs $spacing-sm;
-    background: rgba($c-success, 0.15);
+    background: rgba($c-success, 0.3);
     border-radius: $border-radius-sm;
     font-size: $font-size-xs;
     text-transform: uppercase;
@@ -1235,9 +1277,9 @@
 
   .complication-type {
     font-weight: $font-weight-bold;
-    color: $c-text-dark;
+    color: #fff;
     padding: $spacing-xs $spacing-sm;
-    background: rgba($c-danger, 0.15);
+    background: rgba($c-danger, 0.3);
     border-radius: $border-radius-sm;
     font-size: $font-size-xs;
     text-transform: uppercase;
@@ -1245,13 +1287,13 @@
 
   .benefit-target,
   .complication-target {
-    color: $c-text-dark;
+    color: #fff;
     font-weight: 500;
   }
 
   .benefit-value {
     font-weight: $font-weight-bold;
-    color: $c-success-dark;
+    color: $c-success-light;
   }
 
   .complication-severity {
@@ -1262,11 +1304,11 @@
 
     &.severity-minor {
       background: var(--wor-warning-alpha-20);
-      color: var(--wor-warning-darker);
+      color: var(--wor-warning);
     }
     &.severity-moderate {
       background: var(--wor-warning-alpha-30);
-      color: var(--wor-warning-darker);
+      color: var(--wor-warning);
     }
     &.severity-major {
       background: var(--wor-danger-alpha-20);
@@ -1274,7 +1316,7 @@
     }
     &.severity-severe {
       background: var(--wor-danger-alpha-30);
-      color: var(--wor-danger-darker);
+      color: $c-danger;
     }
   }
 
@@ -1283,7 +1325,7 @@
     flex-basis: 100%;
     margin: $spacing-xs 0 0 0;
     font-size: $font-size-sm;
-    color: $c-text-dark;
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.4;
   }
 }
@@ -1293,7 +1335,7 @@
 // ============================================
 .empty-notice {
   font-size: $font-size-sm;
-  color: $c-text-light;
+  color: rgba(255, 255, 255, 0.5);
   font-style: italic;
   text-align: center;
   padding: $spacing-xl;
@@ -1315,7 +1357,7 @@
     justify-content: space-between;
     align-items: center;
     padding: $spacing-sm $spacing-md;
-    border-bottom: $border-width solid $c-border-light;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     &:last-child {
       border-bottom: none;
@@ -1324,13 +1366,13 @@
     .skill-name {
       font-size: $font-size-base;
       font-weight: 500;
-      color: $c-text-dark;
+      color: #fff;
     }
 
     .skill-rank {
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
-      color: $c-success;
+      color: $c-success-light;
     }
   }
 }
@@ -1344,7 +1386,7 @@
   .hook-item {
     margin-bottom: $spacing-md;
     padding-bottom: $spacing-md;
-    border-bottom: $border-width solid $c-border-light;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     &:last-child {
       margin-bottom: 0;
@@ -1356,14 +1398,14 @@
       display: block;
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
-      color: $c-text-dark;
+      color: $c-gold !important;
       margin-bottom: $spacing-xs;
     }
 
     .hook-description {
       margin: 0;
       font-size: $font-size-sm;
-      color: $c-text-dark;
+      color: rgba(255, 255, 255, 0.7);
       line-height: 1.5;
     }
   }
@@ -1372,7 +1414,7 @@
 // Contact styling
 .contact-type {
   font-style: italic;
-  color: $c-copper;
+  color: $c-gold;
 }
 
 // Resource subsections
@@ -1386,7 +1428,7 @@
   > strong {
     display: block;
     font-size: $font-size-sm;
-    color: $c-text-dark;
+    color: $c-gold !important;
     margin-bottom: $spacing-xs;
   }
 
@@ -1397,7 +1439,7 @@
 
     li {
       font-size: $font-size-sm;
-      color: $c-text-dark;
+      color: #fff;
       margin-bottom: $spacing-xs;
 
       &:last-child {
@@ -1425,42 +1467,42 @@
   }
 }
 
-// Ensure text in fieldset content is dark
+// Ensure text in fieldset content is light (dark theme)
 .item-fieldset .fieldset-content {
   p {
-    color: $c-text-dark;
+    color: rgba(255, 255, 255, 0.7);
     font-size: $font-size-base;
     line-height: 1.5;
     margin: 0;
   }
 
   em {
-    color: $c-text-medium;
+    color: rgba(255, 255, 255, 0.6);
     margin-left: $spacing-sm;
   }
 }
 
 // ============================================
-// ITEM SHEET WINDOW - DARK TEXT OVERRIDES
+// ITEM SHEET WINDOW - DARK THEME TEXT
 // ============================================
 // These rules ensure all text in item sheets (Lineage, Archetype, Calling, etc.)
-// is dark on light backgrounds
+// is light on dark backgrounds
 // Note: This file is imported inside .weight-of-ruin {} so we just use &.item-sheet
 &.item-sheet {
   // Attribute modifiers (e.g., FOR: -1 RES: +1)
   .attribute-modifiers {
     .modifier {
-      color: $c-text-dark !important;
+      color: #fff !important;
     }
   }
 
   // Form field values (e.g., Starting Witchsight: 1)
   .form-group {
     .field-value {
-      color: $c-text-dark;
+      color: #fff;
     }
     label {
-      color: $c-text-dark;
+      color: $c-gold !important;
     }
   }
 
@@ -1468,10 +1510,10 @@
   .signature-talents-list {
     .talent-item {
       .talent-name {
-        color: $c-text-dark !important;
+        color: $c-gold !important;
       }
       .talent-description {
-        color: $c-text-medium;
+        color: rgba(255, 255, 255, 0.7);
       }
     }
   }
@@ -1479,8 +1521,8 @@
   // Skill tags (Suggested Skills in Calling sheets)
   .skill-tags {
     .skill-tag {
-      color: $c-text-dark !important;
-      background: rgba($c-stone, 0.12);
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.1);
     }
   }
 
@@ -1488,10 +1530,10 @@
   .features-list {
     .feature-item {
       .feature-name {
-        color: $c-text-dark !important;
+        color: $c-gold !important;
       }
       .feature-description {
-        color: $c-text-medium;
+        color: rgba(255, 255, 255, 0.7);
       }
     }
   }
@@ -1500,9 +1542,9 @@
   .subtypes-list,
   .callings-list {
     li {
-      color: $c-text-dark;
+      color: #fff;
       strong {
-        color: $c-text-dark !important;
+        color: $c-gold !important;
       }
     }
   }
@@ -1510,20 +1552,20 @@
   // Equipment lists
   .equipment-list {
     li {
-      color: $c-text-dark;
+      color: #fff;
     }
   }
 
   // General fieldset content
   .fieldset-content {
-    color: $c-text-dark;
+    color: #fff;
 
     ul {
-      color: $c-text-dark;
+      color: #fff;
       li {
-        color: $c-text-dark;
+        color: #fff;
         strong {
-          color: $c-text-dark !important;
+          color: $c-gold !important;
         }
       }
     }
@@ -1543,7 +1585,7 @@
 
       label {
         font-weight: $font-weight-bold;
-        color: $c-text-dark;
+        color: $c-gold !important;
       }
 
       .array-add-btn {
@@ -1575,14 +1617,17 @@
       align-items: center;
       gap: $spacing-sm;
       padding: $spacing-sm;
-      background: rgba($c-dark, 0.05);
+      background: rgba(0, 0, 0, 0.3);
       border-radius: $border-radius-sm;
-      border: 1px solid rgba($c-dark, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
 
       select, input {
         @include input-base;
         font-size: $font-size-sm;
         padding: $spacing-xs;
+        background: rgba(0, 0, 0, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        color: #fff !important;
       }
 
       .bonus-type, .condition-select {
@@ -1619,13 +1664,13 @@
 
       .bonus-display, .condition-display {
         flex: 1;
-        color: $c-text-dark;
+        color: #fff;
         font-size: $font-size-sm;
       }
     }
 
     .field-value.empty {
-      color: $c-text-light;
+      color: rgba(255, 255, 255, 0.5);
       font-style: italic;
     }
   }
