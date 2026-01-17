@@ -715,8 +715,10 @@
       "ShowAllHint": "Toggle to show skills with rank 0"
     },
     "Weapon": {
+      "Attack": "Attack",
       "Damage": "Damage",
       "BaseDamage": "Base Damage",
+      "DamageType": "Damage Type",
       "UseStrengthBonus": "Add Strength Bonus",
       "Attribute": "Attribute",
       "Group": {
@@ -757,18 +759,48 @@
         "Ranged": "Ranged",
         "Thrown": "Thrown",
         "Reach": "Reach"
+      },
+      "Modifications": "Modifications",
+      "Modification": {
+        "Category": "Category",
+        "Type": "Type",
+        "Add": "Add Modification",
+        "Remove": "Remove",
+        "Damage": "Damage",
+        "Effect": "Effect",
+        "Flavour": "Flavour",
+        "DamagePlaceholder": "+1",
+        "EffectPlaceholder": "e.g., +1 damage vs unarmored",
+        "FlavourPlaceholder": "e.g., The blade drips with venom...",
+        "Physical": {
+          "label": "Physical",
+          "Serrated": "Serrated",
+          "Flanged": "Flanged",
+          "GripWraps": "Grip-Wraps"
+        },
+        "Alchemical": {
+          "label": "Alchemical",
+          "Acid": "Acid",
+          "Poison": "Poison",
+          "Incendiary": "Incendiary"
+        },
+        "Witching": {
+          "label": "Witching",
+          "Ironsalted": "Ironsalted",
+          "Bloodgrooved": "Bloodgrooved",
+          "GraveTempered": "Grave-Tempered"
+        }
       }
     },
     "Quality": {
       "Label": "Quality",
-      "Shoddy": "Shoddy",
-      "Standard": "Standard",
-      "Quality": "Quality",
-      "Masterwork": "Masterwork",
-      "Legendary": "Legendary",
-      "Poor": "Poor",
-      "Fine": "Fine",
-      "Superior": "Superior"
+      "Ruined": "Ruined (-3)",
+      "Damaged": "Damaged (-2)",
+      "Inferior": "Inferior (-1)",
+      "Average": "Average (+0)",
+      "Fine": "Fine (+1)",
+      "Superior": "Superior (+2)",
+      "Masterwork": "Masterwork (+3)"
     },
     "Rarity": {
       "Common": "Common",

@@ -65,6 +65,7 @@
     gap: $spacing-sm;
     min-width: 0;
 
+    // Item name - both h1 (view mode) and input (edit mode) share the class
     .item-name {
       margin: 0;
       font-family: $font-primary;
@@ -72,30 +73,31 @@
       font-weight: $font-weight-bold;
       color: #fff !important;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
 
-      input {
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        color: inherit;
-        background: transparent;
-        border: none;
-        border-bottom: $border-width solid transparent;
-        width: 100%;
-        text-shadow: inherit;
+    // Input element with item-name class (edit mode)
+    input.item-name {
+      background: transparent !important;
+      border: none !important;
+      border-bottom: $border-width solid transparent !important;
+      max-width: 360px;
+      height: 32px;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-sm;
+      transition: background $transition-fast, border-color $transition-fast;
 
-        &::placeholder {
-          color: var(--wor-text-inverse-alpha-50);
-        }
+      &::placeholder {
+        color: var(--wor-text-inverse-alpha-50);
+      }
 
-        &:hover {
-          border-bottom-color: var(--wor-text-inverse-alpha-30);
-        }
+      &:hover {
+        border-bottom-color: var(--wor-text-inverse-alpha-30) !important;
+      }
 
-        &:focus {
-          outline: none;
-          border-bottom-color: $c-gold;
-        }
+      &:focus {
+        outline: none;
+        border-bottom-color: $c-gold !important;
+        background: rgba(0, 0, 0, 0.4) !important;
       }
     }
 
@@ -302,7 +304,7 @@
     button[data-tab],
     [role="tab"] {
       padding: $spacing-sm $spacing-lg;
-      font-size: $font-size-sm;
+      font-size: $font-size-md; // 14px - section header size
       font-weight: $font-weight-bold;
       color: rgba(255, 255, 255, 0.7) !important;
       text-transform: uppercase;
@@ -552,7 +554,7 @@
   .fieldset-header {
     @include section-header;
     padding: $spacing-sm $spacing-md;
-    font-size: $font-size-sm;
+    font-size: $font-size-md; // 14px - section header size
   }
 
   .fieldset-content {
@@ -591,7 +593,6 @@
 
     label {
       @include text-label;
-      font-size: 10px;
     }
 
     input,
@@ -660,7 +661,8 @@
         display: flex;
         align-items: center;
         gap: $spacing-sm;
-        font-size: $font-size-sm;
+        font-size: $font-size-base; // 12px - regular text
+        font-weight: $font-weight-bold;
         color: #fff;
         text-transform: none;
         letter-spacing: 0;
@@ -684,7 +686,7 @@
   > h3 {
     @include section-header;
     padding: $spacing-sm $spacing-md;
-    font-size: $font-size-sm;
+    font-size: $font-size-md; // 14px - section header size
     margin: 0;
   }
 
@@ -696,7 +698,7 @@
 
     h3 {
       margin: 0;
-      font-size: $font-size-sm;
+      font-size: $font-size-md; // 14px - section header size
       font-weight: $font-weight-bold;
       color: #fff;
     }
@@ -864,6 +866,248 @@
 
   .stats-grid {
     @extend .form-grid;
+  }
+}
+
+// ============================================
+// WEAPON DAMAGE ROW
+// ============================================
+.damage-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  align-items: flex-start;
+}
+
+.damage-group {
+  flex: 1 1 auto;
+  min-width: 200px;
+}
+
+.damage-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+
+  .damage-input {
+    width: 48px !important;
+    height: 32px;
+    text-align: center;
+    font-weight: $font-weight-bold;
+    padding: $spacing-xs !important;
+    font-size: $font-size-base !important;
+  }
+
+  .damage-value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 32px;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: $border-radius-sm;
+  }
+
+  .d6-indicator {
+    font-weight: $font-weight-bold;
+    color: $c-gold;
+    font-size: $font-size-base;
+    padding: 0 $spacing-xs;
+  }
+
+  .damage-type-select {
+    flex: 1;
+    min-width: 100px;
+    max-width: 140px;
+  }
+
+  .damage-type {
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.8);
+    padding: $spacing-xs $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $border-radius-sm;
+  }
+}
+
+// ============================================
+// WEAPON MODIFICATIONS
+// ============================================
+.fieldset-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .add-modification-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid $c-success;
+    background: rgba($c-success, 0.2);
+    color: $c-success-light;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $c-success;
+      color: #fff;
+    }
+  }
+}
+
+.modifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.modification-item {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: $border-radius-sm;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+
+  .modification-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .modification-category {
+      flex: 0 0 110px;
+    }
+
+    .modification-type {
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .remove-modification-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 1px solid $c-danger;
+      background: rgba($c-danger, 0.2);
+      color: $c-danger;
+      border-radius: $border-radius-sm;
+      cursor: pointer;
+      transition: all $transition-fast;
+      flex-shrink: 0;
+
+      &:hover {
+        background: $c-danger;
+        color: #fff;
+      }
+    }
+  }
+
+  .modification-details {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+
+    .mod-field {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      label {
+        @include text-label;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      input {
+        font-size: $font-size-sm;
+        padding: $spacing-xs;
+      }
+
+      &.damage-field {
+        grid-column: 1;
+
+        input {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      &.effect-field {
+        grid-column: 2;
+      }
+
+      &.flavour-field {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  .modification-display {
+    padding: $spacing-sm;
+
+    .mod-title {
+      display: flex;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-xs;
+
+      .mod-category {
+        font-size: $font-size-xs;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: $c-gold;
+        padding: 2px $spacing-xs;
+        background: rgba($c-gold, 0.15);
+        border-radius: $border-radius-sm;
+      }
+
+      .mod-type {
+        font-weight: $font-weight-bold;
+        color: #fff;
+      }
+    }
+
+    .mod-stat {
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2px;
+
+      strong {
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: $font-weight-normal;
+      }
+    }
+
+    .mod-flavour {
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.6);
+      font-style: italic;
+      margin-top: $spacing-xs;
+      padding-top: $spacing-xs;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.empty-modifications {
+  text-align: center;
+  padding: $spacing-md;
+
+  .hint {
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
   }
 }
 

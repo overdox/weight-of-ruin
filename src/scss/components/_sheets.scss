@@ -1021,13 +1021,13 @@
       font-weight: $font-weight-bold;
       color: $c-text-dark;
       text-transform: uppercase;
-      font-size: $font-size-sm;
+      font-size: $font-size-base;
       letter-spacing: 0.5px;
 
       .attribute-abbr {
         display: inline-block;
         margin-left: $spacing-sm;
-        font-size: $font-size-xs;
+        font-size: $font-size-sm;
         color: $c-text-medium;
         font-weight: $font-weight-normal;
       }
@@ -1468,7 +1468,7 @@
   h3 {
     margin: 0;
     font-family: $font-primary;
-    font-size: $font-size-base;
+    font-size: $font-size-md; // 14px - section header size
     font-weight: $font-weight-bold;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -1508,7 +1508,7 @@
 h3.section-header-with-button {
   margin: 0;
   font-family: $font-primary;
-  font-size: $font-size-base;
+  font-size: $font-size-md; // 14px - section header size
   font-weight: $font-weight-bold;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -3864,7 +3864,8 @@ h3.section-header-with-button {
 
         label {
           display: block;
-          font-size: $font-size-xs;
+          font-size: $font-size-base;
+          font-weight: $font-weight-bold;
           color: $c-text-medium;
           margin-bottom: $spacing-xs;
         }

@@ -13,6 +13,7 @@ export default class WeaponData extends ItemBaseData {
    * Migrate source data before validation
    * Handles rename of meleeProwess → weaponProwess
    * Migrates old value field to price object
+   * Migrates old quality levels to new system
    */
   static migrateData(source) {
     if (source.prowess === 'meleeProwess') {
@@ -28,6 +29,20 @@ export default class WeaponData extends ItemBaseData {
         orin: totalOrin % 10
       };
       delete source.value;
+    }
+
+    // Migrate old quality levels to new system
+    // Old: poor, standard, fine, superior, masterwork
+    // New: ruined, damaged, inferior, average, fine, superior, masterwork
+    if (source.quality?.level) {
+      const qualityMigration = {
+        'poor': 'inferior',
+        'standard': 'average'
+        // fine, superior, masterwork remain the same
+      };
+      if (qualityMigration[source.quality.level]) {
+        source.quality.level = qualityMigration[source.quality.level];
+      }
     }
 
     return super.migrateData(source);
@@ -148,6 +163,51 @@ export default class WeaponData extends ItemBaseData {
     );
 
     // ========================================
+    // WEAPON MODIFICATIONS
+    // Physical, Alchemical, or Witching enhancements
+    // ========================================
+    schema.modifications = new fields.ArrayField(
+      new fields.SchemaField({
+        category: new fields.StringField({
+          required: true,
+          blank: false,
+          initial: "physical",
+          choices: ["physical", "alchemical", "witching"],
+          label: "WOR.Weapon.Modification.Category"
+        }),
+        type: new fields.StringField({
+          required: true,
+          blank: false,
+          initial: "serrated",
+          label: "WOR.Weapon.Modification.Type"
+        }),
+        // Optional damage bonus from the modification
+        damage: new fields.NumberField({
+          required: false,
+          nullable: true,
+          integer: true,
+          initial: null,
+          label: "WOR.Weapon.Modification.Damage"
+        }),
+        // Optional mechanical effect description
+        effect: new fields.StringField({
+          required: false,
+          blank: true,
+          initial: "",
+          label: "WOR.Weapon.Modification.Effect"
+        }),
+        // Optional flavour/description text
+        flavour: new fields.StringField({
+          required: false,
+          blank: true,
+          initial: "",
+          label: "WOR.Weapon.Modification.Flavour"
+        })
+      }),
+      { initial: [] }
+    );
+
+    // ========================================
     // WEAPON GROUP
     // Category for weapon proficiency/similarity
     // ========================================
@@ -178,12 +238,12 @@ export default class WeaponData extends ItemBaseData {
       level: new fields.StringField({
         required: true,
         blank: false,
-        initial: "standard",
-        choices: ["poor", "standard", "fine", "superior", "masterwork"],
+        initial: "average",
+        choices: ["ruined", "damaged", "inferior", "average", "fine", "superior", "masterwork"],
         label: "WOR.Weapon.Quality"
       }),
       // Attack dice modifier based on quality level
-      // Poor: -1, Standard: 0, Fine: +1, Superior: +2, Masterwork: +3
+      // Ruined: -3, Damaged: -2, Inferior: -1, Average: 0, Fine: +1, Superior: +2, Masterwork: +3
       attackModifier: new fields.NumberField({
         ...requiredInteger,
         initial: 0,
@@ -319,12 +379,14 @@ export default class WeaponData extends ItemBaseData {
 
   /**
    * Attack pool modifier from quality
-   * Poor: -1, Standard: 0, Fine: +1, Superior: +2, Masterwork: +3
+   * Ruined: -3, Damaged: -2, Inferior: -1, Average: 0, Fine: +1, Superior: +2, Masterwork: +3
    */
   get attackBonus() {
     const qualityBonuses = {
-      poor: -1,
-      standard: 0,
+      ruined: -3,
+      damaged: -2,
+      inferior: -1,
+      average: 0,
       fine: 1,
       superior: 2,
       masterwork: 3

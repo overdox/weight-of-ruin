@@ -391,9 +391,11 @@ button.icon-only,
 }
 
 // === LABELS ===
+// Global label styling: 12px bold for consistent appearance across all sheets
 label {
   font-family: $font-primary;
-  font-size: $font-size-sm;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
   color: $c-medium;
 
   &.required::after {

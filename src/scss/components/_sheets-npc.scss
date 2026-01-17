@@ -199,7 +199,6 @@
 
       .stat-label {
         @include text-label;
-        font-size: $font-size-xs;
       }
 
       .stat-value {
@@ -236,7 +235,6 @@
 
       label {
         @include text-label;
-        font-size: $font-size-xs;
       }
 
       .trauma-inline {
@@ -330,7 +328,6 @@
 
       .attr-abbr {
         @include text-label;
-        font-size: $font-size-xs;
       }
 
       .attr-value {

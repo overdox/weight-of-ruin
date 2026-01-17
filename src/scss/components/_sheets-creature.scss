@@ -192,7 +192,6 @@
 
         .stat-label {
           @include text-label;
-          font-size: $font-size-xs;
         }
 
         .stat-value {
@@ -224,7 +223,6 @@
 
         label {
           @include text-label;
-          font-size: $font-size-xs;
         }
 
         .fatigue-inline {
