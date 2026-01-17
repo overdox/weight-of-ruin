@@ -1444,7 +1444,7 @@ export class CharacterCreationWizard extends HandlebarsApplicationMixin(Applicat
     })) || [];
 
     // Send enhanced roll message
-    const content = await renderTemplate(
+    const content = await foundry.applications.handlebars.renderTemplate(
       'systems/weight-of-ruin/templates/chat/creation-background-roll.hbs',
       {
         standingFormula: standingRoll.formula,

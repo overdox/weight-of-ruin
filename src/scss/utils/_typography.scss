@@ -4,6 +4,7 @@
 // Font family definitions
 $font-primary: 'IM Fell English', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
 $font-secondary: 'IM Fell English SC', 'IM Fell English', Georgia, serif;
+$font-numeric: 'Roboto Slab', 'Georgia', serif;
 $font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
 
 // Font sizes
@@ -55,4 +56,9 @@ $letter-spacing-wider: 0.1em;
   font-family: $font-primary;
   font-size: $font-size-base;
   line-height: $line-height-base;
+}
+
+@mixin text-numeric {
+  font-family: $font-numeric;
+  font-weight: $font-weight-normal;
 }

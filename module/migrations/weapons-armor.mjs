@@ -7,7 +7,7 @@
  * - New: system.baseDamage (number), system.useStrengthBonus (boolean)
  * - Old: system.skill = "swordplay"
  * - New: system.skill = "weaponSkill"
- * - Add: system.reliability, system.armorPiercing, system.rarity, system.group
+ * - Add: system.precision, system.armorPiercing, system.rarity, system.group
  *
  * Armor:
  * - Add: system.encumbering, system.noisy, system.bulky, system.cumbersome
@@ -124,8 +124,8 @@ async function migrateWeapon(weapon) {
   }
 
   // Add new fields if missing
-  if (system.reliability === undefined) {
-    updateData['system.reliability'] = 6; // Default REL
+  if (system.precision === undefined) {
+    updateData['system.precision'] = 6; // Default PRE
   }
   if (system.armorPiercing === undefined) {
     updateData['system.armorPiercing'] = 0; // Default AP

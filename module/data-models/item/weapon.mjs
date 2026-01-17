@@ -45,6 +45,12 @@ export default class WeaponData extends ItemBaseData {
       }
     }
 
+    // Migrate reliability to precision
+    if (source.reliability !== undefined && source.precision === undefined) {
+      source.precision = source.reliability;
+      delete source.reliability;
+    }
+
     return super.migrateData(source);
   }
 
@@ -64,6 +70,15 @@ export default class WeaponData extends ItemBaseData {
       label: "WOR.Weapon.BaseDamage"
     });
 
+    // Damage die type (d4, d6, d8, d10, d12)
+    schema.damageDie = new fields.StringField({
+      required: true,
+      blank: false,
+      initial: "d6",
+      choices: ["d4", "d6", "d8", "d10", "d12"],
+      label: "WOR.Weapon.DamageDie"
+    });
+
     // Whether to add Strength Bonus to damage (true for melee, some ranged like Composite Bow)
     schema.useStrengthBonus = new fields.BooleanField({
       initial: true,
@@ -79,17 +94,17 @@ export default class WeaponData extends ItemBaseData {
     });
 
     // ========================================
-    // RELIABILITY (REL)
+    // PRECISION (PRE)
     // Maximum number of hits that can count on an attack roll
     // ========================================
-    schema.reliability = new fields.NumberField({
+    schema.precision = new fields.NumberField({
       required: false,
       nullable: true,
       integer: true,
       initial: 6,
       min: 1,
       max: 10,
-      label: "WOR.Weapon.Reliability"
+      label: "WOR.Weapon.Precision"
     });
 
     // ========================================
@@ -181,13 +196,29 @@ export default class WeaponData extends ItemBaseData {
           initial: "serrated",
           label: "WOR.Weapon.Modification.Type"
         }),
-        // Optional damage bonus from the modification
-        damage: new fields.NumberField({
+        // Damage die type for the modification (fixed, d4, d6, d8, d10, d12)
+        damageDie: new fields.StringField({
+          required: false,
+          blank: true,
+          initial: "",
+          choices: ["", "fixed", "d4", "d6", "d8", "d10", "d12"],
+          label: "WOR.Weapon.Modification.DamageDie"
+        }),
+        // Damage value (used with 'fixed' or as number of dice)
+        damageValue: new fields.NumberField({
           required: false,
           nullable: true,
           integer: true,
           initial: null,
-          label: "WOR.Weapon.Modification.Damage"
+          min: 0,
+          label: "WOR.Weapon.Modification.DamageValue"
+        }),
+        // Damage type based on category (physical/alchemical/witching)
+        damageType: new fields.StringField({
+          required: false,
+          blank: true,
+          initial: "",
+          label: "WOR.Weapon.Modification.DamageType"
         }),
         // Optional mechanical effect description
         effect: new fields.StringField({
@@ -358,10 +389,11 @@ export default class WeaponData extends ItemBaseData {
    * For display purposes; actual damage calculated at roll time with actor context
    */
   get displayDamage() {
+    const dieType = this.damageDie || 'd6';
     if (this.useStrengthBonus) {
-      return `SB+${this.baseDamage}`;
+      return `${this.baseDamage}${dieType}+SB`;
     }
-    return String(this.baseDamage);
+    return `${this.baseDamage}${dieType}`;
   }
 
   /**
@@ -485,12 +517,13 @@ export default class WeaponData extends ItemBaseData {
   getRollData() {
     return {
       baseDamage: this.baseDamage,
+      damageDie: this.damageDie,
       useStrengthBonus: this.useStrengthBonus,
       damageType: this.damageType,
       attribute: this.attribute,
       skill: this.skill,
       attackBonus: this.attackBonus,
-      reliability: this.reliability,
+      precision: this.precision,
       armorPiercing: this.armorPiercing,
       isMelee: this.isMelee,
       isRanged: this.isRanged,

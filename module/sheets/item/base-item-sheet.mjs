@@ -432,6 +432,15 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
       bludgeoning: 'WOR.DamageType.Bludgeoning'
     };
 
+    // Damage die options
+    context.damageDieOptions = {
+      d4: 'd4',
+      d6: 'd6',
+      d8: 'd8',
+      d10: 'd10',
+      d12: 'd12'
+    };
+
     // Modification category options
     context.modificationCategoryOptions = {
       physical: 'WOR.Weapon.Modification.Physical.label',
@@ -458,11 +467,31 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
       }
     };
 
-    // Prepare modifications with resolved type options
+    // Modification damage type options by category
+    context.modificationDamageTypeOptions = {
+      physical: {
+        slashing: 'WOR.ModDamageType.Slashing',
+        piercing: 'WOR.ModDamageType.Piercing',
+        bludgeoning: 'WOR.ModDamageType.Bludgeoning'
+      },
+      alchemical: {
+        acid: 'WOR.ModDamageType.Acid',
+        poison: 'WOR.ModDamageType.Poison',
+        fire: 'WOR.ModDamageType.Fire'
+      },
+      witching: {
+        cold: 'WOR.ModDamageType.Cold',
+        necrotic: 'WOR.ModDamageType.Necrotic',
+        psychic: 'WOR.ModDamageType.Psychic'
+      }
+    };
+
+    // Prepare modifications with resolved type options and damage type options
     context.modifications = (context.system.modifications || []).map((mod, index) => ({
       ...mod,
       index,
-      typeOptions: context.modificationTypeOptions[mod.category] || context.modificationTypeOptions.physical
+      typeOptions: context.modificationTypeOptions[mod.category] || context.modificationTypeOptions.physical,
+      damageTypeOptions: context.modificationDamageTypeOptions[mod.category] || context.modificationDamageTypeOptions.physical
     }));
   }
 
@@ -1037,7 +1066,7 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
       }
     }
 
-    // Handle weapon modification category changes - reset type when category changes
+    // Handle weapon modification category changes - reset type and damageType when category changes
     if (this.document.type === 'weapon' && updateData.system?.modifications) {
       const currentMods = this.document.system.modifications || [];
       const newMods = updateData.system.modifications;
@@ -1054,8 +1083,9 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
         const idx = parseInt(index);
         const currentMod = currentMods[idx];
         if (currentMod && newMod.category && newMod.category !== currentMod.category) {
-          // Category changed, reset type to default for new category
+          // Category changed, reset type and damageType to defaults for new category
           newMod.type = typeDefaults[newMod.category] || 'serrated';
+          newMod.damageType = ''; // Reset damage type when category changes
         }
       }
 

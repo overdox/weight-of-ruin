@@ -2,8 +2,8 @@
 // A grimdark medieval fantasy RPG for Foundry VTT
 // Design Philosophy: "High Realism, Low Friction"
 
-// Import IM Fell English font from Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap');
+// Import local font declarations
+@import 'utils/fonts';
 
 // Import utilities (order matters - colors before variables, variables before mixins)
 @import 'utils/colors';
@@ -21,6 +21,54 @@
 body {
   background: var(--wor-bg-body) repeat;
   color: var(--wor-text-primary);
+}
+
+// === NUMERIC FONT STYLING ===
+// Apply Roboto Slab to all numeric values throughout the system
+.weight-of-ruin,
+.wor {
+  // Dice displays
+  .die {
+    font-family: $font-numeric;
+  }
+
+  // Input fields for numbers
+  input[type="number"],
+  input[data-dtype="Number"] {
+    font-family: $font-numeric;
+  }
+
+  // Common numeric value classes
+  .value,
+  .numeric-value,
+  .stat-value,
+  .attribute-value,
+  .skill-rank,
+  .rank-value,
+  .hits-count,
+  .hits-value,
+  .damage-value,
+  .damage-total,
+  .pool-total,
+  .pool-value,
+  .breakdown-value,
+  .result-value,
+  .modifier-value,
+  .bonus-value,
+  .fatigue-value,
+  .trauma-value,
+  .defense-value,
+  .dr-value,
+  .health-value,
+  .essence-value,
+  .zeal-value,
+  .resource-value,
+  .dice-pool,
+  .roll-total,
+  .hit-count,
+  .margin-value {
+    font-family: $font-numeric;
+  }
 }
 
 // Styles limited to The Weight of Ruin sheets
@@ -67,6 +115,9 @@ body {
 
 // === GLOBAL D6 DIE STYLES ===
 // Applies anywhere in Foundry for WoR dice
+// Default: dark background for non-special values (2, 3, 4)
+// Green: hit dice (5, 6) and max value dice
+// Red: min value (1)
 .die.d6,
 span.die.d6,
 .roll-dice .die,
@@ -78,13 +129,14 @@ span.die.d6,
   height: 1.5rem;
   padding: 0 $spacing-xs;
   border-radius: $border-radius-sm;
-  font-family: $font-primary;
+  font-family: $font-numeric;
   font-weight: bold;
   font-size: $font-size-base;
-  background: linear-gradient(145deg, $c-pale, var(--wor-pale-darker));
-  border: $border-width-thick solid $c-medium;
-  color: $c-dark;
-  box-shadow: $shadow-sm, inset 0 1px 0 var(--wor-white-alpha-40);
+  // Default: dark background for non-special values
+  background: #292929;
+  border: $border-width-thick solid #1a1a1a;
+  color: $c-white;
+  box-shadow: $shadow-sm, inset 0 1px 0 var(--wor-white-alpha-20);
   margin: 1px;
 
   // Hit die (success)
@@ -94,12 +146,11 @@ span.die.d6,
     color: $c-white;
   }
 
-  // Maximum value (6)
+  // Maximum value (6) - green like hit dice
   &.max {
-    background: linear-gradient(145deg, $c-accent-light, $c-accent);
-    border-color: $c-accent-dark;
-    color: $c-dark;
-    box-shadow: $shadow-glow-accent, $shadow-sm;
+    background: linear-gradient(145deg, $c-success-light, $c-success);
+    border-color: $c-success-dark;
+    color: $c-white;
   }
 
   // Minimum value (1)
