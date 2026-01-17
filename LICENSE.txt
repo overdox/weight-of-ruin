@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 The Weight of Ruin Development Team
+Copyright (c) 2024 Nordic Realms
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,11 @@ SOFTWARE.
 
 ---
 
-This system is based on the Foundry VTT Boilerplate System by Asacolips Projects.
-The boilerplate is also licensed under the MIT License.
+
+GAME CONTENT LICENSE
+
+The game rules, mechanics, and system content of "The Weight of Ruin" are
+licensed under the Open RPG Creative (ORC) License.
+See licenses/ORCLicense.md for full details.
 
 ---
-
-IMAGE LICENSES
-
-anvil-impact.png by Lorc under CC BY 3.0 from game-icons.net
