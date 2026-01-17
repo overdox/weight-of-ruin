@@ -10,8 +10,8 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
   static DEFAULT_OPTIONS = {
     classes: ['wor', 'weight-of-ruin', 'item-sheet'],
     position: {
-      width: 520,
-      height: 480
+      width: 720,
+      height: 650
     },
     actions: {
       advanceRank: WoRBaseItemSheet.#onAdvanceRank,
@@ -30,7 +30,9 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
       removeBonus: WoRBaseItemSheet.#onRemoveBonus,
       addAppliedCondition: WoRBaseItemSheet.#onAddAppliedCondition,
       removeAppliedCondition: WoRBaseItemSheet.#onRemoveAppliedCondition,
-      editDescription: WoRBaseItemSheet.#onEditDescription
+      editDescription: WoRBaseItemSheet.#onEditDescription,
+      addModification: WoRBaseItemSheet.#onAddModification,
+      removeModification: WoRBaseItemSheet.#onRemoveModification
     },
     form: {
       submitOnChange: true,
@@ -369,10 +371,12 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
       exotic: 'WOR.Weapon.CategoryType.Exotic'
     };
 
-    // Quality options - must match schema choices: poor, standard, fine, superior, masterwork
+    // Quality options - must match schema choices: ruined, damaged, inferior, average, fine, superior, masterwork
     context.qualityOptions = {
-      poor: 'WOR.Quality.Poor',
-      standard: 'WOR.Quality.Standard',
+      ruined: 'WOR.Quality.Ruined',
+      damaged: 'WOR.Quality.Damaged',
+      inferior: 'WOR.Quality.Inferior',
+      average: 'WOR.Quality.Average',
       fine: 'WOR.Quality.Fine',
       superior: 'WOR.Quality.Superior',
       masterwork: 'WOR.Quality.Masterwork'
@@ -420,6 +424,46 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
     context.weaponProperties.forEach(prop => {
       prop.checked = currentProps.includes(prop.key);
     });
+
+    // Damage type options
+    context.damageTypeOptions = {
+      slashing: 'WOR.DamageType.Slashing',
+      piercing: 'WOR.DamageType.Piercing',
+      bludgeoning: 'WOR.DamageType.Bludgeoning'
+    };
+
+    // Modification category options
+    context.modificationCategoryOptions = {
+      physical: 'WOR.Weapon.Modification.Physical.label',
+      alchemical: 'WOR.Weapon.Modification.Alchemical.label',
+      witching: 'WOR.Weapon.Modification.Witching.label'
+    };
+
+    // Modification type options by category
+    context.modificationTypeOptions = {
+      physical: {
+        serrated: 'WOR.Weapon.Modification.Physical.Serrated',
+        flanged: 'WOR.Weapon.Modification.Physical.Flanged',
+        gripWraps: 'WOR.Weapon.Modification.Physical.GripWraps'
+      },
+      alchemical: {
+        acid: 'WOR.Weapon.Modification.Alchemical.Acid',
+        poison: 'WOR.Weapon.Modification.Alchemical.Poison',
+        incendiary: 'WOR.Weapon.Modification.Alchemical.Incendiary'
+      },
+      witching: {
+        ironsalted: 'WOR.Weapon.Modification.Witching.Ironsalted',
+        bloodgrooved: 'WOR.Weapon.Modification.Witching.Bloodgrooved',
+        graveTempered: 'WOR.Weapon.Modification.Witching.GraveTempered'
+      }
+    };
+
+    // Prepare modifications with resolved type options
+    context.modifications = (context.system.modifications || []).map((mod, index) => ({
+      ...mod,
+      index,
+      typeOptions: context.modificationTypeOptions[mod.category] || context.modificationTypeOptions.physical
+    }));
   }
 
   async _prepareArmorContext(context) {
@@ -993,6 +1037,61 @@ export class WoRBaseItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
       }
     }
 
+    // Handle weapon modification category changes - reset type when category changes
+    if (this.document.type === 'weapon' && updateData.system?.modifications) {
+      const currentMods = this.document.system.modifications || [];
+      const newMods = updateData.system.modifications;
+
+      // Type defaults for each category
+      const typeDefaults = {
+        physical: 'serrated',
+        alchemical: 'acid',
+        witching: 'ironsalted'
+      };
+
+      // Check each modification for category changes
+      for (const [index, newMod] of Object.entries(newMods)) {
+        const idx = parseInt(index);
+        const currentMod = currentMods[idx];
+        if (currentMod && newMod.category && newMod.category !== currentMod.category) {
+          // Category changed, reset type to default for new category
+          newMod.type = typeDefaults[newMod.category] || 'serrated';
+        }
+      }
+
+      // Convert modifications object to array
+      updateData.system.modifications = Object.values(newMods);
+    }
+
     await this.document.update(updateData);
   }
+
+  /**
+   * Handle adding a new modification to a weapon
+   */
+  static async #onAddModification(event, target) {
+    event.preventDefault();
+    const modifications = this.document.system.modifications || [];
+    const newModification = {
+      category: 'physical',
+      type: 'serrated'
+    };
+    await this.document.update({
+      'system.modifications': [...modifications, newModification]
+    });
+  }
+
+  /**
+   * Handle removing a modification from a weapon
+   */
+  static async #onRemoveModification(event, target) {
+    event.preventDefault();
+    const index = parseInt(target.dataset.index, 10);
+    if (isNaN(index)) return;
+
+    const modifications = [...(this.document.system.modifications || [])];
+    modifications.splice(index, 1);
+    await this.document.update({ 'system.modifications': modifications });
+  }
+
 }

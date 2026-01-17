@@ -1257,7 +1257,8 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 
     label {
-      font-size: $font-size-xs;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
       color: rgba(255, 255, 255, 0.6) !important;
       text-transform: uppercase;
     }

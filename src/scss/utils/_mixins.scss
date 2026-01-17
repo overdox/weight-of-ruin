@@ -57,6 +57,7 @@
 }
 
 // === SECTION HEADERS (Unified dark brown gradient with gold text) ===
+// Section headers: 14px ($font-size-md), bold
 @mixin section-header-bar {
   display: flex;
   align-items: center;
@@ -68,7 +69,7 @@
   background: linear-gradient(90deg, #4d3535 0%, #755550 100%);
   color: $c-gold !important;
   font-family: $font-primary;
-  font-size: $font-size-base;
+  font-size: $font-size-md; // 14px - section header size
   font-weight: $font-weight-bold;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -90,7 +91,7 @@
 }
 
 @mixin subsection-header {
-  font-size: $font-size-base;
+  font-size: $font-size-md; // 14px - section header size
   font-weight: $font-weight-bold;
   color: $c-gold !important;
   text-transform: uppercase;
@@ -435,8 +436,9 @@
 }
 
 // === TEXT STYLES ===
+// Label text: 12px bold - consistent across all sheets
 @mixin text-label {
-  font-size: $font-size-xs;
+  font-size: $font-size-base;
   font-weight: $font-weight-bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -444,7 +446,7 @@
 }
 
 @mixin text-label-light {
-  font-size: $font-size-xs;
+  font-size: $font-size-base;
   font-weight: $font-weight-normal;
   text-transform: uppercase;
   letter-spacing: 0.5px;
