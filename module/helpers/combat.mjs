@@ -17,7 +17,7 @@ export function calculateTTFromDefense(defense) {
 
 /**
  * Build an attack dice pool.
- * Pool = Prowess + Martial Skill + Modifiers
+ * Pool = Prowess + Martial Skill + Quality + Modifiers
  * Prowess types: weaponProwess (STR+AGI), ballisticProwess (AWA+AGI), unarmedProwess (STR+FOR)
  * Martial skills: Arms (+WP), Marksmanship (+BP), Brawling (+UP)
  * @param {Object} options - Attack options
@@ -57,8 +57,11 @@ export function buildAttackPool({ attacker, weapon, modifier = 0 }) {
   );
   const skillRank = martialSkill?.system?.totalRank ?? martialSkill?.system?.rank ?? 0;
 
-  // Calculate total pool: Prowess + Skill + Modifier
-  const total = Math.max(0, prowessValue + skillRank + modifier);
+  // Get weapon quality bonus
+  const qualityBonus = weaponData.attackBonus ?? 0;
+
+  // Calculate total pool: Prowess + Skill + Quality + Modifier
+  const total = Math.max(0, prowessValue + skillRank + qualityBonus + modifier);
 
   return {
     prowess: {
@@ -71,6 +74,7 @@ export function buildAttackPool({ attacker, weapon, modifier = 0 }) {
       rank: skillRank,
       item: martialSkill
     },
+    quality: qualityBonus,
     modifier,
     total,
     weapon: {
@@ -81,20 +85,44 @@ export function buildAttackPool({ attacker, weapon, modifier = 0 }) {
 }
 
 /**
+ * Generate HTML display for damage dice with different die shapes.
+ * @param {Array} diceResults - Array of {value, die} objects
+ * @returns {string} HTML string of dice display
+ */
+export function generateDamageDiceDisplay(diceResults) {
+  if (!diceResults || !Array.isArray(diceResults)) return '';
+
+  return diceResults.map(d => {
+    const dieType = d.die || 'd6';
+    const maxValue = parseInt(dieType.substring(1)) || 6;
+    const isMax = d.value === maxValue;
+    const isMin = d.value === 1;
+
+    let classes = ['die', dieType];
+    if (isMax) classes.push('max');
+    if (isMin) classes.push('min');
+
+    return `<span class="${classes.join(' ')}">${d.value}</span>`;
+  }).join('');
+}
+
+/**
  * Calculate damage from an attack.
- * Damage = Weapon Damage + Strength (if melee) - Target DR
+ * Damage = Base + Strength (if enabled) + Modifications + Hits (if Heavy) - DR
  * @param {Object} options - Damage calculation options
  * @param {Item} options.weapon - The weapon item
  * @param {Actor} options.attacker - The attacking actor
  * @param {Actor} [options.target] - The target actor (for DR)
  * @param {boolean} [options.isCritical=false] - Whether this was a critical hit
- * @returns {Object} Damage breakdown
+ * @param {number} [options.hits=0] - Number of hits from attack roll (for Heavy weapons)
+ * @returns {Promise<Object>} Damage breakdown with rolled dice
  */
-export function calculateDamage({ weapon, attacker, target = null, isCritical = false }) {
+export async function calculateDamage({ weapon, attacker, target = null, isCritical = false, hits = 0 }) {
   const weaponData = weapon.system;
 
-  // Base weapon damage
-  const baseDamage = weaponData.baseDamage ?? 0;
+  // Base weapon damage and die type
+  const baseDamageCount = weaponData.baseDamage ?? 0;
+  const damageDie = weaponData.damageDie || 'd6';
 
   // Strength bonus for melee weapons (if useStrengthBonus is true)
   const rangeType = weaponData.range?.type || 'melee';
@@ -102,17 +130,126 @@ export function calculateDamage({ weapon, attacker, target = null, isCritical = 
   const useStrengthBonus = weaponData.useStrengthBonus ?? isMelee;
   const strengthBonus = useStrengthBonus ? (attacker.system.getAttributeTotal?.('strength') ?? attacker.system.str ?? 0) : 0;
 
+  // Check if weapon is Heavy (adds hits to damage)
+  const properties = weaponData.properties || [];
+  const isHeavy = properties.some(p => p.toLowerCase() === 'heavy');
+  const heavyBonus = isHeavy ? hits : 0;
+
   // Quality modifier (if weapon has quality bonuses)
   const qualityBonus = weaponData.attackBonus ?? weaponData.quality?.attackModifier ?? 0;
 
-  // Total raw damage before DR
-  const rawDamage = baseDamage + strengthBonus + qualityBonus;
+  // Collect all dice to roll
+  const diceToRoll = [];
+
+  // Base damage dice
+  if (baseDamageCount > 0) {
+    diceToRoll.push({ count: baseDamageCount, die: damageDie, source: 'base' });
+  }
+
+  // Process modifications for damage
+  const modifications = weaponData.modifications || [];
+  const modificationDamage = [];
+  let totalModFixedDamage = 0;
+
+  for (const mod of modifications) {
+    if (mod.damageDie && mod.damageValue) {
+      if (mod.damageDie === 'fixed') {
+        totalModFixedDamage += mod.damageValue;
+        modificationDamage.push({
+          category: mod.category,
+          type: mod.type,
+          damageType: mod.damageType,
+          effect: mod.effect,
+          flavour: mod.flavour,
+          isFixed: true,
+          value: mod.damageValue,
+          display: `+${mod.damageValue}`
+        });
+      } else {
+        // Add modification dice to roll
+        diceToRoll.push({ count: mod.damageValue, die: mod.damageDie, source: 'modification', category: mod.category });
+        modificationDamage.push({
+          category: mod.category,
+          type: mod.type,
+          damageType: mod.damageType,
+          effect: mod.effect,
+          flavour: mod.flavour,
+          isFixed: false,
+          diceCount: mod.damageValue,
+          die: mod.damageDie,
+          display: `${mod.damageValue}${mod.damageDie}`
+        });
+      }
+    } else if (mod.effect || mod.flavour) {
+      // Include modifications with just effect/flavour text
+      modificationDamage.push({
+        category: mod.category,
+        type: mod.type,
+        damageType: mod.damageType,
+        effect: mod.effect,
+        flavour: mod.flavour,
+        isFixed: false,
+        value: 0,
+        display: null
+      });
+    }
+  }
+
+  // Roll all damage dice
+  const allDiceResults = [];
+  let totalDiceRolled = 0;
+
+  for (const diceGroup of diceToRoll) {
+    const formula = `${diceGroup.count}${diceGroup.die}`;
+    const roll = new Roll(formula);
+    await roll.evaluate();
+
+    // Extract individual die results
+    for (const term of roll.terms) {
+      if (term.results) {
+        for (const result of term.results) {
+          allDiceResults.push({
+            value: result.result,
+            die: diceGroup.die,
+            source: diceGroup.source,
+            category: diceGroup.category
+          });
+        }
+      }
+    }
+    totalDiceRolled += roll.total;
+  }
 
   // Target's Damage Reduction
   let targetDR = 0;
   if (target) {
     targetDR = target.armorDR ?? 0;
   }
+
+  // Build the damage formula for display
+  // Format: {base}{die} + {str} + {mods} + {heavy hits} - {DR}
+  const formulaParts = [];
+  formulaParts.push(`${baseDamageCount}${damageDie}`);
+
+  if (strengthBonus > 0) {
+    formulaParts.push(`${strengthBonus}`);
+  }
+
+  // Add modification dice/damage
+  for (const mod of modificationDamage) {
+    if (mod.display) {
+      formulaParts.push(mod.display);
+    }
+  }
+
+  if (heavyBonus > 0) {
+    formulaParts.push(`${heavyBonus}`);
+  }
+
+  const damageFormula = formulaParts.join(' + ');
+
+  // Calculate total raw damage (dice + fixed bonuses)
+  const rawDamage = totalDiceRolled + strengthBonus + qualityBonus + totalModFixedDamage + heavyBonus;
 
   // Final damage after DR (minimum 0)
   const finalDamage = Math.max(0, rawDamage - targetDR);
@@ -121,19 +258,31 @@ export function calculateDamage({ weapon, attacker, target = null, isCritical = 
   const traumaDealt = isCritical ? 2 : 1;
 
   return {
-    baseDamage,
+    baseDamage: baseDamageCount,
+    damageDie,
+    baseDiceTotal: totalDiceRolled,
+    diceResults: allDiceResults,
     strengthBonus,
     qualityBonus,
+    heavyBonus,
+    isHeavy,
+    hits,
+    modifications: modificationDamage,
     rawDamage,
     targetDR,
     finalDamage,
     traumaDealt,
     isCritical,
     isMelee,
+    formula: damageFormula,
     breakdown: {
-      base: baseDamage,
+      base: baseDamageCount,
+      die: damageDie,
+      diceTotal: totalDiceRolled,
       strength: strengthBonus,
       quality: qualityBonus,
+      heavy: heavyBonus,
+      modifications: modificationDamage,
       dr: targetDR
     }
   };
@@ -141,11 +290,14 @@ export function calculateDamage({ weapon, attacker, target = null, isCritical = 
 
 /**
  * Perform a complete attack roll.
+ * Hits are capped by weapon precision + aim bonus + improved precision talent.
  * @param {Object} options - Attack options
  * @param {Actor} options.attacker - The attacking actor
  * @param {Item} options.weapon - The weapon item
  * @param {Actor} [options.target] - The target actor
  * @param {number} [options.modifier=0] - Additional modifier
+ * @param {number} [options.aimBonus=0] - Bonus to max hits from Aim action
+ * @param {number} [options.improvedPrecision=0] - Bonus to max hits from Improved Precision talent
  * @param {string} [options.difficulty='standard'] - Difficulty tier
  * @param {boolean} [options.skipDialog=false] - Skip the attack dialog
  * @returns {Promise<Object>} Attack result
@@ -155,6 +307,8 @@ export async function rollAttack({
   weapon,
   target = null,
   modifier = 0,
+  aimBonus = 0,
+  improvedPrecision = 0,
   difficulty = 'standard',
   skipDialog = false
 }) {
@@ -185,8 +339,10 @@ export async function rollAttack({
     // Update values from dialog
     modifier = dialogResult.modifier;
     targetThreshold = dialogResult.targetThreshold;
+    aimBonus = dialogResult.aimBonus ?? aimBonus;
     poolData.modifier = modifier;
-    poolData.total = Math.max(0, poolData.prowess.value + poolData.skill.rank + modifier);
+    // Recalculate total including quality bonus
+    poolData.total = Math.max(0, poolData.prowess.value + poolData.skill.rank + poolData.quality + modifier);
   }
 
   // Always use standard difficulty
@@ -199,18 +355,46 @@ export async function rollAttack({
     targetThreshold
   });
 
+  // Calculate maximum hits based on weapon precision
+  const weaponPrecision = weapon.system.precision ?? 6;
+  const maxHits = weaponPrecision + aimBonus + improvedPrecision;
+
+  // Store raw hits and calculate effective (capped) hits
+  const rawHits = rollResult.hits;
+  const effectiveHits = Math.min(rawHits, maxHits);
+  const hitsCapped = rawHits > maxHits;
+
+  // Update the roll result with capped hits
+  rollResult.rawHits = rawHits;
+  rollResult.effectiveHits = effectiveHits;
+  rollResult.hits = effectiveHits; // Override hits with capped value
+  rollResult.maxHits = maxHits;
+  rollResult.hitsCapped = hitsCapped;
+  rollResult.precision = {
+    weapon: weaponPrecision,
+    aim: aimBonus,
+    talent: improvedPrecision,
+    total: maxHits
+  };
+
+  // Re-evaluate degree based on effective hits
+  if (targetThreshold !== null) {
+    rollResult.degree = evaluateDegree(effectiveHits, targetThreshold);
+  }
+
   // Determine if it's a hit and if critical
   const isHit = rollResult.degree && ['success', 'criticalSuccess'].includes(rollResult.degree.key);
   const isCritical = rollResult.degree?.key === 'criticalSuccess';
 
-  // Calculate damage if hit
+  // Calculate damage if hit (pass effective hits for Heavy weapon bonus)
   let damageResult = null;
   if (isHit) {
-    damageResult = calculateDamage({
+    damageResult = await calculateDamage({
       weapon,
       attacker,
       target,
-      isCritical
+      isCritical,
+      hits: effectiveHits
     });
   }
 
@@ -233,9 +417,12 @@ export async function rollAttack({
       name: weapon.name,
       img: weapon.img,
       damage: weapon.system.baseDamage,
+      damageDie: weapon.system.damageDie || 'd6',
       range: weapon.system.range?.type || 'melee',
       hands: weapon.system.hands || 1,
-      properties: weapon.system.properties || []
+      properties: weapon.system.properties || [],
+      modifications: weapon.system.modifications || [],
+      precision: weaponPrecision
     },
     pool: poolData,
     roll: rollResult,
@@ -322,11 +509,17 @@ async function sendAttackToChat(attackResult) {
     attackResult.roll.difficulty?.threshold || 5
   );
 
+  // Build damage dice display if hit
+  const damageDiceDisplay = attackResult.damage?.diceResults
+    ? generateDamageDiceDisplay(attackResult.damage.diceResults)
+    : '';
+
   const content = await foundry.applications.handlebars.renderTemplate(
     'systems/weight-of-ruin/templates/chat/attack-card.hbs',
     {
       ...attackResult,
       diceDisplay,
+      damageDiceDisplay,
       degreeLabel: attackResult.roll.degree ? game.i18n.localize(attackResult.roll.degree.label) : null,
       degreeCss: attackResult.roll.degree?.cssClass || ''
     }

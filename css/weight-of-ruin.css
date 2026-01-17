@@ -1,4 +1,31 @@
-@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap");
+@font-face {
+  font-family: "IM Fell English";
+  src: url("../fonts/IMFellEnglish-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IM Fell English";
+  src: url("../fonts/IMFellEnglish-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IM Fell English SC";
+  src: url("../fonts/IMFellEnglishSC-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("../fonts/RobotoSlab-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 [data-wor-theme=light] {
   --wor-bg-body: url(../assets/ui/background.webp);
   --wor-bg-parchment-texture: url(../assets/ui/parchment.webp);
@@ -138,26 +165,26 @@
   --wor-danger-alpha-80: rgba(139, 53, 53, 0.80);
   --wor-danger-alpha-90: rgba(139, 53, 53, 0.90);
   --wor-danger-light-alpha-50: rgba(168, 69, 69, 0.50);
-  --wor-success: #3a6b3a;
-  --wor-success-dark: #2a5a2a;
-  --wor-success-light: #4a8b4a;
-  --wor-success-darker: #1a4a1a;
-  --wor-success-dark-darker: #1a4a1a;
-  --wor-success-bg: rgba(58, 107, 58, 0.12);
-  --wor-success-alpha-03: rgba(58, 107, 58, 0.03);
-  --wor-success-alpha-05: rgba(58, 107, 58, 0.05);
-  --wor-success-alpha-08: rgba(58, 107, 58, 0.08);
-  --wor-success-alpha-10: rgba(58, 107, 58, 0.10);
-  --wor-success-alpha-15: rgba(58, 107, 58, 0.15);
-  --wor-success-alpha-20: rgba(58, 107, 58, 0.20);
-  --wor-success-alpha-25: rgba(58, 107, 58, 0.25);
-  --wor-success-alpha-30: rgba(58, 107, 58, 0.30);
-  --wor-success-alpha-50: rgba(58, 107, 58, 0.50);
-  --wor-success-alpha-70: rgba(58, 107, 58, 0.70);
-  --wor-success-alpha-80: rgba(58, 107, 58, 0.80);
-  --wor-success-alpha-90: rgba(58, 107, 58, 0.90);
-  --wor-success-light-alpha-50: rgba(74, 139, 74, 0.50);
-  --wor-success-dark-alpha-90: rgba(42, 90, 42, 0.90);
+  --wor-success: #3a6943;
+  --wor-success-dark: #2a5933;
+  --wor-success-light: #4a7953;
+  --wor-success-darker: #1a4923;
+  --wor-success-dark-darker: #1a4923;
+  --wor-success-bg: rgba(58, 105, 67, 0.12);
+  --wor-success-alpha-03: rgba(58, 105, 67, 0.03);
+  --wor-success-alpha-05: rgba(58, 105, 67, 0.05);
+  --wor-success-alpha-08: rgba(58, 105, 67, 0.08);
+  --wor-success-alpha-10: rgba(58, 105, 67, 0.10);
+  --wor-success-alpha-15: rgba(58, 105, 67, 0.15);
+  --wor-success-alpha-20: rgba(58, 105, 67, 0.20);
+  --wor-success-alpha-25: rgba(58, 105, 67, 0.25);
+  --wor-success-alpha-30: rgba(58, 105, 67, 0.30);
+  --wor-success-alpha-50: rgba(58, 105, 67, 0.50);
+  --wor-success-alpha-70: rgba(58, 105, 67, 0.70);
+  --wor-success-alpha-80: rgba(58, 105, 67, 0.80);
+  --wor-success-alpha-90: rgba(58, 105, 67, 0.90);
+  --wor-success-light-alpha-50: rgba(74, 121, 83, 0.50);
+  --wor-success-dark-alpha-90: rgba(42, 89, 51, 0.90);
   --wor-warning: #a86a28;
   --wor-warning-dark: #8a5520;
   --wor-warning-light: #c88838;
@@ -347,26 +374,26 @@
   --wor-danger-alpha-80: rgba(196, 85, 85, 0.85);
   --wor-danger-alpha-90: rgba(196, 85, 85, 0.92);
   --wor-danger-light-alpha-50: rgba(216, 101, 101, 0.55);
-  --wor-success: #5a9b5a;
-  --wor-success-dark: #4a8b4a;
-  --wor-success-light: #6aab6a;
-  --wor-success-darker: #3a7b3a;
-  --wor-success-dark-darker: #2a6b2a;
-  --wor-success-bg: rgba(90, 155, 90, 0.15);
-  --wor-success-alpha-03: rgba(90, 155, 90, 0.05);
-  --wor-success-alpha-05: rgba(90, 155, 90, 0.08);
-  --wor-success-alpha-08: rgba(90, 155, 90, 0.12);
-  --wor-success-alpha-10: rgba(90, 155, 90, 0.15);
-  --wor-success-alpha-15: rgba(90, 155, 90, 0.20);
-  --wor-success-alpha-20: rgba(90, 155, 90, 0.25);
-  --wor-success-alpha-25: rgba(90, 155, 90, 0.32);
-  --wor-success-alpha-30: rgba(90, 155, 90, 0.35);
-  --wor-success-alpha-50: rgba(90, 155, 90, 0.55);
-  --wor-success-alpha-70: rgba(90, 155, 90, 0.75);
-  --wor-success-alpha-80: rgba(90, 155, 90, 0.85);
-  --wor-success-alpha-90: rgba(90, 155, 90, 0.92);
-  --wor-success-light-alpha-50: rgba(106, 171, 106, 0.55);
-  --wor-success-dark-alpha-90: rgba(74, 139, 74, 0.92);
+  --wor-success: #3a6943;
+  --wor-success-dark: #2a5933;
+  --wor-success-light: #4a7953;
+  --wor-success-darker: #1a4923;
+  --wor-success-dark-darker: #1a4923;
+  --wor-success-bg: rgba(58, 105, 67, 0.15);
+  --wor-success-alpha-03: rgba(58, 105, 67, 0.05);
+  --wor-success-alpha-05: rgba(58, 105, 67, 0.08);
+  --wor-success-alpha-08: rgba(58, 105, 67, 0.12);
+  --wor-success-alpha-10: rgba(58, 105, 67, 0.15);
+  --wor-success-alpha-15: rgba(58, 105, 67, 0.20);
+  --wor-success-alpha-20: rgba(58, 105, 67, 0.25);
+  --wor-success-alpha-25: rgba(58, 105, 67, 0.32);
+  --wor-success-alpha-30: rgba(58, 105, 67, 0.35);
+  --wor-success-alpha-50: rgba(58, 105, 67, 0.55);
+  --wor-success-alpha-70: rgba(58, 105, 67, 0.75);
+  --wor-success-alpha-80: rgba(58, 105, 67, 0.85);
+  --wor-success-alpha-90: rgba(58, 105, 67, 0.92);
+  --wor-success-light-alpha-50: rgba(74, 121, 83, 0.55);
+  --wor-success-dark-alpha-90: rgba(42, 89, 51, 0.92);
   --wor-warning: #d88a38;
   --wor-warning-dark: #c87a28;
   --wor-warning-light: #e89a48;
@@ -2953,6 +2980,75 @@
 body {
   background: var(--wor-bg-body) repeat;
   color: var(--wor-text-primary);
+}
+
+.weight-of-ruin .die,
+.wor .die {
+  font-family: "Roboto Slab", "Georgia", serif;
+}
+.weight-of-ruin input[type=number],
+.weight-of-ruin input[data-dtype=Number],
+.wor input[type=number],
+.wor input[data-dtype=Number] {
+  font-family: "Roboto Slab", "Georgia", serif;
+}
+.weight-of-ruin .value,
+.weight-of-ruin .numeric-value,
+.weight-of-ruin .stat-value,
+.weight-of-ruin .attribute-value,
+.weight-of-ruin .skill-rank,
+.weight-of-ruin .rank-value,
+.weight-of-ruin .hits-count,
+.weight-of-ruin .hits-value,
+.weight-of-ruin .damage-value,
+.weight-of-ruin .damage-total,
+.weight-of-ruin .pool-total,
+.weight-of-ruin .pool-value,
+.weight-of-ruin .breakdown-value,
+.weight-of-ruin .result-value,
+.weight-of-ruin .modifier-value,
+.weight-of-ruin .bonus-value,
+.weight-of-ruin .fatigue-value,
+.weight-of-ruin .trauma-value,
+.weight-of-ruin .defense-value,
+.weight-of-ruin .dr-value,
+.weight-of-ruin .health-value,
+.weight-of-ruin .essence-value,
+.weight-of-ruin .zeal-value,
+.weight-of-ruin .resource-value,
+.weight-of-ruin .dice-pool,
+.weight-of-ruin .roll-total,
+.weight-of-ruin .hit-count,
+.weight-of-ruin .margin-value,
+.wor .value,
+.wor .numeric-value,
+.wor .stat-value,
+.wor .attribute-value,
+.wor .skill-rank,
+.wor .rank-value,
+.wor .hits-count,
+.wor .hits-value,
+.wor .damage-value,
+.wor .damage-total,
+.wor .pool-total,
+.wor .pool-value,
+.wor .breakdown-value,
+.wor .result-value,
+.wor .modifier-value,
+.wor .bonus-value,
+.wor .fatigue-value,
+.wor .trauma-value,
+.wor .defense-value,
+.wor .dr-value,
+.wor .health-value,
+.wor .essence-value,
+.wor .zeal-value,
+.wor .resource-value,
+.wor .dice-pool,
+.wor .roll-total,
+.wor .hit-count,
+.wor .margin-value {
+  font-family: "Roboto Slab", "Georgia", serif;
 }
 
 .weight-of-ruin input[type=text],
@@ -5799,7 +5895,7 @@ body {
 }
 .weight-of-ruin .sheet-tabs .item {
   padding: 4px 12px;
-  font-size: 0.6875rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--wor-text-secondary);
   text-transform: uppercase;
@@ -12532,7 +12628,7 @@ body {
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   width: 100%;
   padding: 2px;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
 }
 .weight-of-ruin .item-sidebar .sidebar-stat select:focus {
   outline: none;
@@ -12704,7 +12800,7 @@ body {
 .weight-of-ruin .weapon-details .stats-grid .form-group select {
   width: 100%;
   padding: 4px;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   background: rgba(0, 0, 0, 0.4) !important;
   border: 1px solid rgba(var(--wor-copper), 0.4) !important;
   color: #fff !important;
@@ -13045,7 +13141,7 @@ body {
   text-align: center;
   font-weight: 700;
   padding: 2px !important;
-  font-size: 0.75rem !important;
+  font-size: 0.875rem !important;
 }
 .weight-of-ruin .damage-row .damage-value {
   display: inline-flex;
@@ -13059,7 +13155,15 @@ body {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 2px;
 }
-.weight-of-ruin .damage-row .d6-indicator {
+.weight-of-ruin .damage-row .damage-die-select {
+  width: 60px !important;
+  min-width: 60px;
+  font-weight: 700;
+  color: var(--wor-gold);
+  font-size: 0.875rem !important;
+  text-align: center;
+}
+.weight-of-ruin .damage-row .damage-die-indicator {
   font-weight: 700;
   color: var(--wor-gold);
   font-size: 0.75rem;
@@ -13069,6 +13173,7 @@ body {
   flex: 1;
   min-width: 100px;
   max-width: 140px;
+  font-size: 0.875rem !important;
 }
 .weight-of-ruin .damage-row .damage-type {
   font-size: 0.6875rem;
@@ -13076,6 +13181,14 @@ body {
   padding: 2px 4px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 2px;
+}
+.weight-of-ruin .precision-input {
+  width: 48px !important;
+  height: 32px;
+  text-align: center;
+  font-weight: 700;
+  padding: 2px !important;
+  font-size: 0.875rem !important;
 }
 .weight-of-ruin .fieldset-header {
   display: flex;
@@ -13099,6 +13212,51 @@ body {
 .weight-of-ruin .fieldset-header .add-modification-btn:hover {
   background: var(--wor-success);
   color: #fff;
+}
+.weight-of-ruin .modifications-section {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.weight-of-ruin .modifications-section .modifications-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.weight-of-ruin .modifications-section .modifications-label label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.weight-of-ruin .modifications-section .modifications-label .add-modification-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--wor-gold);
+  background: rgba(var(--wor-gold), 0.2);
+  color: var(--wor-gold);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.weight-of-ruin .modifications-section .modifications-label .add-modification-btn:hover {
+  background: var(--wor-gold);
+  color: var(--wor-text-primary);
+}
+.weight-of-ruin .modifications-section .empty-modifications {
+  padding: 4px;
+  text-align: center;
+}
+.weight-of-ruin .modifications-section .empty-modifications .hint {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
 }
 .weight-of-ruin .modifications-list {
   display: flex;
@@ -13147,7 +13305,7 @@ body {
 }
 .weight-of-ruin .modification-item .modification-details {
   display: grid;
-  grid-template-columns: 60px 1fr;
+  grid-template-columns: 60px 70px 100px 1fr;
   gap: 4px;
   padding: 4px;
 }
@@ -13164,19 +13322,37 @@ body {
   color: rgba(255, 255, 255, 0.6);
   color: rgba(255, 255, 255, 0.5);
 }
-.weight-of-ruin .modification-item .modification-details .mod-field input {
-  font-size: 0.6875rem;
+.weight-of-ruin .modification-item .modification-details .mod-field input, .weight-of-ruin .modification-item .modification-details .mod-field select {
+  font-size: 0.875rem;
   padding: 2px;
 }
-.weight-of-ruin .modification-item .modification-details .mod-field.damage-field {
+.weight-of-ruin .modification-item .modification-details .mod-field.damage-value-field {
   grid-column: 1;
 }
-.weight-of-ruin .modification-item .modification-details .mod-field.damage-field input {
-  width: 100%;
+.weight-of-ruin .modification-item .modification-details .mod-field.damage-value-field input.damage-input {
+  width: 48px !important;
+  height: 32px;
   text-align: center;
+  font-weight: 700;
+  padding: 2px !important;
+  font-size: 0.875rem !important;
+}
+.weight-of-ruin .modification-item .modification-details .mod-field.damage-die-field {
+  grid-column: 2;
+}
+.weight-of-ruin .modification-item .modification-details .mod-field.damage-die-field select {
+  height: 32px;
+  font-size: 0.875rem !important;
+}
+.weight-of-ruin .modification-item .modification-details .mod-field.damage-type-field {
+  grid-column: 3;
+}
+.weight-of-ruin .modification-item .modification-details .mod-field.damage-type-field select {
+  height: 32px;
+  font-size: 0.875rem !important;
 }
 .weight-of-ruin .modification-item .modification-details .mod-field.effect-field {
-  grid-column: 2;
+  grid-column: 4;
 }
 .weight-of-ruin .modification-item .modification-details .mod-field.flavour-field {
   grid-column: 1/-1;
@@ -15187,7 +15363,8 @@ body {
   border-radius: 4px;
 }
 .weight-of-ruin.character-creation .creation-header .lp-tracker .lp-label {
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--wor-white);
 }
 .weight-of-ruin.character-creation .creation-header .lp-tracker .lp-value {
@@ -15233,7 +15410,7 @@ body {
 }
 .weight-of-ruin.character-creation .creation-body .step-header h2 {
   margin: 0;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-family: "IM Fell English", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   color: var(--wor-header-text);
 }
@@ -15379,7 +15556,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-left: 2px solid var(--wor-copper);
   border-radius: 2px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
 }
@@ -18623,7 +18800,8 @@ body {
   border-radius: 4px;
 }
 .weight-of-ruin.advancement-wizard .creation-header .lp-tracker .lp-label {
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--wor-white);
 }
 .weight-of-ruin.advancement-wizard .creation-header .lp-tracker .lp-value {
@@ -18669,7 +18847,7 @@ body {
 }
 .weight-of-ruin.advancement-wizard .creation-body .step-header h2 {
   margin: 0;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-family: "IM Fell English", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   color: var(--wor-header-text);
 }
@@ -19142,7 +19320,8 @@ body {
   border-radius: 4px;
 }
 .weight-of-ruin.npc-creation .npc-creation-header .trait-points-tracker .tracker-label {
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--wor-white);
 }
 .weight-of-ruin.npc-creation .npc-creation-header .trait-points-tracker .tracker-value {
@@ -20571,37 +20750,63 @@ body {
 .wor .roll-card .roll-auto-success i {
   margin-right: 2px;
 }
-.wor .die.d6 {
+.wor .die {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 1.5rem;
   height: 1.5rem;
   padding: 0 2px;
-  border-radius: 2px;
+  font-family: "Roboto Slab", "Georgia", serif;
   font-weight: 700;
   font-size: 0.75rem;
-  background: linear-gradient(145deg, var(--wor-pale), var(--wor-pale-darker));
-  border: 2px solid var(--wor-text-secondary);
-  color: var(--wor-text-primary);
-  box-shadow: var(--wor-shadow-sm), inset 0 1px 0 var(--wor-white-alpha-40);
+  background: #292929;
+  border: 2px solid #1a1a1a;
+  color: var(--wor-white);
+  box-shadow: var(--wor-shadow-sm), inset 0 1px 0 var(--wor-white-alpha-20);
   margin: 1px;
 }
-.wor .die.d6.hit {
+.wor .die.max {
   background: linear-gradient(145deg, var(--wor-success-light), var(--wor-success));
   border-color: var(--wor-success-dark);
   color: var(--wor-white);
 }
-.wor .die.d6.max {
-  background: linear-gradient(145deg, var(--wor-gold-light), var(--wor-gold));
-  border-color: var(--wor-gold-dark);
-  color: var(--wor-text-primary);
-  box-shadow: 0 0 8px rgba(201, 162, 39, 0.4), var(--wor-shadow-sm);
+.wor .die.hit {
+  background: linear-gradient(145deg, var(--wor-success-light), var(--wor-success));
+  border-color: var(--wor-success-dark);
+  color: var(--wor-white);
 }
-.wor .die.d6.min {
+.wor .die.min {
   background: linear-gradient(145deg, var(--wor-danger-light), var(--wor-danger));
   border-color: var(--wor-danger-dark);
   color: var(--wor-white);
+}
+.wor .die.d4 {
+  border-radius: 0;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  width: 1.6rem;
+  height: 1.4rem;
+  padding-top: 0.3rem;
+}
+.wor .die.d6 {
+  border-radius: 2px;
+}
+.wor .die.d8 {
+  border-radius: 2px;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  width: 1.6rem;
+}
+.wor .die.d10 {
+  border-radius: 2px;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  width: 1.6rem;
+  height: 1.5rem;
+  padding-top: 0.15rem;
+}
+.wor .die.d12 {
+  border-radius: 50%;
+  width: 1.7rem;
+  height: 1.7rem;
 }
 .wor .crisis-roll {
   background: transparent;
@@ -20845,6 +21050,15 @@ body {
   min-width: 90px !important;
   margin: 0 !important;
 }
+.wor .attack-card .result-indicator .result-display.attack-result .hits-count.capped {
+  flex-direction: column;
+  gap: 2px;
+}
+.wor .attack-card .result-indicator .result-display.attack-result .hits-count.capped .precision-cap {
+  font-size: 0.625rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
 .wor .attack-card .item-display .item-info .weapon-name {
   color: var(--wor-gold);
 }
@@ -20859,7 +21073,7 @@ body {
   border-radius: 2px 2px 0 0;
 }
 .wor .attack-card .damage-section .section-header.damage-header .section-title {
-  font-size: 0.6875rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--wor-gold);
   text-transform: uppercase;
@@ -20893,6 +21107,53 @@ body {
   font-size: 1rem;
   box-shadow: var(--wor-shadow-sm);
   border: 2px solid var(--wor-success-dark);
+}
+.wor .attack-card .damage-section .damage-result .damage-formula {
+  color: var(--wor-gold);
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 0.875rem;
+}
+.wor .attack-card .damage-section .damage-result .damage-total {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: linear-gradient(145deg, var(--wor-danger-light), var(--wor-danger));
+  color: var(--wor-white);
+  font-size: 1rem;
+  box-shadow: var(--wor-shadow-sm);
+  border: 2px solid var(--wor-danger-dark);
+}
+.wor .attack-card .modifications-display {
+  margin-top: 4px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  border-left: 3px solid var(--wor-gold);
+}
+.wor .attack-card .modifications-display .mod-effect {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 2px;
+  font-size: 0.6875rem;
+  color: var(--wor-gold);
+}
+.wor .attack-card .modifications-display .mod-effect i {
+  margin-top: 2px;
+  font-size: 0.625rem;
+}
+.wor .attack-card .modifications-display .mod-effect span {
+  flex: 1;
+}
+.wor .attack-card .modifications-display .mod-flavour {
+  margin-top: 2px;
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+.wor .attack-card .modifications-display .mod-flavour em {
+  font-style: italic;
 }
 .wor .attack-card .attack-header {
   margin-bottom: 4px;
@@ -21142,6 +21403,129 @@ body {
 .wor .attack-card .collapsible-section {
   width: 100%;
   box-sizing: border-box;
+}
+.wor .attack-card .pool-breakdown,
+.wor .attack-card .precision-breakdown,
+.wor .attack-card .damage-breakdown {
+  background: rgba(var(--wor-text-primary), 0.03);
+  border-radius: 2px;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+.wor .attack-card .pool-breakdown .breakdown-row,
+.wor .attack-card .precision-breakdown .breakdown-row,
+.wor .attack-card .damage-breakdown .breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+  font-size: 0.6875rem;
+}
+.wor .attack-card .pool-breakdown .breakdown-row:not(:last-child),
+.wor .attack-card .precision-breakdown .breakdown-row:not(:last-child),
+.wor .attack-card .damage-breakdown .breakdown-row:not(:last-child) {
+  border-bottom: 1px dashed rgba(var(--wor-text-primary), 0.08);
+}
+.wor .attack-card .pool-breakdown .breakdown-row .breakdown-label,
+.wor .attack-card .precision-breakdown .breakdown-row .breakdown-label,
+.wor .attack-card .damage-breakdown .breakdown-row .breakdown-label {
+  color: var(--wor-text-secondary);
+}
+.wor .attack-card .pool-breakdown .breakdown-row .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row .breakdown-value {
+  font-weight: 700;
+  color: var(--wor-text-primary);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.quality .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row.quality .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row.quality .breakdown-value {
+  color: var(--wor-gold-dark);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.modifier .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row.modifier .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row.modifier .breakdown-value {
+  color: var(--wor-text-secondary);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.strength .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row.strength .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row.strength .breakdown-value {
+  color: var(--wor-success-dark);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.modification .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row.modification .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row.modification .breakdown-value {
+  color: var(--wor-magic);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.heavy .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row.heavy .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row.heavy .breakdown-value {
+  color: var(--wor-copper-dark);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.dr .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row.dr .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row.dr .breakdown-value {
+  color: var(--wor-success-dark);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.total,
+.wor .attack-card .precision-breakdown .breakdown-row.total,
+.wor .attack-card .damage-breakdown .breakdown-row.total {
+  padding-top: 4px;
+  margin-top: 2px;
+  border-top: 1px solid rgba(var(--wor-text-primary), 0.1);
+  border-bottom: none;
+}
+.wor .attack-card .pool-breakdown .breakdown-row.total .breakdown-label,
+.wor .attack-card .precision-breakdown .breakdown-row.total .breakdown-label,
+.wor .attack-card .damage-breakdown .breakdown-row.total .breakdown-label {
+  font-weight: 700;
+  color: var(--wor-text-primary);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.total .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row.total .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row.total .breakdown-value {
+  font-size: 0.875rem;
+  color: var(--wor-gold-dark);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.capped .breakdown-label,
+.wor .attack-card .precision-breakdown .breakdown-row.capped .breakdown-label,
+.wor .attack-card .damage-breakdown .breakdown-row.capped .breakdown-label {
+  color: var(--wor-warning);
+}
+.wor .attack-card .pool-breakdown .breakdown-row.capped .breakdown-value,
+.wor .attack-card .precision-breakdown .breakdown-row.capped .breakdown-value,
+.wor .attack-card .damage-breakdown .breakdown-row.capped .breakdown-value {
+  color: var(--wor-warning);
+  font-weight: 700;
+}
+.wor .attack-card .precision-breakdown {
+  border-left: 2px solid var(--wor-gold);
+}
+.wor .attack-card .roll-dice.attack-dice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+  padding: 4px;
+  margin-bottom: 4px;
+  background: rgba(var(--wor-text-primary), 0.05);
+  border-radius: 2px;
+}
+.wor .attack-card .damage-breakdown {
+  border-left: 2px solid var(--wor-danger);
+}
+.wor .attack-card .damage-breakdown .breakdown-row.total .breakdown-value {
+  color: var(--wor-danger);
+}
+.wor .attack-card .damage-breakdown .roll-dice.damage-dice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+  padding: 4px;
+  margin-bottom: 4px;
+  background: rgba(var(--wor-text-primary), 0.05);
+  border-radius: 2px;
 }
 .wor .spell-card.chat-card {
   background: transparent;
@@ -22467,11 +22851,11 @@ body {
   color: var(--wor-gold) !important;
 }
 .wor.attack-dialog .attack-dialog-content .dialog-section .section-header i {
-  font-size: 0.6875rem;
+  font-size: 0.875rem;
 }
 .wor.attack-dialog .attack-dialog-content .dialog-section .section-header h2 {
   margin: 0;
-  font-size: 0.6875rem;
+  font-size: 0.875rem;
   flex: 1;
 }
 .wor.attack-dialog .attack-dialog-content .dialog-section .section-body {
@@ -22662,13 +23046,13 @@ span.die.d6,
   height: 1.5rem;
   padding: 0 2px;
   border-radius: 2px;
-  font-family: "IM Fell English", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-family: "Roboto Slab", "Georgia", serif;
   font-weight: bold;
   font-size: 0.75rem;
-  background: linear-gradient(145deg, var(--wor-pale), var(--wor-pale-darker));
-  border: 2px solid var(--wor-text-secondary);
-  color: var(--wor-text-primary);
-  box-shadow: var(--wor-shadow-sm), inset 0 1px 0 var(--wor-white-alpha-40);
+  background: #292929;
+  border: 2px solid #1a1a1a;
+  color: var(--wor-white);
+  box-shadow: var(--wor-shadow-sm), inset 0 1px 0 var(--wor-white-alpha-20);
   margin: 1px;
 }
 .die.d6.hit,
@@ -22683,10 +23067,9 @@ span.die.d6.hit,
 span.die.d6.max,
 .roll-dice .die.max,
 .chat-message .die.max {
-  background: linear-gradient(145deg, var(--wor-gold-light), var(--wor-gold));
-  border-color: var(--wor-gold-dark);
-  color: var(--wor-text-primary);
-  box-shadow: 0 0 8px rgba(201, 162, 39, 0.4), var(--wor-shadow-sm);
+  background: linear-gradient(145deg, var(--wor-success-light), var(--wor-success));
+  border-color: var(--wor-success-dark);
+  color: var(--wor-white);
 }
 .die.d6.min,
 span.die.d6.min,

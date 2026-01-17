@@ -103,7 +103,8 @@
     border-radius: $border-radius-md;
 
     .tracker-label {
-      font-size: $font-size-sm;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
       color: $c-white;
     }
 

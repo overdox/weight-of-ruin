@@ -219,7 +219,7 @@ export async function createZealNotification(actor, options = {}) {
     effect: options.effect
   };
 
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     'systems/weight-of-ruin/templates/chat/zeal-notification.hbs',
     templateData
   );
@@ -263,7 +263,7 @@ export async function createEssenceNotification(actor, options = {}) {
     isLeng: current === 0
   };
 
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     'systems/weight-of-ruin/templates/chat/essence-notification.hbs',
     templateData
   );
@@ -305,7 +305,7 @@ export async function createGenericNotification(options = {}) {
     resource: options.resource
   };
 
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     'systems/weight-of-ruin/templates/chat/generic-notification.hbs',
     templateData
   );

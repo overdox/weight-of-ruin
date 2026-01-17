@@ -55,8 +55,8 @@ function transformWeaponData(oldData) {
   }
 
   // Add defaults only for missing fields (won't override existing correct values)
-  if (data.system.reliability === undefined) {
-    data.system.reliability = 6;
+  if (data.system.precision === undefined) {
+    data.system.precision = 6;
   }
   if (data.system.armorPiercing === undefined) {
     data.system.armorPiercing = 0;

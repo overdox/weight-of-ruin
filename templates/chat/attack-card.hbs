@@ -16,7 +16,14 @@
     <div class="result-display attack-result">
       <span class="dice-pool">{{pool.total}}d6</span>
       <span class="result-arrow">→</span>
+      {{#if roll.hitsCapped}}
+      <span class="hits-count capped" title="{{localize 'WOR.Combat.HitsCapped'}}: {{roll.rawHits}} → {{roll.effectiveHits}}">
+        {{roll.effectiveHits}} {{localize "WOR.Roll.Hits"}}
+        <span class="precision-cap">({{localize "WOR.Weapon.Precision.Abbrev"}} {{roll.maxHits}})</span>
+      </span>
+      {{else}}
       <span class="hits-count">{{roll.hits}} {{localize "WOR.Roll.Hits"}}</span>
+      {{/if}}
     </div>
   </div>
 
@@ -40,11 +47,30 @@
       <span class="section-title">{{localize "WOR.Combat.Damage"}}</span>
     </div>
     <div class="damage-result">
-      <span class="dice-pool">{{damage.rawDamage}}d6</span>
+      <span class="damage-formula">{{damage.formula}}</span>
       <span class="result-arrow">→</span>
-      <span class="damage-hits">{{damage.traumaDealt}} {{localize "WOR.Roll.Hits"}}</span>
+      <span class="damage-total">{{damage.finalDamage}} {{localize "WOR.Combat.Dmg"}}</span>
     </div>
   </div>
+
+  {{!-- Modification Effects & Flavour --}}
+  {{#if damage.modifications.length}}
+  <div class="modifications-display">
+    {{#each damage.modifications}}
+    {{#if effect}}
+    <div class="mod-effect">
+      <i class="fas fa-bolt"></i>
+      <span>{{effect}}</span>
+    </div>
+    {{/if}}
+    {{#if flavour}}
+    <div class="mod-flavour">
+      <em>"{{flavour}}"</em>
+    </div>
+    {{/if}}
+    {{/each}}
+  </div>
+  {{/if}}
   {{/if}}
 
   {{!-- Miss Message --}}
@@ -71,39 +97,117 @@
       </div>
       {{/if}}
 
-      {{!-- Dice Display (D6 icons) --}}
-      <div class="roll-dice">
+      {{!-- Attack Roll Dice Display (D6 icons) --}}
+      <div class="roll-dice attack-dice">
         {{{diceDisplay}}}
+      </div>
+
+      {{!-- Pool Breakdown --}}
+      <div class="pool-breakdown">
+        <div class="breakdown-row">
+          <span class="breakdown-label">{{pool.prowess.label}}</span>
+          <span class="breakdown-value">{{pool.prowess.value}}</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-label">{{pool.skill.name}}</span>
+          <span class="breakdown-value">{{pool.skill.rank}}</span>
+        </div>
+        {{#if pool.quality}}
+        <div class="breakdown-row quality">
+          <span class="breakdown-label">{{localize "WOR.Weapon.Quality"}}</span>
+          <span class="breakdown-value">{{#if (gt pool.quality 0)}}+{{/if}}{{pool.quality}}</span>
+        </div>
+        {{/if}}
+        {{#if pool.modifier}}
+        <div class="breakdown-row modifier">
+          <span class="breakdown-label">{{localize "WOR.Roll.Modifier"}}</span>
+          <span class="breakdown-value">{{#if (gt pool.modifier 0)}}+{{/if}}{{pool.modifier}}</span>
+        </div>
+        {{/if}}
+        <div class="breakdown-row total">
+          <span class="breakdown-label">{{localize "WOR.Roll.TotalPool"}}</span>
+          <span class="breakdown-value">{{pool.total}}d6</span>
+        </div>
+      </div>
+
+      {{!-- Precision Info --}}
+      <div class="precision-breakdown">
+        <div class="breakdown-row">
+          <span class="breakdown-label">{{localize "WOR.Weapon.Precision.Label"}}</span>
+          <span class="breakdown-value">{{roll.precision.weapon}}</span>
+        </div>
+        {{#if roll.precision.aim}}
+        <div class="breakdown-row">
+          <span class="breakdown-label">{{localize "WOR.Combat.Aim"}}</span>
+          <span class="breakdown-value">+{{roll.precision.aim}}</span>
+        </div>
+        {{/if}}
+        {{#if roll.precision.talent}}
+        <div class="breakdown-row">
+          <span class="breakdown-label">{{localize "WOR.Combat.ImprovedPrecision"}}</span>
+          <span class="breakdown-value">+{{roll.precision.talent}}</span>
+        </div>
+        {{/if}}
+        <div class="breakdown-row total">
+          <span class="breakdown-label">{{localize "WOR.Combat.MaxHits"}}</span>
+          <span class="breakdown-value">{{roll.maxHits}}</span>
+        </div>
+        {{#if roll.hitsCapped}}
+        <div class="breakdown-row capped">
+          <span class="breakdown-label">{{localize "WOR.Combat.RawHits"}}</span>
+          <span class="breakdown-value">{{roll.rawHits}} → {{roll.effectiveHits}}</span>
+        </div>
+        {{/if}}
       </div>
 
       {{!-- Damage Breakdown (on hit) --}}
       {{#if damage}}
       <div class="damage-breakdown">
-        <div class="damage-row">
-          <span class="damage-label">{{localize "WOR.Weapon.BaseDamage"}}</span>
-          <span class="damage-value">{{damage.baseDamage}}</span>
+        {{!-- Damage Dice Display --}}
+        {{#if damageDiceDisplay}}
+        <div class="roll-dice damage-dice">
+          {{{damageDiceDisplay}}}
+        </div>
+        {{/if}}
+        <div class="breakdown-row">
+          <span class="breakdown-label">{{localize "WOR.Weapon.BaseDamage"}} ({{damage.baseDamage}}{{damage.damageDie}})</span>
+          <span class="breakdown-value">{{damage.baseDiceTotal}}</span>
         </div>
         {{#if damage.strengthBonus}}
-        <div class="damage-row">
-          <span class="damage-label">{{localize "WOR.Attribute.Str.long"}}</span>
-          <span class="damage-value">+{{damage.strengthBonus}}</span>
+        <div class="breakdown-row strength">
+          <span class="breakdown-label">{{localize "WOR.Attribute.Strength.long"}}</span>
+          <span class="breakdown-value">+{{damage.strengthBonus}}</span>
         </div>
         {{/if}}
         {{#if damage.qualityBonus}}
-        <div class="damage-row">
-          <span class="damage-label">{{localize "WOR.Weapon.Quality"}}</span>
-          <span class="damage-value">+{{damage.qualityBonus}}</span>
+        <div class="breakdown-row quality">
+          <span class="breakdown-label">{{localize "WOR.Weapon.Quality"}}</span>
+          <span class="breakdown-value">+{{damage.qualityBonus}}</span>
+        </div>
+        {{/if}}
+        {{#each damage.modifications}}
+        {{#if display}}
+        <div class="breakdown-row modification">
+          <span class="breakdown-label">{{localize (concat "WOR.Weapon.Modification." (capitalize category) ".label")}}</span>
+          <span class="breakdown-value">{{display}}</span>
+        </div>
+        {{/if}}
+        {{/each}}
+        {{#if damage.heavyBonus}}
+        <div class="breakdown-row heavy">
+          <span class="breakdown-label">{{localize "WOR.Combat.HeavyBonus"}} ({{damage.hits}} {{localize "WOR.Roll.Hits"}})</span>
+          <span class="breakdown-value">+{{damage.heavyBonus}}</span>
         </div>
         {{/if}}
         {{#if target.dr}}
-        <div class="damage-row dr">
-          <span class="damage-label">{{localize "WOR.Armor.DR.Label"}}</span>
-          <span class="damage-value">-{{target.dr}}</span>
+        <div class="breakdown-row dr">
+          <span class="breakdown-label">{{localize "WOR.Armor.DR.Label"}}</span>
+          <span class="breakdown-value">-{{target.dr}}</span>
         </div>
         {{/if}}
-        <div class="damage-row total">
-          <span class="damage-label">{{localize "WOR.Combat.TotalDamage"}}</span>
-          <span class="damage-value">{{damage.finalDamage}}</span>
+        <div class="breakdown-row total">
+          <span class="breakdown-label">{{localize "WOR.Combat.TotalDamage"}}</span>
+          <span class="breakdown-value">{{damage.finalDamage}}</span>
         </div>
       </div>
       {{/if}}

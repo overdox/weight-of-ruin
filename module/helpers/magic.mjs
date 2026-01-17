@@ -816,7 +816,7 @@ export async function sendSpellChatMessage(actor, spell, result, poolData) {
     hasBacklash: !!result.backlash
   };
 
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     'systems/weight-of-ruin/templates/chat/spell-cast.hbs',
     templateData
   );
@@ -855,7 +855,7 @@ export async function sendRitualChatMessage(actor, ritual, result, poolData) {
     isExtended: result.isExtended
   };
 
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     'systems/weight-of-ruin/templates/chat/ritual-perform.hbs',
     templateData
   );

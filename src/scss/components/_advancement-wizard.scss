@@ -106,7 +106,8 @@
     border-radius: $border-radius-md;
 
     .lp-label {
-      font-size: $font-size-sm;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
       color: $c-white;
     }
 
@@ -143,7 +144,7 @@
 
     h2 {
       margin: 0;
-      font-size: $font-size-base;
+      font-size: $font-size-md;
       font-family: $font-primary;
       color: $c-header-text;
 

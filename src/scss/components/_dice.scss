@@ -350,44 +350,81 @@
   }
 }
 
-// D6 Die styling
-.die.d6 {
+// Base die styling (shared across all die types)
+.die {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 1.5rem;
   height: 1.5rem;
   padding: 0 $spacing-xs;
-  border-radius: $border-radius-sm;
+  font-family: $font-numeric;
   font-weight: $font-weight-bold;
   font-size: $font-size-base;
-  background: linear-gradient(145deg, $c-pale, var(--wor-pale-darker));
-  border: $border-width-thick solid $c-medium;
-  color: $c-dark;
-  box-shadow: $shadow-sm, inset 0 1px 0 var(--wor-white-alpha-40);
+  // Default: dark background for non-special values
+  background: #292929;
+  border: $border-width-thick solid #1a1a1a;
+  color: $c-white;
+  box-shadow: $shadow-sm, inset 0 1px 0 var(--wor-white-alpha-20);
   margin: 1px;
 
-  // Hit dice (met threshold)
+  // Maximum roll - green
+  &.max {
+    background: linear-gradient(145deg, $c-success-light, $c-success);
+    border-color: $c-success-dark;
+    color: $c-white;
+  }
+
+  // Hit dice (5's and 6's at standard difficulty for d6)
   &.hit {
     background: linear-gradient(145deg, $c-success-light, $c-success);
     border-color: $c-success-dark;
     color: $c-white;
   }
 
-  // Maximum roll (6)
-  &.max {
-    background: linear-gradient(145deg, $c-accent-light, $c-accent);
-    border-color: $c-accent-dark;
-    color: $c-dark;
-    box-shadow: $shadow-glow-accent, $shadow-sm;
-  }
-
-  // Minimum roll (1)
+  // Minimum roll (1) - always red
   &.min {
     background: linear-gradient(145deg, $c-danger-light, $c-danger);
     border-color: $c-danger-dark;
     color: $c-white;
   }
+}
+
+// D4 - Diamond/pyramid shape
+.die.d4 {
+  border-radius: 0;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  width: 1.6rem;
+  height: 1.4rem;
+  padding-top: 0.3rem;
+}
+
+// D6 - Square with rounded corners
+.die.d6 {
+  border-radius: $border-radius-sm;
+}
+
+// D8 - Octagonal shape (approximated with more rounded)
+.die.d8 {
+  border-radius: $border-radius-sm;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  width: 1.6rem;
+}
+
+// D10 - Pentagon-ish shape
+.die.d10 {
+  border-radius: $border-radius-sm;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  width: 1.6rem;
+  height: 1.5rem;
+  padding-top: 0.15rem;
+}
+
+// D12 - Dodecagon (approximated)
+.die.d12 {
+  border-radius: 50%;
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
 // Crisis Roll Card
@@ -686,6 +723,18 @@
         transform: none !important;
         min-width: 90px !important;
         margin: 0 !important;
+
+        // Capped hits indicator
+        &.capped {
+          flex-direction: column;
+          gap: $spacing-xs;
+
+          .precision-cap {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-normal;
+            opacity: 0.9;
+          }
+        }
       }
     }
   }
@@ -707,7 +756,7 @@
       border-radius: $border-radius-sm $border-radius-sm 0 0;
 
       .section-title {
-        font-size: $font-size-sm;
+        font-size: $font-size-md;
         font-weight: $font-weight-bold;
         color: $c-gold;
         text-transform: uppercase;
@@ -745,6 +794,62 @@
         font-size: $font-size-lg;
         box-shadow: $shadow-sm;
         border: $border-width-thick solid $c-success-dark;
+      }
+
+      .damage-formula {
+        color: $c-gold;
+        font-family: $font-mono;
+        font-size: $font-size-md;
+      }
+
+      .damage-total {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $border-radius-md;
+        background: linear-gradient(145deg, $c-danger-light, $c-danger);
+        color: $c-white;
+        font-size: $font-size-lg;
+        box-shadow: $shadow-sm;
+        border: $border-width-thick solid $c-danger-dark;
+      }
+    }
+  }
+
+  // Modification Effects & Flavour Display
+  .modifications-display {
+    margin-top: $spacing-sm;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: $border-radius-sm;
+    border-left: 3px solid $c-gold;
+
+    .mod-effect {
+      display: flex;
+      align-items: flex-start;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-xs;
+      font-size: $font-size-sm;
+      color: $c-gold;
+
+      i {
+        margin-top: 2px;
+        font-size: $font-size-xs;
+      }
+
+      span {
+        flex: 1;
+      }
+    }
+
+    .mod-flavour {
+      margin-top: $spacing-xs;
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.7);
+
+      em {
+        font-style: italic;
       }
     }
   }
@@ -1045,6 +1150,125 @@
   .collapsible-section {
     width: 100%;
     box-sizing: border-box;
+  }
+
+  // Pool, Precision, and Damage Breakdowns
+  .pool-breakdown,
+  .precision-breakdown,
+  .damage-breakdown {
+    background: rgba($c-dark, 0.03);
+    border-radius: $border-radius-sm;
+    padding: $spacing-sm;
+    margin-bottom: $spacing-sm;
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $spacing-xs 0;
+      font-size: $font-size-sm;
+
+      &:not(:last-child) {
+        border-bottom: $border-width dashed rgba($c-dark, 0.08);
+      }
+
+      .breakdown-label {
+        color: $c-medium;
+      }
+
+      .breakdown-value {
+        font-weight: $font-weight-bold;
+        color: $c-dark;
+      }
+
+      &.quality .breakdown-value {
+        color: $c-accent-dark;
+      }
+
+      &.modifier .breakdown-value {
+        color: $c-medium;
+      }
+
+      &.strength .breakdown-value {
+        color: $c-success-dark;
+      }
+
+      &.modification .breakdown-value {
+        color: $c-magic;
+      }
+
+      &.heavy .breakdown-value {
+        color: $c-copper-dark;
+      }
+
+      &.dr .breakdown-value {
+        color: $c-success-dark;
+      }
+
+      &.total {
+        padding-top: $spacing-sm;
+        margin-top: $spacing-xs;
+        border-top: $border-width solid rgba($c-dark, 0.1);
+        border-bottom: none;
+
+        .breakdown-label {
+          font-weight: $font-weight-bold;
+          color: $c-dark;
+        }
+
+        .breakdown-value {
+          font-size: $font-size-md;
+          color: $c-accent-dark;
+        }
+      }
+
+      &.capped {
+        .breakdown-label {
+          color: $c-warning;
+        }
+
+        .breakdown-value {
+          color: $c-warning;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+  }
+
+  .precision-breakdown {
+    border-left: $border-width-thick solid $c-accent;
+  }
+
+  // Attack dice display
+  .roll-dice.attack-dice {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    justify-content: center;
+    padding: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    background: rgba($c-dark, 0.05);
+    border-radius: $border-radius-sm;
+  }
+
+  .damage-breakdown {
+    border-left: $border-width-thick solid $c-danger;
+
+    .breakdown-row.total .breakdown-value {
+      color: $c-danger;
+    }
+
+    // Damage dice display
+    .roll-dice.damage-dice {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+      justify-content: center;
+      padding: $spacing-sm;
+      margin-bottom: $spacing-sm;
+      background: rgba($c-dark, 0.05);
+      border-radius: $border-radius-sm;
+    }
   }
 }
 

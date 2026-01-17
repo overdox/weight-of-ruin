@@ -582,6 +582,7 @@
     "Roll": {
       "Title": "Roll",
       "Pool": "Dice Pool",
+      "TotalPool": "Total Pool",
       "Hits": "Hits",
       "TargetThreshold": "Target Threshold",
       "Result": "Result",
@@ -629,9 +630,11 @@
       "AttackWith": "Attack with {weapon}",
       "AttackMissed": "Attack missed!",
       "Damage": "Damage",
+      "Dmg": "Dmg",
       "TotalDamage": "Total Damage",
       "DamageReduction": "DR",
       "TraumaDealt": "Trauma Dealt",
+      "HeavyBonus": "Heavy",
       "Critical": "Critical Hit!",
       "ApplyDamage": "Apply Damage",
       "DamageApplied": "Damage Applied",
@@ -659,7 +662,12 @@
         "Obscured": "Obscured (-2)",
         "PointBlank": "Point Blank (+2)",
         "LongRange": "Long Range (-2)"
-      }
+      },
+      "HitsCapped": "Hits capped by precision",
+      "MaxHits": "Max Hits",
+      "RawHits": "Raw Hits",
+      "Aim": "Aim",
+      "ImprovedPrecision": "Improved Precision"
     },
     "Defense": {
       "Label": "Defense",
@@ -744,7 +752,10 @@
       "Equipped": "Equipped",
       "Hands": "Hands",
       "Quality": "Quality Bonus",
-      "Reliability": "Reliability",
+      "Precision": {
+        "Label": "Precision",
+        "Abbrev": "PRE"
+      },
       "Details": "Weapon Details",
       "RangeShort": "Short Range",
       "RangeLong": "Long Range",
@@ -765,8 +776,15 @@
         "Category": "Category",
         "Type": "Type",
         "Add": "Add Modification",
+        "AddHint": "Click + to add a modification",
         "Remove": "Remove",
         "Damage": "Damage",
+        "DamageValue": "Amount",
+        "DamageDie": {
+          "Label": "Die",
+          "Fixed": "Fixed"
+        },
+        "DamageType": "Type",
         "Effect": "Effect",
         "Flavour": "Flavour",
         "DamagePlaceholder": "+1",
@@ -1375,6 +1393,17 @@
       "Cold": "Cold",
       "Lightning": "Lightning",
       "Poison": "Poison",
+      "Necrotic": "Necrotic",
+      "Psychic": "Psychic"
+    },
+    "ModDamageType": {
+      "Slashing": "Slashing",
+      "Piercing": "Piercing",
+      "Bludgeoning": "Bludgeoning",
+      "Acid": "Acid",
+      "Poison": "Poison",
+      "Fire": "Fire",
+      "Cold": "Cold",
       "Necrotic": "Necrotic",
       "Psychic": "Psychic"
     },

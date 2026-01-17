@@ -131,14 +131,6 @@
               </div>
               {{/if}}
               <div class="form-group">
-                <label>{{localize "WOR.Weapon.Reliability"}}</label>
-                {{#if isEditMode}}
-                <input type="number" name="system.reliability" value="{{system.reliability}}" min="1" max="6" />
-                {{else}}
-                <span class="field-value">{{system.reliability}}</span>
-                {{/if}}
-              </div>
-              <div class="form-group">
                 <label>{{localize "WOR.Weapon.Group.Label"}}</label>
                 {{#if isEditMode}}
                 <select name="system.group">
@@ -195,11 +187,19 @@
                 <span class="field-value">{{localize (concat "WOR.Quality." (capitalize system.quality.level))}}</span>
                 {{/if}}
               </div>
+              <div class="form-group">
+                <label>{{localize "WOR.Weapon.Precision.Label"}}</label>
+                {{#if isEditMode}}
+                <input type="number" name="system.precision" value="{{system.precision}}" min="1" max="10" class="precision-input" />
+                {{else}}
+                <span class="field-value">{{system.precision}}</span>
+                {{/if}}
+              </div>
             </div>
           </div>
         </div>
 
-        {{!-- Damage Fieldset --}}
+        {{!-- Damage Fieldset (includes Modifications) --}}
         <div class="item-fieldset">
           <div class="fieldset-header">{{localize "WOR.Weapon.Damage"}}</div>
           <div class="fieldset-content">
@@ -212,7 +212,15 @@
                   {{else}}
                   <span class="field-value damage-value">{{system.baseDamage}}</span>
                   {{/if}}
-                  <span class="d6-indicator">d6</span>
+                  {{#if isEditMode}}
+                  <select name="system.damageDie" class="damage-die-select">
+                    {{#each damageDieOptions as |label key|}}
+                    <option value="{{key}}" {{#if (eq key ../system.damageDie)}}selected{{/if}}>{{label}}</option>
+                    {{/each}}
+                  </select>
+                  {{else}}
+                  <span class="damage-die-indicator">{{system.damageDie}}</span>
+                  {{/if}}
                   {{#if isEditMode}}
                   <select name="system.damageType" class="damage-type-select">
                     {{#each damageTypeOptions as |label key|}}
@@ -235,83 +243,106 @@
                 </label>
               </div>
             </div>
-          </div>
-        </div>
 
-        {{!-- Modifications Fieldset --}}
-        <div class="item-fieldset">
-          <div class="fieldset-header">
-            {{localize "WOR.Weapon.Modifications"}}
-            {{#if isEditMode}}
-            <button type="button" class="add-modification-btn" data-action="addModification" title="{{localize 'WOR.Weapon.Modification.Add'}}">
-              <i class="fas fa-plus"></i>
-            </button>
-            {{/if}}
-          </div>
-          <div class="fieldset-content">
-            {{#if modifications.length}}
-            <div class="modifications-list">
-              {{#each modifications}}
-              <div class="modification-item" data-index="{{index}}">
-                {{#if @root.isEditMode}}
-                <div class="modification-header">
-                  <select name="system.modifications.{{index}}.category" class="modification-category">
-                    {{#each @root.modificationCategoryOptions as |label key|}}
-                    <option value="{{key}}" {{#if (eq key ../category)}}selected{{/if}}>{{localize label}}</option>
-                    {{/each}}
-                  </select>
-                  <select name="system.modifications.{{index}}.type" class="modification-type">
-                    {{#each typeOptions as |label key|}}
-                    <option value="{{key}}" {{#if (eq key ../type)}}selected{{/if}}>{{localize label}}</option>
-                    {{/each}}
-                  </select>
-                  <button type="button" class="remove-modification-btn" data-action="removeModification" data-index="{{index}}" title="{{localize 'WOR.Weapon.Modification.Remove'}}">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-                <div class="modification-details">
-                  <div class="mod-field damage-field">
-                    <label>{{localize "WOR.Weapon.Modification.Damage"}}</label>
-                    <input type="number" name="system.modifications.{{index}}.damage" value="{{damage}}" placeholder="{{localize 'WOR.Weapon.Modification.DamagePlaceholder'}}" />
-                  </div>
-                  <div class="mod-field effect-field">
-                    <label>{{localize "WOR.Weapon.Modification.Effect"}}</label>
-                    <input type="text" name="system.modifications.{{index}}.effect" value="{{effect}}" placeholder="{{localize 'WOR.Weapon.Modification.EffectPlaceholder'}}" />
-                  </div>
-                  <div class="mod-field flavour-field">
-                    <label>{{localize "WOR.Weapon.Modification.Flavour"}}</label>
-                    <input type="text" name="system.modifications.{{index}}.flavour" value="{{flavour}}" placeholder="{{localize 'WOR.Weapon.Modification.FlavourPlaceholder'}}" />
-                  </div>
-                </div>
-                {{else}}
-                <div class="modification-display">
-                  <div class="mod-title">
-                    <span class="mod-category">{{localize (concat "WOR.Weapon.Modification." (capitalize category) ".label")}}</span>
-                    <span class="mod-type">{{localize (concat "WOR.Weapon.Modification." (capitalize category) "." (capitalize type))}}</span>
-                  </div>
-                  {{#if damage}}
-                  <div class="mod-stat"><strong>{{localize "WOR.Weapon.Modification.Damage"}}:</strong> +{{damage}}</div>
-                  {{/if}}
-                  {{#if effect}}
-                  <div class="mod-stat"><strong>{{localize "WOR.Weapon.Modification.Effect"}}:</strong> {{effect}}</div>
-                  {{/if}}
-                  {{#if flavour}}
-                  <div class="mod-flavour">{{flavour}}</div>
-                  {{/if}}
-                </div>
+            {{!-- Modifications (inside Damage section) --}}
+            <div class="modifications-section">
+              <div class="modifications-label">
+                <label>{{localize "WOR.Weapon.Modifications"}}</label>
+                {{#if isEditMode}}
+                <button type="button" class="add-modification-btn" data-action="addModification" title="{{localize 'WOR.Weapon.Modification.Add'}}">
+                  <i class="fas fa-plus"></i>
+                </button>
                 {{/if}}
               </div>
-              {{/each}}
-            </div>
-            {{else}}
-            <div class="empty-modifications">
-              {{#if isEditMode}}
-              <span class="hint">{{localize "WOR.Weapon.Modification.Add"}}</span>
+              {{#if modifications.length}}
+              <div class="modifications-list">
+                {{#each modifications}}
+                <div class="modification-item" data-index="{{index}}">
+                  {{#if @root.isEditMode}}
+                  <div class="modification-header">
+                    <select name="system.modifications.{{index}}.category" class="modification-category">
+                      {{#each @root.modificationCategoryOptions as |label key|}}
+                      <option value="{{key}}" {{#if (eq key ../category)}}selected{{/if}}>{{localize label}}</option>
+                      {{/each}}
+                    </select>
+                    <select name="system.modifications.{{index}}.type" class="modification-type">
+                      {{#each typeOptions as |label key|}}
+                      <option value="{{key}}" {{#if (eq key ../type)}}selected{{/if}}>{{localize label}}</option>
+                      {{/each}}
+                    </select>
+                    <button type="button" class="remove-modification-btn" data-action="removeModification" data-index="{{index}}" title="{{localize 'WOR.Weapon.Modification.Remove'}}">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <div class="modification-details">
+                    <div class="mod-field damage-value-field">
+                      <label>{{localize "WOR.Weapon.Modification.DamageValue"}}</label>
+                      <input type="number" name="system.modifications.{{index}}.damageValue" value="{{damageValue}}" min="0" class="damage-input" />
+                    </div>
+                    <div class="mod-field damage-die-field">
+                      <label>{{localize "WOR.Weapon.Modification.DamageDie.Label"}}</label>
+                      <select name="system.modifications.{{index}}.damageDie" class="mod-damage-die-select">
+                        <option value="" {{#unless damageDie}}selected{{/unless}}>—</option>
+                        <option value="fixed" {{#if (eq damageDie "fixed")}}selected{{/if}}>{{localize "WOR.Weapon.Modification.DamageDie.Fixed"}}</option>
+                        <option value="d4" {{#if (eq damageDie "d4")}}selected{{/if}}>d4</option>
+                        <option value="d6" {{#if (eq damageDie "d6")}}selected{{/if}}>d6</option>
+                        <option value="d8" {{#if (eq damageDie "d8")}}selected{{/if}}>d8</option>
+                        <option value="d10" {{#if (eq damageDie "d10")}}selected{{/if}}>d10</option>
+                        <option value="d12" {{#if (eq damageDie "d12")}}selected{{/if}}>d12</option>
+                      </select>
+                    </div>
+                    <div class="mod-field damage-type-field">
+                      <label>{{localize "WOR.Weapon.Modification.DamageType"}}</label>
+                      <select name="system.modifications.{{index}}.damageType" class="mod-damage-type-select">
+                        <option value="" {{#unless damageType}}selected{{/unless}}>—</option>
+                        {{#each damageTypeOptions as |label key|}}
+                        <option value="{{key}}" {{#if (eq key ../damageType)}}selected{{/if}}>{{localize label}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                    <div class="mod-field effect-field">
+                      <label>{{localize "WOR.Weapon.Modification.Effect"}}</label>
+                      <input type="text" name="system.modifications.{{index}}.effect" value="{{effect}}" placeholder="{{localize 'WOR.Weapon.Modification.EffectPlaceholder'}}" />
+                    </div>
+                    <div class="mod-field flavour-field">
+                      <label>{{localize "WOR.Weapon.Modification.Flavour"}}</label>
+                      <input type="text" name="system.modifications.{{index}}.flavour" value="{{flavour}}" placeholder="{{localize 'WOR.Weapon.Modification.FlavourPlaceholder'}}" />
+                    </div>
+                  </div>
+                  {{else}}
+                  <div class="modification-display">
+                    <div class="mod-title">
+                      <span class="mod-category">{{localize (concat "WOR.Weapon.Modification." (capitalize category) ".label")}}</span>
+                      <span class="mod-type">{{localize (concat "WOR.Weapon.Modification." (capitalize category) "." (capitalize type))}}</span>
+                    </div>
+                    {{#if damageDie}}
+                    <div class="mod-stat">
+                      <strong>{{localize "WOR.Weapon.Modification.Damage"}}:</strong>
+                      {{#if (eq damageDie "fixed")}}+{{damageValue}}{{else}}{{damageValue}}{{damageDie}}{{/if}}
+                      {{#if damageType}} ({{localize (concat "WOR.ModDamageType." (capitalize damageType))}}){{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if effect}}
+                    <div class="mod-stat"><strong>{{localize "WOR.Weapon.Modification.Effect"}}:</strong> {{effect}}</div>
+                    {{/if}}
+                    {{#if flavour}}
+                    <div class="mod-flavour">{{flavour}}</div>
+                    {{/if}}
+                  </div>
+                  {{/if}}
+                </div>
+                {{/each}}
+              </div>
               {{else}}
-              <span class="hint">—</span>
+              <div class="empty-modifications">
+                {{#if isEditMode}}
+                <span class="hint">{{localize "WOR.Weapon.Modification.AddHint"}}</span>
+                {{else}}
+                <span class="hint">—</span>
+                {{/if}}
+              </div>
               {{/if}}
             </div>
-            {{/if}}
           </div>
         </div>
 

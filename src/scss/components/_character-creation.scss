@@ -103,7 +103,8 @@
       border-radius: $border-radius-md;
 
       .lp-label {
-        font-size: $font-size-sm;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
         color: $c-white;
       }
 
@@ -140,7 +141,7 @@
 
       h2 {
         margin: 0;
-        font-size: $font-size-base;
+        font-size: $font-size-md;
         font-family: $font-primary;
         color: $c-header-text;
       }
@@ -223,7 +224,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: $border-width-thick solid $c-copper;
     border-radius: $border-radius-sm;
-    font-size: $font-size-base;
+    font-size: $font-size-md;
     color: rgba(255, 255, 255, 0.8);
     line-height: $line-height-relaxed;
   }

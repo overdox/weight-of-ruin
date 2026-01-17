@@ -454,7 +454,7 @@
       @include input-base;
       width: 100%;
       padding: $spacing-xs;
-      font-size: $font-size-sm;
+      font-size: $font-size-base;
     }
 
     // Multi-currency price stat
@@ -599,7 +599,7 @@
     select {
       width: 100%;
       padding: $spacing-sm;
-      font-size: $font-size-sm;
+      font-size: $font-size-base;
       background: rgba(0, 0, 0, 0.4) !important;
       border: 1px solid rgba($c-copper, 0.4) !important;
       color: #fff !important;
@@ -896,7 +896,7 @@
     text-align: center;
     font-weight: $font-weight-bold;
     padding: $spacing-xs !important;
-    font-size: $font-size-base !important;
+    font-size: $font-size-md !important;
   }
 
   .damage-value {
@@ -912,7 +912,16 @@
     border-radius: $border-radius-sm;
   }
 
-  .d6-indicator {
+  .damage-die-select {
+    width: 60px !important;
+    min-width: 60px;
+    font-weight: $font-weight-bold;
+    color: $c-gold;
+    font-size: $font-size-md !important;
+    text-align: center;
+  }
+
+  .damage-die-indicator {
     font-weight: $font-weight-bold;
     color: $c-gold;
     font-size: $font-size-base;
@@ -923,6 +932,7 @@
     flex: 1;
     min-width: 100px;
     max-width: 140px;
+    font-size: $font-size-md !important;
   }
 
   .damage-type {
@@ -932,6 +942,16 @@
     background: rgba(0, 0, 0, 0.2);
     border-radius: $border-radius-sm;
   }
+}
+
+// Precision input styling (same as damage-input)
+.precision-input {
+  width: 48px !important;
+  height: 32px;
+  text-align: center;
+  font-weight: $font-weight-bold;
+  padding: $spacing-xs !important;
+  font-size: $font-size-md !important;
 }
 
 // ============================================
@@ -959,6 +979,55 @@
     &:hover {
       background: $c-success;
       color: #fff;
+    }
+  }
+}
+
+// Modifications section (inside Damage fieldset)
+.modifications-section {
+  margin-top: $spacing-lg;
+  padding-top: $spacing-md;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  .modifications-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+
+    label {
+      @include text-label;
+    }
+
+    .add-modification-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 1px solid $c-gold;
+      background: rgba($c-gold, 0.2);
+      color: $c-gold;
+      border-radius: $border-radius-sm;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &:hover {
+        background: $c-gold;
+        color: $c-dark;
+      }
+    }
+  }
+
+  .empty-modifications {
+    padding: $spacing-sm;
+    text-align: center;
+
+    .hint {
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.4);
+      font-style: italic;
     }
   }
 }
@@ -1016,7 +1085,7 @@
 
   .modification-details {
     display: grid;
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: 60px 70px 100px 1fr;
     gap: $spacing-sm;
     padding: $spacing-sm;
 
@@ -1030,22 +1099,44 @@
         color: rgba(255, 255, 255, 0.5);
       }
 
-      input {
-        font-size: $font-size-sm;
+      input, select {
+        font-size: $font-size-md;
         padding: $spacing-xs;
       }
 
-      &.damage-field {
+      &.damage-value-field {
         grid-column: 1;
 
-        input {
-          width: 100%;
+        input.damage-input {
+          width: 48px !important;
+          height: 32px;
           text-align: center;
+          font-weight: $font-weight-bold;
+          padding: $spacing-xs !important;
+          font-size: $font-size-md !important;
+        }
+      }
+
+      &.damage-die-field {
+        grid-column: 2;
+
+        select {
+          height: 32px;
+          font-size: $font-size-md !important;
+        }
+      }
+
+      &.damage-type-field {
+        grid-column: 3;
+
+        select {
+          height: 32px;
+          font-size: $font-size-md !important;
         }
       }
 
       &.effect-field {
-        grid-column: 2;
+        grid-column: 4;
       }
 
       &.flavour-field {
